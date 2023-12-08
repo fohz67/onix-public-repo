@@ -1,1 +1,2414 @@
-const _0x514770=_0x51d6;(function(_0x566176,_0x50e266){const _0x214548=_0x51d6,_0x5b75f7=_0x566176();while(!![]){try{const _0x2bf3a7=parseInt(_0x214548(0x8b))/0x1+parseInt(_0x214548(0x210))/0x2+parseInt(_0x214548(0x295))/0x3*(parseInt(_0x214548(0x2ce))/0x4)+-parseInt(_0x214548(0x2e5))/0x5*(parseInt(_0x214548(0xec))/0x6)+-parseInt(_0x214548(0x2e4))/0x7+-parseInt(_0x214548(0x8a))/0x8+parseInt(_0x214548(0x258))/0x9;if(_0x2bf3a7===_0x50e266)break;else _0x5b75f7['push'](_0x5b75f7['shift']());}catch(_0x5271a5){_0x5b75f7['push'](_0x5b75f7['shift']());}}}(_0x3650,0x84aff));const APP={'version':_0x514770(0x129),'mode':window[_0x514770(0x275)][_0x514770(0x23c)]===_0x514770(0x90)?0x2:0x1,'resize':0x0,'skinAuth':_0x514770(0x2a1),'reserved':{'value':![],'color':_0x514770(0x307)},'blacklist':['1','2','3','4','5','6','7','8','9','0','k','K','m','M','A1','A2','A3','A4','A5','B1','B2','B3','B4','B5','C1','C2','C3','C4','C5','D1','D2','D3','D4','D5','E1','E2','E3','E4','E5',_0x514770(0x150),'','\x20','\x20\x20',_0x514770(0x105),_0x514770(0x2fe),_0x514770(0xcf),_0x514770(0xa7),_0x514770(0x1b4),'\x20\x20\x20\x20\x20\x20\x20\x20',_0x514770(0x141),_0x514770(0x1bc),'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',_0x514770(0x281),'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',_0x514770(0x9d),'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20']},ATTRS={'libraries':getAllLibrary(),'selectors':getAllSelectors(),'images':getAllImages(),'colors':getAllColors(),'errors':getAllErrors(),'titles':getAllTitle()},DB={'database':undefined,'references':{}},USER={'credentials':{},'statistics':{},'configurations':getAllConfigurations()},LISTS={'users':{},'colors':{},'badges':undefined,'configurations':undefined,'leaderboard':undefined},SKINS={'all':[],'me':[],'fav':[]};document[_0x514770(0x1b1)]===_0x514770(0x271)?document[_0x514770(0x97)]('DOMContentLoaded',onDocumentReady):onDocumentReady();function onDocumentReady(){const _0x387f14=_0x514770,_0x401245=APP[_0x387f14(0xd1)]===0x1?_0x387f14(0x1dd):'Delta\x20-\x20Dual';pageConfiguration(_0x401245),onAttributesReady()[_0x387f14(0x28b)]();}async function onAttributesReady(){const _0x11efb8=_0x514770;try{await loadScript(ATTRS[_0x11efb8(0x155)]['firebaseApp']),await Promise[_0x11efb8(0x186)]([loadScript(ATTRS[_0x11efb8(0x155)]['jquery']),loadScript(ATTRS[_0x11efb8(0x155)][_0x11efb8(0x2bd)]),loadScript(ATTRS['libraries'][_0x11efb8(0x20b)]),loadScript(ATTRS[_0x11efb8(0x155)]['sortable'])]),await onScriptsReady();}catch(_0x51a432){const _0x547312=parseInt(localStorage['getItem'](_0x11efb8(0x247))||0x0);_0x547312<0x2?(localStorage[_0x11efb8(0x2e6)](_0x11efb8(0x247),(_0x547312+0x1)[_0x11efb8(0x1f1)]()),window[_0x11efb8(0x275)][_0x11efb8(0x220)]()):displayError(ATTRS[_0x11efb8(0x261)]['title']+_0x11efb8(0x1b0)+ATTRS[_0x11efb8(0x261)][_0x11efb8(0xb5)]);}}async function onScriptsReady(){firebaseConfiguration(()=>{firebaseAccount(()=>{firebaseComponents(()=>{removeAds(),createComponents(),listenerComponents(),drawStyle();});});});}function firebaseConfiguration(_0x1b99cd){const _0x26228e=_0x514770,_0x3346a0={'apiKey':_0x26228e(0xbe),'authDomain':'delta-client.firebaseapp.com','projectId':'delta-client','storageBucket':_0x26228e(0x1a3),'messagingSenderId':_0x26228e(0x15d),'appId':_0x26228e(0x21e),'measurementId':'G-G5YSMYFCXJ','databaseURL':_0x26228e(0x30e)};typeof firebase!==_0x26228e(0x1c9)?(firebase[_0x26228e(0x11e)](_0x3346a0),_0x1b99cd()):displayError(ATTRS[_0x26228e(0x261)][_0x26228e(0x9c)]+_0x26228e(0xf4)+ATTRS[_0x26228e(0x261)]['content']);}function firebaseSignOut(){const _0x2eb18a=_0x514770;firebase[_0x2eb18a(0x237)]()[_0x2eb18a(0x280)]&&firebase['auth']()[_0x2eb18a(0x114)]()[_0x2eb18a(0x28b)](()=>{const _0x3f94b0=_0x2eb18a;window[_0x3f94b0(0x275)][_0x3f94b0(0x220)]();})[_0x2eb18a(0x110)](()=>{const _0x35fe08=_0x2eb18a;displayError(ERROR['title']+_0x35fe08(0xc7)+ERROR[_0x35fe08(0xb5)]);});}function firebaseAccount(_0x3f886b){const _0x55a926=_0x514770;firebase[_0x55a926(0x237)]()[_0x55a926(0x1ae)](function(_0x3b7749){_0x3b7749?(getLocalValues(_0x3b7749),getDatabase(),_0x3f886b()):initRegisterForm(()=>{});});}function firebaseComponents(_0x4f842b){const _0x432241=_0x514770;firebase[_0x432241(0xac)]['length']>0x0&&(fetchUserData(),_0x4f842b());}function initRegisterForm(){initRegisterPage(),initAnimationsPage(),initAnimationsForm(),initForm(),setTimeout(()=>{removeCookie();},0x3e8);}function initRegisterPage(){const _0x419686=_0x514770;document[_0x419686(0xbb)][_0x419686(0xd4)]+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#login-form>input::placeholder\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:#956dff6e;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20',document[_0x419686(0x119)][_0x419686(0xd4)]+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22signIn\x22\x20style=\x22background:\x20linear-gradient(45deg,#010004,#130535);position:\x20fixed;top:\x200;left:\x200;width:\x20100%;height:\x20100%;z-index:\x209999;display:\x20flex;justify-content:\x20center;align-items:\x20center;flex-direction:\x20column;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h2\x20id=\x22delta-text\x22\x20style=\x22position:\x20absolute;top:\x2090px;font-size:\x2045px;background:\x20linear-gradient(45deg,\x20#5718c2,\x20#8036ff,\x20#aa78ff,\x20#cbadff,\x20#aa78ff,\x20#8036ff,\x20#5718c2);background-size:\x20200%\x20auto;animation:\x20slide\x202s\x20infinite;-webkit-background-clip:\x20text;background-clip:\x20text;color:\x20transparent;\x22>Delta\x20account</h2>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4\x20id=\x22delta-text\x22\x20style=\x22position:\x20absolute;top:\x20180px;color:\x20#b79cff;font-size:\x2025px;opacity:\x200.8;text-align:\x20center\x22>Password\x20login\x20is\x20required\x20for\x20security<br>Your\x20data\x20is\x20safe\x20and\x20secured\x20<i\x20class=\x22fas\x20fa-lock\x22></i><br>Your\x20password\x20must\x20be\x20at\x20least\x207\x20characters\x20long\x20<i\x20class=\x22fas\x20fa-key\x22></i></h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<form\x20id=\x22login-form\x22\x20style=\x22position:\x20absolute;\x20display:\x20flex;\x20flex-direction:\x20column;\x20gap:\x2010px;\x20justify-content:\x20center;\x20align-items:\x20center;\x20margin-top:\x20270px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22email\x22\x20id=\x22email-input\x22\x20placeholder=\x22Email\x22\x20style=\x22background:\x20#54379f4d;border:solid\x201px\x20#956dff6e;color:\x20#ffffff;border-radius:\x2013px;padding:\x208px;width:\x20350px;height:\x2035px;font-size:\x2018px;text-align:\x20center;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22password\x22\x20id=\x22password-input\x22\x20placeholder=\x22Password\x22\x20style=\x22background:\x20#54379f4d;border:solid\x201px\x20#956dff6e;color:\x20#dadada;border-radius:\x2013px;padding:\x208px;width:\x20350px;height:\x2035px;font-size:\x2018px;text-align:\x20center;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22submit-account\x22\x20style=\x22background:\x20#b69cff;color:\x20#241931;border-radius:\x2013px;padding:\x208px;width:\x20350px;height:\x2035px;transform:\x20scale(1);transition:\x20all\x200.3s\x20ease\x200s;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20id=\x22submit-text\x22\x20style=\x22font-size:\x2018px;\x20text-align:\x20center;\x20padding:\x206px;\x22>Login/create\x20(automatic)</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</form>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';}function initAnimationsForm(){const _0xcdd03=_0x514770,_0x4af059=$(ATTRS[_0xcdd03(0x166)][_0xcdd03(0x286)]),_0x1d366e={'transform':_0xcdd03(0x1e8),'transition':'all\x200.3s'},_0x3e86d4={'transform':'scale(1)','transition':_0xcdd03(0x1e1)},_0x1da2e6=()=>{const _0x145a9a=_0xcdd03;$(ATTRS[_0x145a9a(0x166)][_0x145a9a(0x1bd)])['text'](_0x145a9a(0x233)),_0x4af059[_0x145a9a(0x191)]('background-color','#b69cff');};_0x4af059[_0xcdd03(0x2c8)](()=>_0x4af059[_0xcdd03(0x191)](_0x1d366e),()=>_0x4af059[_0xcdd03(0x191)](_0x3e86d4)),$(ATTRS[_0xcdd03(0x166)][_0xcdd03(0x2a9)])['on']('input',_0x1da2e6),$(ATTRS[_0xcdd03(0x166)]['passwordInput'])['on'](_0xcdd03(0xa1),_0x1da2e6);}function initForm(){const _0x471ddf=_0x514770,_0x3c31b3=$(ATTRS['selectors'][_0x471ddf(0x286)]),_0x3f8e48=$(ATTRS['selectors']['submitText']),_0x22625d=$(ATTRS[_0x471ddf(0x166)][_0x471ddf(0x2a9)]),_0x1093eb=$(ATTRS[_0x471ddf(0x166)][_0x471ddf(0xd9)]),_0xe6decf=()=>{const _0x20a5db=_0x471ddf;_0x3f8e48['text']('Loading...'),_0x3c31b3['css'](_0x20a5db(0x14d),_0x20a5db(0x1a8));},_0x37c3e4=_0x5268f5=>{const _0x132ad8=_0x471ddf;_0x3f8e48['text'](_0x5268f5),_0x3c31b3['css'](_0x132ad8(0x14d),_0x132ad8(0x2f3));},_0x3f6de2=()=>{const _0x4ae86d=_0x471ddf;USER[_0x4ae86d(0x18d)]=firebase[_0x4ae86d(0x237)]()[_0x4ae86d(0x280)],window[_0x4ae86d(0x275)]['reload']();},_0x2bff1f=_0x8bf177=>{const _0x24aaae=_0x471ddf;_0x8bf177[_0x24aaae(0x27d)]==='auth/email-already-in-use'?firebase[_0x24aaae(0x237)]()[_0x24aaae(0xf2)](_0x22625d[_0x24aaae(0x2b5)](),_0x1093eb[_0x24aaae(0x2b5)]())[_0x24aaae(0x28b)](_0x3f6de2)[_0x24aaae(0x110)](()=>_0x37c3e4(_0x24aaae(0xb6))):_0x37c3e4(_0x24aaae(0x223));};_0x3c31b3['on']('click',function(){const _0x346a46=_0x471ddf;_0x1093eb[_0x346a46(0x2b5)]()[_0x346a46(0x2de)]>0x6?(_0xe6decf(),firebase[_0x346a46(0x237)]()[_0x346a46(0x1f2)](_0x22625d[_0x346a46(0x2b5)](),_0x1093eb[_0x346a46(0x2b5)]())[_0x346a46(0x28b)](_0x3f6de2)[_0x346a46(0x110)](_0x2bff1f)):_0x37c3e4('Password\x20too\x20short...');});}function initAnimationsPage(){const _0x2a10ed=_0x514770,_0x48eb15=document[_0x2a10ed(0xbf)](_0x2a10ed(0x28e));_0x48eb15[_0x2a10ed(0x1ee)]=_0x2a10ed(0x16d),document[_0x2a10ed(0xbb)][_0x2a10ed(0x1c5)](_0x48eb15);}function pushUserInfos(){const _0x57031e=_0x514770;let _0x514b0f={'uid':USER[_0x57031e(0x18d)][_0x57031e(0x2d5)],'nickname':USER[_0x57031e(0x1a9)][_0x57031e(0xb9)],'skin':$(ATTRS['selectors'][_0x57031e(0x2e8)])[_0x57031e(0x2b5)](),'color':APP['reserved'][_0x57031e(0x1b8)]?APP[_0x57031e(0xfa)][_0x57031e(0x24e)]:USER[_0x57031e(0x1a9)][_0x57031e(0x2b8)],'server':USER[_0x57031e(0x154)],'status':new Date()['getTime'](),'mode':USER[_0x57031e(0xd1)],'level':0x0,'anonymous':USER[_0x57031e(0x1a9)][_0x57031e(0x14e)]};if($(ATTRS[_0x57031e(0x166)][_0x57031e(0x2a5)])['length']===0x0)_0x514b0f[_0x57031e(0x8c)]=APP[_0x57031e(0xd1)]===0x1?$(ATTRS[_0x57031e(0x166)][_0x57031e(0x8c)])[_0x57031e(0x2cf)]()[_0x57031e(0x19b)]()['match'](/\d+/)[0x0]:$(ATTRS['selectors'][_0x57031e(0xe0)])[_0x57031e(0x2cf)]()[_0x57031e(0x263)]('\x20')[0x1];pushDatabase(DB[_0x57031e(0x8f)][_0x57031e(0x25e)],_0x514b0f);}function pushUserOnline(){const _0x63ecd2=_0x514770;pushDatabase(DB[_0x63ecd2(0x8f)]['meUser'],{'uid':USER['credentials'][_0x63ecd2(0x2d5)],'nickname':USER[_0x63ecd2(0x1a9)][_0x63ecd2(0xb9)],'skin':$(ATTRS['selectors'][_0x63ecd2(0x2e8)])[_0x63ecd2(0x2b5)](),'color':APP[_0x63ecd2(0xfa)][_0x63ecd2(0x1b8)]?APP[_0x63ecd2(0xfa)][_0x63ecd2(0x24e)]:USER['configurations']['nicknameColor'],'server':USER['server'],'status':new Date()[_0x63ecd2(0x13a)]()});}function pushUserColors(){const _0x1731ba=_0x514770;if(APP[_0x1731ba(0xfa)][_0x1731ba(0x1b8)])return;pushDatabase(DB['references'][_0x1731ba(0x2d1)],{'uid':USER[_0x1731ba(0x18d)][_0x1731ba(0x2d5)],'nickname':USER[_0x1731ba(0x1a9)][_0x1731ba(0xb9)],'color':USER[_0x1731ba(0x1a9)]['nicknameColor']});}function pushUserConfigurations(){const _0xbfb472=_0x514770;USER['configurations'][_0xbfb472(0xff)]===_0xbfb472(0x196)&&pushDatabase(DB[_0xbfb472(0x8f)][_0xbfb472(0x22c)],{'skins':USER['configurations'][_0xbfb472(0x184)],'hotkeys':USER[_0xbfb472(0x1a9)][_0xbfb472(0xa9)],'blurredHUD':USER[_0xbfb472(0x1a9)][_0xbfb472(0x2bb)],'timeChat':USER[_0xbfb472(0x1a9)][_0xbfb472(0xfe)],'timeChatRainbow':USER[_0xbfb472(0x1a9)][_0xbfb472(0xc6)],'resizableChatbox':USER['configurations'][_0xbfb472(0x28a)],'colorNicknameCell':USER['configurations'][_0xbfb472(0x1d5)],'colorNicknameChatbox':USER['configurations'][_0xbfb472(0x180)],'colorNicknameLeaderboard':USER[_0xbfb472(0x1a9)]['colorNicknameLeaderboard'],'nicknameColor':USER[_0xbfb472(0x1a9)][_0xbfb472(0x2b8)],'nickname':USER[_0xbfb472(0x1a9)][_0xbfb472(0xb9)],'teamtag':$(ATTRS[_0xbfb472(0x166)]['teamTag'])[_0xbfb472(0x2b5)](),'browser':USER['configurations'][_0xbfb472(0x17c)],'platform':USER[_0xbfb472(0x1a9)][_0xbfb472(0x2ed)],'machineId':USER['configurations'][_0xbfb472(0x1f9)],'date':USER[_0xbfb472(0x1a9)][_0xbfb472(0x99)]});}function pushUserStatisticsDb(){const _0x31e968=_0x514770;pushDatabase(DB[_0x31e968(0x8f)][_0x31e968(0x100)],USER[_0x31e968(0x303)]),localStorage['setItem']('sT','0'),localStorage[_0x31e968(0x2e6)]('sM','0'),localStorage[_0x31e968(0x2e6)]('sK','0'),localStorage[_0x31e968(0x2e6)]('sG','1');}function pushUserStatisticsLocally(){const _0xf76f9e=_0x514770,_0x4dbe90=parseInt(getLocalStorageItem('sT','0'))+($(ATTRS[_0xf76f9e(0x166)][_0xf76f9e(0x1c1)])['length']?getConvertedTimeToSeconds($(ATTRS[_0xf76f9e(0x166)][_0xf76f9e(0x1c1)])[_0xf76f9e(0x2cf)]()[_0xf76f9e(0x263)](':\x20')[0x1]):0x0),_0x27be30=parseInt(getLocalStorageItem('sM','0'))+($(ATTRS[_0xf76f9e(0x166)]['statScore'])[_0xf76f9e(0x2de)]?getConvertedStringToNumber($(ATTRS[_0xf76f9e(0x166)][_0xf76f9e(0x21f)])[_0xf76f9e(0x2cf)]()[_0xf76f9e(0x263)](':\x20')[0x1]):0x0),_0x8e671c=parseInt(getLocalStorageItem('sK','0'))+($(ATTRS[_0xf76f9e(0x166)][_0xf76f9e(0x176)])['length']?parseInt($(ATTRS[_0xf76f9e(0x166)]['statKills'])[_0xf76f9e(0x2cf)]()[_0xf76f9e(0x263)](':\x20')[0x1],0xa):0x0),_0x3d47b9=parseInt(getLocalStorageItem('sG','1'))+0x1;USER[_0xf76f9e(0x303)][_0xf76f9e(0x159)]+=_0x4dbe90,USER[_0xf76f9e(0x303)][_0xf76f9e(0xb3)]+=_0x27be30,USER['statistics']['killTotal']+=_0x8e671c,USER[_0xf76f9e(0x303)][_0xf76f9e(0x142)]+=_0x3d47b9,USER[_0xf76f9e(0x303)]['timeAvg']=USER[_0xf76f9e(0x303)][_0xf76f9e(0x159)]/_0x3d47b9,USER[_0xf76f9e(0x303)][_0xf76f9e(0xef)]=USER['statistics'][_0xf76f9e(0xb3)]/_0x3d47b9,USER['statistics']['kda']=USER['statistics'][_0xf76f9e(0x285)]/_0x3d47b9,localStorage['setItem']('sT',_0x4dbe90[_0xf76f9e(0x1f1)]()),localStorage[_0xf76f9e(0x2e6)]('sM',_0x27be30[_0xf76f9e(0x1f1)]()),localStorage[_0xf76f9e(0x2e6)]('sK',_0x8e671c[_0xf76f9e(0x1f1)]()),localStorage['setItem']('sG',_0x3d47b9[_0xf76f9e(0x1f1)]());}function pushUserBadge(_0x812ce8){const _0x2f5d94=_0x514770,_0x1dce54=JSON[_0x2f5d94(0x19f)](unescape(_0x812ce8));delete _0x1dce54[_0x2f5d94(0x2dc)],Object[_0x2f5d94(0x314)](LISTS[_0x2f5d94(0xd3)])[_0x2f5d94(0xf5)](_0x23ada4=>{const _0x1039c0=_0x2f5d94;$(_0x1039c0(0x1e5)+_0x23ada4['id'])[_0x1039c0(0x191)]('opacity',0.4);}),$(_0x2f5d94(0x1e5)+_0x1dce54['id'])[_0x2f5d94(0x191)](_0x2f5d94(0x192),0x1),pushDatabase(DB[_0x2f5d94(0x8f)][_0x2f5d94(0x167)],_0x1dce54),pushDatabase(DB[_0x2f5d94(0x8f)][_0x2f5d94(0x25f)],_0x1dce54);}function fetchUserStatisticsDb(){const _0x3d31e5=_0x514770;DB[_0x3d31e5(0x8f)][_0x3d31e5(0x100)][_0x3d31e5(0x2a4)](_0x3d31e5(0x1b8),_0xbf08d5=>{const _0x5b5bdf=_0x3d31e5;if(_0xbf08d5[_0x5b5bdf(0x127)]()){const _0x1f6ea9=_0xbf08d5['val']();USER['statistics']={'timeTotal':(_0x1f6ea9[_0x5b5bdf(0x159)]||0x0)+parseInt(getLocalStorageItem('sT','0')),'massTotal':(_0x1f6ea9['massTotal']||0x0)+parseInt(getLocalStorageItem('sM','0')),'killTotal':(_0x1f6ea9[_0x5b5bdf(0x285)]||0x0)+parseInt(getLocalStorageItem('sK','0')),'gameTotal':(_0x1f6ea9[_0x5b5bdf(0x142)]||0x0)+parseInt(getLocalStorageItem('sG','1')),'uid':USER[_0x5b5bdf(0x18d)][_0x5b5bdf(0x2d5)]};}else USER[_0x5b5bdf(0x303)]={'timeTotal':0x0,'massTotal':0x0,'killTotal':0x0,'gameTotal':0x1,'uid':USER['credentials']['uid']};USER[_0x5b5bdf(0x303)][_0x5b5bdf(0x310)]=USER[_0x5b5bdf(0x303)][_0x5b5bdf(0x285)]/USER[_0x5b5bdf(0x303)][_0x5b5bdf(0x142)],USER[_0x5b5bdf(0x303)][_0x5b5bdf(0xef)]=USER['statistics'][_0x5b5bdf(0xb3)]/USER[_0x5b5bdf(0x303)][_0x5b5bdf(0x142)],USER[_0x5b5bdf(0x303)][_0x5b5bdf(0xa2)]=USER[_0x5b5bdf(0x303)]['timeTotal']/USER[_0x5b5bdf(0x303)][_0x5b5bdf(0x142)],pushUserStatisticsDb();});}function fetchUsersOnce(){const _0x28a5f8=_0x514770;DB[_0x28a5f8(0x8f)]['user'][_0x28a5f8(0x2a4)]('value',_0x3c9950=>{const _0x42db77=_0x28a5f8;_0x3c9950[_0x42db77(0x127)]()&&(LISTS[_0x42db77(0x136)]=_0x3c9950['val'](),fetchBanned(),fetchUserChanged());});}function fetchUserChanged(){const _0x12e67e=_0x514770;DB['references'][_0x12e67e(0x2dd)]['on'](_0x12e67e(0x87),_0x4a659f=>{const _0x183ab6=_0x12e67e;if(_0x4a659f[_0x183ab6(0x127)]()){const _0x404ef2=_0x4a659f[_0x183ab6(0x2b5)]();_0x404ef2[_0x183ab6(0x2d5)]&&(LISTS[_0x183ab6(0x136)][_0x404ef2[_0x183ab6(0x2d5)]]=_0x404ef2);}});}function fetchColorsOnce(_0x216779){const _0x130dd8=_0x514770;DB['references'][_0x130dd8(0x24e)][_0x130dd8(0x2a4)](_0x130dd8(0x1b8),_0x29e058=>{const _0xf54d46=_0x130dd8;if(_0x29e058[_0xf54d46(0x127)]()){const _0x4f86bf=_0x29e058['val']();Object[_0xf54d46(0x265)](_0x4f86bf)[_0xf54d46(0xf5)](_0x3cace4=>{const _0x92ca5c=_0xf54d46,_0x4e707f=_0x4f86bf[_0x3cace4];_0x4e707f[_0x92ca5c(0xb9)]&&_0x4e707f[_0x92ca5c(0x24e)]&&(LISTS['colors'][_0x4e707f[_0x92ca5c(0xb9)][_0x92ca5c(0x19b)]()]={'color':_0x4e707f[_0x92ca5c(0x24e)],'badge':_0x4e707f[_0x92ca5c(0x1f5)]&&_0x4e707f[_0x92ca5c(0x1f5)]['url']?_0x4e707f['badge']['url']:null,'uid':_0x4e707f[_0x92ca5c(0x2d5)]});}),localStorage['setItem']('userColors',JSON[_0xf54d46(0x24f)](LISTS['colors']));if(APP[_0xf54d46(0xd1)]===0x1&&USER[_0xf54d46(0x1a9)]['colorNicknameCell']==='checked')changeCellColor();if(USER['configurations'][_0xf54d46(0xbc)]==='checked'||USER[_0xf54d46(0x1a9)][_0xf54d46(0x180)]===_0xf54d46(0x196)||USER[_0xf54d46(0x1a9)][_0xf54d46(0x1d5)]===_0xf54d46(0x196))fetchColorChanged();_0x216779();}});}function fetchColorChanged(){const _0x501453=_0x514770;DB[_0x501453(0x8f)][_0x501453(0x24e)]['on']('child_changed',_0xf1ee20=>{const _0x246f8e=_0x501453;if(_0xf1ee20[_0x246f8e(0x127)]()){const _0x2bf01a=_0xf1ee20[_0x246f8e(0x2b5)]();_0x2bf01a[_0x246f8e(0xb9)]&&_0x2bf01a[_0x246f8e(0x24e)]&&(LISTS['colors'][_0x2bf01a['nickname'][_0x246f8e(0x19b)]()]={'color':_0x2bf01a['color'],'badge':_0x2bf01a[_0x246f8e(0x1f5)]&&_0x2bf01a[_0x246f8e(0x1f5)][_0x246f8e(0x2d4)]?_0x2bf01a[_0x246f8e(0x1f5)][_0x246f8e(0x2d4)]:null,'uid':_0x2bf01a[_0x246f8e(0x2d5)]});localStorage[_0x246f8e(0x2e6)](_0x246f8e(0x250),JSON[_0x246f8e(0x24f)](LISTS[_0x246f8e(0x306)]));if(APP[_0x246f8e(0xd1)]===0x1&&USER[_0x246f8e(0x1a9)][_0x246f8e(0x1d5)]==='checked')changeCellColor(_0x2bf01a[_0x246f8e(0xb9)]);}});}function fetchBanned(){const _0x5c5d3e=_0x514770,_0xf7ec10=LISTS[_0x5c5d3e(0x136)][USER[_0x5c5d3e(0x18d)][_0x5c5d3e(0x2d5)]];_0xf7ec10[_0x5c5d3e(0x15e)]&&displayError(_0x5c5d3e(0x1b3)+_0xf7ec10[_0x5c5d3e(0x15e)]);}function fetchItem(_0x18802f,_0xc45687){const _0x2abc4a=_0x514770;return Object[_0x2abc4a(0x2ad)](_0x18802f)[_0x2abc4a(0x227)](([_0x4afd23,_0x58c90a])=>{return _0xc45687(_0x58c90a,_0x4afd23);})[_0x2abc4a(0x190)]('');}function pageConfiguration(_0x4fcc2b){const _0x59de1b=_0x514770;let _0x4d2c09=document[_0x59de1b(0x213)](ATTRS[_0x59de1b(0x166)][_0x59de1b(0x153)])||document['createElement'](_0x59de1b(0x153));_0x4d2c09[_0x59de1b(0x1b6)]='image/x-icon',_0x4d2c09[_0x59de1b(0x175)]=_0x59de1b(0x2fb),_0x4d2c09['href']=ATTRS[_0x59de1b(0xf0)][_0x59de1b(0x16f)],document[_0x59de1b(0x269)](ATTRS['selectors'][_0x59de1b(0xbb)])[0x0][_0x59de1b(0x1c5)](_0x4d2c09),document[_0x59de1b(0x9c)]=_0x4fcc2b;}function loadScript(_0x445cf6){return new Promise((_0x1129a7,_0x3f9616)=>{const _0x3a1089=_0x51d6,_0x31135f=document['createElement'](_0x3a1089(0xb2));_0x31135f[_0x3a1089(0x151)]=_0x445cf6,_0x31135f[_0x3a1089(0x1f0)]=_0x1129a7,_0x31135f['onerror']=_0x3f9616,document[_0x3a1089(0xbb)][_0x3a1089(0x1c5)](_0x31135f);});}function removeAds(){const _0x455aca=_0x514770;$(ATTRS[_0x455aca(0x166)]['ad'])[_0x455aca(0x191)](_0x455aca(0x270),_0x455aca(0x273));}function removeCookie(){setTimeout(function(){const _0x44f728=_0x51d6;$(ATTRS[_0x44f728(0x166)][_0x44f728(0xfc)])&&($(ATTRS['selectors']['cmpButton'])[_0x44f728(0x138)](),$(ATTRS[_0x44f728(0x166)][_0x44f728(0xfc)])['remove']());},0x3e8);}function onActionPressed(){const _0x405f86=_0x514770;pushUserOnline(),USER['configurations'][_0x405f86(0x28a)]===_0x405f86(0x196)&&APP['resize']===0x0&&(APP[_0x405f86(0x1fa)]=0x1,createChatboxResizable());}function onColorChanged(_0x204831){const _0x1a462b=_0x514770,_0x2df0d3=$(_0x204831)[_0x1a462b(0x2b5)]();/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/[_0x1a462b(0x1cd)](_0x2df0d3)&&changeUserColor(_0x2df0d3);}function listenerComponents(){const _0x8f12=_0x514770;APP[_0x8f12(0xd1)]===0x1&&($(ATTRS[_0x8f12(0x166)][_0x8f12(0x2e8)])['on'](_0x8f12(0x1c3),function(){const _0x3edb9c=_0x8f12;skinValidation($(this)[_0x3edb9c(0x2b5)]());}),$(ATTRS[_0x8f12(0x166)]['skinElem'])['on'](_0x8f12(0x138),function(){const _0x42b6a9=_0x8f12;skinValidation($(this)[_0x42b6a9(0x27f)]('src'));}));if(APP['mode']===0x2){const _0x33554e=document[_0x8f12(0x213)](ATTRS[_0x8f12(0x166)][_0x8f12(0x2ca)]),_0x37108b={'characterData':!![],'childList':!![],'subtree':!![]};let _0xa19e66=function(_0x326690,_0x4e6edc){const _0x408675=_0x8f12;for(var _0x461285 of _0x326690){if(_0x461285[_0x408675(0x1b6)]===_0x408675(0x1fc)||_0x461285[_0x408675(0x1b6)]===_0x408675(0xc0)){onActionPressed();break;}}};const _0x2494b0=new MutationObserver(_0xa19e66);_0x2494b0[_0x8f12(0xee)](_0x33554e,_0x37108b);}$(ATTRS['selectors']['nickname'])['on'](_0x8f12(0xa1),function(){const _0xbe7b5=_0x8f12;APP[_0xbe7b5(0xd1)]===0x1&&$(ATTRS[_0xbe7b5(0x166)][_0xbe7b5(0x187)])[_0xbe7b5(0x2cf)]($(this)[_0xbe7b5(0x2b5)]()),USER[_0xbe7b5(0x1a9)][_0xbe7b5(0xb9)]=$(this)[_0xbe7b5(0x2b5)]();})['on'](_0x8f12(0x1c3),function(){getReservedName(),pushUserColors(),pushUserOnline();}),$(ATTRS[_0x8f12(0x166)][_0x8f12(0x2b6)])['on']('click',function(){const _0x2baf0f=_0x8f12;USER[_0x2baf0f(0x154)]=$(this)[_0x2baf0f(0x2b7)](ATTRS['selectors']['serverName'])['text'](),APP[_0x2baf0f(0x1fa)]=0x0,pushUserOnline();}),$(ATTRS[_0x8f12(0x166)][_0x8f12(0x194)])['on'](_0x8f12(0x138),()=>{const _0x3296e8=_0x8f12;if(USER[_0x3296e8(0x154)]!=='\x20Lobbies')pushUserStatisticsLocally();onActionPressed();}),$(ATTRS['selectors'][_0x8f12(0x1db)])['on'](_0x8f12(0x138),onActionPressed);}function createComponents(){const _0x778658=_0x514770;APP[_0x778658(0xd1)]===0x1&&(createSkinProfile(),createHUD());createBoxes(),createSortable();if(APP['mode']===0x1&&USER[_0x778658(0x1a9)][_0x778658(0x180)]===_0x778658(0x196))createColorObserver(ATTRS[_0x778658(0x166)][_0x778658(0x121)],ATTRS[_0x778658(0x166)]['messageName']);if(APP[_0x778658(0xd1)]===0x1&&USER['configurations'][_0x778658(0xbc)]===_0x778658(0x196))createColorObserver(ATTRS[_0x778658(0x166)][_0x778658(0x209)],ATTRS[_0x778658(0x166)][_0x778658(0x2ea)]);}function createHUD(){const _0x4e6a47=_0x514770;displayTitle(),displaySocial();const _0x1f9f13=$(ATTRS[_0x4e6a47(0x166)][_0x4e6a47(0x8c)])[_0x4e6a47(0x2cf)]()[_0x4e6a47(0x19b)]();$(ATTRS['selectors'][_0x4e6a47(0x2a5)])[_0x4e6a47(0x2de)]===0x0&&_0x1f9f13[_0x4e6a47(0x309)](/\d+/)[0x0]>=0x5&&displaySwitch();}function displayTitle(){const _0xc2d2d7=_0x514770,_0x19f25f=ATTRS['titles'][Math['floor'](Math['random']()*ATTRS[_0xc2d2d7(0xc1)][_0xc2d2d7(0x2de)])];$(ATTRS['selectors']['barHud'])[_0xc2d2d7(0x19a)](_0xc2d2d7(0x23a)+_0x19f25f+'</titleExtension>\x0a\x20\x20\x20\x20');}function displaySocial(){const _0x1c7585=_0x514770,_0x61a2fc=$(ATTRS[_0x1c7585(0x166)][_0x1c7585(0x283)]),_0x31e097='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<a\x20data-v-7a126fed\x20href=\x22https://discord.gg/wthDcUb6nY\x22\x20target=\x22_blank\x22\x20rel=\x22noopener\x22\x20class=\x22discord-link\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-heart\x22></i>\x20Delta\x20Discord\x0a\x20\x20\x20\x20\x20\x20\x20\x20</a>\x0a\x20\x20\x20\x20',_0x21ae9d='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<a\x20data-v-7a126fed\x20href=\x22https://discord.gg/cJByExsnub\x22\x20target=\x22_blank\x22\x20rel=\x22noopener\x22\x20class=\x22bug-link\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-bug\x22></i>\x20Report\x20a\x20bug\x0a\x20\x20\x20\x20\x20\x20\x20\x20</a>\x0a\x20\x20\x20\x20';_0x61a2fc[_0x1c7585(0x19a)](_0x31e097,_0x21ae9d),_0x61a2fc[_0x1c7585(0x20e)](function(){const _0x503ed4=_0x1c7585;_0x61a2fc[_0x503ed4(0x183)](0xfa,0x1);}),_0x61a2fc[_0x1c7585(0x25c)](function(){const _0x5c4d34=_0x1c7585;_0x61a2fc[_0x5c4d34(0xd8)](!![],!![])['fadeTo'](0xfa,0.1);});}function displaySwitch(){const _0x31208b=_0x514770;$(ATTRS[_0x31208b(0x166)][_0x31208b(0x9b)])[_0x31208b(0x19a)](_0x31208b(0x231)+ATTRS[_0x31208b(0x155)][_0x31208b(0xd0)]+_0x31208b(0x116));}function createSkinProfile(){const _0x3243a5=_0x514770,_0x4f50e6=$(ATTRS[_0x3243a5(0x166)][_0x3243a5(0x2e8)])['val']();$(ATTRS[_0x3243a5(0x166)][_0x3243a5(0x266)])['before'](_0x3243a5(0x23d)+_0x4f50e6+_0x3243a5(0x130)+USER[_0x3243a5(0x1a9)]['nicknameColor']+'\x22>'+USER[_0x3243a5(0x1a9)][_0x3243a5(0xb9)]+_0x3243a5(0x189)),skinValidation(_0x4f50e6);}function skinValidation(_0x56073c){const _0x36f9fc=_0x514770;if(_0x56073c===ATTRS[_0x36f9fc(0xf0)][_0x36f9fc(0x14f)])$(ATTRS[_0x36f9fc(0x166)][_0x36f9fc(0x23f)])[_0x36f9fc(0x27f)](_0x36f9fc(0x151),ATTRS[_0x36f9fc(0xf0)][_0x36f9fc(0x1a7)]);else{const _0x5280ea=new Image();_0x5280ea[_0x36f9fc(0x1f0)]=function(){const _0x4e4b8d=_0x36f9fc;$(ATTRS[_0x4e4b8d(0x166)][_0x4e4b8d(0x23f)])[_0x4e4b8d(0x27f)]('src',_0x56073c),pushUserOnline();},_0x5280ea[_0x36f9fc(0x297)]=function(){const _0x589212=_0x36f9fc;$(ATTRS[_0x589212(0x166)][_0x589212(0x23f)])[_0x589212(0x27f)](_0x589212(0x151),ATTRS[_0x589212(0xf0)][_0x589212(0x18b)]),pushUserOnline();},_0x5280ea['src']=_0x56073c;}}function getReservedName(){const _0x5ec28e=_0x514770,_0x2d29dc=LISTS[_0x5ec28e(0x306)][USER[_0x5ec28e(0x1a9)]['nickname'][_0x5ec28e(0x19b)]()];_0x2d29dc&&_0x2d29dc[_0x5ec28e(0x2d5)]!==USER['credentials'][_0x5ec28e(0x2d5)]?(sendTimedSwal(_0x5ec28e(0x174),_0x5ec28e(0x1d2),0x2710,'OK'),$(ATTRS[_0x5ec28e(0x166)][_0x5ec28e(0x187)])[_0x5ec28e(0x191)]({'color':_0x2d29dc['color'],'font-style':_0x5ec28e(0x2a3)}),$(ATTRS['selectors']['nickname'])[_0x5ec28e(0x191)]('font-style','italic'),APP[_0x5ec28e(0xfa)]={'value':!![],'color':_0x2d29dc[_0x5ec28e(0x24e)]}):($(ATTRS['selectors'][_0x5ec28e(0x187)])[_0x5ec28e(0x191)]({'color':USER[_0x5ec28e(0x1a9)][_0x5ec28e(0x2b8)],'font-style':_0x5ec28e(0x104)}),$(ATTRS['selectors']['nickname'])[_0x5ec28e(0x191)]('font-style','normal'),APP[_0x5ec28e(0xfa)]={'value':![],'color':USER['configurations'][_0x5ec28e(0x2b8)]});}function showPage(_0x4968ef,_0x8e57c0,_0x3a3cdf,_0xfbac53){const _0x214ec5=_0x514770;if(typeof _0xfbac53==='function')_0xfbac53();_0x8e57c0&&_0x8e57c0[_0x214ec5(0xf5)]((_0x122a3c,_0x5d5a9a)=>{const _0x45682b=_0x214ec5;_0x5d5a9a===_0x4968ef?($(_0x122a3c)['removeClass'](_0x45682b(0x1d8)),$(_0x122a3c)[_0x45682b(0x11b)](_0x45682b(0x1ba))):($(_0x122a3c)[_0x45682b(0x2f1)]('buttonTabDisabled'),$(_0x122a3c)['addClass']('buttonTabActive'));}),_0x3a3cdf&&_0x3a3cdf[_0x214ec5(0xf5)]((_0x4f922b,_0x2b77ec)=>{const _0x18fd78=_0x214ec5;_0x2b77ec===_0x4968ef?$(_0x4f922b)[_0x18fd78(0x2f1)](_0x18fd78(0x1bf)):$(_0x4f922b)[_0x18fd78(0x11b)](_0x18fd78(0x1bf));});}function createBoxes(){const _0x22c339=_0x514770;createNewIcon(!![],_0x22c339(0x19c),_0x22c339(0x284),drawUsersModal),createNewIcon(!![],_0x22c339(0x13c),_0x22c339(0x2d3),drawStatisticsModal),createNewIcon(!![],_0x22c339(0x113),_0x22c339(0x24a),drawLeaderboardModal),createNewIcon(!![],_0x22c339(0x2d2),_0x22c339(0x89),drawToolsModal),createNewIcon(!![],_0x22c339(0xf3),_0x22c339(0x2ba),drawSkinsModal);}function createNewIcon(_0x438d42,_0x187b6f,_0x3495f1,_0xd76a2c){const _0xf8e484=_0x514770;let _0x4648fa=$('<i>')['addClass'](_0x187b6f)[_0xf8e484(0x27f)]('id',_0x3495f1)['on'](_0xf8e484(0x138),_0xd76a2c?_0xd76a2c:'');(_0x438d42?$(ATTRS['selectors']['mainContainer']):$(ATTRS[_0xf8e484(0x166)][_0xf8e484(0x91)]))[_0xf8e484(0x19a)](_0x4648fa);}function createNewBox(_0xce3361,_0x1a012e,_0x3c28a8,_0x5b3acc,_0x42325b){const _0x322946=_0x514770;let _0x3d487c=_0x42325b?_0x322946(0x26a):'';$(ATTRS[_0x322946(0x166)][_0x322946(0xc8)])[_0x322946(0x19a)](_0x322946(0xd2)+_0x3d487c+_0x322946(0x259)+(_0x5b3acc?'tip=\x22'+_0x5b3acc+'\x22':'')+'>'+_0x1a012e+'</h2>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x3c28a8+_0x322946(0x1a6)+_0xce3361+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20');}function createColorObserver(_0x559268,_0x1e2ce2){const _0x11ba61=_0x514770,_0x2f06e1=document[_0x11ba61(0x213)](_0x559268);function _0x2f311d(_0x5689df){const _0x48e290=_0x11ba61,_0x1d9941=_0x5689df[_0x48e290(0x1ee)]['trim']();if(!APP[_0x48e290(0x24d)][_0x48e290(0x1d3)](_0x1d9941)){const _0x35a863=LISTS['colors'][_0x1d9941];if(!_0x35a863){_0x5689df[_0x48e290(0x170)][_0x48e290(0x10b)]('custom')&&(_0x5689df['classList'][_0x48e290(0x1be)]('custom'),_0x5689df[_0x48e290(0x28e)]['color']='');return;}_0x5689df[_0x48e290(0x170)][_0x48e290(0x282)](_0x48e290(0xaa)),_0x5689df[_0x48e290(0x28e)][_0x48e290(0x24e)]=_0x35a863['color']?_0x35a863[_0x48e290(0x24e)]:_0x48e290(0x10f);}else _0x5689df[_0x48e290(0x28e)][_0x48e290(0x24e)]=_0x48e290(0x10f);}const _0x3fd529=new MutationObserver(_0x597e58=>{const _0x3aaeb8=_0x11ba61;for(const _0x5368e4 of _0x597e58){if(_0x5368e4[_0x3aaeb8(0x1b6)]==='childList')_0x5368e4[_0x3aaeb8(0x251)][_0x3aaeb8(0xf5)](_0x47a519=>{const _0x356c82=_0x3aaeb8;_0x47a519['nodeType']===Node[_0x356c82(0x143)]&&(_0x47a519[_0x356c82(0x201)](_0x1e2ce2)&&_0x2f311d(_0x47a519),_0x47a519[_0x356c82(0x305)](_0x1e2ce2)[_0x356c82(0xf5)](_0x2f311d));});else{if(_0x5368e4['type']==='characterData'){const _0x471fa3=_0x5368e4['target'][_0x3aaeb8(0x29e)];_0x471fa3&&_0x471fa3['matches'](_0x1e2ce2)&&_0x2f311d(_0x471fa3);}}}});_0x3fd529[_0x11ba61(0xee)](_0x2f06e1,{'childList':!![],'subtree':!![],'characterData':!![]});}function drawUsersModal(){const _0x47c0f6=_0x514770;if($(ATTRS[_0x47c0f6(0x166)][_0x47c0f6(0x1ec)])[_0x47c0f6(0x2de)]>0x0)return;const _0x2de95d=usersModal(LISTS[_0x47c0f6(0x136)]),_0x5d3cd5=_0x2de95d[_0x47c0f6(0x1eb)]+_0x2de95d[_0x47c0f6(0x276)]+_0x2de95d[_0x47c0f6(0x252)]+_0x2de95d[_0x47c0f6(0xd7)]+_0x2de95d[_0x47c0f6(0x262)]+_0x2de95d['offlineList'];createNewBox(_0x5d3cd5,_0x2de95d['counts'][_0x47c0f6(0x128)]+_0x47c0f6(0x16e),injectAnonymousSwitch(),injectConnectionsStats());}function usersModal(_0x2d1127){const _0x44feb5=_0x514770,_0x2ea351=_0x2d1127[USER[_0x44feb5(0x18d)][_0x44feb5(0x2d5)]];let {listOnline:_0x2f581f,listOffline:_0x195320,userCount:_0x266e26}=updateUserLists(_0x2d1127,_0x2ea351);return{'meHeader':_0x44feb5(0xdb),'onlineHeader':_0x44feb5(0x1ad)+_0x266e26[_0x44feb5(0x163)]+'\x20Online\x20players</h3>','offlineHeader':_0x44feb5(0x1ad)+_0x266e26['offline']+_0x44feb5(0x216),'profileHeader':injectUser(_0x2ea351,getUsersTime(_0x2ea351[_0x44feb5(0x16b)])),'onlineList':_0x2f581f,'offlineList':_0x195320,'counts':_0x266e26};}function _0x3650(){const _0x4dffa9=['child','Online','onlineColor','onclick=\x22pushUserBadge(\x27','1:68762024822:web:c4f0497b6b914ac9ce9857','statScore','reload','leaderboardItemMe','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22timeChat\x22\x20','An\x20error\x20as\x20occurred...','https://i.ibb.co/NtMpMBJ/anonymous.png','skinsNavMePage','Users','map','#play-button','prototype','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22listItem\x20userItem\x20','#skinurl','meConfigItem','.leaderboardBox','filter','fr-FR','fillText','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22switchDual\x20switchButton\x22\x20tip=\x27What\x20is\x20this\x20?\x20Delta\x20dual\x20is\x20the\x20new\x20Delta\x20mode,\x20it\x20allows\x20you\x20to\x20play\x20in\x20multibox\x20with\x20only\x201\x20page.\x20Optimized\x20and\x20supported\x20by\x20Delta,\x20it\x20will\x20make\x20you\x20love\x20it\x20<3\x27\x20onclick=\x22window.location.href\x20=\x20\x27','Total\x20install:\x20','Login/create\x20(automatic)','\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22userOnline\x22\x20style=\x22background-color:\x20','leaderboardStatisticValueMe','.anonymousStatus','auth','.xp-data\x20>\x20div:last-child','random','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<titleMod>(Single\x20mode)</titleMod>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<titleExtension>','Pi\x20the\x20legend','pathname','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22profile-image\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22skinProfile\x20beautifulSkin\x22\x20alt=\x22\x22\x20src=\x22','Public\x20skins','skinProfile','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22userOnlineText\x22>','Deleting\x20your\x20statistics\x20failed','userAgent','#cmpbox','.anonymousSwitch','tip','Safari','promiseError','Yes','=\x22\x22\x20onchange=\x22USER.configurations.timeChatRainbow\x20=\x20switchManager(USER.configurations.timeChatRainbow,\x20\x27timeChatRainbow\x27)\x22\x20tip=\x22\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Rainbow\x20color\x20for\x20message\x20time</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','leaderboardIcon','https://cors-proxy.fringe.zone/https://skins.vanis.io/api/public-skins?page=','userAgentData','blacklist','color','stringify','userColors','addedNodes','onlineHeader','randomUUID','Luka\x20need\x20Fohz\x20?','exception','apply','Fetching\x20my\x20favorites\x20skins\x20error','13490712oOIlpS','>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-73ccaaca=\x22\x22\x20class=\x22overlay\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20data-v-73ccaaca=\x22\x22\x20class=\x22fas\x20fa-times-circle\x20close-button\x22\x20onclick=\x22$(ATTRS.selectors.modalHud).remove()\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-73ccaaca=\x22\x22\x20class=\x22wrapper\x22><div\x20data-v-73ccaaca=\x22\x22\x20class=\x22content\x20fade-box\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-c41b640a=\x22\x22\x20data-v-5190ae12=\x22\x22\x20data-v-15c13b66=\x22\x22\x20class=\x22container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22customBoxHeader\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h2\x20data-v-f0eb8534=\x22\x22\x20class=\x22player-list-title\x20customBoxTitle\x22\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22listItem\x20configItem\x22\x20id=\x22','#message-list','mouseleave','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22userLevel\x22>','meUser','meUserBadge','Skin\x20yoinked','errors','offlineHeader','split','resizable','keys','playerData','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22blurredHUD\x22\x20','string','getElementsByTagName','style=\x22margin-left:\x20-316px;\x20width:\x20962px;\x22','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22configDate\x22>','.\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','width','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','backdrop-filter','display','submitLoading','Time\x20total','none','Anonymous\x20#','location','profileHeader','Statistics/','\x20hotkeys</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22configSkins\x20configCard\x22>','#password-input','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22leaderboardNickname\x20','=\x22\x22\x20onchange=\x22USER.configurations.anonymous\x20=\x20switchManager(USER.configurations.anonymous,\x20\x27anonymous\x27)\x22\x20tip=\x22When\x20this\x20mode\x20is\x20activated,\x20the\x20only\x20information\x20visible\x20to\x20other\x20players\x20is\x20your\x20online\x20status\x20and\x20the\x20server\x20you\x20are\x20on.\x20The\x20rest\x20is\x20hidden.\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Anonymous</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','getItem','code','Error','attr','currentUser','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','add','socialContainer','userIcon','killTotal','submitButton','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinItemActions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinItemNav\x20skinItemNavId\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22skinItemURL\x22>Skin\x20ID:\x20','=\x22\x22\x20onchange=\x22USER.configurations.autoSynchronization\x20=\x20switchManager(USER.configurations.autoSynchronization,\x20\x27autoSynchronization\x27)\x22\x20tip=\x22By\x20saving\x20your\x20locales\x20configurations\x20to\x20the\x20database,\x20you\x20will\x20be\x20able\x20to\x20access\x20them\x20anywhere\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Auto\x20save\x20my\x20configurations</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22toolsPageConfigurations\x20hidden\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22header\x22>','<style>','resizableChatbox','then','\x22\x20src=\x22','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22userPhoto\x20beautifulSkin\x22\x20alt=\x22\x22\x20src=\x22','style','Delta\x20will\x20carry\x20you','.skin-container','.leaderboard-label[data-v-8a0c31c6]>:last-child\x20','update','Deadly\x20World\x20the\x20solo','dualMode','57RfSyJo','tip=\x22','onerror','meConfig','Mass\x20eaten','#menu-container','Single','slice','.overlaySkin','parentElement','json','.skinsNavAllButton','Vanis\x20s5fKDiOD5hSR-DVZGs5u','Browser','italic','once','discordBtn','trace','.leaderboardList','Dual','emailInput','getElementById','https://i.ibb.co/Lr248FQ/single.png','https://i.ibb.co/g9Sj8gK/undef.png','entries','.server-list-item','.nicknameProfile','last2days','\x22\x20onchange=\x22onColorChanged(this)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22colorPickerGui\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22color\x22\x20id=\x22colorPickerSelector\x22\x20value=\x22','.bar>.statBar','.message-from','playerStalkContainer','val','serverListItem','find','nicknameColor','Skin\x20copied','skinsIcon','blurredHUD','https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js','firebaseAuth','https://skins.vanis.io/s/','Do\x20you\x20want\x20to\x20load\x20this\x20configuration\x20into\x20the\x20game?','#colorPickerInput','Ecosia','height','Disconnected','\x27)\x22>\x0a\x20\x20\x20\x20','Do\x20you\x20want\x20to\x20remove\x20this\x20configuration\x20definitely?','Time\x20played','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22stat-span\x22>\x20to\x20Discord\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fab\x20fa-discord\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22stat-p\x20confidential\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22stat-span\x22\x20style=\x22text-shadow:\x20none!important\x22>Account\x20email\x20:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','hover','logout','bar','leaderbordKdaButton','.skinBox','.loadingDelta','94132DtGPSN','text','\x20K/D','meColor','fas\x20fa-wrench','statIcon','url','uid','<error>','skinsNavFavPage','#c084ff','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22leaderboardItem\x20','Opera','\x22\x20onclick=\x22openSkin(\x27','owners','user','length','https://skins.vanis.io/','.customBoxTitle','+220\x20users\x20on\x20Delta','=\x22\x22\x20onchange=\x22USER.configurations.colorNicknameLeaderboard\x20=\x20switchManager(USER.configurations.colorNicknameLeaderboard,\x20\x27colorNicknameLeaderboard\x27)\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Show\x20colors\x20in\x20the\x20leaderboard</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22colorSwitchNickCell\x22\x20','table','7235949BXvPgS','275EfOKpZ','setItem','</div>','skinUrl','Duru\x20is\x20cuter\x20than\x20all','leaderboardText','log','Confirm\x20update?','platform','email','teamtag','\x22\x20tip=\x22','removeClass','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTabContainer\x22>','#ee3652','<div\x20class=\x22listSkins\x22>','#colorSwitchNickLeaderboard','.skinsNavMePage','.colorPickerGui','.minimap-wrapper>.container','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22leaderboardStatisticValue\x20','\x0aLevel\x20:\x20','shortcut\x20icon','Nickname\x20:\x20','#colorSwitchNickChatbox','\x20\x20\x20\x20','round','.toolsNavPerksTab','bind','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22divLogout\x22\x20onclick=\x22firebaseSignOut()\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Logout</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-sign-out-alt\x20signOutButton\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','statistics','isNaN','querySelectorAll','colors','#ffffff','.message-list','match','clientY','The\x20configuration\x20has\x20been\x20changed,\x20the\x20page\x20will\x20reload...','\x0aLast\x20connection\x20:\x20','</p>','https://delta-client-default-rtdb.europe-west1.firebasedatabase.app','Vanis.io','kda','.perks','#email-input','Mass\x20total','values','min','clipboard','child_changed','BBN\x20the\x20SK','toolIcon','6027848RQZRQh','830458Rvkvqi','level','DM\x20Luka\x20to\x20recruit\x20Fohz!','leaderboardList','references','/delta-dual','menuContainer','New\x20badges\x20are\x20available\x20!','<img\x20src=\x22','#nickname','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22','Join\x20discord\x20now','addEventListener','.userBox','date','colorPickerSelector','mainContainer','title','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0aColor\x20used\x20:\x20','Server\x20responded\x20with\x20','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22leaderboardList\x22></div>\x0a\x20\x20\x20\x20','input','timeAvg','50px','leaderbordGamesButton','Exe\x20the\x20legend','.statBox','\x20\x20\x20\x20\x20\x20','clientX','hotkeys','custom','count','apps','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTabContainer\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTab\x20buttonTabDisabled\x20skinsNavAllButton\x22\x20onclick=\x22showPage(0,\x20[ATTRS.selectors.skinsNavAllButton,\x20ATTRS.selectors.skinsNavMeButton,\x20ATTRS.selectors.skinsNavFavButton],\x20[ATTRS.selectors.skinsNavAllPage,\x20ATTRS.selectors.skinsNavMePage,\x20ATTRS.selectors.skinsNavFavPage],\x20loadAllSkins)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>Public\x20skins</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTab\x20buttonTabActive\x20skinsNavMeButton\x22\x20onclick=\x22showPage(1,\x20[ATTRS.selectors.skinsNavAllButton,\x20ATTRS.selectors.skinsNavMeButton,\x20ATTRS.selectors.skinsNavFavButton],\x20[ATTRS.selectors.skinsNavAllPage,\x20ATTRS.selectors.skinsNavMePage,\x20ATTRS.selectors.skinsNavFavPage],\x20loadMySkins)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>Your\x20skins</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTab\x20buttonTabActive\x20skinsNavFavButton\x22\x20onclick=\x22showPage(2,\x20[ATTRS.selectors.skinsNavAllButton,\x20ATTRS.selectors.skinsNavMeButton,\x20ATTRS.selectors.skinsNavFavButton],\x20[ATTRS.selectors.skinsNavAllPage,\x20ATTRS.selectors.skinsNavMePage,\x20ATTRS.selectors.skinsNavFavPage],\x20loadFavSkins)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>Favorite\x20skins</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinsNavAllPage\x20skinsLibraryList\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinsNavMePage\x20skinsLibraryList\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinsNavFavPage\x20skinsLibraryList\x22></div>\x0a\x20\x20\x20\x20','https://i.ibb.co/kh36nB5/delta.png','console','Css\x20injector\x20system\x20failed','.account-name','script','massTotal','Success','content','Incorrect\x20password...','.skinsNavFavPage','Delta\x20best\x20ext\x20?','nickname','\x22\x20onerror=\x22this.src\x20=\x20\x27','head','colorNicknameLeaderboard','28px','AIzaSyCc_St6TMlGM6fmeYre_gHjCXYriPc3wtM','createElement','characterData','titles','hasOwnProperty','Google\x20Chrome','.\x20Please\x20send\x20a\x20message\x20in\x20#support\x20on\x20the\x20official\x20Delta\x20Discord\x20server\x20:\x20https://discord.gg/wthDcUb6nY/','\x22\x20alt=\x22','timeChatRainbow','Signout\x20failed','playerContainer','Colors/','.player-list-title','.xp-data\x20>\x20div:first-child','\x0aMode:\x20','.toolsPagePerks','/img/skin-add.png','\x20\x20\x20\x20\x20','deltaDual','mode','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-73ccaaca=\x22\x22\x20data-v-5190ae12=\x22\x22\x20class=\x22modal\x22\x20','badges','innerHTML','push','.modal','onlineList','stop','passwordInput','https://vanis.io/delta-dual','<h3\x20class=\x22titleSubBox\x22>My\x20profile</h3>','https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js','leaderbordTimeButton','Tor','appendTo','levelDual','Profile\x20&\x20stats','Confirm\x20reset?','\x27\x22>','offlineColor','Unknown','<img\x20class=\x22leaderboardBadgeDiv\x22\x20alt=\x22\x22\x20src=\x22','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22listTop\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22listTextElem\x20configTextElem\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22configHeader\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22configHeaderTitle\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22configName\x22>','=\x22\x22\x20onchange=\x22USER.configurations.colorNicknameCell\x20=\x20switchManager(USER.configurations.colorNicknameCell,\x20\x27colorNicknameCell\x27)\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Show\x20colors\x20in\x20the\x20cells</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-22117250=\x22\x22\x20class=\x22silent\x20silentCustomTop\x20silentCustomBottom\x22>If\x20you\x20change\x20an\x20option,\x20refresh\x20the\x20page</div>\x0a\x20\x20\x20\x20','constructor','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','Page\x20','82206UgKqBo','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22toolsPageSettings\x20hidden\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22header\x22>Configuration<i\x20class=\x22fas\x20fa-cog\x20headerIcon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','observe','massAvg','images','#teamtag','signInWithEmailAndPassword','fas\x20fa-images','Database\x20connection\x20failed','forEach','#overlay','Lobby','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22header\x22>Statistics\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-chart-bar\x20headerIcon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22listTextItem\x20userTextElem\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22userNickLine\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','reserved','\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>','cmp','statusText','timeChat','autoSynchronization','meStat','.player-info\x20div:nth-child(2)','chatboxContainer','.leaderbordTimeButton','normal','\x20\x20\x20','offline','.skinsNavAllPage','(((.+)+)+)+$','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','#chatbox','contains','class','info','#colorSwitchNickCell','white','catch','singleMode','ref','fas\x20fa-trophy','signOut','\x0a\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20','\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Switch\x20to\x20dual</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20style=\x22margin-top:\x204px\x22\x20class=\x22fas\x20fa-exchange-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','Favorite\x20skins','Fetching\x20my\x20skins\x20error','body','MachineId','addClass','\x20skins</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','/badge','initializeApp','Splat\x20the\x20YouTuber','Who\x27s\x20Miracle..?','messageList','anonymousSkin','https://skins.vanis.io/s/vanis1','toolBox','=\x22\x22\x20onchange=\x22USER.configurations.timeChat\x20=\x20switchManager(USER.configurations.timeChat,\x20\x27timeChat\x27)\x22\x20tip=\x22\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Show\x20time\x20before\x20message</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22timeChat\x22\x20','daily','exists','total','3.8.4','.leaderbordKillsButton','fav','The\x20configuration\x20have\x20been\x20successfully\x20deleted','.leaderbordMassTotalButton','Deleting\x20your\x20configuration\x20failed','firebase','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22nicknameProfile\x22\x20style=\x22color:\x20','skinsNavAllPage','skinBox','now','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22\x20tip=\x22Don\x27t\x20activate\x20this\x20option\x20if\x20you\x20do\x20not\x20have\x20a\x20powerful\x20enough\x20computer\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22colorSwitchNickChatbox\x22\x20','.container[data-v-4c95bd45]','users','Deleted','click','K/D','getTime','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22resetAllStatistics\x22\x20onclick=\x22swalResetStatistics()\x22>Reset\x20all\x20statistics\x20<i\x20class=\x22fas\x20fa-sync-alt\x20resetAllStatisticsIcon\x22></i></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','fas\x20fa-user','Grouk\x20the\x20legend','defaultColor','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22stat-p\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x20\x20\x20\x20\x20\x20\x20\x20\x20','gameTotal','ELEMENT_NODE','#overlay>.container>.fade-box.scroll>div>div:nth-child(2)','floor','\x22\x20placeholder=\x22','The\x20skin\x20has\x20been\x20copied\x20to\x20the\x20clipboard','\x20on\x20','\x0aActive\x20last\x202\x20days:\x20','.playerStalkContainer','Statistics','left','background-color','anonymous','imageAddVanis','Unnamed','src','#32e34a','link','server','libraries','error','.toolsPageConfigurations','https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js','timeTotal','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22configButtons\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-trash\x20configDelete\x22\x20onclick=\x22deleteConfiguration(\x27','https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js',':\x20</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','68762024822','banned','min\x20','Delta\x20settings','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22stat-p\x22\x20','https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/favorites','online','\x22\x20alt=\x22\x22\x20class=\x22configSkinItem\x20beautifulSkin\x22\x20tip=\x22','<p\x20class=\x22configTag\x22>Tag:\x20','selectors','meColorBadge','Alis.io','colorPickerInput','announcement','status','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22badgeItem\x20badge','\x0a\x20\x20\x20\x20\x20\x20\x20\x20@keyframes\x20slide\x20{\x200%\x20{\x20background-position:\x20200%\x200;\x20}\x20100%\x20{\x20background-position:\x20-200%\x200;\x20}\x20}\x0a\x20\x20\x20\x20','\x20Players','deltaLogo','classList','.chatbox','database','Mass\x20eaten\x20/\x20game','Reserved\x20nickname','rel','statKills','=\x22\x22\x20onchange=\x22USER.configurations.colorNicknameChatbox\x20=\x20switchManager(USER.configurations.colorNicknameChatbox,\x20\x27colorNicknameChatbox\x27)\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Show\x20colors\x20in\x20the\x20chat</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22\x20tip=\x22Don\x27t\x20activate\x20this\x20option\x20if\x20you\x20do\x20not\x20have\x20a\x20powerful\x20enough\x20computer\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22colorSwitchNickLeaderboard\x22\x20','Fohz\x20the\x20tricker','Check\x20it\x20out\x20in\x20Delta\x20perks\x20;)\x20If\x20you\x20want\x20a\x20badge,\x20send\x20a\x20message\x20in\x20#support\x20in\x20Discord','overlay','discordName','browser','last15days','.skin','Configurations/','colorNicknameChatbox','\x27)\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-play\x20configGet\x22\x20onclick=\x22updateConfiguration(\x27','leaderbordMassTotalButton','fadeTo','skins','<img\x20class=\x22userBadgeDiv\x22\x20alt=\x22\x22\x20src=\x22','all','nicknameProfile','unchecked','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20',',\x20\x27','transparentSkin','messageToast','credentials','\x20-\x20Lvl\x20','search','join','css','opacity','hasClass','playButton','endsWith','checked','.leaderbordMassAvgButton','.leaderboard-text','Yuu\x20the\x20hat\x20coder','append','trim','fas\x20fa-users','off','\x22\x20style=\x22color:\x20','parse','.server-list','.message-row.toast','Chromium','delta-client.appspot.com','rgb(255,\x20255,\x20255)','.toolsNavSettingsTab','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','vanisSkin','#584879','configurations','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22userModeImg\x22\x20alt=\x22\x22\x20src=\x22','Your\x20statistics\x20have\x20been\x20successfully\x20deleted,\x20the\x20page\x20will\x20reload...','Delta.io','<h3\x20class=\x22titleSubBox\x22>','onAuthStateChanged','toFixed','Promise\x20issue,\x203\x20attempts\x20failed.','readyState','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22header\x22>Profil\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20data-v-22117250=\x22\x22\x20class=\x22right\x20silent\x20silentUid\x20confidential\x22>','You\x27ve\x20been\x20banned\x20from\x20Delta\x20by\x20Fohz.\x20Reason:\x20','\x20\x20\x20\x20\x20\x20\x20','each','type','list','value','empty','buttonTabDisabled','#colorPickerSelector','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','submitText','remove','hidden','mousemove','statTime','Skin\x20not\x20copied','change','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','appendChild','skin','return\x20(function()\x20','fillStyle','undefined','Alis.io\x20legends','\x27)\x22\x20','toLocaleDateString','test','last7days','#leaderboard','\x20backups\x20saved<i\x20class=\x22fas\x20fa-save\x20headerIcon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22configCardList\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22configHotkeys\x20configCard\x22>','Your\x20actual\x20nickname\x20is\x20reserved\x20by\x20another\x20Delta\x20player,\x20if\x20you\x20want\x20to\x20play\x20with\x20your\x20color,\x20change\x20your\x20nickname','includes','mousedown','colorNicknameCell','Confirm\x20deletion?','Frenchies\x20on\x20top','buttonTabActive','\x0aDaily\x20active\x20users:\x20','\x20buttonTab\x20','spectateButton','absolute','Delta\x20-\x20Single','undefMode','Deaths','.add-skin','all\x200.3s','img','\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','Users/','.badge','Badges','\x20style=\x22opacity:\x20','scale(0.9)','.toolsNavConfigurationsTab','.leaderbordGamesButton','meHeader','userBox','leaderbordMassAvgButton','textContent','h\x20ago','onload','toString','createUserWithEmailAndPassword','https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/skins','>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22stat-span\x22>','badge','minimapContainer','\x22\x20onclick=\x22handleButtonClick(','#account-name','machineId','resize','#submit-account','childList','blur(7px)','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','fire','#player-container','matches','leaderboardNicknameMe','.toolsPageSettings','Server\x20bad\x20response','mouseup','\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinItemCopy\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-copy\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22skinItemTextButton\x22>Copy</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','reduce','.social-container','leaderboard','Zimek\x20the\x20precursor','firebaseDatabase','=\x22\x22\x20onchange=\x22USER.configurations.resizableChatbox\x20=\x20switchManager(USER.configurations.resizableChatbox,\x20\x27resizableChatbox\x27)\x22\x20tip=\x22\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Resizable\x20chatbox</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22autoSynchronization\x22\x20','Offline','mouseover','Delta\x20on\x20top','615354SaTvnR','Kills','defaultSkin','querySelector','#spec-button','Deltaboard\x20top\x2050','\x20Offline\x20players</h3>','{}.constructor(\x22return\x20this\x22)(\x20)','html','\x0aActive\x20this\x20week:\x20'];_0x3650=function(){return _0x4dffa9;};return _0x3650();}function updateUserLists(_0x2e05d4,_0x4e4455){const _0x4ff098=_0x514770;let _0x5d5aaf='',_0xa5d863='',_0x1b4d8e={'online':0x0,'offline':0x0,'total':0x0};return Object[_0x4ff098(0x314)](_0x2e05d4)['forEach'](_0x105439=>{const _0x3c34c7=_0x4ff098;if(_0x105439===_0x4e4455)return;const _0x513e45=getUsersTime(_0x105439[_0x3c34c7(0x16b)]),_0xc462be=injectUser(_0x105439,_0x513e45);if(_0x513e45===_0x3c34c7(0x21b))_0x5d5aaf+=_0xc462be,_0x1b4d8e[_0x3c34c7(0x163)]++;else _0x513e45&&(_0xa5d863+=_0xc462be,_0x1b4d8e[_0x3c34c7(0x106)]++);_0x1b4d8e[_0x3c34c7(0x128)]++;}),{'listOnline':_0x5d5aaf,'listOffline':_0xa5d863,'userCount':_0x1b4d8e};}function injectUser(_0x208191,_0x3df1f6){const _0x4e02db=_0x514770;return getUsersAnonymous(_0x208191),_0x208191[_0x4e02db(0xb9)][_0x4e02db(0x19b)]()===''&&(_0x208191[_0x4e02db(0x24e)]=_0x4e02db(0x10f),_0x208191[_0x4e02db(0xb9)]=_0x4e02db(0x150)),_0x4e02db(0x22a)+_0x3df1f6+_0x4e02db(0x2f0)+getUsersTip(_0x208191,_0x208191[_0x4e02db(0x154)],_0x3df1f6)+_0x4e02db(0x28d)+(_0x208191['skin']===''?ATTRS['images'][_0x4e02db(0x18b)]:_0x208191['skin'])+'\x22\x20onerror=\x22this.src\x20=\x20\x27'+ATTRS[_0x4e02db(0xf0)][_0x4e02db(0x212)]+_0x4e02db(0x234)+(_0x3df1f6===_0x4e02db(0x21b)?ATTRS[_0x4e02db(0x306)][_0x4e02db(0x21c)]:ATTRS[_0x4e02db(0x306)][_0x4e02db(0xe4)])+_0x4e02db(0xf9)+(_0x208191[_0x4e02db(0x1f5)]?_0x4e02db(0x185)+_0x208191[_0x4e02db(0x1f5)]['url']+_0x4e02db(0x2f0)+_0x208191['badge'][_0x4e02db(0x245)]+'\x22>':'')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22userNickname\x22\x20style=\x22color:\x20'+_0x208191[_0x4e02db(0x24e)]+'\x22>'+_0x208191[_0x4e02db(0xb9)]+_0x4e02db(0x25d)+(_0x208191[_0x4e02db(0x8c)]===0x0?'':_0x4e02db(0x18e)+_0x208191['level'])+_0x4e02db(0x240)+_0x3df1f6+_0x4e02db(0x148)+_0x208191[_0x4e02db(0x154)]+_0x4e02db(0x1aa)+getUsersMode(_0x208191['mode'])+_0x4e02db(0x2f0)+(_0x208191[_0x4e02db(0xd1)]+'\x20mode')+_0x4e02db(0x13f);}function injectAnonymousSwitch(){const _0x3324bb=_0x514770;return'\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x20switchAnonymous\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22anonymousSwitch\x22\x20'+USER[_0x3324bb(0x1a9)]['anonymous']+_0x3324bb(0x27b);}function injectConnectionsStats(){const _0x34365f=_0x514770;let _0x535e38={'total':Object[_0x34365f(0x265)](LISTS[_0x34365f(0x136)])[_0x34365f(0x2de)],'online':0x0,'daily':0x0,'last2days':0x0,'last7days':0x0,'last15days':0x0},_0x2d680a={'now':new Date()[_0x34365f(0x13a)](),'online':0x1b7740,'daily':0x2*0x18*0x3c*0x3c*0x3e8,'last2days':0x3*0x18*0x3c*0x3c*0x3e8,'last7days':0x8*0x18*0x3c*0x3c*0x3e8,'last15days':0xf*0x18*0x3c*0x3c*0x3e8};for(let _0x409913 in LISTS[_0x34365f(0x136)]){if(LISTS[_0x34365f(0x136)][_0x34365f(0xc2)](_0x409913)){let _0x24a75d=LISTS[_0x34365f(0x136)][_0x409913]['status'];if(_0x2d680a[_0x34365f(0x133)]-_0x24a75d<=_0x2d680a[_0x34365f(0x163)])_0x535e38[_0x34365f(0x163)]++;if(_0x2d680a[_0x34365f(0x133)]-_0x24a75d<=_0x2d680a[_0x34365f(0x126)])_0x535e38[_0x34365f(0x126)]++;if(_0x2d680a['now']-_0x24a75d<=_0x2d680a[_0x34365f(0x2b0)])_0x535e38[_0x34365f(0x2b0)]++;if(_0x2d680a[_0x34365f(0x133)]-_0x24a75d<=_0x2d680a[_0x34365f(0x1ce)])_0x535e38[_0x34365f(0x1ce)]++;if(_0x2d680a['now']-_0x24a75d>_0x2d680a[_0x34365f(0x17d)])_0x535e38['last15days']++;}}return _0x34365f(0x232)+(_0x535e38[_0x34365f(0x128)]-0x1)+'\x0aOnline\x20users:\x20'+(_0x535e38[_0x34365f(0x163)]-0x1)+_0x34365f(0x1d9)+(_0x535e38['daily']-0x1)+_0x34365f(0x149)+(_0x535e38[_0x34365f(0x2b0)]-0x1)+_0x34365f(0x219)+(_0x535e38['last7days']-0x1);}function getUsersTime(_0x4c7da9){const _0x5185a3=_0x514770;function _0x5ba8f8(_0xd4dfdc,_0x222e7a,_0x4d60d4){const _0x164855=_0x51d6;if(_0xd4dfdc>=0x2)return undefined;else{if(_0xd4dfdc>0x0)return _0xd4dfdc+'d\x20ago';else{if(_0x222e7a>0x0)return _0x222e7a+_0x164855(0x1ef);else{if(_0x4d60d4>0x0)return _0x4d60d4+'\x20min\x20ago';}}}return _0x164855(0x20d);}const _0x394614=new Date()[_0x5185a3(0x13a)](),_0x2ca02f=_0x394614-_0x4c7da9,_0x125049=Math[_0x5185a3(0x145)](_0x2ca02f/0xea60),_0x25a379=Math['floor'](_0x125049/(0x18*0x3c)),_0x53f492=_0x125049-_0x25a379*0x18*0x3c,_0x37e687=Math[_0x5185a3(0x145)](_0x53f492/0x3c),_0x10d214=_0x53f492%0x3c;if(_0x2ca02f<0x1b7740)return _0x5185a3(0x21b);return _0x5ba8f8(_0x25a379,_0x37e687%0x18,_0x10d214);}function getUsersAnonymous(_0x145753){const _0x50cfd2=_0x514770;_0x145753[_0x50cfd2(0x14e)]==='checked'&&(_0x145753[_0x50cfd2(0x1c6)]=ATTRS['images'][_0x50cfd2(0x122)],_0x145753[_0x50cfd2(0xb9)]=_0x50cfd2(0x274)+Math[_0x50cfd2(0x145)](Math[_0x50cfd2(0x239)]()*0x3e8),_0x145753['level']=0x0,_0x145753[_0x50cfd2(0x24e)]=ATTRS[_0x50cfd2(0x306)][_0x50cfd2(0x10f)],_0x145753[_0x50cfd2(0xd1)]='Anonymous',_0x145753[_0x50cfd2(0x1f5)]=null);}function getUsersTip(_0x25213a,_0x279c11,_0x171141){const _0x160772=_0x514770;return _0x160772(0x2fc)+_0x25213a['nickname']+_0x160772(0x2fa)+_0x25213a[_0x160772(0x8c)]+_0x160772(0x30c)+(_0x171141===_0x160772(0x21b)?'Now':_0x171141)+'\x0aServer\x20:\x20'+_0x279c11+_0x160772(0x9e)+_0x25213a[_0x160772(0x24e)]+_0x160772(0xcc)+(_0x25213a[_0x160772(0xd1)]?_0x25213a['mode']:'Unknown');}function getUsersMode(_0x1819ca){const _0x18a561=_0x514770;if(_0x1819ca===_0x18a561(0x29b))return ATTRS[_0x18a561(0xf0)][_0x18a561(0x111)];else return _0x1819ca===_0x18a561(0x2a8)?ATTRS[_0x18a561(0xf0)][_0x18a561(0x294)]:ATTRS[_0x18a561(0xf0)][_0x18a561(0x1de)];}function drawStatisticsModal(){const _0x491a3e=_0x514770;if($(ATTRS[_0x491a3e(0x166)][_0x491a3e(0x124)])['length']>0x0)return;const _0x5473fc=statisticsModal(USER['statistics']);createNewBox(_0x5473fc[_0x491a3e(0x1b7)],_0x491a3e(0xe1),_0x5473fc[_0x491a3e(0x2c9)]);}function statisticsModal(_0x5ac733){return{'list':generateStatisticsList(_0x5ac733),'logout':generateLogoutButton()};}function generateLogoutButton(){const _0x31cb87=_0x514770;return _0x31cb87(0x302);}function generateStatisticsList(_0x50d6b2){const _0x4f4979=_0x514770;return'\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22stat-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+generateProfileSection()+_0x4f4979(0x26e)+generateStatisticsSection(_0x50d6b2)+_0x4f4979(0x13b);}function generateProfileSection(){const _0x39858b=_0x514770;return _0x39858b(0x1b2)+USER['credentials'][_0x39858b(0x2d5)]+_0x39858b(0x140)+($(ATTRS[_0x39858b(0x166)][_0x39858b(0x17b)])[_0x39858b(0x2de)]===0x0?_0x39858b(0x2c3):'Connected')+_0x39858b(0x2c7)+USER['credentials'][_0x39858b(0x2ee)]+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';}function generateStatisticsSection(_0x4f90c0){const _0x545a75=_0x514770;return _0x545a75(0xf8)+generateStatisticItem('Kills',_0x4f90c0[_0x545a75(0x285)])+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+generateStatisticItem(_0x545a75(0x1df),_0x4f90c0[_0x545a75(0x142)])+_0x545a75(0x1c4)+generateStatisticItem(_0x545a75(0x139),_0x4f90c0[_0x545a75(0x310)][_0x545a75(0x1af)](0x2),'The\x20KDA\x20represents\x20the\x20number\x20of\x20kills\x20in\x20relation\x20to\x20the\x20number\x20of\x20deaths.')+_0x545a75(0x1c4)+generateStatisticItem(_0x545a75(0x299),getFormatedMass(_0x4f90c0[_0x545a75(0xb3)]))+_0x545a75(0x1c4)+generateStatisticItem(_0x545a75(0x173),getFormatedMass(_0x4f90c0[_0x545a75(0xef)]))+_0x545a75(0x1c4)+generateStatisticItem(_0x545a75(0x2c6),getElapsedTime(_0x4f90c0[_0x545a75(0x159)]))+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+generateStatisticItem('Time\x20played\x20/\x20game',getElapsedTime(_0x4f90c0[_0x545a75(0xa2)]))+_0x545a75(0x1fe);}function generateStatisticItem(_0x2edd05,_0x3c5358,_0x5f20d9=''){const _0x2f07cd=_0x514770;return _0x2f07cd(0x161)+(_0x5f20d9?_0x2f07cd(0x296)+_0x5f20d9+'\x22':'')+_0x2f07cd(0x1f4)+_0x2edd05+_0x2f07cd(0x15c)+_0x3c5358+_0x2f07cd(0x115);}function getConvertedTimeToSeconds(_0xa5a09d){const _0x3b1d7d=_0x514770;if(typeof _0xa5a09d!==_0x3b1d7d(0x268))return 0x0;return _0xa5a09d[_0x3b1d7d(0x263)]('\x20')[_0x3b1d7d(0x207)]((_0x276ae5,_0x31bb03)=>{const _0x1e48ab=_0x3b1d7d,_0x390e8f=parseFloat(_0x31bb03);if(_0x31bb03[_0x1e48ab(0x195)]('s'))return _0x276ae5+_0x390e8f;if(_0x31bb03[_0x1e48ab(0x195)](_0x1e48ab(0x85)))return _0x276ae5+_0x390e8f*0x3c;if(_0x31bb03[_0x1e48ab(0x195)]('h'))return _0x276ae5+_0x390e8f*0xe10;return _0x276ae5;},0x0);}function _0x51d6(_0x3ec839,_0x263211){const _0x3195f6=_0x3650();return _0x51d6=function(_0x3e511b,_0x378bdc){_0x3e511b=_0x3e511b-0x85;let _0x13ad3a=_0x3195f6[_0x3e511b];return _0x13ad3a;},_0x51d6(_0x3ec839,_0x263211);}function getConvertedStringToNumber(_0x23250b){const _0x34c7f0=_0x514770;if(typeof _0x23250b!=='string')return 0x0;const _0x153108=parseFloat(_0x23250b);if(Number[_0x34c7f0(0x304)](_0x153108))return 0x0;if(_0x23250b[_0x34c7f0(0x195)]('k'))return _0x153108*0x3e8;if(_0x23250b[_0x34c7f0(0x195)]('M'))return _0x153108*0xf4240;return _0x153108;}function getElapsedTime(_0x3d1c80){const _0x5f3033=_0x514770,_0x1f0b44=Math[_0x5f3033(0x145)](_0x3d1c80/0x1e13380);_0x3d1c80%=0x1e13380;const _0x5ea04f=Math[_0x5f3033(0x145)](_0x3d1c80/0x2820a8);_0x3d1c80%=0x2820a8;const _0x9ac7cc=Math[_0x5f3033(0x145)](_0x3d1c80/0x15180);_0x3d1c80%=0x15180;const _0x20391a=Math['floor'](_0x3d1c80/0xe10);_0x3d1c80%=0xe10;const _0x5be901=Math['floor'](_0x3d1c80/0x3c);_0x3d1c80%=0x3c;let _0x5185ef='';_0x3d1c80=Math[_0x5f3033(0x2ff)](_0x3d1c80);if(_0x1f0b44>0x0)_0x5185ef+=_0x1f0b44+'y\x20';if(_0x5ea04f>0x0||_0x1f0b44>0x0)_0x5185ef+=_0x5ea04f+'m\x20';if(_0x9ac7cc>0x0||_0x5ea04f>0x0||_0x1f0b44>0x0)_0x5185ef+=_0x9ac7cc+'d\x20';if(_0x20391a>0x0||_0x9ac7cc>0x0||_0x5ea04f>0x0||_0x1f0b44>0x0)_0x5185ef+=_0x20391a+'h\x20';if(_0x5be901>0x0||_0x20391a>0x0||_0x9ac7cc>0x0||_0x5ea04f>0x0||_0x1f0b44>0x0)_0x5185ef+=_0x5be901+_0x5f3033(0x15f);if(_0x3d1c80>0x0||_0x5be901>0x0||_0x20391a>0x0||_0x9ac7cc>0x0||_0x5ea04f>0x0||_0x1f0b44>0x0)_0x5185ef+=_0x3d1c80+'s';return _0x5185ef[_0x5f3033(0x19b)]();}function getFormatedMass(_0xcf7ab8){const _0x1d0688=_0x514770;if(_0xcf7ab8>=0x38d7ea4c68000)return formatNumber(_0xcf7ab8,0x38d7ea4c68000,'Qd');else{if(_0xcf7ab8>=0xe8d4a51000)return formatNumber(_0xcf7ab8,0xe8d4a51000,'Td');else{if(_0xcf7ab8>=0x3b9aca00)return formatNumber(_0xcf7ab8,0x3b9aca00,'Md');else{if(_0xcf7ab8>=0xf4240)return formatNumber(_0xcf7ab8,0xf4240,'M');else{if(_0xcf7ab8>=0x3e8)return formatNumber(_0xcf7ab8,0x3e8,'k');else return Math[_0x1d0688(0x2ff)](_0xcf7ab8)[_0x1d0688(0x1f1)]();}}}}}function formatNumber(_0x3f850a,_0x3c50a4,_0x3b932d){const _0x59ad6b=_0x514770;let _0x2d1e2a=_0x3f850a/_0x3c50a4,_0x3127d4=_0x3f850a%_0x3c50a4,_0x172f61=Math[_0x59ad6b(0x2ff)](_0x3127d4/(_0x3c50a4/0xa));if(_0x172f61>0x0)return Math[_0x59ad6b(0x2ff)](_0x2d1e2a)+','+_0x172f61+_0x3b932d+'\x20';return''+Math[_0x59ad6b(0x2ff)](_0x2d1e2a)+_0x3b932d;}function swalResetStatistics(){const _0xde4076=_0x514770;Swal[_0xde4076(0x1ff)]({'title':_0xde4076(0xe2),'text':'Do\x20you\x20want\x20to\x20permanently\x20delete\x20your\x20statistics?','showCancelButton':!![],'confirmButtonText':_0xde4076(0x248),'cancelButton':'No'})[_0xde4076(0x28b)](_0x32b94a=>{const _0xf6c76e=_0xde4076;_0x32b94a[_0xf6c76e(0x1b8)]===!![]&&confirmResetStatistics();});}function confirmResetStatistics(){const _0x2b4297=_0x514770;DB[_0x2b4297(0x8f)][_0x2b4297(0x100)][_0x2b4297(0x1be)]()[_0x2b4297(0x28b)](()=>{const _0x568fc8=_0x2b4297;sendTimedSwal(_0x568fc8(0x137),_0x568fc8(0x1ab),0x5dc,![]),setTimeout(()=>window[_0x568fc8(0x275)][_0x568fc8(0x220)](),0x5dc);})[_0x2b4297(0x110)](_0x42da0b=>{const _0x324993=_0x2b4297;sendTimedSwal('Error',_0x324993(0x241),0xbb8,![]);});}function drawLeaderboardModal(){const _0x39b1c2=_0x514770;if($(ATTRS['selectors'][_0x39b1c2(0x124)])['length']>0x0)return;LISTS[_0x39b1c2(0x209)]===undefined?DB[_0x39b1c2(0x8f)][_0x39b1c2(0x303)][_0x39b1c2(0x2a4)](_0x39b1c2(0x1b8),_0xa0e22f=>{const _0x56aadf=_0x39b1c2;_0xa0e22f[_0x56aadf(0x127)]()&&(LISTS[_0x56aadf(0x209)]=_0xa0e22f[_0x56aadf(0x2b5)](),addLeaderboardModal());}):addLeaderboardModal();}function addLeaderboardModal(){const _0x57112b=_0x514770,_0x438ec4=[{'id':0x0,'text':_0x57112b(0x139),'filter':'kda','class':_0x57112b(0x2cb)},{'id':0x1,'text':_0x57112b(0x211),'filter':_0x57112b(0x285),'class':'leaderbordKillsButton'},{'id':0x2,'text':_0x57112b(0x1df),'filter':_0x57112b(0x142),'class':_0x57112b(0xa4)},{'id':0x3,'text':_0x57112b(0x313),'filter':_0x57112b(0xb3),'class':_0x57112b(0x182)},{'id':0x4,'text':'Mass\x20avg','filter':_0x57112b(0xef),'class':_0x57112b(0x1ed)},{'id':0x5,'text':_0x57112b(0x272),'filter':'timeTotal','class':'leaderbordTimeButton'}],_0x1d1145=_0x438ec4[_0x57112b(0x227)](_0x5e4de1=>_0x57112b(0x95)+_0x5e4de1[_0x57112b(0x10c)]+_0x57112b(0x1da)+(_0x5e4de1['id']===0x0?_0x57112b(0x1ba):_0x57112b(0x1d8))+_0x57112b(0x1f7)+_0x5e4de1['id']+_0x57112b(0x18a)+_0x5e4de1[_0x57112b(0x22e)]+_0x57112b(0xfb)+_0x5e4de1[_0x57112b(0x2cf)]+_0x57112b(0xea))['join'](''),_0x2f4a3a=_0x57112b(0x2f2)+_0x1d1145+_0x57112b(0xa0);createNewBox(_0x2f4a3a,_0x57112b(0x215),''),injectCustomLeaderboard(_0x57112b(0x310));}function handleButtonClick(_0x206dfc,_0x33da86){const _0x39c7cb=_0x514770;showPage(_0x206dfc,[ATTRS[_0x39c7cb(0x166)][_0x39c7cb(0x2cb)],ATTRS['selectors']['leaderbordKillsButton'],ATTRS[_0x39c7cb(0x166)]['leaderbordGamesButton'],ATTRS[_0x39c7cb(0x166)][_0x39c7cb(0x182)],ATTRS[_0x39c7cb(0x166)]['leaderbordMassAvgButton'],ATTRS[_0x39c7cb(0x166)][_0x39c7cb(0xdd)]],null),injectCustomLeaderboard(_0x33da86);}function injectCustomLeaderboard(_0x45570f){const _0x37dda5=_0x514770,_0x3ff5f6={'kda':(_0x4c9ad6,_0x3b3703)=>_0x3b3703[_0x37dda5(0x310)]-_0x4c9ad6[_0x37dda5(0x310)],'killTotal':(_0xabe3e3,_0xa582d6)=>_0xa582d6[_0x37dda5(0x285)]-_0xabe3e3[_0x37dda5(0x285)],'gameTotal':(_0x18c8ce,_0x4755c8)=>_0x4755c8[_0x37dda5(0x142)]-_0x18c8ce[_0x37dda5(0x142)],'massTotal':(_0x6108e1,_0x2ef56b)=>_0x2ef56b[_0x37dda5(0xb3)]-_0x6108e1[_0x37dda5(0xb3)],'timeTotal':(_0x143743,_0x40e579)=>_0x40e579[_0x37dda5(0x159)]-_0x143743[_0x37dda5(0x159)],'massAvg':(_0x54194f,_0x49579b)=>_0x49579b[_0x37dda5(0xef)]-_0x54194f[_0x37dda5(0xef)]},_0x1d6237=Object[_0x37dda5(0x314)](LISTS['leaderboard'])['sort'](_0x3ff5f6[_0x45570f]||_0x3ff5f6[_0x37dda5(0x310)])[_0x37dda5(0x29c)](0x0,0x32),_0x233a88=_0x1d6237[_0x37dda5(0x227)]((_0x281bc3,_0x34d00b)=>injectLeaderboard(_0x281bc3,_0x281bc3[_0x37dda5(0x2d5)],_0x34d00b+0x1,_0x45570f))[_0x37dda5(0x190)]('');$(ATTRS[_0x37dda5(0x166)][_0x37dda5(0x8e)])[_0x37dda5(0x218)](_0x233a88);}function injectLeaderboard(_0x509961,_0x4ce4cc,_0x1e6397,_0x3f02c1){const _0x376bf=_0x514770,_0x19921b=LISTS[_0x376bf(0x136)][_0x509961[_0x376bf(0x2d5)]];if(!_0x19921b)return'';let _0x1ffcab;switch(_0x3f02c1){case _0x376bf(0x285):_0x1ffcab=_0x509961['killTotal'];break;case _0x376bf(0x142):_0x1ffcab=_0x509961[_0x376bf(0x142)];break;case _0x376bf(0x310):_0x1ffcab=_0x509961[_0x376bf(0x310)]['toFixed'](0x2)+_0x376bf(0x2d0);break;case _0x376bf(0xb3):_0x1ffcab=getFormatedMass(_0x509961[_0x376bf(0xb3)]);break;case _0x376bf(0xef):_0x1ffcab=getFormatedMass(_0x509961[_0x376bf(0xef)]);break;case _0x376bf(0x159):_0x1ffcab=getElapsedTime(_0x509961[_0x376bf(0x159)]);break;default:_0x1ffcab=_0x509961[_0x376bf(0x310)][_0x376bf(0x1af)](0x2)+'\x20K/D';}return _0x19921b[_0x376bf(0xb9)][_0x376bf(0x19b)]()===''&&(_0x19921b[_0x376bf(0x24e)]=_0x376bf(0x10f),_0x19921b[_0x376bf(0xb9)]=_0x376bf(0x150)),_0x376bf(0x2d9)+(_0x19921b[_0x376bf(0x2d5)]===USER[_0x376bf(0x18d)]['uid']?_0x376bf(0x221):'')+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22leaderboardPosition\x22>'+_0x1e6397+_0x376bf(0x26c)+(_0x19921b[_0x376bf(0x1f5)]?_0x376bf(0xe6)+_0x19921b[_0x376bf(0x1f5)][_0x376bf(0x2d4)]+_0x376bf(0x2f0)+_0x19921b[_0x376bf(0x1f5)]['tip']+'\x22>':'')+_0x376bf(0x27a)+(_0x19921b[_0x376bf(0x2d5)]===USER[_0x376bf(0x18d)][_0x376bf(0x2d5)]?_0x376bf(0x202):'')+_0x376bf(0x19e)+_0x19921b[_0x376bf(0x24e)]+'\x22>'+_0x19921b[_0x376bf(0xb9)]+_0x376bf(0x2f9)+(_0x19921b[_0x376bf(0x2d5)]===USER[_0x376bf(0x18d)]['uid']?_0x376bf(0x235):'')+'\x22>'+_0x1ffcab+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';}function drawToolsModal(){const _0x3d0375=_0x514770;if($(ATTRS[_0x3d0375(0x166)][_0x3d0375(0x124)])[_0x3d0375(0x2de)]>0x0)return;LISTS[_0x3d0375(0xd3)]===undefined||LISTS['configurations']===undefined?DB[_0x3d0375(0x8f)]['badges'][_0x3d0375(0x2a4)](_0x3d0375(0x1b8),_0x3a62ef=>{const _0x34716e=_0x3d0375;_0x3a62ef[_0x34716e(0x127)]()&&(LISTS[_0x34716e(0xd3)]=_0x3a62ef[_0x34716e(0x2b5)](),DB[_0x34716e(0x8f)][_0x34716e(0x298)]['once'](_0x34716e(0x1b8),_0x575a66=>{const _0x928f6c=_0x34716e;_0x575a66[_0x928f6c(0x127)]()&&(LISTS[_0x928f6c(0x1a9)]=_0x575a66[_0x928f6c(0x2b5)](),addToolsModal());}));}):addToolsModal();}function addToolsModal(){const _0x486783=_0x514770,_0x57cb58=fetchItem(LISTS[_0x486783(0x1a9)],injectConfiguration),_0x1c6ad2=Object[_0x486783(0x265)](LISTS[_0x486783(0x1a9)])[_0x486783(0x2de)]||0x0,_0x26ff8e=fetchItem(LISTS[_0x486783(0xd3)],injectBadge),_0x4ffc16=toolsModal(_0x57cb58,_0x1c6ad2,_0x26ff8e);createNewBox(_0x4ffc16,_0x486783(0x160),'');}function toolsModal(_0x3a9275,_0x39479e,_0x5e3186){const _0x2d7d27=_0x514770,_0x4c4a7b=_0x2d7d27(0x222)+USER[_0x2d7d27(0x1a9)][_0x2d7d27(0xfe)]+_0x2d7d27(0x125)+USER[_0x2d7d27(0x1a9)][_0x2d7d27(0xc6)]+_0x2d7d27(0x249),_0x56192d=_0x2d7d27(0x134)+USER['configurations']['colorNicknameChatbox']+_0x2d7d27(0x177)+USER[_0x2d7d27(0x1a9)][_0x2d7d27(0xbc)]+_0x2d7d27(0x2e2)+USER['configurations'][_0x2d7d27(0x1d5)]+_0x2d7d27(0xe8);return'\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22tool-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22tool-section\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTabContainer\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTab\x20buttonTabDisabled\x20toolsNavPerksTab\x22\x20onclick=\x22showPage(0,\x20[ATTRS.selectors.toolsPageButtonPerks,\x20ATTRS.selectors.toolsPageButtonSettings,\x20ATTRS.selectors.toolsPageButtonConfigurations],\x20[ATTRS.selectors.toolsPagePerks,\x20ATTRS.selectors.toolsPageSettings,\x20ATTRS.selectors.toolsPageConfigurations])\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>Perks</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTab\x20buttonTabActive\x20toolsNavSettingsTab\x22\x20onclick=\x22showPage(1,\x20[ATTRS.selectors.toolsPageButtonPerks,\x20ATTRS.selectors.toolsPageButtonSettings,\x20ATTRS.selectors.toolsPageButtonConfigurations],\x20[ATTRS.selectors.toolsPagePerks,\x20ATTRS.selectors.toolsPageSettings,\x20ATTRS.selectors.toolsPageConfigurations])\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>Settings</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22buttonTab\x20buttonTabActive\x20toolsNavConfigurationsTab\x22\x20onclick=\x22showPage(2,\x20[ATTRS.selectors.toolsPageButtonPerks,\x20ATTRS.selectors.toolsPageButtonSettings,\x20ATTRS.selectors.toolsPageButtonConfigurations],\x20[ATTRS.selectors.toolsPagePerks,\x20ATTRS.selectors.toolsPageSettings,\x20ATTRS.selectors.toolsPageConfigurations])\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22buttonTabText\x22>Backups</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22toolsPagePerks\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22header\x22>Colored\x20name<i\x20class=\x22fas\x20fa-paint-brush\x20headerIcon\x22></i></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(APP[_0x2d7d27(0xd1)]===0x1?_0x56192d:'')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22colorPickerContainer\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22text\x22\x20id=\x22colorPickerInput\x22\x20value=\x22'+USER['configurations'][_0x2d7d27(0x2b8)]+_0x2d7d27(0x146)+ATTRS['colors']['defaultColor']+_0x2d7d27(0x2b1)+USER['configurations'][_0x2d7d27(0x2b8)]+'\x22\x20onchange=\x22onColorChanged(this)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-22117250=\x22\x22\x20class=\x22silent\x20silentCustomTop\x20silentCustomBottom\x22>After\x20changing\x20the\x20color,\x20you\x20need\x20to\x20re-join\x20the\x20server</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22header\x22>Badges<i\x20class=\x22fas\x20fa-user-check\x20headerIcon\x22></i></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-2c5139e0=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22badgeListPerks\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x5e3186+_0x2d7d27(0xed)+(APP[_0x2d7d27(0xd1)]===0x2?_0x4c4a7b:'')+_0x2d7d27(0x267)+USER[_0x2d7d27(0x1a9)][_0x2d7d27(0x2bb)]+'=\x22\x22\x20onchange=\x22USER.configurations.blurredHUD\x20=\x20switchManager(USER.configurations.blurredHUD,\x20\x27blurredHUD\x27)\x22\x20tip=\x22\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Blurred\x20in-game\x20HUD</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22resizableChatbox\x22\x20'+USER[_0x2d7d27(0x1a9)][_0x2d7d27(0x28a)]+_0x2d7d27(0x20c)+USER[_0x2d7d27(0x1a9)]['autoSynchronization']+_0x2d7d27(0x288)+_0x39479e+_0x2d7d27(0x1d0)+_0x3a9275+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';}async function drawSkinsModal(){const _0x459adb=_0x514770;if($(ATTRS[_0x459adb(0x166)][_0x459adb(0x132)])[_0x459adb(0x2de)]>0x0)return;createNewBox(injectSkinPages(),_0x459adb(0x23e),'','',!![]),loadAllSkins();}function injectSkinPages(){const _0x5891a1=_0x514770;return _0x5891a1(0xad);}function renderSkinsFromList(_0x1a7a2d,_0x427687,_0x2ee11c){const _0x32b306=_0x514770;$(ATTRS[_0x32b306(0x166)]['boxTitle'])[_0x32b306(0x2cf)](_0x1a7a2d),$(_0x2ee11c)[_0x32b306(0x2b7)](_0x32b306(0x1e2))[_0x32b306(0x2de)]!=_0x427687[_0x32b306(0x2de)]&&_0x427687[_0x32b306(0xf5)](_0x3d9eb8=>{itemSkinModal(_0x3d9eb8,_0x2ee11c);});}function itemSkinModal(_0x1fcff5,_0x1b46f6){const _0x1ff1f4=_0x514770,_0x4ede3f=_0x1ff1f4(0x2be)+_0x1fcff5['id'];$(_0x1b46f6)[_0x1ff1f4(0x19a)]('\x0a\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22skinItemLibrary\x20beautifulSkin\x22\x20src=\x22'+_0x4ede3f+_0x1ff1f4(0xc5)+_0x1fcff5['id']+'\x22\x20tip=\x22'+_0x4ede3f+_0x1ff1f4(0x2db)+_0x4ede3f+'\x27,\x20\x27'+_0x1fcff5['id']+_0x1ff1f4(0x2c4));}async function loadAllSkins(){const _0x48a1f4=_0x514770;if(SKINS['all'][_0x48a1f4(0x2de)]>0x0){renderSkinsFromList(_0x48a1f4(0x23e),SKINS[_0x48a1f4(0x186)],ATTRS[_0x48a1f4(0x166)][_0x48a1f4(0x131)]);return;}for(let _0x513350=0x0;_0x513350<=0x32;_0x513350++){const _0x132639=await fetchSkins(_0x48a1f4(0x24b)+_0x513350,_0x48a1f4(0xeb)+_0x513350+'\x20error');_0x132639&&(SKINS[_0x48a1f4(0x186)][_0x48a1f4(0xd5)](..._0x132639),_0x132639[_0x48a1f4(0xf5)](_0xde0cb0=>itemSkinModal(_0xde0cb0,ATTRS[_0x48a1f4(0x166)][_0x48a1f4(0x131)])));}}async function loadMySkins(){const _0x2da7ba=_0x514770;if(SKINS['me'][_0x2da7ba(0x2de)]>0x0){renderSkinsFromList('My\x20skins',SKINS['me'],ATTRS[_0x2da7ba(0x166)][_0x2da7ba(0x225)]);return;}const _0x5d66b5=await fetchSkins(_0x2da7ba(0x1f3),_0x2da7ba(0x118));_0x5d66b5&&(SKINS['me'][_0x2da7ba(0xd5)](..._0x5d66b5),_0x5d66b5[_0x2da7ba(0xf5)](_0x201fff=>itemSkinModal(_0x201fff,ATTRS[_0x2da7ba(0x166)][_0x2da7ba(0x225)])));}async function loadFavSkins(){const _0x33ae43=_0x514770;if(SKINS[_0x33ae43(0x12b)]['length']>0x0){renderSkinsFromList(_0x33ae43(0x117),SKINS[_0x33ae43(0x12b)],ATTRS['selectors'][_0x33ae43(0x2d7)]);return;}const _0x2392b6=await fetchSkins(_0x33ae43(0x162),_0x33ae43(0x257));_0x2392b6&&(SKINS[_0x33ae43(0x12b)][_0x33ae43(0xd5)](..._0x2392b6),_0x2392b6['forEach'](_0x5ede7a=>itemSkinModal(_0x5ede7a,ATTRS[_0x33ae43(0x166)][_0x33ae43(0x2d7)])));}async function fetchSkins(_0x250c05,_0x391a2b){const _0x5d246c=_0x514770;try{const _0x282598=await fetch(_0x250c05,{'method':'GET','headers':{'Authorization':APP['skinAuth'],'Origin':_0x5d246c(0x2df)}});return!_0x282598['ok']&&sendTimedSwal(_0x5d246c(0x204),_0x5d246c(0x9f)+_0x282598['status']+':\x20'+_0x282598[_0x5d246c(0xfd)],0xbb8),await _0x282598[_0x5d246c(0x29f)]();}catch(_0x228c82){return sendTimedSwal(_0x391a2b,_0x228c82[_0x5d246c(0x1f1)](),0xbb8,![]),null;}}function openSkin(_0x691231,_0x716292){const _0x2ca750=_0x514770;$(ATTRS[_0x2ca750(0x166)][_0x2ca750(0x17a)])[_0x2ca750(0x19a)]('\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22overlaySkin\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-times\x20closeSkinItemModal\x22\x20onclick=\x22$(ATTRS.selectors.overlaySkin).remove()\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22absoluteCenter\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22skinItemModal\x20beautifulSkin\x22\x20src=\x22'+_0x691231+'\x22\x20alt=\x22'+_0x716292+_0x2ca750(0x287)+_0x716292+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinItemNav\x20skinItemNavBtn\x22\x20onclick=\x22yoinkSkin(\x27'+_0x691231+'\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinItemYoink\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-link\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22skinItemTextButton\x22>Yoink</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22skinItemNav\x20skinItemNavBtn\x22\x20onclick=\x22copySkin(\x27'+_0x691231+_0x2ca750(0x206));}function copySkin(_0x27b905){const _0x4594ee=_0x514770;navigator[_0x4594ee(0x86)]['writeText'](_0x27b905)['then'](()=>{const _0x16cb0e=_0x4594ee;sendTimedSwal(_0x16cb0e(0x2b9),_0x16cb0e(0x147),0x5dc,![]);})[_0x4594ee(0x110)](()=>{const _0x36cc32=_0x4594ee;sendTimedSwal(_0x36cc32(0x1c2),'An\x20error\x20has\x20occured',0xbb8,![]);});}function yoinkSkin(_0x16477f){const _0x41f7d3=_0x514770;let _0x1fe008=JSON[_0x41f7d3(0x19f)](localStorage[_0x41f7d3(0x27c)](_0x41f7d3(0x184)))||[];_0x1fe008[_0x41f7d3(0xd5)](_0x16477f),localStorage['setItem'](_0x41f7d3(0x184),JSON[_0x41f7d3(0x24f)](_0x1fe008)),sendTimedSwal(_0x41f7d3(0x260),'The\x20skin\x20has\x20been\x20yoinked,\x20need\x20to\x20refresh\x20the\x20page\x20to\x20save',0x5dc,![]);}function injectConfiguration(_0x536499,_0x17dc0c){const _0x4e3d03=_0x514770,_0xba31bc=injectSkin(_0x536499[_0x4e3d03(0x184)]),_0x476a4d=injectTag(_0x536499['teamtag']);function _0x3b24b5(_0x405514){const _0x52b78c=_0x4e3d03;if(!_0x405514)return 0x0;const _0x45614f=JSON[_0x52b78c(0x19f)](_0x405514);return Object[_0x52b78c(0x265)](_0x45614f)['filter'](_0x241a53=>_0x45614f[_0x241a53]!=='')['length'];}return _0x4e3d03(0x25a)+_0x17dc0c+_0x4e3d03(0xe7)+_0x536499[_0x4e3d03(0x17c)]+'\x20'+_0x536499['platform']+_0x4e3d03(0x26b)+_0x536499[_0x4e3d03(0x99)]+_0x4e3d03(0x15a)+_0x17dc0c+_0x4e3d03(0x181)+_0x17dc0c+'\x27)\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22configNick\x22>Nickname:\x20'+_0x536499['nickname']+_0x4e3d03(0x109)+_0x476a4d+_0x4e3d03(0x1d1)+_0x3b24b5(_0x536499[_0x4e3d03(0xa9)])+_0x4e3d03(0x278)+_0xba31bc[_0x4e3d03(0xab)]+_0x4e3d03(0x11c)+_0xba31bc[_0x4e3d03(0x1b7)]+_0x4e3d03(0x1e3);}function injectSkin(_0x4dc3e8){const _0x3ae894=_0x514770;if(!_0x4dc3e8)return{'list':'','count':0x0};const _0x3f71b9=JSON[_0x3ae894(0x19f)](_0x4dc3e8),_0x21b49e=_0x3f71b9[_0x3ae894(0x29c)](0x0,0x32)[_0x3ae894(0x227)](_0x43de7d=>_0x3ae894(0x93)+_0x43de7d+_0x3ae894(0x164)+_0x43de7d+_0x3ae894(0xba)+ATTRS[_0x3ae894(0xf0)][_0x3ae894(0x212)]+_0x3ae894(0xe3));return{'list':_0x3ae894(0x2f4)+_0x21b49e[_0x3ae894(0x190)]('')+_0x3ae894(0x2e7),'count':Object['keys'](_0x3f71b9)[_0x3ae894(0x2de)]};}function injectTag(_0x28ebd4){const _0x50bf43=_0x514770;if(_0x28ebd4&&_0x28ebd4!=='')return _0x50bf43(0x165)+_0x28ebd4+_0x50bf43(0x30d);return'';}function injectBadge(_0x131cf9,_0x495e6){const _0x37797f=_0x514770,_0x4ac714=_0x131cf9[_0x37797f(0x2dc)][USER['credentials']['uid']],_0x50406c=LISTS[_0x37797f(0x136)][USER[_0x37797f(0x18d)][_0x37797f(0x2d5)]][_0x37797f(0x1f5)],_0x20aa2a=_0x50406c&&_0x50406c['id']===_0x131cf9['id'],_0xcc1e4b=_0x4ac714?_0x37797f(0x21d)+escape(JSON[_0x37797f(0x24f)](_0x131cf9))+_0x37797f(0x1cb):'onclick=\x22sendTimedSwal(\x27Badge\x20not\x20found\x27,\x20\x27You\x20don\x5c\x27t\x20have\x20this\x20badge\x20in\x20your\x20collection\x27,\x2010000,\x20\x27OK\x27)\x22';return _0x37797f(0x16c)+_0x131cf9['id']+_0x37797f(0x28c)+_0x131cf9[_0x37797f(0x2d4)]+_0x37797f(0x2f0)+_0x131cf9['tip']+'\x22\x20'+_0xcc1e4b+_0x37797f(0x1e7)+(_0x20aa2a?0x1:0.4)+';\x22/>\x0a\x20\x20\x20\x20';}function deleteSuccess(_0x1da582){const _0x2f488f=_0x514770,_0x55050c=$('#'+_0x1da582);DB[_0x2f488f(0x8f)]['meConfig'][_0x2f488f(0x21a)](_0x1da582)[_0x2f488f(0x1be)]()[_0x2f488f(0x28b)](()=>{const _0x40683d=_0x2f488f;_0x55050c[_0x40683d(0x2de)]&&(_0x55050c[_0x40683d(0x1be)](),sendTimedSwal(_0x40683d(0x137),_0x40683d(0x12c),0x5dc,![]));})[_0x2f488f(0x110)](()=>{const _0x42b21b=_0x2f488f;sendTimedSwal(_0x42b21b(0x27e),_0x42b21b(0x12e),0xbb8,![]);});}function deleteConfiguration(_0xa94db5){const _0xdae87e=_0x514770;Swal[_0xdae87e(0x1ff)]({'title':_0xdae87e(0x1d6),'text':_0xdae87e(0x2c5),'showCancelButton':!![],'confirmButtonText':'Yes','cancelButton':'No'})[_0xdae87e(0x28b)](_0x49b2e4=>{const _0x18461=_0xdae87e;_0x49b2e4[_0x18461(0x1b8)]===!![]&&deleteSuccess(_0xa94db5);});}function updateSuccess(_0x4bd220){const _0xe3a2e8=_0x514770,_0x248cc4=LISTS[_0xe3a2e8(0x1a9)][_0x4bd220];['skins',_0xe3a2e8(0xa9),_0xe3a2e8(0x2bb),_0xe3a2e8(0xfe),'timeChatRainbow',_0xe3a2e8(0x28a),_0xe3a2e8(0x1d5),_0xe3a2e8(0x180),_0xe3a2e8(0xbc),_0xe3a2e8(0x2b8),_0xe3a2e8(0xb9),_0xe3a2e8(0x2ef)]['forEach'](_0x59a262=>{const _0x48b031=_0xe3a2e8;_0x248cc4[_0x59a262]&&_0x248cc4[_0x59a262]!==''&&_0x248cc4[_0x59a262]!=='{}'&&localStorage[_0x48b031(0x2e6)](_0x59a262,_0x248cc4[_0x59a262]);}),localStorage[_0xe3a2e8(0x2e6)](_0xe3a2e8(0x11a),_0x4bd220),sendTimedSwal(_0xe3a2e8(0xb4),_0xe3a2e8(0x30b),0x5dc,![]),setTimeout(()=>window[_0xe3a2e8(0x275)][_0xe3a2e8(0x220)](),0x5dc);}function callSwal(_0x1c7093){const _0x514475=_0x514770;Swal[_0x514475(0x1ff)]({'title':_0x514475(0x2ec),'text':_0x514475(0x2bf),'showCancelButton':!![],'confirmButtonText':_0x514475(0x248),'cancelButton':'No'})['then'](_0x2bf641=>{_0x2bf641['value']===!![]&&updateSuccess(_0x1c7093);});}function updateConfiguration(_0x3a9b1f){callSwal(_0x3a9b1f);}function updateSkinsLocally(){const _0x118a63=_0x514770;let _0x1ff784='[';$(ATTRS[_0x118a63(0x166)]['skinElem'])[_0x118a63(0x1b5)](function(){const _0x21bfe4=_0x118a63,_0x501d70=$(this)[_0x21bfe4(0x27f)](_0x21bfe4(0x151));if(_0x501d70&&_0x501d70!==_0x21bfe4(0xce)){if(_0x1ff784!=='[')_0x1ff784+=',';_0x1ff784+='\x22'+_0x501d70+'\x22';}}),_0x1ff784+=']',localStorage[_0x118a63(0x2e6)](_0x118a63(0x184),_0x1ff784);}function createSortable(){const _0xe4c1da=_0x514770,_0x197dbc=document[_0xe4c1da(0x2aa)]('skins');new Sortable(_0x197dbc,{'handle':_0xe4c1da(0x290),'onEnd':function(_0x27f210){updateSkinsLocally();}});}function createChatboxResizable(){const _0x5ada6b=_0x514770,_0x409a66=$(ATTRS[_0x5ada6b(0x166)]['chatboxContainer']);_0x409a66[_0x5ada6b(0x11b)](_0x5ada6b(0x264)),_0x409a66['on'](_0x5ada6b(0x1d4),function(_0x451454){const _0x2c0edc=_0x5ada6b;if($(_0x451454['target'])[_0x2c0edc(0x193)]('resizable')){_0x451454['preventDefault']();const _0x546213=_0x451454['clientX'],_0x417dde=_0x451454[_0x2c0edc(0x30a)],_0x323f6c=parseInt(_0x409a66[_0x2c0edc(0x191)]('width'),0xa),_0x38073f=parseInt(_0x409a66['css'](_0x2c0edc(0x2c2)),0xa);$(document)['on'](_0x2c0edc(0x1c0),_0x5e3068),$(document)['on'](_0x2c0edc(0x205),_0x50be80);function _0x5e3068(_0x1c6018){const _0xf60ea0=_0x2c0edc,_0x41025d=_0x323f6c+_0x1c6018[_0xf60ea0(0xa8)]-_0x546213,_0x3e6fdc=_0x38073f+_0x417dde-_0x1c6018[_0xf60ea0(0x30a)];_0x409a66[_0xf60ea0(0x191)](_0xf60ea0(0x26d),_0x41025d+'px'),_0x409a66[_0xf60ea0(0x191)](_0xf60ea0(0x2c2),_0x3e6fdc+'px');}function _0x50be80(){const _0x3f4928=_0x2c0edc;$(document)[_0x3f4928(0x19d)](_0x3f4928(0x1c0),_0x5e3068),$(document)['off'](_0x3f4928(0x205),_0x50be80);}}});}function changeUserColor(_0x348129){const _0x5e6fb7=_0x514770;USER[_0x5e6fb7(0x1a9)][_0x5e6fb7(0x2b8)]=_0x348129,localStorage[_0x5e6fb7(0x2e6)](_0x5e6fb7(0x2b8),_0x348129),$(ATTRS['selectors']['nicknameProfile'])[_0x5e6fb7(0x191)](_0x5e6fb7(0x24e),APP[_0x5e6fb7(0xfa)][_0x5e6fb7(0x1b8)]?APP[_0x5e6fb7(0xfa)][_0x5e6fb7(0x24e)]:_0x348129),$(ATTRS[_0x5e6fb7(0x166)][_0x5e6fb7(0x169)])[_0x5e6fb7(0x2b5)](_0x348129),$(ATTRS['selectors'][_0x5e6fb7(0x9a)])[_0x5e6fb7(0x2b5)](_0x348129),pushUserColors(),pushUserOnline();}function changeCellColor(_0xa4d582){const _0x137413=_0x514770,_0xcc073e=CanvasRenderingContext2D[_0x137413(0x229)][_0x137413(0x230)];CanvasRenderingContext2D[_0x137413(0x229)]['fillText']=function(_0x5f076d,_0x3c31f4,_0x32e48e){const _0x393ea0=_0x137413;if(!APP[_0x393ea0(0x24d)][_0x393ea0(0x1d3)](_0x5f076d)){if(_0x5f076d===USER[_0x393ea0(0x1a9)][_0x393ea0(0xb9)])this[_0x393ea0(0x1c8)]=USER[_0x393ea0(0x1a9)]['nicknameColor'];else{if(_0x5f076d===_0xa4d582&&LISTS[_0x393ea0(0x306)][_0xa4d582]&&LISTS[_0x393ea0(0x306)][_0xa4d582]['color'])this['fillStyle']=LISTS[_0x393ea0(0x306)][_0xa4d582]['color'];else LISTS['colors'][_0x5f076d]&&LISTS[_0x393ea0(0x306)][_0x5f076d]['color']&&(this[_0x393ea0(0x1c8)]=LISTS[_0x393ea0(0x306)][_0x5f076d][_0x393ea0(0x24e)]);}}_0xcc073e['apply'](this,arguments);};}function pushUserData(){pushUserInfos(),pushUserColors(),pushUserConfigurations();}function fetchUserData(){fetchUsersOnce(),fetchUserStatisticsDb(),fetchColorsOnce(()=>{getReservedName(),pushUserData();});}function getLocalStorageItem(_0x25e0c6,_0x7d1c47){const _0x683bc0=_0x514770;return localStorage[_0x683bc0(0x27c)](_0x25e0c6)||_0x7d1c47;}function getLocalValues(_0x2ebb7e){const _0x5b483e=_0x514770;USER[_0x5b483e(0x18d)]=_0x2ebb7e,USER[_0x5b483e(0x154)]=_0x5b483e(0xf7),USER['mode']=APP[_0x5b483e(0xd1)]===0x1?_0x5b483e(0x29b):_0x5b483e(0x2a8),switchManagerSpecificChange(USER[_0x5b483e(0x1a9)]['blurredHUD'],_0x5b483e(0x2bb));}function getDatabase(){const _0xb06fca=_0x514770;DB['database']=firebase[_0xb06fca(0x172)](),DB[_0xb06fca(0x8f)]=getAllReferences();}function pushDatabase(_0x44448e,_0x192313){const _0x8250c6=_0x514770;window[_0x8250c6(0x12f)]&&_0x44448e[_0x8250c6(0x292)](_0x192313);}function switchManager(_0x8b12c,_0x1d00b2){const _0x25d300=_0x514770;return _0x8b12c===_0x25d300(0x196)?_0x8b12c=_0x25d300(0x188):_0x8b12c=_0x25d300(0x196),switchManagerSpecificChange(_0x8b12c,_0x1d00b2),localStorage[_0x25d300(0x2e6)](_0x1d00b2,_0x8b12c),_0x8b12c;}function switchManagerSpecificChange(_0x10ce1e,_0x30f1eb){const _0x103ad0=_0x514770;if(_0x30f1eb==='anonymous')pushDatabase(DB[_0x103ad0(0x8f)]['meUser'],{'anonymous':_0x10ce1e});else{if(_0x30f1eb===_0x103ad0(0x2bb)){let _0x3f4f8e=_0x10ce1e===_0x103ad0(0x196)?_0x103ad0(0x1fd):'';$(ATTRS[_0x103ad0(0x166)][_0x103ad0(0x209)])[_0x103ad0(0x191)]('backdrop-filter',_0x3f4f8e),$(ATTRS[_0x103ad0(0x166)][_0x103ad0(0x102)])[_0x103ad0(0x191)](_0x103ad0(0x26f),_0x3f4f8e),$(ATTRS[_0x103ad0(0x166)][_0x103ad0(0x1f6)])[_0x103ad0(0x191)]('backdrop-filter',_0x3f4f8e),$(ATTRS[_0x103ad0(0x166)][_0x103ad0(0x18c)])['css']('backdrop-filter',_0x3f4f8e),APP[_0x103ad0(0xd1)]===0x2&&$(ATTRS[_0x103ad0(0x166)][_0x103ad0(0x2b4)])[_0x103ad0(0x191)](_0x103ad0(0x26f),_0x3f4f8e);}}}function sendTimedSwal(_0x1c15a5,_0x100327,_0x248fc1,_0x2cd864){Swal['fire']({'title':_0x1c15a5,'text':_0x100327,'timer':_0x248fc1,'showConfirmButton':_0x2cd864});}function displayError(_0x3bc54c){const _0x5f2086=_0x514770,_0x18c15b=$(ATTRS[_0x5f2086(0x166)]['bodyHud']);_0x18c15b[_0x5f2086(0x1b9)](),_0x18c15b[_0x5f2086(0x191)]('background-color','black');const _0x126ae8=$(_0x5f2086(0x2d6))[_0x5f2086(0x2cf)](_0x3bc54c)[_0x5f2086(0x191)]({'font-size':_0x5f2086(0xbd),'color':_0x5f2086(0x10f),'text-align':_0x5f2086(0x14c),'margin':_0x5f2086(0xa3),'position':_0x5f2086(0x1dc)});_0x18c15b[_0x5f2086(0x19a)](_0x126ae8);throw new Error(_0x3bc54c);}function getNavigator(){const _0x3123f1=_0x514770;if(!navigator[_0x3123f1(0x242)])return _0x3123f1(0x2a2);const _0x42a095=navigator[_0x3123f1(0x242)],_0x3f3e9d={'Chrome':_0x3123f1(0xc3),'Firefox':'Mozilla\x20Firefox','Safari':_0x3123f1(0x246),'Edge':'Microsoft\x20Edge','Opera':_0x3123f1(0x2da),'Brave':'Brave','Ecosia':_0x3123f1(0x2c1),'Tor':_0x3123f1(0xde),'Chromium':_0x3123f1(0x1a2)};for(const _0x1eda5e in _0x3f3e9d){if(_0x42a095[_0x3123f1(0x1d3)](_0x1eda5e))return _0x3f3e9d[_0x1eda5e];}return _0x3123f1(0x2a2);}function getPlatform(){const _0x296ba5=_0x514770;if(navigator[_0x296ba5(0x24c)]&&navigator[_0x296ba5(0x24c)][_0x296ba5(0x2ed)])return navigator[_0x296ba5(0x24c)][_0x296ba5(0x2ed)];if(navigator[_0x296ba5(0x2ed)])return navigator['platform'];return _0x296ba5(0xe5);}function getMachineId(){const _0x1a8891=_0x514770;let _0x3ebb61=localStorage[_0x1a8891(0x27c)](_0x1a8891(0x11a));return!_0x3ebb61&&(_0x3ebb61=crypto[_0x1a8891(0x253)](),localStorage[_0x1a8891(0x2e6)](_0x1a8891(0x11a),_0x3ebb61)),_0x3ebb61;}function getAllConfigurations(){const _0x51f134=_0x514770;return{'skins':localStorage[_0x51f134(0x27c)]('skins'),'hotkeys':localStorage[_0x51f134(0x27c)](_0x51f134(0xa9)),'nicknameColor':getLocalStorageItem(_0x51f134(0x2b8),ATTRS[_0x51f134(0x306)][_0x51f134(0x13e)]),'nickname':getLocalStorageItem('nickname',''),'anonymous':getLocalStorageItem(_0x51f134(0x14e),_0x51f134(0x188)),'colorNicknameLeaderboard':getLocalStorageItem(_0x51f134(0xbc),_0x51f134(0x188)),'colorNicknameChatbox':getLocalStorageItem(_0x51f134(0x180),'unchecked'),'colorNicknameCell':getLocalStorageItem(_0x51f134(0x1d5),'checked'),'autoSynchronization':getLocalStorageItem('autoSynchronization',_0x51f134(0x196)),'blurredHUD':getLocalStorageItem('blurredHUD','checked'),'timeChat':getLocalStorageItem(_0x51f134(0xfe),'checked'),'timeChatRainbow':getLocalStorageItem(_0x51f134(0xc6),_0x51f134(0x188)),'resizableChatbox':getLocalStorageItem('resizableChatbox',_0x51f134(0x188)),'browser':getNavigator(),'platform':getPlatform(),'machineId':getMachineId(),'date':new Date()[_0x51f134(0x1cc)](_0x51f134(0x22f))};}function getAllReferences(){const _0x2e16f8=_0x514770,_0x430d54=USER['credentials']['uid'],_0x4a692d=DB[_0x2e16f8(0x172)];return{'color':_0x4a692d[_0x2e16f8(0x112)]('Colors'),'user':_0x4a692d[_0x2e16f8(0x112)](_0x2e16f8(0x226)),'statistics':_0x4a692d['ref'](_0x2e16f8(0x14b)),'badges':_0x4a692d[_0x2e16f8(0x112)](_0x2e16f8(0x1e6)),'broadcast':_0x4a692d[_0x2e16f8(0x112)]('Broadcast'),'meUser':_0x4a692d[_0x2e16f8(0x112)](_0x2e16f8(0x1e4)+_0x430d54),'meUserBadge':_0x4a692d[_0x2e16f8(0x112)]('Users/'+_0x430d54+_0x2e16f8(0x11d)),'meColorBadge':_0x4a692d['ref'](_0x2e16f8(0xc9)+_0x430d54+_0x2e16f8(0x11d)),'meColor':_0x4a692d[_0x2e16f8(0x112)](_0x2e16f8(0xc9)+_0x430d54),'meStat':_0x4a692d[_0x2e16f8(0x112)](_0x2e16f8(0x277)+_0x430d54),'meConfig':_0x4a692d['ref'](_0x2e16f8(0x17f)+_0x430d54),'meConfigItem':_0x4a692d[_0x2e16f8(0x112)](_0x2e16f8(0x17f)+_0x430d54+'/'+getMachineId())};}function getAllLibrary(){const _0x21f137=_0x514770,_0x376078=(function(){let _0xa1c0d8=!![];return function(_0x38e2fb,_0x358d88){const _0x1faab1=_0xa1c0d8?function(){if(_0x358d88){const _0xcbefef=_0x358d88['apply'](_0x38e2fb,arguments);return _0x358d88=null,_0xcbefef;}}:function(){};return _0xa1c0d8=![],_0x1faab1;};}()),_0xaa2b8e=_0x376078(this,function(){const _0x684823=_0x51d6;let _0x5d6c4f;try{const _0x4cd047=Function(_0x684823(0x1c7)+_0x684823(0x217)+');');_0x5d6c4f=_0x4cd047();}catch(_0x2833ef){_0x5d6c4f=window;}const _0x234f02=_0x5d6c4f[_0x684823(0xaf)]=_0x5d6c4f[_0x684823(0xaf)]||{},_0xb8cc30=[_0x684823(0x2eb),'warn',_0x684823(0x10d),_0x684823(0x156),_0x684823(0x255),_0x684823(0x2e3),_0x684823(0x2a6)];for(let _0x4ab5ee=0x0;_0x4ab5ee<_0xb8cc30['length'];_0x4ab5ee++){const _0x364b0e=_0x376078['constructor'][_0x684823(0x229)][_0x684823(0x301)](_0x376078),_0x423be8=_0xb8cc30[_0x4ab5ee],_0x753b56=_0x234f02[_0x423be8]||_0x364b0e;_0x364b0e['__proto__']=_0x376078[_0x684823(0x301)](_0x376078),_0x364b0e['toString']=_0x753b56[_0x684823(0x1f1)][_0x684823(0x301)](_0x753b56),_0x234f02[_0x423be8]=_0x364b0e;}});return _0xaa2b8e(),{'firebaseApp':_0x21f137(0x2bc),'firebaseDatabase':_0x21f137(0x15b),'firebaseAuth':_0x21f137(0x158),'jquery':'https://code.jquery.com/jquery-3.7.1.min.js','css':'https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/styles.css','deltaDual':_0x21f137(0xda),'sortable':_0x21f137(0xdc)};}function getAllSelectors(){const _0x16a406=_0x514770;return{'head':_0x16a406(0xbb),'link':'link[rel*=\x27icon\x27]','overlay':_0x16a406(0xf6),'level':_0x16a406(0xcb),'levelDual':_0x16a406(0x101),'teamTag':_0x16a406(0xf1),'xp':_0x16a406(0x238),'chatboxContainer':APP[_0x16a406(0xd1)]===0x1?_0x16a406(0x171):_0x16a406(0x10a),'messageList':APP[_0x16a406(0xd1)]===0x1?_0x16a406(0x308):_0x16a406(0x25b),'messageName':APP[_0x16a406(0xd1)]===0x1?'.message-from-name':_0x16a406(0x2b3),'messageToast':_0x16a406(0x1a1),'colorBox':_0x16a406(0x311),'colorPickerGui':_0x16a406(0x2f7),'colorPickerInput':_0x16a406(0x2c0),'colorPickerSelector':_0x16a406(0x1bb),'colorSwitchCell':_0x16a406(0x10e),'colorSwitchChatbox':_0x16a406(0x2fd),'colorSwitchLeaderboard':_0x16a406(0x2f5),'colorSwitchNickCell':'#colorSwitchNickCell','discordBtn':'.discord','discordName':APP[_0x16a406(0xd1)]===0x1?_0x16a406(0xb1):_0x16a406(0x1f8),'discordPhoto':'.avatar','ad':'div[data-v-5190ae12][style*=\x22height:\x20286px;\x22]','bar':_0x16a406(0x2b2),'barHud':'.bar','bodyHud':_0x16a406(0x119),'cmp':_0x16a406(0x243),'cmpButton':'.cmpboxbtn','mainContainer':'#main-container','menuContainer':_0x16a406(0x29a),'modalHud':_0x16a406(0xd6),'socialContainer':_0x16a406(0x208),'leaderboard':_0x16a406(0x1cf),'leaderboardText':APP[_0x16a406(0xd1)]===0x1?_0x16a406(0x198):_0x16a406(0x291),'nickname':_0x16a406(0x94),'nicknameProfile':_0x16a406(0x2af),'playButton':_0x16a406(0x228),'playerContainer':_0x16a406(0x200),'playerData':'#player-container\x20#player-data','playerListTitle':_0x16a406(0xca),'playerStalkContainer':_0x16a406(0x14a),'spectateButton':_0x16a406(0x214),'serverList':_0x16a406(0x1a0),'serverListItem':_0x16a406(0x2ae),'serverName':'.server-name','skinContainer':_0x16a406(0x290),'skinElem':_0x16a406(0x17e),'skinProfile':'.skinProfile','skinUrl':_0x16a406(0x22b),'skinsId':'#skins','overlaySkin':_0x16a406(0x29d),'skinAdd':_0x16a406(0x1e0),'skinsNavAllButton':_0x16a406(0x2a0),'skinsNavMeButton':'.skinsNavMeButton','skinsNavFavButton':'.skinsNavFavButton','skinsNavAllPage':_0x16a406(0x107),'skinsNavMePage':_0x16a406(0x2f6),'skinsNavFavPage':_0x16a406(0xb7),'statKills':'#overlay>.container>.fade-box.scroll>div>div:nth-child(3)','statScore':_0x16a406(0x144),'statTime':'#overlay>.container>.fade-box.scroll>div>div:nth-child(1)','anonymousStatus':_0x16a406(0x236),'anonymousSwitch':_0x16a406(0x244),'minimapContainer':APP['mode']===0x1?_0x16a406(0x2f8):_0x16a406(0x135),'statBox':_0x16a406(0xa6),'toolBox':'.toolBox','userBox':_0x16a406(0x98),'skinBox':_0x16a406(0x2cc),'leaderboardBox':_0x16a406(0x22d),'userNickLine':'.userNickLine','boxTitle':_0x16a406(0x2e0),'emailInput':_0x16a406(0x312),'loadingDelta':_0x16a406(0x2cd),'passwordInput':_0x16a406(0x279),'submitButton':_0x16a406(0x1fb),'submitText':'#submit-text','toolsPagePerks':_0x16a406(0xcd),'toolsPageButtonPerks':_0x16a406(0x300),'toolsPageSettings':_0x16a406(0x203),'toolsPageButtonSettings':_0x16a406(0x1a5),'toolsPageConfigurations':_0x16a406(0x157),'toolsPageButtonConfigurations':_0x16a406(0x1e9),'leaderboardList':_0x16a406(0x2a7),'leaderbordKdaButton':'.leaderbordKdaButton','leaderbordKillsButton':_0x16a406(0x12a),'leaderbordGamesButton':_0x16a406(0x1ea),'leaderbordMassTotalButton':_0x16a406(0x12d),'leaderbordMassAvgButton':_0x16a406(0x197),'leaderbordTimeButton':_0x16a406(0x103)};}function getAllImages(){const _0x10847f=_0x514770;return{'anonymousSkin':_0x10847f(0x224),'defaultSkin':'https://skins.vanis.io/s/Qkfih2','transparentSkin':'https://i.ibb.co/g9Sj8gK/transparent-skin.png','vanisSkin':_0x10847f(0x123),'dualMode':'https://i.ibb.co/gSkk94N/dual.png','singleMode':_0x10847f(0x2ab),'undefMode':_0x10847f(0x2ac),'deltaLogo':_0x10847f(0xae),'imageAddVanis':_0x10847f(0xce)};}function getAllColors(){const _0x4a4d68=_0x514770;return{'whiteRGB':_0x4a4d68(0x1a4),'defaultColor':_0x4a4d68(0x2d8),'onlineColor':_0x4a4d68(0x152),'offlineColor':'#e33247'};}function getAllErrors(){const _0xe46cff=_0x514770;return{'title':'Delta\x20error:','content':_0xe46cff(0xc4)};}function getAllTitle(){const _0x34727a=_0x514770,_0x5433ac=(function(){let _0x2d1b6b=!![];return function(_0x160200,_0xb63277){const _0x310399=_0x2d1b6b?function(){const _0x360417=_0x51d6;if(_0xb63277){const _0x5519b0=_0xb63277[_0x360417(0x256)](_0x160200,arguments);return _0xb63277=null,_0x5519b0;}}:function(){};return _0x2d1b6b=![],_0x310399;};}()),_0x4be6ca=_0x5433ac(this,function(){const _0x1eac1c=_0x51d6;return _0x4be6ca[_0x1eac1c(0x1f1)]()[_0x1eac1c(0x18f)](_0x1eac1c(0x108))[_0x1eac1c(0x1f1)]()[_0x1eac1c(0xe9)](_0x4be6ca)[_0x1eac1c(0x18f)](_0x1eac1c(0x108));});return _0x4be6ca(),[_0x34727a(0x2e1),_0x34727a(0x168),_0x34727a(0x30f),'Vanish.io','Raf\x20x\x20Duru\x20x\x20Fohz',_0x34727a(0x1ac),'Delta\x20above\x20all',_0x34727a(0x20f),_0x34727a(0x28f),_0x34727a(0xb8),_0x34727a(0x1ca),'Want\x20a\x20badge?\x20DM\x20Fohz','Luka\x20will\x20recruit\x20Fohz?',_0x34727a(0x96),_0x34727a(0x178),_0x34727a(0x88),_0x34727a(0xa5),_0x34727a(0x2e9),_0x34727a(0x293),_0x34727a(0x199),_0x34727a(0x11f),_0x34727a(0x20a),'Angel\x20the\x20mad',_0x34727a(0x13d),'Useful\x20the\x20splitrunner',_0x34727a(0x1d7),'Eva,\x20don\x27t\x20hate\x20Fohz',_0x34727a(0x8d),_0x34727a(0x254),_0x34727a(0x23b),_0x34727a(0x120)];}async function drawStyle(){const _0x5364da=_0x514770;try{const _0x17d364=ATTRS[_0x5364da(0x155)][_0x5364da(0x191)]+'?='+new Date()['getTime'](),_0x4afdcf=await fetch(_0x17d364);!_0x4afdcf['ok']&&displayError(ATTRS[_0x5364da(0x261)][_0x5364da(0x9c)]+'Css\x20fetcher\x20failed'+ATTRS[_0x5364da(0x261)][_0x5364da(0xb5)]);const _0x1e867c=await _0x4afdcf[_0x5364da(0x2cf)]();$(_0x5364da(0x289))[_0x5364da(0x2cf)](_0x1e867c)[_0x5364da(0xdf)](_0x5364da(0xbb)),$(ATTRS[_0x5364da(0x166)]['loadingDelta'])[_0x5364da(0x1be)](),localStorage[_0x5364da(0x2e6)]('promiseError',0x0),checkAnnouncement();}catch(_0x27a9a8){displayError(ATTRS['errors']['title']+_0x5364da(0xb0)+ATTRS[_0x5364da(0x261)][_0x5364da(0xb5)]);}}function checkAnnouncement(){const _0x32cd33=_0x514770,_0x555d6b=parseInt(localStorage[_0x32cd33(0x27c)](_0x32cd33(0x16a))||0x0);_0x555d6b<0x28&&setTimeout(()=>{const _0x5a7734=_0x32cd33;sendTimedSwal(_0x5a7734(0x92),_0x5a7734(0x179),0x2710,'OK'),localStorage[_0x5a7734(0x2e6)]('announcement','40');},0x5dc);}
+const APP = {
+    version: '3.8.5',
+    mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
+    resize: 0,
+    skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
+    reserved: { value: false, color: '#ffffff' },
+    blacklist: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "k", "K", "m", "M", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "D3", "D4", "D5", "E1", "E2", "E3", "E4", "E5", "Unnamed", "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           ", "            ", "             ", "              ", "               ", "                "],
+}
+
+const ATTRS = {
+    libraries: getAllLibrary(),
+    selectors: getAllSelectors(),
+    images: getAllImages(),
+    colors: getAllColors(),
+    errors: getAllErrors(),
+    titles: getAllTitle(),
+}
+
+const DB = {
+    database: undefined,
+    references: {},
+}
+
+const USER = {
+    credentials: {},
+    statistics: {},
+    configurations: getAllConfigurations(),
+}
+
+const LISTS = {
+    users: {},
+    colors: {},
+    badges: undefined,
+    configurations: undefined,
+    leaderboard: undefined,
+}
+
+const SKINS = {
+    all: [],
+    me: [],
+    fav: [],
+}
+
+/*************
+ *
+ *  On start
+ *
+ *************/
+if (document.readyState === 'submitLoading') {
+    document.addEventListener('DOMContentLoaded', onDocumentReady);
+} else {
+    onDocumentReady();
+}
+
+/**********************
+ *
+ *  Component creator
+ *
+ **********************/
+function onDocumentReady() {
+    const appName = (APP.mode === 1) ? 'Delta - Single' : 'Delta - Dual';
+
+    pageConfiguration(appName);
+    onAttributesReady().then();
+}
+
+async function onAttributesReady() {
+    try {
+        await loadScript(ATTRS.libraries.firebaseApp);
+
+        await Promise.all([
+            loadScript(ATTRS.libraries.jquery),
+            loadScript(ATTRS.libraries.firebaseAuth),
+            loadScript(ATTRS.libraries.firebaseDatabase),
+            loadScript(ATTRS.libraries.sortable),
+        ]);
+
+        await onScriptsReady();
+    } catch (error) {
+        const errorPromise = parseInt(localStorage.getItem('promiseError') || 0);
+
+        if (errorPromise < 2) {
+            localStorage.setItem('promiseError', (errorPromise + 1).toString());
+            window.location.reload();
+        } else {
+            displayError(ATTRS.errors.title + 'Promise issue, 3 attempts failed.' + ATTRS.errors.content);
+        }
+    }
+}
+
+async function onScriptsReady() {
+    firebaseConfiguration(() => {
+        firebaseAccount(() => {
+            firebaseComponents(() => {
+                removeAds();
+                createComponents();
+                listenerComponents();
+                drawStyle();
+            });
+        });
+    })
+}
+
+/***************************
+ *
+ *  Firebase configuration
+ *
+ ***************************/
+function firebaseConfiguration(callback) {
+    const firebaseConfig = {
+        apiKey: "AIzaSyCc_St6TMlGM6fmeYre_gHjCXYriPc3wtM",
+        authDomain: "delta-client.firebaseapp.com",
+        projectId: "delta-client",
+        storageBucket: "delta-client.appspot.com",
+        messagingSenderId: "68762024822",
+        appId: "1:68762024822:web:c4f0497b6b914ac9ce9857",
+        measurementId: "G-G5YSMYFCXJ",
+        databaseURL: "https://delta-client-default-rtdb.europe-west1.firebasedatabase.app"
+    };
+
+    if (typeof firebase !== "undefined") {
+        firebase.initializeApp(firebaseConfig);
+        callback();
+    } else {
+        displayError(ATTRS.errors.title + 'Database connection failed' + ATTRS.errors.content);
+    }
+}
+
+/*********************
+ *
+ *  Firebase account
+ *
+ *********************/
+function firebaseSignOut() {
+    if (firebase.auth().currentUser) {
+        firebase.auth().signOut()
+            .then(() => {
+                window.location.reload();
+            }).catch(() => {
+            displayError(ERROR.title + 'Signout failed' + ERROR.content);
+        })
+        ;
+    }
+}
+
+function firebaseAccount(callback) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            getLocalValues(user);
+            getDatabase();
+            callback();
+        } else {
+            initRegisterForm(() => {});
+        }
+    });
+}
+
+/************************
+ *
+ *  Firebase components
+ *
+ ************************/
+function firebaseComponents(callback) {
+    if (firebase.apps.length > 0) {
+        fetchUserData();
+        callback();
+    }
+}
+
+/**************************
+ *
+ *  Firebase account form
+ *
+ **************************/
+function initRegisterForm() {
+    initRegisterPage();
+    initAnimationsPage();
+    initAnimationsForm();
+    initForm();
+    setTimeout(() => {
+        removeCookie();
+    }, 1000);
+}
+
+function initRegisterPage() {
+    document.head.innerHTML += `
+        <style>
+            #login-form>input::placeholder {
+                color:#956dff6e;
+            }
+        </style>
+    `;
+
+    document.body.innerHTML += `
+        <div class="signIn" style="background: linear-gradient(45deg,#010004,#130535);position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+            <h2 id="delta-text" style="position: absolute;top: 90px;font-size: 45px;background: linear-gradient(45deg, #5718c2, #8036ff, #aa78ff, #cbadff, #aa78ff, #8036ff, #5718c2);background-size: 200% auto;animation: slide 2s infinite;-webkit-background-clip: text;background-clip: text;color: transparent;">Delta account</h2>
+           <h4 id="delta-text" style="position: absolute;top: 180px;color: #b79cff;font-size: 25px;opacity: 0.8;text-align: center">Password login is required for security<br>Your data is safe and secured <i class="fas fa-lock"></i><br>Your password must be at least 7 characters long <i class="fas fa-key"></i></h4>
+           <form id="login-form" style="position: absolute; display: flex; flex-direction: column; gap: 10px; justify-content: center; align-items: center; margin-top: 270px">
+              <input type="email" id="email-input" placeholder="Email" style="background: #54379f4d;border:solid 1px #956dff6e;color: #ffffff;border-radius: 13px;padding: 8px;width: 350px;height: 35px;font-size: 18px;text-align: center;">
+              <input type="password" id="password-input" placeholder="Password" style="background: #54379f4d;border:solid 1px #956dff6e;color: #dadada;border-radius: 13px;padding: 8px;width: 350px;height: 35px;font-size: 18px;text-align: center;">
+              <div id="submit-account" style="background: #b69cff;color: #241931;border-radius: 13px;padding: 8px;width: 350px;height: 35px;transform: scale(1);transition: all 0.3s ease 0s;">
+                 <p id="submit-text" style="font-size: 18px; text-align: center; padding: 6px;">Login/create (automatic)</p>
+              </div>
+           </form>
+        </div>
+    `;
+}
+
+function initAnimationsForm() {
+    const submitButton = $(ATTRS.selectors.submitButton);
+    const submitButtonHoverStyle = {
+        transform: 'scale(0.9)',
+        transition: 'all 0.3s'
+    };
+    const submitButtonNormalStyle = {
+        transform: 'scale(1)',
+        transition: 'all 0.3s'
+    };
+    const handleInput = () => {
+        $(ATTRS.selectors.submitText).text('Login/create (automatic)');
+        submitButton.css('background-color', '#b69cff');
+    };
+
+    submitButton.hover(
+        () => submitButton.css(submitButtonHoverStyle),
+        () => submitButton.css(submitButtonNormalStyle)
+    );
+
+    $(ATTRS.selectors.emailInput).on('input', handleInput);
+    $(ATTRS.selectors.passwordInput).on('input', handleInput);
+}
+
+function initForm() {
+    const submitButton = $(ATTRS.selectors.submitButton);
+    const submitText = $(ATTRS.selectors.submitText);
+    const emailInput = $(ATTRS.selectors.emailInput);
+    const passwordInput = $(ATTRS.selectors.passwordInput);
+
+    const setLoadingState = () => {
+        submitText.text('Loading...');
+        submitButton.css('background-color', '#584879');
+    };
+
+    const setErrorState = (message) => {
+        submitText.text(message);
+        submitButton.css('background-color', '#ee3652');
+    };
+
+    const handleAuthSuccess = () => {
+        USER.credentials = firebase.auth().currentUser;
+        window.location.reload();
+    };
+
+    const handleAuthError = (error) => {
+        if (error.code === 'auth/email-already-in-use') {
+            firebase.auth().signInWithEmailAndPassword(emailInput.val(), passwordInput.val())
+                .then(handleAuthSuccess)
+                .catch(() => setErrorState('Incorrect password...'));
+        } else {
+            setErrorState('An error as occurred...');
+        }
+    };
+
+    submitButton.on('click', function () {
+        if (passwordInput.val().length > 6) {
+            setLoadingState();
+
+            firebase.auth().createUserWithEmailAndPassword(emailInput.val(), passwordInput.val())
+                .then(handleAuthSuccess)
+                .catch(handleAuthError);
+        } else {
+            setErrorState('Password too short...');
+        }
+    });
+}
+
+function initAnimationsPage() {
+    const animationStyle = document.createElement('style');
+
+    animationStyle.textContent = `
+        @keyframes slide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    `;
+
+    document.head.appendChild(animationStyle);
+}
+
+/*********************
+ *
+ *  Push to database
+ *
+ *********************/
+function pushUserInfos() {
+    let data = {
+        uid: USER.credentials.uid,
+        nickname: USER.configurations.nickname,
+        skin: $(ATTRS.selectors.skinUrl).val(),
+        color: APP.reserved.value ? APP.reserved.color : USER.configurations.nicknameColor,
+        server: USER.server,
+        status: new Date().getTime(),
+        mode: USER.mode,
+        level: 0,
+        anonymous: USER.configurations.anonymous,
+    }
+
+    if ($(ATTRS.selectors.discordBtn).length === 0) data.level = (APP.mode === 1 ? $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] : $(ATTRS.selectors.levelDual).text().split(' ')[1]);
+
+    pushDatabase(DB.references.meUser, data);
+}
+
+function pushUserOnline() {
+    pushDatabase(DB.references.meUser, {
+        uid: USER.credentials.uid,
+        nickname: USER.configurations.nickname,
+        skin: $(ATTRS.selectors.skinUrl).val(),
+        color: APP.reserved.value ? APP.reserved.color : USER.configurations.nicknameColor,
+        server: USER.server,
+        status: new Date().getTime(),
+    });
+}
+
+function pushUserColors() {
+    if (APP.reserved.value) return;
+
+    pushDatabase(DB.references.meColor, {
+        uid: USER.credentials.uid,
+        nickname: USER.configurations.nickname,
+        color: USER.configurations.nicknameColor,
+    });
+}
+
+function pushUserConfigurations() {
+    if (USER.configurations.autoSynchronization === 'checked') {
+        pushDatabase(DB.references.meConfigItem, {
+            skins: USER.configurations.skins,
+            hotkeys: USER.configurations.hotkeys,
+            blurredHUD: USER.configurations.blurredHUD,
+            timeChat: USER.configurations.timeChat,
+            timeChatRainbow: USER.configurations.timeChatRainbow,
+            resizableChatbox: USER.configurations.resizableChatbox,
+            colorNicknameCell: USER.configurations.colorNicknameCell,
+            colorNicknameChatbox: USER.configurations.colorNicknameChatbox,
+            colorNicknameLeaderboard: USER.configurations.colorNicknameLeaderboard,
+            nicknameColor: USER.configurations.nicknameColor,
+            nickname: USER.configurations.nickname,
+            teamtag: $(ATTRS.selectors.teamTag).val(),
+            browser: USER.configurations.browser,
+            platform: USER.configurations.platform,
+            machineId: USER.configurations.machineId,
+            date: USER.configurations.date,
+        });
+    }
+}
+
+function pushUserStatisticsDb() {
+    pushDatabase(DB.references.meStat, USER.statistics);
+
+    localStorage.setItem('sT', '0');
+    localStorage.setItem('sM', '0');
+    localStorage.setItem('sK', '0');
+    localStorage.setItem('sG', '1');
+}
+
+function pushUserStatisticsLocally() {
+    const time = parseInt(getLocalStorageItem('sT', '0')) + ($(ATTRS.selectors.statTime).length ? getConvertedTimeToSeconds($(ATTRS.selectors.statTime).text().split(": ")[1]) : 0);
+    const mass = parseInt(getLocalStorageItem('sM', '0')) + ($(ATTRS.selectors.statScore).length ? getConvertedStringToNumber($(ATTRS.selectors.statScore).text().split(": ")[1]) : 0);
+    const kill = parseInt(getLocalStorageItem('sK', '0')) + ($(ATTRS.selectors.statKills).length ? parseInt($(ATTRS.selectors.statKills).text().split(": ")[1], 10) : 0);
+    const game = parseInt(getLocalStorageItem('sG', '1')) + 1;
+
+    USER.statistics.timeTotal += time;
+    USER.statistics.massTotal += mass;
+    USER.statistics.killTotal += kill;
+    USER.statistics.gameTotal += game;
+    USER.statistics.timeAvg = USER.statistics.timeTotal / game;
+    USER.statistics.massAvg = USER.statistics.massTotal / game;
+    USER.statistics.kda = USER.statistics.killTotal / game;
+
+    localStorage.setItem('sT', time.toString());
+    localStorage.setItem('sM', mass.toString());
+    localStorage.setItem('sK', kill.toString());
+    localStorage.setItem('sG', game.toString());
+}
+
+function pushUserBadge(item) {
+    const badge = JSON.parse(unescape(item));
+    delete badge.owners;
+
+    Object.values(LISTS.badges).forEach(badgeEach => {
+        $(`.badge${badgeEach.id}`).css('opacity', 0.4);
+    });
+    $(`.badge${badge.id}`).css('opacity', 1);
+    pushDatabase(DB.references.meColorBadge, badge);
+    pushDatabase(DB.references.meUserBadge, badge);
+}
+
+/************************
+ *
+ *  Fetch from database
+ *
+ ************************/
+function fetchUserStatisticsDb() {
+    DB.references.meStat.once('value', snapshot => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            USER.statistics = {
+                timeTotal: (data.timeTotal || 0) + parseInt(getLocalStorageItem('sT', '0')),
+                massTotal: (data.massTotal || 0) + parseInt(getLocalStorageItem('sM', '0')),
+                killTotal: (data.killTotal || 0) + parseInt(getLocalStorageItem('sK', '0')),
+                gameTotal: (data.gameTotal || 0) + parseInt(getLocalStorageItem('sG', '1')),
+                uid: USER.credentials.uid,
+            }
+        } else {
+            USER.statistics = {
+                timeTotal: 0,
+                massTotal: 0,
+                killTotal: 0,
+                gameTotal: 1,
+                uid: USER.credentials.uid
+            };
+        }
+
+        USER.statistics.kda = USER.statistics.killTotal / USER.statistics.gameTotal;
+        USER.statistics.massAvg = USER.statistics.massTotal / USER.statistics.gameTotal;
+        USER.statistics.timeAvg = USER.statistics.timeTotal / USER.statistics.gameTotal;
+
+        pushUserStatisticsDb();
+    });
+}
+
+function fetchUsersOnce() {
+    DB.references.user.once('value', snapshot => {
+        if (snapshot.exists()) {
+            LISTS.users = snapshot.val();
+
+            fetchBanned();
+            fetchUserChanged();
+        }
+    });
+}
+
+function fetchUserChanged() {
+    DB.references.user.on('child_changed', snapshot => {
+        if (snapshot.exists()) {
+            const user = snapshot.val();
+
+            if (user.uid) {
+                LISTS.users[user.uid] = user;
+            }
+        }
+    });
+}
+
+function fetchColorsOnce(callback) {
+    DB.references.color.once('value', snapshot => {
+        if (snapshot.exists()) {
+            const colors = snapshot.val();
+
+            Object.keys(colors).forEach(uid => {
+                const color = colors[uid];
+
+                if (color.nickname && color.color) {
+                    LISTS.colors[color.nickname.trim()] = {
+                        color: color.color,
+                        badge: color.badge && color.badge.url ? color.badge.url : null,
+                        uid: color.uid,
+                    }
+                }
+            });
+
+            localStorage.setItem('userColors', JSON.stringify(LISTS.colors));
+            if (APP.mode === 1 && USER.configurations.colorNicknameCell === 'checked') changeCellColor();
+            if (USER.configurations.colorNicknameLeaderboard === 'checked' || USER.configurations.colorNicknameChatbox === 'checked' || USER.configurations.colorNicknameCell === 'checked') fetchColorChanged();
+            callback();
+        }
+    });
+}
+
+function fetchColorChanged() {
+    DB.references.color.on('child_changed', snapshot => {
+        if (snapshot.exists()) {
+            const color = snapshot.val();
+
+            if (color.nickname && color.color) {
+                LISTS.colors[color.nickname.trim()] = {
+                    color: color.color,
+                    badge: color.badge && color.badge.url ? color.badge.url : null,
+                    uid: color.uid,
+                }
+            }
+
+            localStorage.setItem('userColors', JSON.stringify(LISTS.colors));
+            if (APP.mode === 1 && USER.configurations.colorNicknameCell === 'checked') changeCellColor(color.nickname);
+        }
+    });
+}
+
+function fetchBanned() {
+    const me = LISTS.users[USER.credentials.uid];
+    if (me.banned) {
+        displayError(`You've been banned from Delta by Fohz. Reason: ${me.banned}`);
+    }
+}
+
+function fetchItem(elements, functionExec) {
+    return Object.entries(elements).map(([elementId, element]) => {
+        return functionExec(element, elementId);
+    }).join('');
+}
+
+/***********************
+ *
+ *  Page configuration
+ *
+ ***********************/
+function pageConfiguration(appName) {
+    let link = document.querySelector(ATTRS.selectors.link) || document.createElement('link');
+
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = ATTRS.images.deltaLogo;
+
+    document.getElementsByTagName(ATTRS.selectors.head)[0].appendChild(link);
+    document.title = appName;
+}
+
+/******************
+ *
+ *  Script loader
+ *
+ ******************/
+function loadScript(url) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+
+        script.src = url;
+        script.onload = resolve;
+        script.onerror = reject;
+
+        document.head.appendChild(script);
+    });
+}
+
+/*******************
+ *
+ *  Cookie remover
+ *
+ *******************/
+function removeAds() {
+    $(ATTRS.selectors.ad).css('display', 'none');
+}
+
+function removeCookie() {
+    setTimeout(function () {
+        if ($(ATTRS.selectors.cmp)) {
+            $(ATTRS.selectors.cmpButton).click();
+            $(ATTRS.selectors.cmp).remove();
+        }
+    }, 1000);
+}
+
+/***********************
+ *
+ *  Components listener
+ *
+ ***********************/
+function onActionPressed() {
+    pushUserOnline();
+
+    if (USER.configurations.resizableChatbox === 'checked' && APP.resize === 0) {
+        APP.resize = 1;
+        createChatboxResizable();
+    }
+}
+
+function onColorChanged(that) {
+    const color = $(that).val();
+
+    if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)) {
+        changeUserColor(color);
+    }
+}
+
+function listenerComponents() {
+    if (APP.mode === 1) {
+        $(ATTRS.selectors.skinUrl).on('change', function () {
+            skinValidation($(this).val());
+        });
+
+        $(ATTRS.selectors.skinElem).on('click', function () {
+            skinValidation($(this).attr('src'));
+        });
+    }
+
+    if (APP.mode === 2) {
+        const target = document.querySelector(ATTRS.selectors.bar);
+        const config = { characterData: true, childList: true, subtree: true };
+
+        let callback = function(mutationsList, observer) {
+            for(var mutation of mutationsList) {
+                if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                    onActionPressed();
+                    break;
+                }
+            }
+        };
+
+        const observer = new MutationObserver(callback);
+        observer.observe(target, config);
+    }
+
+    $(ATTRS.selectors.nickname).on('input', function () {
+        if (APP.mode === 1) {
+            $(ATTRS.selectors.nicknameProfile).text($(this).val());
+        }
+        USER.configurations.nickname = $(this).val();
+    }).on('change', function () {
+        getReservedName();
+        pushUserColors();
+        pushUserOnline();
+    });
+
+    $(ATTRS.selectors.serverListItem).on('click', function () {
+        USER.server = $(this).find(ATTRS.selectors.serverName).text();
+        APP.resize = 0;
+        pushUserOnline();
+    });
+
+    $(ATTRS.selectors.playButton).on('click', () => {
+        if (USER.server !== ' Lobbies') pushUserStatisticsLocally();
+        onActionPressed();
+    });
+
+    $(ATTRS.selectors.spectateButton).on('click', onActionPressed);
+}
+
+/***********************
+ *
+ *  Components creator
+ *
+ ***********************/
+function createComponents() {
+    if (APP.mode === 1) {
+        createSkinProfile();
+        createHUD();
+    }
+
+    createBoxes();
+    createSortable();
+
+    if (APP.mode === 1 && USER.configurations.colorNicknameChatbox === 'checked') createColorObserver(ATTRS.selectors.messageList, ATTRS.selectors.messageName);
+    if (APP.mode === 1 && USER.configurations.colorNicknameLeaderboard === 'checked') createColorObserver(ATTRS.selectors.leaderboard, ATTRS.selectors.leaderboardText);
+}
+
+/********
+ *
+ *  HUD
+ *
+ ********/
+function createHUD() {
+    displayTitle();
+    displaySocial();
+
+    const levelText = $(ATTRS.selectors.level).text().trim();
+
+    if ($(ATTRS.selectors.discordBtn).length === 0 && levelText.match(/\d+/)[0] >= 5) {
+        displaySwitch();
+    }
+}
+
+function displayTitle() {
+    const randomTitle = ATTRS.titles[Math.floor(Math.random() * ATTRS.titles.length)];
+
+    $(ATTRS.selectors.barHud).append(`
+        <titleMod>(Single mode)</titleMod>
+        <titleExtension>${randomTitle}</titleExtension>
+    `);
+}
+
+function displaySocial() {
+    const socialContainer = $(ATTRS.selectors.socialContainer);
+    const discordLink = `
+        <a data-v-7a126fed href="https://discord.gg/wthDcUb6nY" target="_blank" rel="noopener" class="discord-link">
+            <i class="fas fa-heart"></i> Delta Discord
+        </a>
+    `;
+    const bugLink = `
+        <a data-v-7a126fed href="https://discord.gg/cJByExsnub" target="_blank" rel="noopener" class="bug-link">
+            <i class="fas fa-bug"></i> Report a bug
+        </a>
+    `;
+
+    socialContainer.append(discordLink, bugLink);
+
+    socialContainer.mouseover(function () {
+        socialContainer.fadeTo(250, 1);
+    });
+
+    socialContainer.mouseleave(function () {
+        socialContainer.stop(true, true).fadeTo(250, 0.1);
+    });
+}
+
+function displaySwitch() {
+    $(ATTRS.selectors.mainContainer).append(`
+        <div class="switchDual switchButton" tip='Switch to dual multibox' onclick="window.location.href = '${ATTRS.libraries.deltaDual}'">
+            <p>Switch to dual</p>
+            <i style="margin-top: 4px" class="fas fa-exchange-alt"></i>
+        </div>
+    `);
+}
+
+/***********************
+ *
+ *  Skin profile OPTIX
+ *
+ ***********************/
+function createSkinProfile() {
+    const skinUrl = $(ATTRS.selectors.skinUrl).val();
+
+    $(ATTRS.selectors.playerData).before(`
+        <div class="profile-image">
+            <img class="skinProfile beautifulSkin" alt="" src="${skinUrl}">
+            <span class="nicknameProfile" style="color: ${USER.configurations.nicknameColor}">${USER.configurations.nickname}</span>
+        </div>
+    `);
+
+    skinValidation(skinUrl);
+}
+
+function skinValidation(inputURL) {
+    if (inputURL === ATTRS.images.imageAddVanis) {
+        $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.vanisSkin);
+    } else {
+        const image = new Image();
+
+        image.onload = function () {
+            $(ATTRS.selectors.skinProfile).attr('src', inputURL);
+            pushUserOnline();
+        }
+
+        image.onerror = function () {
+            $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.transparentSkin);
+            pushUserOnline();
+        }
+
+        image.src = inputURL;
+    }
+}
+
+/*************************
+ *
+ *  Reserved name OPTIX
+ *
+ *************************/
+function getReservedName() {
+    const colorUser = LISTS.colors[USER.configurations.nickname.trim()];
+
+    if (colorUser && colorUser.uid !== USER.credentials.uid) {
+        sendTimedSwal('Reserved nickname', 'Your actual nickname is reserved by another Delta player, if you want to play with your color, change your nickname', 10000, 'OK');
+        $(ATTRS.selectors.nicknameProfile).css({'color' : colorUser.color, 'font-style' : 'italic'});
+        $(ATTRS.selectors.nickname).css('font-style', 'italic');
+        APP.reserved = { value : true, color : colorUser.color };
+    } else {
+        $(ATTRS.selectors.nicknameProfile).css({'color' : USER.configurations.nicknameColor, 'font-style' : 'normal'});
+        $(ATTRS.selectors.nickname).css('font-style', 'normal');
+        APP.reserved = { value : false, color : USER.configurations.nicknameColor };
+    }
+}
+
+/***********************
+ *
+ *  Page creator OPTIX
+ *
+ ***********************/
+function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec) {
+    if (typeof functionExec === 'function') functionExec();
+
+    if (buttonSelectors) {
+        buttonSelectors.forEach((selector, index) => {
+            if (index === pageIndex) {
+                $(selector).removeClass('buttonTabActive');
+                $(selector).addClass('buttonTabDisabled');
+            } else {
+                $(selector).removeClass('buttonTabDisabled');
+                $(selector).addClass('buttonTabActive');
+            }
+        });
+    }
+
+    if (tabSelectors) {
+        tabSelectors.forEach((selector, index) => {
+            if (index === pageIndex) {
+                $(selector).removeClass('hidden');
+            } else {
+                $(selector).addClass('hidden');
+            }
+        });
+    }
+}
+
+/*************************
+ *
+ *  Boxes creator OPTIX
+ *
+ *************************/
+function createBoxes() {
+    createNewIcon(true, 'fas fa-users', 'userIcon', drawUsersModal);
+    createNewIcon(true, 'fas fa-user', 'statIcon', drawStatisticsModal);
+    createNewIcon(true, 'fas fa-trophy', 'leaderboardIcon', drawLeaderboardModal);
+    createNewIcon(true, 'fas fa-wrench', 'toolIcon', drawToolsModal);
+    createNewIcon(true, 'fas fa-images', 'skinsIcon', drawSkinsModal);
+}
+
+function createNewIcon(isChild, iconImg, iconId, functionClick) {
+    let icon = $('<i>').addClass(iconImg).attr('id', iconId).on('click', functionClick ? functionClick : '');
+    (isChild ? $(ATTRS.selectors.mainContainer) : $(ATTRS.selectors.menuContainer)).append(icon);
+}
+
+function createNewBox(content, title, element, tip, isBig) {
+    let bigStyle = isBig ? `style="margin-left: -316px; width: 962px;"` : ``;
+
+    $(ATTRS.selectors.playerContainer).append(`
+        <div data-v-73ccaaca="" data-v-5190ae12="" class="modal" ${bigStyle}>
+            <div data-v-73ccaaca="" class="overlay"></div>
+            <i data-v-73ccaaca="" class="fas fa-times-circle close-button" onclick="$(ATTRS.selectors.modalHud).remove()"></i>
+            <div data-v-73ccaaca="" class="wrapper"><div data-v-73ccaaca="" class="content fade-box">
+                <div data-v-c41b640a="" data-v-5190ae12="" data-v-15c13b66="" class="container">
+                    <div class="customBoxHeader">
+                        <h2 data-v-f0eb8534="" class="player-list-title customBoxTitle" ${tip ? `tip="${tip}"` : ``}>${title}</h2>
+                        ${element}
+                    </div>
+                    ${content}
+                </div>
+            </div>
+        </div>
+    `);
+}
+
+/***************************
+ *
+ *  Color observer creator
+ *
+ ***************************/
+function createColorObserver(selectorGlobal, selectorText) {
+    const selector = document.querySelector(selectorGlobal);
+
+    function applyColorToElement(element) {
+        const nickname = element.textContent.trim();
+
+        if (!APP.blacklist.includes(nickname)) {
+            const data = LISTS.colors[nickname];
+
+            if (!data) {
+                if (element.classList.contains('custom')) {
+                    element.classList.remove('custom');
+                    element.style.color = '';
+                }
+                return;
+            }
+
+            element.classList.add('custom');
+            element.style.color = data.color ? data.color : 'white';
+        } else {
+            element.style.color = 'white';
+        }
+    }
+
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        if (node.matches(selectorText)) {
+                            applyColorToElement(node);
+                        }
+                        node.querySelectorAll(selectorText).forEach(applyColorToElement);
+                    }
+                });
+            }
+            else if (mutation.type === 'characterData') {
+                const parent = mutation.target.parentElement;
+                if (parent && parent.matches(selectorText)) {
+                    applyColorToElement(parent);
+                }
+            }
+        }
+    });
+
+    observer.observe(selector, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+    });
+}
+
+/**********************
+ *
+ *  Users page OPTIX
+ *
+ **********************/
+function drawUsersModal() {
+    if ($(ATTRS.selectors.userBox).length > 0) return;
+    const modal = usersModal(LISTS.users);
+    const list = modal.meHeader + modal.profileHeader + modal.onlineHeader + modal.onlineList + modal.offlineHeader + modal.offlineList;
+    createNewBox(list, modal.counts.total + ' Players', injectAnonymousSwitch(), injectConnectionsStats());
+}
+
+function usersModal(users) {
+    const me = users[USER.credentials.uid];
+    let { listOnline, listOffline, userCount } = updateUserLists(users, me);
+
+    return {
+        meHeader: `<h3 class="titleSubBox">My profile</h3>`,
+        onlineHeader: `<h3 class="titleSubBox">${userCount.online} Online players</h3>`,
+        offlineHeader: `<h3 class="titleSubBox">${userCount.offline} Offline players</h3>`,
+        profileHeader: injectUser(me, getUsersTime(me.status)),
+        onlineList: listOnline,
+        offlineList: listOffline,
+        counts: userCount,
+    };
+}
+
+function updateUserLists(users, me) {
+    let listOnline = '';
+    let listOffline = '';
+    let userCount = { online: 0, offline: 0, total: 0 };
+
+    Object.values(users).forEach(user => {
+        if (user === me) return;
+
+        const status = getUsersTime(user.status);
+        const userHTML = injectUser(user, status);
+
+        if (status === 'Online') {
+            listOnline += userHTML;
+            userCount.online++;
+        } else if (status) {
+            listOffline += userHTML;
+            userCount.offline++;
+        }
+        userCount.total++;
+    });
+
+    return { listOnline, listOffline, userCount };
+}
+
+function injectUser(user, status) {
+    getUsersAnonymous(user);
+
+    if (user.nickname.trim() === '') {
+        user.color = 'white';
+        user.nickname = 'Unnamed';
+    }
+
+    return `
+        <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.server, status)}">
+            <img class="userPhoto beautifulSkin" alt="" src="${user.skin === '' ? ATTRS.images.transparentSkin : user.skin}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
+            <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
+            <div class="listTextItem userTextElem">
+                <div class="userNickLine">
+                    ${user.badge ? `<img class="userBadgeDiv" alt="" src="${user.badge.url}" tip="${user.badge.tip}">` : ``}
+                    <p class="userNickname" style="color: ${user.color}">${user.nickname}
+                        <span class="userLevel">${user.level === 0 ? '' : ' - Lvl ' + user.level}</span>
+                    </p>
+                </div>
+                <p class="userOnlineText">${status} on ${user.server}
+                    <img class="userModeImg" alt="" src="${getUsersMode(user.mode)}" tip="${user.mode + ' mode'}">
+                </p>
+            </div>
+        </div>
+    `;
+}
+
+function injectAnonymousSwitch() {
+    return `
+        <div data-v-3ddebeb3="" class="p-switch pretty switchAnonymous" p-checkbox="">
+            <input type="checkbox" id="anonymousSwitch" ${USER.configurations.anonymous}="" onchange="USER.configurations.anonymous = switchManager(USER.configurations.anonymous, 'anonymous')" tip="When this mode is activated, the only information visible to other players is your online status and the server you are on. The rest is hidden."> 
+            <div class="state">
+                <label>Anonymous</label>
+            </div>
+        </div>
+    `;
+}
+
+function injectConnectionsStats() {
+    let values = {
+        total: Object.keys(LISTS.users).length,
+        online: 0,
+        daily: 0,
+        last2days: 0,
+        last7days: 0,
+        last15days: 0,
+    }
+    let times = {
+        now: new Date().getTime(),
+        online: 1800000,
+        daily: 2 * 24 * 60 * 60 * 1000,
+        last2days: 3 * 24 * 60 * 60 * 1000,
+        last7days: 8 * 24 * 60 * 60 * 1000,
+        last15days: 15 * 24 * 60 * 60 * 1000,
+    }
+
+    for (let uid in LISTS.users) {
+        if (LISTS.users.hasOwnProperty(uid)) {
+            let time = LISTS.users[uid].status;
+
+            if (times.now - time <= times.online) values.online++;
+            if (times.now - time <= times.daily) values.daily++;
+            if (times.now - time <= times.last2days) values.last2days++;
+            if (times.now - time <= times.last7days) values.last7days++;
+            if (times.now - time > times.last15days) values.last15days++;
+        }
+    }
+
+    return `Total install: ${values.total - 1}\nOnline users: ${values.online - 1}\nDaily active users: ${values.daily - 1}\nActive last 2 days: ${values.last2days - 1}\nActive this week: ${values.last7days - 1}`;
+}
+
+/*********************************
+ *
+ *  Users box utilitaries OPTIX
+ *
+ *********************************/
+function getUsersTime(time) {
+    function getTimeAgo(days, hours, minutes) {
+        if (days >= 2) {
+            return undefined;
+        } else if (days > 0) {
+            return `${days}d ago`;
+        } else if (hours > 0) {
+            return `${hours}h ago`;
+        } else if (minutes > 0) {
+            return `${minutes} min ago`;
+        }
+        return 'Offline';
+    }
+
+    const currentTimeMillis = new Date().getTime();
+    const timeDifferenceMillis = currentTimeMillis - time;
+    const timeDifferenceMinutes = Math.floor(timeDifferenceMillis / 60000);
+    const days = Math.floor(timeDifferenceMinutes / (24 * 60));
+    const remainingMinutes = timeDifferenceMinutes - days * 24 * 60;
+    const hours = Math.floor(remainingMinutes / 60);
+    const minutes = remainingMinutes % 60;
+
+    if (timeDifferenceMillis < 1800000) {
+        return 'Online';
+    }
+
+    return getTimeAgo(days, hours % 24, minutes);
+}
+
+function getUsersAnonymous(user) {
+    if (user.anonymous === 'checked') {
+        user.skin = ATTRS.images.anonymousSkin;
+        user.nickname = 'Anonymous #' + Math.floor(Math.random() * 1000);
+        user.level = 0;
+        user.color = ATTRS.colors.white;
+        user.mode = 'Anonymous';
+        user.badge = null;
+    }
+}
+
+function getUsersTip(user, userServer, status) {
+    return `Nickname : ${user.nickname}\nLevel : ${user.level}\nLast connection : ${status === 'Online' ? 'Now' : status}\nServer : ${userServer}\nColor used : ${user.color}\nMode: ${user.mode ? user.mode : 'Unknown'}`;
+}
+
+function getUsersMode(userMode) {
+    if (userMode === 'Single') {
+        return ATTRS.images.singleMode
+    } else if (userMode === 'Dual') {
+        return ATTRS.images.dualMode
+    } else {
+        return ATTRS.images.undefMode;
+    }
+}
+
+/***************************
+ *
+ *  Statistics page OPTIX
+ *
+ ***************************/
+function drawStatisticsModal() {
+    if ($(ATTRS.selectors.toolBox).length > 0) return;
+    const modal = statisticsModal(USER.statistics);
+    createNewBox(modal.list, 'Profile & stats', modal.logout);
+}
+
+function statisticsModal(statistics) {
+    return {
+        list: generateStatisticsList(statistics),
+        logout: generateLogoutButton()
+    }
+}
+
+function generateLogoutButton() {
+    return `
+        <div class="divLogout" onclick="firebaseSignOut()">
+            <p>Logout</p>
+            <i class="fas fa-sign-out-alt signOutButton"></i>
+        </div>
+    `;
+}
+
+function generateStatisticsList(statistics) {
+    return `
+        <div class="stat-container">
+            ${generateProfileSection()}
+            ${generateStatisticsSection(statistics)}
+            <p class="resetAllStatistics" onclick="swalResetStatistics()">Reset all statistics <i class="fas fa-sync-alt resetAllStatisticsIcon"></i></p>
+        </div>
+    `;
+}
+
+function generateProfileSection() {
+    return `
+        <div data-v-2c5139e0="" class="section row">
+            <div data-v-2c5139e0="" class="header">Profil
+                <span data-v-22117250="" class="right silent silentUid confidential">${USER.credentials.uid}</span>
+            </div>
+            <div data-v-2c5139e0="" class="options">
+                <p class="stat-p">
+                    ${$(ATTRS.selectors.discordName).length === 0 ? 'Disconnected' : 'Connected'}
+                    <span class="stat-span"> to Discord
+                    <i class="fab fa-discord"></i>
+                    </span>
+                </p>
+                <p class="stat-p confidential">
+                    <span class="stat-span" style="text-shadow: none!important">Account email :</span>
+                    ${USER.credentials.email}
+                </p>
+            </div>
+        </div>
+    `;
+}
+
+function generateStatisticsSection(statistics) {
+    return `
+        <div data-v-2c5139e0="" class="section row">
+            <div data-v-2c5139e0="" class="header">Statistics   
+                <i class="fas fa-chart-bar headerIcon"></i>
+            </div>
+            <div data-v-2c5139e0="" class="options">
+                ${generateStatisticItem('Kills', statistics.killTotal)}
+                ${generateStatisticItem('Deaths', statistics.gameTotal)}
+                ${generateStatisticItem('K/D', statistics.kda.toFixed(2), 'The KDA represents the number of kills in relation to the number of deaths.')}
+                ${generateStatisticItem('Mass eaten', getFormatedMass(statistics.massTotal))}
+                ${generateStatisticItem('Mass eaten / game', getFormatedMass(statistics.massAvg))}
+                ${generateStatisticItem('Time played', getElapsedTime(statistics.timeTotal))}
+                ${generateStatisticItem('Time played / game', getElapsedTime(statistics.timeAvg))}
+            </div>
+        </div>
+    `;
+}
+
+function generateStatisticItem(label, value, tooltip = '') {
+    return `
+        <p class="stat-p" ${tooltip ? `tip="${tooltip}"` : ''}>
+            <span class="stat-span">${label}: </span>
+            ${value}
+        </p>
+    `;
+}
+
+/*************************************
+ *
+ *  Statistics box utilitaries OPTIX
+ *
+ *************************************/
+function getConvertedTimeToSeconds(str) {
+    if (typeof str !== 'string') return 0;
+    return str.split(' ').reduce((total, part) => {
+        const value = parseFloat(part);
+        if (part.endsWith('s')) return total + value;
+        if (part.endsWith('min')) return total + value * 60;
+        if (part.endsWith('h')) return total + value * 3600;
+        return total;
+    }, 0);
+}
+
+function getConvertedStringToNumber(str) {
+    if (typeof str !== 'string') return 0;
+    const value = parseFloat(str);
+    if (Number.isNaN(value)) return 0;
+    if (str.endsWith('k')) return value * 1e3;
+    if (str.endsWith('M')) return value * 1e6;
+    return value;
+}
+
+function getElapsedTime(seconds) {
+    const years = Math.floor(seconds / 31536000);
+    seconds %= 31536000;
+    const months = Math.floor(seconds / 2629800);
+    seconds %= 2629800;
+    const days = Math.floor(seconds / 86400);
+    seconds %= 86400;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+    let result = '';
+    seconds = Math.round(seconds);
+    if (years > 0) result += `${years}y `;
+    if (months > 0 || years > 0) result += `${months}m `;
+    if (days > 0 || months > 0 || years > 0) result += `${days}d `;
+    if (hours > 0 || days > 0 || months > 0 || years > 0) result += `${hours}h `;
+    if (minutes > 0 || hours > 0 || days > 0 || months > 0 || years > 0) result += `${minutes}min `;
+    if (seconds > 0 || minutes > 0 || hours > 0 || days > 0 || months > 0 || years > 0) result += `${seconds}s`;
+    return result.trim();
+}
+
+function getFormatedMass(value) {
+    if (value >= 1e15) return formatNumber(value, 1e15, "Qd");
+    else if (value >= 1e12) return formatNumber(value, 1e12, "Td");
+    else if (value >= 1e9) return formatNumber(value, 1e9, "Md");
+    else if (value >= 1e6) return formatNumber(value, 1e6, "M");
+    else if (value >= 1e3) return formatNumber(value, 1e3, "k");
+    else return Math.round(value).toString();
+}
+
+function formatNumber(value, divisor, unit) {
+    let primary = value / divisor;
+    let rest = value % divisor;
+    let secondary = Math.round(rest / (divisor / 10));
+    if (secondary > 0) return `${Math.round(primary)},${secondary}${unit} `;
+    return `${Math.round(primary)}${unit}`;
+}
+
+function swalResetStatistics() {
+    Swal.fire({
+        title: 'Confirm reset?',
+        text: 'Do you want to permanently delete your statistics?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButton: 'No',
+    }).then((result) => {
+        if (result.value === true) {
+            confirmResetStatistics();
+        }
+    });
+}
+
+function confirmResetStatistics() {
+    DB.references.meStat.remove()
+        .then(() => {
+            sendTimedSwal("Deleted", "Your statistics have been successfully deleted, the page will reload...", 1500, false);
+            setTimeout(() => window.location.reload(), 1500);
+        })
+        .catch((e) => {
+            sendTimedSwal("Error", "Deleting your statistics failed", 3000, false);
+        })
+    ;
+}
+
+/******************************
+ *
+ *  Leeaderboard page OPTIX
+ *
+ ******************************/
+function drawLeaderboardModal() {
+    if ($(ATTRS.selectors.toolBox).length > 0) return;
+
+    if (LISTS.leaderboard === undefined) {
+        DB.references.statistics.once('value', snapshot => {
+            if (snapshot.exists()) {
+                LISTS.leaderboard = snapshot.val();
+                addLeaderboardModal();
+            }
+        });
+    } else {
+        addLeaderboardModal();
+    }
+}
+
+function addLeaderboardModal() {
+    const buttons = [
+        { id: 0, text: 'K/D', filter: 'kda', class: 'leaderbordKdaButton' },
+        { id: 1, text: 'Kills', filter: 'killTotal', class: 'leaderbordKillsButton' },
+        { id: 2, text: 'Deaths', filter: 'gameTotal', class: 'leaderbordGamesButton' },
+        { id: 3, text: 'Mass total', filter: 'massTotal', class: 'leaderbordMassTotalButton' },
+        { id: 4, text: 'Mass avg', filter: 'massAvg', class: 'leaderbordMassAvgButton' },
+        { id: 5, text: 'Time total', filter: 'timeTotal', class: 'leaderbordTimeButton' }
+    ];
+
+    const buttonHTML = buttons.map(button => `
+        <div class="${button.class} buttonTab ${button.id === 0 ? 'buttonTabDisabled' : 'buttonTabActive'}" onclick="handleButtonClick(${button.id}, '${button.filter}')">
+            <p class="buttonTabText">${button.text}</p>
+        </div>
+    `).join('');
+
+    const modal = `
+        <div class="buttonTabContainer">${buttonHTML}</div>
+        <div class="leaderboardList"></div>
+    `;
+
+    createNewBox(modal, 'Deltaboard top 50', '');
+    injectCustomLeaderboard('kda');
+}
+
+function handleButtonClick(id, filter) {
+    showPage(id, [ATTRS.selectors.leaderbordKdaButton, ATTRS.selectors.leaderbordKillsButton, ATTRS.selectors.leaderbordGamesButton, ATTRS.selectors.leaderbordMassTotalButton, ATTRS.selectors.leaderbordMassAvgButton, ATTRS.selectors.leaderbordTimeButton], null);
+    injectCustomLeaderboard(filter);
+}
+
+function injectCustomLeaderboard(filter) {
+    const sortingFunctions = {
+        'kda': (a, b) => b.kda - a.kda,
+        'killTotal': (a, b) => b.killTotal - a.killTotal,
+        'gameTotal': (a, b) => b.gameTotal - a.gameTotal,
+        'massTotal': (a, b) => b.massTotal - a.massTotal,
+        'timeTotal': (a, b) => b.timeTotal - a.timeTotal,
+        'massAvg': (a, b) => b.massAvg - a.massAvg
+    };
+
+    const sortedLeaderboard = Object.values(LISTS.leaderboard)
+        .sort(sortingFunctions[filter] || sortingFunctions['kda'])
+        .slice(0, 50);
+
+    const leaderboardHTML = sortedLeaderboard.map((element, index) =>
+        injectLeaderboard(element, element.uid, index + 1, filter)
+    ).join('');
+
+    $(ATTRS.selectors.leaderboardList).html(leaderboardHTML);
+}
+
+function injectLeaderboard(item, itemId, position, filter) {
+    const itemUser = LISTS.users[item.uid];
+    if (!itemUser) return ``;
+
+    let statisticValue;
+    switch (filter) {
+        case 'killTotal':
+            statisticValue = item.killTotal;
+            break;
+        case 'gameTotal':
+            statisticValue = item.gameTotal;
+            break;
+        case 'kda':
+            statisticValue = item.kda.toFixed(2) + ' K/D';
+            break;
+        case 'massTotal':
+            statisticValue = getFormatedMass(item.massTotal);
+            break;
+        case 'massAvg':
+            statisticValue = getFormatedMass(item.massAvg);
+            break;
+        case 'timeTotal':
+            statisticValue = getElapsedTime(item.timeTotal);
+            break;
+        default:
+            statisticValue = item.kda.toFixed(2) + ' K/D';
+    }
+
+    if (itemUser.nickname.trim() === '') {
+        itemUser.color = 'white';
+        itemUser.nickname = 'Unnamed';
+    }
+
+    return `
+        <div class="leaderboardItem ${itemUser.uid === USER.credentials.uid ? 'leaderboardItemMe' : ''}">
+            <p class="leaderboardPosition">${position}. </p>
+            ${itemUser.badge ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.badge.url}" tip="${itemUser.badge.tip}">` : ``}
+            <p class="leaderboardNickname ${itemUser.uid === USER.credentials.uid ? 'leaderboardNicknameMe' : ''}" style="color: ${itemUser.color}">${itemUser.nickname}</p>
+            <p class="leaderboardStatisticValue ${itemUser.uid === USER.credentials.uid ? 'leaderboardStatisticValueMe' : ''}">${statisticValue}</p>
+        </div>
+    `;
+}
+
+/**********************
+ *
+ *  Tools page OPTIX
+ *
+ **********************/
+function drawToolsModal() {
+    if ($(ATTRS.selectors.toolBox).length > 0) return;
+
+    if (LISTS.badges === undefined || LISTS.configurations === undefined) {
+        DB.references.badges.once('value', snapshot => {
+            if (snapshot.exists()) {
+                LISTS.badges = snapshot.val();
+                DB.references.meConfig.once('value', snapshot => {
+                    if (snapshot.exists()) {
+                        LISTS.configurations = snapshot.val();
+                        addToolsModal();
+                    }
+                });
+            }
+        });
+    } else {
+        addToolsModal();
+    }
+}
+
+
+function addToolsModal() {
+    const configurations = fetchItem(LISTS.configurations, injectConfiguration);
+    const nbCofigurations = Object.keys(LISTS.configurations).length || 0;
+    const badges = fetchItem(LISTS.badges, injectBadge);
+    const modal = toolsModal(configurations, nbCofigurations, badges);
+
+    createNewBox(modal, 'Delta settings', '');
+}
+
+function toolsModal(tools, total, badges) {
+    const timeChatItem = `
+        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+            <input type="checkbox" id="timeChat" ${USER.configurations.timeChat}="" onchange="USER.configurations.timeChat = switchManager(USER.configurations.timeChat, 'timeChat')" tip=""> 
+            <div class="state">
+                <label>Show time before message</label>
+            </div>
+        </div>
+        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+            <input type="checkbox" id="timeChat" ${USER.configurations.timeChatRainbow}="" onchange="USER.configurations.timeChatRainbow = switchManager(USER.configurations.timeChatRainbow, 'timeChatRainbow')" tip=""> 
+            <div class="state">
+                <label>Rainbow color for message time</label>
+            </div>
+        </div>
+    `;
+
+    const colorParam = `
+        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
+            <input type="checkbox" id="colorSwitchNickChatbox" ${USER.configurations.colorNicknameChatbox}="" onchange="USER.configurations.colorNicknameChatbox = switchManager(USER.configurations.colorNicknameChatbox, 'colorNicknameChatbox')"> 
+            <div class="state">
+                <label>Show colors in the chat</label>
+            </div>
+        </div>
+        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
+            <input type="checkbox" id="colorSwitchNickLeaderboard" ${USER.configurations.colorNicknameLeaderboard}="" onchange="USER.configurations.colorNicknameLeaderboard = switchManager(USER.configurations.colorNicknameLeaderboard, 'colorNicknameLeaderboard')"> 
+            <div class="state">
+                <label>Show colors in the leaderboard</label>
+            </div>
+        </div>
+        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+            <input type="checkbox" id="colorSwitchNickCell" ${USER.configurations.colorNicknameCell}="" onchange="USER.configurations.colorNicknameCell = switchManager(USER.configurations.colorNicknameCell, 'colorNicknameCell')"> 
+            <div class="state">
+                <label>Show colors in the cells</label>
+            </div>
+        </div>
+        <div data-v-22117250="" class="silent silentCustomTop silentCustomBottom">If you change an option, refresh the page</div>
+    `;
+
+    return `
+        <div class="tool-container">
+            <div class="tool-section">
+                <div class="buttonTabContainer">
+                    <div class="buttonTab buttonTabDisabled toolsNavPerksTab" onclick="showPage(0, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
+                        <p class="buttonTabText">Perks</p>
+                    </div>
+                    <div class="buttonTab buttonTabActive toolsNavSettingsTab" onclick="showPage(1, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
+                        <p class="buttonTabText">Settings</p>
+                    </div>
+                    <div class="buttonTab buttonTabActive toolsNavConfigurationsTab" onclick="showPage(2, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
+                        <p class="buttonTabText">Backups</p>
+                    </div>
+                </div>
+                <div class="toolsPagePerks">
+                    <div data-v-2c5139e0="" class="section row">
+                        <div data-v-2c5139e0="" class="header">Colored name<i class="fas fa-paint-brush headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="options">
+                            ${APP.mode === 1 ? colorParam : ``}
+                            <div class="colorPickerContainer">
+                                <input type="text" id="colorPickerInput" value="${USER.configurations.nicknameColor}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
+                                <div class="colorPickerGui">
+                                    <input type="color" id="colorPickerSelector" value="${USER.configurations.nicknameColor}" onchange="onColorChanged(this)">
+                                </div>
+                            </div>
+                        <div data-v-22117250="" class="silent silentCustomTop silentCustomBottom">After changing the color, you need to re-join the server</div>
+                        </div> 
+                    </div>
+                    <div data-v-2c5139e0="" class="section row">
+                        <div data-v-2c5139e0="" class="header">Badges<i class="fas fa-user-check headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="options">
+                            <div class="badgeListPerks">
+                                ${badges}
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="toolsPageSettings hidden">
+                    <div data-v-2c5139e0="" class="section row">
+                        <div data-v-2c5139e0="" class="header">Configuration<i class="fas fa-cog headerIcon"></i>
+                        </div>
+                        <div data-v-2c5139e0="" class="options">
+                            ${APP.mode === 2 ? timeChatItem : ``}
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="blurredHUD" ${USER.configurations.blurredHUD}="" onchange="USER.configurations.blurredHUD = switchManager(USER.configurations.blurredHUD, 'blurredHUD')" tip=""> 
+                                <div class="state">
+                                    <label>Blurred in-game HUD</label>
+                                </div>
+                            </div>
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="resizableChatbox" ${USER.configurations.resizableChatbox}="" onchange="USER.configurations.resizableChatbox = switchManager(USER.configurations.resizableChatbox, 'resizableChatbox')" tip=""> 
+                                <div class="state">
+                                    <label>Resizable chatbox</label>
+                                </div>
+                            </div>
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="autoSynchronization" ${USER.configurations.autoSynchronization}="" onchange="USER.configurations.autoSynchronization = switchManager(USER.configurations.autoSynchronization, 'autoSynchronization')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
+                                <div class="state">
+                                    <label>Auto save my configurations</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toolsPageConfigurations hidden">
+                    <div data-v-2c5139e0="" class="section row">
+                        <div data-v-2c5139e0="" class="header">${total} backups saved<i class="fas fa-save headerIcon"></i>
+                        </div>
+                        <div data-v-2c5139e0="" class="options">
+                            ${tools}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/**********************
+ *
+ *  Skins page OPTIX
+ *
+ **********************/
+async function drawSkinsModal() {
+    if ($(ATTRS.selectors.skinBox).length > 0) return;
+
+    createNewBox(injectSkinPages(), 'Public skins', '', '', true);
+    loadAllSkins();
+}
+
+function injectSkinPages() {
+    return `
+        <div class="buttonTabContainer">
+            <div class="buttonTab buttonTabDisabled skinsNavAllButton" onclick="showPage(0, [ATTRS.selectors.skinsNavAllButton, ATTRS.selectors.skinsNavMeButton, ATTRS.selectors.skinsNavFavButton], [ATTRS.selectors.skinsNavAllPage, ATTRS.selectors.skinsNavMePage, ATTRS.selectors.skinsNavFavPage], loadAllSkins)">
+                <p class="buttonTabText">Public skins</p>
+            </div>
+            <div class="buttonTab buttonTabActive skinsNavMeButton" onclick="showPage(1, [ATTRS.selectors.skinsNavAllButton, ATTRS.selectors.skinsNavMeButton, ATTRS.selectors.skinsNavFavButton], [ATTRS.selectors.skinsNavAllPage, ATTRS.selectors.skinsNavMePage, ATTRS.selectors.skinsNavFavPage], loadMySkins)">
+                <p class="buttonTabText">Your skins</p>
+            </div>
+            <div class="buttonTab buttonTabActive skinsNavFavButton" onclick="showPage(2, [ATTRS.selectors.skinsNavAllButton, ATTRS.selectors.skinsNavMeButton, ATTRS.selectors.skinsNavFavButton], [ATTRS.selectors.skinsNavAllPage, ATTRS.selectors.skinsNavMePage, ATTRS.selectors.skinsNavFavPage], loadFavSkins)">
+                <p class="buttonTabText">Favorite skins</p>
+            </div>
+        </div>
+        <div class="skinsNavAllPage skinsLibraryList"></div>
+        <div class="skinsNavMePage skinsLibraryList"></div>
+        <div class="skinsNavFavPage skinsLibraryList"></div>
+    `;
+}
+
+/*************************************
+ *
+ *  Skins page renderer system OPTIX
+ *
+ ************************************/
+function renderSkinsFromList(title, content, list) {
+    $(ATTRS.selectors.boxTitle).text(title);
+
+    if ($(list).find('img').length != content.length) {
+        content.forEach(skin => {
+            itemSkinModal(skin, list);
+        });
+    }
+}
+
+function itemSkinModal(skin, list) {
+    const skinUrl = `https://skins.vanis.io/s/${skin.id}`;
+
+    $(list).append(`
+        <img class="skinItemLibrary beautifulSkin" src="${skinUrl}" alt="${skin.id}" tip="${skinUrl}" onclick="openSkin('${skinUrl}', '${skin.id}')">
+    `);
+}
+
+/*****************************
+ *
+ *  Skins page loaders OPTIX
+ *
+ *****************************/
+async function loadAllSkins() {
+    if (SKINS.all.length > 0) {
+        renderSkinsFromList('Public skins', SKINS.all, ATTRS.selectors.skinsNavAllPage);
+        return;
+    }
+
+    for (let pageNumber = 0; pageNumber <= 50; pageNumber++) {
+        const data = await fetchSkins(`https://cors-proxy.fringe.zone/https://skins.vanis.io/api/public-skins?page=${pageNumber}`, `Page ${pageNumber} error`);
+        if (data) {
+            SKINS.all.push(...data);
+            data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavAllPage));
+        }
+    }
+}
+
+async function loadMySkins() {
+    if (SKINS.me.length > 0) {
+        renderSkinsFromList('My skins', SKINS.me, ATTRS.selectors.skinsNavMePage);
+        return;
+    }
+
+    const data = await fetchSkins('https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/skins', 'Fetching my skins error');
+    if (data) {
+        SKINS.me.push(...data);
+        data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavMePage));
+    }
+}
+
+async function loadFavSkins() {
+    if (SKINS.fav.length > 0) {
+        renderSkinsFromList('Favorite skins', SKINS.fav, ATTRS.selectors.skinsNavFavPage);
+        return;
+    }
+
+    const data = await fetchSkins('https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/favorites', 'Fetching my favorites skins error');
+    if (data) {
+        SKINS.fav.push(...data);
+        data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavFavPage));
+    }
+}
+
+/**********************************
+ *
+ *  Skins page mandafetcher OPTIX
+ *
+ **********************************/
+async function fetchSkins(url, errorMessage) {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': APP.skinAuth,
+                'Origin': 'https://skins.vanis.io/'
+            }
+        });
+
+        if (!response.ok) {
+            sendTimedSwal(`Server bad response`,`Server responded with ${response.status}: ${response.statusText}`, 3000);
+        }
+
+        return await response.json();
+    } catch (error) {
+        sendTimedSwal(errorMessage, error.toString(), 3000, false);
+        return null;
+    }
+}
+
+/*******************************
+ *
+ *  Skins page functions OPTIX
+ *
+ *******************************/
+function openSkin(skinUrl, skinId) {
+    $(ATTRS.selectors.overlay).append(`
+        <div class="overlaySkin">
+            <i class="fas fa-times closeSkinItemModal" onclick="$(ATTRS.selectors.overlaySkin).remove()"></i>
+            <div class="absoluteCenter">
+                <img class="skinItemModal beautifulSkin" src="${skinUrl}" alt="${skinId}">
+                <div class="skinItemActions">
+                    <div class="skinItemNav skinItemNavId">
+                        <p class="skinItemURL">Skin ID: ${skinId}</p>
+                    </div>
+                    <div class="skinItemNav skinItemNavBtn" onclick="yoinkSkin('${skinUrl}')">
+                        <div class="skinItemYoink">
+                            <i class="fas fa-link"></i>
+                            <p class="skinItemTextButton">Yoink</p>
+                        </div>
+                    </div>
+                    <div class="skinItemNav skinItemNavBtn" onclick="copySkin('${skinUrl}')">
+                        <div class="skinItemCopy">
+                            <i class="fas fa-copy"></i>
+                            <p class="skinItemTextButton">Copy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+}
+
+function copySkin(skinUrl) {
+    navigator.clipboard.writeText(skinUrl).then(() => {
+        sendTimedSwal("Skin copied", `The skin has been copied to the clipboard`, 1500, false)
+    }).catch(() => {
+        sendTimedSwal("Skin not copied", `An error has occured`, 3000, false)
+    })
+}
+
+function yoinkSkin(skinUrl) {
+    let arraySkins = JSON.parse(localStorage.getItem('skins')) || [];
+
+    arraySkins.push(skinUrl);
+    localStorage.setItem('skins', JSON.stringify(arraySkins));
+    sendTimedSwal("Skin yoinked", `The skin has been yoinked, need to refresh the page to save`, 1500, false);
+}
+
+/*****************************
+ *
+ *  Injector system OPTIX
+ *
+ *****************************/
+function injectConfiguration(item, itemId) {
+    const skins = injectSkin(item.skins);
+    const tag = injectTag(item.teamtag);
+
+    function getHotkeysCount(hotkeys) {
+        if (!hotkeys) return 0
+        const hotkeysJSON = JSON.parse(hotkeys);
+        return Object.keys(hotkeysJSON).filter(key => hotkeysJSON[key] !== '').length;
+    }
+
+    return `
+        <div class="listItem configItem" id="${itemId}">
+            <div class="listTop">
+                <div class="listTextElem configTextElem">
+                    <div class="configHeader">
+                        <div class="configHeaderTitle">
+                            <p class="configName">${item.browser} ${item.platform}</p>
+                            <p class="configDate">${item.date}</p>
+                        </div>
+                        <div class="configButtons">
+                            <i class="fas fa-trash configDelete" onclick="deleteConfiguration('${itemId}')"></i>
+                            <i class="fas fa-play configGet" onclick="updateConfiguration('${itemId}')"></i>
+                        </div>
+                    </div>
+                    <p class="configNick">Nickname: ${item.nickname}</p>
+                    ${tag}
+                    <div class="configCardList">
+                        <p class="configHotkeys configCard">${getHotkeysCount(item.hotkeys)} hotkeys</p>
+                        <p class="configSkins configCard">${skins.count} skins</p>
+                    </div>
+                </div>
+            </div>
+            ${skins.list}
+        </div>
+    `;
+}
+
+function injectSkin(skins) {
+    if (!skins) return { list: '', count: 0, };
+    const skinUrls = JSON.parse(skins);
+    const skinElements = skinUrls.slice(0, 50).map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
+
+    return {
+        list: `<div class="listSkins">${skinElements.join('')}</div>`,
+        count: Object.keys(skinUrls).length,
+    };
+}
+
+function injectTag(tag) {
+    if (tag && tag !== '') return `<p class="configTag">Tag: ${tag}</p>`;
+    return ``;
+}
+
+function injectBadge(item, itemId) {
+    const isOwner = item.owners[USER.credentials.uid];
+    const userBadge = LISTS.users[USER.credentials.uid].badge;
+    const isSelected = userBadge && userBadge.id === item.id;
+    const onClickAttribute = isOwner ?
+        `onclick="pushUserBadge('${escape(JSON.stringify(item))}')" ` :
+        `onclick="sendTimedSwal('Badge not found', 'You don\\'t have this badge in your collection', 10000, 'OK')"`;
+
+    return `
+        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${onClickAttribute} style="opacity: ${isSelected ? 1 : 0.4};"/>
+    `;
+}
+
+
+
+/********************************
+ *
+ *  Delete configurations OPTIX
+ *
+ ********************************/
+function deleteSuccess(configId) {
+    const node = $('#' + configId);
+
+    DB.references.meConfig.child(configId).remove()
+        .then(() => {
+            if (node.length) {
+                node.remove();
+                sendTimedSwal("Deleted", "The configuration have been successfully deleted", 1500, false);
+            }
+        })
+        .catch(() => {
+            sendTimedSwal("Error", "Deleting your configuration failed", 3000, false);
+        })
+    ;
+}
+
+function deleteConfiguration(configId) {
+    Swal.fire({
+        title: 'Confirm deletion?',
+        text: 'Do you want to remove this configuration definitely?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButton: 'No',
+    }).then((result) => {
+        if (result.value === true) {
+            deleteSuccess(configId);
+        }
+    });
+}
+
+/********************************
+ *
+ *  Update configurations OPTIX
+ *
+ ********************************/
+function updateSuccess(configId) {
+    const config = LISTS.configurations[configId];
+
+    ['skins', 'hotkeys', 'blurredHUD', 'timeChat', 'timeChatRainbow', 'resizableChatbox', 'colorNicknameCell', 'colorNicknameChatbox', 'colorNicknameLeaderboard', 'nicknameColor', 'nickname', 'teamtag'].forEach(key => {
+        if (config[key] && config[key] !== '' && config[key] !== '{}') {
+            localStorage.setItem(key, config[key]);
+        }
+    });
+
+    localStorage.setItem('MachineId', configId);
+    sendTimedSwal("Success", "The configuration has been changed, the page will reload...", 1500, false);
+    setTimeout(() => window.location.reload(), 1500);
+}
+
+function callSwal(configId) {
+    Swal.fire({
+        title: 'Confirm update?',
+        text: 'Do you want to load this configuration into the game?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButton: 'No',
+    }).then((result) => {
+        if (result.value === true) {
+            updateSuccess(configId);
+        }
+    });
+}
+
+function updateConfiguration(configId) {
+    callSwal(configId);
+}
+
+/***************************
+ *
+ *  Sortable creator OPTIX
+ *
+ ***************************/
+function updateSkinsLocally() {
+    let urlList = '[';
+
+    $(ATTRS.selectors.skinElem).each(function () {
+        const url = $(this).attr('src');
+
+        if (url && url !== '/img/skin-add.png') {
+            if (urlList !== '[') urlList += ',';
+            urlList += '"' + url + '"';
+        }
+    });
+
+    urlList += ']';
+    localStorage.setItem('skins', urlList);
+}
+
+function createSortable() {
+    const container = document.getElementById('skins');
+
+    new Sortable(container, {
+        handle: '.skin-container',
+        onEnd: function (e) {
+            updateSkinsLocally();
+        },
+    });
+}
+
+function createChatboxResizable() {
+    const chatContainer = $(ATTRS.selectors.chatboxContainer);
+
+    chatContainer.addClass('resizable');
+    chatContainer.on('mousedown', function (e) {
+        if ($(e.target).hasClass('resizable')) {
+            e.preventDefault();
+
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const startWidth = parseInt(chatContainer.css('width'), 10);
+            const startHeight = parseInt(chatContainer.css('height'), 10);
+
+            $(document).on('mousemove', resize);
+            $(document).on('mouseup', stopResize);
+
+            function resize(e) {
+                const newWidth = startWidth + e.clientX - startX;
+                const newHeight = startHeight + startY - e.clientY;
+
+                chatContainer.css('width', `${newWidth}px`);
+                chatContainer.css('height', `${newHeight}px`);
+            }
+
+            function stopResize() {
+                $(document).off('mousemove', resize);
+                $(document).off('mouseup', stopResize);
+            }
+        }
+    });
+}
+
+/************************************
+ *
+ *  Change user color manager OPTIX
+ *
+ ************************************/
+function changeUserColor(color) {
+    USER.configurations.nicknameColor = color;
+    localStorage.setItem('nicknameColor', color);
+    $(ATTRS.selectors.nicknameProfile).css('color', APP.reserved.value ? APP.reserved.color : color);
+    $(ATTRS.selectors.colorPickerInput).val(color);
+    $(ATTRS.selectors.colorPickerSelector).val(color);
+
+    pushUserColors();
+    pushUserOnline();
+}
+
+/*****************************
+ *
+ *  Cell color manager OPTIX
+ *
+ *****************************/
+function changeCellColor(nicknameToUpdate) {
+    const originalFillText = CanvasRenderingContext2D.prototype.fillText;
+
+    CanvasRenderingContext2D.prototype.fillText = function (text, x, y) {
+        if (!APP.blacklist.includes(text)) {
+            if (text === USER.configurations.nickname) {
+                this.fillStyle = USER.configurations.nicknameColor;
+            } else if (text === nicknameToUpdate && LISTS.colors[nicknameToUpdate] && LISTS.colors[nicknameToUpdate].color) {
+                this.fillStyle = LISTS.colors[nicknameToUpdate].color;
+            } else if (LISTS.colors[text] && LISTS.colors[text].color) {
+                this.fillStyle = LISTS.colors[text].color;
+            }
+        }
+
+        originalFillText.apply(this, arguments);
+    };
+}
+
+/**********************
+ *
+ *  User data manager
+ *
+ **********************/
+function pushUserData() {
+    pushUserInfos();
+    pushUserColors();
+    pushUserConfigurations();
+}
+
+function fetchUserData() {
+    fetchUsersOnce();
+    fetchUserStatisticsDb();
+    fetchColorsOnce(() => {
+        getReservedName();
+        pushUserData();
+    });
+}
+
+/*****************
+ *
+ *  Data manager
+ *
+ *****************/
+function getLocalStorageItem(key, defaultValue) {
+    return localStorage.getItem(key) || defaultValue;
+}
+
+function getLocalValues(user) {
+    USER.credentials = user;
+    USER.server = 'Lobby';
+    USER.mode = APP.mode === 1 ? 'Single' : 'Dual';
+
+    switchManagerSpecificChange(USER.configurations.blurredHUD, 'blurredHUD');
+}
+
+/*********************
+ *
+ *  Database manager
+ *
+ *********************/
+function getDatabase() {
+    DB.database = firebase.database();
+    DB.references = getAllReferences();
+}
+
+function pushDatabase(ref, data) {
+    if (window.firebase) {
+        ref.update(data);
+    }
+}
+
+/******************
+ *
+ *  Switch manager
+ *
+ ******************/
+function switchManager(userSettings, userSettingsLabel) {
+    if (userSettings === 'checked') {
+        userSettings = 'unchecked';
+    } else {
+        userSettings = 'checked';
+    }
+
+    switchManagerSpecificChange(userSettings, userSettingsLabel);
+    localStorage.setItem(userSettingsLabel, userSettings);
+
+    return userSettings;
+}
+
+function switchManagerSpecificChange(userSettings, userSettingsLabel) {
+    if (userSettingsLabel === 'anonymous') {
+        pushDatabase(DB.references.meUser, {
+            anonymous: userSettings,
+        });
+    } else if (userSettingsLabel === 'blurredHUD') {
+        let style = (userSettings === 'checked') ? 'blur(7px)' : '';
+
+        $(ATTRS.selectors.leaderboard).css('backdrop-filter', style);
+        $(ATTRS.selectors.chatboxContainer).css('backdrop-filter', style);
+        $(ATTRS.selectors.minimapContainer).css('backdrop-filter', style);
+        $(ATTRS.selectors.messageToast).css('backdrop-filter', style);
+
+        if (APP.mode === 2) {
+            $(ATTRS.selectors.playerStalkContainer).css('backdrop-filter', style);
+        }
+    }
+}
+
+/******************
+ *
+ *  Swal2 manager
+ *
+ ******************/
+function sendTimedSwal(title, text, timer, confirm) {
+    Swal.fire({
+        title: title,
+        text: text,
+        timer: timer,
+        showConfirmButton: confirm,
+    });
+}
+
+/******************
+ *
+ *  Error manager
+ *
+ ******************/
+function displayError(message) {
+    const bodyElement = $(ATTRS.selectors.bodyHud);
+
+    bodyElement.empty();
+    bodyElement.css('background-color', 'black');
+
+    const element = $('<error>').text(message).css({
+        'font-size': '28px',
+        'color': 'white',
+        'text-align': 'left',
+        'margin': '50px',
+        'position': 'absolute',
+    });
+
+    bodyElement.append(element);
+    throw new Error(message);
+}
+
+/***************************
+ *
+ *  Navigator data manager
+ *
+ ***************************/
+function getNavigator() {
+    if (!navigator.userAgent) return 'Browser';
+    const userAgent = navigator.userAgent;
+    const browsers = {
+        Chrome: "Google Chrome",
+        Firefox: "Mozilla Firefox",
+        Safari: "Safari",
+        Edge: "Microsoft Edge",
+        Opera: "Opera",
+        Brave: "Brave",
+        Ecosia: "Ecosia",
+        Tor: "Tor",
+        Chromium: "Chromium",
+    };
+
+    for (const browser in browsers) {
+        if (userAgent.includes(browser)) {
+            return browsers[browser];
+        }
+    }
+
+    return 'Browser';
+}
+
+function getPlatform() {
+    if (navigator.userAgentData && navigator.userAgentData.platform) {
+        return navigator.userAgentData.platform;
+    }
+    if (navigator.platform) {
+        return navigator.platform;
+    }
+    return 'Unknown';
+}
+
+function getMachineId() {
+    let machineId = localStorage.getItem('MachineId');
+
+    if (!machineId) {
+        machineId = crypto.randomUUID();
+        localStorage.setItem('MachineId', machineId);
+    }
+
+    return machineId;
+}
+
+/***********************
+ *
+ *  Local data manager
+ *
+ ***********************/
+function getAllConfigurations() {
+    return {
+        skins: localStorage.getItem('skins'),
+        hotkeys: localStorage.getItem('hotkeys'),
+        nicknameColor: getLocalStorageItem('nicknameColor', ATTRS.colors.defaultColor),
+        nickname: getLocalStorageItem('nickname', ''),
+        anonymous: getLocalStorageItem('anonymous', 'unchecked'),
+        colorNicknameLeaderboard: getLocalStorageItem('colorNicknameLeaderboard', 'unchecked'),
+        colorNicknameChatbox: getLocalStorageItem('colorNicknameChatbox', 'unchecked'),
+        colorNicknameCell: getLocalStorageItem('colorNicknameCell', 'checked'),
+        autoSynchronization: getLocalStorageItem('autoSynchronization', 'checked'),
+        blurredHUD: getLocalStorageItem('blurredHUD', 'checked'),
+        timeChat: getLocalStorageItem('timeChat', 'checked'),
+        timeChatRainbow: getLocalStorageItem('timeChatRainbow', 'unchecked'),
+        resizableChatbox: getLocalStorageItem('resizableChatbox', 'unchecked'),
+        browser: getNavigator(),
+        platform: getPlatform(),
+        machineId: getMachineId(),
+        date: new Date().toLocaleDateString('fr-FR'),
+    }
+}
+
+function getAllReferences() {
+    const uid = USER.credentials.uid;
+    const db = DB.database;
+
+    return {
+        color: db.ref("Colors"),
+        user: db.ref(`Users`),
+        statistics: db.ref(`Statistics`),
+        badges: db.ref(`Badges`),
+        meUser: db.ref(`Users/${uid}`),
+        meUserBadge: db.ref(`Users/${uid}/badge`),
+        meColorBadge: db.ref(`Colors/${uid}/badge`),
+        meColor: db.ref(`Colors/${uid}`),
+        meStat: db.ref(`Statistics/${uid}`),
+        meConfig: db.ref(`Configurations/${uid}`),
+        meConfigItem: db.ref(`Configurations/${uid}/${getMachineId()}`),
+    }
+}
+
+function getAllLibrary() {
+    return {
+        firebaseApp: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js',
+        firebaseDatabase: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js',
+        firebaseAuth: "https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js",
+        jquery: 'https://code.jquery.com/jquery-3.7.1.min.js',
+        css: 'https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/styles.css',
+        deltaDual: 'https://vanis.io/delta-dual',
+        sortable: 'https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js',
+    }
+}
+
+function getAllSelectors() {
+    return {
+        // Global Elements
+        head: 'head',
+        link: 'link[rel*=\'icon\']',
+        overlay: '#overlay',
+
+        // Account Information
+        level: '.xp-data > div:first-child',
+        levelDual: '.player-info div:nth-child(2)',
+        teamTag: '#teamtag',
+        xp: '.xp-data > div:last-child',
+
+        // Chatbox Elements
+        chatboxContainer: APP.mode === 1 ? '.chatbox' : '#chatbox',
+        messageList: APP.mode === 1 ? '.message-list' : '#message-list',
+        messageName: APP.mode === 1 ? '.message-from-name' : '.message-from',
+        messageToast: '.message-row.toast',
+
+        // Colors and Images
+        colorBox: '.perks',
+        colorPickerGui: '.colorPickerGui',
+        colorPickerInput: '#colorPickerInput',
+        colorPickerSelector: '#colorPickerSelector',
+        colorSwitchCell: '#colorSwitchNickCell',
+        colorSwitchChatbox: '#colorSwitchNickChatbox',
+        colorSwitchLeaderboard: '#colorSwitchNickLeaderboard',
+        colorSwitchNickCell: '#colorSwitchNickCell',
+
+        // Discord Integration
+        discordBtn: '.discord',
+        discordName: APP.mode === 1 ? '.account-name' : '#account-name',
+        discordPhoto: '.avatar',
+
+        // HUD and Ads
+        ad: 'div[data-v-5190ae12][style*="height: 286px;"]',
+        bar: '.bar>.statBar',
+        barHud: '.bar',
+        bodyHud: 'body',
+        cmp: '#cmpbox',
+        cmpButton: '.cmpboxbtn',
+        mainContainer: '#main-container',
+        menuContainer: '#menu-container',
+        modalHud: '.modal',
+        socialContainer: '.social-container',
+
+        // Leaderboard Elements
+        leaderboard: '#leaderboard',
+        leaderboardText: APP.mode === 1 ? '.leaderboard-text' : '.leaderboard-label[data-v-8a0c31c6]>:last-child ',
+
+        // Nickname Elements
+        nickname: '#nickname',
+        nicknameProfile: '.nicknameProfile',
+
+        // Player Data and Control
+        playButton: '#play-button',
+        playerContainer: '#player-container',
+        playerData: '#player-container #player-data',
+        playerListTitle: '.player-list-title',
+        playerStalkContainer: '.playerStalkContainer',
+        spectateButton: '#spec-button',
+
+        // Server Information
+        serverList: '.server-list',
+        serverListItem: '.server-list-item',
+        serverName: '.server-name',
+
+        // Skin Elements
+        skinContainer: '.skin-container',
+        skinElem: '.skin',
+        skinProfile: '.skinProfile',
+        skinUrl: '#skinurl',
+        skinsId: '#skins',
+        overlaySkin: '.overlaySkin',
+        skinAdd: '.add-skin',
+        skinsNavAllButton: '.skinsNavAllButton',
+        skinsNavMeButton: '.skinsNavMeButton',
+        skinsNavFavButton: '.skinsNavFavButton',
+        skinsNavAllPage: '.skinsNavAllPage',
+        skinsNavMePage: '.skinsNavMePage',
+        skinsNavFavPage: '.skinsNavFavPage',
+
+        // Stat Bar Elements
+        statKills: '#overlay>.container>.fade-box.scroll>div>div:nth-child(3)',
+        statScore: '#overlay>.container>.fade-box.scroll>div>div:nth-child(2)',
+        statTime: '#overlay>.container>.fade-box.scroll>div>div:nth-child(1)',
+
+        // User Interface Boxes
+        anonymousStatus: '.anonymousStatus',
+        anonymousSwitch: '.anonymousSwitch',
+        minimapContainer: APP.mode === 1 ? '.minimap-wrapper>.container' : '.container[data-v-4c95bd45]',
+        statBox: '.statBox',
+        toolBox: '.toolBox',
+        userBox: '.userBox',
+        skinBox: '.skinBox',
+        leaderboardBox: '.leaderboardBox',
+        userNickLine: '.userNickLine',
+        boxTitle: '.customBoxTitle',
+
+        // User Authentication
+        emailInput: '#email-input',
+        loadingDelta: '.loadingDelta',
+        passwordInput: '#password-input',
+        submitButton: '#submit-account',
+        submitText: '#submit-text',
+
+        // Tools page
+        toolsPagePerks: '.toolsPagePerks',
+        toolsPageButtonPerks: '.toolsNavPerksTab',
+        toolsPageSettings: '.toolsPageSettings',
+        toolsPageButtonSettings: '.toolsNavSettingsTab',
+        toolsPageConfigurations: '.toolsPageConfigurations',
+        toolsPageButtonConfigurations: '.toolsNavConfigurationsTab',
+
+        // Leaderboard page
+        leaderboardList : '.leaderboardList',
+        leaderbordKdaButton : '.leaderbordKdaButton',
+        leaderbordKillsButton : '.leaderbordKillsButton',
+        leaderbordGamesButton : '.leaderbordGamesButton',
+        leaderbordMassTotalButton : '.leaderbordMassTotalButton',
+        leaderbordMassAvgButton : '.leaderbordMassAvgButton',
+        leaderbordTimeButton : '.leaderbordTimeButton',
+    };
+}
+
+
+function getAllImages() {
+    return {
+        // Skins
+        anonymousSkin: 'https://i.ibb.co/NtMpMBJ/anonymous.png',
+        defaultSkin: 'https://skins.vanis.io/s/Qkfih2',
+        transparentSkin: 'https://i.ibb.co/g9Sj8gK/transparent-skin.png',
+        vanisSkin: 'https://skins.vanis.io/s/vanis1',
+
+        // Modes
+        dualMode: 'https://i.ibb.co/gSkk94N/dual.png',
+        singleMode: 'https://i.ibb.co/Lr248FQ/single.png',
+        undefMode: 'https://i.ibb.co/g9Sj8gK/undef.png',
+
+        // Utils
+        deltaLogo: 'https://i.ibb.co/kh36nB5/delta.png',
+        imageAddVanis: '/img/skin-add.png'
+    };
+}
+
+function getAllColors() {
+    return {
+        whiteRGB: 'rgb(255, 255, 255)',
+        defaultColor: '#c084ff',
+        onlineColor: '#32e34a',
+        offlineColor: '#e33247',
+    }
+}
+
+function getAllErrors() {
+    return {
+        title: 'Delta error:',
+        content: '. Please send a message in #support on the official Delta Discord server : https://discord.gg/wthDcUb6nY/',
+    };
+}
+
+function getAllTitle() {
+    return [
+        "+220 users on Delta",
+        "Alis.io",
+        "Vanis.io",
+        "Vanish.io",
+        "Raf x Duru x Fohz",
+        "Delta.io",
+        "Delta above all",
+        "Delta on top",
+        "Delta will carry you",
+        "Delta best ext ?",
+        "Alis.io legends",
+        "Want a badge? DM Fohz",
+        "Luka will recruit Fohz?",
+        "Join discord now",
+        "Fohz the tricker",
+        "BBN the SK",
+        "Exe the legend",
+        "Duru is cuter than all",
+        "Deadly World the solo",
+        "Yuu the hat coder",
+        "Splat the YouTuber",
+        "Zimek the precursor",
+        "Angel the mad",
+        "Grouk the legend",
+        "Useful the splitrunner",
+        "Frenchies on top",
+        "Eva, don't hate Fohz",
+        "DM Luka to recruit Fohz!",
+        "Luka need Fohz ?",
+        "Pi the legend",
+        "Who's Miracle..?",
+    ];
+}
+
+/***************
+ *
+ *  Draw style
+ *
+ ***************/
+async function drawStyle() {
+    try {
+        const cache = `${ATTRS.libraries.css}?=${new Date().getTime()}`;
+        const response = await fetch(cache);
+
+        if (!response.ok) {
+            displayError(ATTRS.errors.title + 'Css fetcher failed' + ATTRS.errors.content);
+        }
+
+        const css = await response.text();
+
+        $('<style>').text(css).appendTo('head');
+        $(ATTRS.selectors.loadingDelta).remove();
+        localStorage.setItem('promiseError', 0);
+
+        checkAnnouncement();
+    } catch (error) {
+        displayError(ATTRS.errors.title + 'Css injector system failed' + ATTRS.errors.content);
+    }
+}
+
+/***************
+ *
+ *  Broadcast
+ *
+ ***************/
+function checkAnnouncement() {
+    const announcement = parseInt(localStorage.getItem('announcement') || 0);
+
+    if (announcement < 40) {
+        setTimeout(() => {
+            sendTimedSwal('New badges are available !', 'Check it out in Delta perks ;) If you want a badge, send a message in #support in Discord', 10000, 'OK')
+            localStorage.setItem('announcement', '40');
+        }, 1500);
+    }
+}
