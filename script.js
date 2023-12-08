@@ -77,7 +77,7 @@ async function onAttributesReady() {
 
         await onScriptsReady();
     } catch (error) {
-        const errorPromise = parseInt(localStorage.getItem('promiseError') || 0);
+        const errorPromise = parseInt(localStorage.getItem('promiseError') || 0) || 0;
 
         if (errorPromise < 2) {
             localStorage.setItem('promiseError', (errorPromise + 1).toString());
@@ -208,14 +208,9 @@ function initRegisterPage() {
 
 function initAnimationsForm() {
     const submitButton = $(ATTRS.selectors.submitButton);
-    const submitButtonHoverStyle = {
-        transform: 'scale(0.9)',
-        transition: 'all 0.3s'
-    };
-    const submitButtonNormalStyle = {
-        transform: 'scale(1)',
-        transition: 'all 0.3s'
-    };
+    const submitButtonHoverStyle = { transform: 'scale(0.9)', transition: 'all 0.3s' };
+    const submitButtonNormalStyle = { transform: 'scale(1)', transition: 'all 0.3s' };
+
     const handleInput = () => {
         $(ATTRS.selectors.submitText).text('Login/create (automatic)');
         submitButton.css('background-color', '#b69cff');
@@ -275,13 +270,9 @@ function initForm() {
 }
 
 function initAnimationsPage() {
-    const animationStyle = document.createElement('style');
-
-    animationStyle.textContent = `
-        @keyframes slide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    `;
-
-    document.head.appendChild(animationStyle);
+    document.head.appendChild(`
+        <style>@keyframes slide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }</style>
+    `);
 }
 
 /*********************
@@ -302,8 +293,7 @@ function pushUserInfos() {
         anonymous: USER.configurations.anonymous,
     }
 
-    if ($(ATTRS.selectors.discordBtn).length === 0) data.level = (APP.mode === 1 ? $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] : $(ATTRS.selectors.levelDual).text().split(' ')[1]);
-
+    if ($(ATTRS.selectors.discordBtn).length === 0) data.level = (APP.mode === 1 ? $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] : $(ATTRS.selectors.levelDual).text().split(' ')[1]) || 0;
     pushDatabase(DB.references.meUser, data);
 }
 
@@ -369,7 +359,7 @@ function pushUserStatisticsLocally() {
     USER.statistics.timeTotal += time;
     USER.statistics.massTotal += mass;
     USER.statistics.killTotal += kill;
-    USER.statistics.gameTotal += game;
+    USER.statistics.gameTotal += 1;
     USER.statistics.timeAvg = USER.statistics.timeTotal / game;
     USER.statistics.massAvg = USER.statistics.massTotal / game;
     USER.statistics.kda = USER.statistics.killTotal / game;
@@ -502,6 +492,7 @@ function fetchBanned() {
 }
 
 function fetchItem(elements, functionExec) {
+    if (!elements) return ``;
     return Object.entries(elements).map(([elementId, element]) => {
         return functionExec(element, elementId);
     }).join('');
@@ -702,7 +693,7 @@ function displaySocial() {
 
 function displaySwitch() {
     $(ATTRS.selectors.mainContainer).append(`
-        <div class="switchDual switchButton" tip='Switch to dual multibox' onclick="window.location.href = '${ATTRS.libraries.deltaDual}'">
+        <div class="switchDual switchButton" tip='Delta Dual uses Rise, the original system created by Zimek.' onclick="window.location.href = '${ATTRS.libraries.deltaDual}'">
             <p>Switch to dual</p>
             <i style="margin-top: 4px" class="fas fa-exchange-alt"></i>
         </div>
@@ -1435,7 +1426,7 @@ function toolsModal(tools, total, badges) {
                 <label>Show colors in the cells</label>
             </div>
         </div>
-        <div data-v-22117250="" class="silent silentCustomTop silentCustomBottom">If you change an option, refresh the page</div>
+        <div data-v-22117250="" class="silent silentCustomTop silentCustomBottom">After change color settings, refresh the page.</div>
     `;
 
     return `
@@ -1456,21 +1447,28 @@ function toolsModal(tools, total, badges) {
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">Colored name<i class="fas fa-paint-brush headerIcon"></i></div>
                         <div data-v-2c5139e0="" class="options">
-                            ${APP.mode === 1 ? colorParam : ``}
                             <div class="colorPickerContainer">
                                 <input type="text" id="colorPickerInput" value="${USER.configurations.nicknameColor}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
                                 <div class="colorPickerGui">
                                     <input type="color" id="colorPickerSelector" value="${USER.configurations.nicknameColor}" onchange="onColorChanged(this)">
                                 </div>
                             </div>
-                        <div data-v-22117250="" class="silent silentCustomTop silentCustomBottom">After changing the color, you need to re-join the server</div>
+                        <div data-v-22117250="" class="silent silentCustomTop">After change, re-join the server</div>
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Badges<i class="fas fa-user-check headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="header">Badges<i class="fas fa-certificate headerIcon"></i></div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="badgeListPerks">
                                 ${badges}
+                            </div>
+                        </div> 
+                    </div>
+                    <div data-v-2c5139e0="" class="section row">
+                        <div data-v-2c5139e0="" class="header">Hats<i class="fas fa-hat-cowboy-side headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="options">
+                            <div class="hatListPerks">
+                                Soon
                             </div>
                         </div> 
                     </div>
@@ -1480,6 +1478,7 @@ function toolsModal(tools, total, badges) {
                         <div data-v-2c5139e0="" class="header">Configuration<i class="fas fa-cog headerIcon"></i>
                         </div>
                         <div data-v-2c5139e0="" class="options">
+                            ${APP.mode === 1 ? colorParam : ``}
                             ${APP.mode === 2 ? timeChatItem : ``}
                             <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
                                 <input type="checkbox" id="blurredHUD" ${USER.configurations.blurredHUD}="" onchange="USER.configurations.blurredHUD = switchManager(USER.configurations.blurredHUD, 'blurredHUD')" tip=""> 
@@ -1610,6 +1609,7 @@ async function loadFavSkins() {
     }
 
     const data = await fetchSkins('https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/favorites', 'Fetching my favorites skins error');
+
     if (data) {
         SKINS.fav.push(...data);
         data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavFavPage));
@@ -1761,8 +1761,6 @@ function injectBadge(item, itemId) {
         <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${onClickAttribute} style="opacity: ${isSelected ? 1 : 0.4};"/>
     `;
 }
-
-
 
 /********************************
  *
@@ -2123,8 +2121,12 @@ function getMachineId() {
  ***********************/
 function getAllConfigurations() {
     return {
-        skins: localStorage.getItem('skins'),
-        hotkeys: localStorage.getItem('hotkeys'),
+        browser: getNavigator(),
+        platform: getPlatform(),
+        machineId: getMachineId(),
+        date: new Date().toLocaleDateString('fr-FR'),
+        skins: getLocalStorageItem('skins', '{}'),
+        hotkeys: getLocalStorageItem('hotkeys', '{}'),
         nicknameColor: getLocalStorageItem('nicknameColor', ATTRS.colors.defaultColor),
         nickname: getLocalStorageItem('nickname', ''),
         anonymous: getLocalStorageItem('anonymous', 'unchecked'),
@@ -2136,10 +2138,6 @@ function getAllConfigurations() {
         timeChat: getLocalStorageItem('timeChat', 'checked'),
         timeChatRainbow: getLocalStorageItem('timeChatRainbow', 'unchecked'),
         resizableChatbox: getLocalStorageItem('resizableChatbox', 'unchecked'),
-        browser: getNavigator(),
-        platform: getPlatform(),
-        machineId: getMachineId(),
-        date: new Date().toLocaleDateString('fr-FR'),
     }
 }
 
@@ -2182,7 +2180,7 @@ function getAllSelectors() {
         overlay: '#overlay',
 
         // Account Information
-        level: '.xp-data > div:first-child',
+        level: '.xp-data>div:first-child',
         levelDual: '.player-info div:nth-child(2)',
         teamTag: '#teamtag',
         xp: '.xp-data > div:last-child',
