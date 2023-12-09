@@ -271,9 +271,13 @@ function initForm() {
 }
 
 function initAnimationsPage() {
-    document.head.appendChild(`
-        <style>@keyframes slide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }</style>
-    `);
+    const animationStyle = document.createElement('style');
+
+    animationStyle.textContent = `
+        @keyframes slide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    `;
+
+    document.head.appendChild(animationStyle);
 }
 
 /*********************
