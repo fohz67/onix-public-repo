@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.8.5',
+    version: '3.9',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -1177,25 +1177,21 @@ function getConvertedStringToNumber(str) {
     return value;
 }
 
-function getElapsedTime(seconds) {
-    const years = Math.floor(seconds / 31536000);
-    seconds %= 31536000;
-    const months = Math.floor(seconds / 2629800);
-    seconds %= 2629800;
-    const days = Math.floor(seconds / 86400);
-    seconds %= 86400;
-    const hours = Math.floor(seconds / 3600);
-    seconds %= 3600;
-    const minutes = Math.floor(seconds / 60);
-    seconds %= 60;
+function getElapsedTime(seconds, showYears = true, showMonths = true, showDays = true, showHours = true, showMinutes = true, showSeconds = true) {
+    let years = 0, months = 0, days = 0, hours = 0, minutes = 0;
+    if (showYears) years = Math.floor(seconds / 31536000), seconds %= 31536000;
+    if (showMonths) months = Math.floor(seconds / 2629800), seconds %= 2629800;
+    if (showDays) days = Math.floor(seconds / 86400), seconds %= 86400;
+    if (showHours) hours = Math.floor(seconds / 3600), seconds %= 3600;
+    if (showMinutes) minutes = Math.floor(seconds / 60), seconds %= 60;
+    if (showSeconds) seconds = Math.round(seconds);
     let result = '';
-    seconds = Math.round(seconds);
-    if (years > 0) result += `${years}y `;
-    if (months > 0 || years > 0) result += `${months}m `;
-    if (days > 0 || months > 0 || years > 0) result += `${days}d `;
-    if (hours > 0 || days > 0 || months > 0 || years > 0) result += `${hours}h `;
-    if (minutes > 0 || hours > 0 || days > 0 || months > 0 || years > 0) result += `${minutes}min `;
-    if (seconds > 0 || minutes > 0 || hours > 0 || days > 0 || months > 0 || years > 0) result += `${seconds}s`;
+    if (showYears && years > 0) result += `${years}y `;
+    if (showMonths && months > 0) result += `${months}m `;
+    if (showDays && days > 0) result += `${days}d `;
+    if (showHours && hours > 0) result += `${hours}h `;
+    if (showMinutes && minutes > 0) result += `${minutes}min `;
+    if (showSeconds && seconds > 0) result += `${seconds}s`;
     return result.trim();
 }
 
@@ -1218,8 +1214,8 @@ function formatNumber(value, divisor, unit) {
 
 function swalResetStatistics() {
     Swal.fire({
-        title: 'Confirm reset?',
-        text: 'Do you want to permanently delete your statistics?',
+        title: 'Confirm reset ?',
+        text: 'Do you want to permanently delete your statistics ?',
         showCancelButton: true,
         confirmButtonText: 'Yes',
         cancelButton: 'No',
@@ -1335,7 +1331,7 @@ function injectLeaderboard(item, itemId, position, filter) {
             statisticValue = getFormatedMass(item.massAvg);
             break;
         case 'timeTotal':
-            statisticValue = getElapsedTime(item.timeTotal);
+            statisticValue = getElapsedTime(item.timeTotal, false, false, false);
             break;
         default:
             statisticValue = item.kda.toFixed(2) + ' K/D';
@@ -1784,8 +1780,8 @@ function deleteSuccess(configId) {
 
 function deleteConfiguration(configId) {
     Swal.fire({
-        title: 'Confirm deletion?',
-        text: 'Do you want to remove this configuration definitely?',
+        title: 'Confirm deletion ?',
+        text: 'Do you want to remove this configuration definitely ?',
         showCancelButton: true,
         confirmButtonText: 'Yes',
         cancelButton: 'No',
@@ -1817,8 +1813,8 @@ function updateSuccess(configId) {
 
 function callSwal(configId) {
     Swal.fire({
-        title: 'Confirm update?',
-        text: 'Do you want to load this configuration into the game?',
+        title: 'Confirm update ?',
+        text: 'Do you want to load this configuration into the game ?',
         showCancelButton: true,
         confirmButtonText: 'Yes',
         cancelButton: 'No',
