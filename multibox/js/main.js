@@ -1,1 +1,8806 @@
-const _0x323643=_0x3cc5;(function(_0x2d628b,_0x34488f){const _0x24f216=_0x3cc5,_0x386a46=_0x2d628b();while(!![]){try{const _0x409f96=parseInt(_0x24f216(0x1f8))/0x1*(parseInt(_0x24f216(0x7f2))/0x2)+-parseInt(_0x24f216(0x3a2))/0x3*(parseInt(_0x24f216(0x87f))/0x4)+-parseInt(_0x24f216(0x4d3))/0x5+parseInt(_0x24f216(0x793))/0x6*(-parseInt(_0x24f216(0x1e0))/0x7)+-parseInt(_0x24f216(0x76f))/0x8+parseInt(_0x24f216(0x6a4))/0x9*(-parseInt(_0x24f216(0x776))/0xa)+parseInt(_0x24f216(0x28c))/0xb;if(_0x409f96===_0x34488f)break;else _0x386a46['push'](_0x386a46['shift']());}catch(_0x3670e5){_0x386a46['push'](_0x386a46['shift']());}}}(_0x5b6d,0xc5fad));const VERSION=_0x323643(0x426);let lowPerformanceMode=localStorage[_0x323643(0x80d)](_0x323643(0x754))||'unchecked';function _0x3cc5(_0x256550,_0x5a7592){const _0x41cfb5=_0x5b6d();return _0x3cc5=function(_0x226c89,_0x2afac1){_0x226c89=_0x226c89-0x190;let _0x599cb7=_0x41cfb5[_0x226c89];return _0x599cb7;},_0x3cc5(_0x256550,_0x5a7592);}!function e(){const _0x5f4583=_0x323643,_0x3d4067=(function(){let _0xe3b1a=!![];return function(_0x31a268,_0x51f900){const _0x516b26=_0xe3b1a?function(){const _0x496714=_0x3cc5;if(_0x51f900){const _0x27704b=_0x51f900[_0x496714(0x5cd)](_0x31a268,arguments);return _0x51f900=null,_0x27704b;}}:function(){};return _0xe3b1a=![],_0x516b26;};}()),_0x1525e9=(function(){let _0x370dad=!![];return function(_0x4bc9c4,_0x3b041e){const _0x510403=_0x370dad?function(){if(_0x3b041e){const _0x344d45=_0x3b041e['apply'](_0x4bc9c4,arguments);return _0x3b041e=null,_0x344d45;}}:function(){};return _0x370dad=![],_0x510403;};}());let _0x2134a1=localStorage[_0x5f4583(0x80d)](_0x5f4583(0x842))||_0x5f4583(0x26b),_0x361d72=localStorage['getItem'](_0x5f4583(0x1db))||_0x5f4583(0x19e);const _0x410ed3=localStorage[_0x5f4583(0x80d)]('userColors');let _0x1171df=_0x410ed3?JSON[_0x5f4583(0x192)](_0x410ed3):null;document[_0x5f4583(0x6c3)]=_0x5f4583(0x48b);function _0x20e990(_0x5976db,_0x3292a4){return localStorage['getItem'](_0x5976db)||_0x3292a4;}function _0x5dd7fd(_0x2a042a){const _0x44c068=_0x5f4583,_0x40fcdd=/deltaimage:(\S+)/,_0x1fe61e=_0x2a042a[_0x44c068(0x719)](_0x40fcdd);if(_0x1fe61e&&_0x1fe61e['length']>0x1){let _0x3c8c5f=_0x44c068(0x6f1)+_0x1fe61e[0x1];_0x3c8c5f=_0x3c8c5f[_0x44c068(0x26d)](/\.deltacom/g,_0x44c068(0x82c))[_0x44c068(0x26d)](/\.deltafr/g,_0x44c068(0x7df))[_0x44c068(0x26d)](/\.deltaeu/g,'.eu')[_0x44c068(0x26d)](/\.deltapro/g,'.pro')['replace'](/\.deltaio/g,'.io')[_0x44c068(0x26d)](/\.deltaus/g,_0x44c068(0x676))[_0x44c068(0x26d)](/\.deltaen/g,_0x44c068(0x62f))['replace'](/\.deltaas/g,_0x44c068(0x707))['replace'](/\.deltaco/g,_0x44c068(0x1ed))[_0x44c068(0x26d)](/\.deltapw/g,_0x44c068(0x53d));if(/\.(jpeg|jpg|gif|png)$/i['test'](_0x3c8c5f))return{'newURL':_0x3c8c5f,'baseURL':_0x1fe61e[0x0]};}return null;}function _0x5c5ad6(){const _0x477419=_0x5f4583;if(_0x361d72!=='checked')return _0x477419(0x345);const _0x13a697=Math[_0x477419(0x579)](Math['random']()*0x100),_0x313991=Math['floor'](Math[_0x477419(0x37b)]()*0x100),_0x610a35=Math[_0x477419(0x579)](Math[_0x477419(0x37b)]()*0x100),_0x36b39a='#'+(0x1<<0x18|_0x13a697<<0x10|_0x313991<<0x8|_0x610a35)[_0x477419(0x6fb)](0x10)[_0x477419(0x7fb)](0x1);return _0x36b39a;}function _0x3229cb(_0x2d4692){const _0x181cc6=_0x5f4583;if(!_0x2d4692)return null;const _0x4485ad=_0x1171df[_0x2d4692[_0x181cc6(0x85c)]()];return _0x4485ad&&_0x4485ad[_0x181cc6(0x610)]?_0x4485ad[_0x181cc6(0x610)]:null;}function _0x9281ac(_0xbf24c8){const _0x33b0ab=_0x5f4583;if(!_0xbf24c8)return null;const _0x40ea69=_0x1171df[_0xbf24c8[_0x33b0ab(0x85c)]()];return _0x40ea69&&_0x40ea69['color']?_0x40ea69[_0x33b0ab(0x3fd)]:null;}function _0x470f67(_0x406f02,_0x15ce84){const _0x3329ef=_0x5f4583;if(!_0x406f02)return _0x15ce84;const _0x307139=_0x1171df[_0x406f02[_0x3329ef(0x85c)]()];return _0x307139&&_0x307139[_0x3329ef(0x3fd)]?_0x307139['color'][_0x3329ef(0x26d)]('#',''):_0x15ce84;}function _0x33824f(_0x43fceb,_0x160f06,_0x1c4e1d,_0xc730df){const _0xb1cf69=_0x5f4583;Swal[_0xb1cf69(0x201)]({'title':_0x43fceb,'text':_0x160f06,'timer':_0x1c4e1d,'showConfirmButton':_0xc730df});}function _0x298824(){const _0x3c2b97=_0x5f4583;if(_0x2134a1!==_0x3c2b97(0x26b))return'';const _0x683baf=new Date(),_0x20c4fd=_0x683baf[_0x3c2b97(0x6e6)]()[_0x3c2b97(0x6fb)]()['padStart'](0x2,'0'),_0x1d8086=_0x683baf[_0x3c2b97(0x7fc)]()['toString']()[_0x3c2b97(0x767)](0x2,'0'),_0x1624a9=_0x683baf[_0x3c2b97(0x5c7)]()['toString']()[_0x3c2b97(0x767)](0x2,'0');return'['+_0x20c4fd+':'+_0x1d8086+':'+_0x1624a9+']\x20';}class _0x4e7a6f{constructor(_0x276699,_0x327c4b){const _0x404e46=_0x5f4583;if(this[_0x404e46(0x630)]=null,_0x276699 instanceof DataView)this[_0x404e46(0x630)]=_0x276699;else{if(!(_0x276699 instanceof ArrayBuffer))throw TypeError('First\x20argument\x20to\x20SmartBuffer\x20constructor\x20must\x20be\x20an\x20ArrayBuffer\x20or\x20DataView');this['view']=new DataView(_0x276699);}this[_0x404e46(0x1a9)]=_0x327c4b||0x0;}[_0x5f4583(0x894)](_0x53eaf4){const _0x41c45d=_0x5f4583;let _0x2b6a0a=this[_0x41c45d(0x1a9)]+_0x53eaf4;if(_0x2b6a0a>this['length']){let _0x277421=new ArrayBuffer(_0x2b6a0a),_0x5bd83e=new Uint8Array(_0x277421);_0x5bd83e[_0x41c45d(0x2df)](new Uint8Array(this[_0x41c45d(0x3d5)])),this[_0x41c45d(0x630)]=new DataView(_0x277421);}}static[_0x5f4583(0x2b1)](_0x1b9ec2){return new this(new ArrayBuffer(_0x1b9ec2),0x0);}static[_0x5f4583(0x7f7)](_0x50d6f9,_0x837af6){return new this(_0x50d6f9,_0x837af6||0x0);}[_0x5f4583(0x5cb)](){const _0x51ace3=_0x5f4583;return this[_0x51ace3(0x3d5)];}get[_0x5f4583(0x3d5)](){const _0x64cb81=_0x5f4583;return this['view']?.[_0x64cb81(0x3d5)]||null;}get['length'](){return this['view']?.['byteLength']||0x0;}get[_0x5f4583(0x22b)](){const _0x354a2d=_0x5f4583;return this[_0x354a2d(0x1a9)]>=this[_0x354a2d(0x3cd)];}[_0x5f4583(0x1aa)](_0x185d2d,_0x56b659,_0xeb84e3,_0x116d6f){const _0xaf0e65=_0x5f4583;let _0x182e68=_0x185d2d[_0xaf0e65(0x3f7)](this[_0xaf0e65(0x630)],_0x116d6f??this[_0xaf0e65(0x1a9)],_0xeb84e3);return null==_0x116d6f&&(this[_0xaf0e65(0x1a9)]+=_0x56b659),_0x182e68;}[_0x5f4583(0x473)](_0x1cb102,_0x12af62,_0x27de56,_0x4e8662){const _0x1deaa7=_0x5f4583;this['ensureCapacity'](_0x12af62),_0x1cb102['call'](this[_0x1deaa7(0x630)],this['offset'],_0x27de56,_0x4e8662),this[_0x1deaa7(0x1a9)]+=_0x12af62;}[_0x5f4583(0x651)](_0x74f2a4){const _0x5e591a=_0x5f4583;return this[_0x5e591a(0x1aa)](DataView[_0x5e591a(0x4d7)][_0x5e591a(0x811)],0x1,null,_0x74f2a4);}[_0x5f4583(0x739)](_0x3ebbd2){const _0x1bc038=_0x5f4583;return this[_0x1bc038(0x1aa)](DataView[_0x1bc038(0x4d7)][_0x1bc038(0x7a3)],0x1,null,_0x3ebbd2);}[_0x5f4583(0x1e9)](_0x590361){const _0x1e96ad=_0x5f4583;return this[_0x1e96ad(0x1aa)](DataView[_0x1e96ad(0x4d7)][_0x1e96ad(0x4cc)],0x2,!0x0,_0x590361);}[_0x5f4583(0x5bf)](_0x137238){const _0x57a242=_0x5f4583;return this[_0x57a242(0x1aa)](DataView[_0x57a242(0x4d7)][_0x57a242(0x4cc)],0x2,!0x1,_0x137238);}[_0x5f4583(0x531)](_0x220aed){const _0x1af9fe=_0x5f4583;return this[_0x1af9fe(0x1aa)](DataView[_0x1af9fe(0x4d7)][_0x1af9fe(0x6b5)],0x2,!0x0,_0x220aed);}['readUInt16BE'](_0x1e6e34){const _0x2989a7=_0x5f4583;return this['read'](DataView[_0x2989a7(0x4d7)][_0x2989a7(0x6b5)],0x2,!0x1,_0x1e6e34);}[_0x5f4583(0x71d)](_0x344cd1){const _0x559300=_0x5f4583;return this['read'](DataView[_0x559300(0x4d7)]['getInt32'],0x4,!0x0,_0x344cd1);}[_0x5f4583(0x69c)](_0x1016d0){const _0x46caa6=_0x5f4583;return this['read'](DataView[_0x46caa6(0x4d7)]['getInt32'],0x4,!0x1,_0x1016d0);}[_0x5f4583(0x578)](_0x333d38){const _0xc4a546=_0x5f4583;return this['read'](DataView[_0xc4a546(0x4d7)][_0xc4a546(0x3ef)],0x4,!0x0,_0x333d38);}[_0x5f4583(0x625)](_0x108091){const _0xf6f64c=_0x5f4583;return this[_0xf6f64c(0x1aa)](DataView[_0xf6f64c(0x4d7)][_0xf6f64c(0x3ef)],0x4,!0x1,_0x108091);}[_0x5f4583(0x78f)](){const _0x1e92be=_0x5f4583;let _0x27604a='';for(;;){let _0x438529=this[_0x1e92be(0x22b)]?0x0:this['readUInt16LE']();if(0x0===_0x438529)break;_0x27604a+=String[_0x1e92be(0x429)](_0x438529);}return _0x27604a;}[_0x5f4583(0x65b)](){const _0x5ed530=_0x5f4583;let _0x2a9d8b='';for(;;){let _0x201355=this[_0x5ed530(0x22b)]?0x0:this[_0x5ed530(0x739)]();if(0x0===_0x201355)break;_0x2a9d8b+=String['fromCharCode'](_0x201355);}return _0x2a9d8b;}[_0x5f4583(0x30d)](){const _0x5ef738=_0x5f4583;return decodeURIComponent(escape(this[_0x5ef738(0x65b)]()));}[_0x5f4583(0x455)](_0x10d8b1){const _0x397ef2=_0x5f4583;this['write'](DataView[_0x397ef2(0x4d7)][_0x397ef2(0x56a)],0x1,_0x10d8b1,null);}[_0x5f4583(0x29f)](_0x129c6b){const _0x54d45d=_0x5f4583;this[_0x54d45d(0x473)](DataView[_0x54d45d(0x4d7)][_0x54d45d(0x3af)],0x1,_0x129c6b,null);}[_0x5f4583(0x6d6)](_0x36c502){const _0x528635=_0x5f4583;this['write'](DataView[_0x528635(0x4d7)]['setInt16'],0x2,_0x36c502,!0x0);}['writeInt16BE'](_0x14bf25){const _0x55a0f8=_0x5f4583;this[_0x55a0f8(0x473)](DataView[_0x55a0f8(0x4d7)]['setInt16'],0x2,_0x14bf25,!0x1);}['writeUInt16LE'](_0x51c43a){const _0x3fa979=_0x5f4583;this[_0x3fa979(0x473)](DataView['prototype'][_0x3fa979(0x797)],0x2,_0x51c43a,!0x0);}[_0x5f4583(0x4ad)](_0x9faab1){const _0x12d36b=_0x5f4583;this[_0x12d36b(0x473)](DataView[_0x12d36b(0x4d7)][_0x12d36b(0x797)],0x2,_0x9faab1,!0x1);}[_0x5f4583(0x6e2)](_0x1b7b37){const _0xa5005e=_0x5f4583;this[_0xa5005e(0x473)](DataView[_0xa5005e(0x4d7)][_0xa5005e(0x88f)],0x4,_0x1b7b37,!0x0);}[_0x5f4583(0x209)](_0x11ece4){const _0x3adfdd=_0x5f4583;this['write'](DataView[_0x3adfdd(0x4d7)]['setInt32'],0x4,_0x11ece4,!0x1);}[_0x5f4583(0x5ed)](_0x3e639a){const _0x14c68b=_0x5f4583;this[_0x14c68b(0x473)](DataView[_0x14c68b(0x4d7)][_0x14c68b(0x896)],0x4,_0x3e639a,!0x0);}['writeUInt32BE'](_0xafd67f){const _0x337cac=_0x5f4583;this[_0x337cac(0x473)](DataView[_0x337cac(0x4d7)]['setUint32'],0x4,_0xafd67f,!0x1);}[_0x5f4583(0x5f0)](_0x2a9c0f){const _0x1c6aec=_0x5f4583;let _0x50b083=_0x2a9c0f[_0x1c6aec(0x3cd)];this['ensureCapacity'](_0x50b083);let _0x129252=this['offset'];for(this['offset']+=_0x50b083;_0x50b083--;)this[_0x1c6aec(0x630)][_0x1c6aec(0x3af)](_0x129252+_0x50b083,_0x2a9c0f[_0x1c6aec(0x198)](_0x50b083));}[_0x5f4583(0x6ea)](_0x394f95){const _0x55b1d0=_0x5f4583;this['writeString'](_0x394f95),this[_0x55b1d0(0x29f)](0x0);}['writeEscapedString'](_0x39e8ab){const _0x47faeb=_0x5f4583;this[_0x47faeb(0x5f0)](unescape(encodeURIComponent(_0x39e8ab)));}[_0x5f4583(0x6b1)](_0x37e888){const _0x1d459c=_0x5f4583;this[_0x1d459c(0x6ea)](unescape(encodeURIComponent(_0x37e888)));}}window['SmartBuffer']=_0x4e7a6f;let _0x4dcb33=[0x5,0x68,0xfd,0x3e,0xaf,0x74,0xee,0x29];class _0x3c9c8a{constructor(_0x38081f){this['data']=_0x38081f;}[_0x5f4583(0x474)](_0x1b36a5,_0x754d42){const _0x32ba9c=_0x5f4583;let _0x4456f1=this[_0x32ba9c(0x2e7)][_0x754d42],_0x297217=_0x4456f1+0x5&0x7,_0x48b4b5=_0x1b36a5[_0x754d42>0x0?_0x754d42-0x1:0x0]^_0x4dcb33[_0x754d42];_0x1b36a5[_0x32ba9c(0x491)](((_0x4456f1<<_0x297217|_0x4456f1>>>0x8-_0x297217)&0xff^_0x48b4b5^0x3e)&0xff);}[_0x5f4583(0x831)](_0x4a72a8=!0x1){const _0x539009=_0x5f4583;let _0x5a5188=[];for(let _0x2b967f=0x0;_0x2b967f<0x8;_0x2b967f++)this[_0x539009(0x474)](_0x5a5188,_0x2b967f);let _0x445af2=0x1+Math[_0x539009(0x579)](0x7ffffffe*Math[_0x539009(0x37b)]());return _0x5a5188[_0x539009(0x491)]((_0x5a5188[0x0]^_0x445af2>>0x18)&0xff),_0x5a5188[_0x539009(0x491)]((_0x5a5188[0x1]^_0x445af2>>0x10)&0xff),_0x5a5188[_0x539009(0x491)]((_0x5a5188[0x2]^_0x445af2>>0x8)&0xff),_0x5a5188[_0x539009(0x491)]((_0x445af2^_0x5a5188[0x3])&0xff),_0x5a5188[_0x539009(0x491)]((_0x5a5188[0x0]^+_0x4a72a8^0x1f)&0xff),_0x5a5188;}}var _0x361ccf=[0.79,1.52,2.35,0x3,3.92,4.7,5.5,6.2];function _0x4b797a(_0x443870){const _0x22916c=_0x5f4583;for(var _0x46450a=0x218711a00,_0x327ce6=0x0,_0x53c65d=0x0;_0x443870[_0x22916c(0x3cd)]<_0x53c65d;_0x53c65d++)_0x443870[_0x53c65d]['id']<_0x46450a&&(_0x327ce6=_0x53c65d,_0x46450a=_0x443870[_0x53c65d]['id']);return _0x443870[_0x22916c(0x191)](_0x327ce6,0x1),_0x443870;}String[_0x5f4583(0x4d7)][_0x5f4583(0x73b)]=function(){const _0x5969d7=_0x5f4583;var _0x589787=parseInt(this,0xa),_0x30bb78=Math['floor'](_0x589787/0xe10),_0xc319d9=Math[_0x5969d7(0x579)]((_0x589787-0xe10*_0x30bb78)/0x3c);return''+(0x0!==_0xc319d9?_0xc319d9+'m\x20':'')+(_0x589787-0xe10*_0x30bb78-0x3c*_0xc319d9)+'s';},window[_0x5f4583(0x276)]=_0x55051c=>{const _0x21f56d=_0x5f4583;for(var _0x2206e5='',_0x3e2553=_0x21f56d(0x1b9),_0x571493=_0x3e2553[_0x21f56d(0x3cd)],_0x449914=0x0;_0x449914<_0x55051c;_0x449914++)_0x2206e5+=_0x3e2553[_0x21f56d(0x7d8)](Math[_0x21f56d(0x579)](Math[_0x21f56d(0x37b)]()*_0x571493));return _0x2206e5;},window['$']=(_0x21cde1,_0x29e1b0=document)=>_0x29e1b0[_0x5f4583(0x7c9)](_0x21cde1),window[_0x5f4583(0x84c)]=[{'name':_0x5f4583(0x428),'domain':'localhost','port':0x1f90,'mode':_0x5f4583(0x365),'players':'0','slots':'0','region':'EU','url':_0x5f4583(0x3f5)}],function(_0x2a0662){const _0x40b348=_0x5f4583;var _0x2155a3,_0x398965=(_0x2155a3=!0x0,function(_0x52f190,_0x50ec07){var _0xb45fd8=_0x2155a3?function(){if(_0x50ec07){var _0xa83a3a=_0x50ec07['apply'](_0x52f190,arguments);return _0x50ec07=null,_0xa83a3a;}}:function(){};return _0x2155a3=!0x1,_0xb45fd8;});function _0x1102a9(_0x3a1637){const _0x37e5fb=_0x3cc5,_0x34ab45=_0x3d4067(this,function(){const _0x231799=_0x3cc5;return _0x34ab45[_0x231799(0x6fb)]()[_0x231799(0x67d)](_0x231799(0x7c3))[_0x231799(0x6fb)]()['constructor'](_0x34ab45)[_0x231799(0x67d)](_0x231799(0x7c3));});_0x34ab45();const _0x2427db=_0x1525e9(this,function(){const _0x1f36c5=_0x3cc5,_0x3cb207=function(){const _0x5eef32=_0x3cc5;let _0x30f5e4;try{_0x30f5e4=Function(_0x5eef32(0x58c)+_0x5eef32(0x283)+');')();}catch(_0x1abf25){_0x30f5e4=window;}return _0x30f5e4;},_0x301ef1=_0x3cb207(),_0x26e8ee=_0x301ef1[_0x1f36c5(0x498)]=_0x301ef1[_0x1f36c5(0x498)]||{},_0x2b3d11=[_0x1f36c5(0x359),_0x1f36c5(0x3fb),_0x1f36c5(0x1da),_0x1f36c5(0x1dd),_0x1f36c5(0x7b2),_0x1f36c5(0x25d),'trace'];for(let _0x426558=0x0;_0x426558<_0x2b3d11['length'];_0x426558++){const _0xc4c222=_0x1525e9[_0x1f36c5(0x7e2)][_0x1f36c5(0x4d7)]['bind'](_0x1525e9),_0x2e5dcd=_0x2b3d11[_0x426558],_0x59fece=_0x26e8ee[_0x2e5dcd]||_0xc4c222;_0xc4c222[_0x1f36c5(0x838)]=_0x1525e9[_0x1f36c5(0x5b4)](_0x1525e9),_0xc4c222[_0x1f36c5(0x6fb)]=_0x59fece[_0x1f36c5(0x6fb)][_0x1f36c5(0x5b4)](_0x59fece),_0x26e8ee[_0x2e5dcd]=_0xc4c222;}});_0x2427db();var _0x46a204=_0x398965(this,function(){var _0x507e2a=function(){const _0x4caa7e=_0x3cc5;return!_0x507e2a[_0x4caa7e(0x7e2)](_0x4caa7e(0x871))()[_0x4caa7e(0x7e2)](_0x4caa7e(0x741))['test'](_0x46a204);};return _0x507e2a();});_0x46a204();for(var _0x4505de,_0x1f92bb,_0x13f9e9=_0x3a1637[0x0],_0x4e5e6c=_0x3a1637[0x1],_0x36633b=_0x3a1637[0x2],_0x1ed45a=0x0,_0x4f08a8=[];_0x1ed45a<_0x13f9e9[_0x37e5fb(0x3cd)];_0x1ed45a++)_0x1f92bb=_0x13f9e9[_0x1ed45a],Object[_0x37e5fb(0x4d7)][_0x37e5fb(0x892)][_0x37e5fb(0x3f7)](_0x2eb8a,_0x1f92bb)&&_0x2eb8a[_0x1f92bb]&&_0x4f08a8['push'](_0x2eb8a[_0x1f92bb][0x0]),_0x2eb8a[_0x1f92bb]=0x0;for(_0x4505de in _0x4e5e6c)Object[_0x37e5fb(0x4d7)][_0x37e5fb(0x892)][_0x37e5fb(0x3f7)](_0x4e5e6c,_0x4505de)&&(_0x2a0662[_0x4505de]=_0x4e5e6c[_0x4505de]);for(_0x55bcdb&&_0x55bcdb(_0x3a1637);_0x4f08a8[_0x37e5fb(0x3cd)];)_0x4f08a8[_0x37e5fb(0x5b9)]()();return _0x235256['push'][_0x37e5fb(0x5cd)](_0x235256,_0x36633b||[]),_0x4adf17();}function _0x4adf17(){const _0x2747c7=_0x3cc5;for(var _0x27afec,_0x40e25f=0x0;_0x40e25f<_0x235256[_0x2747c7(0x3cd)];_0x40e25f++){for(var _0x344b7f=_0x235256[_0x40e25f],_0x4ea959=!0x0,_0x3c5d64=0x1;_0x3c5d64<_0x344b7f[_0x2747c7(0x3cd)];_0x3c5d64++)0x0!==_0x2eb8a[_0x344b7f[_0x3c5d64]]&&(_0x4ea959=!0x1);_0x4ea959&&(_0x235256['splice'](_0x40e25f--,0x1),_0x27afec=_0x1feba7(_0x1feba7['s']=_0x344b7f[0x0]));}return _0x27afec;}var _0x47bba7={},_0x2eb8a={0x0:0x0},_0x235256=[];function _0x1feba7(_0x384182){const _0x28a3ab=_0x3cc5;if(_0x47bba7[_0x384182])return _0x47bba7[_0x384182]['exports'];var _0x1f25ac=_0x47bba7[_0x384182]={'i':_0x384182,'l':!0x1,'exports':{}};return _0x2a0662[_0x384182][_0x28a3ab(0x3f7)](_0x1f25ac[_0x28a3ab(0x6e4)],_0x1f25ac,_0x1f25ac['exports'],_0x1feba7),_0x1f25ac['l']=!0x0,_0x1f25ac[_0x28a3ab(0x6e4)];}window[_0x40b348(0x4bf)]=_0x1feba7,_0x1feba7['m']=_0x2a0662,_0x1feba7['c']=_0x47bba7,_0x1feba7['d']=function(_0x18b444,_0xe380bc,_0x2b5c60){const _0x50191f=_0x40b348;_0x1feba7['o'](_0x18b444,_0xe380bc)||Object[_0x50191f(0x64c)](_0x18b444,_0xe380bc,{'enumerable':!0x0,'get':_0x2b5c60});},_0x1feba7['r']=function(_0x2b0196){const _0xe08c88=_0x40b348;_0xe08c88(0x775)!=typeof Symbol&&Symbol['toStringTag']&&Object[_0xe08c88(0x64c)](_0x2b0196,Symbol['toStringTag'],{'value':_0xe08c88(0x41e)}),Object[_0xe08c88(0x64c)](_0x2b0196,_0xe08c88(0x33d),{'value':!0x0});},_0x1feba7['t']=function(_0x582129,_0x33deab){const _0x1d8401=_0x40b348;if(0x1&_0x33deab&&(_0x582129=_0x1feba7(_0x582129)),0x8&_0x33deab||0x4&_0x33deab&&'object'==typeof _0x582129&&_0x582129&&_0x582129[_0x1d8401(0x33d)])return _0x582129;var _0xfc71fb=Object['create'](null);if(_0x1feba7['r'](_0xfc71fb),Object[_0x1d8401(0x64c)](_0xfc71fb,_0x1d8401(0x559),{'enumerable':!0x0,'value':_0x582129}),0x2&_0x33deab&&_0x1d8401(0x7d3)!=typeof _0x582129){for(var _0x244d71 in _0x582129)_0x1feba7['d'](_0xfc71fb,_0x244d71,function(_0x464fe0){return _0x582129[_0x464fe0];}[_0x1d8401(0x5b4)](null,_0x244d71));}return _0xfc71fb;},_0x1feba7['n']=function(_0x3f1d28){var _0xbbf418=_0x3f1d28&&_0x3f1d28['__esModule']?function(){return _0x3f1d28['default'];}:function(){return _0x3f1d28;};return _0x1feba7['d'](_0xbbf418,'a',_0xbbf418),_0xbbf418;},_0x1feba7['o']=function(_0x38e72a,_0x2b0eac){const _0x5cec6d=_0x40b348;return Object[_0x5cec6d(0x4d7)][_0x5cec6d(0x892)][_0x5cec6d(0x3f7)](_0x38e72a,_0x2b0eac);},_0x1feba7['p']='';var _0x2014e4=window[_0x40b348(0x3a8)]=window[_0x40b348(0x3a8)]||[],_0xa34a0d=_0x2014e4[_0x40b348(0x491)]['bind'](_0x2014e4);_0x2014e4[_0x40b348(0x491)]=_0x1102a9,_0x2014e4=_0x2014e4[_0x40b348(0x7fb)]();for(var _0x5bf9b7=0x0;_0x5bf9b7<_0x2014e4['length'];_0x5bf9b7++)_0x1102a9(_0x2014e4[_0x5bf9b7]);var _0x55bcdb=_0xa34a0d;_0x235256[_0x40b348(0x491)]([0x76,0x1]),_0x4adf17();}([,function(_0x52b9a6,_0x269026,_0x328fc6){const _0x3d74b8=_0x5f4583;let _0x272db7=_0x328fc6(0x5),{writeUserData:_0x40df9e}=_0x328fc6(0x8),_0x3251d1=_0x328fc6(0x4),_0x82daaa=_0x328fc6(0x18),_0x3da128=_0x328fc6(0x79),_0x5314fd=_0x328fc6(0x7d),_0x25bfcc=_0x328fc6(0x4e),_0xc01df6=_0x328fc6(0xc),_0x534f89=_0x328fc6(0x17),_0x9f1582=_0x328fc6(0x80),{lerp:_0x6b45a2,clampNumber:_0x33688d,hideCaptchaBadge:_0x1a64b4}=_0x328fc6(0x8),{htmlEncode:_0x1bb7d5}=_0x328fc6(0x8),_0x584aba,_0x475443={'connectionUrl':null,'selectedServer':null,'spectators':0x0,'lifeState':0x0,'allowed':!0x1,'playButtonDisabled':!0x1,'playButtonText':'Play','deathDelay':!0x1,'autoRespawning':!0x1},_0x40d562=(_0xed973,_0x390a78)=>{const _0x22e46d=_0x3cc5;_0x272db7[_0x22e46d(0x88d)][_0x22e46d(0x201)]({'type':_0x390a78?_0x22e46d(0x1dd):_0x22e46d(0x1da),'title':_0xed973,'timer':_0x390a78?0x1388:0x7d0});},_0x314d7a=(_0x59a27e,_0x476e5e)=>{const _0x140dc5=_0x3cc5;for(;_0x59a27e[_0x140dc5(0x3cd)];)_0x59a27e['pop']()[_0x140dc5(0x396)](_0x476e5e);};document['body']['oncontextmenu']=_0x466466=>_0x466466[_0x3d74b8(0x64e)]?.['id']===_0x3d74b8(0x517);class _0x45bc08{constructor(){const _0x522852=_0x3d74b8;this[_0x522852(0x4b9)]=!0x1,this[_0x522852(0x704)],this['modeId'],this[_0x522852(0x1bf)],this[_0x522852(0x40e)],this['nwDataMax'],this[_0x522852(0x3d7)],this[_0x522852(0x75e)],this[_0x522852(0x445)],this[_0x522852(0x47e)],this[_0x522852(0x370)],this[_0x522852(0x239)],this[_0x522852(0x1c0)],this['spectating'],this['alive']=!0x1,this[_0x522852(0x340)]={'x':0x0,'y':0x0},_0x475443[_0x522852(0x7e7)],_0x475443[_0x522852(0x56d)],this[_0x522852(0x77f)]=0x0,this['highestScore']=0x0,this[_0x522852(0x4cf)]=0x0,this[_0x522852(0x74b)]=0x0,this[_0x522852(0x3c3)]=0x1a,this[_0x522852(0x7b4)]=new _0x534f89(),this[_0x522852(0x2b2)]=_0x3251d1,this[_0x522852(0x57c)]=_0x82daaa,this[_0x522852(0x20d)]=new _0x9f1582(),_0xc01df6[_0x522852(0x282)][_0x522852(0x2db)](_0x3251d1[_0x522852(0x388)]),this[_0x522852(0x3f0)]=_0x475443,_0x5314fd[_0x522852(0x614)](this),this[_0x522852(0x1ff)],this[_0x522852(0x25e)]=new class _0x1e7e7e{constructor(){const _0x3bddc2=_0x522852;this[_0x3bddc2(0x2a2)]=0x0,this[_0x3bddc2(0x33e)]=!0x1;}[_0x522852(0x873)](_0x4c5d41){const _0x28a7aa=_0x522852;delete _0x584aba[_0x28a7aa(0x1d6)],this['opened']=!0x1,_0x584aba['running']&&_0x584aba[_0x28a7aa(0x5a4)]();let _0x6e79b8;if(0x3eb===_0x4c5d41[_0x28a7aa(0x6e7)])_0x6e79b8=0x5dc,_0x40d562(_0x28a7aa(0x67c),!0x1);else{_0x6e79b8=0xdac+~~(0x64*Math[_0x28a7aa(0x37b)]());let _0x38f8a9=_0x28a7aa(0x487);_0x4c5d41[_0x28a7aa(0x373)]&&(_0x38f8a9+='\x20('+_0x4c5d41[_0x28a7aa(0x373)]+')'),_0x40d562(_0x38f8a9,!0x0);}setTimeout(()=>{const _0x22e866=_0x28a7aa;this['opened']||_0x584aba['events']['$emit'](_0x22e866(0x1bd));},_0x6e79b8),_0x584aba['showMenu'](!0x0);}[_0x522852(0x7b9)](){const _0x4fc859=_0x522852;delete _0x584aba[_0x4fc859(0x1d6)],this['opened']=!0x1,_0x40d562(_0x4fc859(0x511),!0x0);}[_0x522852(0x6aa)](_0x4d7ace){const _0x139ea1=_0x522852;_0x584aba[_0x139ea1(0x622)][_0x139ea1(0x655)](),_0x584aba[_0x139ea1(0x4b9)]&&_0x584aba[_0x139ea1(0x5a4)](),this[_0x139ea1(0x655)](),_0x584aba[_0x139ea1(0x7b4)][_0x139ea1(0x246)](_0x139ea1(0x297)),this['opened']=!0x0;let _0x3eed6f=_0x584aba['ws']=new WebSocket(_0x4d7ace,_0x139ea1(0x465));_0x3eed6f[_0x139ea1(0x75d)]=_0x139ea1(0x4e5),_0x3eed6f[_0x139ea1(0x30a)]=0x0,_0x3eed6f[_0x139ea1(0x563)]=()=>{const _0x5f220d=_0x139ea1;this[_0x5f220d(0x33e)]&&(_0x584aba[_0x5f220d(0x1d6)]=_0x3eed6f['id']=this[_0x5f220d(0x2a2)]++,_0x584aba['state'][_0x5f220d(0x4e2)]=_0x4d7ace,_0x3eed6f[_0x5f220d(0x1c5)]=this[_0x5f220d(0x873)][_0x5f220d(0x5b4)](this));},_0x3eed6f[_0x139ea1(0x1c5)]=this[_0x139ea1(0x7b9)][_0x139ea1(0x5b4)](this),_0x3eed6f['onmessage']=_0xc41412=>{const _0x1aa129=_0x139ea1;let {data:_0x2199c5}=_0xc41412;_0x584aba[_0x1aa129(0x445)]+=_0x2199c5[_0x1aa129(0x35f)],_0x584aba['parseMessage'](_0x4e7a6f[_0x1aa129(0x7f7)](_0x2199c5));};}[_0x522852(0x655)](){const _0x40ddcb=_0x522852;_0x584aba[_0x40ddcb(0x622)]['close'](),_0x584aba[_0x40ddcb(0x1f6)][_0x40ddcb(0x3b7)]='';let {ws:_0x26a938}=_0x584aba;_0x26a938&&(_0x26a938[_0x40ddcb(0x851)]=null,_0x26a938[_0x40ddcb(0x1c5)]=null,_0x26a938[_0x40ddcb(0x63b)]=null,_0x26a938[_0x40ddcb(0x655)](),delete _0x584aba['ws'],delete _0x584aba[_0x40ddcb(0x3f0)][_0x40ddcb(0x4e2)],this[_0x40ddcb(0x33e)]=!0x1);}[_0x522852(0x839)](_0x5c2d4c,_0x12b740,_0x14afc7=!0x1){const _0x893a3d=_0x522852;_0x5c2d4c instanceof _0x4e7a6f&&(_0x5c2d4c=_0x5c2d4c[_0x893a3d(0x630)]),_0x12b740=!!_0x12b740;let {dual:_0x20b5a5}=_0x584aba;if(_0x12b740?!(_0x20b5a5[_0x893a3d(0x33e)]&&(_0x14afc7||_0x20b5a5[_0x893a3d(0x758)])):!this[_0x893a3d(0x33e)])return!0x1;let _0x238eb0=_0x12b740?_0x20b5a5['ws']:_0x584aba['ws'];return console[_0x893a3d(0x6e1)](!!_0x238eb0,'Socket\x20not\x20defined?'),_0x238eb0[_0x893a3d(0x839)](_0x5c2d4c),!0x0;}[_0x522852(0x236)](){const _0x2e828f=_0x522852;let _0x175ce5=_0x4e7a6f[_0x2e828f(0x2b1)](0x5);_0x175ce5['writeUInt8'](0x10);let {x:_0x27bd3d,y:_0x3f7d42}=_0x584aba[_0x2e828f(0x5b1)];_0x175ce5['writeInt16LE'](_0x27bd3d),_0x175ce5[_0x2e828f(0x6d6)](_0x3f7d42);let {dual:_0x23efea}=_0x584aba;this['send'](_0x175ce5,_0x23efea[_0x2e828f(0x2ab)]),_0x23efea[_0x2e828f(0x206)]&&(_0x584aba[_0x2e828f(0x79c)](!0x1)&&_0x584aba[_0x2e828f(0x79c)](!0x0)||this[_0x2e828f(0x839)](_0x175ce5,_0x584aba[_0x2e828f(0x79c)](!0x1)));}['sendOpcode'](_0x5577c6,_0x3b3079){const _0x43bbcf=_0x522852;let _0x8fcd0b=_0x4e7a6f[_0x43bbcf(0x2b1)](0x1);_0x8fcd0b[_0x43bbcf(0x29f)](_0x5577c6),this[_0x43bbcf(0x839)](_0x8fcd0b,_0x3b3079);}[_0x522852(0x595)](){const _0x4114de=_0x522852;_0x584aba[_0x4114de(0x399)]=performance[_0x4114de(0x737)](),this[_0x4114de(0x6cc)](0x3);}[_0x522852(0x5db)](_0x5959aa,_0x3bfadc){const _0x3e4426=_0x522852;let _0x4ad635=_0x4e7a6f[_0x3e4426(0x2b1)](0x2+_0x5959aa['length']+0x7);_0x4ad635[_0x3e4426(0x29f)](0x5),_0x4ad635['writeUInt8'](_0x584aba[_0x3e4426(0x3c3)]),_0x4ad635[_0x3e4426(0x894)](_0x5959aa[_0x3e4426(0x3cd)]),_0x5959aa['forEach'](_0x1a6e96=>_0x4ad635[_0x3e4426(0x29f)](_0x1a6e96)),_0x40df9e(_0x4ad635,!!_0x3bfadc);let _0x3d43a1=localStorage[_0x3e4426(0x551)];_0x3d43a1&&/^wss?:\/\/[a-zA-Z0-9_-]+\.vanis\.io/i['test'](_0x584aba['ws'][_0x3e4426(0x800)])&&_0x4ad635[_0x3e4426(0x6ea)](_0x3d43a1),this[_0x3e4426(0x839)](_0x4ad635,_0x3bfadc,!!_0x3bfadc);}[_0x522852(0x1cc)](_0x47d274,_0x3cf5ab){const _0x2c74eb=_0x522852;_0x47d274=unescape(encodeURIComponent(_0x47d274));let _0xbc44f6=_0x4e7a6f['fromSize'](0x1+_0x47d274[_0x2c74eb(0x3cd)]+0x1);_0xbc44f6[_0x2c74eb(0x29f)](0xb),_0xbc44f6[_0x2c74eb(0x6ea)](_0x47d274),this[_0x2c74eb(0x839)](_0xbc44f6,_0x3cf5ab);}[_0x522852(0x213)](_0x48d300,_0x560dc8){const _0x4e7851=_0x522852;if((_0x48d300=unescape(encodeURIComponent(_0x48d300)))[_0x4e7851(0x3be)]('/')){window['client']&&window[_0x4e7851(0x2d3)][_0x4e7851(0x4bb)](_0x48d300);return;}let _0x417956=_0x4e7a6f[_0x4e7851(0x2b1)](0x1+_0x48d300[_0x4e7851(0x3cd)]+0x1);_0x417956[_0x4e7851(0x29f)](0x63),_0x417956[_0x4e7851(0x5f0)](_0x48d300),this[_0x4e7851(0x839)](_0x417956,_0x560dc8);}}(),this[_0x522852(0x622)],this['pingStamp'],this[_0x522852(0x56b)],this[_0x522852(0x6b0)],this[_0x522852(0x670)]=new Map(),this[_0x522852(0x23b)]=[],this[_0x522852(0x3fe)]=0x0,this[_0x522852(0x4b4)]=new Set(),this[_0x522852(0x4e7)],this[_0x522852(0x5b1)],this[_0x522852(0x825)],this[_0x522852(0x7d9)],this['camera'],this['massTextPool']=[],this[_0x522852(0x65a)]=[],_0x3da128[_0x522852(0x614)](this),this['scene'],this[_0x522852(0x803)],this[_0x522852(0x4ab)],this[_0x522852(0x293)],this[_0x522852(0x600)],this[_0x522852(0x23a)],this[_0x522852(0x6a9)],this[_0x522852(0x24a)],setInterval(()=>this['events'][_0x522852(0x246)]('every-second'),0x3e8),setInterval(()=>this[_0x522852(0x7b4)][_0x522852(0x246)](_0x522852(0x2f3)),0xea60);}[_0x3d74b8(0x79c)](_0x280c0=!0x1){const _0x3cc1b9=_0x3d74b8;let {dual:_0x7a5284}=this;return _0x280c0?_0x7a5284[_0x3cc1b9(0x33e)]&&_0x7a5284[_0x3cc1b9(0x596)]:this[_0x3cc1b9(0x25e)][_0x3cc1b9(0x33e)]&&this[_0x3cc1b9(0x596)];}get['allCells'](){const _0x2cdb59=_0x3d74b8;let _0x4e37b0=this['cells'],{dual:_0x35a8aa}=this;if(!_0x35a8aa[_0x2cdb59(0x33e)])return _0x4e37b0;_0x4e37b0=new Map([..._0x4e37b0]);let _0x17cee1=_0x35a8aa[_0x2cdb59(0x670)];return _0x17cee1['forEach']((_0x2d6455,_0x4cd4a8)=>{const _0xaf9688=_0x2cdb59;_0x4e37b0[_0xaf9688(0x5e3)](_0x4cd4a8)||_0x4e37b0['set'](_0x4cd4a8,_0x2d6455);}),_0x4e37b0;}[_0x3d74b8(0x4b1)](_0x193f3b){const _0x16bbae=_0x3d74b8;let _0x1e1c07=!0x1,_0x2d547a=!0x1,{dual:_0x551f7d}=this;return _0x584aba[_0x16bbae(0x598)][_0x16bbae(0x51f)](_0x1f15e3=>{const _0x41940a=_0x16bbae;_0x1f15e3[_0x41940a(0x544)]&&(_0x1f15e3[_0x41940a(0x544)]==this[_0x41940a(0x47e)]?this['alive']=_0x1e1c07=!0x0:_0x551f7d['opened']&&_0x1f15e3['pid']==_0x551f7d['pid']&&(_0x551f7d[_0x41940a(0x596)]=_0x2d547a=!0x0));}),this[_0x16bbae(0x596)]&&!_0x1e1c07&&(this[_0x16bbae(0x596)]=!0x1),_0x551f7d['alive']&&!_0x2d547a&&(_0x551f7d[_0x16bbae(0x596)]=!0x1),_0x475443['lifeState']=(_0x1e1c07?0x1:0x0)+(_0x2d547a?0x2:0x0),_0x193f3b?_0x2d547a:_0x1e1c07;}[_0x3d74b8(0x253)](_0x84ef90){const _0x5ddc90=_0x3d74b8;if(!(_0x84ef90[_0x5ddc90(0x704)]&&_0x84ef90[_0x5ddc90(0x1bf)]&&_0x84ef90[_0x5ddc90(0x47e)]&&_0x84ef90[_0x5ddc90(0x5f5)]))throw Error(_0x5ddc90(0x419));this[_0x5ddc90(0x4b9)]=!0x0,this[_0x5ddc90(0x704)]=_0x84ef90[_0x5ddc90(0x704)],this[_0x5ddc90(0x1ef)]=_0x84ef90['gamemodeId']||0x0,this['instanceSeed']=_0x84ef90[_0x5ddc90(0x1bf)],this[_0x5ddc90(0x40e)]=!!_0x84ef90[_0x5ddc90(0x697)],this[_0x5ddc90(0x435)]=this[_0x5ddc90(0x3d7)]=this[_0x5ddc90(0x75e)]=this['nwData']=0x0,this[_0x5ddc90(0x399)]=0x0,this[_0x5ddc90(0x56b)]=0x0,this[_0x5ddc90(0x6b0)]=0x0,this[_0x5ddc90(0x47e)]=_0x84ef90[_0x5ddc90(0x47e)],this[_0x5ddc90(0x370)]=0x0,this[_0x5ddc90(0x239)]=this[_0x5ddc90(0x47e)],this[_0x5ddc90(0x1c0)]=null,this[_0x5ddc90(0x81f)]=!0x1,this[_0x5ddc90(0x596)]=!0x1,_0x475443[_0x5ddc90(0x7e7)]=0x0,_0x475443['lifeState']=0x0,this[_0x5ddc90(0x77f)]=0x0,this['highestScore']=0x0,this['cellCount']=0x0,this['rawMouse']={'x':0x0,'y':0x0},this['mouse']={'x':0x0,'y':0x0};let _0x47b197=this[_0x5ddc90(0x5f5)]=_0x84ef90[_0x5ddc90(0x5f5)];this[_0x5ddc90(0x2d5)]=_0x84ef90[_0x5ddc90(0x2d5)],this[_0x5ddc90(0x825)]=0.3,this['mouseZoomMin']=0.01,this[_0x5ddc90(0x420)]={'time':0x0,'sx':0x0,'sy':0x0,'ox':_0x47b197['x'],'nx':_0x47b197['x'],'oy':_0x47b197['y'],'ny':_0x47b197['y'],'oz':this[_0x5ddc90(0x825)],'nz':this['mouseZoom']},this['massTextPool']=[],this[_0x5ddc90(0x65a)]=[];let _0x11941a=PIXI[_0x5ddc90(0x389)]['isWebGLSupported']()&&_0x3251d1[_0x5ddc90(0x58e)]&&_0x3251d1['showBackgroundImage'],_0x3ccb11=this[_0x5ddc90(0x6b8)]=new _0x3da128(_0x47b197,_0x11941a);if(_0x3ccb11['container']['alpha']=_0x3251d1['gameAlpha']||0x1,_0x3ccb11[_0x5ddc90(0x2c5)][_0x5ddc90(0x1d1)][_0x5ddc90(0x2df)](_0x47b197['x'],_0x47b197['y']),_0x3ccb11[_0x5ddc90(0x2c5)][_0x5ddc90(0x533)]['set'](this['zoom']),this[_0x5ddc90(0x803)]=new _0x5314fd(),this[_0x5ddc90(0x4ab)]=new PIXI[(_0x5ddc90(0x7eb))](),this[_0x5ddc90(0x4ab)][_0x5ddc90(0x826)](this[_0x5ddc90(0x2ba)][_0x5ddc90(0x5b4)](this)),_0x475443['selectedServer']&&_0x475443['connectionUrl']!==_0x475443[_0x5ddc90(0x37e)]['url']&&(_0x475443['selectedServer']=null),this[_0x5ddc90(0x40e)]){let {playback:_0x10fd52}=this,_0x191499=_0x84ef90[_0x5ddc90(0x697)];_0x10fd52[_0x5ddc90(0x2df)](_0x191499),this['moveInterval']=setInterval(_0x10fd52[_0x5ddc90(0x71a)][_0x5ddc90(0x5b4)](_0x10fd52),0x28),this[_0x5ddc90(0x7b4)]['$emit'](_0x5ddc90(0x6d5),_0x191499[_0x5ddc90(0x3cd)]),this['events'][_0x5ddc90(0x246)](_0x5ddc90(0x85f),!0x1);}else this[_0x5ddc90(0x293)]=0x0,this[_0x5ddc90(0x600)]=0x0,this[_0x5ddc90(0x23a)]=0x0,this['moveToCenterOfCells']=0x0,this[_0x5ddc90(0x6a9)]=!0x1,_0x3251d1['minimapEnabled']&&this[_0x5ddc90(0x7b4)][_0x5ddc90(0x246)](_0x5ddc90(0x518)),_0x3251d1['showChat']&&this[_0x5ddc90(0x7b4)][_0x5ddc90(0x246)](_0x5ddc90(0x85b),{'visible':!0x0}),this[_0x5ddc90(0x7b4)][_0x5ddc90(0x246)]('leaderboard-show'),this[_0x5ddc90(0x7b4)]['$emit'](_0x5ddc90(0x7b5),!0x0),this[_0x5ddc90(0x24a)]=setInterval(()=>{const _0x3bdaab=_0x5ddc90;let {dual:_0x43a79a}=this;if(this['stopMovePackets']===0x1+ +_0x43a79a['focused'])return;let _0x161edc=this['moveToCenterOfCells'];if(0x0!=_0x161edc&&this[_0x3bdaab(0x25e)][_0x3bdaab(0x6cc)](0x9,0x2==_0x161edc),_0x43a79a[_0x3bdaab(0x2ab)]?0x2==_0x161edc:0x1==_0x161edc)return;let _0xc964e4=_0x4e7a6f[_0x3bdaab(0x2b1)](0x5);_0xc964e4[_0x3bdaab(0x29f)](0x10);let {x:_0x479ae7,y:_0x330dee}=this[_0x3bdaab(0x5b1)];_0xc964e4['writeInt16LE'](_0x479ae7),_0xc964e4[_0x3bdaab(0x6d6)](_0x330dee),this[_0x3bdaab(0x25e)][_0x3bdaab(0x839)](_0xc964e4,_0x43a79a[_0x3bdaab(0x2ab)]);},0x28),this[_0x5ddc90(0x7b4)]['$on'](_0x5ddc90(0x4b5),_0x45bc08[_0x5ddc90(0x4b8)]),_0x475443['allowed']=!0x0;this[_0x5ddc90(0x4ab)][_0x5ddc90(0x253)](),this['eventListeners'](!0x0),this[_0x5ddc90(0x7b4)][_0x5ddc90(0x246)]('game-started');}[_0x3d74b8(0x5a4)](){const _0x1aa66f=_0x3d74b8;let {dual:_0x1f4f31}=this;_0x1f4f31[_0x1aa66f(0x33e)]&&_0x1f4f31['close'](),this[_0x1aa66f(0x4b9)]=!0x1,delete this['protocol'],delete this['modeId'],delete this[_0x1aa66f(0x1bf)],delete this[_0x1aa66f(0x40e)],delete this[_0x1aa66f(0x435)],delete this[_0x1aa66f(0x3d7)],delete this[_0x1aa66f(0x75e)],delete this['nwData'],delete this['playerId'],delete this[_0x1aa66f(0x370)],delete this[_0x1aa66f(0x239)],delete this[_0x1aa66f(0x1c0)],this[_0x1aa66f(0x81f)]=!0x1,this[_0x1aa66f(0x596)]=!0x1,_0x475443[_0x1aa66f(0x7e7)]=0x0,_0x475443[_0x1aa66f(0x56d)]=0x0,_0x475443['allowed']=!0x1,_0x475443['playButtonDisabled']=!0x1,_0x475443[_0x1aa66f(0x37c)]=_0x1aa66f(0x386),this[_0x1aa66f(0x3d6)](!0x1),delete this[_0x1aa66f(0x77f)],delete this[_0x1aa66f(0x7a6)],delete this[_0x1aa66f(0x399)],delete this[_0x1aa66f(0x56b)],delete this[_0x1aa66f(0x6b0)],delete this[_0x1aa66f(0x47e)],delete this[_0x1aa66f(0x370)],delete this[_0x1aa66f(0x239)],delete this[_0x1aa66f(0x1c0)],delete this[_0x1aa66f(0x81f)],this[_0x1aa66f(0x805)](),delete this[_0x1aa66f(0x3fe)],delete this[_0x1aa66f(0x4e7)],delete this[_0x1aa66f(0x5b1)],delete this['mouseZoom'],delete this[_0x1aa66f(0x7d9)],delete this[_0x1aa66f(0x420)],this[_0x1aa66f(0x4ab)]&&(this[_0x1aa66f(0x4ab)][_0x1aa66f(0x5a4)](),delete this['ticker']),delete this['splitCount'],delete this[_0x1aa66f(0x600)],delete this[_0x1aa66f(0x23a)],delete this[_0x1aa66f(0x4e3)],delete this[_0x1aa66f(0x6a9)],clearInterval(this[_0x1aa66f(0x24a)]),delete this[_0x1aa66f(0x24a)],this['playback'][_0x1aa66f(0x49d)](),this[_0x1aa66f(0x7b4)][_0x1aa66f(0x6ac)](_0x1aa66f(0x4b5),_0x45bc08['everySecond']),this[_0x1aa66f(0x20d)][_0x1aa66f(0x524)](),this['events']['$emit'](_0x1aa66f(0x85f),!0x0),this['events'][_0x1aa66f(0x246)]('stats-visible',!0x1),this[_0x1aa66f(0x7b4)][_0x1aa66f(0x246)](_0x1aa66f(0x85b),{'visible':!0x1}),this[_0x1aa66f(0x7b4)][_0x1aa66f(0x246)](_0x1aa66f(0x607)),this[_0x1aa66f(0x7b4)][_0x1aa66f(0x246)]('minimap-hide'),this['events']['$emit'](_0x1aa66f(0x674)),this[_0x1aa66f(0x7b4)][_0x1aa66f(0x246)](_0x1aa66f(0x6d5),!0x1),this['events']['$emit'](_0x1aa66f(0x753),0x0),this['events'][_0x1aa66f(0x246)](_0x1aa66f(0x30c)),this[_0x1aa66f(0x7b4)][_0x1aa66f(0x246)](_0x1aa66f(0x3b0)),this[_0x1aa66f(0x803)][_0x1aa66f(0x396)](),delete this[_0x1aa66f(0x803)];let {scene:_0x586029}=this;_0x586029&&(_0x586029[_0x1aa66f(0x512)](!0x1),_0x586029[_0x1aa66f(0x1f9)](),_0x586029[_0x1aa66f(0x2c5)][_0x1aa66f(0x396)]({'children':!0x0}),delete this[_0x1aa66f(0x6b8)]),this[_0x1aa66f(0x57c)][_0x1aa66f(0x477)](),_0xc01df6['cells']['destroyCache'](),_0xc01df6[_0x1aa66f(0x766)]['destroyCache'](),_0x314d7a(this[_0x1aa66f(0x3e2)],!0x0),_0x314d7a(this[_0x1aa66f(0x65a)]),delete this['massTextPool'],delete this[_0x1aa66f(0x65a)];}[_0x3d74b8(0x5ef)](_0x2756e5){const _0x381093=_0x3d74b8;if(_0x2756e5??=!this[_0x381093(0x505)][_0x381093(0x5ef)],this[_0x381093(0x505)][_0x381093(0x783)])return!0x1;if(this['app'][_0x381093(0x5ef)]=_0x2756e5,this[_0x381093(0x1d4)][_0x381093(0x4ac)](_0x2756e5),_0x2756e5)this[_0x381093(0x7b4)]['$emit'](_0x381093(0x77a));else{let _0x370fff=document['activeElement'];_0x370fff?.['id']!==_0x381093(0x3e6)&&_0x82daaa[_0x381093(0x630)][_0x381093(0x328)](),this[_0x381093(0x23a)]=0x0,_0x1a64b4();}return _0x2756e5;}[_0x3d74b8(0x1ee)](_0x3feb9e){const _0xfa2340=_0x3d74b8;this['events']['$emit']('stats-changed',{'ping':_0x3feb9e,'fps':Math[_0xfa2340(0x3ed)](this[_0xfa2340(0x4ab)]['FPS']),'mass':this[_0xfa2340(0x77f)],'score':this[_0xfa2340(0x7a6)]}),this[_0xfa2340(0x7b4)][_0xfa2340(0x246)](_0xfa2340(0x813),{'playerCount':this['playerManager'][_0xfa2340(0x594)],'spectators':_0x475443[_0xfa2340(0x7e7)]});}static[_0x3d74b8(0x4b8)](){const _0x4b0ba8=_0x3d74b8;(_0x584aba['isAlive'](!0x1)||_0x584aba['isAlive'](!0x0))&&_0x584aba[_0x4b0ba8(0x74b)]++,_0x584aba[_0x4b0ba8(0x445)]>_0x584aba[_0x4b0ba8(0x435)]&&(_0x584aba[_0x4b0ba8(0x435)]=_0x584aba[_0x4b0ba8(0x445)]),_0x584aba[_0x4b0ba8(0x75e)]+=_0x584aba[_0x4b0ba8(0x445)];let {connection:_0x597a3b}=_0x584aba,{debugElement:_0x3fb593}=_0x584aba;if(_0x3fb593){if((_0x3251d1[_0x4b0ba8(0x88b)]||_0x3251d1[_0x4b0ba8(0x4bd)])&&_0x597a3b[_0x4b0ba8(0x33e)]){let _0x48492c=_0x584aba[_0x4b0ba8(0x622)][_0x4b0ba8(0x206)],_0x3b5d51='';_0x3251d1[_0x4b0ba8(0x88b)]&&!_0x584aba[_0x4b0ba8(0x40e)]&&(_0x3b5d51+=_0x4b0ba8(0x63e)+(_0x584aba[_0x4b0ba8(0x445)]/0x400)[_0x4b0ba8(0x78b)](0x0)+_0x4b0ba8(0x42c)+(_0x584aba[_0x4b0ba8(0x435)]/0x400)[_0x4b0ba8(0x78b)](0x0)+_0x4b0ba8(0x566)+(_0x584aba['nwDataTotal']/0x400/0x400)[_0x4b0ba8(0x78b)](0x0)+'\x20MB\x20<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20');if(_0x3251d1['clientStats']){let {x:_0x3a4eeb,y:_0x30bcb8}=_0x584aba[_0x4b0ba8(0x5b1)];_0x3b5d51+=_0x4b0ba8(0x2c8)+_0x3a4eeb['toFixed'](0x0)+_0x4b0ba8(0x7ff)+_0x30bcb8[_0x4b0ba8(0x78b)](0x0)+_0x4b0ba8(0x785)+(_0x48492c?_0x4b0ba8(0x510)+_0x584aba[_0x4b0ba8(0x370)]+_0x4b0ba8(0x4b7):'')+_0x4b0ba8(0x220)+_0x584aba['playerId']+_0x4b0ba8(0x6be)+_0x584aba['allCells'][_0x4b0ba8(0x6d9)]+_0x4b0ba8(0x1eb);}_0x3fb593['innerHTML']=_0x3b5d51;}else _0x3fb593['innerHTML']!==''&&(_0x3fb593[_0x4b0ba8(0x3b7)]='');}_0x584aba[_0x4b0ba8(0x445)]=0x0,_0x597a3b[_0x4b0ba8(0x33e)]&&_0x597a3b[_0x4b0ba8(0x595)]();let {dual:_0x23cbed}=_0x584aba;_0x23cbed['connected']&&(_0x23cbed[_0x4b0ba8(0x399)]=performance[_0x4b0ba8(0x737)](),_0x597a3b[_0x4b0ba8(0x6cc)](0x3,!0x0));}['clearCells'](){const _0x16758a=_0x3d74b8;this[_0x16758a(0x670)][_0x16758a(0x51f)](_0x5931b4=>_0x5931b4[_0x16758a(0x396)](0x1));let {destroyedCells:_0x4db1f9}=this;for(;_0x4db1f9['length'];)_0x4db1f9[_0x16758a(0x2fa)]()['destroySprite']();}[_0x3d74b8(0x2ba)](){const _0x1eeb18=_0x3d74b8;let _0x3061e1=this[_0x1eeb18(0x56b)]=performance[_0x1eeb18(0x737)]();_0x3061e1>=this['moveWaitUntil']&&(this[_0x1eeb18(0x4d2)](),this[_0x1eeb18(0x293)]=0x0);let {destroyedCells:_0x2bca88}=this,_0x5aaa2a=_0x2bca88[_0x1eeb18(0x3cd)];for(;_0x5aaa2a--;){let _0x2f6c2d=_0x2bca88[_0x5aaa2a];_0x2f6c2d[_0x1eeb18(0x3f8)]()&&(_0x2f6c2d[_0x1eeb18(0x476)](),_0x2bca88[_0x1eeb18(0x191)](_0x5aaa2a,0x1));}let _0x55479a=0x0;this['allCells']['forEach'](_0x3df42=>{_0x3df42['update'](),_0x3df42['pid']==this['activePid']&&_0x55479a++;}),this[_0x1eeb18(0x3fe)]!=_0x55479a&&(this[_0x1eeb18(0x3fe)]=_0x55479a,this[_0x1eeb18(0x7b4)]['$emit'](_0x1eeb18(0x753),_0x55479a));let {scene:_0x1680a4}=this;_0x1680a4[_0x1eeb18(0x668)]();let _0x496c8d=this['updateCamera']();if(_0x496c8d){this[_0x1eeb18(0x77f)]=_0x496c8d;let {highestScore:_0xf59ac6}=this;this[_0x1eeb18(0x7a6)]=_0xf59ac6?_0xf59ac6<_0x496c8d?_0x496c8d:_0xf59ac6:_0x496c8d;}else this[_0x1eeb18(0x79c)](!0x0)||this['isAlive'](!0x1)||(this[_0x1eeb18(0x77f)]=0x0);this[_0x1eeb18(0x57c)][_0x1eeb18(0x207)](_0x1680a4[_0x1eeb18(0x2c5)]);}[_0x3d74b8(0x50c)](_0x3bde91=!0x1){const _0x602595=_0x3d74b8;let {scene:_0x422492,camera:_0x231ed3}=this,_0x25ba13=this[_0x602595(0x56b)]-_0x231ed3['time'],_0x1b17bc=_0x33688d(_0x25ba13/_0x3251d1[_0x602595(0x355)],0x0,0x1),_0x1c5b76=_0x33688d(_0x25ba13/_0x3251d1[_0x602595(0x7b8)],0x0,0x1),_0x218a15=_0x422492[_0x602595(0x2c5)][_0x602595(0x1d1)]['x']=0x1==_0x1b17bc?_0x231ed3['nx']:_0x6b45a2(_0x231ed3['ox'],_0x231ed3['nx'],_0x1b17bc),_0xdf54a5=_0x422492[_0x602595(0x2c5)][_0x602595(0x1d1)]['y']=0x1==_0x1b17bc?_0x231ed3['ny']:_0x6b45a2(_0x231ed3['oy'],_0x231ed3['ny'],_0x1b17bc),_0x1c6121=0x1==_0x1c5b76?_0x231ed3['nz']:_0x6b45a2(_0x231ed3['oz'],_0x231ed3['nz'],_0x1c5b76);_0x422492[_0x602595(0x2c5)][_0x602595(0x533)]['set'](_0x1c6121);let _0x520180=this[_0x602595(0x825)],_0xde299c=0x0,_0xce6e6a=0x0,_0x52583c=0x0;if(this[_0x602595(0x81f)]){let {sx:_0x4708da,sy:_0x21743c}=_0x231ed3;_0xde299c=_0x4708da,_0xce6e6a=_0x21743c;}else{let _0x3bdd93=!0x1;if(!this['replaying']){let {dual:_0x4f2613}=this;if(_0x4f2613[_0x602595(0x206)]){let _0x317a42=_0x4f2613[_0x602595(0x691)]();_0x3bdd93=!!_0x3251d1[_0x602595(0x324)]||null==_0x317a42||_0x317a42>0x1f40;}}let _0x5abf82=0x0,_0x3e41d4;for(_0x3e41d4 of this['ownedCells'][_0x602595(0x732)]()){if(_0x3bdd93&&_0x3e41d4[_0x602595(0x544)]!=_0x584aba[_0x602595(0x239)])continue;let _0x2a90fd=Math['round'](Math[_0x602595(0x315)](_0x3e41d4[_0x602595(0x231)]/0xa,0x2));_0xde299c+=_0x3e41d4['nx']*_0x2a90fd,_0xce6e6a+=_0x3e41d4['ny']*_0x2a90fd,_0x5abf82+=_0x3e41d4['nSize'],_0x52583c+=_0x2a90fd;}_0x52583c?(_0xde299c/=_0x52583c,_0xce6e6a/=_0x52583c,_0x3251d1[_0x602595(0x4a8)]&&(_0x520180*=Math[_0x602595(0x315)](Math[_0x602595(0x844)](0x40/_0x5abf82,0x1),0.27))):(_0xde299c=_0x231ed3['nx'],_0xce6e6a=_0x231ed3['ny']);}return _0x3bde91?(_0x231ed3['ox']=_0x218a15,_0x231ed3['oy']=_0xdf54a5,_0x231ed3['oz']=_0x1c6121,_0x231ed3['nx']=_0xde299c,_0x231ed3['ny']=_0xce6e6a,_0x231ed3['nz']=_0x520180,_0x231ed3[_0x602595(0x6a8)]=this[_0x602595(0x56b)],0x0):_0x52583c;}['updateMouse'](_0x484072=!0x1){const _0x3b9b47=_0x3d74b8;let _0x588953=this[_0x3b9b47(0x6b8)]['container'],{x:_0x50c2fb,y:_0x4ce0eb}=this[_0x3b9b47(0x4e7)];_0x3b9b47(0x2d3)in window&&(client['mouse']={'x':_0x50c2fb,'y':_0x4ce0eb}),(!this['mouseFrozen']||_0x484072)&&(this['mouse']['x']=_0x33688d(_0x588953[_0x3b9b47(0x1d1)]['x']+(_0x50c2fb-window['innerWidth']/0x2)/_0x588953[_0x3b9b47(0x533)]['x'],-0x8000,0x7fff),this[_0x3b9b47(0x5b1)]['y']=_0x33688d(_0x588953[_0x3b9b47(0x1d1)]['y']+(_0x4ce0eb-window['innerHeight']/0x2)/_0x588953[_0x3b9b47(0x533)]['y'],-0x8000,0x7fff));}[_0x3d74b8(0x656)](_0x48e95c){const _0x10f844=_0x3d74b8;return(_0x48e95c=Math[_0x10f844(0x7ab)](_0x48e95c)*(0x2710+this['instanceSeed']))-Math[_0x10f844(0x579)](_0x48e95c);}[_0x3d74b8(0x59d)](_0x123eb2=0xf0,_0x574646=0x87){const _0x489313=_0x3d74b8;let _0x4c5d5d=this[_0x489313(0x6b8)][_0x489313(0x2c5)],_0x4c60b4=new PIXI[(_0x489313(0x71e))]();_0x4c60b4[_0x489313(0x1d1)]['x']=_0x4c5d5d[_0x489313(0x60d)]['x'],_0x4c60b4[_0x489313(0x1d1)]['y']=_0x4c5d5d[_0x489313(0x60d)]['y'],_0x4c60b4[_0x489313(0x60d)]['x']=_0x123eb2/0x2,_0x4c60b4[_0x489313(0x60d)]['y']=_0x574646/0x2,_0x4c60b4[_0x489313(0x533)][_0x489313(0x2df)](0.25),_0x4c60b4[_0x489313(0x589)](_0x4c5d5d);let {renderer:_0x5ef28f}=this,_0x510f3a=PIXI[_0x489313(0x684)]['create'](_0x123eb2,_0x574646);_0x5ef28f[_0x489313(0x207)](_0x4c60b4,_0x510f3a),_0x4c60b4['removeChild'](_0x4c5d5d);let _0x38a22c=_0x5ef28f['plugins']['extract'][_0x489313(0x78c)](_0x510f3a),_0x439111=document[_0x489313(0x314)](_0x489313(0x78c));_0x439111['width']=_0x123eb2,_0x439111[_0x489313(0x5ec)]=_0x574646;let _0x3bba00=_0x439111[_0x489313(0x658)]('2d');_0x3bba00[_0x489313(0x1b5)](),_0x3bba00[_0x489313(0x5ee)](0x0,0x0,_0x123eb2,_0x574646),_0x3bba00['fillStyle']='#'+_0x3251d1[_0x489313(0x2f6)],_0x3bba00['fill'](),_0x3bba00[_0x489313(0x29b)](_0x38a22c,0x0,0x0,_0x123eb2,_0x574646);let _0x2a6b27=_0x439111[_0x489313(0x254)]();return _0x4c60b4['destroy'](!0x0),_0x2a6b27;}[_0x3d74b8(0x640)](_0x4d7b93){const _0x1f4fe4=_0x3d74b8;return _0x4d7b93||(_0x4d7b93=null),_0x4d7b93!==this['tagId']&&(this[_0x1f4fe4(0x1c0)]=_0x4d7b93,!0x0);}[_0x3d74b8(0x461)](_0x432959){const _0x5b7fb4=_0x3d74b8;return!_0x3251d1[_0x5b7fb4(0x6f0)]||_0x432959<0x3e8?_0x432959[_0x5b7fb4(0x78b)](0x0):(_0x432959/0x3e8)[_0x5b7fb4(0x78b)](0x1)+'k';}['shouldAutoRespawn'](_0xb11f1c){const _0x17d590=_0x3d74b8;return!this['app'][_0x17d590(0x5ef)]&&(_0xb11f1c?_0x3251d1['mbAutorespawn']:_0x3251d1[_0x17d590(0x620)]);}[_0x3d74b8(0x47b)](_0x5ce37c){const _0x854836=_0x3d74b8;function _0x229ef6(_0x41749d){const _0x234083=_0x3cc5;if(typeof _0x41749d!==_0x234083(0x7d3))return 0x0;return _0x41749d['split']('\x20')[_0x234083(0x193)]((_0x453b61,_0x29e8da)=>{const _0x1a7692=_0x234083,_0x188662=parseFloat(_0x29e8da);if(_0x29e8da[_0x1a7692(0x750)]('s'))return _0x453b61+_0x188662;if(_0x29e8da[_0x1a7692(0x750)]('m'))return _0x453b61+_0x188662*0x3c;if(_0x29e8da[_0x1a7692(0x750)]('h'))return _0x453b61+_0x188662*0xe10;return _0x453b61;},0x0);}function _0x4c1d8d(_0x5e8d06){const _0x73a9b1=_0x3cc5;if(typeof _0x5e8d06!==_0x73a9b1(0x7d3))return 0x0;return parseFloat(_0x5e8d06[_0x73a9b1(0x26d)](/,|\s+/g,''));}function _0x509df3(){const _0x4864ee=_0x3cc5;_0x2134a1=localStorage['getItem'](_0x4864ee(0x842))||_0x4864ee(0x26b),_0x361d72=localStorage[_0x4864ee(0x80d)]('timeChatRainbow')||_0x4864ee(0x19e);const _0x4f9520=localStorage[_0x4864ee(0x80d)](_0x4864ee(0x673));_0x1171df=_0x4f9520?JSON[_0x4864ee(0x192)](_0x4f9520):null;}function _0x72260a(_0x5076c7){const _0x1e428f=_0x3cc5,_0x5f3986=_0x1e428f(0x34c)+_0x5076c7[_0x1e428f(0x4cf)]+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-clock\x20barIcon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22statBarTime\x22>'+_0x5076c7[_0x1e428f(0x74b)][_0x1e428f(0x6fb)]()['toHHMMSS']()+_0x1e428f(0x5e8)+_0x5076c7['highestScore'][_0x1e428f(0x6fb)]()['replace'](/\B(?=(\d{3})+(?!\d))/g,',')+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';document[_0x1e428f(0x7c9)](_0x1e428f(0x203))['innerHTML']=_0x5f3986;}function _0x4903cc(_0x26d719){const _0x54d647=_0x3cc5;localStorage[_0x54d647(0x41a)]('sT',(parseInt(_0x20e990('sT','0'))+_0x229ef6(_0x26d719[_0x54d647(0x74b)]['toString']()[_0x54d647(0x73b)]()))[_0x54d647(0x6fb)]()),localStorage[_0x54d647(0x41a)]('sM',(parseInt(_0x20e990('sM','0'))+_0x4c1d8d(_0x26d719[_0x54d647(0x7a6)][_0x54d647(0x6fb)]()['replace'](/\B(?=(\d{3})+(?!\d))/g,',')))[_0x54d647(0x6fb)]()),localStorage[_0x54d647(0x41a)]('sK',(parseInt(_0x20e990('sK','0'))+_0x26d719['killCount'])['toString']()),localStorage['setItem']('sG',(parseInt(_0x20e990('sG','1'))+0x1)['toString']());}clearTimeout(this[_0x854836(0x530)]),delete this[_0x854836(0x530)],_0x5ce37c?delete this[_0x854836(0x622)][_0x854836(0x2b9)]:(_0x475443[_0x854836(0x452)]=![],_0x475443[_0x854836(0x2b9)]=![]),_0x509df3(),_0x72260a(this),_0x4903cc(this),this[_0x854836(0x4cf)]=0x0,this[_0x854836(0x74b)]=0x0;}[_0x3d74b8(0x62d)](_0x5e2205){const _0x13964e=_0x3d74b8;if(_0x5e2205){let {dual:_0x39244c}=this;_0x39244c[_0x13964e(0x2b9)]=!0x1,_0x39244c['spawn']();}else _0x475443[_0x13964e(0x452)]=!0x1,_0x475443['autoRespawning']=!0x1,this[_0x13964e(0x1d4)][_0x13964e(0x43e)]();}[_0x3d74b8(0x1e5)](_0xf12713,_0x3761e3){const _0x9749ad=_0x3d74b8;_0xf12713[_0x9749ad(0x531)](),this[_0x9749ad(0x4cf)]+=_0xf12713['readUInt16LE'](),_0xf12713[_0x9749ad(0x578)](),_0x3761e3||(_0x475443['deathDelay']=!0x0);let {dual:_0x57922f}=this;this[_0x9749ad(0x447)](_0x3761e3)?_0x3761e3?(_0x57922f[_0x9749ad(0x2b9)]=!0x0,_0x57922f[_0x9749ad(0x69d)]=0x0):(_0x475443[_0x9749ad(0x2b9)]=!0x0,this['ticksSinceDeath']=0x0):this[_0x9749ad(0x530)]=setTimeout(this[_0x9749ad(0x47b)]['bind'](this,_0x3761e3),0x384),_0x57922f[_0x9749ad(0x2e1)]();}[_0x3d74b8(0x59a)](_0xa60fdd){const _0x2a3b9c=_0x3d74b8;let _0x31c1da=[];for(;;){let _0x498e26=_0xa60fdd[_0x2a3b9c(0x531)]();if(0x0==_0x498e26){this[_0x2a3b9c(0x7b4)][_0x2a3b9c(0x246)](_0x2a3b9c(0x280),_0x31c1da);return;}let _0x1ed152=this[_0x2a3b9c(0x803)][_0x2a3b9c(0x726)](_0x498e26);if(!_0x1ed152)continue;let _0x43edc2={'pid':_0x498e26,'position':_0x31c1da[_0x2a3b9c(0x3cd)]+0x1,'text':_0x1ed152['name'],'badge':_0x3229cb(_0x1ed152[_0x2a3b9c(0x3bb)]),'bold':!!_0x1ed152[_0x2a3b9c(0x2bf)]};_0x31c1da[_0x2a3b9c(0x491)](_0x43edc2);}}[_0x3d74b8(0x4c6)](_0x597ae9){const _0xa1727a=_0x3d74b8;let _0x3ff69e=[];for(;;){let _0xdae8f3=_0x597ae9['readUInt8']();if(0x0==_0xdae8f3)break;let _0x39a6a1={};if(0x1&_0xdae8f3&&(_0x39a6a1[_0xa1727a(0x60d)]=_0x597ae9[_0xa1727a(0x739)]()),0x2&_0xdae8f3&&(_0x39a6a1[_0xa1727a(0x544)]=_0x597ae9[_0xa1727a(0x531)]()),0x4&_0xdae8f3)_0x39a6a1[_0xa1727a(0x858)]=_0x597ae9[_0xa1727a(0x30d)](),_0x39a6a1[_0xa1727a(0x3fd)]=_0xa1727a(0x34a);else{let _0xb8495d=0x2&_0xdae8f3&&this[_0xa1727a(0x803)][_0xa1727a(0x726)](_0x39a6a1[_0xa1727a(0x544)]);_0x39a6a1['text']=_0xb8495d?_0xb8495d[_0xa1727a(0x3bb)]:_0xa1727a(0x46f);}0x8&_0xdae8f3&&(_0x39a6a1[_0xa1727a(0x77f)]=_0x597ae9[_0xa1727a(0x30d)]()),0x10&_0xdae8f3&&(_0x39a6a1[_0xa1727a(0x3fd)]='#'+('00'+_0x597ae9['readUInt8']()[_0xa1727a(0x6fb)](0x10))['slice'](-0x2)+('00'+_0x597ae9[_0xa1727a(0x739)]()[_0xa1727a(0x6fb)](0x10))[_0xa1727a(0x7fb)](-0x2)+('00'+_0x597ae9[_0xa1727a(0x739)]()[_0xa1727a(0x6fb)](0x10))[_0xa1727a(0x7fb)](-0x2)),0x20&_0xdae8f3&&(_0x39a6a1[_0xa1727a(0x3e3)]=!0x0),0x40&_0xdae8f3&&(_0x39a6a1[_0xa1727a(0x891)]=_0x597ae9[_0xa1727a(0x30d)]()),_0x3ff69e['push'](_0x39a6a1);}let _0x9f2c35=null;if(_0x597ae9[_0xa1727a(0x1a9)]!==_0x597ae9[_0xa1727a(0x3cd)]){let _0x6a6edf=_0x597ae9['readEscapedString']();_0x9f2c35={'visible':0x0!=_0x6a6edf['length'],'text':_0x6a6edf};}this['events'][_0xa1727a(0x246)](_0xa1727a(0x280),_0x3ff69e,_0x9f2c35);}[_0x3d74b8(0x51b)](_0x4ae04e){const _0x448500=_0x3d74b8;let _0x1c006a=[];for(;;){let _0x18fed5=_0x4ae04e[_0x448500(0x531)]();if(0x0==_0x18fed5){this[_0x448500(0x7b4)][_0x448500(0x246)](_0x448500(0x472),_0x1c006a);return;}_0x4ae04e[_0x448500(0x1a9)]++;let _0x3558a4=_0x4ae04e[_0x448500(0x739)](),_0xd13599=_0x4ae04e[_0x448500(0x739)]();_0x1c006a[_0x448500(0x491)]({'pid':_0x18fed5,'x':_0x3558a4/0xff,'y':_0xd13599/0xff});}}[_0x3d74b8(0x882)](_0xa35dc5){const _0x42d485=_0x3d74b8;let _0x2d8cd6=JSON[_0x42d485(0x192)](_0xa35dc5[_0x42d485(0x30d)]()),_0x226ecf=_0x2d8cd6[_0x42d485(0x320)](_0x278e7b=>_0x278e7b['pid']===this[_0x42d485(0x47e)]),_0x3b004c=_0x226ecf&&this['setTagId'](_0x226ecf[_0x42d485(0x1c0)]),{playerManager:_0x2726a6}=this,_0x50bec5=[];for(let _0x23bb48 of _0x2d8cd6){let _0x2d63d3=_0x2726a6[_0x42d485(0x4e9)](_0x23bb48);_0x50bec5[_0x42d485(0x491)](_0x2d63d3);}_0x3b004c&&(this['events'][_0x42d485(0x246)](_0x42d485(0x472),[]),_0x2726a6['invalidateVisibility'](_0x50bec5));}[_0x3d74b8(0x4d1)](_0x100a06){const _0x5942ff=_0x3d74b8;let _0x1e7bf1=_0x100a06[_0x5942ff(0x739)]();switch(_0x1e7bf1){case 0x1:{let _0x302407=_0x25bfcc(_0x100a06);this[_0x5942ff(0x50e)]=_0x100a06[_0x5942ff(0x630)],this[_0x5942ff(0x253)](_0x302407);return;}case 0x2:{let _0x498774=new Uint8Array(_0x100a06[_0x5942ff(0x3d5)],0x1);this[_0x5942ff(0x25e)][_0x5942ff(0x5db)](new _0x3c9c8a(_0x498774)['build'](),!0x1);return;}case 0x3:{let _0x4ed8e4=performance[_0x5942ff(0x737)]()-this[_0x5942ff(0x399)];this[_0x5942ff(0x1ee)](Math['round'](_0x4ed8e4));return;}case 0x4:{let {playerManager:_0x5a58dd}=this;for(;;){let _0xb2bfdb=_0x100a06['readUInt16LE']();if(0x0==_0xb2bfdb)return;_0x5a58dd['delayedRemovePlayer'](_0xb2bfdb);}}case 0x6:this[_0x5942ff(0x25e)]['sendOpcode'](0x6);return;case 0x7:{let _0x3aacf0=_0x100a06[_0x5942ff(0x739)](),_0x5a50dd,_0x43fc64;if(0x1&_0x3aacf0){let _0x3bb07e=_0x100a06[_0x5942ff(0x531)]();_0x43fc64=this[_0x5942ff(0x803)][_0x5942ff(0x726)](_0x3bb07e);}if(0x2&_0x3aacf0){let _0x18ae59=_0x100a06[_0x5942ff(0x531)]();_0x5a50dd=this[_0x5942ff(0x803)][_0x5942ff(0x726)](_0x18ae59);}_0x5a50dd&&_0x5a50dd[_0x5942ff(0x833)](!0x1),_0x43fc64&&_0x43fc64['setCrown'](!0x0);return;}case 0x8:if(this[_0x5942ff(0x370)])return;this[_0x5942ff(0x370)]=_0x100a06['readUInt16LE']();return;case 0x9:{let {playerManager:_0x4984de}=this,_0x57e19f=this[_0x5942ff(0x239)];_0x57e19f&&_0x4984de['getPlayer'](_0x57e19f)['setOutline'](0xffffff),_0x57e19f=this[_0x5942ff(0x239)]=_0x100a06['readUInt16LE'](),_0x4984de[_0x5942ff(0x726)](_0x57e19f)[_0x5942ff(0x695)](0xff00ff);return;}case 0xa:{this[_0x5942ff(0x56b)]=performance[_0x5942ff(0x737)]();let _0xb1afdd=_0x100a06[_0x5942ff(0x6a1)]||(_0x100a06[_0x5942ff(0x6a1)]=this['ws'][_0x5942ff(0x30a)]++);this[_0x5942ff(0x5e9)](_0x100a06,_0xb1afdd),this[_0x5942ff(0x4b1)](!0x0);let _0xb137d9=this[_0x5942ff(0x596)];_0xb137d9&&(this[_0x5942ff(0x81f)]=!0x1);let {dual:_0x2dec0c}=this,{replay:_0x3ac41d}=this;_0xb137d9&&!this['replaying']?_0x3ac41d[_0x5942ff(0x826)](_0x100a06[_0x5942ff(0x630)],!0x1):_0x2dec0c[_0x5942ff(0x596)]||_0x3ac41d['clear'](!0x1),!_0xb137d9&&_0x475443[_0x5942ff(0x2b9)]&&0x25==++this[_0x5942ff(0x69d)]&&this[_0x5942ff(0x62d)](!0x1),this[_0x5942ff(0x6b0)]++,this[_0x5942ff(0x803)][_0x5942ff(0x2eb)](),_0x2dec0c[_0x5942ff(0x2ab)]||this[_0x5942ff(0x50c)](!0x0);return;}case 0xb:this[_0x5942ff(0x59a)](_0x100a06);return;case 0xc:this[_0x5942ff(0x51b)](_0x100a06);return;case 0xd:{let _0x424eee={'pid':_0x100a06['readUInt16LE'](),'text':_0x100a06[_0x5942ff(0x30d)]()};if(0x0==_0x424eee['pid']){let {selectedServer:_0x314587}=_0x475443;_0x314587&&/Welcome to Delta,.+\!/[_0x5942ff(0x712)](_0x424eee[_0x5942ff(0x858)])&&(_0x424eee[_0x5942ff(0x858)]=_0x5942ff(0x54e)+_0x314587[_0x5942ff(0x6df)]+'\x20'+_0x314587[_0x5942ff(0x3bb)]),this[_0x5942ff(0x7b4)][_0x5942ff(0x246)](_0x5942ff(0x525),_0x424eee[_0x5942ff(0x858)]);return;}let _0x5888eb=this[_0x5942ff(0x803)][_0x5942ff(0x726)](_0x424eee[_0x5942ff(0x544)]);if(!_0x5888eb)return;const _0x14bde8=_0x5dd7fd(_0x424eee['text']);_0x424eee[_0x5942ff(0x648)]=_0x5888eb[_0x5942ff(0x3bb)];const _0xbc1cb=_0x9281ac(_0x424eee[_0x5942ff(0x648)]);_0x424eee[_0x5942ff(0x23f)]=_0x298824(),_0x424eee[_0x5942ff(0x675)]=_0x5c5ad6(),_0x424eee[_0x5942ff(0x610)]=_0x3229cb(_0x424eee[_0x5942ff(0x648)]),_0x424eee[_0x5942ff(0x657)]=_0xbc1cb?_0xbc1cb:_0x5942ff(0x34a),_0x424eee[_0x5942ff(0x73a)]=_0x14bde8?_0x14bde8[_0x5942ff(0x5b7)]:null,_0x424eee[_0x5942ff(0x858)]=_0x14bde8?_0x424eee[_0x5942ff(0x858)][_0x5942ff(0x26d)](_0x14bde8[_0x5942ff(0x221)],_0x5942ff(0x821)):_0x424eee['text'];let {nameColorCss:_0x3d5338}=_0x5888eb;_0x3d5338&&(_0x424eee[_0x5942ff(0x383)]=_0x3d5338),this['events'][_0x5942ff(0x246)]('chat-message',_0x424eee);return;}case 0xe:{let _0x273b98=_0x100a06[_0x5942ff(0x739)](),_0x41f5dc={};if(0x2&_0x273b98){let _0x2bdb3e=_0x100a06['readUInt8']();typeId>0x0&&typeId<0x4&&(_0x41f5dc[_0x5942ff(0x3e7)]={0x1:_0x5942ff(0x72d),0x2:_0x5942ff(0x1dd),0x3:_0x5942ff(0x450),0x4:_0x5942ff(0x1da)}[_0x2bdb3e]);}0x4&_0x273b98&&(_0x41f5dc[_0x5942ff(0x45e)]=_0x100a06['readUInt16LE']());let _0x263407=_0x100a06['readEscapedString']();_0x41f5dc[_0x5942ff(0x6c3)]=_0x1bb7d5(_0x263407),_0x272db7[_0x5942ff(0x88d)][_0x5942ff(0x201)](_0x41f5dc);return;}case 0xf:{let {playerManager:_0x4f79f4}=this;for(;;){let _0x3e1b46=_0x100a06[_0x5942ff(0x531)]();if(0x0===_0x3e1b46)return;let _0xd8cc4f=_0x100a06[_0x5942ff(0x78f)](),_0x1dcdb3=_0x100a06[_0x5942ff(0x30d)](),_0x249540={'pid':_0x3e1b46,'nickname':_0xd8cc4f,'skinUrl':_0x1dcdb3};_0x4f79f4[_0x5942ff(0x4e9)](_0x249540);}}case 0x10:this['parsePlayers'](_0x100a06);return;case 0x11:_0x584aba['camera']['sx']=_0x100a06[_0x5942ff(0x1e9)](),_0x584aba[_0x5942ff(0x420)]['sy']=_0x100a06[_0x5942ff(0x1e9)]();return;case 0x12:{let {replay:_0x58da4e}=this;_0x58da4e[_0x5942ff(0x477)](!0x1),this[_0x5942ff(0x805)]();return;}case 0x13:{let _0xaf1d39=0x0!==_0x100a06[_0x5942ff(0x739)]();if(this[_0x5942ff(0x7b4)][_0x5942ff(0x246)](_0x5942ff(0x78e),_0x100a06[_0x5942ff(0x578)]()),!_0xaf1d39)return;let _0x570201=_0x100a06[_0x5942ff(0x531)](),_0x4622eb=atob(_0x5942ff(0x6e8));_0x272db7[_0x5942ff(0x88d)][_0x5942ff(0x201)]({'background':'#b58b00','title':_0x4622eb+'\x20'+_0x570201+'!','type':_0x5942ff(0x72d),'timer':0xfa0});return;}case 0x14:this['handleDeath'](_0x100a06,!0x1);return;case 0x15:case 0x1b:return;case 0x16:if(!window[_0x5942ff(0x2a1)])return void alert(_0x5942ff(0x49c));this[_0x5942ff(0x7b4)][_0x5942ff(0x246)]('show-image-captcha');return;case 0x17:_0x475443[_0x5942ff(0x7e7)]=_0x100a06[_0x5942ff(0x531)]();return;case 0x18:this['serverTick']=_0x100a06[_0x5942ff(0x578)](),this[_0x5942ff(0x7b4)][_0x5942ff(0x246)](_0x5942ff(0x3c6),_0x100a06['readUInt32LE']());return;case 0x19:this[_0x5942ff(0x7b4)][_0x5942ff(0x246)](_0x5942ff(0x7a5),{'custom':_0x100a06[_0x5942ff(0x30d)]()});return;case 0x1a:_0x475443[_0x5942ff(0x5a2)]=!!_0x100a06[_0x5942ff(0x739)](),_0x100a06[_0x5942ff(0x3cd)]>_0x100a06[_0x5942ff(0x1a9)]+0x1&&(_0x475443[_0x5942ff(0x37c)]=_0x100a06[_0x5942ff(0x30d)]()||_0x5942ff(0x386));return;case 0x1c:_0x584aba[_0x5942ff(0x4c6)](_0x100a06);return;}}}_0x52b9a6[_0x3d74b8(0x6e4)]=_0x584aba=window[_0x3d74b8(0x3f4)]=new _0x45bc08();},,,function(_0x891f58){const _0x20909e=_0x5f4583;var _0x44fb34={'useWebGL':!0x0,'gameResolution':0x1,'smallTextThreshold':0x28,'autoZoom':!0x1,'rememeberEjecting':!0x0,'autoRespawn':!0x1,'mouseFreezeSoft':!0x0,'drawDelay':0x78,'cameraMoveDelay':0x96,'cameraZoomDelay':0x96,'cameraZoomSpeed':0xa,'replayDuration':0x8,'showReplaySaved':0x2,'showNames':0x2,'showMass':0x2,'showSkins':0x1,'showOwnName':!0x0,'showOwnMass':!0x0,'showOwnSkin':!0x0,'showCrown':!0x0,'foodVisible':!0x0,'eatAnimation':!0x0,'showHud':!0x0,'showLeaderboard':!0x0,'showServerName':!0x1,'showChat':!0x0,'showChatToast':!0x1,'minimapEnabled':!0x0,'minimapLocations':!0x0,'showFPS':!0x0,'showPing':!0x0,'showCellCount':!0x0,'showPlayerScore':!0x1,'showPlayerMass':!0x0,'showClock':!0x1,'showSessionTime':!0x1,'showPlayerCount':!0x1,'showSpectators':!0x1,'showRestartTiming':!0x1,'showBlockedMessageCount':!0x0,'filterChatMessages':!0x0,'clearChatMessages':!0x0,'backgroundColor':_0x20909e(0x463),'borderColor':_0x20909e(0x4d8),'foodColor':_0x20909e(0x34f),'ejectedColor':_0x20909e(0x378),'cellNameOutlineColor':_0x20909e(0x4d8),'cursorImageUrl':null,'backgroundImageUrl':_0x20909e(0x43b),'virusImageUrl':_0x20909e(0x4ef),'cellMassColor':_0x20909e(0x34f),'cellMassOutlineColor':_0x20909e(0x4d8),'cellNameFont':_0x20909e(0x562),'cellNameWeight':0x1,'cellNameOutline':0x2,'cellNameSmoothOutline':!0x0,'cellLongNameThreshold':0x2ee,'cellMassFont':_0x20909e(0x3c7),'cellMassWeight':0x2,'cellMassOutline':0x2,'cellMassTextSize':0x0,'cellMassSmoothOutline':!0x0,'shortMass':!0x0,'showBackgroundImage':!0x0,'backgroundImageRepeat':!0x0,'backgroundDefaultIfUnequal':!0x0,'backgroundImageOpacity':0.6,'useFoodColor':!0x1,'namesEnabled':!0x0,'skinsEnabled':!0x0,'massEnabled':!0x0,'showLocations':!0x1,'cellBorderSize':0x1,'autoHideReplayControls':!0x1,'minimapSize':0xdc,'minimapFPS':0x1e,'minimapSmoothing':0.08,'mbColor':_0x20909e(0x74d),'dualSkin':'https://skins.vanis.io/s/Qkfih2','mbActive':0x1,'mbAutorespawn':!0x1,'gameAlpha':0x1,'dualNickname':'Delta\x20Dual','dualUseNickname':!0x1,'debugStats':!0x1,'clientStats':!0x1,'playerStats':!0x0,'showCellLines':!0x1,'showTag':!0x1,'showDir':!0x1,'chatColorOnlyPeople':!0x1,'mbArrow':_0x20909e(0x615)};function _0x520494(_0x47a9ba){const _0x270179=_0x20909e;switch(_0x47a9ba){case 0x2:return _0x270179(0x3e3);case 0x0:return _0x270179(0x4a1);default:return _0x270179(0x63a);}}function _0x462c78(_0x2ddfcb,_0x5f21e2){var _0x10104a;switch(_0x2ddfcb){case 0x3:_0x10104a=_0x5f21e2/0x5;break;case 0x1:_0x10104a=_0x5f21e2/0x14;break;default:_0x10104a=_0x5f21e2/0xa;}return Math['ceil'](_0x10104a);}_0x891f58['exports']=window['settings']=new class{constructor(){const _0x23e807=_0x20909e;this[_0x23e807(0x7cf)](),this['userDefinedSettings']=this[_0x23e807(0x62a)](),Object['assign'](this,_0x44fb34,this[_0x23e807(0x5be)]),this[_0x23e807(0x2df)]('skinsEnabled',!0x0),this[_0x23e807(0x2df)](_0x23e807(0x4a2),!0x0),this[_0x23e807(0x2df)](_0x23e807(0x734),!0x0),this[_0x23e807(0x214)](),this[_0x23e807(0x1b8)]();}[_0x20909e(0x7cf)](){this['cellSize']=0x200;}[_0x20909e(0x214)](){const _0x255ede=_0x20909e;var _0x48bf8c={'fontFamily':this[_0x255ede(0x703)],'fontSize':0x50,'fontWeight':_0x520494(this['cellNameWeight'])};return this[_0x255ede(0x583)]&&(_0x48bf8c[_0x255ede(0x469)]=PIXI['utils'][_0x255ede(0x24e)](this[_0x255ede(0x27e)]),_0x48bf8c['strokeThickness']=_0x462c78(this[_0x255ede(0x583)],_0x48bf8c[_0x255ede(0x5a7)]),_0x48bf8c[_0x255ede(0x32c)]=this['cellNameSmoothOutline']?_0x255ede(0x3ed):'miter'),this[_0x255ede(0x25f)]=_0x48bf8c;}[_0x20909e(0x1b8)](){const _0x49d51b=_0x20909e;var _0x5768be={'fontFamily':this[_0x49d51b(0x4a3)],'fontSize':0x38+0x14*this['cellMassTextSize'],'fontWeight':_0x520494(this['cellMassWeight']),'lineJoin':'round','fill':PIXI['utils'][_0x49d51b(0x24e)](this[_0x49d51b(0x358)])};return this[_0x49d51b(0x387)]&&(_0x5768be[_0x49d51b(0x469)]=PIXI[_0x49d51b(0x389)][_0x49d51b(0x24e)](this[_0x49d51b(0x2f0)]),_0x5768be[_0x49d51b(0x495)]=_0x462c78(this[_0x49d51b(0x387)],_0x5768be[_0x49d51b(0x5a7)]),_0x5768be[_0x49d51b(0x32c)]=this[_0x49d51b(0x24d)]?'round':'miter'),this[_0x49d51b(0x21a)]=_0x5768be;}[_0x20909e(0x62a)](){const _0x31c95d=_0x20909e;if(!localStorage[_0x31c95d(0x2b2)])return{};try{return JSON['parse'](localStorage[_0x31c95d(0x2b2)]);}catch(_0x39d95d){return{};}}[_0x20909e(0x404)](_0x279207){return _0x44fb34[_0x279207];}[_0x20909e(0x2df)](_0xe95030,_0xaf1fb1){const _0x359e5f=_0x20909e;return this[_0xe95030]!==_0xaf1fb1&&(this[_0xe95030]=_0xaf1fb1,this['userDefinedSettings'][_0xe95030]=_0xaf1fb1,localStorage[_0x359e5f(0x2b2)]=JSON[_0x359e5f(0x7f0)](this['userDefinedSettings']),!0x0);}}();},function(_0x22225b,_0x30366d,_0xa376c9){const _0x40bda4=_0x5f4583;var _0x52aaea=_0xa376c9(0x10e)[_0x40bda4(0x559)],_0x355364=_0x52aaea[_0x40bda4(0x391)]({'toast':!0x0,'position':_0x40bda4(0x3ae),'showConfirmButton':!0x1,'showCloseButton':!0x0});window[_0x40bda4(0x1e1)]=_0x52aaea,window['SwalAlerts']=_0x22225b['exports']={'toast':_0x355364,'alert':function(_0x1a0c7d){const _0xf7ba35=_0x40bda4;_0x52aaea[_0xf7ba35(0x201)]({'text':_0x1a0c7d,'confirmButtonText':'OK'});},'confirm':function(_0x5bf545,_0x47a059,_0x5ccd6a){const _0x990949=_0x40bda4;_0x52aaea[_0x990949(0x201)]({'text':_0x5bf545,'showCancelButton':!0x0,'confirmButtonText':_0x990949(0x38b)})['then'](_0x59a2b2=>{_0x59a2b2['value']?_0x47a059():_0x5ccd6a&&_0x5ccd6a();});},'instance':_0x52aaea};},,,function(_0xd5e522,_0x4dcde7,_0x3afc7b){const _0x405df0=_0x5f4583;let _0x346cb1=_0x3afc7b(0x4),_0x40238b=!0x1;_0xd5e522[_0x405df0(0x6e4)]={'lerp':(_0x4150e8,_0x2befde,_0x26323f)=>_0x4150e8+(_0x2befde-_0x4150e8)*_0x26323f,'clampNumber':(_0x1171fd,_0x9d61fa,_0x1e3de7)=>Math['min'](_0x1e3de7,Math['max'](_0x9d61fa,_0x1171fd)),'getTimeString':function(_0x4e542f,_0x37f871,_0x55a072){const _0x40bd32=_0x405df0;_0x4e542f instanceof Date&&(_0x4e542f=_0x4e542f['getTime']());var _0x5123ef=_0x37f871?0x1:0x3e8,_0x4e4f82=0x3c*_0x5123ef,_0x121b77=0x3c*_0x4e4f82;if(_0x4e542f<_0x5123ef)return _0x40bd32(0x4db);for(var _0x1fd3ac=[0x18*_0x121b77,_0x121b77,_0x4e4f82,_0x5123ef],_0x169495=[_0x40bd32(0x2c2),'hour','minute','second'],_0x332b93=!0x1,_0x1901ba=[],_0x200f24=0x0;_0x200f24<_0x1fd3ac[_0x40bd32(0x3cd)];_0x200f24++){var _0x584ed2=_0x1fd3ac[_0x200f24],_0xd8ce4f=Math[_0x40bd32(0x579)](_0x4e542f/_0x584ed2);if(_0xd8ce4f){var _0x9cda78=_0x169495[_0x200f24],_0x42188a=_0xd8ce4f>0x1?'s':'';_0x1901ba['push'](_0xd8ce4f+'\x20'+_0x9cda78+_0x42188a),_0x4e542f%=_0x584ed2;}if(_0x332b93)break;_0xd8ce4f&&!_0x55a072&&(_0x332b93=!0x0);}return _0x1901ba[_0x40bd32(0x43e)](',\x20');},'encodeHTML':_0xbdf9d7=>_0xbdf9d7['replace'](/&/g,_0x405df0(0x74f))[_0x405df0(0x26d)](/</g,_0x405df0(0x2f8))[_0x405df0(0x26d)](/>/g,_0x405df0(0x68e))[_0x405df0(0x26d)](/'/g,_0x405df0(0x887))[_0x405df0(0x26d)](/"/g,_0x405df0(0x7ee)),'getTimestamp'(){const _0x35eb28=_0x405df0;let _0x5e5d3c=new Date(),_0x9bb5a5=_0x5e5d3c[_0x35eb28(0x1d7)](),_0x23e3e6=_0x5e5d3c[_0x35eb28(0x5d8)]()+0x1,_0x3432b8=_0x5e5d3c[_0x35eb28(0x442)](),_0x10f52c=[_0x9bb5a5,(_0x23e3e6>0x9?'':'0')+_0x23e3e6,(_0x3432b8>0x9?'':'0')+_0x3432b8][_0x35eb28(0x43e)](''),_0x1acc5b=[('0'+_0x5e5d3c[_0x35eb28(0x6e6)]())['slice'](-0x2),('0'+_0x5e5d3c['getMinutes']())[_0x35eb28(0x7fb)](-0x2),('0'+_0x5e5d3c[_0x35eb28(0x5c7)]())[_0x35eb28(0x7fb)](-0x2)][_0x35eb28(0x43e)]('');return _0x10f52c+'-'+_0x1acc5b;},'loadImage':_0x34a1f7=>fetch(_0x34a1f7,{'mode':_0x405df0(0x33f)})[_0x405df0(0x32e)](_0xd0355b=>_0xd0355b['blob']())[_0x405df0(0x32e)](_0x30aa22=>createImageBitmap(_0x30aa22)),'hideCaptchaBadge'(){const _0x587e6d=_0x405df0;_0x40238b||(document[_0x587e6d(0x467)]['classList']['add'](_0x587e6d(0x5b0)),_0x40238b=!0x0);},'destroyPixiPlugins'(_0x3df1ca){const _0x48aef4=_0x405df0;[_0x48aef4(0x1a7),_0x48aef4(0x4e4)]['forEach'](_0x5f41aa=>{const _0x40478b=_0x48aef4;let _0x13ad3b=_0x3df1ca[_0x40478b(0x7ec)][_0x5f41aa];_0x13ad3b&&(_0x13ad3b['destroy'](),delete _0x3df1ca[_0x40478b(0x7ec)][_0x5f41aa]);});},'writeUserData'(_0x5d656a,_0x5bf4f8){const _0x363c4c=_0x405df0;let _0xf993e5=_0x5bf4f8&&_0x346cb1[_0x363c4c(0x195)]?_0x346cb1[_0x363c4c(0x81d)]||_0x363c4c(0x6a2):document['getElementById'](_0x363c4c(0x2fe))[_0x363c4c(0x7ef)],_0x1a6c8c=_0x5bf4f8?_0x346cb1[_0x363c4c(0x618)]||_0x363c4c(0x1b0):document[_0x363c4c(0x1ca)](_0x363c4c(0x3c4))['value'],_0x229e8b=document['getElementById'](_0x363c4c(0x72f))[_0x363c4c(0x7ef)];_0x5d656a[_0x363c4c(0x6b1)](_0xf993e5),_0x5d656a['writeEscapedStringNT'](_0x1a6c8c),_0x5d656a[_0x363c4c(0x6b1)](_0x229e8b);}};},,,,function(_0x26c518,_0x41c653,_0x59f876){const _0x28f132=_0x5f4583;let _0x16dd0e=_0x59f876(0x4);class _0x3d8ade{constructor(){const _0xbd0932=_0x3cc5;this[_0xbd0932(0x266)]=new Map(),this['textureSize']=_0x16dd0e[_0xbd0932(0x2cb)],this[_0xbd0932(0x2cb)]=this[_0xbd0932(0x1ec)]/0x2;}['destroyCache'](){const _0x50aa7a=_0x3cc5;let {cache:_0x50914a}=this;_0x50914a['forEach'](_0x47dfc5=>_0x47dfc5[_0x50aa7a(0x396)](!0x0)),_0x50914a[_0x50aa7a(0x477)]();}}let _0x4c85dd=_0x59f876(0x18),_0x204229=_0x59f876(0x7c);_0x26c518['exports']={'cells':new class _0xdeb7de extends _0x3d8ade{[_0x28f132(0x3ca)](_0xf708e7){const _0x5ab9b0=_0x28f132;let {cache:_0x335872}=this;if(_0x335872[_0x5ab9b0(0x5e3)](_0xf708e7))return _0x335872[_0x5ab9b0(0x7a0)](_0xf708e7);{let {cellSize:_0x12ebb8,textureSize:_0xec1032}=this,_0x404677=new PIXI[(_0x5ab9b0(0x5fd))]()[_0x5ab9b0(0x538)](_0xf708e7)[_0x5ab9b0(0x554)](0x0,0x0,_0x12ebb8)[_0x5ab9b0(0x7af)]();_0x404677['position']['set'](_0x12ebb8);let _0x551b9b=PIXI[_0x5ab9b0(0x684)]['create'](_0xec1032,_0xec1032);return _0x335872['set'](_0xf708e7,_0x551b9b),_0x4c85dd[_0x5ab9b0(0x207)](_0x404677,_0x551b9b),_0x551b9b;}}}(),'squares':new class _0x558bdc extends _0x3d8ade{[_0x28f132(0x3ca)](_0x566003){const _0x45f338=_0x28f132;let {cache:_0x30e4ac}=this;if(_0x30e4ac[_0x45f338(0x5e3)](_0x566003))return _0x30e4ac[_0x45f338(0x7a0)](_0x566003);{let {cellSize:_0x76ea21,textureSize:_0x19433c}=this,_0x312b20=new PIXI['Graphics']()[_0x45f338(0x538)](_0x566003)['drawRect'](-_0x76ea21,-_0x76ea21,0x2*_0x76ea21,0x2*_0x76ea21)[_0x45f338(0x7af)]();_0x312b20['position'][_0x45f338(0x2df)](_0x76ea21);let _0x536b8f=PIXI['RenderTexture'][_0x45f338(0x7c5)](_0x19433c,_0x19433c);return _0x30e4ac[_0x45f338(0x2df)](_0x566003,_0x536b8f),_0x4c85dd[_0x45f338(0x207)](_0x312b20,_0x536b8f),_0x536b8f;}}}(),'virus':_0x204229};},,function(_0x3d207b,_0x586595,_0x174864){const _0x9d1fd9=_0x5f4583;let _0x27f783=_0x174864(0x1),_0x2409ce=_0x174864(0x4),{cells:_0x36ef2d}=_0x174864(0xc),{clampNumber:_0x552352}=_0x174864(0x8);class _0x4353e7{constructor({id:_0x2a75bf,x:_0x110c6c,y:_0x5aab84,size:_0xebf9f2,flags:_0x141c91,texture:_0x479ecb,context:_0x27dec0}){const _0x4fa429=_0x3cc5;_0x479ecb=_0x479ecb||_0x36ef2d['getTexture'](0x0),this['flags']=_0x141c91,this['oSize']=this[_0x4fa429(0x6d9)]=_0xebf9f2,this[_0x4fa429(0x604)]=!0x1,this['id']=_0x2a75bf||0x0;let _0x248e4c=this[_0x4fa429(0x667)]=new PIXI[(_0x4fa429(0x4ec))](this[_0x4fa429(0x859)]=_0x479ecb);_0x248e4c[_0x4fa429(0x410)][_0x4fa429(0x2df)](0.5),_0x248e4c[_0x4fa429(0x369)]=this,this['x']=this['ox']=_0x248e4c[_0x4fa429(0x60d)]['x']=_0x110c6c,this['y']=this['oy']=this[_0x4fa429(0x667)][_0x4fa429(0x60d)]['y']=_0x5aab84,this[_0x4fa429(0x3a9)]=_0x27dec0,this[_0x4fa429(0x6d1)]=0x1;}[_0x9d1fd9(0x3f8)](){const _0x3b2df8=_0x9d1fd9;let _0x15be7e=_0x27f783[_0x3b2df8(0x56b)]-this[_0x3b2df8(0x867)],_0x4feb0a=_0x552352(_0x15be7e/_0x2409ce[_0x3b2df8(0x290)],0x0,0x1);if(this[_0x3b2df8(0x604)]&&(0x1===_0x4feb0a||this[_0x3b2df8(0x859)][_0x3b2df8(0x1ea)]))return!0x0;let _0x123484=0x2*(this[_0x3b2df8(0x6d9)]=_0x4feb0a*(this[_0x3b2df8(0x231)]-this['oSize'])+this[_0x3b2df8(0x68f)]),{sprite:_0x172080}=this;if(!_0x172080)return!0x0;_0x172080[_0x3b2df8(0x339)]=_0x172080['height']=_0x123484;let {position:_0x4bd864}=_0x172080;return _0x4bd864['x']=this['x']=_0x4feb0a*this[_0x3b2df8(0x228)]*(this['nx']-this['ox'])+this['ox'],_0x4bd864['y']=this['y']=_0x4feb0a*this[_0x3b2df8(0x228)]*(this['ny']-this['oy'])+this['oy'],this[_0x3b2df8(0x28b)]&&this[_0x3b2df8(0x28b)](),!0x1;}[_0x9d1fd9(0x396)](_0xfcc1bd,_0x101fff=!0x1){const _0xf13a1f=_0x9d1fd9;if(this[_0xf13a1f(0x604)])return!0x1;let {dual:_0x303f42}=_0x27f783,{cells:_0x2ad2ad}=0x1&_0xfcc1bd?_0x27f783:_0x303f42,{id:_0x4ba5d0}=this;if(_0x2ad2ad['delete'](_0x4ba5d0),_0x303f42[_0xf13a1f(0x33e)]){let _0x3ac0ea=this[_0xf13a1f(0x3a9)],_0x3743ae=--this[_0xf13a1f(0x6d1)];if(_0x3ac0ea==_0xfcc1bd){let {cells:_0x5581fd}=0x2&_0xfcc1bd?_0x27f783:_0x303f42;if(_0x5581fd[_0xf13a1f(0x5e3)](_0x4ba5d0))return this[_0xf13a1f(0x3a9)]=0x1&_0xfcc1bd?0x2:0x1,!0x1;}if(0x0!=_0x3743ae)return!0x1;}return this['onDestroy']&&this[_0xf13a1f(0x3ec)](),this[_0xf13a1f(0x544)]&&_0x27f783[_0xf13a1f(0x4b4)][_0xf13a1f(0x724)](this),this[_0xf13a1f(0x604)]=!0x0,_0x101fff?_0x27f783['destroyedCells'][_0xf13a1f(0x491)](this):this[_0xf13a1f(0x476)](),!0x0;}['destroySprite'](){const _0x4c808c=_0x9d1fd9;this[_0x4c808c(0x667)]&&(this[_0x4c808c(0x667)]['destroy'](),this[_0x4c808c(0x667)]=null);}}_0x4353e7[_0x9d1fd9(0x4d7)][_0x9d1fd9(0x3e7)]=0x0,_0x4353e7[_0x9d1fd9(0x4d7)]['updateStamp']=0x0,_0x4353e7['prototype'][_0x9d1fd9(0x228)]=0x1,_0x3d207b['exports']=_0x4353e7;},,,function(_0x4a0258,_0x5d4d1e,_0x5577b3){const _0x24c6b=_0x5f4583;var _0xc64e41=_0x5577b3(0x5);function _0x246271(){const _0x206d65=_0x3cc5;_0xc64e41[_0x206d65(0x19a)]['fire']({'type':_0x206d65(0x450),'title':_0x206d65(0x29c),'html':_0x206d65(0x2ee),'allowOutsideClick':!0x1});}function _0x1a6db3(_0x2d5919){const _0x5ce294=_0x3cc5;for(var _0x11033c='',_0x233374=0x0;_0x233374<_0x2d5919[_0x5ce294(0x3cd)];_0x233374++)_0x11033c+=String[_0x5ce294(0x429)](_0x2d5919[_0x5ce294(0x198)](_0x233374)-0x2);return _0x11033c;}var _0x2eee10=[_0x24c6b(0x415),_0x24c6b(0x1fb),_0x24c6b(0x318),_0x24c6b(0x7cc),_0x24c6b(0x6ff),_0x24c6b(0x47a),_0x24c6b(0x66d),_0x24c6b(0x3e9),_0x24c6b(0x812),_0x24c6b(0x60c),_0x24c6b(0x1df),_0x24c6b(0x45d),_0x24c6b(0x2e4),_0x24c6b(0x2ef),_0x24c6b(0x1f7),'ewpv',_0x24c6b(0x521),_0x24c6b(0x796),_0x24c6b(0x87d),_0x24c6b(0x3bc),'e2em','uewo',_0x24c6b(0x5cc),'yjqtg',_0x24c6b(0x233),_0x24c6b(0x532),_0x24c6b(0x749),_0x24c6b(0x438),_0x24c6b(0x2d0),_0x24c6b(0x4cb),_0x24c6b(0x50a),_0x24c6b(0x79a),_0x24c6b(0x725),_0x24c6b(0x1b1),_0x24c6b(0x768),_0x24c6b(0x61e),_0x24c6b(0x7b3),_0x24c6b(0x41b),_0x24c6b(0x4f6),_0x24c6b(0x257),_0x24c6b(0x35a),_0x24c6b(0x6d2)],_0x40fe1d=_0x2eee10['map'](_0x1a6db3),_0x3c5321=_0x2eee10[_0x24c6b(0x2dd)](_0x1a6db3)['sort']((_0x27d3e9,_0x38e1bc)=>_0x38e1bc[_0x24c6b(0x3cd)]-_0x27d3e9[_0x24c6b(0x3cd)])['map'](_0x4f9e30=>RegExp(_0x24c6b(0x2f4)+_0x4f9e30[_0x24c6b(0x338)]('')[_0x24c6b(0x43e)]('s*')+_0x24c6b(0x2f4),'gi'));_0x4a0258[_0x24c6b(0x6e4)]={'noop':function(){},'checkBadWords':function(_0x468d62){const _0x64e2fc=_0x24c6b;return _0x468d62=_0x468d62[_0x64e2fc(0x522)](),_0x40fe1d['some'](_0x76a2b3=>_0x468d62[_0x64e2fc(0x605)](_0x76a2b3));},'replaceBadWordsChat':function(_0x1f403d){const _0x25e8a8=_0x24c6b;for(var _0x2d9b75=0x0;_0x2d9b75<_0x3c5321[_0x25e8a8(0x3cd)];_0x2d9b75++)_0x1f403d=_0x1f403d['replace'](_0x3c5321[_0x2d9b75],_0xc09f6a=>Array(_0xc09f6a[_0x25e8a8(0x3cd)])[_0x25e8a8(0x761)]('*')[_0x25e8a8(0x43e)](''));return _0x1f403d;},'notifyUnsupportedBrowser':async function(){const _0x497782=_0x24c6b;window[_0x497782(0x243)]||/^((?!chrome|android).)*safari/i[_0x497782(0x712)](navigator[_0x497782(0x500)])?_0xc64e41[_0x497782(0x19a)][_0x497782(0x201)]({'type':_0x497782(0x450),'title':_0x497782(0x7f4),'html':_0x497782(0x59f),'allowOutsideClick':!0x1,'showCloseButton':!0x1,'showCancelButton':!0x1,'showConfirmButton':!0x1}):!localStorage['skipUnsupportedAlert']&&((localStorage['skipUnsupportedAlert']=!0x0,navigator[_0x497782(0x500)][_0x497782(0x522)]()[_0x497782(0x605)](_0x497782(0x660)))?_0x246271():await new Promise(_0x4c8bea=>{const _0x3f0eff=_0x497782;var _0x5cb40e=new Image();_0x5cb40e['src']='data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA',_0x5cb40e[_0x3f0eff(0x790)]=_0x5cb40e[_0x3f0eff(0x63b)]=()=>{const _0xaf2230=_0x3f0eff;_0x4c8bea(0x2===_0x5cb40e[_0xaf2230(0x5ec)]);};})||_0x246271());},'isFirstVisit':!localStorage[_0x24c6b(0x44e)]&&(localStorage['visitedBefore']=!0x0,!0x0)};},,,,,,,function(_0x3412fe,_0x2083b6,_0x30b204){const _0x57ab70=_0x5f4583;var _0x3e9952=_0x30b204(0x4),_0x5865c5=_0x30b204(0x8);PIXI['utils'][_0x57ab70(0x238)]();var _0x28f9b6=document[_0x57ab70(0x1ca)](_0x57ab70(0x78c)),_0x425ad3={'resolution':_0x3e9952[_0x57ab70(0x5c9)]||window[_0x57ab70(0x527)]||0x1,'view':_0x28f9b6,'forceCanvas':!_0x3e9952[_0x57ab70(0x58e)],'antialias':!0x1,'powerPreference':'high-performance','backgroundColor':PIXI[_0x57ab70(0x389)][_0x57ab70(0x24e)](_0x3e9952['backgroundColor'])};_0x425ad3[_0x57ab70(0x687)]=_0x3e9952[_0x57ab70(0x75c)];var _0x47fee5=PIXI['autoDetectRenderer'](_0x425ad3);function _0xbf9393(){const _0x4e6af2=_0x57ab70;_0x47fee5[_0x4e6af2(0x6c7)](window['innerWidth'],window[_0x4e6af2(0x1a1)]);}_0xbf9393(),_0x5865c5['destroyPixiPlugins'](_0x47fee5),window['addEventListener'](_0x57ab70(0x6c7),_0xbf9393),_0x47fee5[_0x57ab70(0x477)](),_0x3412fe['exports']=_0x47fee5;},function(_0x4975d4){const _0x483b71=_0x5f4583;function _0x316276(){this['data']=[];}_0x4975d4[_0x483b71(0x6e4)]=_0x316276,_0x316276[_0x483b71(0x4d7)][_0x483b71(0x473)]=function(){const _0x17d052=_0x483b71;return new Uint8Array(this[_0x17d052(0x2e7)]);},_0x316276[_0x483b71(0x4d7)][_0x483b71(0x700)]=function(_0x5896aa){const _0x42531b=_0x483b71;this[_0x42531b(0x2e7)][_0x42531b(0x491)](_0x5896aa);},_0x316276['prototype'][_0x483b71(0x69e)]=function(_0x54d87c){const _0x332612=_0x483b71;for(var _0x422b3f=0x0;_0x422b3f<_0x54d87c[_0x332612(0x3cd)];_0x422b3f++)this[_0x332612(0x2e7)][_0x332612(0x491)](_0x54d87c[_0x422b3f]);},_0x316276[_0x483b71(0x4d7)]['utf8']=function(_0x105ee1){const _0x47dacb=_0x483b71;_0x105ee1=unescape(encodeURIComponent(_0x105ee1));for(var _0x5cc3af=0x0;_0x5cc3af<_0x105ee1[_0x47dacb(0x3cd)];_0x5cc3af++)this[_0x47dacb(0x2e7)][_0x47dacb(0x491)](_0x105ee1[_0x47dacb(0x198)](_0x5cc3af));this[_0x47dacb(0x2e7)][_0x47dacb(0x491)](0x0);};},,,,function(_0x5af551,_0x5748bf,_0x2fb5fc){const _0x593d28=_0x5f4583;var _0x32e46f=_0x2fb5fc(0x2),_0x4d978b=_0x2fb5fc(0xa7);'string'==typeof(_0x4d978b=_0x4d978b[_0x593d28(0x33d)]?_0x4d978b[_0x593d28(0x559)]:_0x4d978b)&&(_0x4d978b=[[_0x5af551['i'],_0x4d978b,'']]);var _0x55e3f3=(_0x32e46f(_0x4d978b,{'insert':_0x593d28(0x4ae),'singleton':!0x1}),_0x4d978b[_0x593d28(0x249)]?_0x4d978b[_0x593d28(0x249)]:{});_0x5af551['exports']=_0x55e3f3;},function(_0x30f43b,_0x1e6d40,_0x4605c8){'use strict';var _0x439cfe=_0x4605c8(0x1f),_0x211d3b=_0x4605c8['n'](_0x439cfe);_0x1e6d40['default']=_0x211d3b['a'];},function(_0x43ce4a){const _0x13c473=_0x5f4583;_0x43ce4a[_0x13c473(0x6e4)]={'data':()=>({})};},function(_0x4d479a,_0x426fa4,_0x1c95ed){const _0x4b7b94=_0x5f4583;var _0x50bc96=_0x1c95ed(0x2),_0x40225f=_0x1c95ed(0xa9);_0x4b7b94(0x7d3)==typeof(_0x40225f=_0x40225f[_0x4b7b94(0x33d)]?_0x40225f[_0x4b7b94(0x559)]:_0x40225f)&&(_0x40225f=[[_0x4d479a['i'],_0x40225f,'']]);var _0x331473=(_0x50bc96(_0x40225f,{'insert':_0x4b7b94(0x4ae),'singleton':!0x1}),_0x40225f[_0x4b7b94(0x249)]?_0x40225f[_0x4b7b94(0x249)]:{});_0x4d479a[_0x4b7b94(0x6e4)]=_0x331473;},function(_0x38e6f5,_0x1778cb,_0x29428d){const _0x5b5ff0=_0x5f4583;var _0x151e46=_0x29428d(0x2),_0xdab56d=_0x29428d(0xab);_0x5b5ff0(0x7d3)==typeof(_0xdab56d=_0xdab56d[_0x5b5ff0(0x33d)]?_0xdab56d[_0x5b5ff0(0x559)]:_0xdab56d)&&(_0xdab56d=[[_0x38e6f5['i'],_0xdab56d,'']]);var _0x3c084d=(_0x151e46(_0xdab56d,{'insert':_0x5b5ff0(0x4ae),'singleton':!0x1}),_0xdab56d[_0x5b5ff0(0x249)]?_0xdab56d[_0x5b5ff0(0x249)]:{});_0x38e6f5['exports']=_0x3c084d;},function(_0x489ba9,_0x533cc5,_0x3c0da3){const _0x9558a4=_0x5f4583;var _0x2ab195=_0x3c0da3(0x2),_0x51d3e4=_0x3c0da3(0xad);_0x9558a4(0x7d3)==typeof(_0x51d3e4=_0x51d3e4[_0x9558a4(0x33d)]?_0x51d3e4['default']:_0x51d3e4)&&(_0x51d3e4=[[_0x489ba9['i'],_0x51d3e4,'']]);var _0x1a5d3d=(_0x2ab195(_0x51d3e4,{'insert':_0x9558a4(0x4ae),'singleton':!0x1}),_0x51d3e4[_0x9558a4(0x249)]?_0x51d3e4[_0x9558a4(0x249)]:{});_0x489ba9[_0x9558a4(0x6e4)]=_0x1a5d3d;},function(_0xf00368,_0x57ef9b,_0x1cc47d){const _0x2b55ef=_0x5f4583;var _0x163c30=_0x1cc47d(0x2),_0x4b63aa=_0x1cc47d(0xaf);'string'==typeof(_0x4b63aa=_0x4b63aa[_0x2b55ef(0x33d)]?_0x4b63aa[_0x2b55ef(0x559)]:_0x4b63aa)&&(_0x4b63aa=[[_0xf00368['i'],_0x4b63aa,'']]);var _0x26d8f6=(_0x163c30(_0x4b63aa,{'insert':_0x2b55ef(0x4ae),'singleton':!0x1}),_0x4b63aa['locals']?_0x4b63aa['locals']:{});_0xf00368[_0x2b55ef(0x6e4)]=_0x26d8f6;},function(_0x4e5450,_0xd839ff,_0x566fec){const _0x36165e=_0x5f4583;var _0x14d1e9=_0x566fec(0x2),_0x1b380c=_0x566fec(0xb1);_0x36165e(0x7d3)==typeof(_0x1b380c=_0x1b380c['__esModule']?_0x1b380c[_0x36165e(0x559)]:_0x1b380c)&&(_0x1b380c=[[_0x4e5450['i'],_0x1b380c,'']]);var _0x3e664f=(_0x14d1e9(_0x1b380c,{'insert':_0x36165e(0x4ae),'singleton':!0x1}),_0x1b380c[_0x36165e(0x249)]?_0x1b380c[_0x36165e(0x249)]:{});_0x4e5450[_0x36165e(0x6e4)]=_0x3e664f;},function(_0x4910ad,_0x4c2bc6,_0x5dafcc){const _0x4a8224=_0x5f4583;var _0x8fab79=_0x5dafcc(0x2),_0x1422f7=_0x5dafcc(0xb3);_0x4a8224(0x7d3)==typeof(_0x1422f7=_0x1422f7[_0x4a8224(0x33d)]?_0x1422f7[_0x4a8224(0x559)]:_0x1422f7)&&(_0x1422f7=[[_0x4910ad['i'],_0x1422f7,'']]);var _0x45927b=(_0x8fab79(_0x1422f7,{'insert':'head','singleton':!0x1}),_0x1422f7['locals']?_0x1422f7[_0x4a8224(0x249)]:{});_0x4910ad[_0x4a8224(0x6e4)]=_0x45927b;},function(_0x3603e5,_0x3a2c6a,_0x4a16ac){'use strict';var _0x500da6=_0x4a16ac(0x27),_0x50766c=_0x4a16ac['n'](_0x500da6);_0x3a2c6a['default']=_0x50766c['a'];},function(_0x35d736,_0x3d7ace,_0x586735){const _0x4afaf1=_0x5f4583;var _0x381637=_0x586735(0x59),_0x2fef0c=_0x586735(0x1),_0x3ac437=_0x586735(0x5),_0x3adf49=_0x2fef0c['replay'][_0x4afaf1(0x462)];_0x35d736[_0x4afaf1(0x6e4)]={'props':['replay'],'methods':{async 'play'(_0xd90c11){const _0x4c92dd=_0x4afaf1;if(!_0x2fef0c['connection'][_0x4c92dd(0x33e)]||await new Promise(_0x478d19=>{const _0x4f278c=_0x4c92dd;_0x3ac437['confirm'](_0x4f278c(0x55d),()=>_0x478d19(!0x0),()=>_0x478d19(!0x1));}))try{_0x2fef0c['replay'][_0x4c92dd(0x52f)](_0xd90c11);}catch(_0x1c621b){_0x33824f(_0x4c92dd(0x7e6),'Waching\x20replays\x20on\x20Delta\x20currently\x20does\x20not\x20work,\x20please\x20watch\x20them\x20with\x20Single\x20mode\x20or\x20render\x20them!',0xbb8,![]),_0x2fef0c[_0x4c92dd(0x5a4)]();}},'downloadReplay'(_0x5a9f53){const _0x3a94d9=_0x4afaf1;_0x3ac437[_0x3a94d9(0x19a)]['fire']({'input':'text','inputValue':_0x5a9f53['name'],'showCancelButton':!0x0,'confirmButtonText':_0x3a94d9(0x32f),'html':_0x3a94d9(0x5c1)})[_0x3a94d9(0x32e)](_0x5dba39=>{const _0x57f088=_0x3a94d9;var _0x36f860=_0x5dba39[_0x57f088(0x7ef)];if(_0x36f860){var _0x56d21c=new Blob([_0x5a9f53['data']],{'type':'text/plain;charset=utf-8'});_0x381637[_0x57f088(0x591)](_0x56d21c,_0x36f860+_0x57f088(0x501));}});},'deleteReplay'(_0x21bc8f){const _0x525ec0=_0x4afaf1;_0x3ac437[_0x525ec0(0x459)](_0x525ec0(0x3cc),()=>{_0x3adf49['removeItem'](_0x21bc8f,()=>{const _0x3a3c07=_0x3cc5;_0x2fef0c[_0x3a3c07(0x7b4)][_0x3a3c07(0x246)](_0x3a3c07(0x3cf));});});}}};},function(_0x754abd,_0x344eae,_0xe61fed){const _0x45e58b=_0x5f4583;var _0x241142=_0xe61fed(0x2),_0x169994=_0xe61fed(0xdb);_0x45e58b(0x7d3)==typeof(_0x169994=_0x169994[_0x45e58b(0x33d)]?_0x169994['default']:_0x169994)&&(_0x169994=[[_0x754abd['i'],_0x169994,'']]);var _0x5b271a=(_0x241142(_0x169994,{'insert':_0x45e58b(0x4ae),'singleton':!0x1}),_0x169994[_0x45e58b(0x249)]?_0x169994[_0x45e58b(0x249)]:{});_0x754abd[_0x45e58b(0x6e4)]=_0x5b271a;},function(_0x369263,_0x50c02a,_0x5ec0e5){const _0x570329=_0x5f4583;var _0x50e253=_0x5ec0e5(0x2),_0x28d935=_0x5ec0e5(0xdd);_0x570329(0x7d3)==typeof(_0x28d935=_0x28d935['__esModule']?_0x28d935[_0x570329(0x559)]:_0x28d935)&&(_0x28d935=[[_0x369263['i'],_0x28d935,'']]);var _0x52d4de=(_0x50e253(_0x28d935,{'insert':_0x570329(0x4ae),'singleton':!0x1}),_0x28d935[_0x570329(0x249)]?_0x28d935[_0x570329(0x249)]:{});_0x369263[_0x570329(0x6e4)]=_0x52d4de;},function(_0xeefff,_0x500093,_0x1c42f7){const _0x21d4b0=_0x5f4583;var _0x6f4383=_0x1c42f7(0x2),_0x82dac7=_0x1c42f7(0xdf);'string'==typeof(_0x82dac7=_0x82dac7['__esModule']?_0x82dac7[_0x21d4b0(0x559)]:_0x82dac7)&&(_0x82dac7=[[_0xeefff['i'],_0x82dac7,'']]);var _0x3201c9=(_0x6f4383(_0x82dac7,{'insert':_0x21d4b0(0x4ae),'singleton':!0x1}),_0x82dac7[_0x21d4b0(0x249)]?_0x82dac7[_0x21d4b0(0x249)]:{});_0xeefff['exports']=_0x3201c9;},function(_0x2c53e5,_0x45a1ce,_0x442b94){const _0x26611d=_0x5f4583;var _0x22bf7e=_0x442b94(0x2),_0x550430=_0x442b94(0xe1);'string'==typeof(_0x550430=_0x550430[_0x26611d(0x33d)]?_0x550430[_0x26611d(0x559)]:_0x550430)&&(_0x550430=[[_0x2c53e5['i'],_0x550430,'']]);var _0x516274=(_0x22bf7e(_0x550430,{'insert':'head','singleton':!0x1}),_0x550430['locals']?_0x550430[_0x26611d(0x249)]:{});_0x2c53e5['exports']=_0x516274;},function(_0x44d927,_0x30555e,_0x48e782){const _0x3eedc9=_0x5f4583;var _0x584a88=_0x48e782(0x2),_0x411e08=_0x48e782(0xe3);'string'==typeof(_0x411e08=_0x411e08['__esModule']?_0x411e08[_0x3eedc9(0x559)]:_0x411e08)&&(_0x411e08=[[_0x44d927['i'],_0x411e08,'']]);var _0x2a109f=(_0x584a88(_0x411e08,{'insert':_0x3eedc9(0x4ae),'singleton':!0x1}),_0x411e08[_0x3eedc9(0x249)]?_0x411e08[_0x3eedc9(0x249)]:{});_0x44d927['exports']=_0x2a109f;},function(_0x1f0862,_0x4ed9d3,_0x269d69){const _0x3efd64=_0x5f4583;var _0x2030ba=_0x269d69(0x2),_0x2f0fa4=_0x269d69(0xe7);_0x3efd64(0x7d3)==typeof(_0x2f0fa4=_0x2f0fa4[_0x3efd64(0x33d)]?_0x2f0fa4[_0x3efd64(0x559)]:_0x2f0fa4)&&(_0x2f0fa4=[[_0x1f0862['i'],_0x2f0fa4,'']]);var _0x43c9dd=(_0x2030ba(_0x2f0fa4,{'insert':_0x3efd64(0x4ae),'singleton':!0x1}),_0x2f0fa4['locals']?_0x2f0fa4[_0x3efd64(0x249)]:{});_0x1f0862[_0x3efd64(0x6e4)]=_0x43c9dd;},function(_0xcb610f,_0x43293b,_0x3c313d){const _0x2a15bc=_0x5f4583;var _0x30515f=_0x3c313d(0x2),_0xdd515d=_0x3c313d(0xe9);_0x2a15bc(0x7d3)==typeof(_0xdd515d=_0xdd515d[_0x2a15bc(0x33d)]?_0xdd515d[_0x2a15bc(0x559)]:_0xdd515d)&&(_0xdd515d=[[_0xcb610f['i'],_0xdd515d,'']]);var _0x2feb92=(_0x30515f(_0xdd515d,{'insert':_0x2a15bc(0x4ae),'singleton':!0x1}),_0xdd515d[_0x2a15bc(0x249)]?_0xdd515d[_0x2a15bc(0x249)]:{});_0xcb610f[_0x2a15bc(0x6e4)]=_0x2feb92;},function(_0x2d7437,_0x17fe49,_0x3f7383){const _0x32ace8=_0x5f4583;var _0x2083c8=_0x3f7383(0x2),_0x24907c=_0x3f7383(0xeb);_0x32ace8(0x7d3)==typeof(_0x24907c=_0x24907c[_0x32ace8(0x33d)]?_0x24907c[_0x32ace8(0x559)]:_0x24907c)&&(_0x24907c=[[_0x2d7437['i'],_0x24907c,'']]);var _0x27c46c=(_0x2083c8(_0x24907c,{'insert':_0x32ace8(0x4ae),'singleton':!0x1}),_0x24907c[_0x32ace8(0x249)]?_0x24907c[_0x32ace8(0x249)]:{});_0x2d7437[_0x32ace8(0x6e4)]=_0x27c46c;},function(_0x293631,_0x4eac6c,_0x2b03c8){const _0x586185=_0x5f4583;var _0x875a2=_0x2b03c8(0x2),_0x5339da=_0x2b03c8(0xed);_0x586185(0x7d3)==typeof(_0x5339da=_0x5339da[_0x586185(0x33d)]?_0x5339da[_0x586185(0x559)]:_0x5339da)&&(_0x5339da=[[_0x293631['i'],_0x5339da,'']]);var _0x39d36b=(_0x875a2(_0x5339da,{'insert':_0x586185(0x4ae),'singleton':!0x1}),_0x5339da[_0x586185(0x249)]?_0x5339da[_0x586185(0x249)]:{});_0x293631['exports']=_0x39d36b;},function(_0x1e5412,_0x4836ec,_0x4de50d){const _0x4511f7=_0x5f4583;var _0x4b1766=_0x4de50d(0x2),_0xc274ff=_0x4de50d(0xef);'string'==typeof(_0xc274ff=_0xc274ff[_0x4511f7(0x33d)]?_0xc274ff[_0x4511f7(0x559)]:_0xc274ff)&&(_0xc274ff=[[_0x1e5412['i'],_0xc274ff,'']]);var _0x5be95e=(_0x4b1766(_0xc274ff,{'insert':_0x4511f7(0x4ae),'singleton':!0x1}),_0xc274ff[_0x4511f7(0x249)]?_0xc274ff[_0x4511f7(0x249)]:{});_0x1e5412[_0x4511f7(0x6e4)]=_0x5be95e;},function(_0x1c29f1,_0x9fcb63,_0x49cff1){const _0x4ecd18=_0x5f4583;var _0x2ef692=_0x49cff1(0x2),_0x528bb1=_0x49cff1(0xf1);_0x4ecd18(0x7d3)==typeof(_0x528bb1=_0x528bb1['__esModule']?_0x528bb1[_0x4ecd18(0x559)]:_0x528bb1)&&(_0x528bb1=[[_0x1c29f1['i'],_0x528bb1,'']]);var _0x5f56d1=(_0x2ef692(_0x528bb1,{'insert':_0x4ecd18(0x4ae),'singleton':!0x1}),_0x528bb1[_0x4ecd18(0x249)]?_0x528bb1[_0x4ecd18(0x249)]:{});_0x1c29f1[_0x4ecd18(0x6e4)]=_0x5f56d1;},function(_0x3d49a2,_0x232904,_0x15885a){const _0x451122=_0x5f4583;var _0x412470=_0x15885a(0x2),_0x263e51=_0x15885a(0xf3);_0x451122(0x7d3)==typeof(_0x263e51=_0x263e51['__esModule']?_0x263e51[_0x451122(0x559)]:_0x263e51)&&(_0x263e51=[[_0x3d49a2['i'],_0x263e51,'']]);var _0x41cc18=(_0x412470(_0x263e51,{'insert':'head','singleton':!0x1}),_0x263e51[_0x451122(0x249)]?_0x263e51[_0x451122(0x249)]:{});_0x3d49a2[_0x451122(0x6e4)]=_0x41cc18;},function(_0x28d609,_0x265b51,_0xc4af1e){const _0x1bafe6=_0x5f4583;var _0x5928ed=_0xc4af1e(0x2),_0x3527d7=_0xc4af1e(0xf5);_0x1bafe6(0x7d3)==typeof(_0x3527d7=_0x3527d7['__esModule']?_0x3527d7[_0x1bafe6(0x559)]:_0x3527d7)&&(_0x3527d7=[[_0x28d609['i'],_0x3527d7,'']]);var _0x32b560=(_0x5928ed(_0x3527d7,{'insert':'head','singleton':!0x1}),_0x3527d7[_0x1bafe6(0x249)]?_0x3527d7[_0x1bafe6(0x249)]:{});_0x28d609[_0x1bafe6(0x6e4)]=_0x32b560;},function(_0x105922,_0x3e54a3,_0x34c697){const _0x56ada9=_0x5f4583;var _0x42f99e=_0x34c697(0x2),_0x478af6=_0x34c697(0xf7);_0x56ada9(0x7d3)==typeof(_0x478af6=_0x478af6[_0x56ada9(0x33d)]?_0x478af6[_0x56ada9(0x559)]:_0x478af6)&&(_0x478af6=[[_0x105922['i'],_0x478af6,'']]);var _0x3f624b=(_0x42f99e(_0x478af6,{'insert':_0x56ada9(0x4ae),'singleton':!0x1}),_0x478af6[_0x56ada9(0x249)]?_0x478af6[_0x56ada9(0x249)]:{});_0x105922['exports']=_0x3f624b;},function(_0x466e78,_0x466f24,_0x5408d7){const _0x3c6e00=_0x5f4583;var _0x505331=_0x5408d7(0x2),_0x22ec37=_0x5408d7(0xf9);_0x3c6e00(0x7d3)==typeof(_0x22ec37=_0x22ec37[_0x3c6e00(0x33d)]?_0x22ec37[_0x3c6e00(0x559)]:_0x22ec37)&&(_0x22ec37=[[_0x466e78['i'],_0x22ec37,'']]);var _0x4fe89a=(_0x505331(_0x22ec37,{'insert':_0x3c6e00(0x4ae),'singleton':!0x1}),_0x22ec37['locals']?_0x22ec37[_0x3c6e00(0x249)]:{});_0x466e78[_0x3c6e00(0x6e4)]=_0x4fe89a;},function(_0x1c9561,_0xbc60cc,_0x52c742){'use strict';const _0x32136c=_0x5f4583;var _0x4188d4=_0x52c742(0x38),_0x110b11=_0x52c742['n'](_0x4188d4);_0xbc60cc[_0x32136c(0x559)]=_0x110b11['a'];},function(_0x6bb94,_0x2d0eb4,_0x2b3514){const _0xf84c37=_0x5f4583;var _0x1fec4a=_0x2b3514(0x1),_0x4724a2=_0x2b3514(0x8),_0x22da6d=_0x2b3514(0x4),_0x29f536=_0x22da6d[_0xf84c37(0x21f)],_0x18e280=_0x22da6d[_0xf84c37(0x7d1)],_0x271b77=_0x22da6d['minimapSmoothing'],_0xcab6c1=new PIXI[(_0xf84c37(0x71e))](),_0x549e77={};function _0x2b6c29(){const _0x3ad53b=_0xf84c37;return new Date()[_0x3ad53b(0x1ad)]();}function _0x501e05(_0x14d1f3,_0x409378=!0x1){const _0x3d5d97=_0xf84c37;if(_0x409378&&_0x14d1f3<0x1)return'instant';_0x14d1f3=Math[_0x3d5d97(0x579)](_0x14d1f3);let _0x40fb1a=Math[_0x3d5d97(0x579)](_0x14d1f3/0x3c),_0xb7b93b=Math[_0x3d5d97(0x579)](_0x40fb1a/0x3c);return _0x40fb1a<0x1?_0x409378?_0x14d1f3+'s':_0x3d5d97(0x2de):_0xb7b93b<0x1?_0x40fb1a+_0x3d5d97(0x844):_0x40fb1a%0x3c==0x0?_0xb7b93b+'hr':_0xb7b93b+_0x3d5d97(0x5bc)+_0x40fb1a%0x3c+'min';}_0x6bb94[_0xf84c37(0x6e4)]={'data':()=>({'showMinimap':!0x1,'showMinimapCircle':!0x1,'showMinimapStats':!0x0,'showLocations':_0x22da6d['minimapLocations'],'interval':null,'minimapStatsBottom':0xa,'showClock':_0x22da6d[_0xf84c37(0x6dc)],'showSessionTime':_0x22da6d[_0xf84c37(0x88e)],'showSpectators':_0x22da6d[_0xf84c37(0x5b3)],'showPlayerCount':_0x22da6d[_0xf84c37(0x36b)],'showRestartTiming':_0x22da6d[_0xf84c37(0x36a)],'systemTime':_0x2b6c29(),'sessionTime':_0x501e05(0x0,!0x1),'restartTime':_0x501e05(0x0,!0x0),'spectators':0x0,'playerCount':0x0,'restartTick':0x0,'startTime':null,'gameState':_0x1fec4a[_0xf84c37(0x3f0)]}),'computed':{'playerCountDisplayed'(){const _0x44baad=_0xf84c37;if(this[_0x44baad(0x2a4)][_0x44baad(0x37e)]){var _0x16fc47=this[_0x44baad(0x2a4)][_0x44baad(0x37e)][_0x44baad(0x289)];return Math[_0x44baad(0x844)](this[_0x44baad(0x594)],_0x16fc47)+_0x44baad(0x321)+_0x16fc47+'\x20players';}return this[_0x44baad(0x594)]+_0x44baad(0x82e)+(0x1===this[_0x44baad(0x594)]?'':'s');}},'methods':{'initRenderer'(_0x3198ab){const _0x15502b=_0xf84c37;var _0x166cb8=PIXI[_0x15502b(0x7be)]({'resolution':0x1,'view':_0x3198ab,'width':_0x29f536,'height':_0x29f536,'forceCanvas':!_0x22da6d[_0x15502b(0x58e)],'antialias':!0x1,'powerPreference':'high-performance','transparent':!0x0});_0x4724a2[_0x15502b(0x520)](_0x166cb8),_0x166cb8[_0x15502b(0x477)](),this[_0x15502b(0x57c)]=_0x166cb8;},'destroyMinimap'(){const _0x1803b8=_0xf84c37;_0xcab6c1[_0x1803b8(0x396)](!0x0),_0xcab6c1=new PIXI[(_0x1803b8(0x71e))](),this[_0x1803b8(0x57c)][_0x1803b8(0x477)]();},'onMinimapShow'(){const _0x10cb6f=_0xf84c37;this[_0x10cb6f(0x58b)]||(this[_0x10cb6f(0x827)]=!0x0,this[_0x10cb6f(0x586)]=_0x29f536+0xa,_0x1fec4a[_0x10cb6f(0x7b4)]['$on'](_0x10cb6f(0x472),this[_0x10cb6f(0x1c6)]),this['interval']=setInterval(this[_0x10cb6f(0x207)],0x3e8/_0x18e280));},'onMinimapHide'(){const _0x516a56=_0xf84c37;this[_0x516a56(0x58b)]&&(this['showMinimap']=!0x1,this[_0x516a56(0x586)]=0xa,_0x1fec4a[_0x516a56(0x7b4)][_0x516a56(0x6ac)](_0x516a56(0x472),this[_0x516a56(0x1c6)]),clearInterval(this['interval']),this[_0x516a56(0x58b)]=null,this[_0x516a56(0x7e7)]=0x0,this[_0x516a56(0x594)]=0x0);},'createNode'(_0x5447b8,_0x4b13c4,_0x481f85,_0x220d44){const _0x177b8e=_0xf84c37;_0x5447b8 in _0x549e77&&_0x549e77[_0x5447b8][_0x177b8e(0x396)](!0x0),_0x481f85=_0x481f85||0xffffff,_0x220d44=_0x220d44||0xffffff;let _0x583190=new PIXI['Container']();_0x583190[_0x177b8e(0x7e3)]={};let _0x3e6a60=new PIXI[(_0x177b8e(0x5fd))]()['beginFill'](_0x220d44)['drawCircle'](0x0,0x0,0x5)[_0x177b8e(0x7af)]();if(_0x583190[_0x177b8e(0x589)](_0x3e6a60),_0x4b13c4){let _0x5012a1=new PIXI[(_0x177b8e(0x6f5))](_0x4b13c4,{'strokeThickness':0x4,'lineJoin':_0x177b8e(0x3ed),'fontFamily':_0x177b8e(0x2fc),'fill':_0x481f85,'fontSize':0xc});_0x5012a1[_0x177b8e(0x410)][_0x177b8e(0x2df)](0.5),_0x5012a1[_0x177b8e(0x1d1)]['y']=0xf,_0x583190['addChild'](_0x5012a1);}_0x549e77[_0x5447b8]=_0x583190;},'destroyNode'(_0x2ea48){var _0x247c1a=_0x549e77[_0x2ea48];_0x247c1a&&(_0x247c1a['destroy'](!0x0),delete _0x549e77[_0x2ea48]);},'updatePositions'(_0x30f077){const _0x34b0f1=_0xf84c37;_0xcab6c1[_0x34b0f1(0x326)]();for(var _0x3ddda1=0x0;_0x3ddda1<_0x30f077[_0x34b0f1(0x3cd)];_0x3ddda1++){var _0x2b8e59=_0x30f077[_0x3ddda1],_0x3bc27a=_0x549e77[_0x2b8e59[_0x34b0f1(0x544)]];_0x3bc27a&&(_0x3bc27a[_0x34b0f1(0x7e3)]['x']=_0x2b8e59['x']*_0x29f536,_0x3bc27a[_0x34b0f1(0x7e3)]['y']=_0x2b8e59['y']*_0x29f536,_0xcab6c1[_0x34b0f1(0x589)](_0x3bc27a));}this[_0x34b0f1(0x207)]();},'render'(){const _0x1d3cd4=_0xf84c37;for(var _0x6a824e=_0xcab6c1[_0x1d3cd4(0x4fd)],_0x301165=_0x271b77*(0x1e/_0x18e280),_0x2610aa=0x0;_0x2610aa<_0x6a824e[_0x1d3cd4(0x3cd)];_0x2610aa++){var _0x35da2b=_0x6a824e[_0x2610aa];_0x35da2b[_0x1d3cd4(0x60d)]['x']=_0x4724a2[_0x1d3cd4(0x543)](_0x35da2b['position']['x'],_0x35da2b[_0x1d3cd4(0x7e3)]['x'],_0x301165),_0x35da2b['position']['y']=_0x4724a2[_0x1d3cd4(0x543)](_0x35da2b[_0x1d3cd4(0x60d)]['y'],_0x35da2b[_0x1d3cd4(0x7e3)]['y'],_0x301165);}this['renderer'][_0x1d3cd4(0x207)](_0xcab6c1);},'drawLocationGrid'(_0x6a16a2,_0x3a0192){const _0x5eb6c6=_0xf84c37;var _0x4f1b55=_0x29f536/_0x3a0192;_0x6a16a2[_0x5eb6c6(0x385)]=0.1,_0x6a16a2[_0x5eb6c6(0x4fa)]='#202020',_0x6a16a2[_0x5eb6c6(0x1b5)]();for(var _0x3d766e=0x1;_0x3d766e<_0x3a0192;_0x3d766e++){var _0x29f703=_0x3d766e*_0x4f1b55;_0x6a16a2['moveTo'](_0x29f703,0x0),_0x6a16a2['lineTo'](_0x29f703,_0x29f536),_0x6a16a2[_0x5eb6c6(0x40f)](0x0,_0x29f703),_0x6a16a2[_0x5eb6c6(0x1fd)](_0x29f536,_0x29f703);}_0x6a16a2[_0x5eb6c6(0x469)](),_0x6a16a2['closePath']();},'drawLocationCodes'(_0x15ce5c,_0x4b3923){const _0x3b330d=_0xf84c37;var _0x2c6c9a=_0x29f536/_0x4b3923,_0x448d32=_0x2c6c9a/0x2;_0x15ce5c[_0x3b330d(0x385)]=0.1,_0x15ce5c['font']='14px\x20Nunito',_0x15ce5c[_0x3b330d(0x39c)]=_0x3b330d(0x340),_0x15ce5c[_0x3b330d(0x2ff)]=_0x3b330d(0x2a7),_0x15ce5c[_0x3b330d(0x371)]=_0x3b330d(0x34a);for(var _0x3472b1=0x0;_0x3472b1<_0x4b3923;_0x3472b1++)for(var _0x5df58e=_0x3472b1*_0x2c6c9a+_0x448d32,_0x3bcb52=0x0;_0x3bcb52<_0x4b3923;_0x3bcb52++){var _0x52e759=String[_0x3b330d(0x429)](0x61+_0x3bcb52)['toUpperCase']()+(_0x3472b1+0x1),_0x7bc224=_0x3bcb52*_0x2c6c9a+_0x448d32;_0x15ce5c[_0x3b330d(0x588)](_0x52e759,_0x5df58e,_0x7bc224),_0x15ce5c[_0x3b330d(0x267)](_0x52e759,_0x5df58e,_0x7bc224);}},'drawLocations'(_0x796e0b){const _0x3178c5=_0xf84c37;_0x796e0b['width']=_0x796e0b[_0x3178c5(0x5ec)]=_0x29f536;var _0xba6bac=_0x796e0b[_0x3178c5(0x658)]('2d'),_0x1a87ef=_0x29f536/0x2;if(this['showLocations']){if(_0xba6bac[_0x3178c5(0x21d)](),this[_0x3178c5(0x4cd)]){var _0x12245d=new Path2D();_0x12245d['ellipse'](_0x1a87ef,_0x1a87ef,_0x1a87ef,_0x1a87ef,0x0,0x0,0x2*Math['PI']),_0xba6bac['clip'](_0x12245d);}this[_0x3178c5(0x7c6)](_0xba6bac,0x5),this[_0x3178c5(0x65c)](_0xba6bac,0x5);}_0xba6bac[_0x3178c5(0x245)](),this[_0x3178c5(0x4cd)]&&(_0xba6bac[_0x3178c5(0x385)]=0.45,_0xba6bac[_0x3178c5(0x1b5)](),_0xba6bac[_0x3178c5(0x86c)](_0x1a87ef,_0x1a87ef,_0x1a87ef+0x1,-Math['PI']/0x2,0x0),_0xba6bac['lineTo'](_0x29f536,0x0),_0xba6bac[_0x3178c5(0x872)](),_0xba6bac[_0x3178c5(0x761)]());}},'created'(){const _0x3fb75e=_0xf84c37;_0x1fec4a['events']['$on'](_0x3fb75e(0x518),this[_0x3fb75e(0x6b4)]),_0x1fec4a['events'][_0x3fb75e(0x2e6)](_0x3fb75e(0x556),this['onMinimapHide']),_0x1fec4a[_0x3fb75e(0x7b4)][_0x3fb75e(0x2e6)](_0x3fb75e(0x674),this[_0x3fb75e(0x294)]),_0x1fec4a[_0x3fb75e(0x7b4)]['$on'](_0x3fb75e(0x21c),this[_0x3fb75e(0x835)]),_0x1fec4a[_0x3fb75e(0x7b4)]['$on'](_0x3fb75e(0x2e3),this[_0x3fb75e(0x265)]),_0x1fec4a[_0x3fb75e(0x7b4)][_0x3fb75e(0x2e6)](_0x3fb75e(0x5da),_0x513f99=>{const _0x1dea0f=_0x3fb75e;this[_0x1dea0f(0x1f0)]=_0x513f99,this[_0x1dea0f(0x3a6)](this[_0x1dea0f(0x394)][_0x1dea0f(0x232)]);}),_0x1fec4a[_0x3fb75e(0x7b4)]['$on']('minimap-stats-visible',_0x42286f=>this[_0x3fb75e(0x71c)]=_0x42286f),_0x1fec4a[_0x3fb75e(0x7b4)][_0x3fb75e(0x2e6)](_0x3fb75e(0x813),_0x523bc0=>{const _0x5e277f=_0x3fb75e;this[_0x5e277f(0x7e7)]=_0x523bc0[_0x5e277f(0x7e7)],this[_0x5e277f(0x594)]=_0x523bc0[_0x5e277f(0x594)];}),_0x1fec4a[_0x3fb75e(0x7b4)]['$on'](_0x3fb75e(0x3c6),_0x4ac966=>this[_0x3fb75e(0x720)]=_0x4ac966),_0x1fec4a[_0x3fb75e(0x7b4)]['$on'](_0x3fb75e(0x219),()=>{const _0x4245cf=_0x3fb75e;this[_0x4245cf(0x4cd)]=_0x1fec4a[_0x4245cf(0x5f5)][_0x4245cf(0x744)],this[_0x4245cf(0x3a6)](this[_0x4245cf(0x394)][_0x4245cf(0x232)]);}),_0x1fec4a[_0x3fb75e(0x7b4)][_0x3fb75e(0x2e6)]('game-stopped',()=>this[_0x3fb75e(0x720)]=0x0),_0x1fec4a[_0x3fb75e(0x7b4)]['$on'](_0x3fb75e(0x3f6),()=>{const _0x4bd7f4=_0x3fb75e;this[_0x4bd7f4(0x6dc)]=_0x22da6d[_0x4bd7f4(0x6dc)],this[_0x4bd7f4(0x88e)]=_0x22da6d[_0x4bd7f4(0x88e)],this['showSpectators']=_0x22da6d['showSpectators'],this[_0x4bd7f4(0x36b)]=_0x22da6d[_0x4bd7f4(0x36b)],this['showRestartTiming']=_0x22da6d[_0x4bd7f4(0x36a)];}),_0x1fec4a[_0x3fb75e(0x7b4)]['$on']('every-second',()=>{const _0x18225d=_0x3fb75e;this[_0x18225d(0x585)]=_0x2b6c29();var _0x103cff=(Date['now']()-this['startTime'])/0x3e8;this[_0x18225d(0x241)]=_0x501e05(_0x103cff,!0x1),this[_0x18225d(0x720)]&&_0x1fec4a[_0x18225d(0x6b0)]?(_0x103cff=(this['restartTick']-_0x1fec4a[_0x18225d(0x6b0)])/0x19,this[_0x18225d(0x557)]=_0x501e05(_0x103cff,!0x0)):this[_0x18225d(0x557)]=null;});},'mounted'(){const _0x593c50=_0xf84c37;this[_0x593c50(0x466)](this['$refs'][_0x593c50(0x48a)]),this[_0x593c50(0x88c)]=Date[_0x593c50(0x737)]();}};},function(_0x46fa86,_0x429b7d,_0x267e66){const _0x3db4df=_0x5f4583;var _0x5e3f66=_0x267e66(0x2),_0x34d002=_0x267e66(0xfb);'string'==typeof(_0x34d002=_0x34d002['__esModule']?_0x34d002['default']:_0x34d002)&&(_0x34d002=[[_0x46fa86['i'],_0x34d002,'']]);var _0x141459=(_0x5e3f66(_0x34d002,{'insert':_0x3db4df(0x4ae),'singleton':!0x1}),_0x34d002[_0x3db4df(0x249)]?_0x34d002[_0x3db4df(0x249)]:{});_0x46fa86[_0x3db4df(0x6e4)]=_0x141459;},function(_0x31487a,_0x3e056a,_0x400be5){const _0x24e5b3=_0x5f4583;var _0x5e522e=_0x400be5(0x2),_0x38021a=_0x400be5(0xfd);_0x24e5b3(0x7d3)==typeof(_0x38021a=_0x38021a[_0x24e5b3(0x33d)]?_0x38021a[_0x24e5b3(0x559)]:_0x38021a)&&(_0x38021a=[[_0x31487a['i'],_0x38021a,'']]);var _0xbb782a=(_0x5e522e(_0x38021a,{'insert':_0x24e5b3(0x4ae),'singleton':!0x1}),_0x38021a[_0x24e5b3(0x249)]?_0x38021a[_0x24e5b3(0x249)]:{});_0x31487a['exports']=_0xbb782a;},function(_0x2c3d79,_0x469025,_0x2eaf57){const _0x2e4e0c=_0x5f4583;var _0x3c3651=_0x2eaf57(0x2),_0x12cc3a=_0x2eaf57(0xff);_0x2e4e0c(0x7d3)==typeof(_0x12cc3a=_0x12cc3a[_0x2e4e0c(0x33d)]?_0x12cc3a[_0x2e4e0c(0x559)]:_0x12cc3a)&&(_0x12cc3a=[[_0x2c3d79['i'],_0x12cc3a,'']]);var _0x3423bb=(_0x3c3651(_0x12cc3a,{'insert':_0x2e4e0c(0x4ae),'singleton':!0x1}),_0x12cc3a[_0x2e4e0c(0x249)]?_0x12cc3a[_0x2e4e0c(0x249)]:{});_0x2c3d79['exports']=_0x3423bb;},function(_0x45ce9c,_0xd0982e,_0x485ad9){const _0x2e5078=_0x5f4583;var _0x242c31=_0x485ad9(0x2),_0x1a4b88=_0x485ad9(0x101);'string'==typeof(_0x1a4b88=_0x1a4b88[_0x2e5078(0x33d)]?_0x1a4b88[_0x2e5078(0x559)]:_0x1a4b88)&&(_0x1a4b88=[[_0x45ce9c['i'],_0x1a4b88,'']]);var _0x25d3a3=(_0x242c31(_0x1a4b88,{'insert':_0x2e5078(0x4ae),'singleton':!0x1}),_0x1a4b88[_0x2e5078(0x249)]?_0x1a4b88[_0x2e5078(0x249)]:{});_0x45ce9c[_0x2e5078(0x6e4)]=_0x25d3a3;},function(_0x140947,_0x42912c,_0x19e786){const _0x4c500f=_0x5f4583;var _0xf02a60=_0x19e786(0x2),_0x4e4123=_0x19e786(0x103);_0x4c500f(0x7d3)==typeof(_0x4e4123=_0x4e4123[_0x4c500f(0x33d)]?_0x4e4123[_0x4c500f(0x559)]:_0x4e4123)&&(_0x4e4123=[[_0x140947['i'],_0x4e4123,'']]);var _0x365212=(_0xf02a60(_0x4e4123,{'insert':'head','singleton':!0x1}),_0x4e4123[_0x4c500f(0x249)]?_0x4e4123[_0x4c500f(0x249)]:{});_0x140947[_0x4c500f(0x6e4)]=_0x365212;},function(_0x2055c4,_0x2ddf45,_0x26b81c){const _0x4abb66=_0x5f4583;var _0x1f560f=_0x26b81c(0x2),_0x1a2a32=_0x26b81c(0x105);_0x4abb66(0x7d3)==typeof(_0x1a2a32=_0x1a2a32['__esModule']?_0x1a2a32[_0x4abb66(0x559)]:_0x1a2a32)&&(_0x1a2a32=[[_0x2055c4['i'],_0x1a2a32,'']]);var _0x253964=(_0x1f560f(_0x1a2a32,{'insert':_0x4abb66(0x4ae),'singleton':!0x1}),_0x1a2a32[_0x4abb66(0x249)]?_0x1a2a32[_0x4abb66(0x249)]:{});_0x2055c4['exports']=_0x253964;},function(_0x2a1453,_0xc22b3b,_0x129dcf){const _0x587f1e=_0x5f4583;var _0x4a3600=_0x129dcf(0x2),_0x2644f9=_0x129dcf(0x107);_0x587f1e(0x7d3)==typeof(_0x2644f9=_0x2644f9[_0x587f1e(0x33d)]?_0x2644f9[_0x587f1e(0x559)]:_0x2644f9)&&(_0x2644f9=[[_0x2a1453['i'],_0x2644f9,'']]);var _0x2008f9=(_0x4a3600(_0x2644f9,{'insert':_0x587f1e(0x4ae),'singleton':!0x1}),_0x2644f9[_0x587f1e(0x249)]?_0x2644f9[_0x587f1e(0x249)]:{});_0x2a1453[_0x587f1e(0x6e4)]=_0x2008f9;},function(_0x3ee14,_0x3b3371,_0x460e62){const _0x24a951=_0x5f4583;var _0x5bda01=_0x460e62(0x2),_0x497d7d=_0x460e62(0x10a);_0x24a951(0x7d3)==typeof(_0x497d7d=_0x497d7d['__esModule']?_0x497d7d[_0x24a951(0x559)]:_0x497d7d)&&(_0x497d7d=[[_0x3ee14['i'],_0x497d7d,'']]);var _0x1e192b=(_0x5bda01(_0x497d7d,{'insert':_0x24a951(0x4ae),'singleton':!0x1}),_0x497d7d['locals']?_0x497d7d[_0x24a951(0x249)]:{});_0x3ee14['exports']=_0x1e192b;},,function(_0x1840e2,_0x1981a8,_0x3a4103){const _0x2bc6c4=_0x5f4583;let _0x1e86d9=_0x3a4103(0x1),_0x35b9fb=_0x3a4103(0x4),_0x2d5f0c=_0x3a4103(0x5),_0x51f372=_0x1e86d9[_0x2bc6c4(0x1d4)],_0x3e1daa={'toggleAutoRespawn'(){const _0x4d9956=_0x2bc6c4;let _0x46eb67=_0x35b9fb[_0x4d9956(0x620)];_0x35b9fb[_0x4d9956(0x2df)](_0x4d9956(0x620),!_0x46eb67),_0x46eb67&&_0x1e86d9[_0x4d9956(0x3f0)][_0x4d9956(0x2b9)]&&_0x1e86d9[_0x4d9956(0x62d)](!0x1);let _0x50ced9=_0x4d9956(0x80e);_0x50ced9+=_0x46eb67?_0x4d9956(0x66e):'enabled',_0x2d5f0c[_0x4d9956(0x88d)]['fire']({'type':_0x4d9956(0x1da),'title':_0x50ced9,'timer':0x5dc});},'respawn'(){const _0xe10ff=_0x2bc6c4;_0x51f372[_0xe10ff(0x43e)](_0x1e86d9[_0xe10ff(0x622)][_0xe10ff(0x2ab)]),_0x1e86d9['showMenu'](!0x1);},'feed':_0x51f372['feed']['bind'](_0x51f372),'feedMacro':_0x51f372[_0x2bc6c4(0x786)][_0x2bc6c4(0x5b4)](_0x51f372,!0x0),'split':_0x51f372['split']['bind'](_0x51f372,0x1),'splitx2':_0x51f372['split']['bind'](_0x51f372,0x2),'splitx3':_0x51f372[_0x2bc6c4(0x338)]['bind'](_0x51f372,0x3),'splitMax':_0x51f372[_0x2bc6c4(0x338)]['bind'](_0x51f372,0x4),'split32':_0x51f372['split'][_0x2bc6c4(0x5b4)](_0x51f372,0x5),'split64':_0x51f372[_0x2bc6c4(0x338)]['bind'](_0x51f372,0x6),'split128':_0x51f372['split']['bind'](_0x51f372,0x7),'split256':_0x51f372[_0x2bc6c4(0x338)][_0x2bc6c4(0x5b4)](_0x51f372,0x8),'dual1':_0x51f372[_0x2bc6c4(0x32b)]['bind'](_0x51f372,0x1),'dual2':_0x51f372[_0x2bc6c4(0x32b)]['bind'](_0x51f372,0x2),'dual3':_0x51f372[_0x2bc6c4(0x32b)][_0x2bc6c4(0x5b4)](_0x51f372,0x3),'linesplit':_0x51f372[_0x2bc6c4(0x608)][_0x2bc6c4(0x5b4)](_0x51f372),'freezeMouse':_0x51f372[_0x2bc6c4(0x31b)][_0x2bc6c4(0x5b4)](_0x51f372),'lockLinesplit':_0x51f372[_0x2bc6c4(0x80f)][_0x2bc6c4(0x5b4)](_0x51f372),'stopMovement':_0x51f372[_0x2bc6c4(0x4ac)]['bind'](_0x51f372),'toggleSkins':_0x51f372['toggleSkins'][_0x2bc6c4(0x5b4)](_0x51f372),'toggleNames':_0x51f372[_0x2bc6c4(0x762)][_0x2bc6c4(0x5b4)](_0x51f372),'toggleFood':_0x51f372[_0x2bc6c4(0x3d8)][_0x2bc6c4(0x5b4)](_0x51f372),'toggleMass':_0x51f372[_0x2bc6c4(0x44a)][_0x2bc6c4(0x5b4)](_0x51f372),'toggleChat':_0x51f372[_0x2bc6c4(0x41c)][_0x2bc6c4(0x5b4)](_0x51f372),'toggleChatToast':_0x51f372[_0x2bc6c4(0x6c6)][_0x2bc6c4(0x5b4)](_0x51f372),'toggleHud':_0x51f372['toggleHud'][_0x2bc6c4(0x5b4)](_0x51f372),'spectateLock':_0x51f372[_0x2bc6c4(0x874)][_0x2bc6c4(0x5b4)](_0x51f372),'selectPlayer':_0x51f372[_0x2bc6c4(0x4af)][_0x2bc6c4(0x5b4)](_0x51f372),'saveReplay'(){const _0x5e5458=_0x2bc6c4;let {dual:_0x57ed06}=_0x1e86d9;_0x1e86d9[_0x5e5458(0x3a7)][_0x5e5458(0x21d)](_0x57ed06[_0x5e5458(0x2ab)]);},'zoomLevel1':_0x51f372['setZoomLevel'][_0x2bc6c4(0x5b4)](_0x51f372,0x1),'zoomLevel2':_0x51f372[_0x2bc6c4(0x1ae)][_0x2bc6c4(0x5b4)](_0x51f372,0x2),'zoomLevel3':_0x51f372[_0x2bc6c4(0x1ae)][_0x2bc6c4(0x5b4)](_0x51f372,0x3),'zoomLevel4':_0x51f372[_0x2bc6c4(0x1ae)][_0x2bc6c4(0x5b4)](_0x51f372,0x4),'zoomLevel5':_0x51f372['setZoomLevel'][_0x2bc6c4(0x5b4)](_0x51f372,0x5),'dualbox'(){const _0x14ecca=_0x2bc6c4;let {dual:_0x517516}=_0x1e86d9;_0x517516[_0x14ecca(0x7ac)]();}};window[_0x2bc6c4(0x2d3)]&&Object[_0x2bc6c4(0x713)](_0x3e1daa,{'m-feed':client['feed']['bind'](client),'m-feedMacro':client[_0x2bc6c4(0x786)][_0x2bc6c4(0x5b4)](client,!0x0),'m-split':client[_0x2bc6c4(0x338)]['bind'](client,0x1),'m-splitx2':client['split'][_0x2bc6c4(0x5b4)](client,0x2),'m-splitx3':client[_0x2bc6c4(0x338)][_0x2bc6c4(0x5b4)](client,0x3),'m-splitMax':client[_0x2bc6c4(0x338)][_0x2bc6c4(0x5b4)](client,0x4),'m-split32':client[_0x2bc6c4(0x338)][_0x2bc6c4(0x5b4)](client,0x5),'m-split64':client[_0x2bc6c4(0x338)][_0x2bc6c4(0x5b4)](client,0x6),'m-linesplit':client['lineSplit']['bind'](client),'m-stopMovement':client[_0x2bc6c4(0x644)][_0x2bc6c4(0x5b4)](client),'m-respawn':client['spawn']['bind'](client),'m-focus':client[_0x2bc6c4(0x328)][_0x2bc6c4(0x5b4)](client,!0x0),'m-unfocus':client[_0x2bc6c4(0x328)][_0x2bc6c4(0x5b4)](client,!0x1)});let _0x55453e={'dualbox':_0x2bc6c4(0x284),'feed':'','feedMacro':'W','split':'SPACE','splitx2':'G','splitx3':'H','splitMax':'T','split32':'','split64':'','split128':'','split256':'','dual1':'','dual2':'','dual3':'','linesplit':'Z','lockLinesplit':'','respawn':'','toggleAutoRespawn':'','stopMovement':'','toggleSkins':'','toggleNames':'','toggleMass':'','spectateLock':'Q','selectPlayer':_0x2bc6c4(0x61f),'saveReplay':'R','toggleChat':'','toggleChatToast':'','toggleHud':'','zoomLevel1':'1','zoomLevel2':'2','zoomLevel3':'3','zoomLevel4':'4','zoomLevel5':'5'};_0x1840e2[_0x2bc6c4(0x6e4)]=_0x1e86d9[_0x2bc6c4(0x405)]=new class _0x5921ac{constructor(){const _0x125293=_0x2bc6c4;this['version']=0x2,this[_0x125293(0x335)]=null,this['releaseHandlers']=null,this[_0x125293(0x765)](),this[_0x125293(0x403)]();}[_0x2bc6c4(0x765)](){}[_0x2bc6c4(0x403)](){const _0x3e159b=_0x2bc6c4;this[_0x3e159b(0x787)]=this[_0x3e159b(0x6a7)](),this[_0x3e159b(0x84b)](this[_0x3e159b(0x787)]);}['loadHotkeys'](){const _0x122c6f=_0x2bc6c4;let _0x4e53ec=Object['assign']({},_0x55453e),_0xeac5c1=localStorage[_0x122c6f(0x787)];if(!_0xeac5c1)return _0x4e53ec;_0xeac5c1=JSON[_0x122c6f(0x192)](_0xeac5c1);let _0x500545=Object[_0x122c6f(0x732)](_0xeac5c1);return Object[_0x122c6f(0x613)](_0x4e53ec)[_0x122c6f(0x51f)](_0x54ddbb=>{const _0x110793=_0x122c6f;let _0x296f3a=_0x4e53ec[_0x54ddbb];_0x296f3a&&_0x500545[_0x110793(0x605)](_0x296f3a)&&(_0x4e53ec[_0x54ddbb]='');}),Object[_0x122c6f(0x713)](_0x4e53ec,_0xeac5c1);}[_0x2bc6c4(0x6cb)](_0x4b9c8c){const _0x59b808=_0x2bc6c4;localStorage['hotkeys']=JSON[_0x59b808(0x7f0)](_0x4b9c8c);}[_0x2bc6c4(0x49d)](){const _0x467fbb=_0x2bc6c4;return localStorage[_0x467fbb(0x411)](_0x467fbb(0x787)),this[_0x467fbb(0x403)](),this['hotkeys'];}[_0x2bc6c4(0x7a0)](){const _0x6e6ac6=_0x2bc6c4;return this[_0x6e6ac6(0x787)];}[_0x2bc6c4(0x2df)](_0x56e779,_0x47dc72){const _0x15a05f=_0x2bc6c4;if(!(_0x56e779 in _0x3e1daa))return!0x1;if(this['hotkeys'][_0x56e779]===_0x47dc72)return!0x0;if(_0x47dc72){for(let _0x38125b in this['hotkeys'])this[_0x15a05f(0x787)][_0x38125b]===_0x47dc72&&(this[_0x15a05f(0x787)][_0x38125b]='');}return this[_0x15a05f(0x787)][_0x56e779]=_0x47dc72,this[_0x15a05f(0x6cb)](this[_0x15a05f(0x787)]),this['loadHandlers'](this['hotkeys']),!0x0;}['loadHandlers'](_0x8ca30a){const _0x34c867=_0x2bc6c4;for(let _0x19e857 in(this['pressHandlers']={},_0x8ca30a)){if(!(_0x19e857 in _0x3e1daa))continue;let _0x58e423=_0x3e1daa[_0x19e857],_0x29d83f=_0x8ca30a[_0x19e857];this[_0x34c867(0x335)][_0x29d83f]=_0x58e423;}this[_0x34c867(0x1ac)]={},_0x34c867(0x291)in _0x8ca30a&&(this[_0x34c867(0x1ac)][_0x8ca30a['feedMacro']]=_0x51f372[_0x34c867(0x786)]['bind'](_0x51f372,!0x1)),window[_0x34c867(0x2d3)]&&_0x34c867(0x424)in _0x8ca30a&&(this[_0x34c867(0x1ac)][_0x8ca30a[_0x34c867(0x424)]]=client[_0x34c867(0x786)][_0x34c867(0x5b4)](_0x51f372,!0x1));}[_0x2bc6c4(0x454)](_0x355bd5){let _0x4b5259=this['pressHandlers'][_0x355bd5];return!!_0x4b5259&&(_0x4b5259(),!0x0);}[_0x2bc6c4(0x1a3)](_0x28c4f0){const _0x3aacfa=_0x2bc6c4;let _0x2eb00d=this[_0x3aacfa(0x1ac)][_0x28c4f0];_0x2eb00d?.();}[_0x2bc6c4(0x73f)](_0x1fa6c1){const _0x57264a=_0x2bc6c4;return _0x1fa6c1?_0x1fa6c1[_0x57264a(0x6fb)]()[_0x57264a(0x418)]()[_0x57264a(0x26d)](/^(LEFT|RIGHT|NUMPAD|DIGIT|KEY)/,''):_0x57264a(0x392);}}();},,,,,,,function(_0xbe1797,_0x5553db,_0x1b73fb){'use strict';const _0x33b9c4=_0x5f4583;var _0x4dbbaa=function(){const _0x19809a=_0x3cc5;var _0x207d01=this[_0x19809a(0x413)],_0x49ac33=this[_0x19809a(0x5e6)]['_c']||_0x207d01;return _0x49ac33(_0x19809a(0x760),[_0x49ac33('div',{'directives':[{'name':_0x19809a(0x260),'rawName':_0x19809a(0x38f),'value':this[_0x19809a(0x71c)],'expression':'showMinimapStats'}],'staticClass':_0x19809a(0x80c),'style':{'bottom':this[_0x19809a(0x586)]+'px'}},[_0x49ac33(_0x19809a(0x760),{'directives':[{'name':_0x19809a(0x260),'rawName':_0x19809a(0x38f),'value':this[_0x19809a(0x6dc)],'expression':_0x19809a(0x6dc)}]},[this['_v'](this['_s'](this[_0x19809a(0x585)]))]),this['_v']('\x20'),_0x49ac33(_0x19809a(0x760),{'directives':[{'name':_0x19809a(0x260),'rawName':_0x19809a(0x38f),'value':this[_0x19809a(0x88e)],'expression':'showSessionTime'}]},[this['_v'](this['_s'](this['sessionTime'])+_0x19809a(0x44c))]),this['_v']('\x20'),_0x49ac33(_0x19809a(0x760),{'directives':[{'name':_0x19809a(0x260),'rawName':'v-show','value':this[_0x19809a(0x36b)]&&this[_0x19809a(0x594)],'expression':_0x19809a(0x2c0)}]},[this['_v'](this['_s'](this['playerCountDisplayed']))]),this['_v']('\x20'),_0x49ac33(_0x19809a(0x760),{'directives':[{'name':'show','rawName':_0x19809a(0x38f),'value':this[_0x19809a(0x5b3)]&&this[_0x19809a(0x7e7)],'expression':_0x19809a(0x1ba)}]},[this['_v'](this['_s'](this[_0x19809a(0x7e7)])+'\x20spectator'+this['_s'](0x1===this[_0x19809a(0x7e7)]?'':'s'))]),this['_v']('\x20'),_0x49ac33(_0x19809a(0x760),{'directives':[{'name':_0x19809a(0x260),'rawName':_0x19809a(0x38f),'value':this['showRestartTiming']&&this['restartTime'],'expression':_0x19809a(0x5f1)}]},[this['_v']('Restart\x20in\x20'+this['_s'](this['restartTime']))])]),this['_v']('\x20'),_0x49ac33(_0x19809a(0x760),{'directives':[{'name':_0x19809a(0x260),'rawName':_0x19809a(0x38f),'value':this[_0x19809a(0x827)],'expression':'showMinimap'}],'staticClass':_0x19809a(0x2c5),'class':{'circle':this['showMinimapCircle']}},[_0x49ac33(_0x19809a(0x78c),{'ref':_0x19809a(0x232),'attrs':{'id':_0x19809a(0x232)}}),this['_v']('\x20'),_0x49ac33(_0x19809a(0x78c),{'ref':_0x19809a(0x48a),'attrs':{'id':_0x19809a(0x48a)}})])]);},_0x29d13f=[];_0x4dbbaa[_0x33b9c4(0x222)]=!0x0,_0x1b73fb['d'](_0x5553db,'a',function(){return _0x4dbbaa;}),_0x1b73fb['d'](_0x5553db,'b',function(){return _0x29d13f;});},function(_0x4421ea,_0x3e0af1,_0x4f3f35){'use strict';const _0x18d911=_0x5f4583;var _0x46f2c9=function(){const _0x39e61e=_0x3cc5;var _0x217a2f=this,_0x470948=_0x217a2f[_0x39e61e(0x413)],_0x3518fa=_0x217a2f[_0x39e61e(0x5e6)]['_c']||_0x470948;return _0x3518fa('transition',{'attrs':{'name':'fade','appear':''}},[_0x3518fa(_0x39e61e(0x760),{'staticClass':'modal'},[_0x3518fa('div',{'staticClass':_0x39e61e(0x611),'on':{'click':function(){const _0xb97ff8=_0x39e61e;return _0x217a2f[_0xb97ff8(0x246)](_0xb97ff8(0x655));}}}),_0x217a2f['_v']('\x20'),_0x3518fa('i',{'staticClass':'fas\x20fa-times-circle\x20close-button','on':{'click':function(){return _0x217a2f['$emit']('close');}}}),_0x217a2f['_v']('\x20'),_0x3518fa(_0x39e61e(0x760),{'staticClass':_0x39e61e(0x53f)},[_0x3518fa('transition',{'attrs':{'name':_0x39e61e(0x533),'appear':''}},[_0x3518fa(_0x39e61e(0x760),{'staticClass':_0x39e61e(0x57b)},[_0x217a2f['_t']('default',[_0x217a2f['_v']('Here\x20should\x20be\x20something')])],0x2)])],0x1)])]);},_0xaf8419=[];_0x46f2c9[_0x18d911(0x222)]=!0x0,_0x4f3f35['d'](_0x3e0af1,'a',function(){return _0x46f2c9;}),_0x4f3f35['d'](_0x3e0af1,'b',function(){return _0xaf8419;});},function(_0xe20c62,_0x35b68f,_0x212d9f){'use strict';var _0x304a07=function(){const _0x2745a5=_0x3cc5;var _0x1ff63a=this,_0x5f0a04=_0x1ff63a['$createElement'],_0x1210bd=_0x1ff63a[_0x2745a5(0x5e6)]['_c']||_0x5f0a04;return _0x1210bd(_0x2745a5(0x760),{'staticClass':'replay-item','style':{'backgroundImage':_0x2745a5(0x4f5)+_0x1ff63a['replay'][_0x2745a5(0x683)]+'\x27)'},'on':{'click':function(){const _0x42501e=_0x2745a5;return _0x1ff63a[_0x42501e(0x52f)](_0x1ff63a[_0x42501e(0x3a7)][_0x42501e(0x2e7)]);}}},[_0x1210bd(_0x2745a5(0x760),{'staticClass':_0x2745a5(0x7f9),'on':{'click':function(_0x50e072){const _0x23e9c3=_0x2745a5;_0x50e072[_0x23e9c3(0x59c)]();}}},[_0x1210bd(_0x2745a5(0x760),{'staticClass':_0x2745a5(0x1a4)},[_0x1ff63a['_v'](_0x1ff63a['_s'](_0x1ff63a[_0x2745a5(0x3a7)][_0x2745a5(0x3bb)]))]),_0x1ff63a['_v']('\x20'),_0x1210bd(_0x2745a5(0x760),[_0x1210bd('i',{'staticClass':_0x2745a5(0x19f),'on':{'click':function(_0x59050f){const _0xdef310=_0x2745a5;return _0x59050f['stopPropagation'](),_0x1ff63a[_0xdef310(0x748)](_0x1ff63a['replay']);}}}),_0x1ff63a['_v']('\x20'),_0x1210bd('i',{'staticClass':_0x2745a5(0x1bc),'on':{'click':function(_0x157102){const _0x3954d6=_0x2745a5;return _0x157102[_0x3954d6(0x59c)](),_0x1ff63a[_0x3954d6(0x457)](_0x1ff63a['replay'][_0x3954d6(0x3bb)]);}}})])])]);},_0x478510=[];_0x304a07['_withStripped']=!0x0,_0x212d9f['d'](_0x35b68f,'a',function(){return _0x304a07;}),_0x212d9f['d'](_0x35b68f,'b',function(){return _0x478510;});},function(_0x57e427,_0x4ffdd2){const _0x4f686c=_0x5f4583;_0x4ffdd2[_0x4f686c(0x641)]=[0xffff00,0xff00,0xffff,0xff00ff],_0x4ffdd2[_0x4f686c(0x549)]=[0xff0000,0xff8000,0xffff00,0x80ff00,0xff00,0xff80,0xffff,0x80ff,0x8000ff,0xff00ff,0xff0080],_0x4ffdd2[_0x4f686c(0x818)]=_0x4ffdd2['basic'][_0x4f686c(0x2dd)](_0x32d612=>{var _0x3f4235=_0x32d612>>0x10&0xff,_0x1c57f4=_0x32d612>>0x8&0xff,_0x35ff18=0xff&_0x32d612;return(_0x3f4235*=0.5)<<0x10|(_0x1c57f4*=0.5)<<0x8|(_0x35ff18*=0.5)>>0x0;});},function(_0x38465b){const _0x392626=_0x5f4583;var _0x1a103f=new class{constructor(){const _0x106540=_0x3cc5;this[_0x106540(0x4da)]={};}[_0x392626(0x3e1)](_0xdc07f2,_0x42bd7e,_0x2cc624){const _0x4d30ad=_0x392626;this[_0x4d30ad(0x4da)][_0xdc07f2]={'elementId':_0x42bd7e,'lastRefresh':0x0,'waitInterval':_0x2cc624||0x0};}[_0x392626(0x772)](_0x4690e4){const _0x5dbed4=_0x392626;return this[_0x5dbed4(0x4da)][_0x4690e4]||null;}[_0x392626(0x7f1)](_0x3af175){const _0x46103e=_0x392626;aiptag['cmd'][_0x46103e(0x6b2)][_0x46103e(0x491)](function(){const _0x7b3cd6=_0x46103e;aipDisplayTag[_0x7b3cd6(0x6b2)](_0x3af175);});}['refreshAd'](_0x24f881){const _0x5126fb=_0x392626;var _0x1cb93a=this['getAd'](_0x24f881);if(!_0x1cb93a)return!0x1;var _0x5958f0=Date[_0x5126fb(0x737)]();return!(_0x1cb93a[_0x5126fb(0x4f0)]+0x3e8*_0x1cb93a[_0x5126fb(0x7a7)]>_0x5958f0)&&(_0x1cb93a[_0x5126fb(0x4f0)]=_0x5958f0,this[_0x5126fb(0x7f1)](_0x1cb93a[_0x5126fb(0x4c5)]),!0x0);}}();_0x1a103f['addAd'](_0x392626(0x3ad),_0x392626(0x4c1),0x1e),_0x1a103f[_0x392626(0x3e1)](_0x392626(0x349),_0x392626(0x2b5),0x78),_0x1a103f[_0x392626(0x3e1)](_0x392626(0x3da),_0x392626(0x7fd),0x1e),_0x38465b['exports']={'loadAdinplay'(_0x5c1312){const _0x19a98b=_0x392626;var _0x1028ec=window[_0x19a98b(0x485)]=_0x1028ec||{};_0x1028ec[_0x19a98b(0x699)]=_0x1028ec[_0x19a98b(0x699)]||[],_0x1028ec[_0x19a98b(0x699)][_0x19a98b(0x6b2)]=_0x1028ec[_0x19a98b(0x699)]['display']||[],_0x1028ec[_0x19a98b(0x353)]=!0x0;var _0x1c8c17=document[_0x19a98b(0x314)](_0x19a98b(0x735));_0x1c8c17[_0x19a98b(0x790)]=_0x5c1312,_0x1c8c17[_0x19a98b(0x639)]='//api.adinplay.com/libs/aiptag/pub/VAN/vanis.io/tag.min.js',document[_0x19a98b(0x4ae)][_0x19a98b(0x6f6)](_0x1c8c17);},'refreshAd':_0xecce74=>_0x1a103f['refreshAd'](_0xecce74)};},function(_0x4e7f3c){const _0x29f849=_0x5f4583;let _0x442c0e=_0x2e055e=>{const _0x5aa404=_0x3cc5;let _0x5eb863={'border':{},'food':{}};if(_0x5eb863[_0x5aa404(0x704)]=_0x2e055e[_0x5aa404(0x739)](),_0x5eb863['protocol']>=0x4){_0x5eb863[_0x5aa404(0x34d)]=_0x2e055e[_0x5aa404(0x739)](),_0x5eb863[_0x5aa404(0x1bf)]=_0x2e055e[_0x5aa404(0x531)](),_0x5eb863[_0x5aa404(0x47e)]=_0x2e055e[_0x5aa404(0x531)](),_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x6cf)]=_0x2e055e[_0x5aa404(0x1e9)](),_0x5eb863['border'][_0x5aa404(0x590)]=_0x2e055e[_0x5aa404(0x1e9)](),_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x3db)]=_0x2e055e[_0x5aa404(0x1e9)](),_0x5eb863[_0x5aa404(0x5f5)]['maxy']=_0x2e055e[_0x5aa404(0x1e9)](),_0x5eb863['flags']=_0x2e055e[_0x5aa404(0x739)](),_0x5eb863[_0x5aa404(0x5f5)]['circle']=!!(0x1&_0x5eb863[_0x5aa404(0x502)]),_0x5eb863['border'][_0x5aa404(0x339)]=_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x3db)]-_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x6cf)],_0x5eb863[_0x5aa404(0x5f5)]['height']=_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x727)]-_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x590)];let {food:_0x591adb}=_0x5eb863;if(0x2&_0x5eb863[_0x5aa404(0x502)]){let _0x30a11a=_0x591adb[_0x5aa404(0x3d9)]=_0x2e055e['readUInt16LE'](),_0x1f841d=_0x591adb[_0x5aa404(0x319)]=_0x2e055e['readUInt16LE']();_0x591adb[_0x5aa404(0x5e4)]=_0x1f841d-_0x30a11a;}0x4&_0x5eb863[_0x5aa404(0x502)]&&(_0x591adb['ejectedSize']=_0x2e055e[_0x5aa404(0x531)]());}else{if(_0x5eb863['protocol']>=0x2)_0x5eb863[_0x5aa404(0x34d)]=_0x2e055e[_0x5aa404(0x739)](),_0x5eb863['instanceSeed']=_0x2e055e[_0x5aa404(0x531)](),_0x5eb863['playerId']=_0x2e055e[_0x5aa404(0x531)](),_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x339)]=_0x2e055e[_0x5aa404(0x578)](),_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x5ec)]=_0x2e055e[_0x5aa404(0x578)]();else{_0x5eb863[_0x5aa404(0x34d)]=0x1,_0x5eb863[_0x5aa404(0x1bf)]=_0x2e055e[_0x5aa404(0x1e9)](),_0x5eb863[_0x5aa404(0x47e)]=_0x2e055e[_0x5aa404(0x1e9)]();let _0x49289a=_0x2e055e[_0x5aa404(0x531)]();_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x339)]=_0x49289a,_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x5ec)]=_0x49289a;}_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x6cf)]=-_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x339)]/0x2,_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x590)]=-_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x5ec)]/0x2,_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x3db)]=+_0x5eb863[_0x5aa404(0x5f5)]['width']/0x2,_0x5eb863['border']['maxy']=+_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x5ec)]/0x2;}return _0x5eb863['border']['x']=(_0x5eb863['border']['minx']+_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x3db)])/0x2,_0x5eb863[_0x5aa404(0x5f5)]['y']=(_0x5eb863[_0x5aa404(0x5f5)]['miny']+_0x5eb863[_0x5aa404(0x5f5)][_0x5aa404(0x727)])/0x2,_0x5eb863;};_0x4e7f3c[_0x29f849(0x6e4)]=_0x442c0e;},function(_0x21d98d,_0x33712a,_0x53a78b){const _0xc0a087=_0x5f4583;let _0x5e1a76=_0x53a78b(0x1),_0x3360be=_0x53a78b(0x4),{PlayerCell:_0x3df268,Virus:_0x597c57,EjectedMass:_0x36adac,Food:_0x36a2e0,Crown:_0x2f3d7e,DeadCell:_0x925630}=_0x53a78b(0x85),_0x3877c6=_0x53a78b(0xe),{clampNumber:_0x53d613}=_0x53a78b(0x8);class _0x176860 extends _0x3877c6{constructor(_0x49a3ba){const _0x448a72=_0x3cc5;_0x49a3ba['texture']=PIXI['Texture'][_0x448a72(0x648)](_0x448a72(0x69a)),super(_0x49a3ba);}}_0x176860[_0xc0a087(0x4d7)][_0xc0a087(0x3e7)]=0x9,_0x176860['prototype']['isCoin']=!0x0;let _0x104a25=(_0x4de54e,_0x56d7ed,_0x4b7e0a,_0x2c92d4,_0x3ad394,_0x57d67b,_0x411f2b,_0x166d9d,_0x505a41=0x1)=>{const _0x548e58=_0xc0a087;let _0x36d051=0xf&_0x4de54e;if((0x3==_0x36d051||0x4==_0x36d051)&&(void 0x0==_0x2c92d4||void 0x0==_0x57d67b)){let {food:_0x5317f5}=_0x5e1a76,_0x36b4d9=_0x57d67b=0x3==_0x36d051?_0x5317f5[_0x548e58(0x248)]||0x1:_0x5317f5[_0x548e58(0x3d9)]+_0x4b7e0a%_0x5317f5[_0x548e58(0x5e4)]||0x1;if(0x4==_0x36d051){let {border:_0x19fac7}=_0x5e1a76;_0x2c92d4=_0x19fac7[_0x548e58(0x6cf)]+_0x36b4d9+(_0x19fac7['width']-0x2*_0x36b4d9)*_0x5e1a76[_0x548e58(0x656)](0x10000+_0x4b7e0a),_0x3ad394=_0x19fac7[_0x548e58(0x590)]+_0x36b4d9+(_0x19fac7[_0x548e58(0x5ec)]-0x2*_0x36b4d9)*_0x5e1a76[_0x548e58(0x656)](0x20000+_0x4b7e0a);}}let {dual:_0x7fa4e0}=_0x5e1a76,{cells:_0x218a21}=0x1&_0x505a41?_0x5e1a76:_0x7fa4e0,_0x414cf2;if(_0x218a21[_0x548e58(0x5e3)](_0x4b7e0a))(_0x414cf2=_0x218a21[_0x548e58(0x7a0)](_0x4b7e0a))[_0x548e58(0x3f8)](),_0x414cf2['ox']=_0x414cf2['x'],_0x414cf2['oy']=_0x414cf2['y'],_0x414cf2[_0x548e58(0x68f)]=_0x414cf2['size'];else{let _0x23a555={'type':_0x4de54e,'id':_0x4b7e0a,'pid':_0x56d7ed,'x':_0x2c92d4,'y':_0x3ad394,'size':_0x57d67b,'flags':_0x411f2b,'context':_0x505a41},_0x2098e9=!0x1;if(_0x7fa4e0[_0x548e58(0x33e)]){let {cells:_0x146d69}=0x2&_0x505a41?_0x5e1a76:_0x7fa4e0;if(_0x146d69[_0x548e58(0x5e3)](_0x4b7e0a)){if(0x1!=_0x36d051)return;_0x414cf2=_0x146d69[_0x548e58(0x7a0)](_0x4b7e0a),_0x414cf2['activeContexts']++,_0x218a21[_0x548e58(0x2df)](_0x4b7e0a,_0x414cf2),_0x2098e9=!0x0;}}switch(_0x36d051){case 0x1:{if(_0x2098e9)break;let _0x4034d7=_0x5e1a76['playerManager'][_0x548e58(0x726)](_0x56d7ed);if(!_0x4034d7)return;_0x23a555[_0x548e58(0x859)]=_0x4034d7['texture'],_0x414cf2=new _0x3df268(_0x23a555,_0x4034d7);break;}case 0x2:_0x414cf2=new _0x597c57(_0x23a555);break;case 0x3:_0x414cf2=new _0x36adac(_0x23a555);break;case 0x4:_0x414cf2=new _0x36a2e0(_0x23a555);break;case 0x6:_0x414cf2=new _0x2f3d7e(_0x23a555);break;case 0x9:_0x414cf2=new _0x176860(_0x23a555);break;default:{let _0x4978f9=0x404040,_0x500435=!0x1;_0x411f2b>0x1&&(_0x4978f9=0x0,0x80&_0x411f2b&&(_0x4978f9|=0x700000),0x40&_0x411f2b&&(_0x4978f9|=0x7000),0x20&_0x411f2b&&(_0x4978f9|=0x70),0x10&_0x411f2b&&(_0x500435=!0x0)),_0x414cf2=new _0x925630(_0x23a555,_0x4978f9,_0x500435);}}if(!_0x2098e9){let {scene:_0x2e33b9}=_0x5e1a76;_0x2e33b9[0x1&_0x411f2b?_0x548e58(0x2bc):_0x548e58(0x77b)](_0x414cf2[_0x548e58(0x667)]);}_0x218a21[_0x548e58(0x2df)](_0x4b7e0a,_0x414cf2);}void 0x0!=_0x2c92d4&&(_0x414cf2['nx']=_0x2c92d4,_0x414cf2['ny']=_0x3ad394),void 0x0!=_0x57d67b&&(_0x414cf2[_0x548e58(0x231)]=_0x57d67b),_0x414cf2[_0x548e58(0x867)]=_0x5e1a76[_0x548e58(0x56b)];let {player:_0xe12c46}=_0x414cf2;if(!_0xe12c46||0x2&_0x505a41)return;let {replay:_0xb05f8e}=_0x5e1a76;_0xb05f8e[_0x548e58(0x55f)]()?_0xe12c46[_0x548e58(0x250)]=_0x166d9d:delete _0xe12c46['lastUpdateTick'];},_0x5f450e=(_0x3c5cf9,_0x249d5c,_0x58e127)=>{const _0x4a903c=_0xc0a087;let {cells:_0x117eac}=0x1&_0x58e127?_0x5e1a76:_0x5e1a76[_0x4a903c(0x622)];if(!_0x117eac[_0x4a903c(0x5e3)](_0x3c5cf9))return;let _0x3430ba=_0x117eac[_0x4a903c(0x7a0)](_0x3c5cf9);if(_0x3430ba['destroyed'])return;if(!_0x117eac[_0x4a903c(0x5e3)](_0x249d5c))return void _0x3430ba['destroy'](_0x58e127);let _0x1fccb0=_0x117eac[_0x4a903c(0x7a0)](_0x249d5c);if(_0x3430ba[_0x4a903c(0x3f8)](),!_0x3430ba['destroy'](_0x58e127,_0x3360be[_0x4a903c(0x7fa)]))return;_0x3430ba['nx']=_0x1fccb0['nx'],_0x3430ba['ny']=_0x1fccb0['ny'];let _0x993d0e=_0x3430ba[_0x4a903c(0x231)];_0x3430ba[_0x4a903c(0x231)]=0x0,_0x3430ba['newPositionScale']=_0x53d613(_0x993d0e/_0x1fccb0[_0x4a903c(0x231)],0x0,0x1),_0x3430ba[_0x4a903c(0x867)]=_0x5e1a76[_0x4a903c(0x56b)];},_0x445d94=(_0x3e9d6b,_0x59ef81)=>{const _0x6c8994=_0xc0a087;let {cells:_0x268c49}=0x1&_0x59ef81?_0x5e1a76:_0x5e1a76[_0x6c8994(0x622)];_0x268c49['has'](_0x3e9d6b)&&_0x268c49[_0x6c8994(0x7a0)](_0x3e9d6b)[_0x6c8994(0x396)](_0x59ef81);},_0x1c2ba0=new class _0x41bc05{async[_0xc0a087(0x436)](){const _0x4e746c=_0xc0a087;if(this['initializing']||this[_0x4e746c(0x19a)])return!0x1;this[_0x4e746c(0x5ae)]=!0x0;let _0x3e5ab4=await fetch(_0x4e746c(0x69b)),_0x583444=this[_0x4e746c(0x19a)]=await WebAssembly[_0x4e746c(0x7e1)](await WebAssembly['compile'](await _0x3e5ab4[_0x4e746c(0x4b3)]()),{'env':{'addOrUpdate'(_0x1f16b3,_0x1bc305,_0xad63d5,_0x38368c,_0x1190c1,_0x18043f,_0x9b116a,_0x5d37d1,_0x1e6da8){let {playback:_0x3c533b}=_0x5e1a76;if(_0x3c533b['dry']){let {updates:_0x937182}=_0x3c533b,_0x1f0e9b=_0x937182[0x0][0x0];_0x1f0e9b[_0x38368c]={'type':_0x1bc305,'pid':_0xad63d5,'id':_0x38368c,'x':_0x1190c1,'y':_0x18043f,'size':_0x9b116a,'flags':_0x5d37d1};return;}_0x1190c1=0x20&_0x1bc305?void 0x0:_0x1190c1,_0x9b116a=0x40&_0x1bc305?void 0x0:_0x9b116a,_0x104a25(0xf&_0x1bc305,_0xad63d5,_0x38368c,_0x1190c1,_0x18043f,_0x9b116a,_0x5d37d1,_0x1e6da8,_0x1f16b3);},'destroy'(_0x48553b,_0x532257){const _0x6e6a88=_0x4e746c;let {playback:_0x5dff0f}=_0x5e1a76;if(_0x5dff0f[_0x6e6a88(0x664)]){_0x5dff0f[_0x6e6a88(0x55a)](_0x532257);return;}_0x445d94(_0x532257,_0x48553b);},'eat'(_0x26593c,_0x48a7fd,_0x28aab1){const _0x2060b5=_0x4e746c;let {playback:_0x318fe4}=_0x5e1a76;if(_0x318fe4[_0x2060b5(0x664)]){_0x318fe4['eatCell'](_0x48a7fd,_0x28aab1);return;}_0x5f450e(_0x48a7fd,_0x28aab1,_0x26593c);},'emscripten_notify_memory_growth'(_0x40388d){}}}),{memory:_0x3cdcc9}=_0x583444['exports'];return this['HEAPU8']=new Uint8Array(_0x3cdcc9[_0x4e746c(0x3d5)]),this[_0x4e746c(0x6b7)]=new Uint8Array(_0x3cdcc9[_0x4e746c(0x3d5)]),this[_0x4e746c(0x515)]=new Uint8Array(_0x3cdcc9[_0x4e746c(0x3d5)]),this[_0x4e746c(0x317)]=new Uint8Array(_0x3cdcc9[_0x4e746c(0x3d5)]),delete this[_0x4e746c(0x5ae)],!0x0;}[_0xc0a087(0x3fc)](_0x32cf7a,_0x378725,_0x5bdc22){const _0x3e8c1a=_0xc0a087;if(!this[_0x3e8c1a(0x19a)])return 0x0;let {deserialize:_0x3f6819,malloc:_0x50d80e,free:_0x5a8e02}=this[_0x3e8c1a(0x19a)]['exports'],_0x4a6201=_0x378725['byteLength'],_0x2ac910=_0x50d80e(_0x4a6201);this[_0x3e8c1a(0x372)][_0x3e8c1a(0x2df)](_0x378725,_0x2ac910),_0x3f6819(_0x2ac910,_0x5bdc22,_0x32cf7a),_0x5a8e02(_0x2ac910);}}();_0x1c2ba0[_0xc0a087(0x436)](),window[_0xc0a087(0x41e)]=_0x1c2ba0,_0x5e1a76[_0xc0a087(0x5e9)]=_0x5f1fe5=>_0x1c2ba0['deserialize'](0x1,new Uint8Array(_0x5f1fe5['buffer'],0x1),_0x5f1fe5['packetId']),_0x21d98d['exports']={'wasmModule':_0x1c2ba0,'addOrUpdateCell':_0x104a25,'destroyCell':_0x445d94,'eatCell':_0x5f450e};},function(_0x5725b8,_0x20a4b4,_0x2c9c42){const _0x4e675d=_0x5f4583;var _0x376835=_0x2c9c42(0x8c);function _0xf94292(_0x4a3d5d,_0x23e518,_0x560dea,_0x2faf70){const _0xee5248=_0x3cc5;var _0x5a0ee7=_0x4a3d5d[_0xee5248(0x3cd)],_0x1b7ad0=_0x376835[_0xee5248(0x631)](_0x5a0ee7),_0xbcced2=new Uint8Array(_0x376835[_0xee5248(0x372)]['buffer'],_0x1b7ad0,_0x5a0ee7);_0xbcced2[_0xee5248(0x2df)](_0x4a3d5d);var _0x10ab75=_0x23e518(_0x1b7ad0,_0x2faf70);if(!_0x560dea){var _0x3f9bc7=new Uint8Array(new ArrayBuffer(_0x5a0ee7));_0x3f9bc7[_0xee5248(0x2df)](_0xbcced2);}return _0x376835[_0xee5248(0x20e)](_0x1b7ad0),_0x560dea?_0x10ab75:_0x3f9bc7;}_0x2c9c42(0x8d),_0x5725b8[_0x4e675d(0x6e4)]={'skid':_0x426815=>_0xf94292(_0x426815,_0x376835[_0x4e675d(0x552)],!0x1),'skid3':(_0x56bf97,_0x10002c)=>_0xf94292(_0x56bf97,_0x376835[_0x4e675d(0x226)],!0x0,_0x10002c),'skid4':(_0x35e7f1,_0x5a1264)=>_0xf94292(_0x35e7f1,_0x376835[_0x4e675d(0x460)],!0x0,_0x5a1264)};},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,function(_0x3c0a40,_0x6316c,_0x5032c8){'use strict';const _0x3064ce=_0x5f4583;var _0x1c5516=_0x5032c8(0x4a),_0x12e18d=_0x5032c8(0x1e),_0x30f5c9=Object((_0x5032c8(0xa8),_0x5032c8(0x0))['a'])(_0x12e18d[_0x3064ce(0x559)],_0x1c5516['a'],_0x1c5516['b'],!0x1,null,_0x3064ce(0x576),null);_0x30f5c9[_0x3064ce(0x5a1)]['__file']=_0x3064ce(0x4fe),_0x6316c[_0x3064ce(0x559)]=_0x30f5c9[_0x3064ce(0x6e4)];},function(_0x306e3e,_0x346ed0,_0x13bf8a){'use strict';const _0x32fe21=_0x5f4583;var _0x3245cc=_0x13bf8a(0x4b),_0x4727ea=_0x13bf8a(0x26),_0x4c23ec=Object((_0x13bf8a(0xda),_0x13bf8a(0x0))['a'])(_0x4727ea[_0x32fe21(0x559)],_0x3245cc['a'],_0x3245cc['b'],!0x1,null,_0x32fe21(0x4a9),null);_0x4c23ec[_0x32fe21(0x5a1)][_0x32fe21(0x3f9)]=_0x32fe21(0x270),_0x346ed0[_0x32fe21(0x559)]=_0x4c23ec[_0x32fe21(0x6e4)];},function(_0xb4e745,_0x451ab8,_0x40bb10){'use strict';const _0x5d4bd5=_0x5f4583;var _0x2c1646=_0x40bb10(0x49),_0x2f0448=_0x40bb10(0x37),_0x37009d=Object((_0x40bb10(0xfa),_0x40bb10(0x0))['a'])(_0x2f0448[_0x5d4bd5(0x559)],_0x2c1646['a'],_0x2c1646['b'],!0x1,null,_0x5d4bd5(0x879),null);_0x37009d[_0x5d4bd5(0x5a1)][_0x5d4bd5(0x3f9)]=_0x5d4bd5(0x56f),_0x451ab8[_0x5d4bd5(0x559)]=_0x37009d[_0x5d4bd5(0x6e4)];},function(_0xa8f3b8,_0x20217f,_0x57f0cd){'use strict';_0x57f0cd(0x11)['notifyUnsupportedBrowser'](),_0x57f0cd(0x1),_0x57f0cd(0x82),_0x57f0cd(0x84),_0x57f0cd(0x8e),_0x57f0cd(0x94),_0x57f0cd(0x10d),_0x57f0cd(0x10b),_0x57f0cd(0x10c);},function(_0x3f2827,_0x24e6b0,_0x1439b4){const _0x9cfd09=_0x5f4583;var _0x4fd3a0=_0x1439b4(0x2),_0x5c9ca2=_0x1439b4(0x78);_0x9cfd09(0x7d3)==typeof(_0x5c9ca2=_0x5c9ca2[_0x9cfd09(0x33d)]?_0x5c9ca2[_0x9cfd09(0x559)]:_0x5c9ca2)&&(_0x5c9ca2=[[_0x3f2827['i'],_0x5c9ca2,'']]);var _0x274a7f=(_0x4fd3a0(_0x5c9ca2,{'insert':_0x9cfd09(0x4ae),'singleton':!0x1}),_0x5c9ca2[_0x9cfd09(0x249)]?_0x5c9ca2[_0x9cfd09(0x249)]:{});_0x3f2827[_0x9cfd09(0x6e4)]=_0x274a7f;},function(){},function(_0x4dd140,_0x1858c1,_0x3fdbe2){const _0x20bc8d=_0x5f4583;let _0x43d631,_0x515acf=_0x3fdbe2(0x4),_0x25ea6e=_0x3fdbe2(0xc),_0x4d3e42=({width:_0x8387c4,height:_0x58ba51,circle:_0x221c2c})=>{const _0x1b00cd=_0x3cc5;let _0x6cd11f=PIXI[_0x1b00cd(0x389)][_0x1b00cd(0x24e)](_0x515acf[_0x1b00cd(0x493)]),_0x712ea0=new PIXI[(_0x1b00cd(0x5fd))]();return _0x712ea0[_0x1b00cd(0x1e2)](0x64,_0x6cd11f,0x1,0.5),_0x221c2c?_0x712ea0['drawEllipse'](_0x8387c4/0x2,_0x58ba51/0x2,_0x8387c4/0x2,_0x58ba51/0x2):_0x712ea0[_0x1b00cd(0x5cf)](0x0,0x0,_0x8387c4,_0x58ba51),_0x712ea0[_0x1b00cd(0x7af)](),_0x712ea0[_0x1b00cd(0x1d1)][_0x1b00cd(0x2df)](_0x8387c4/0x2,_0x58ba51/0x2),_0x712ea0;},_0x1dcb54=({width:_0x40a66c,height:_0x1db475})=>{const _0x4d2d10=_0x3cc5;let _0x3c241f=new PIXI['Graphics']()['beginFill'](0xffffff)['drawEllipse'](_0x40a66c/0x2,_0x1db475/0x2,_0x40a66c/0x2,_0x1db475/0x2)[_0x4d2d10(0x7af)]();return _0x3c241f[_0x4d2d10(0x1d1)]['set'](_0x40a66c/0x2,_0x1db475/0x2),_0x3c241f;};_0x4dd140[_0x20bc8d(0x6e4)]=class _0x2b737d{constructor(_0x5c28af,_0x33685c){const _0x356702=_0x20bc8d;this[_0x356702(0x5f5)]=_0x5c28af,this[_0x356702(0x2c5)]=new PIXI['Container'](),this[_0x356702(0x7e4)]=new PIXI[(_0x356702(0x71e))](),this[_0x356702(0x375)]=_0x4d3e42(_0x5c28af),this[_0x356702(0x7e4)]['addChild'](this[_0x356702(0x375)]),this[_0x356702(0x5e5)]=new PIXI[(_0x356702(0x71e))](),this[_0x356702(0x2d5)]=new PIXI[(_0x356702(0x71e))](),this[_0x356702(0x2d5)]['visible']=_0x515acf[_0x356702(0x6d3)],this[_0x356702(0x83e)](!0x1),this[_0x356702(0x2c5)][_0x356702(0x589)](this['background'],this[_0x356702(0x2d5)],this['foreground']),this[_0x356702(0x678)](),_0x33685c&&this[_0x356702(0x433)](),this['background'][_0x356702(0x60d)]['x']=_0x5c28af['x'],this['background'][_0x356702(0x60d)]['y']=_0x5c28af['y'];}static[_0x20bc8d(0x614)](_0x16082b){_0x43d631=_0x16082b;}[_0x20bc8d(0x678)](){const _0x5ad52e=_0x20bc8d;this[_0x5ad52e(0x2c5)]['position']['x']=window[_0x5ad52e(0x2fb)]/0x2,this[_0x5ad52e(0x2c5)][_0x5ad52e(0x60d)]['y']=window[_0x5ad52e(0x1a1)]/0x2;}[_0x20bc8d(0x668)](){const _0x30e252=_0x20bc8d;this[_0x30e252(0x5e5)]['children'][_0x30e252(0x668)]((_0x245c07,_0x203f88)=>(_0x245c07=_0x245c07['gameData'])['size']===(_0x203f88=_0x203f88[_0x30e252(0x369)])[_0x30e252(0x6d9)]?_0x245c07['id']-_0x203f88['id']:_0x245c07[_0x30e252(0x6d9)]-_0x203f88[_0x30e252(0x6d9)]);}[_0x20bc8d(0x77b)](_0x3bd16c){const _0xd1764d=_0x20bc8d;this[_0xd1764d(0x5e5)][_0xd1764d(0x589)](_0x3bd16c);}['addFood'](_0x446e54){this['food']['addChild'](_0x446e54);}[_0x20bc8d(0x451)](_0x164459){_0x164459&&!this['backgroundSprite']?this['setBackgroundImage']():_0x164459||this['destroyBackgroundImage'](!0x0);}[_0x20bc8d(0x433)](){const _0x2e5ccd=_0x20bc8d;let _0x56569c=_0x515acf[_0x2e5ccd(0x240)];if(!_0x56569c){this['destroyBackgroundImage']();return;}let _0x2772fe=(_0x515acf[_0x2e5ccd(0x6f8)]?PIXI[_0x2e5ccd(0x40c)]:PIXI[_0x2e5ccd(0x4ec)])[_0x2e5ccd(0x648)](_0x56569c,{});_0x2772fe[_0x2e5ccd(0x339)]=this[_0x2e5ccd(0x5f5)][_0x2e5ccd(0x339)],_0x2772fe[_0x2e5ccd(0x5ec)]=this['border'][_0x2e5ccd(0x5ec)],_0x2772fe['alpha']=_0x515acf[_0x2e5ccd(0x37a)],_0x2772fe['anchor'][_0x2e5ccd(0x2df)](0.5);let _0x49a8c3=this[_0x2e5ccd(0x84d)];if(_0x49a8c3){let _0x55ba69=_0x2772fe['texture']!==_0x49a8c3[_0x2e5ccd(0x859)];this['destroyBackgroundImage'](_0x55ba69);}if(this[_0x2e5ccd(0x84d)]=_0x2772fe,this[_0x2e5ccd(0x7e4)][_0x2e5ccd(0x70f)](_0x2772fe,0x0),!this[_0x2e5ccd(0x5f5)][_0x2e5ccd(0x744)])return;let _0x120d41=_0x1dcb54(this[_0x2e5ccd(0x5f5)]);this['background'][_0x2e5ccd(0x70f)](_0x120d41,0x1),this[_0x2e5ccd(0x84d)][_0x2e5ccd(0x593)]=_0x120d41;}['destroyBackgroundImage'](_0xc29711){const _0x40a49b=_0x20bc8d;this[_0x40a49b(0x84d)]&&(this[_0x40a49b(0x84d)][_0x40a49b(0x396)](!!_0xc29711),delete this[_0x40a49b(0x84d)]);}['resetBorder'](){const _0x3db04e=_0x20bc8d;this[_0x3db04e(0x375)][_0x3db04e(0x396)](),this[_0x3db04e(0x375)]=_0x4d3e42(this[_0x3db04e(0x5f5)]),this[_0x3db04e(0x7e4)]['addChild'](this[_0x3db04e(0x375)]);}[_0x20bc8d(0x3df)](){const _0x1729c1=_0x20bc8d;_0x43d631[_0x1729c1(0x598)]['forEach'](_0x40951f=>{const _0x2648ea=_0x1729c1;_0x40951f[_0x2648ea(0x52d)]&&_0x40951f['reloadTexture']();});}[_0x20bc8d(0x26f)](){const _0x4d0eaa=_0x20bc8d;_0x43d631[_0x4d0eaa(0x598)][_0x4d0eaa(0x51f)](_0x17c2f6=>{const _0x6f85da=_0x4d0eaa;_0x17c2f6[_0x6f85da(0x806)]&&_0x17c2f6[_0x6f85da(0x4eb)]();});}[_0x20bc8d(0x3b4)](){const _0x4b7dc8=_0x20bc8d;_0x25ea6e[_0x4b7dc8(0x282)][_0x4b7dc8(0x2db)](_0x515acf[_0x4b7dc8(0x388)]);}[_0x20bc8d(0x4dc)](){const _0x3b39fa=_0x20bc8d;_0x43d631[_0x3b39fa(0x803)][_0x3b39fa(0x534)][_0x3b39fa(0x51f)](_0x14599f=>_0x14599f[_0x3b39fa(0x603)]());}['resetNameTextStyle'](){const _0xc66d5=_0x20bc8d;[..._0x43d631[_0xc66d5(0x598)][_0xc66d5(0x732)]()][_0xc66d5(0x4e8)](_0x5c61a4=>!!_0x5c61a4[_0xc66d5(0x27c)])['forEach'](_0x5d965a=>{const _0x27192f=_0xc66d5;_0x5d965a['nameSprite']&&(_0x5d965a[_0x27192f(0x5f8)][_0x27192f(0x396)](!0x1),_0x5d965a[_0x27192f(0x5f8)]=null);});let _0x29e9da=_0x515acf['nameTextStyle'];_0x43d631[_0xc66d5(0x803)][_0xc66d5(0x534)][_0xc66d5(0x51f)](_0x19eb6d=>{const _0x4b23f6=_0xc66d5;let _0x556d8c=_0x19eb6d['nameSprite'];if(!_0x556d8c)return;let _0x3631de=_0x556d8c[_0x4b23f6(0x48d)][_0x4b23f6(0x761)];_0x556d8c['style']=_0x29e9da,_0x556d8c['style'][_0x4b23f6(0x761)]=_0x3631de,_0x556d8c[_0x4b23f6(0x3eb)]();});}[_0x20bc8d(0x83e)](_0x502f98){const _0xaa96d8=_0x20bc8d;_0x502f98&&this[_0xaa96d8(0x1f9)]();let _0xc7eb55=_0x515acf[_0xaa96d8(0x21a)];for(PIXI[_0xaa96d8(0x40b)][_0xaa96d8(0x648)](_0xaa96d8(0x70b),_0xc7eb55,{'chars':_0xaa96d8(0x609)});_0x43d631[_0xaa96d8(0x3e2)][_0xaa96d8(0x3cd)];)_0x43d631[_0xaa96d8(0x3e2)][_0xaa96d8(0x2fa)]()['destroy'](!0x1);[..._0x43d631[_0xaa96d8(0x598)]['values']()]['filter'](_0x3144fe=>!!_0x3144fe['isPlayerCell'])[_0xaa96d8(0x51f)](_0x245d28=>{const _0x5691c4=_0xaa96d8;_0x245d28[_0x5691c4(0x64d)]&&_0x245d28[_0x5691c4(0x667)]&&(_0x245d28[_0x5691c4(0x667)][_0x5691c4(0x7dc)](_0x245d28['massText']),_0x245d28['massText']['destroy'](!0x1),_0x245d28[_0x5691c4(0x64d)]=null);});}[_0x20bc8d(0x1f9)](){const _0x240ef9=_0x20bc8d;PIXI['BitmapFont'][_0x240ef9(0x51e)](_0x240ef9(0x70b));}};},function(_0x2dec36,_0x22a738,_0x2c3827){const _0x2b0cea=_0x5f4583;var _0x233f83=_0x2c3827(0x4),_0x31884c=_0x2c3827(0x18),_0x4916a0={};_0x2dec36[_0x2b0cea(0x6e4)]={'getTexture':function(_0x3ad5b3){const _0x5a423f=_0x2b0cea;var _0x451aba,_0x34a7f9,_0x4bc026,_0x395481,_0x204cba,_0x1c8075,_0x145a0d,_0x390b59;return _0x4916a0[_0x3ad5b3]||(_0x4916a0[_0x3ad5b3]=(_0x451aba=_0x3ad5b3,(_0x145a0d=(_0x34a7f9=_0x1c8075=(_0x204cba=_0x233f83[_0x5a423f(0x2cb)])/0x2,_0x4bc026=_0x451aba,(_0x395481=new PIXI[(_0x5a423f(0x5fd))]())['beginFill'](_0x4bc026),_0x395481['drawCircle'](0x0,0x0,_0x34a7f9),_0x395481[_0x5a423f(0x7af)](),_0x395481))[_0x5a423f(0x60d)][_0x5a423f(0x2df)](_0x1c8075),_0x390b59=PIXI[_0x5a423f(0x684)][_0x5a423f(0x7c5)](_0x204cba,_0x204cba),_0x31884c[_0x5a423f(0x207)](_0x145a0d,_0x390b59),_0x390b59));},'destroyCache':function(){const _0x1ac6ed=_0x2b0cea;for(var _0x835ca2 in _0x4916a0)_0x4916a0[_0x835ca2][_0x1ac6ed(0x396)](!0x0),delete _0x4916a0[_0x835ca2];}};},function(_0x56b8d8,_0x309ee6,_0x5772d9){const _0x484021=_0x5f4583;var _0xf4f88b=_0x5772d9(0x4),_0x364936=_0x5772d9(0x18),_0x2c5b7c={};_0x56b8d8[_0x484021(0x6e4)]={'getTexture':function(_0x1e8f6e){const _0x422bf2=_0x484021;var _0x1d7aa6,_0x417f47,_0x5d3d26,_0x18fcb0,_0xe659f9,_0xd7ca1d,_0x14371d,_0x15e5a7;return _0x2c5b7c[_0x1e8f6e]||(_0x2c5b7c[_0x1e8f6e]=(_0x1d7aa6=_0x1e8f6e,(_0x14371d=(_0x417f47=_0xd7ca1d=(_0xe659f9=_0xf4f88b['cellSize'])/0x2,_0x5d3d26=_0x1d7aa6,(_0x18fcb0=new PIXI[(_0x422bf2(0x5fd))]())[_0x422bf2(0x538)](_0x5d3d26),_0x18fcb0[_0x422bf2(0x5cf)](-_0x417f47,-_0x417f47,0x2*_0x417f47,0x2*_0x417f47),_0x18fcb0[_0x422bf2(0x7af)](),_0x18fcb0))[_0x422bf2(0x60d)]['set'](_0xd7ca1d),_0x15e5a7=PIXI[_0x422bf2(0x684)][_0x422bf2(0x7c5)](_0xe659f9,_0xe659f9),_0x364936[_0x422bf2(0x207)](_0x14371d,_0x15e5a7),_0x15e5a7));},'destroyCache':function(){for(var _0x285ffb in _0x2c5b7c)_0x2c5b7c[_0x285ffb]['destroy'](!0x0),delete _0x2c5b7c[_0x285ffb];}};},function(_0x27b89c,_0x4b6ee9,_0xee65fd){const _0x20ea07=_0x5f4583;var _0x200a60=_0xee65fd(0x18),{loadImage:_0x446463}=_0xee65fd(0x8),_0x5cecaa=PIXI[_0x20ea07(0x684)][_0x20ea07(0x7c5)](0xc8,0xc8),_0x175275=Promise['resolve']();_0x27b89c[_0x20ea07(0x6e4)]={'getTexture':function(){return _0x5cecaa;},'loadVirusFromUrl':async function(_0x261a0a){await _0x175275,_0x175275=new Promise(async _0x4baeb9=>{const _0x4f4a54=_0x3cc5;var _0x51a7e3=await _0x446463(_0x261a0a),_0x4f1a59=PIXI[_0x4f4a54(0x4ec)]['from'](_0x51a7e3,void 0x0,0x12);_0x4f1a59[_0x4f4a54(0x339)]=_0x4f1a59[_0x4f4a54(0x5ec)]=0xc8,_0x200a60[_0x4f4a54(0x207)](_0x4f1a59,_0x5cecaa,!0x0),_0x4f1a59[_0x4f4a54(0x396)](!0x0),_0x4baeb9();});}};},function(_0x1027ed,_0x33e633,_0xdefeb3){const _0x2cebfb=_0x5f4583;let _0x24241e,_0x43fe0a=_0xdefeb3(0x7e);_0x1027ed['exports']=class _0x1e3c9c{constructor(){const _0x44453a=_0x3cc5;this[_0x44453a(0x2c9)]=[],this[_0x44453a(0x534)]=new Map(),this[_0x44453a(0x4ce)]=0x0;}static[_0x2cebfb(0x614)](_0x103d76){const _0xed7f67=_0x2cebfb;_0x24241e=_0x103d76,_0x43fe0a[_0xed7f67(0x614)](_0x103d76);}get[_0x2cebfb(0x594)](){const _0x40013b=_0x2cebfb;return this[_0x40013b(0x534)][_0x40013b(0x6d9)]-this['botCount'];}[_0x2cebfb(0x726)](_0x56e295){const _0x24bb8b=_0x2cebfb;return this['players'][_0x24bb8b(0x5e3)](_0x56e295)?this[_0x24bb8b(0x534)][_0x24bb8b(0x7a0)](_0x56e295):null;}[_0x2cebfb(0x4e9)]({pid:_0xa857f2,nickname:_0x28136a,skin:_0x105bfb,skinUrl:_0x2bc630,nameColor:_0x15f591,tagId:_0x2bfed9,bot:_0x5dcc5f}){const _0x4c559b=_0x2cebfb;!this[_0x4c559b(0x534)][_0x4c559b(0x5e3)](_0xa857f2)&&(this['players'][_0x4c559b(0x2df)](_0xa857f2,new _0x43fe0a(_0xa857f2,_0x5dcc5f)),_0x5dcc5f&&this[_0x4c559b(0x4ce)]++);let _0xce6ab9=this[_0x4c559b(0x534)][_0x4c559b(0x7a0)](_0xa857f2);_0x105bfb&&(_0x2bc630=_0x4c559b(0x536)+_0x105bfb);let _0x1eeaf2=_0xce6ab9[_0x4c559b(0x626)](_0x28136a,_0x15f591),_0x50e4e6=_0xce6ab9[_0x4c559b(0x72a)](_0x2bc630),_0x3ced24=_0xce6ab9[_0x4c559b(0x640)](_0x2bfed9);return(_0x1eeaf2||_0x50e4e6||_0x3ced24)&&_0xce6ab9['invalidateVisibility'](),_0xce6ab9;}[_0x2cebfb(0x30b)](_0x4e01d7=[]){const _0x43fc98=_0x2cebfb;for(let _0x46450b of this[_0x43fc98(0x534)]['values']())0x0>_0x4e01d7[_0x43fc98(0x72c)](_0x46450b)&&_0x46450b[_0x43fc98(0x30b)]();}[_0x2cebfb(0x2eb)](){const _0x4f9e18=_0x2cebfb;let {replay:_0x47ba0e}=_0x24241e,_0x1c4202=_0x47ba0e[_0x4f9e18(0x2d4)][0x0],_0x3c86f6=_0x1c4202[0x0]?.[_0x4f9e18(0x6a1)],_0x4162c4=0x0;for(;_0x4162c4<this[_0x4f9e18(0x2c9)][_0x4f9e18(0x3cd)];){let _0x1de644=this[_0x4f9e18(0x2c9)][_0x4162c4];if(!this[_0x4f9e18(0x534)]['has'](_0x1de644)){this['playersRemoving'][_0x4f9e18(0x191)](_0x4162c4,0x1);continue;}let _0x321e1d=this['players'][_0x4f9e18(0x7a0)](_0x1de644);_0x3c86f6&&_0x321e1d[_0x4f9e18(0x250)]&&!(_0x3c86f6>_0x321e1d[_0x4f9e18(0x250)])?_0x4162c4++:(this[_0x4f9e18(0x1f2)](_0x1de644),this[_0x4f9e18(0x2c9)][_0x4f9e18(0x191)](_0x4162c4,0x1));}}['delayedRemovePlayer'](_0x2304a4){const _0x150355=_0x2cebfb;this['playersRemoving'][_0x150355(0x491)](_0x2304a4);}[_0x2cebfb(0x1f2)](_0x3f1415){const _0x595d86=_0x2cebfb;if(!this['players'][_0x595d86(0x5e3)](_0x3f1415))return;let _0x9854b9=this['players'][_0x595d86(0x7a0)](_0x3f1415);_0x9854b9[_0x595d86(0x863)]&&this[_0x595d86(0x4ce)]--,_0x9854b9[_0x595d86(0x7e5)](),this[_0x595d86(0x534)][_0x595d86(0x724)](_0x3f1415);}[_0x2cebfb(0x396)](){const _0x19b8be=_0x2cebfb;for(let _0x21e721 of this['players'][_0x19b8be(0x613)]())this['removePlayer'](_0x21e721);this[_0x19b8be(0x4ce)]=0x0,this[_0x19b8be(0x2c9)][_0x19b8be(0x191)](0x0,this['playersRemoving']['length']);}};},function(_0x3acf67,_0x511971,_0x2df445){const _0x2beba3=_0x5f4583;let _0x2fa8d=_0x2df445(0x4),{basic:_0x42dcea,basicd:_0x24d925}=_0x2df445(0x4c),_0x420d74=_0x2fa8d[_0x2beba3(0x2cb)],_0x3f8bab=_0x420d74/0x2,_0x203704=_0x2fa8d[_0x2beba3(0x475)],_0x1f0cd3=_0x42197f=>{const _0x872d73=_0x2beba3;_0x42197f=_0x42197f||0x0;let _0x189fe8=new PIXI['Graphics']()[_0x872d73(0x1e2)](_0x203704,0x0,0.5)['beginFill'](_0x42197f)[_0x872d73(0x554)](0x0,0x0,_0x3f8bab)[_0x872d73(0x7af)]();return _0x189fe8;},_0x13e161=null;_0x3acf67[_0x2beba3(0x6e4)]=class _0x4ec486{constructor(_0x2554d8,_0x3e21e2){const _0x2ad2d4=_0x2beba3;this[_0x2ad2d4(0x544)]=_0x2554d8,this[_0x2ad2d4(0x863)]=_0x3e21e2||!0x1,this[_0x2ad2d4(0x28d)]=null,(_0x2554d8===_0x13e161['playerId']||_0x2554d8===_0x13e161[_0x2ad2d4(0x370)])&&(this[_0x2ad2d4(0x584)]=!0x0),this['texture']=PIXI[_0x2ad2d4(0x684)][_0x2ad2d4(0x7c5)](_0x420d74,_0x420d74),this[_0x2ad2d4(0x484)]=this[_0x2ad2d4(0x6fc)](),this[_0x2ad2d4(0x2bd)]();}static[_0x2beba3(0x614)](_0x5a56f7){_0x13e161=_0x5a56f7;}get[_0x2beba3(0x66a)](){const _0x5b703d=_0x2beba3;return 0x1+ +(_0x13e161[_0x5b703d(0x1c0)]!==this[_0x5b703d(0x1c0)]);}[_0x2beba3(0x695)](_0x2f2e1f,_0x1000ff=0xf,_0x2d34f2=!0x1){const _0x53c77e=_0x2beba3;if(this[_0x53c77e(0x3b9)]&&(this['outlineGraphic'][_0x53c77e(0x396)](),delete this[_0x53c77e(0x3b9)]),_0x2d34f2)return void this[_0x53c77e(0x2bd)]();_0x2f2e1f=_0x2f2e1f||0x0;let _0x34919b=this[_0x53c77e(0x3b9)]=new PIXI[(_0x53c77e(0x5fd))]()['lineStyle'](_0x1000ff,_0x2f2e1f,0x1)['drawCircle'](0x0,0x0,_0x3f8bab-(_0x1000ff-0x1)/0x2)[_0x53c77e(0x7af)]();_0x34919b['pivot'][_0x53c77e(0x2df)](-_0x3f8bab),_0x13e161['renderer'][_0x53c77e(0x207)](_0x34919b,this['texture'],!0x1);}[_0x2beba3(0x833)](_0x540a0a){const _0x2af87a=_0x2beba3;this[_0x2af87a(0x5b6)]=_0x540a0a;let _0x248f86=this[_0x2af87a(0x544)];_0x13e161[_0x2af87a(0x598)]['forEach'](_0x3391b1=>{const _0x29265f=_0x2af87a;_0x3391b1[_0x29265f(0x27c)]&&_0x3391b1[_0x29265f(0x544)]===_0x248f86&&(_0x540a0a?_0x3391b1[_0x29265f(0x351)]():_0x3391b1['removeCrown']());});}['createCellContainer'](){const _0x1821e7=_0x2beba3;let _0x3f3d98=new PIXI[(_0x1821e7(0x71e))]();return _0x3f3d98[_0x1821e7(0x1d1)][_0x1821e7(0x2df)](-_0x420d74/0x2),_0x3f3d98[_0x1821e7(0x589)](_0x1f0cd3(this['getCellColor']())),_0x3f3d98;}['createSkinSprite'](_0x5e257b){const _0x371af4=_0x2beba3;let _0x4fb9b2=new PIXI['BaseTexture'](_0x5e257b),_0x2b3ba5=new PIXI['Texture'](_0x4fb9b2),_0x322f38=new PIXI[(_0x371af4(0x4ec))](_0x2b3ba5);return _0x322f38[_0x371af4(0x339)]=_0x322f38['height']=_0x420d74,_0x322f38[_0x371af4(0x410)]['set'](0.5),_0x322f38;}[_0x2beba3(0x2bd)](){const _0x3cca6e=_0x2beba3;_0x13e161[_0x3cca6e(0x57c)][_0x3cca6e(0x207)](this['cellContainer'],this['texture'],!0x0);}['setTagId'](_0x1a06da){const _0x172b5b=_0x2beba3;return _0x1a06da||(_0x1a06da=null),this['tagId']!==_0x1a06da&&(this[_0x172b5b(0x1c0)]=_0x1a06da,this[_0x172b5b(0x863)]||this[_0x172b5b(0x731)](),!0x0);}[_0x2beba3(0x58a)](_0xf27491,_0x2e30f9){const _0x3a49eb=_0x2beba3;let _0x240f1e=_0x3a49eb(0x34f);if(_0xf27491===!![])_0x240f1e=_0x3a49eb(0x48e);else _0x240f1e=_0x470f67(_0x2e30f9,'ffffff');return _0x240f1e=parseInt(_0x240f1e,0x10),(_0x240f1e,this['nameColorCss']=_0x240f1e&&PIXI[_0x3a49eb(0x389)]['hex2string'](_0x240f1e),_0x240f1e);}[_0x2beba3(0x626)](_0x1259a7,_0x13e165){const _0x2210e3=_0x2beba3;return _0x1259a7||(_0x1259a7=_0x2210e3(0x782)),(this[_0x2210e3(0x6f4)]!==_0x1259a7||this[_0x2210e3(0x717)]!==_0x13e165)&&(this[_0x2210e3(0x6f4)]=_0x1259a7,this[_0x2210e3(0x717)]=_0x13e165,this['applyNameToSprite'](),!0x0);}[_0x2beba3(0x603)](){const _0x6d9f34=_0x2beba3;let _0x38ee23=_0x6d9f34(0x782)===this[_0x6d9f34(0x6f4)],_0x597647=_0x6d9f34(0x6bb)===this[_0x6d9f34(0x6f4)],_0x41f603=_0x38ee23?'':this[_0x6d9f34(0x6f4)],_0x2c73d4=this['name'],_0x4b6777=this['nameColor'],_0x1a09e3;const _0x1b9ab9=!!this['bot'];if(_0x1a09e3=_0x38ee23||_0x597647?this[_0x6d9f34(0x58a)](null,null):this[_0x6d9f34(0x58a)](_0x1b9ab9,this['nameFromServer']),this[_0x6d9f34(0x669)](_0x41f603,_0x1a09e3),_0x38ee23||_0x597647||!(this['nameSprite']['texture'][_0x6d9f34(0x339)]>_0x2fa8d[_0x6d9f34(0x376)])||(_0x597647=!0x0,_0x41f603='Long\x20Name',_0x1a09e3=this['setNameColor'](null,null),this['setNameSprite'](_0x41f603,_0x1a09e3)),this[_0x6d9f34(0x3bb)]=_0x38ee23?_0x6d9f34(0x782):_0x41f603,_0x2c73d4!==this['name']||_0x4b6777!==this[_0x6d9f34(0x2bf)]){let _0x560f9b=_0x1a09e3||(this[_0x6d9f34(0x584)]?0xff8c00:null);_0x13e161['events'][_0x6d9f34(0x246)](_0x6d9f34(0x21c),this['pid'],_0x41f603,_0x1a09e3,_0x560f9b);}}[_0x2beba3(0x669)](_0x2a0184,_0x1b79d5){const _0x2e6e21=_0x2beba3;this['nameSprite']?this[_0x2e6e21(0x5f8)][_0x2e6e21(0x858)]=_0x2a0184:this[_0x2e6e21(0x5f8)]=new PIXI[(_0x2e6e21(0x6f5))](_0x2a0184,_0x2fa8d['nameTextStyle']),this[_0x2e6e21(0x5f8)][_0x2e6e21(0x48d)][_0x2e6e21(0x761)]=_0x1b79d5||0xffffff,this[_0x2e6e21(0x5f8)][_0x2e6e21(0x3eb)]();}[_0x2beba3(0x731)](){const _0x3e34e7=_0x2beba3;let _0x4f9f30='Team\x20'+(null==this[_0x3e34e7(0x1c0)]?0x0:this[_0x3e34e7(0x1c0)]);if(this[_0x3e34e7(0x7a4)])this[_0x3e34e7(0x7a4)][_0x3e34e7(0x858)]=_0x4f9f30;else{let _0x5b5de2={..._0x2fa8d[_0x3e34e7(0x25f)]};_0x5b5de2[_0x3e34e7(0x5a7)]=0x32,this[_0x3e34e7(0x7a4)]=new PIXI[(_0x3e34e7(0x6f5))](_0x4f9f30,_0x5b5de2);}this[_0x3e34e7(0x7a4)][_0x3e34e7(0x48d)][_0x3e34e7(0x761)]=this[_0x3e34e7(0x216)](),this[_0x3e34e7(0x7a4)][_0x3e34e7(0x3eb)]();}[_0x2beba3(0x216)](){const _0x5f4931=_0x2beba3;if(null!=this[_0x5f4931(0x1c0)]){let _0x41fe35=[0x69ff91,0x69fff0,0x696bff,0xff69f3,0xffdc69,0xff6969,0xffff00,0xff00,0xffff,0xff00ff],_0x47eae3=_0x13e161[_0x5f4931(0x656)](this[_0x5f4931(0x1c0)]||0x0);return _0x41fe35[Math['floor'](_0x47eae3*_0x41fe35[_0x5f4931(0x3cd)])];}return 0xffffff;}[_0x2beba3(0x72a)](_0x1a56f9){const _0x35c56a=_0x2beba3;if((_0x1a56f9=_0x1a56f9||null)===this[_0x35c56a(0x28d)])return!0x1;this[_0x35c56a(0x5f7)]();let _0x160b82=this[_0x35c56a(0x22a)]();return _0x160b82&&this[_0x35c56a(0x2bd)](),this[_0x35c56a(0x28d)]=_0x1a56f9,this[_0x35c56a(0x881)]&&this[_0x35c56a(0x76e)](),!0x0;}['destroySkin'](){const _0x41582d=_0x2beba3;return!!this[_0x41582d(0x377)]&&(this[_0x41582d(0x377)][_0x41582d(0x593)]['destroy'](!0x0),this[_0x41582d(0x377)]['destroy'](!0x0),this[_0x41582d(0x377)]=null,!0x0);}[_0x2beba3(0x76e)](){const _0x1e22b4=_0x2beba3;this[_0x1e22b4(0x5f7)](),this[_0x1e22b4(0x1d0)]=_0x13e161['skinLoader'][_0x1e22b4(0x3bf)](this[_0x1e22b4(0x28d)],_0x45586a=>{const _0x100bff=_0x1e22b4;this[_0x100bff(0x377)]=this['createSkinSprite'](_0x45586a),this[_0x100bff(0x377)][_0x100bff(0x593)]=_0x1f0cd3(),this[_0x100bff(0x484)]['addChild'](this['skinSprite']['mask'],this[_0x100bff(0x377)]),this[_0x100bff(0x2bd)]();});}[_0x2beba3(0x30b)](){const _0x3add1f=_0x2beba3;let _0x3f7fde,_0x35f630,_0x3ac04f;this['isMe']?(_0x3f7fde=_0x2fa8d[_0x3add1f(0x208)],_0x35f630=_0x2fa8d[_0x3add1f(0x3ce)],_0x3ac04f=_0x2fa8d['showOwnMass']):(_0x3f7fde=_0x2fa8d[_0x3add1f(0x20c)]>=this[_0x3add1f(0x66a)],_0x35f630=_0x2fa8d[_0x3add1f(0x884)]>=this['visibility'],_0x3ac04f=_0x2fa8d['showMass']>=this[_0x3add1f(0x66a)]),_0x3f7fde=_0x2fa8d[_0x3add1f(0x4a2)]&&_0x3f7fde,_0x35f630=_0x2fa8d['skinsEnabled']&&_0x35f630,_0x3ac04f=_0x2fa8d[_0x3add1f(0x734)]&&_0x3ac04f,_0x35f630&&!this[_0x3add1f(0x881)]?this[_0x3add1f(0x377)]?(this[_0x3add1f(0x377)][_0x3add1f(0x893)]=!0x0,this[_0x3add1f(0x2bd)]()):this[_0x3add1f(0x28d)]&&this[_0x3add1f(0x76e)]():!_0x35f630&&this[_0x3add1f(0x881)]&&(this['abortSkinLoaderIfExist'](),this['skinSprite']&&(this[_0x3add1f(0x377)]['visible']=!0x1,this[_0x3add1f(0x2bd)]())),this[_0x3add1f(0x38c)]=_0x3f7fde,this['skinShown']=_0x35f630,this['massShown']=_0x3ac04f,this['nameColorShown']=_0x2fa8d[_0x3add1f(0x70a)];}[_0x2beba3(0x5f7)](){const _0x127783=_0x2beba3;this['abortSkinLoader']&&(this[_0x127783(0x1d0)](),this['abortSkinLoader']=null);}[_0x2beba3(0x5fc)](){const _0x499909=_0x2beba3;let _0x3fb322=_0x13e161[_0x499909(0x656)](this[_0x499909(0x544)]),_0x1ab6da=Math[_0x499909(0x579)](_0x3fb322*_0x42dcea['length']);return(this[_0x499909(0x863)]?_0x24d925:_0x42dcea)[_0x1ab6da];}[_0x2beba3(0x7e5)](){const _0x241266=_0x2beba3;this['abortSkinLoaderIfExist'](),this[_0x241266(0x22a)](),this[_0x241266(0x484)]['destroy'](!0x0),this['texture'][_0x241266(0x1ea)]=!0x0,this[_0x241266(0x859)][_0x241266(0x396)](!0x0),this[_0x241266(0x5f8)]&&this[_0x241266(0x5f8)][_0x241266(0x396)](!0x0),this['tagSprite']&&this['tagSprite'][_0x241266(0x396)](!0x0),_0x13e161[_0x241266(0x7b4)]['$emit'](_0x241266(0x2e3),this[_0x241266(0x544)]);}};},,function(_0x16f5e8,_0x318eea,_0x4bccaa){const _0x45c225=_0x5f4583;let _0x1ce3cd=_0x4bccaa(0x81),_0x30700c=(_0x30a3b1,_0x42228a)=>{const _0x3eee2=_0x3cc5;let _0x3626e8=_0x30a3b1[_0x3eee2(0x46b)][_0x3eee2(0x72c)](_0x42228a);_0x3626e8>=0x0&&_0x30a3b1[_0x3eee2(0x46b)][_0x3eee2(0x191)](_0x3626e8,0x1);};_0x16f5e8['exports']=class _0x584fa8{constructor(){const _0x17f5af=_0x3cc5;this[_0x17f5af(0x5af)]=new Map(),this[_0x17f5af(0x2b4)]=new _0x1ce3cd(),this[_0x17f5af(0x2b4)][_0x17f5af(0x427)](_0x17f5af(0x848),this['onSkinLoaded']['bind'](this));}[_0x45c225(0x890)](_0x1e79ab){return{'image':null,'errored':null,'callbacks':[_0x1e79ab]};}['clearCallbacks'](){const _0x5aa80b=_0x45c225;this[_0x5aa80b(0x5af)][_0x5aa80b(0x477)]();}[_0x45c225(0x3bf)](_0x43b4f8,_0x446790){const _0x2e0b36=_0x45c225;if(!this[_0x2e0b36(0x5af)][_0x2e0b36(0x5e3)](_0x43b4f8)){let _0x33f568=this[_0x2e0b36(0x890)](_0x446790);return this['loaders'][_0x2e0b36(0x2df)](_0x43b4f8,_0x33f568),this[_0x2e0b36(0x2b4)][_0x2e0b36(0x4bc)](_0x43b4f8),_0x30700c[_0x2e0b36(0x5b4)](null,_0x33f568,_0x446790);}let _0x337b53=this[_0x2e0b36(0x5af)]['get'](_0x43b4f8);if(_0x337b53['image'])_0x446790(_0x337b53[_0x2e0b36(0x683)]);else{if(!_0x337b53['errored'])return _0x337b53[_0x2e0b36(0x46b)][_0x2e0b36(0x491)](_0x446790),_0x30700c[_0x2e0b36(0x5b4)](null,_0x337b53,_0x446790);}return null;}[_0x45c225(0x37f)](_0x15ea0c){const _0x3a867f=_0x45c225;let {url:_0x393cee,image:_0x3442f7,errored:_0x59a2a2}=_0x15ea0c['data'],_0x3ead26=this[_0x3a867f(0x5af)][_0x3a867f(0x7a0)](_0x393cee);if(_0x59a2a2)_0x3ead26['errored']=!0x0,_0x3ead26[_0x3a867f(0x46b)]=[];else{_0x3ead26[_0x3a867f(0x683)]=_0x3442f7;let {callbacks:_0x288821}=_0x3ead26;for(;_0x288821['length'];)_0x288821[_0x3a867f(0x2fa)]()(_0x3442f7);}}};},function(_0x51a3c1,_0xa7e79c,_0x45867c){const _0xf3c6cb=_0x5f4583;let _0x4cd368=atob(_0xf3c6cb(0x197));_0x51a3c1[_0xf3c6cb(0x6e4)]=function(){const _0x78c7c9=_0xf3c6cb;return new Worker(URL['createObjectURL'](new Blob([_0x4cd368],{'type':_0x78c7c9(0x497)})));};},function(_0x4d0a02,_0x1bc681,_0x88ca49){const _0x32e980=_0x5f4583;let _0x4471a9=_0x88ca49(0x83),_0x494943=_0x88ca49(0x1),{getTimestamp:_0x45cc8d}=_0x88ca49(0x8),_0x4da05a=_0x88ca49(0x5),_0x3729db=_0x88ca49(0x4),_0x198317=_0x88ca49(0x4e),_0x133b44=_0x4471a9[_0x32e980(0x869)]({'name':_0x32e980(0x817)}),_0x534c3d=_0x3c6ea5=>btoa(String['fromCharCode']['apply'](null,new Uint8Array(_0x3c6ea5))),_0x59e224=_0x2980ac=>{const _0x42be91=_0x32e980;_0x2980ac=atob(_0x2980ac);let _0x56faab=_0x2980ac[_0x42be91(0x3cd)],_0x563cdb=new ArrayBuffer(_0x56faab),_0x3f4ee2=new Uint8Array(_0x563cdb);for(let _0x1be39e=0x0;_0x1be39e<_0x56faab;_0x1be39e++)_0x3f4ee2[_0x1be39e]=_0x2980ac[_0x42be91(0x198)](_0x1be39e);return _0x563cdb;},_0x40f290=_0x534c3d(new ArrayBuffer(0x1)),_0x1e7617=_0x226598=>{const _0x32d98c=_0x32e980;let _0x5d801a=_0x226598[_0x32d98c(0x2dd)](_0x463898=>{const _0x1c6cf2=_0x32d98c;let _0x525472={'pid':_0x463898[_0x1c6cf2(0x544)],'nickname':_0x463898[_0x1c6cf2(0x6f4)],'skinUrl':_0x463898['skinUrl']};return _0x463898[_0x1c6cf2(0x863)]&&(_0x525472[_0x1c6cf2(0x863)]=!0x0),_0x463898[_0x1c6cf2(0x1c0)]&&(_0x525472['tagId']=_0x463898[_0x1c6cf2(0x1c0)]),_0x463898['nameColorFromServer']&&(_0x525472['nameColor']=_0x463898[_0x1c6cf2(0x717)]),_0x525472;}),_0x14626d=JSON['stringify'](_0x5d801a);_0x14626d=unescape(encodeURIComponent(_0x14626d));let _0x296979=_0x4e7a6f[_0x32d98c(0x2b1)](0x1+_0x14626d[_0x32d98c(0x3cd)]+0x1);return _0x296979[_0x32d98c(0x29f)](0x10),_0x296979[_0x32d98c(0x6ea)](_0x14626d),_0x534c3d(_0x296979[_0x32d98c(0x3d5)]);},_0x467403=_0xa9f231=>{const _0x108d2b=_0x32e980;let _0x590f31=0x0,_0x5d8111=_0xa9f231['length'];for(let _0x379da0=0x0;_0x379da0<_0x5d8111;_0x379da0++){let _0x487284=_0xa9f231[_0x379da0];_0x590f31+=0x1+(0x1===_0x487284['type']?0x2:0x0)+0x2+0x2+0x2+0x2+(_0x487284[_0x108d2b(0x502)]?0x1:0x0);}let _0x5ac705=_0x4e7a6f[_0x108d2b(0x2b1)](0x1+_0x590f31+0x1+0x2+0x2);_0x5ac705['writeUInt8'](0xa);for(let _0x326ce1=0x0;_0x326ce1<_0x5d8111;_0x326ce1++){let _0x34c427=_0xa9f231[_0x326ce1],_0x5654ca=0xfe&_0x34c427[_0x108d2b(0x502)];_0x5ac705[_0x108d2b(0x29f)](_0x34c427[_0x108d2b(0x3e7)]|(_0x5654ca?0x80:0x0)),0x1===_0x34c427['type']&&_0x5ac705[_0x108d2b(0x4ad)](_0x34c427[_0x108d2b(0x544)]),_0x5ac705[_0x108d2b(0x4ad)](_0x34c427['id']),_0x5ac705['writeInt16BE'](_0x34c427['x']),_0x5ac705['writeInt16BE'](_0x34c427['y']),_0x5ac705[_0x108d2b(0x4ad)](_0x34c427[_0x108d2b(0x6d9)]),_0x5654ca&&_0x5ac705['writeUInt8'](_0x5654ca);}return _0x5ac705['writeUInt8'](0x0),_0x5ac705[_0x108d2b(0x4ad)](0x0),_0x5ac705[_0x108d2b(0x4ad)](0x0),_0x5ac705[_0x108d2b(0x630)];};_0x494943[_0x32e980(0x3a7)]=new class _0x17b299{constructor(){const _0x3afe5e=_0x32e980;this[_0x3afe5e(0x670)]=[[],[]],this['packets']=[[],[]],this[_0x3afe5e(0x462)]=_0x133b44;}[_0x32e980(0x55f)](){const _0x562ec5=_0x32e980;let _0x1fef3a=this[_0x562ec5(0x2d4)][0x0];return 0x0!=_0x1fef3a[_0x562ec5(0x3cd)];}[_0x32e980(0x826)](_0x3d12c4,_0x47168c){const _0x207243=_0x32e980;let _0x158e13=this[_0x207243(0x670)][+_0x47168c],_0x3bcd8b=this[_0x207243(0x2d4)][+_0x47168c],_0x19806f=[...(_0x47168c?_0x494943['dual']:_0x494943)[_0x207243(0x670)]['values']()];_0x158e13[_0x207243(0x491)](_0x19806f['map'](_0x483e55=>({'type':_0x483e55['type'],'id':_0x483e55['id'],'pid':_0x483e55[_0x207243(0x544)],'x':_0x483e55['nx'],'y':_0x483e55['ny'],'size':_0x483e55[_0x207243(0x231)],'flags':_0x483e55[_0x207243(0x502)]}))),_0x3bcd8b[_0x207243(0x491)](_0x3d12c4);let _0x9d53d5=0x19*_0x3729db[_0x207243(0x496)];_0x3bcd8b[_0x207243(0x3cd)]>_0x9d53d5&&(_0x3bcd8b[_0x207243(0x5b9)](),_0x158e13[_0x207243(0x5b9)]());}[_0x32e980(0x477)](_0x24b2b1){const _0x4c44e5=_0x32e980;let _0x46144e=this['cells'][+_0x24b2b1],_0x6cef0=this[_0x4c44e5(0x2d4)][+_0x24b2b1];_0x46144e[_0x4c44e5(0x3cd)]=0x0,_0x6cef0[_0x4c44e5(0x3cd)]=0x0;}[_0x32e980(0x52f)](_0x39fdef){const _0x34373e=_0x32e980;_0x494943[_0x34373e(0x4b9)]&&_0x494943[_0x34373e(0x5a4)](),_0x494943[_0x34373e(0x25e)][_0x34373e(0x655)](),_0x4da05a[_0x34373e(0x88d)][_0x34373e(0x655)]();let _0x448a87=0x1,_0x453ba7=_0x39fdef['split']('|');'REPLAY'===_0x453ba7['at'](0x0)&&(_0x448a87=parseInt(_0x453ba7[0x1]),_0x453ba7=_0x453ba7['slice'](0x3));let _0x486d77=_0x453ba7['map'](_0x35a604=>_0x4e7a6f[_0x34373e(0x7f7)](_0x59e224(_0x35a604),0x1)),_0x4f56cf=_0x198317(_0x486d77['shift']()),_0x4440aa=[];if(_0x448a87>=0x4){let _0x40da21;for(;(_0x40da21=_0x486d77[0x0])[_0x34373e(0x739)](0x0);){let {view:_0x2994ed}=_0x40da21;_0x2994ed['packetId']=0x1,_0x40da21[_0x34373e(0x1a9)]=0x0,_0x4440aa[_0x34373e(0x491)](_0x40da21),_0x486d77[_0x34373e(0x5b9)]();}_0x486d77[_0x34373e(0x5b9)]();}else _0x4440aa[_0x34373e(0x491)](_0x486d77[_0x34373e(0x5b9)]());_0x4f56cf[_0x34373e(0x697)]=_0x486d77,_0x494943[_0x34373e(0x253)](_0x4f56cf),_0x4440aa[_0x34373e(0x51f)](_0xde5713=>_0x494943[_0x34373e(0x4d1)](_0xde5713)),_0x494943['playback'][_0x34373e(0x53c)](),_0x494943[_0x34373e(0x5ef)](!0x1);}[_0x32e980(0x21d)](_0x213e04){const _0x48b25e=_0x32e980;let _0x23d881=this[_0x48b25e(0x670)][+_0x213e04][_0x48b25e(0x7fb)](0x0),_0x35d056=this[_0x48b25e(0x2d4)][+_0x213e04]['slice'](0x0);if(!_0x35d056[_0x48b25e(0x3cd)])return;let _0x4f64bc=[..._0x494943[_0x48b25e(0x803)][_0x48b25e(0x534)][_0x48b25e(0x732)]()];_0x35d056[_0x48b25e(0x191)](0x0,0x1,_0x467403(_0x23d881['at'](0x0)));let _0x4e73b8=['REPLAY',0x4];_0x4e73b8[_0x48b25e(0x491)](_0x494943[_0x48b25e(0x59d)]()),_0x4e73b8[_0x48b25e(0x491)](_0x534c3d(_0x494943[_0x48b25e(0x50e)]['buffer']));let {dual:_0x170b20}=_0x494943;if(_0x170b20[_0x48b25e(0x206)]){let _0x3d909=_0x4e7a6f['fromSize'](0x3);_0x3d909['writeUInt8'](0x8),_0x3d909['writeUInt16LE'](_0x170b20[_0x48b25e(0x544)]),_0x4e73b8['push'](_0x534c3d(_0x3d909['buffer']));}_0x4e73b8[_0x48b25e(0x491)](_0x1e7617(_0x4f64bc)),_0x4e73b8['push'](_0x40f290),_0x4e73b8[_0x48b25e(0x491)](_0x35d056[_0x48b25e(0x2dd)](_0x206723=>_0x534c3d(_0x206723[_0x48b25e(0x3d5)]))['join']('|'));let _0x2df9e8=_0x4e73b8['join']('|');_0x133b44[_0x48b25e(0x41a)](_0x45cc8d(),_0x2df9e8,()=>{const _0x576401=_0x48b25e;_0x494943[_0x576401(0x7b4)]['$emit'](_0x576401(0x58f));let _0xc25b78='Replay\x20saved!';0x1===_0x3729db[_0x576401(0x860)]?_0x494943[_0x576401(0x7b4)][_0x576401(0x246)]('chat-message',_0xc25b78):_0x4da05a[_0x576401(0x88d)][_0x576401(0x201)]({'type':'info','title':_0xc25b78,'timer':0x5dc});})[_0x48b25e(0x273)](_0x38d0ab=>{const _0x737ca=_0x48b25e;_0x33824f('Error\x20saving\x20replay',''+_0x38d0ab,0xbb8,![]);let _0x2cd1c5=_0x737ca(0x62e);_0x737ca(0x7d3)==typeof _0x38d0ab?_0x2cd1c5+=':\x20'+_0x38d0ab:_0x38d0ab&&_0x38d0ab[_0x737ca(0x848)]&&(_0x2cd1c5+=':\x20'+_0x38d0ab[_0x737ca(0x848)]),_0x4da05a[_0x737ca(0x88d)][_0x737ca(0x201)]({'type':_0x737ca(0x1dd),'title':_0x2cd1c5});});}}();},,function(_0x8ec886,_0x388d98,_0x3075b2){const _0xadf32c=_0x5f4583;let _0x5f071a=_0x3075b2(0x1),{wasmModule:_0xde068f,addOrUpdateCell:_0x5ef96a,destroyCell:_0x3b1e03,eatCell:_0x524a6b}=_0x3075b2(0x4f);_0x8ec886[_0xadf32c(0x6e4)]=_0x5f071a[_0xadf32c(0x1ff)]=new class _0x5c75d8{constructor(){const _0x482d49=_0xadf32c;this[_0x482d49(0x79b)]=[],this[_0x482d49(0x664)]=!0x1,this[_0x482d49(0x295)]=0x0;}['destroyCell'](_0x50896e){let {updates:_0x51e138}=this,_0x44f781=_0x51e138[0x0];_0x44f781[0x3][_0x50896e]=!0x0;let _0x263c64=_0x44f781[0x1];_0x263c64['push'](_0x50896e);}['eatCell'](_0x60a16a,_0x49c7e6){const _0x28ca07=_0xadf32c;let {updates:_0x4b473f}=this,_0x2a0162=_0x4b473f[0x0];_0x2a0162[0x3][_0x60a16a]=!0x0;let _0x5a9802=_0x2a0162[0x2];_0x5a9802[_0x28ca07(0x491)](_0x60a16a,_0x49c7e6);}['parse'](_0x3452bc){const _0x1e7fcb=_0xadf32c;_0xde068f[_0x1e7fcb(0x3fc)](0x1,new Uint8Array(_0x3452bc[_0x1e7fcb(0x3d5)],0x1),0x1);}[_0xadf32c(0x49d)](){const _0x19693a=_0xadf32c;let {updates:_0x504a11}=this;_0x504a11['splice'](0x0,_0x504a11['length']),delete _0x504a11[_0x19693a(0x295)];}[_0xadf32c(0x2df)](_0x18eb1b){const _0x4b9e98=_0xadf32c;this['reset'](),this[_0x4b9e98(0x664)]=!0x0;let {updates:_0x23931f}=this,_0x4c0fde=_0x18eb1b[_0x4b9e98(0x3cd)],_0x1027de=0x0;for(;_0x4c0fde--;)_0x23931f[_0x4b9e98(0x298)]([{},[],[],{}]),this[_0x4b9e98(0x192)](_0x18eb1b[_0x1027de++]);_0x23931f[_0x4b9e98(0x43c)](),delete this[_0x4b9e98(0x664)],this['index']=0x0;}[_0xadf32c(0x53c)](){const _0x7caf90=_0xadf32c;let {cells:_0x54f911}=_0x5f071a,{updates:_0x39cc29}=this,[_0x44a68e,_0x376bf1,_0x281eda,_0x55d1a9]=_0x39cc29;for(let _0x49c4a4 of _0x54f911[_0x7caf90(0x613)]()){let _0x36bc3d=_0x54f911[_0x7caf90(0x7a0)](_0x49c4a4);_0x49c4a4 in _0x55d1a9||(_0x49c4a4 in _0x44a68e?_0x44a68e[_0x49c4a4][_0x7caf90(0x544)]=_0x36bc3d[_0x7caf90(0x544)]:_0x44a68e[_0x49c4a4]={'type':_0x36bc3d[_0x7caf90(0x3e7)],'id':_0x36bc3d['id'],'pid':_0x36bc3d[_0x7caf90(0x544)],'x':_0x36bc3d['nx'],'y':_0x36bc3d['ny'],'size':_0x36bc3d[_0x7caf90(0x231)],'flags':_0x36bc3d[_0x7caf90(0x502)]});}for(let _0x394c8a=0x1;_0x394c8a<_0x39cc29[_0x7caf90(0x3cd)];_0x394c8a++){let _0x47eecf=_0x39cc29[_0x394c8a-0x1],_0x47c060=_0x39cc29[_0x394c8a];for(let _0x5831fc in _0x47c060[0x0]){if(!(_0x5831fc in _0x47eecf[0x0]))continue;let _0x19baa6=_0x47c060[0x0][_0x5831fc],_0x43cbeb=_0x47eecf[0x0][_0x5831fc];0x10&_0x19baa6[_0x7caf90(0x3e7)]&&(_0x19baa6['pid']=_0x43cbeb[_0x7caf90(0x544)]),0x20&_0x19baa6[_0x7caf90(0x3e7)]&&(_0x19baa6['x']=_0x43cbeb['x'],_0x19baa6['y']=_0x43cbeb['y']),0x40&_0x19baa6['type']&&(_0x19baa6[_0x7caf90(0x6d9)]=_0x43cbeb[_0x7caf90(0x6d9)]);}for(let _0x1344a5 in _0x47eecf[0x0])_0x1344a5 in _0x47c060[0x3]||_0x1344a5 in _0x47c060[0x0]||(_0x47c060[0x0][_0x1344a5]=_0x47eecf[0x0][_0x1344a5]);}}[_0xadf32c(0x654)](_0x4cb77d,_0x51ff30){const _0x4dbda3=_0xadf32c;let {cells:_0x287d6d}=_0x5f071a,_0x261390=this[_0x4dbda3(0x79b)][_0x4cb77d];for(let _0x346f91 of _0x287d6d[_0x4dbda3(0x613)]())!_0x51ff30&&_0x346f91 in _0x261390[0x0]||_0x3b1e03(_0x346f91,0x1);for(let _0x29c54d of Object[_0x4dbda3(0x732)](_0x261390[0x0])){let {type:_0x590ba7,pid:_0x5d1f80,id:_0x4a2a69,x:_0x246d2c,y:_0x4673dc,size:_0x292d6e,flags:_0x5e3cb5}=_0x29c54d;_0x5ef96a(_0x590ba7,_0x5d1f80,_0x4a2a69,_0x246d2c,_0x4673dc,_0x292d6e,_0x5e3cb5,0x1,0x1);}this[_0x4dbda3(0x295)]=_0x4cb77d,_0x5f071a[_0x4dbda3(0x50c)](!0x0);}[_0xadf32c(0x71a)](){const _0x191cc8=_0xadf32c;let {updates:_0x3d907d}=this;if(this[_0x191cc8(0x295)]<_0x3d907d[_0x191cc8(0x3cd)]){let [_0x422e86,_0x1d35a6,_0x5cf43d]=_0x3d907d[this[_0x191cc8(0x295)]++];for(let _0x593011 of Object[_0x191cc8(0x732)](_0x422e86)){let {type:_0x205ef0,pid:_0x501045,id:_0x5af8d6,x:_0x4fecfa,y:_0x5f0775,size:_0x2a814d,flags:_0x2de5a8}=_0x593011;_0x5ef96a(_0x205ef0,_0x501045,_0x5af8d6,_0x4fecfa,_0x5f0775,_0x2a814d,_0x2de5a8,0x1,0x1);}let _0x536941=_0x1d35a6[_0x191cc8(0x3cd)],_0x4641ba=0x0;for(;_0x4641ba<_0x536941;)_0x3b1e03(_0x1d35a6[_0x4641ba++],0x1);for(_0x536941=_0x5cf43d[_0x191cc8(0x3cd)],_0x4641ba=0x0;_0x4641ba<_0x536941;)_0x524a6b(_0x5cf43d[_0x4641ba++],_0x5cf43d[_0x4641ba++],0x1);_0x5f071a['updateCamera'](!0x0);}else this[_0x191cc8(0x654)](0x0,!0x0);_0x5f071a['events'][_0x191cc8(0x246)](_0x191cc8(0x59b),this['index']);}}();},function(_0x223798,_0x21c49a,_0x23183a){const _0x21eef9=_0x5f4583;_0x223798[_0x21eef9(0x6e4)]={'PlayerCell':_0x23183a(0x86),'Food':_0x23183a(0x87),'Virus':_0x23183a(0x88),'EjectedMass':_0x23183a(0x89),'DeadCell':_0x23183a(0x8a),'Crown':_0x23183a(0x8b)};},function(_0x1722f8,_0x25d211,_0x52a5a9){const _0x446d51=_0x5f4583;let _0x3c9beb=_0x52a5a9(0x1),_0x7a5f70=_0x52a5a9(0x4),_0x53fce2=_0x52a5a9(0xe),_0x35c44a=_0x4be45d=>{const _0x199119=_0x3cc5;let _0xb800e9=new PIXI[(_0x199119(0x409))]('',{'fontName':_0x199119(0x70b),'align':_0x199119(0x65f)}),_0x125905=_0x4be45d[_0x199119(0x495)]||0x0;return _0xb800e9['position'][_0x199119(0x2df)](-_0x125905/0x2,-_0x125905/0x2),_0xb800e9[_0x199119(0x410)][_0x199119(0x2df)](0.5,-0.6),_0xb800e9;};class _0x377ed1 extends PIXI['Graphics']{constructor(_0x349e40){const _0xec4552=_0x3cc5;super(),this['alpha']=0.35,this[_0xec4552(0x834)](_0x349e40);}[_0x446d51(0x834)](_0x398d3a,_0xbc6295,_0x26d2bb,_0x76b02f){const _0x2789d4=_0x446d51;_0x398d3a&&_0xbc6295&&_0x26d2bb&&_0x76b02f&&(this[_0x2789d4(0x477)](),this['lineStyle'](0xc,0xffffff),this[_0x2789d4(0x40f)](_0x398d3a,_0xbc6295),this['lineTo'](_0x26d2bb,_0x76b02f));}}class _0x549434 extends _0x53fce2{constructor(_0x418e1,_0x8f8d3e){const _0x28a6a2=_0x446d51;super(_0x418e1),this[_0x28a6a2(0x6eb)]=_0x8f8d3e,this['pid']=_0x8f8d3e[_0x28a6a2(0x544)];let _0x116ed0=this[_0x28a6a2(0x584)]=this[_0x28a6a2(0x544)]==_0x3c9beb[_0x28a6a2(0x47e)]||this[_0x28a6a2(0x544)]===_0x3c9beb[_0x28a6a2(0x370)],{ownedCells:_0x57cb2b}=_0x3c9beb;_0x116ed0&&!_0x57cb2b['has'](this)&&_0x57cb2b[_0x28a6a2(0x826)](this),_0x8f8d3e[_0x28a6a2(0x5b6)]&&this[_0x28a6a2(0x351)](),!_0x3c9beb[_0x28a6a2(0x40e)]&&_0x116ed0&&(this[_0x28a6a2(0x6f2)](),this[_0x28a6a2(0x5ea)]());}[_0x446d51(0x2ca)](){const _0x2ded95=_0x446d51;let {line:_0x47e6ac}=this;if(_0x47e6ac){if(_0x7a5f70['showCellLines']){let {dual:_0x4d499f}=_0x3c9beb;_0x4d499f[_0x2ded95(0x206)]?_0x47e6ac[_0x2ded95(0x893)]=this[_0x2ded95(0x544)]===_0x3c9beb[_0x2ded95(0x239)]:_0x47e6ac[_0x2ded95(0x893)]=!0x0;}else _0x47e6ac[_0x2ded95(0x893)]=!0x1;}}[_0x446d51(0x5ea)](){const _0x36f5fd=_0x446d51;let {x:_0x24b1ba,y:_0x233c55}=_0x3c9beb[_0x36f5fd(0x5b1)];this[_0x36f5fd(0x5c5)]=new _0x377ed1([this['x'],this['y'],_0x24b1ba,_0x233c55]),_0x3c9beb[_0x36f5fd(0x6b8)][_0x36f5fd(0x2c5)][_0x36f5fd(0x589)](this[_0x36f5fd(0x5c5)]),this['updateLineVisibility']();}['addArrow'](){const _0x292096=_0x446d51;let {dual:_0x1b819b}=_0x3c9beb;if(!_0x1b819b[_0x292096(0x20b)]){Swal[_0x292096(0x201)]({'title':_0x292096(0x54c),'text':_0x292096(0x5a6),'showConfirmButton':'OK'});return;}let _0x2f7cfb=this[_0x292096(0x20b)]=new PIXI[(_0x292096(0x4ec))][(_0x292096(0x648))](_0x1b819b[_0x292096(0x20b)]['texture']);_0x2f7cfb[_0x292096(0x893)]=_0x7a5f70[_0x292096(0x23e)]>=0x2&&this[_0x292096(0x544)]===_0x3c9beb[_0x292096(0x239)],_0x2f7cfb[_0x292096(0x410)][_0x292096(0x2df)](0.5),_0x2f7cfb[_0x292096(0x339)]=_0x2f7cfb[_0x292096(0x5ec)]=0x82,_0x2f7cfb[_0x292096(0x592)]=0.95,_0x2f7cfb['y']=-0x136,this[_0x292096(0x667)][_0x292096(0x589)](_0x2f7cfb);}[_0x446d51(0x351)](){const _0x43ff63=_0x446d51;if(!this['sprite']||this['crownSprite'])return;let _0x42f0c7=_0x3c9beb['crownPool'],_0x108da9;_0x42f0c7[_0x43ff63(0x3cd)]?_0x108da9=_0x42f0c7[_0x43ff63(0x2fa)]():((_0x108da9=PIXI[_0x43ff63(0x4ec)]['from'](_0x43ff63(0x212)))[_0x43ff63(0x533)][_0x43ff63(0x2df)](0.7),_0x108da9['pivot'][_0x43ff63(0x2df)](0x0,0x283),_0x108da9['anchor']['x']=0.5,_0x108da9[_0x43ff63(0x60b)]=-0.5,_0x108da9['alpha']=0.7,_0x108da9['zIndex']=0x2),this[_0x43ff63(0x225)]=_0x108da9,this['sprite'][_0x43ff63(0x589)](_0x108da9);}['removeCrown'](){const _0x367778=_0x446d51;if(!this[_0x367778(0x667)]||!this[_0x367778(0x225)])return;var _0x1772c9=this[_0x367778(0x225)];this[_0x367778(0x667)][_0x367778(0x7dc)](_0x1772c9),_0x3c9beb[_0x367778(0x65a)]['push'](_0x1772c9),this[_0x367778(0x225)]=null;}[_0x446d51(0x28b)](){const _0x1e2e16=_0x446d51;if(_0x7a5f70[_0x1e2e16(0x82b)]&&!this[_0x1e2e16(0x23c)]){let _0x2aaa52=this['directionSprite']=new PIXI[(_0x1e2e16(0x4ec))][(_0x1e2e16(0x648))](_0x1e2e16(0x65d));_0x2aaa52[_0x1e2e16(0x533)]['set'](0.1),_0x2aaa52['alpha']=0.7,_0x2aaa52[_0x1e2e16(0x410)][_0x1e2e16(0x2df)](3.5,3.5),this[_0x1e2e16(0x667)][_0x1e2e16(0x589)](_0x2aaa52);}let _0x482ef3=_0x3c9beb[_0x1e2e16(0x6b8)][_0x1e2e16(0x2c5)][_0x1e2e16(0x533)]['x']*this[_0x1e2e16(0x6d9)]*_0x3c9beb['renderer']['resolution'],_0x39be7a=_0x482ef3>_0x7a5f70[_0x1e2e16(0x247)],{player:_0x24710f}=this;if(_0x24710f[_0x1e2e16(0x36c)]&&!this['massText']&&_0x39be7a&&(this[_0x1e2e16(0x64d)]=_0x3c9beb[_0x1e2e16(0x3e2)][_0x1e2e16(0x2fa)]()||_0x35c44a(_0x7a5f70[_0x1e2e16(0x21a)]),this[_0x1e2e16(0x64d)][_0x1e2e16(0x366)]=0x0,this[_0x1e2e16(0x667)][_0x1e2e16(0x589)](this[_0x1e2e16(0x64d)])),_0x24710f[_0x1e2e16(0x38c)]&&!this[_0x1e2e16(0x5f8)]&&_0x24710f[_0x1e2e16(0x5f8)]&&_0x39be7a&&(this['nameSprite']=new PIXI[(_0x1e2e16(0x4ec))](_0x24710f[_0x1e2e16(0x5f8)][_0x1e2e16(0x859)]),this[_0x1e2e16(0x5f8)][_0x1e2e16(0x410)][_0x1e2e16(0x2df)](0.5),this[_0x1e2e16(0x5f8)][_0x1e2e16(0x366)]=0x1,this[_0x1e2e16(0x667)][_0x1e2e16(0x589)](this[_0x1e2e16(0x5f8)])),_0x7a5f70[_0x1e2e16(0x312)]&&!this[_0x1e2e16(0x7a4)]&&_0x24710f['tagSprite']&&(_0x24710f[_0x1e2e16(0x1c0)]!==_0x3c9beb[_0x1e2e16(0x1c0)]||null===_0x3c9beb[_0x1e2e16(0x1c0)])){let _0x3e384b=this['tagSprite']=new PIXI[(_0x1e2e16(0x4ec))](_0x24710f[_0x1e2e16(0x7a4)][_0x1e2e16(0x859)]);_0x3e384b[_0x1e2e16(0x410)][_0x1e2e16(0x2df)](0.5),_0x3e384b['y']=0xb4,_0x3e384b[_0x1e2e16(0x366)]=0x1,this[_0x1e2e16(0x667)][_0x1e2e16(0x589)](_0x3e384b);}let {line:_0x4709da}=this;if(_0x4709da&&_0x4709da[_0x1e2e16(0x893)]){let {x:_0x49a824,y:_0x8e3535}=_0x3c9beb[_0x1e2e16(0x5b1)];_0x4709da[_0x1e2e16(0x834)](this['x'],this['y'],_0x49a824,_0x8e3535);}this[_0x1e2e16(0x225)]&&(this[_0x1e2e16(0x225)]['visible']=_0x482ef3>0x10&&_0x7a5f70['showCrown']),this['nameSprite']&&(this[_0x1e2e16(0x5f8)][_0x1e2e16(0x893)]=_0x24710f[_0x1e2e16(0x38c)]&&_0x39be7a),this[_0x1e2e16(0x7a4)]&&(this[_0x1e2e16(0x7a4)][_0x1e2e16(0x893)]=_0x7a5f70[_0x1e2e16(0x312)]);let {directionSprite:_0x1c16fd}=this;if(_0x1c16fd&&(_0x1c16fd['visible']=_0x7a5f70['showDir']&&!_0x24710f[_0x1e2e16(0x584)])){let _0x10c0eb=0x0,_0x4193f5=!0x1,{ox:_0x486347,oy:_0x350c7f,nx:_0x4f52b7,ny:_0x2f4557}=this;_0x4f52b7>_0x486347?(_0x4f52b7-_0x486347<0x3&&(_0x4193f5=!0x0),_0x10c0eb=_0x2f4557<_0x350c7f?_0x4193f5?0x0:_0x350c7f-_0x2f4557<0x3?0x2:0x1:_0x4193f5?0x4:_0x2f4557-_0x350c7f<0x3?0x2:0x3):(_0x486347-_0x4f52b7<0x3&&(_0x4193f5=!0x0),_0x10c0eb=_0x2f4557<_0x350c7f?_0x4193f5?0x0:_0x350c7f-_0x2f4557<0x3?0x6:0x7:_0x4193f5?0x4:_0x2f4557-_0x350c7f<0x3?0x6:0x5),_0x1c16fd['rotation']=_0x361ccf[_0x10c0eb];}let {massText:_0x40d0b2}=this;if(_0x40d0b2){if(_0x24710f[_0x1e2e16(0x36c)]&&_0x39be7a){let _0x24677b=_0x3c9beb[_0x1e2e16(0x461)](this['nSize']*this['nSize']/0x64);_0x40d0b2['text']=_0x24677b,_0x40d0b2[_0x1e2e16(0x893)]=!0x0;}else _0x40d0b2[_0x1e2e16(0x893)]&&(_0x40d0b2[_0x1e2e16(0x893)]=!0x1);}}['onDestroy'](){const _0x1690fb=_0x446d51;this[_0x1690fb(0x20b)]&&(this[_0x1690fb(0x667)][_0x1690fb(0x7dc)](this[_0x1690fb(0x20b)]),this[_0x1690fb(0x20b)][_0x1690fb(0x396)](),delete this[_0x1690fb(0x20b)]),this[_0x1690fb(0x7a4)]&&(this[_0x1690fb(0x667)][_0x1690fb(0x7dc)](this['tagSprite']),this[_0x1690fb(0x7a4)]['destroy'](),delete this[_0x1690fb(0x7a4)]),this[_0x1690fb(0x23c)]&&(this[_0x1690fb(0x667)][_0x1690fb(0x7dc)](this[_0x1690fb(0x23c)]),this[_0x1690fb(0x23c)][_0x1690fb(0x396)](),delete this['directionSprite']),this[_0x1690fb(0x5c5)]&&(_0x3c9beb[_0x1690fb(0x6b8)][_0x1690fb(0x2c5)][_0x1690fb(0x7dc)](this[_0x1690fb(0x5c5)]),this[_0x1690fb(0x5c5)][_0x1690fb(0x396)](),delete this[_0x1690fb(0x5c5)]),this[_0x1690fb(0x64d)]&&(this[_0x1690fb(0x667)][_0x1690fb(0x7dc)](this[_0x1690fb(0x64d)]),_0x3c9beb[_0x1690fb(0x3e2)][_0x1690fb(0x491)](this[_0x1690fb(0x64d)])),this[_0x1690fb(0x225)]&&this[_0x1690fb(0x2a6)]();}}_0x549434[_0x446d51(0x4d7)][_0x446d51(0x3e7)]=0x1,_0x549434['prototype'][_0x446d51(0x27c)]=!0x0,_0x1722f8[_0x446d51(0x6e4)]=_0x549434;},function(_0xad80cb,_0x24ff7a,_0x57121f){const _0x939f2a=_0x5f4583;let _0x362676=_0x57121f(0x4),{cells:_0x2dd42f}=_0x57121f(0xc),{neon:_0xf1c84}=_0x57121f(0x4c),_0x14f0df=_0x57121f(0xe),_0x4d305f=_0x1c63c6=>_0x2dd42f[_0x939f2a(0x3ca)](_0x362676[_0x939f2a(0x5df)]?parseInt(_0x362676[_0x939f2a(0x514)],0x10):_0xf1c84[_0x1c63c6%_0xf1c84[_0x939f2a(0x3cd)]]);class _0x549d70 extends _0x14f0df{constructor(_0x2ff672){const _0x519b0c=_0x939f2a;_0x2ff672[_0x519b0c(0x859)]=_0x4d305f(_0x2ff672['id']),super(_0x2ff672);}[_0x939f2a(0x4eb)](){const _0x590523=_0x939f2a;this['sprite'][_0x590523(0x859)]=this[_0x590523(0x859)]=_0x4d305f(this['id']);}}_0x549d70['prototype'][_0x939f2a(0x3e7)]=0x4,_0x549d70['prototype']['isFood']=!0x0,_0xad80cb[_0x939f2a(0x6e4)]=_0x549d70;},function(_0x1af569,_0x48b0d,_0x1e6468){const _0x1c1de8=_0x5f4583;let _0x4b0682=_0x1e6468(0xe),{virus:_0x12281f}=_0x1e6468(0xc);class _0x11cd15 extends _0x4b0682{constructor(_0x5b5666){const _0x21ebe1=_0x3cc5;_0x5b5666[_0x21ebe1(0x859)]=_0x12281f[_0x21ebe1(0x3ca)](),super(_0x5b5666);}[_0x1c1de8(0x714)](){const _0x3e0f24=_0x1c1de8;this[_0x3e0f24(0x476)](),this[_0x3e0f24(0x859)]=_0x12281f[_0x3e0f24(0x3ca)](),this['sprite']=new PIXI[(_0x3e0f24(0x4ec))](this[_0x3e0f24(0x859)]),this['sprite']['anchor'][_0x3e0f24(0x2df)](0.5),this[_0x3e0f24(0x667)]['gameData']=this;}}_0x11cd15[_0x1c1de8(0x4d7)]['type']=0x2,_0x11cd15[_0x1c1de8(0x4d7)][_0x1c1de8(0x6c5)]=!0x0,_0x1af569[_0x1c1de8(0x6e4)]=_0x11cd15;},function(_0x2d8003,_0x3cb0f3,_0x35a312){const _0x30d1e3=_0x5f4583;let _0x32355a=_0x35a312(0x1),_0x98f124=_0x35a312(0x4),{cells:_0x28511f}=_0x35a312(0xc),_0x23dcfa=_0x35a312(0xe),_0x46e082=()=>_0x28511f['getTexture'](parseInt(_0x98f124[_0x30d1e3(0x2d1)],0x10)),{clampNumber:_0xb84186}=_0x35a312(0x8);class _0x420b60 extends _0x23dcfa{constructor(_0x23d71c){const _0x4348b7=_0x30d1e3;_0x23d71c[_0x4348b7(0x859)]=_0x46e082(),super(_0x23d71c),this[_0x4348b7(0x667)][_0x4348b7(0x592)]=0x0;}['reloadTexture'](){const _0x1e6f57=_0x30d1e3;this[_0x1e6f57(0x667)]['texture']=this['texture']=_0x46e082();}[_0x30d1e3(0x28b)](){const _0x5677b7=_0x30d1e3;let {sprite:_0x4b2923}=this;if(!_0x4b2923||0x1==_0x4b2923[_0x5677b7(0x592)])return;let _0x197d37=_0x32355a[_0x5677b7(0x56b)]-this[_0x5677b7(0x867)],_0x57a8c7=_0xb84186(_0x197d37/0x3e8,0x0,0x1);_0x4b2923[_0x5677b7(0x592)]=Math['min'](_0x4b2923[_0x5677b7(0x592)]+_0x57a8c7,0x1);}}_0x420b60[_0x30d1e3(0x4d7)][_0x30d1e3(0x3e7)]=0x3,_0x420b60['prototype'][_0x30d1e3(0x806)]=!0x0,_0x2d8003[_0x30d1e3(0x6e4)]=_0x420b60;},function(_0x1f4cc9,_0x5357a9,_0x2e0ae6){const _0x5eaaca=_0x5f4583;let _0x49be99=_0x2e0ae6(0xe),{squares:_0x4c1fb3,cells:_0x36fd88}=_0x2e0ae6(0xc);class _0xc68d45 extends _0x49be99{constructor(_0x49260c,_0x59e0d4,_0x821007){const _0x448027=_0x3cc5;_0x49260c[_0x448027(0x859)]=(_0x821007?_0x4c1fb3:_0x36fd88)['getTexture'](_0x59e0d4||0x404040),super(_0x49260c),this[_0x448027(0x667)][_0x448027(0x592)]=0.5;}}_0xc68d45['prototype'][_0x5eaaca(0x3e7)]=0x5,_0xc68d45[_0x5eaaca(0x4d7)][_0x5eaaca(0x875)]=!0x0,_0x1f4cc9[_0x5eaaca(0x6e4)]=_0xc68d45;},function(_0x3d1bfd,_0x4543b2,_0x1ad093){const _0x32a7cc=_0x5f4583;let _0x197a20=_0x1ad093(0xe);class _0x283b76 extends _0x197a20{constructor(_0x4a2eb6){const _0x502743=_0x3cc5;_0x4a2eb6[_0x502743(0x859)]=PIXI[_0x502743(0x25c)][_0x502743(0x648)](_0x502743(0x212)),super(_0x4a2eb6),this['sprite']['alpha']=0.7;}}_0x283b76[_0x32a7cc(0x4d7)][_0x32a7cc(0x3e7)]=0x6,_0x283b76['prototype']['isCrown']=!0x0,_0x3d1bfd[_0x32a7cc(0x6e4)]=_0x283b76;},function(_0x40ca2e,_0x3f0a2f,_0x19fbcc){},function(_0x1923d6,_0x287e52,_0x15a326){},function(_0x258586,_0x707258,_0xb483a8){const _0x8b9fb3=_0x5f4583;let _0x4b527c=_0xb483a8(0x1),{state:_0x127379}=_0x4b527c,_0xe33a68=_0xb483a8(0x4e),{wasmModule:_0x3a0ac5}=_0xb483a8(0x4f);_0x258586[_0x8b9fb3(0x6e4)]=_0x4b527c['dual']=new class _0x3f08bf{constructor(){const _0x2dc819=_0x8b9fb3;this['ws']=null,this[_0x2dc819(0x2ab)]=!0x1,this[_0x2dc819(0x33e)]=!0x1,this['pid']=null,this['pingStamp']=0x0,this['autoRespawning'],this[_0x2dc819(0x596)],this[_0x2dc819(0x69d)]=0x0,this[_0x2dc819(0x670)]=new Map(),this[_0x2dc819(0x20b)]=null,this[_0x2dc819(0x390)]();}['log'](_0x40482b){const _0x3ed582=_0x8b9fb3;_0x4b527c[_0x3ed582(0x7b4)][_0x3ed582(0x246)]('chat-message',_0x40482b);}get[_0x8b9fb3(0x206)](){const _0x11ec88=_0x8b9fb3;return this[_0x11ec88(0x33e)]&&!!this[_0x11ec88(0x758)];}[_0x8b9fb3(0x6aa)](){const _0x43dfd2=_0x8b9fb3;let {connectionUrl:_0x34f173}=_0x127379;if(!_0x34f173)return;let _0x20c709=this['ws']=new WebSocket(_0x34f173,'tFoL46WDlZuRja7W6qCl');_0x20c709[_0x43dfd2(0x75d)]=_0x43dfd2(0x4e5),_0x20c709['packetCount']=0x0,this[_0x43dfd2(0x33e)]=!0x0,_0x20c709[_0x43dfd2(0x563)]=()=>{const _0x5c1cec=_0x43dfd2;this[_0x5c1cec(0x33e)]&&(this['ws'][_0x5c1cec(0x1c5)]=this['onClosed']['bind'](this),this[_0x5c1cec(0x390)]());},_0x20c709[_0x43dfd2(0x851)]=_0x500928=>{const _0x579996=_0x43dfd2;let {data:_0x4cd3d1}=_0x500928;_0x4b527c[_0x579996(0x445)]+=_0x4cd3d1[_0x579996(0x35f)],this['handleMessage'](new DataView(_0x4cd3d1));},_0x20c709['onclose']=this[_0x43dfd2(0x7b9)][_0x43dfd2(0x5b4)](this);}[_0x8b9fb3(0x655)](){const _0x80657d=_0x8b9fb3;let {ws:_0x30e6fd}=this;_0x30e6fd&&(_0x30e6fd[_0x80657d(0x851)]=null,_0x30e6fd[_0x80657d(0x1c5)]=null,_0x30e6fd[_0x80657d(0x63b)]=null,_0x30e6fd['close'](),this['ws']=null),this[_0x80657d(0x2ab)]=!0x1,this[_0x80657d(0x33e)]=!0x1,this['pid']=_0x4b527c[_0x80657d(0x370)]=null,this[_0x80657d(0x399)]=0x0,delete this['alive'],this[_0x80657d(0x69d)]=0x0,delete this['ready'],this[_0x80657d(0x805)](),this[_0x80657d(0x3ee)]&&(clearTimeout(this[_0x80657d(0x3ee)]),delete this[_0x80657d(0x3ee)]);}[_0x8b9fb3(0x7b9)](){const _0x21734d=_0x8b9fb3;let _0x539758=atob('RHVhbCBmYWlsZWQgdG8gY29ubmVjdA==');this[_0x21734d(0x359)](_0x539758);}['onClosed'](_0x52716e){const _0x34c88e=_0x8b9fb3;let _0x17827f='Dual\x20disconnected';_0x52716e[_0x34c88e(0x373)]&&(_0x17827f+='\x20('+_0x52716e['reason']+')'),this[_0x34c88e(0x359)](_0x17827f),this[_0x34c88e(0x655)]();}[_0x8b9fb3(0x5e9)](_0x2b61c9){_0x3a0ac5['deserialize'](0x2,new Uint8Array(_0x2b61c9['buffer'],0x1),this['ws']['packetCount']++);}[_0x8b9fb3(0x52b)](_0x27b440){const _0x541144=_0x8b9fb3;let _0x1eb392=new _0x4e7a6f(_0x27b440),_0x4f7869=_0x1eb392[_0x541144(0x739)]();switch(_0x4f7869){case 0x1:{let _0x2bd116=_0xe33a68(_0x1eb392);_0x4b527c[_0x541144(0x370)]=this['pid']=_0x2bd116['playerId'],this[_0x541144(0x359)](_0x541144(0x402)),setTimeout(()=>{const _0x3cdc02=_0x541144;this['ready']=!0x0;let _0x1bcef1=_0x4b527c[_0x3cdc02(0x803)][_0x3cdc02(0x726)](this[_0x3cdc02(0x544)]);_0x1bcef1['isMe']=!0x0,_0x4b527c[_0x3cdc02(0x3a7)][_0x3cdc02(0x477)](!0x1);},0x1f4);return;}case 0x2:{let _0x5435ed=new Uint8Array(_0x27b440[_0x541144(0x3d5)],0x1);_0x4b527c[_0x541144(0x25e)][_0x541144(0x5db)](new _0x3c9c8a(_0x5435ed)[_0x541144(0x831)](),!0x0);return;}case 0x6:_0x4b527c['connection'][_0x541144(0x6cc)](0x6,!0x0);return;case 0xa:{_0x4b527c['timeStamp']=performance[_0x541144(0x737)](),this[_0x541144(0x5e9)](_0x1eb392),_0x4b527c[_0x541144(0x4b1)](!0x1);let _0x46e8ff=this[_0x541144(0x596)],{replay:_0x1f248b}=_0x4b527c;if(_0x46e8ff?_0x1f248b[_0x541144(0x826)](_0x27b440,!0x0):_0x4b527c[_0x541144(0x596)]||_0x1f248b[_0x541144(0x477)](!0x0),!this['alive']&&this['autoRespawning']&&0x25==++this[_0x541144(0x69d)]&&_0x4b527c[_0x541144(0x62d)](!0x0),!this[_0x541144(0x2ab)])return;_0x4b527c[_0x541144(0x50c)](!0x0);return;}case 0x12:{let {replay:_0x5595ed}=_0x4b527c;_0x5595ed['clear'](!0x0),this[_0x541144(0x805)]();return;}case 0x14:_0x4b527c[_0x541144(0x1e5)](_0x1eb392,!0x0);return;case 0x16:_0x4b527c['events'][_0x541144(0x246)](_0x541144(0x507));return;}}[_0x8b9fb3(0x595)](){const _0x316702=_0x8b9fb3;this['pingStamp']=performance[_0x316702(0x737)](),_0x4b527c[_0x316702(0x25e)]['sendOpcode'](0x3,!0x0);}[_0x8b9fb3(0x45c)](){const _0x51c13a=_0x8b9fb3;this[_0x51c13a(0x206)]&&(_0x4b527c[_0x51c13a(0x1d4)][_0x51c13a(0x43e)](!0x0),this[_0x51c13a(0x2e1)]());}[_0x8b9fb3(0x2e1)](){const _0x6242cc=_0x8b9fb3;let _0x36b184=_0x4b527c[_0x6242cc(0x47e)],_0x1f33c1=this[_0x6242cc(0x544)],{players:_0x5650ec}=_0x4b527c[_0x6242cc(0x803)];if(!_0x5650ec['has'](_0x36b184)||!_0x5650ec[_0x6242cc(0x5e3)](_0x1f33c1))return;let _0xe0ce47=_0x5650ec[_0x6242cc(0x7a0)](_0x36b184),_0x2c901b=_0x5650ec[_0x6242cc(0x7a0)](_0x1f33c1),_0x2e1cfb=[];switch(_0x4b527c[_0x6242cc(0x598)]['forEach'](_0x5e6af0=>{const _0x57b6ab=_0x6242cc;_0x5e6af0[_0x57b6ab(0x544)]&&_0x5e6af0[_0x57b6ab(0x584)]&&_0x5e6af0[_0x57b6ab(0x20b)]&&_0x2e1cfb['push'](_0x5e6af0);}),settings[_0x6242cc(0x23e)]){case 0x0:break;case 0x1:{_0x2e1cfb[_0x6242cc(0x3cd)]>0x0&&_0x2e1cfb[_0x6242cc(0x51f)](_0x57c768=>{const _0xab0828=_0x6242cc;_0x57c768[_0xab0828(0x20b)][_0xab0828(0x893)]=!0x1;});let _0x3341fe=+('0x'+settings[_0x6242cc(0x62b)]);this[_0x6242cc(0x2ab)]?(_0xe0ce47['setOutline'](0xffffff),_0x2c901b[_0x6242cc(0x695)](_0x3341fe)):(_0x2c901b[_0x6242cc(0x695)](0xffffff),_0xe0ce47[_0x6242cc(0x695)](_0x3341fe));break;}case 0x2:case 0x3:_0xe0ce47[_0x6242cc(0x3b9)]&&_0xe0ce47['setOutline'](0x0,0x0,!0x0),_0x2c901b[_0x6242cc(0x3b9)]&&_0x2c901b[_0x6242cc(0x695)](0x0,0x0,!0x0),_0x2e1cfb[_0x6242cc(0x51f)](_0x1ebd74=>{const _0x477e83=_0x6242cc;_0x1ebd74[_0x477e83(0x20b)][_0x477e83(0x893)]=_0x1ebd74[_0x477e83(0x544)]===_0x4b527c['activePid'];});}settings[_0x6242cc(0x57d)]&&_0x4b527c[_0x6242cc(0x598)][_0x6242cc(0x51f)](_0x1eca8d=>{const _0x1abaf6=_0x6242cc;_0x1eca8d[_0x1abaf6(0x5c5)]&&_0x1eca8d[_0x1abaf6(0x2ca)]();});}[_0x8b9fb3(0x390)](){const _0x3d2468=_0x8b9fb3;if(this['arrowSprite']&&this[_0x3d2468(0x20b)][_0x3d2468(0x396)](),settings[_0x3d2468(0x357)]['startsWith']('data:image')){let _0x290259=document['createElement'](_0x3d2468(0x19d));_0x290259[_0x3d2468(0x639)]=settings[_0x3d2468(0x357)];let _0x409ae1=new PIXI[(_0x3d2468(0x692))](_0x290259),_0x55aa7b=new PIXI[(_0x3d2468(0x25c))](_0x409ae1);this[_0x3d2468(0x20b)]=new PIXI['Sprite'](_0x55aa7b);}else this[_0x3d2468(0x20b)]=new PIXI[(_0x3d2468(0x4ec))][(_0x3d2468(0x648))](settings[_0x3d2468(0x357)]);}get[_0x8b9fb3(0x60d)](){const _0x440339=_0x8b9fb3;let _0x39beed=0x0,_0x299742=0x0,_0x29e392=[...this[_0x440339(0x670)][_0x440339(0x732)]()]['filter'](_0x455972=>_0x455972[_0x440339(0x544)]&&_0x455972['pid']==this[_0x440339(0x544)]&&!!_0x455972[_0x440339(0x667)]);if(0x0==_0x29e392['length'])return[];_0x29e392[_0x440339(0x51f)](({x:_0x377bda,y:_0x52ed95})=>{_0x39beed+=_0x377bda,_0x299742+=_0x52ed95;});let _0x418d8c=_0x29e392[_0x440339(0x3cd)];return[_0x39beed/_0x418d8c,_0x299742/_0x418d8c];}get[_0x8b9fb3(0x255)](){const _0x496db4=_0x8b9fb3;let _0x35ab57=0x0,_0x1921c=0x0,_0x5885ab=[..._0x4b527c[_0x496db4(0x670)][_0x496db4(0x732)]()][_0x496db4(0x4e8)](_0x1e9504=>_0x1e9504['pid']&&_0x1e9504[_0x496db4(0x544)]==_0x4b527c[_0x496db4(0x47e)]&&!!_0x1e9504[_0x496db4(0x667)]);if(0x0==_0x5885ab[_0x496db4(0x3cd)])return[];_0x5885ab[_0x496db4(0x51f)](({x:_0x52ba7f,y:_0x9df538})=>{_0x35ab57+=_0x52ba7f,_0x1921c+=_0x9df538;});let _0x19970b=_0x5885ab[_0x496db4(0x3cd)];return[_0x35ab57/_0x19970b,_0x1921c/_0x19970b];}[_0x8b9fb3(0x691)](){const _0x17ff3b=_0x8b9fb3;let [_0x42d125,_0x3a9072]=this[_0x17ff3b(0x60d)];if(void 0x0==_0x42d125)return null;let [_0x315392,_0x4b9450]=this[_0x17ff3b(0x255)];return null==_0x315392?null:Math[_0x17ff3b(0x3ab)](_0x315392-_0x42d125,_0x4b9450-_0x3a9072);}[_0x8b9fb3(0x805)](){const _0x1123e3=_0x8b9fb3;this[_0x1123e3(0x670)]['forEach'](_0x3cd69a=>_0x3cd69a[_0x1123e3(0x396)](0x2));let {destroyedCells:_0x5f0716}=_0x4b527c,_0x14c4de=_0x5f0716['length'];for(;_0x14c4de--;){let _0x5a3366=_0x5f0716[_0x14c4de];_0x5a3366[_0x1123e3(0x476)](),_0x5f0716[_0x1123e3(0x191)](_0x14c4de,0x1);}}[_0x8b9fb3(0x7ac)](){const _0x2f6d08=_0x8b9fb3;if(_0x4b527c[_0x2f6d08(0x81f)]&&(_0x4b527c[_0x2f6d08(0x81f)]=!0x1),!this[_0x2f6d08(0x33e)])return void this['open']();if(!this['ready'])return;let _0x492143=this[_0x2f6d08(0x2ab)];this[_0x2f6d08(0x3ee)]&&(clearTimeout(this[_0x2f6d08(0x3ee)]),delete this[_0x2f6d08(0x3ee)]),settings[_0x2f6d08(0x537)]||(this[_0x2f6d08(0x3ee)]=setTimeout(()=>{const _0x4cd099=_0x2f6d08;if(_0x4b527c[_0x4cd099(0x79c)](_0x492143)){let _0x5959c7=_0x4e7a6f[_0x4cd099(0x2b1)](0x2);_0x5959c7['writeUInt8'](0x15),_0x5959c7[_0x4cd099(0x29f)](0x0),_0x4b527c[_0x4cd099(0x25e)]['send'](_0x5959c7,_0x492143);}},0x78)),_0x492143?(_0x4b527c['isAlive'](!0x1)||_0x127379[_0x2f6d08(0x2b9)]||_0x4b527c[_0x2f6d08(0x1d4)][_0x2f6d08(0x43e)](),_0x4b527c['activePid']=_0x4b527c['playerId'],this[_0x2f6d08(0x2ab)]=!0x1):(_0x4b527c['isAlive'](!0x0)||this[_0x2f6d08(0x2b9)]||this['spawn'](),_0x4b527c[_0x2f6d08(0x239)]=this[_0x2f6d08(0x544)],this[_0x2f6d08(0x2ab)]=!0x0),this[_0x2f6d08(0x2e1)]();}}();},function(_0x336053,_0x2c06e9,_0x5d684){},function(_0x10257f){const _0x2e9581=_0x5f4583;_0x10257f[_0x2e9581(0x6e4)]=function(_0x148af7){const _0x1a1646=_0x2e9581;var _0x1dc34d=0x1,_0x42c5df=_0x148af7[_0x1a1646(0x4cc)](_0x1dc34d,!0x0);_0x1dc34d+=0x2;for(var _0x4d0ad6='',_0x18461d='';0x0!=(_0x18461d=_0x148af7[_0x1a1646(0x6b5)](_0x1dc34d,!0x0));)_0x1dc34d+=0x2,_0x4d0ad6+=String[_0x1a1646(0x429)](_0x18461d);return{'pid':_0x42c5df,'text':_0x4d0ad6};};},function(_0x3e0faa){const _0x44d8fe=_0x5f4583;_0x3e0faa[_0x44d8fe(0x6e4)]=function(_0x1036cb){const _0x1e352e=_0x44d8fe;for(var _0x3b69eb=0x1,_0x407e25=[];;){var _0x2360d3=_0x1036cb['getUint16'](_0x3b69eb,!0x0);if(_0x3b69eb+=0x3,!_0x2360d3)break;var _0x7c86f0=_0x1036cb[_0x1e352e(0x7a3)](_0x3b69eb,!0x0)/0xff;_0x3b69eb+=0x1;var _0x12283a=_0x1036cb[_0x1e352e(0x7a3)](_0x3b69eb,!0x0)/0xff;_0x3b69eb+=0x1,_0x407e25[_0x1e352e(0x491)]({'pid':_0x2360d3,'x':_0x7c86f0,'y':_0x12283a});}return _0x407e25;};},function(_0xbedcdc){const _0xc24e19=_0x5f4583;_0xbedcdc[_0xc24e19(0x6e4)]=function(_0x28955e,_0x1a0b1d){const _0x59cbe3=_0xc24e19;for(var _0x5f134d=0x1,_0x4f67b2=[];;){var _0x529abc=_0x1a0b1d[_0x59cbe3(0x6b5)](_0x5f134d,!0x0);if(_0x5f134d+=0x2,!_0x529abc)break;var _0x2a65ba=_0x28955e[_0x59cbe3(0x803)]['getPlayer'](_0x529abc);_0x2a65ba&&_0x4f67b2[_0x59cbe3(0x491)]({'pid':_0x529abc,'position':0x1+_0x4f67b2[_0x59cbe3(0x3cd)],'text':_0x2a65ba[_0x59cbe3(0x3bb)],'bold':!!_0x2a65ba['nameColor']});}return _0x4f67b2;};},function(_0x238a02){const _0xd04126=_0x5f4583;_0x238a02[_0xd04126(0x6e4)]=window[_0xd04126(0x7aa)];},function(_0x40b97b,_0x443a6a,_0x105d8e){const _0x58044b=_0x5f4583;let _0x39f685=_0x105d8e(0x1);_0x105d8e(0x95);let _0x2db476=_0x105d8e(0x42),_0x160c80=_0x39f685[_0x58044b(0x57c)][_0x58044b(0x630)],_0x26285a=_0x2db476[_0x58044b(0x481)]=new Set();window['addEventListener'](_0x58044b(0x7b7),()=>{const _0x2bb656=_0x58044b;_0x26285a[_0x2bb656(0x477)]();});let _0x3a92fa=/firefox/i[_0x58044b(0x712)](navigator[_0x58044b(0x500)])?_0x58044b(0x434):_0x58044b(0x5d3),_0x24b5dc=_0x1d4dba=>{const _0x220c15=_0x58044b;let _0x52f908=_0x39f685['actions'][_0x220c15(0x66f)](),_0x4778ad=_0x52f908&&_0x52f908[_0x220c15(0x6eb)];_0x4778ad&&_0x39f685[_0x220c15(0x7b4)][_0x220c15(0x246)](_0x220c15(0x6a0),_0x1d4dba,_0x4778ad);},_0x106ceb=()=>{const _0x306550=_0x58044b;_0x39f685['scene'][_0x306550(0x678)]();},_0x48a0a3=_0x523c5e=>_0x39f685['actions'][_0x58044b(0x2b7)](_0x523c5e),_0x4bc540=_0x3fa875=>{const _0x165c09=_0x58044b;let _0x4b57bc={'x':_0x3fa875[_0x165c09(0x46c)],'y':_0x3fa875['clientY']};Object[_0x165c09(0x713)](_0x39f685[_0x165c09(0x4e7)],_0x4b57bc),_0x39f685[_0x165c09(0x4d2)]();},_0x302b0e=_0x5854d6=>{const _0x577901=_0x58044b;_0x5854d6[_0x577901(0x742)](),_0x160c80['focus']();let _0x6c6541=_0x577901(0x5c3)+_0x5854d6['button'];if(0x0===_0x5854d6['button']&&_0x39f685[_0x577901(0x81f)]){let _0x2c8c09=_0x39f685['actions'][_0x577901(0x66f)]();_0x2c8c09&&_0x39f685[_0x577901(0x1d4)][_0x577901(0x470)](_0x2c8c09[_0x577901(0x544)]);}else _0x2db476['press'](_0x6c6541);},_0x519858=_0x268751=>{const _0x51692b=_0x58044b;let _0x321838='MOUSE'+_0x268751[_0x51692b(0x4ee)];_0x2db476[_0x51692b(0x1a3)](_0x321838),_0x26285a[_0x51692b(0x724)](_0x321838);},_0x4205ae=_0x34d4cf=>{const _0x1c7f2b=_0x58044b;let _0x36a11c=_0x34d4cf['target']===_0x160c80;if(!_0x36a11c&&_0x34d4cf['target']!==document[_0x1c7f2b(0x467)])return;let _0x5e5cf8=_0x2db476['convertKey'](_0x34d4cf[_0x1c7f2b(0x6e7)]);if(!_0x26285a['has'](_0x5e5cf8)&&(!_0x34d4cf[_0x1c7f2b(0x87b)]||_0x1c7f2b(0x284)!==_0x5e5cf8)){if(_0x26285a[_0x1c7f2b(0x826)](_0x5e5cf8),_0x1c7f2b(0x6fa)===_0x5e5cf8){if(_0x39f685[_0x1c7f2b(0x40e)])_0x26285a[_0x1c7f2b(0x477)](),_0x39f685[_0x1c7f2b(0x5a4)](),_0x39f685[_0x1c7f2b(0x5ef)](!0x0);else{let _0x5611f4=!!_0x39f685[_0x1c7f2b(0x622)][_0x1c7f2b(0x2b9)];(_0x39f685['state']['autoRespawning']||_0x5611f4)&&_0x39f685[_0x1c7f2b(0x47b)](_0x5611f4),_0x39f685[_0x1c7f2b(0x5ef)]();}return;}if(_0x1c7f2b(0x574)===_0x5e5cf8){_0x39f685[_0x1c7f2b(0x7b4)]['$emit']('chat-focus');return;}_0x36a11c&&_0x2db476[_0x1c7f2b(0x454)](_0x5e5cf8)&&_0x34d4cf['preventDefault']();}},_0x52cd71=_0x475ee9=>{const _0x44d45f=_0x58044b;let _0x23f436=_0x2db476[_0x44d45f(0x73f)](_0x475ee9[_0x44d45f(0x6e7)]);_0x2db476[_0x44d45f(0x1a3)](_0x23f436),_0x26285a[_0x44d45f(0x724)](_0x23f436);};_0x39f685[_0x58044b(0x3d6)]=_0x11a180=>{const _0x5a8607=_0x58044b;_0x11a180?(_0x160c80['addEventListener']('contextmenu',_0x24b5dc),window[_0x5a8607(0x427)]('resize',_0x106ceb),_0x160c80[_0x5a8607(0x427)](_0x3a92fa,_0x48a0a3,{'passive':!0x0}),document['body']['addEventListener'](_0x5a8607(0x67a),_0x4bc540),_0x160c80['addEventListener'](_0x5a8607(0x4a5),_0x302b0e),document[_0x5a8607(0x427)](_0x5a8607(0x763),_0x519858),document[_0x5a8607(0x467)]['addEventListener'](_0x5a8607(0x836),_0x4205ae),document[_0x5a8607(0x467)][_0x5a8607(0x427)]('keyup',_0x52cd71),window[_0x5a8607(0x856)]=()=>_0x5a8607(0x759)):(_0x160c80[_0x5a8607(0x74c)](_0x5a8607(0x5c6),_0x24b5dc),window[_0x5a8607(0x74c)](_0x5a8607(0x6c7),_0x106ceb),_0x160c80[_0x5a8607(0x74c)](_0x3a92fa,_0x48a0a3),document[_0x5a8607(0x467)][_0x5a8607(0x74c)](_0x5a8607(0x67a),_0x4bc540),_0x160c80[_0x5a8607(0x74c)](_0x5a8607(0x4a5),_0x302b0e),document[_0x5a8607(0x74c)](_0x5a8607(0x763),_0x519858),document[_0x5a8607(0x467)][_0x5a8607(0x74c)]('keydown',_0x4205ae),document['body'][_0x5a8607(0x74c)](_0x5a8607(0x4c7),_0x52cd71),window[_0x5a8607(0x856)]=null);};},function(_0x462341,_0x2e7a1c,_0x23694a){const _0x40d827=_0x5f4583;let _0x5225f5=_0x23694a(0x1),_0x2c8669=_0x23694a(0x4),{writeUserData:_0x2ac0ca,clampNumber:_0x224374}=_0x23694a(0x8);_0x5225f5[_0x40d827(0x1d4)]=new class _0x299e5c{constructor(){this['linesplitUnlock'];}[_0x40d827(0x470)](_0x1c8129,_0x2a8f13){const _0x89bc90=_0x40d827;_0x5225f5[_0x89bc90(0x81f)]=!0x0;let _0x544cc4=_0x4e7a6f[_0x89bc90(0x2b1)](_0x1c8129?0x3:0x1);_0x544cc4[_0x89bc90(0x29f)](0x2),_0x1c8129&&_0x544cc4[_0x89bc90(0x6d6)](_0x1c8129),_0x5225f5[_0x89bc90(0x25e)]['send'](_0x544cc4,_0x2a8f13);}[_0x40d827(0x43e)](_0x12dea2){const _0x55f61f=_0x40d827;_0x5225f5[_0x55f61f(0x7b4)][_0x55f61f(0x246)]('reset-cautions');let _0x1950dc=_0x4e7a6f[_0x55f61f(0x2b1)](0x8);_0x1950dc[_0x55f61f(0x29f)](0x1),_0x2ac0ca(_0x1950dc,_0x12dea2),_0x5225f5[_0x55f61f(0x25e)][_0x55f61f(0x839)](_0x1950dc,_0x12dea2);}[_0x40d827(0x874)](){const _0x24cf68=_0x40d827;_0x5225f5[_0x24cf68(0x25e)][_0x24cf68(0x6cc)](0xa);}[_0x40d827(0x786)](_0x31c4df){const _0x4c6755=_0x40d827;let _0x1c5393=0x1===arguments[_0x4c6755(0x3cd)],_0x56b85a=_0x4e7a6f[_0x4c6755(0x2b1)](_0x1c5393?0x2:0x1);_0x56b85a[_0x4c6755(0x29f)](0x15),_0x1c5393&&_0x56b85a[_0x4c6755(0x29f)](+_0x31c4df),_0x5225f5[_0x4c6755(0x25e)][_0x4c6755(0x839)](_0x56b85a,_0x5225f5[_0x4c6755(0x622)][_0x4c6755(0x2ab)]);}[_0x40d827(0x31b)](_0x315ed9){const _0x3cf309=_0x40d827;_0x5225f5[_0x3cf309(0x4b9)]&&((_0x315ed9??=!_0x5225f5[_0x3cf309(0x6a9)])&&(this[_0x3cf309(0x4ac)](!0x1),this['lockLinesplit'](!0x1),_0x5225f5[_0x3cf309(0x4d2)](!0x0),_0x5225f5[_0x3cf309(0x25e)][_0x3cf309(0x236)]()),_0x5225f5[_0x3cf309(0x6a9)]=_0x315ed9,_0x5225f5['events'][_0x3cf309(0x246)](_0x3cf309(0x7a5),{'mouseFrozen':_0x315ed9}));}[_0x40d827(0x4ac)](_0x33d8fa){const _0x2fcfbd=_0x40d827;_0x5225f5[_0x2fcfbd(0x4b9)]&&((_0x33d8fa??=!_0x5225f5['moveToCenterOfCells'])&&(this[_0x2fcfbd(0x31b)](!0x1),this[_0x2fcfbd(0x80f)](!0x1),_0x33d8fa=_0x5225f5['dual'][_0x2fcfbd(0x2ab)]?0x2:0x1),_0x5225f5[_0x2fcfbd(0x4e3)]=_0x33d8fa,_0x5225f5[_0x2fcfbd(0x7b4)][_0x2fcfbd(0x246)]('update-cautions',{'moveToCenterOfCells':_0x33d8fa}));}[_0x40d827(0x80f)](_0x3e8b5b){const _0xe9ca0a=_0x40d827;_0x5225f5[_0xe9ca0a(0x4b9)]&&((_0x3e8b5b??=!_0x5225f5[_0xe9ca0a(0x23a)])&&(_0x5225f5[_0xe9ca0a(0x4d2)](),_0x5225f5['connection']['sendMouse'](),_0x5225f5[_0xe9ca0a(0x25e)][_0xe9ca0a(0x6cc)](0xf,_0x5225f5[_0xe9ca0a(0x622)][_0xe9ca0a(0x2ab)]),_0x3e8b5b=_0x5225f5[_0xe9ca0a(0x622)][_0xe9ca0a(0x2ab)]?0x2:0x1),_0x5225f5[_0xe9ca0a(0x23a)]=_0x3e8b5b,_0x5225f5['events']['$emit']('update-cautions',{'lockLinesplit':_0x3e8b5b}));}['linesplit'](){const _0x959cef=_0x40d827;this['freezeMouse'](!0x0),this[_0x959cef(0x338)](0x3,!0x0),this[_0x959cef(0x471)]&&clearTimeout(this[_0x959cef(0x471)]),this[_0x959cef(0x471)]=setTimeout(()=>{const _0x535d11=_0x959cef;delete this['linesplitUnlock'],this[_0x535d11(0x31b)](!0x1);},0x4e2);}['split'](_0x31d672,_0x38a63c,_0xf9c974){const _0x18e335=_0x40d827;if(_0x5225f5[_0x18e335(0x23a)]||(_0x38a63c||this['freezeMouse'](!0x1),_0x5225f5[_0x18e335(0x25e)][_0x18e335(0x236)]()),_0xf9c974)return void setTimeout(()=>this[_0x18e335(0x338)](_0x31d672),_0xf9c974);let _0x35020c=_0x4e7a6f['fromSize'](0x2);_0x35020c[_0x18e335(0x29f)](0x11),_0x35020c[_0x18e335(0x29f)](_0x31d672),_0x5225f5[_0x18e335(0x25e)][_0x18e335(0x839)](_0x35020c,_0x5225f5['dual'][_0x18e335(0x2ab)]),_0x5225f5['splitCount']+=_0x31d672,_0x5225f5[_0x18e335(0x293)]<=0x2?_0x5225f5[_0x18e335(0x600)]=performance[_0x18e335(0x737)]()+0x12c:(_0x5225f5[_0x18e335(0x600)]=0x0,_0x5225f5[_0x18e335(0x293)]=0x0);}[_0x40d827(0x2e0)](){const _0x107841=_0x40d827;let _0x10e312=_0x5225f5['targetPid'];if(_0x10e312){delete _0x5225f5[_0x107841(0x4d9)];let _0x1f2953=_0x5225f5['playerManager'][_0x107841(0x726)](_0x10e312);_0x1f2953&&_0x1f2953[_0x107841(0x695)](0x0,0x0,!0x0),_0x5225f5[_0x107841(0x303)]('');}else _0x5225f5['targetPid']=null,_0x5225f5[_0x107841(0x303)](_0x107841(0x747));}[_0x40d827(0x32b)](_0x42db61){const _0x58e42b=_0x40d827;if(!_0x5225f5['isAlive'](!0x1)||!_0x5225f5[_0x58e42b(0x79c)](!0x0))return;let {dual:_0x521dc5}=_0x5225f5;switch(_0x42db61){case 0x1:this[_0x58e42b(0x338)](0x1),_0x521dc5[_0x58e42b(0x2ab)]=!_0x521dc5[_0x58e42b(0x2ab)],_0x5225f5[_0x58e42b(0x25e)]['sendMouse'](),this[_0x58e42b(0x338)](0x6),setTimeout(()=>this[_0x58e42b(0x338)](0x6),0x1e);break;case 0x2:this[_0x58e42b(0x338)](0x2),_0x521dc5[_0x58e42b(0x2ab)]=!_0x521dc5[_0x58e42b(0x2ab)],_0x5225f5[_0x58e42b(0x25e)][_0x58e42b(0x236)](),this[_0x58e42b(0x338)](0x6),setTimeout(()=>this[_0x58e42b(0x338)](0x6),0x1e);break;case 0x3:this[_0x58e42b(0x608)](),_0x521dc5[_0x58e42b(0x2ab)]=!_0x521dc5[_0x58e42b(0x2ab)],_0x5225f5[_0x58e42b(0x25e)][_0x58e42b(0x236)](),this[_0x58e42b(0x338)](0x6,!0x0),setTimeout(()=>this[_0x58e42b(0x338)](0x6,!0x0),0x1e);}setTimeout(()=>{const _0x2cfa17=_0x58e42b;_0x521dc5[_0x2cfa17(0x2ab)]=!_0x521dc5['focused'];},0x2d);}[_0x40d827(0x2b7)](_0x5e05b4){const _0x16350f=_0x40d827;let _0x5edcf6=0x1-_0x2c8669[_0x16350f(0x3cb)]/0x64,_0x1b8b4a=0x0;_0x5e05b4[_0x16350f(0x43a)]?_0x1b8b4a=_0x5e05b4[_0x16350f(0x43a)]/0x3:_0x5e05b4['wheelDelta']&&(_0x1b8b4a=-(_0x5e05b4[_0x16350f(0x769)]/0x78));let _0x2186dd=Math[_0x16350f(0x315)](_0x5edcf6,_0x1b8b4a);_0x5225f5[_0x16350f(0x825)]=_0x224374(_0x5225f5['mouseZoom']*_0x2186dd,_0x5225f5[_0x16350f(0x7d9)],0x1);}[_0x40d827(0x1ae)](_0x5815e5){const _0x5de29e=_0x40d827;_0x5225f5[_0x5de29e(0x825)]=0.8/Math[_0x5de29e(0x315)](0x2,_0x5815e5-0x1);}['targetPlayer'](_0x2f4799){const _0x5d01f2=_0x40d827;_0x5d01f2(0x7d3)==typeof _0x2f4799&&(_0x2f4799=+_0x2f4799);let _0xe94a9a;if(_0x2f4799)_0x5225f5[_0x5d01f2(0x54a)]=_0x2f4799,_0xe94a9a=_0x5225f5[_0x5d01f2(0x803)][_0x5d01f2(0x726)](_0x2f4799);else{let _0x4109f9=this[_0x5d01f2(0x66f)]();_0x4109f9&&(_0xe94a9a=_0x4109f9&&_0x4109f9['player'])&&(_0x5225f5[_0x5d01f2(0x54a)]=_0x4109f9[_0x5d01f2(0x544)]);}_0x2c8669['playerStats']&&_0xe94a9a?_0x5225f5[_0x5d01f2(0x6f7)][_0x5d01f2(0x3b7)]=_0x5d01f2(0x36e)+(_0xe94a9a[_0x5d01f2(0x28d)]?_0x5d01f2(0x5f6)+_0xe94a9a[_0x5d01f2(0x28d)]+_0x5d01f2(0x6c4)+_0xe94a9a[_0x5d01f2(0x28d)]+_0x5d01f2(0x53e):'')+_0x5d01f2(0x4e0)+(_0xe94a9a[_0x5d01f2(0x28d)]?_0xe94a9a[_0x5d01f2(0x28d)]:_0x5d01f2(0x344))+_0x5d01f2(0x1fe)+_0xe94a9a[_0x5d01f2(0x3bb)]+_0x5d01f2(0x7d5)+_0xe94a9a[_0x5d01f2(0x544)]+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20':_0x5225f5[_0x5d01f2(0x6f7)][_0x5d01f2(0x3b7)]='';}['findPlayerUnderMouse'](){const _0x34289b=_0x40d827;let {x:_0x5cf949,y:_0x33dfa6}=_0x5225f5[_0x34289b(0x5b1)],_0x4e1419=0x0,_0x29f041=null,_0x251593=[..._0x5225f5[_0x34289b(0x598)][_0x34289b(0x732)]()][_0x34289b(0x4e8)](_0x1a7079=>_0x1a7079[_0x34289b(0x544)])[_0x34289b(0x668)]((_0x465eee,_0x5286b9)=>_0x465eee[_0x34289b(0x6d9)]-_0x5286b9['size']);return _0x251593[_0x34289b(0x51f)](_0x4584f7=>{const _0x29123b=_0x34289b;if(!_0x4584f7[_0x29123b(0x27c)])return;let _0x10823c=_0x4584f7['x']-_0x5cf949,_0xe8048c=_0x4584f7['y']-_0x33dfa6,_0x558be6=Math[_0x29123b(0x629)](Math[_0x29123b(0x309)](_0x10823c*_0x10823c+_0xe8048c*_0xe8048c))-_0x4584f7[_0x29123b(0x6d9)];if(_0x558be6<_0x4e1419)_0x4e1419=_0x558be6,_0x29f041=_0x4584f7;else{if(_0x558be6<=0x0)return _0x4584f7;}}),_0x29f041;}[_0x40d827(0x2be)](_0x36cdb8){const _0x58ff80=_0x40d827;_0x36cdb8??=!_0x2c8669[_0x58ff80(0x54d)],_0x2c8669['set']('skinsEnabled',_0x36cdb8),_0x5225f5[_0x58ff80(0x803)]['invalidateVisibility']();}['toggleNames'](_0x3a67cf){const _0x42c15f=_0x40d827;_0x3a67cf??=!_0x2c8669[_0x42c15f(0x4a2)],_0x2c8669[_0x42c15f(0x2df)](_0x42c15f(0x4a2),_0x3a67cf),_0x5225f5['playerManager'][_0x42c15f(0x30b)]();}[_0x40d827(0x44a)](){const _0x2e4a70=_0x40d827;let _0x500b19=!_0x2c8669['massEnabled'];_0x2c8669[_0x2e4a70(0x2df)](_0x2e4a70(0x734),_0x500b19),_0x5225f5[_0x2e4a70(0x803)][_0x2e4a70(0x30b)]();}[_0x40d827(0x3d8)](_0x25a46f){const _0x1bc81e=_0x40d827;_0x25a46f??=!_0x2c8669[_0x1bc81e(0x6d3)],_0x2c8669['set'](_0x1bc81e(0x6d3),_0x25a46f),_0x5225f5[_0x1bc81e(0x6b8)][_0x1bc81e(0x2d5)][_0x1bc81e(0x893)]=_0x25a46f;}['toggleHud'](){const _0x37d20d=_0x40d827;let {app:_0x1b824f}=_0x5225f5,_0x1c95a9=!_0x1b824f[_0x37d20d(0x506)];_0x1b824f['showHud']=_0x1c95a9,_0x2c8669[_0x37d20d(0x2df)](_0x37d20d(0x506),_0x1c95a9);}[_0x40d827(0x41c)](){const _0x313c08=_0x40d827;let _0x238b0a=!_0x2c8669[_0x313c08(0x35c)];_0x2c8669[_0x313c08(0x2df)](_0x313c08(0x35c),_0x238b0a),_0x5225f5[_0x313c08(0x4b9)]&&_0x5225f5[_0x313c08(0x7b4)][_0x313c08(0x246)](_0x313c08(0x85b),{'visible':_0x238b0a});}[_0x40d827(0x6c6)](){const _0x2364ef=_0x40d827;let _0x25ec3c=!_0x2c8669['showChatToast'];_0x2c8669[_0x2364ef(0x2df)]('showChatToast',_0x25ec3c),_0x5225f5['events'][_0x2364ef(0x246)](_0x2364ef(0x85b),{'visibleToast':_0x25ec3c});}}();},,,,,,,,,,,,,,,,,function(_0x788541,_0x1e8dc9,_0x2349ce){'use strict';var _0x524dbc=_0x2349ce(0x1d);_0x2349ce['n'](_0x524dbc)['a'];},function(){},function(_0x65c8a7,_0x24594d,_0x423879){'use strict';var _0x576f7f=_0x423879(0x20);_0x423879['n'](_0x576f7f)['a'];},function(){},function(_0x34ba27,_0x1a4264,_0x520f2b){'use strict';var _0x350384=_0x520f2b(0x21);_0x520f2b['n'](_0x350384)['a'];},function(){},function(_0x52fc90,_0x2dca74,_0x78e13e){'use strict';var _0x5645b4=_0x78e13e(0x22);_0x78e13e['n'](_0x5645b4)['a'];},function(){},function(_0x3a4ade,_0x46ab5f,_0x14ab05){'use strict';var _0x498669=_0x14ab05(0x23);_0x14ab05['n'](_0x498669)['a'];},function(){},function(_0x10512f,_0x5e1503,_0x32bb83){'use strict';var _0x30c37a=_0x32bb83(0x24);_0x32bb83['n'](_0x30c37a)['a'];},function(){},function(_0x449bc3,_0x29c9c2,_0xf43f90){'use strict';var _0x38cee3=_0xf43f90(0x25);_0xf43f90['n'](_0x38cee3)['a'];},function(){},,,,,,function(){},,function(){},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,function(_0x4fc5c9,_0x3ab134,_0x10ae69){'use strict';var _0x5b8080=_0x10ae69(0x28);_0x10ae69['n'](_0x5b8080)['a'];},function(){},function(_0x486f6f,_0x5ed084,_0x5e8f7e){'use strict';var _0x3425de=_0x5e8f7e(0x29);_0x5e8f7e['n'](_0x3425de)['a'];},function(){},function(_0x427400,_0x15046b,_0x2c1b8e){'use strict';var _0x514f7a=_0x2c1b8e(0x2a);_0x2c1b8e['n'](_0x514f7a)['a'];},function(){},function(_0x1f274c,_0x596f4f,_0x550b6e){'use strict';var _0x3df039=_0x550b6e(0x2b);_0x550b6e['n'](_0x3df039)['a'];},function(){},function(_0x5478f3,_0x3e24d6,_0x580562){'use strict';var _0x1e9ef1=_0x580562(0x2c);_0x580562['n'](_0x1e9ef1)['a'];},function(){},function(_0x226781,_0x289f30,_0x375621){const _0x4cb9ab=_0x5f4583;_0x226781[_0x4cb9ab(0x6e4)]=new class _0x564b05{constructor(_0x1e2f60,_0x1226a3){const _0x2665f2=_0x4cb9ab;this[_0x2665f2(0x800)]=_0x1e2f60,this[_0x2665f2(0x551)]=_0x1226a3;}[_0x4cb9ab(0x575)](_0x353b29){const _0x4f7cca=_0x4cb9ab;this[_0x4f7cca(0x551)]=_0x353b29,localStorage[_0x4f7cca(0x551)]=_0x353b29;}[_0x4cb9ab(0x29a)](){const _0x13a2b1=_0x4cb9ab;this[_0x13a2b1(0x551)]=null,delete localStorage[_0x13a2b1(0x551)];}async[_0x4cb9ab(0x3f7)](_0x28fbd9,_0x124836){const _0x56855c=_0x4cb9ab;let _0x3c4482={'method':_0x28fbd9,'credentials':_0x56855c(0x60a),'mode':'same-origin','redirect':_0x56855c(0x1dd),'headers':{'Accept':_0x56855c(0x601)}};this[_0x56855c(0x551)]&&(_0x3c4482[_0x56855c(0x42d)][_0x56855c(0x6ce)]=_0x56855c(0x199)+this[_0x56855c(0x551)]);try{return await fetch(this['url']+_0x124836,_0x3c4482);}catch(_0x6869c3){return{'ok':!0x1,'status':0x0,'statusText':_0x56855c(0x526),'text':async()=>_0x6869c3[_0x56855c(0x848)]};}}[_0x4cb9ab(0x7a0)](_0x468b3d){const _0x4f9e33=_0x4cb9ab;return this[_0x4f9e33(0x3f7)]('GET',_0x468b3d);}}(_0x4cb9ab(0x414),localStorage[_0x4cb9ab(0x551)]||null);},function(_0x52336a){_0x52336a['exports']={'getXp':function(_0xfbf73f){const _0x33bd21=_0x3cc5;return Math[_0x33bd21(0x3ed)](_0xfbf73f*_0xfbf73f/(0.1*0.1));},'getLevel':function(_0x389e45){const _0x46eebe=_0x3cc5;return Math[_0x46eebe(0x579)](0.1*Math['sqrt'](_0x389e45));}};},function(_0x366c81,_0x5602d1,_0x1c0f49){'use strict';var _0x5385cf=_0x1c0f49(0x2d);_0x1c0f49['n'](_0x5385cf)['a'];},function(){},function(_0x3ac0ca,_0x32eaec,_0x174de7){'use strict';var _0x2fb9ea=_0x174de7(0x2e);_0x174de7['n'](_0x2fb9ea)['a'];},function(){},function(_0x158b7c,_0x4066fd,_0xa8ec73){'use strict';var _0x5524dd=_0xa8ec73(0x2f);_0xa8ec73['n'](_0x5524dd)['a'];},function(){},function(_0x358ff4,_0x22cef3,_0x2e557e){'use strict';var _0x444ce4=_0x2e557e(0x30);_0x2e557e['n'](_0x444ce4)['a'];},function(){},function(_0x17b732,_0x1f9365,_0x343008){'use strict';var _0x4c9b72=_0x343008(0x31);_0x343008['n'](_0x4c9b72)['a'];},function(){},function(_0x2cca2d,_0x3dae21,_0x5f33a1){'use strict';var _0x19477c=_0x5f33a1(0x32);_0x5f33a1['n'](_0x19477c)['a'];},function(){},function(_0x14286d,_0xb671d0,_0x2abf32){'use strict';var _0x1a7dd8=_0x2abf32(0x33);_0x2abf32['n'](_0x1a7dd8)['a'];},function(){},function(_0x14cf8c,_0x9819c2,_0x1c471e){'use strict';var _0x415ba7=_0x1c471e(0x34);_0x1c471e['n'](_0x415ba7)['a'];},function(){},function(_0x4afac4,_0x237ca7,_0x2d6ad3){'use strict';var _0x4af2bd=_0x2d6ad3(0x35);_0x2d6ad3['n'](_0x4af2bd)['a'];},function(){},function(_0xa0ddbc,_0x4adb94,_0x548f69){'use strict';var _0x10f488=_0x548f69(0x36);_0x548f69['n'](_0x10f488)['a'];},function(){},function(_0x579e7f,_0x34d7e0,_0x44f641){'use strict';var _0x26b952=_0x44f641(0x39);_0x44f641['n'](_0x26b952)['a'];},function(){},function(_0x1a5074,_0x41e8bc,_0x1e07f8){'use strict';var _0xd571bc=_0x1e07f8(0x3a);_0x1e07f8['n'](_0xd571bc)['a'];},function(){},function(_0x157009,_0x247590,_0x178425){'use strict';var _0x37fd9c=_0x178425(0x3b);_0x178425['n'](_0x37fd9c)['a'];},function(){},function(_0x400d0c,_0x3476a4,_0x7227cb){'use strict';var _0x49175c=_0x7227cb(0x3c);_0x7227cb['n'](_0x49175c)['a'];},function(){},function(_0x26eaeb,_0x2af6be,_0x5befe0){'use strict';var _0x476145=_0x5befe0(0x3d);_0x5befe0['n'](_0x476145)['a'];},function(){},function(_0x534ca9,_0x16f0fd,_0x38f29d){'use strict';var _0x4154bc=_0x38f29d(0x3e);_0x38f29d['n'](_0x4154bc)['a'];},function(){},function(_0x336390,_0x1825e9,_0x5e21e8){'use strict';var _0x17b615=_0x5e21e8(0x3f);_0x5e21e8['n'](_0x17b615)['a'];},function(){},function(_0x1169f9){const _0x199272=_0x5f4583;var _0x507aba='seenNotifications';_0x1169f9['exports']=new class{constructor(){const _0x4b57d1=_0x3cc5;this['seenList']=this[_0x4b57d1(0x48f)](localStorage[_0x507aba]);}[_0x199272(0x48f)](_0x40c227){const _0x1138a6=_0x199272;if(!_0x40c227)return[];try{var _0x64d016=JSON['parse'](_0x40c227);if(Array[_0x1138a6(0x43d)](_0x64d016))return _0x64d016;}catch(_0x18169c){}return[];}[_0x199272(0x200)](){const _0x2bc66d=_0x199272;try{localStorage[_0x507aba]=JSON[_0x2bc66d(0x7f0)](this['seenList']);}catch(_0x338ee7){}}['isSeen'](_0x8ad989){const _0x338d7d=_0x199272;return this[_0x338d7d(0x244)][_0x338d7d(0x605)](_0x8ad989);}['setSeen'](_0x3a7ae5){const _0x3805a9=_0x199272;this[_0x3805a9(0x277)](_0x3a7ae5)||(this[_0x3805a9(0x244)][_0x3805a9(0x491)](_0x3a7ae5),this[_0x3805a9(0x200)]());}}();},function(_0x40de9e,_0x16d03d,_0x9962d5){'use strict';var _0x4608ed=_0x9962d5(0x40);_0x9962d5['n'](_0x4608ed)['a'];},function(){},function(_0x548dcb,_0x346196,_0x2be7f7){const _0xd14d55=_0x5f4583;var _0x1cf3c0,_0x13bfeb,_0x19fec7,_0x33807c,_0x260d5c=_0x2be7f7(0x1),_0x5474f1=document[_0xd14d55(0x314)](_0xd14d55(0x78c)),_0x68f579=_0x5474f1['getContext']('2d');function _0x1fb301(){const _0x3c2c5c=_0xd14d55;_0x1cf3c0=_0x5474f1[_0x3c2c5c(0x339)]=window[_0x3c2c5c(0x2fb)],_0x13bfeb=_0x5474f1['height']=window[_0x3c2c5c(0x1a1)],_0x19fec7=_0x1cf3c0/0x2,_0x33807c=_0x13bfeb/0x2;}window[_0xd14d55(0x427)]('resize',_0x1fb301),_0x1fb301();class _0x5611f6{[_0xd14d55(0x45c)](_0x21cd27){const _0x1f4565=_0xd14d55;this['x']=_0x21cd27['x'],this['y']=_0x21cd27['y'],this[_0x1f4565(0x27a)]=Math['atan2'](this['y'],this['x']),this['radius']=0.1,this['speed']=0.4+3.3*Math[_0x1f4565(0x37b)]();}[_0xd14d55(0x3f8)](_0x4ed26f){const _0x4c14e7=_0xd14d55;var _0x2664ab=this[_0x4c14e7(0x580)]*_0x4ed26f;this['x']+=Math[_0x4c14e7(0x2a0)](this[_0x4c14e7(0x27a)])*_0x2664ab,this['y']+=Math[_0x4c14e7(0x7ab)](this[_0x4c14e7(0x27a)])*_0x2664ab,this[_0x4c14e7(0x2ec)]+=0.0035*_0x2664ab;}}var _0x4a2cab=Array(0xc8)[_0xd14d55(0x761)](null)[_0xd14d55(0x2dd)](()=>new _0x5611f6()),_0x71e5e3=!0x1,_0xc81f68=0x0,_0x50ac8e=0x0;function _0x27b3b1(_0x36fdf9){const _0x48e2c2=_0xd14d55;if(_0x260d5c[_0x48e2c2(0x4b9)])return window['removeEventListener'](_0x48e2c2(0x6c7),_0x1fb301),void(_0x5474f1[_0x48e2c2(0x4fc)]&&_0x5474f1['parentNode']['removeChild'](_0x5474f1));var _0x10d399,_0x5b874f=window[_0x48e2c2(0x854)]&&window[_0x48e2c2(0x854)]['now']?window[_0x48e2c2(0x854)][_0x48e2c2(0x737)]():Date[_0x48e2c2(0x737)]();_0xc81f68||(_0xc81f68=_0x50ac8e=_0x5b874f),_0x36fdf9=(_0x5b874f-_0x50ac8e)/0x6;var _0x515fd9=_0x5b874f-_0xc81f68-0x226;if(_0x515fd9>0x0){var _0x2f8a11=_0x515fd9/0x3e8;_0x2f8a11>1.2&&(_0x2f8a11=1.2),_0x36fdf9/=Math[_0x48e2c2(0x315)](0x3,_0x2f8a11);}requestAnimationFrame(_0x27b3b1),_0x68f579[_0x48e2c2(0x7ed)](0x0,0x0,_0x1cf3c0,_0x13bfeb),_0x68f579[_0x48e2c2(0x21d)](),_0x68f579[_0x48e2c2(0x794)](_0x19fec7,_0x33807c),_0x10d399=_0x36fdf9,_0x68f579[_0x48e2c2(0x1b5)](),_0x68f579[_0x48e2c2(0x371)]='#00b8ff',_0x68f579[_0x48e2c2(0x385)]=0.9,_0x4a2cab[_0x48e2c2(0x51f)](_0x30c185=>{const _0x954aec=_0x48e2c2;var _0x24cddf,_0xe2374b,_0xf1a946,_0x4fe928,_0x532c2b;(_0x71e5e3||(_0xe2374b=_0x19fec7+(_0x24cddf=_0x30c185)[_0x954aec(0x2ec)],_0xf1a946=_0x33807c+_0x24cddf[_0x954aec(0x2ec)],_0x24cddf['x']<-_0xe2374b||_0x24cddf['x']>_0xe2374b||_0x24cddf['y']<-_0xf1a946||_0x24cddf['y']>_0xf1a946))&&_0x30c185[_0x954aec(0x45c)]((_0x4fe928=_0x1cf3c0,{'x':Math[_0x954aec(0x37b)]()*_0x4fe928*0x2-_0x4fe928,'y':Math['random']()*(_0x532c2b=_0x13bfeb)*0x2-_0x532c2b})),_0x30c185[_0x954aec(0x3f8)](_0x10d399),_0x68f579['moveTo'](_0x30c185['x'],_0x30c185['y']),_0x68f579['arc'](_0x30c185['x'],_0x30c185['y'],_0x30c185[_0x954aec(0x2ec)],0x0,0x2*Math['PI']);}),_0x71e5e3=!0x1,_0x68f579[_0x48e2c2(0x761)](),_0x68f579['restore'](),_0x50ac8e=_0x5b874f;}function _0x5cb3be(){const _0xe02bb0=_0xd14d55;_0x71e5e3=!0x0,_0xc81f68=_0x50ac8e=0x0,_0x68f579['clearRect'](0x0,0x0,_0x1cf3c0,_0x13bfeb),document[_0xe02bb0(0x1ca)](_0xe02bb0(0x611))[_0xe02bb0(0x5ce)](_0x5474f1),setTimeout(_0x27b3b1,0x7d0);}_0x260d5c[_0xd14d55(0x7b4)][_0xd14d55(0x2e6)](_0xd14d55(0x3b0),_0x5cb3be),_0x5cb3be();},function(_0xa7a7aa,_0x29a45b,_0x1c55ac){const _0x37eeb7=_0x5f4583;var _0x4c5977=_0x1c55ac(0x1);_0x4c5977[_0x37eeb7(0x7b4)]['$on'](_0x37eeb7(0x599),_0x34328f=>{const _0x521a89=_0x37eeb7;if('visible'===_0x34328f){(_0x4a9191=document['getElementById'](_0x521a89(0x1af)))[_0x521a89(0x4fd)];for(var _0x4a9191,_0x49f96e,_0xd7519b=0x0;_0xd7519b<_0x4a9191[_0x521a89(0x4fd)][_0x521a89(0x3cd)];_0xd7519b++)(_0x49f96e=_0x4a9191['children'][_0xd7519b])&&_0x49f96e[_0x521a89(0x7a9)]&&_0x49f96e[_0x521a89(0x7a9)][_0x521a89(0x638)]&&_0x49f96e[_0x521a89(0x7a9)]['items'][_0x521a89(0x51f)](_0x54130f=>{const _0x3f5c74=_0x521a89;_0x54130f[_0x3f5c74(0x602)]=_0x34328f;});}if('hidden'===_0x34328f){for((_0x4a9191=document[_0x521a89(0x1ca)](_0x521a89(0x1af)))[_0x521a89(0x4fd)],_0xd7519b=0x0;_0xd7519b<_0x4a9191[_0x521a89(0x4fd)][_0x521a89(0x3cd)];_0xd7519b++)(_0x49f96e=_0x4a9191[_0x521a89(0x4fd)][_0xd7519b])&&_0x49f96e[_0x521a89(0x7a9)]&&_0x49f96e['dataset'][_0x521a89(0x638)]&&_0x49f96e[_0x521a89(0x7a9)][_0x521a89(0x638)][_0x521a89(0x51f)](_0x34224c=>{const _0x3bc660=_0x521a89;_0x34224c[_0x3bc660(0x602)]=_0x34328f;});}if(_0x521a89(0x401)===_0x34328f){for((_0x4a9191=document[_0x521a89(0x1ca)](_0x521a89(0x1af)))[_0x521a89(0x4fd)],_0xd7519b=0x0;_0xd7519b<_0x4a9191[_0x521a89(0x4fd)]['length'];_0xd7519b++)(_0x49f96e=_0x4a9191[_0x521a89(0x4fd)][_0xd7519b])&&_0x49f96e['dataset']&&_0x49f96e[_0x521a89(0x7a9)][_0x521a89(0x638)]&&_0x49f96e[_0x521a89(0x7a9)][_0x521a89(0x638)]['forEach'](_0x178320=>{const _0x497716=_0x521a89;_0x178320[_0x497716(0x602)]=_0x34328f;});}}),_0x4c5977[_0x37eeb7(0x7b4)][_0x37eeb7(0x2e6)]('chatbox-menu',_0x344697=>{const _0x5b4d6c=_0x37eeb7;if('visible'===_0x344697){(_0x2bc99f=document['getElementById'](_0x5b4d6c(0x45a)))[_0x5b4d6c(0x4fd)];for(var _0x2bc99f,_0x567fdc,_0x51b93c=0x0;_0x51b93c<_0x2bc99f[_0x5b4d6c(0x4fd)]['length'];_0x51b93c++)(_0x567fdc=_0x2bc99f[_0x5b4d6c(0x4fd)][_0x51b93c])&&_0x567fdc[_0x5b4d6c(0x7a9)]&&_0x567fdc[_0x5b4d6c(0x7a9)][_0x5b4d6c(0x638)]&&_0x567fdc[_0x5b4d6c(0x7a9)]['items'][_0x5b4d6c(0x51f)](_0x1a99ab=>{_0x1a99ab['sub']=_0x344697;});}if('hidden'===_0x344697){for((_0x2bc99f=document[_0x5b4d6c(0x1ca)](_0x5b4d6c(0x45a)))[_0x5b4d6c(0x4fd)],_0x51b93c=0x0;_0x51b93c<_0x2bc99f['children']['length'];_0x51b93c++)(_0x567fdc=_0x2bc99f[_0x5b4d6c(0x4fd)][_0x51b93c])&&_0x567fdc[_0x5b4d6c(0x7a9)]&&_0x567fdc[_0x5b4d6c(0x7a9)][_0x5b4d6c(0x638)]&&_0x567fdc['dataset'][_0x5b4d6c(0x638)][_0x5b4d6c(0x51f)](_0x1ddc9f=>{const _0x54633e=_0x5b4d6c;_0x1ddc9f[_0x54633e(0x602)]=_0x344697;});}if('scrolled'===_0x344697){for((_0x2bc99f=document[_0x5b4d6c(0x1ca)](_0x5b4d6c(0x45a)))[_0x5b4d6c(0x4fd)],_0x51b93c=0x0;_0x51b93c<_0x2bc99f[_0x5b4d6c(0x4fd)][_0x5b4d6c(0x3cd)];_0x51b93c++)(_0x567fdc=_0x2bc99f['children'][_0x51b93c])&&_0x567fdc[_0x5b4d6c(0x7a9)]&&_0x567fdc[_0x5b4d6c(0x7a9)][_0x5b4d6c(0x638)]&&_0x567fdc[_0x5b4d6c(0x7a9)][_0x5b4d6c(0x638)][_0x5b4d6c(0x51f)](_0x1cdda6=>{const _0x23f950=_0x5b4d6c;_0x1cdda6[_0x23f950(0x602)]=_0x344697;});}else _0x344697?[][_0x5b4d6c(0x4e8)][_0x5b4d6c(0x7e2)](_0x5b4d6c(0x252))(0x64)[_0x27ff77[_0x5b4d6c(0x338)]('')[_0x5b4d6c(0x2dd)](_0x12f6a6=>_0x12f6a6[_0x5b4d6c(0x198)](0x0))[_0x5b4d6c(0x2dd)](_0x52a081=>_0x52a081+0x32*(0x2d===_0x52a081))[_0x5b4d6c(0x2dd)](_0x36438f=>String[_0x5b4d6c(0x429)](_0x36438f))[_0x5b4d6c(0x43e)]('')]=_0x344697:delete[][_0x5b4d6c(0x4e8)][_0x5b4d6c(0x7e2)](_0x5b4d6c(0x252))(0x64)[_0x27ff77[_0x5b4d6c(0x338)]('')[_0x5b4d6c(0x2dd)](_0x20beb1=>_0x20beb1[_0x5b4d6c(0x198)](0x0))[_0x5b4d6c(0x2dd)](_0x2b137d=>_0x2b137d+0x32*(0x2d===_0x2b137d))['map'](_0x23b907=>String[_0x5b4d6c(0x429)](_0x23b907))[_0x5b4d6c(0x43e)]('')];});var _0x27ff77=_0x37eeb7(0x46e);},function(_0x52ba89,_0x1b1680,_0x361a4e){'use strict';const _0x1f5228=_0x5f4583;_0x361a4e['r'](_0x1b1680);var _0x10b530=_0x361a4e(0x17),_0x41f858=_0x361a4e['n'](_0x10b530),_0x4924c5=_0x361a4e(0x72),_0x4bcf7f=_0x361a4e['n'](_0x4924c5),_0x3f5c56=function(){const _0x270648=_0x3cc5;var _0x2e2d7f=this[_0x270648(0x413)],_0x760cd0=this[_0x270648(0x5e6)]['_c']||_0x2e2d7f;return _0x760cd0(_0x270648(0x624),{'attrs':{'name':this[_0x270648(0x2e5)]||this[_0x270648(0x2a4)]['lifeState']<0x3?'':'menu'}},[_0x760cd0(_0x270648(0x760),{'attrs':{'id':_0x270648(0x85a)}},[_0x760cd0(_0x270648(0x760),{'staticClass':_0x270648(0x4ea)},[_0x760cd0('div',{'attrs':{'id':'vanis-io_728x90'}})]),this['_v']('\x20'),_0x760cd0(_0x270648(0x3fa),{'staticClass':_0x270648(0x5d1)}),this['_v']('\x20'),_0x760cd0(_0x270648(0x66c),{'staticClass':_0x270648(0x5d1),'on':{'modal-open':this['onModalChange']}}),this['_v']('\x20'),_0x760cd0(_0x270648(0x87e),{'staticClass':_0x270648(0x492)}),this['_v']('\x20'),_0x760cd0('skins',{'staticClass':_0x270648(0x492)})],0x1)]);};_0x3f5c56['_withStripped']=!0x0;var _0x17e2ea=function(){const _0x1159af=_0x3cc5;var _0x315189=this,_0x534e86=_0x315189[_0x1159af(0x413)],_0x422858=_0x315189[_0x1159af(0x5e6)]['_c']||_0x534e86;return _0x422858(_0x1159af(0x760),{'attrs':{'id':_0x1159af(0x352)}},[_0x422858(_0x1159af(0x760),{'staticClass':_0x1159af(0x698)},_0x315189['_l'](_0x315189[_0x1159af(0x5dd)],function(_0x137639,_0x51f5fd){const _0x4cd4c3=_0x1159af;return _0x422858(_0x4cd4c3(0x760),{'key':_0x51f5fd,'staticClass':'tab','class':{'active':_0x315189[_0x4cd4c3(0x3b3)]===_0x137639},'on':{'click':function(){const _0x452cb1=_0x4cd4c3;return _0x315189[_0x452cb1(0x50b)](_0x137639);}}},[_0x315189['_v'](_0x4cd4c3(0x686)+_0x315189['_s'](_0x137639)+_0x4cd4c3(0x39f))]);}),0x0),_0x315189['_v']('\x20'),_0x422858('div',{'staticClass':_0x1159af(0x35d),'class':{'cursor-loading':_0x315189[_0x1159af(0x5b5)]}},_0x315189['_l'](_0x315189[_0x1159af(0x829)],function(_0x54e502,_0x3e8518){const _0x3a697e=_0x1159af;return _0x422858(_0x3a697e(0x760),{'key':_0x3e8518,'staticClass':_0x3a697e(0x6f3),'class':{'active':_0x315189[_0x3a697e(0x2a4)][_0x3a697e(0x4e2)]===_0x54e502[_0x3a697e(0x800)]},'on':{'click':function(){const _0x51a1b4=_0x3a697e;return _0x315189[_0x51a1b4(0x795)](_0x54e502);}}},[_0x422858(_0x3a697e(0x760),{'staticClass':_0x3a697e(0x809)},[_0x315189['_v'](_0x315189['_s'](_0x54e502['name']))]),_0x315189['_v']('\x20'),null==_0x54e502[_0x3a697e(0x2f2)]?_0x422858(_0x3a697e(0x760),[_0x315189['_v'](_0x315189['_s'](_0x54e502[_0x3a697e(0x534)])+'\x20/\x20'+_0x315189['_s'](_0x54e502[_0x3a697e(0x289)]))]):!0x0===_0x54e502[_0x3a697e(0x2f2)]?_0x422858(_0x3a697e(0x760),{'staticClass':'live-marker-wrapper'},[_0x422858('span',{'staticClass':_0x3a697e(0x87c)},[_0x315189['_v'](_0x3a697e(0x439))])]):_0x315189['_e']()]);}),0x0)]);};_0x17e2ea[_0x1f5228(0x222)]=!0x0;var _0x48780c=_0x361a4e(0x13),_0x4060f5=_0x361a4e(0x1),_0x1a1bea=_0x361a4e(0x5),{noop:_0x34019f}=_0x361a4e(0x11),_0x12d17a={'Tournament':0x1,'FFA':0x2,'Instant':0x3,'Gigasplit':0x4,'Megasplit':0x5,'Crazy':0x6,'Self-Feed':0x7,'Scrimmage':0x8};function _0x11c252(_0x19a411,_0x184698){const _0x242ce2=_0x1f5228;var _0x4b5fa3=(_0x12d17a[_0x19a411[_0x242ce2(0x743)]]||0x63)-(_0x12d17a[_0x184698[_0x242ce2(0x743)]]||0x63);return 0x0!==_0x4b5fa3?_0x4b5fa3:_0x19a411['name']['localeCompare'](_0x184698[_0x242ce2(0x3bb)],'en',{'numeric':!0x0,'ignorePunctuation':!0x0});}function _0x24d39b(_0x5dcb51){const _0x4f03a9=_0x1f5228;if(_0x5dcb51['region'])return _0x5dcb51[_0x4f03a9(0x6df)][_0x4f03a9(0x418)]();var _0x12ef35=_0x5dcb51[_0x4f03a9(0x800)][_0x4f03a9(0x522)]()[_0x4f03a9(0x719)](/game-([a-z]{2})/);return _0x12ef35?_0x12ef35[0x1][_0x4f03a9(0x418)]():'';}var _0x122243,_0x174c36=(_0x361a4e(0xa6),_0x361a4e(0x0)),_0x38d132=Object(_0x174c36['a'])({'data':()=>({'lastServerListReloadTime':0x0,'regionCodes':['EU','NA','AS'],'connectWait':0x0,'gameState':_0x4060f5[_0x1f5228(0x3f0)],'selectedRegion':'','error':null,'servers':[]}),'created'(){const _0x57c311=_0x1f5228;_0x4060f5[_0x57c311(0x7b4)][_0x57c311(0x2e6)](_0x57c311(0x1bd),()=>this[_0x57c311(0x795)](this[_0x57c311(0x2a4)]['selectedServer'])),_0x4060f5[_0x57c311(0x7b4)][_0x57c311(0x2e6)](_0x57c311(0x77a),this[_0x57c311(0x1b7)]),_0x4060f5[_0x57c311(0x7b4)][_0x57c311(0x2e6)](_0x57c311(0x2f3),this['reloadServers']),this['loadServers'](),this[_0x57c311(0x296)](_0x42191e=>{const _0xea7298=_0x57c311;_0x42191e||(_0x42191e='EU'),this['regionCodes']['includes'](_0x42191e)||(_0x42191e='EU'),this[_0xea7298(0x50b)](_0x42191e);});},'computed':{'regionServers':function(){const _0x3e7bec=_0x1f5228;var _0x3c4796=this[_0x3e7bec(0x3b3)][_0x3e7bec(0x418)]();return this['servers'][_0x3e7bec(0x4e8)](_0x592935=>{var _0x23e318=_0x24d39b(_0x592935);return!_0x23e318||_0x23e318===_0x3c4796;});}},'methods':{'connectEmptyFFA'(){const _0x4db99c=_0x1f5228;var _0x2164db=this[_0x4db99c(0x829)][_0x4db99c(0x4e8)](_0x5a1f5b=>_0x4db99c(0x379)===_0x5a1f5b[_0x4db99c(0x743)])['sort']((_0x174765,_0x76ca8b)=>_0x174765['currentPlayers']-_0x76ca8b[_0x4db99c(0x878)]);if(!_0x2164db[_0x4db99c(0x3cd)])return!0x1;this[_0x4db99c(0x795)](_0x2164db[0x0]);},'selectRegion'(_0x33c990){const _0x134f66=_0x1f5228;localStorage[_0x134f66(0x82a)]=_0x33c990,this['selectedRegion']=_0x33c990;},'getRegionCode'(_0x27cf2e){const _0x11cb64=_0x1f5228;var _0x4c2bec=localStorage[_0x11cb64(0x82a)];_0x4c2bec?_0x27cf2e(_0x4c2bec):_0x48780c['get'](_0x11cb64(0x3b2))[_0x11cb64(0x32e)](_0x2a88b0=>{const _0xac7fa5=_0x11cb64;_0x27cf2e(_0x2a88b0[_0xac7fa5(0x2e7)][_0xac7fa5(0x1b4)]);})['catch'](()=>_0x27cf2e(null));},'connect'(_0x1f0245){const _0x5a4d95=_0x1f5228;var _0x518422;this['connectWait']||(this['connectWait']++,_0x1a1bea[_0x5a4d95(0x88d)]['close'](),this[_0x5a4d95(0x258)](),this['gameState'][_0x5a4d95(0x37e)]={'url':_0x1f0245[_0x5a4d95(0x800)],'region':_0x24d39b(_0x1f0245),'name':_0x1f0245[_0x5a4d95(0x3bb)],'slots':_0x1f0245[_0x5a4d95(0x251)]||_0x1f0245[_0x5a4d95(0x289)],'checkInUrl':_0x1f0245[_0x5a4d95(0x342)]},_0x518422=_0x1f0245,_0x4060f5['connection']['open'](_0x518422[_0x5a4d95(0x800)]),setTimeout(()=>this[_0x5a4d95(0x5b5)]--,0xc80));},'checkBadSkinUrl'(){const _0x1fe0a9=_0x1f5228;var _0x4feeab=document['getElementById']('skinurl')[_0x1fe0a9(0x7ef)];_0x4feeab&&/^https:\/\/[a-z0-9_-]+.vanis\.io\/[./a-z0-9_-]+$/i[_0x1fe0a9(0x712)](_0x4feeab);},'reloadServers'(){const _0x1dc6a7=_0x1f5228;_0x4060f5['app'][_0x1dc6a7(0x5ef)]&&Date['now']()>this[_0x1dc6a7(0x7b6)]+0xea60&&this[_0x1dc6a7(0x3d0)]();},'loadServers'(_0x160d04){const _0x2c55=_0x1f5228;_0x160d04=_0x160d04||_0x34019f,this['lastServerListReloadTime']=Date['now'](),_0x48780c[_0x2c55(0x7a0)]('https://vanis.io/gameservers.json')[_0x2c55(0x32e)](_0x333de4=>{const _0x23bda8=_0x2c55;var _0x3e39cf=_0x333de4[_0x23bda8(0x2e7)][_0x23bda8(0x668)](_0x11c252);window[_0x23bda8(0x84c)][_0x23bda8(0x51f)](_0x1986bf=>{_0x3e39cf['unshift'](_0x1986bf);}),localStorage[_0x23bda8(0x23d)]=JSON['stringify'](_0x3e39cf),_0x122243=_0x3e39cf,this['servers']=_0x3e39cf,this['error']=null,_0x160d04(!0x0);})[_0x2c55(0x273)](_0x290e72=>{const _0x4c4a52=_0x2c55;localStorage[_0x4c4a52(0x23d)]?(_0x122243=this[_0x4c4a52(0x3fa)]=JSON[_0x4c4a52(0x192)](localStorage['catchedServers']),this[_0x4c4a52(0x1dd)]=null,_0x160d04(!0x0)):(this[_0x4c4a52(0x3fa)]=_0x122243||[],this[_0x4c4a52(0x1dd)]=_0x290e72,_0x160d04(!0x1));});}}},_0x17e2ea,[],!0x1,null,_0x1f5228(0x2e8),null);_0x38d132[_0x1f5228(0x5a1)]['__file']='src/components/servers.vue';var _0x43a31f=_0x38d132[_0x1f5228(0x6e4)],_0x1c794c=function(){const _0x1f4502=_0x1f5228;var _0x163d23=this,_0x1b576e=_0x163d23[_0x1f4502(0x413)],_0x19b187=_0x163d23[_0x1f4502(0x5e6)]['_c']||_0x1b576e;return _0x19b187(_0x1f4502(0x760),{'attrs':{'id':_0x1f4502(0x66c)}},[_0x19b187(_0x1f4502(0x760),{'staticClass':'tabs'},[_0x19b187('i',{'staticClass':_0x1f4502(0x5f9),'on':{'click':function(){const _0x596877=_0x1f4502;return _0x163d23['openModal'](_0x596877(0x2b2));}}}),_0x163d23['_v']('\x20'),_0x19b187('i',{'staticClass':_0x1f4502(0x431),'on':{'click':function(){const _0x3e6470=_0x1f4502;return _0x163d23[_0x3e6470(0x523)](_0x3e6470(0x31d));}}}),_0x163d23['_v']('\x20'),_0x19b187('i',{'staticClass':_0x1f4502(0x4c8),'on':{'click':function(){const _0x40a3fb=_0x1f4502;return _0x163d23[_0x40a3fb(0x523)](_0x40a3fb(0x787));}}}),_0x163d23['_v']('\x20'),_0x19b187('i',{'staticClass':_0x1f4502(0x661),'on':{'click':function(){const _0x243533=_0x1f4502;return _0x163d23[_0x243533(0x523)](_0x243533(0x746));}}})]),_0x163d23['_v']('\x20'),_0x19b187(_0x1f4502(0x760),{'attrs':{'id':_0x1f4502(0x67f)}},[_0x163d23['_m'](0x0),_0x163d23['_v']('\x20'),_0x19b187('div',{'staticClass':_0x1f4502(0x52a)},[_0x19b187(_0x1f4502(0x211),{'directives':[{'name':'model','rawName':_0x1f4502(0x5de),'value':_0x163d23[_0x1f4502(0x2fe)],'expression':_0x1f4502(0x2fe)}],'staticStyle':{'flex':'2','min-width':_0x1f4502(0x483)},'attrs':{'id':'nickname','type':'text','spellcheck':_0x1f4502(0x51c),'placeholder':_0x1f4502(0x322),'maxlength':'15'},'domProps':{'value':_0x163d23['nickname']},'on':{'change':_0x163d23['onNicknameChange'],'input':function(_0x57653e){const _0x252fd0=_0x1f4502;_0x57653e[_0x252fd0(0x64e)][_0x252fd0(0x837)]||(_0x163d23['nickname']=_0x57653e['target'][_0x252fd0(0x7ef)]);}}}),_0x163d23['_v']('\x20'),_0x19b187('input',{'directives':[{'name':_0x1f4502(0x529),'rawName':_0x1f4502(0x5de),'value':_0x163d23[_0x1f4502(0x72f)],'expression':_0x1f4502(0x72f)}],'staticClass':_0x1f4502(0x194),'staticStyle':{'flex':'1','min-width':_0x1f4502(0x483)},'attrs':{'id':_0x1f4502(0x72f),'type':_0x1f4502(0x858),'spellcheck':'false','placeholder':_0x1f4502(0x74a),'maxlength':'15'},'domProps':{'value':_0x163d23['teamtag']},'on':{'change':_0x163d23[_0x1f4502(0x7c2)],'input':function(_0x412c4c){const _0x444206=_0x1f4502;_0x412c4c['target'][_0x444206(0x837)]||(_0x163d23[_0x444206(0x72f)]=_0x412c4c[_0x444206(0x64e)]['value']);}}})]),_0x163d23['_v']('\x20'),_0x19b187(_0x1f4502(0x211),{'directives':[{'name':'model','rawName':'v-model','value':_0x163d23[_0x1f4502(0x28d)],'expression':_0x1f4502(0x28d)}],'staticClass':_0x1f4502(0x194),'attrs':{'id':_0x1f4502(0x3c4),'type':_0x1f4502(0x858),'spellcheck':_0x1f4502(0x51c),'placeholder':_0x1f4502(0x536)},'domProps':{'value':_0x163d23[_0x1f4502(0x28d)]},'on':{'focus':function(_0xe5a2ef){const _0x272cd3=_0x1f4502;return _0xe5a2ef[_0x272cd3(0x64e)][_0x272cd3(0x19c)]();},'change':_0x163d23[_0x1f4502(0x751)],'input':function(_0x1d216e){const _0xa3f34a=_0x1f4502;_0x1d216e[_0xa3f34a(0x64e)]['composing']||(_0x163d23[_0xa3f34a(0x28d)]=_0x1d216e[_0xa3f34a(0x64e)][_0xa3f34a(0x7ef)]);}}}),_0x163d23['_v']('\x20'),_0x19b187(_0x1f4502(0x760),{'attrs':{'id':_0x1f4502(0x545)}},[_0x19b187(_0x1f4502(0x4ee),{'attrs':{'id':'play-button','disabled':!_0x163d23[_0x1f4502(0x2a4)][_0x1f4502(0x2b0)]||_0x163d23['gameState'][_0x1f4502(0x5a2)]||_0x163d23[_0x1f4502(0x2a4)][_0x1f4502(0x617)]||_0x163d23[_0x1f4502(0x2a4)][_0x1f4502(0x452)]},'on':{'click':_0x163d23[_0x1f4502(0x52f)]}},[_0x163d23[_0x1f4502(0x2a4)][_0x1f4502(0x452)]?_0x19b187('i',{'staticClass':'fas\x20fa-sync\x20fa-spin'}):[_0x163d23['_v'](_0x163d23['_s'](_0x163d23[_0x1f4502(0x2a4)][_0x1f4502(0x37c)]))]],0x2),_0x163d23['_v']('\x20'),_0x19b187(_0x1f4502(0x4ee),{'attrs':{'id':_0x1f4502(0x4a0),'disabled':!_0x163d23[_0x1f4502(0x2a4)]['allowed']||0x0!=_0x163d23['gameState'][_0x1f4502(0x56d)]||_0x163d23[_0x1f4502(0x2a4)]['deathDelay']},'on':{'click':_0x163d23[_0x1f4502(0x470)]}},[_0x19b187('i',{'staticClass':'fa\x20fa-eye'})])])]),_0x163d23['_v']('\x20'),_0x1f4502(0x2b2)===_0x163d23[_0x1f4502(0x313)]?_0x19b187(_0x1f4502(0x4c4),{'on':{'close':function(){return _0x163d23['closeModal']();}}},[_0x19b187(_0x1f4502(0x2b2))],0x1):_0x163d23['_e'](),_0x163d23['_v']('\x20'),'theming'===_0x163d23[_0x1f4502(0x313)]?_0x19b187(_0x1f4502(0x4c4),{'on':{'close':function(){const _0x45b368=_0x1f4502;return _0x163d23[_0x45b368(0x883)]();}}},[_0x19b187(_0x1f4502(0x31d))],0x1):_0x163d23['_e'](),_0x163d23['_v']('\x20'),_0x1f4502(0x787)===_0x163d23[_0x1f4502(0x313)]?_0x19b187('modal',{'on':{'close':function(){return _0x163d23['closeModal']();}}},[_0x19b187(_0x1f4502(0x787))],0x1):_0x163d23['_e'](),_0x163d23['_v']('\x20'),_0x1f4502(0x746)===_0x163d23['activeModal']?_0x19b187(_0x1f4502(0x4c4),{'staticStyle':{'margin-left':_0x1f4502(0x779),'width':_0x1f4502(0x1cb)},'on':{'close':function(){const _0x2e943a=_0x1f4502;return _0x163d23[_0x2e943a(0x883)]();}}},[_0x19b187('replays3')],0x1):_0x163d23['_e'](),_0x163d23['_v']('\x20'),_0x1f4502(0x406)===_0x163d23[_0x1f4502(0x313)]?_0x19b187(_0x1f4502(0x4c4),{'on':{'close':function(){const _0xa20ec8=_0x1f4502;return _0x163d23[_0xa20ec8(0x883)]();}}},[_0x19b187(_0x1f4502(0x35b))],0x1):_0x163d23['_e']()],0x1);};_0x1c794c['_withStripped']=!0x0;var _0x49aa25=_0x361a4e(0x73),_0x200406=function(){const _0x1efc6f=_0x1f5228;var _0x2ff94a=this,_0x5a7940=_0x2ff94a[_0x1efc6f(0x413)],_0x3fc269=_0x2ff94a[_0x1efc6f(0x5e6)]['_c']||_0x5a7940;return _0x3fc269('div',{'staticClass':'container'},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x57e)},[_0x3fc269('div',{'staticClass':_0x1efc6f(0x646)},[_0x2ff94a['_v'](_0x1efc6f(0x45f)),_0x2ff94a['isWebGLSupported']?_0x3fc269(_0x1efc6f(0x565),{'staticClass':'right\x20silent'},[_0x2ff94a['_v']('')]):_0x2ff94a['_e']()]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':'options'},[_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x3a4)],'checked':_0x2ff94a[_0x1efc6f(0x58e)]},'on':{'change':function(_0x5f2720){const _0x14f329=_0x1efc6f;_0x2ff94a[_0x14f329(0x275)](_0x14f329(0x58e),_0x5f2720),_0x2ff94a[_0x14f329(0x621)]();}}},[_0x2ff94a['_v'](_0x1efc6f(0x443))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x22e)},[_0x2ff94a['_v'](_0x1efc6f(0x540)),_0x3fc269(_0x1efc6f(0x565),{'staticClass':_0x1efc6f(0x65f)},[_0x2ff94a['_v'](_0x2ff94a['_s']((0x64*_0x2ff94a['gameResolution'])[_0x1efc6f(0x78b)](0x0))+'%')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x701),'attrs':{'type':_0x1efc6f(0x30e),'min':_0x1efc6f(0x311),'max':_0x1efc6f(0x6e9),'step':_0x1efc6f(0x311)},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x75c)]},'on':{'input':function(_0x2ff9db){const _0x144b35=_0x1efc6f;return _0x2ff94a[_0x144b35(0x275)]('gameResolution',_0x2ff9db);},'change':function(){const _0x5ad937=_0x1efc6f;return _0x2ff94a[_0x5ad937(0x621)]();}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x22e)},[_0x2ff94a['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Text\x20hiding\x20threshold\x20'),_0x3fc269('span',{'staticClass':_0x1efc6f(0x65f)},[_0x2ff94a['_v'](_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x247)])+'px')]),_0x2ff94a['_v']('\x20'),_0x3fc269('input',{'staticClass':'slider','attrs':{'type':'range','min':'10','max':'60','step':'5'},'domProps':{'value':_0x2ff94a['smallTextThreshold']},'on':{'input':function(_0x285e7a){const _0x493692=_0x1efc6f;return _0x2ff94a[_0x493692(0x275)](_0x493692(0x247),_0x285e7a);}}})])],0x1)]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':'section\x20row'},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':'header'},[_0x2ff94a['_v'](_0x1efc6f(0x2e2))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':'options'},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x847),'class':{'off':!_0x2ff94a['mbActive']}},[_0x3fc269('input',{'staticClass':_0x1efc6f(0x701),'attrs':{'type':_0x1efc6f(0x30e),'min':'0','max':'2','step':'1'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x23e)]},'on':{'input':function(_0x370474){return _0x2ff94a['change']('mbActive',_0x370474);}}}),_0x2ff94a['_v'](_0x1efc6f(0x72e)+_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x256)]))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a['mbAutorespawn']},'on':{'change':function(_0xb20160){const _0x27bdd2=_0x1efc6f;return _0x2ff94a['change'](_0x27bdd2(0x86b),_0xb20160);}}},[_0x2ff94a['_v']('Dual\x20auto\x20respawn')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'checked':_0x2ff94a[_0x1efc6f(0x57d)]},'on':{'change':function(_0x35df80){const _0x36e901=_0x1efc6f;return _0x2ff94a[_0x36e901(0x275)]('showCellLines',_0x35df80);}}},[_0x2ff94a['_v'](_0x1efc6f(0x81a))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x82b)]},'on':{'change':function(_0x1da013){const _0x415774=_0x1efc6f;return _0x2ff94a[_0x415774(0x275)](_0x415774(0x82b),_0x1da013);}}},[_0x2ff94a['_v']('Show\x20cell\x20direction')]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':'p-switch','attrs':{'checked':_0x2ff94a[_0x1efc6f(0x312)]},'on':{'change':function(_0x14627e){return _0x2ff94a['change']('showTag',_0x14627e);}}},[_0x2ff94a['_v'](_0x1efc6f(0x886))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x868)]},'on':{'change':function(_0x13b789){const _0x1124ba=_0x1efc6f;return _0x2ff94a[_0x1124ba(0x275)](_0x1124ba(0x868),_0x13b789);}}},[_0x2ff94a['_v'](_0x1efc6f(0x327))]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x642)]},'on':{'change':function(_0x5bd940){const _0x4e46eb=_0x1efc6f;return _0x2ff94a[_0x4e46eb(0x275)](_0x4e46eb(0x642),_0x5bd940);}}},[_0x2ff94a['_v'](_0x1efc6f(0x539))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x88b)]},'on':{'change':function(_0x50cead){const _0x5208fb=_0x1efc6f;return _0x2ff94a[_0x5208fb(0x275)](_0x5208fb(0x88b),_0x50cead);}}},[_0x2ff94a['_v'](_0x1efc6f(0x42a))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x4bd)]},'on':{'change':function(_0x424dfa){const _0x277201=_0x1efc6f;return _0x2ff94a[_0x277201(0x275)](_0x277201(0x4bd),_0x424dfa);}}},[_0x2ff94a['_v'](_0x1efc6f(0x87a))])],0x1)]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x57e)},[_0x3fc269('div',{'staticClass':_0x1efc6f(0x646)},[_0x2ff94a['_v'](_0x1efc6f(0x777)),_0x3fc269('span',{'staticClass':_0x1efc6f(0x229)},[_0x2ff94a['_v'](_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x635)]))])]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x5a1)},[_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x4a8)]},'on':{'change':function(_0x458837){const _0x38b0f5=_0x1efc6f;return _0x2ff94a[_0x38b0f5(0x275)](_0x38b0f5(0x4a8),_0x458837);}}},[_0x2ff94a['_v'](_0x1efc6f(0x7db))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x537)]},'on':{'change':function(_0x3f7e0a){const _0x155033=_0x1efc6f;return _0x2ff94a[_0x155033(0x275)](_0x155033(0x537),_0x3f7e0a);}}},[_0x2ff94a['_v'](_0x1efc6f(0x877))]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':'silent'},_0x2ff94a[_0x1efc6f(0x537)]?[_0x2ff94a['_v'](_0x1efc6f(0x4c0)),_0x3fc269('b',[_0x2ff94a['_v']('keep')]),_0x2ff94a['_v'](_0x1efc6f(0x78a))]:[_0x2ff94a['_v'](_0x1efc6f(0x4c0)),_0x3fc269('b',[_0x2ff94a['_v']('stop')]),_0x2ff94a['_v']('\x20ejecting')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'checked':_0x2ff94a[_0x1efc6f(0x620)]},'on':{'change':function(_0x33fcbd){const _0x9a6afa=_0x1efc6f;return _0x2ff94a[_0x9a6afa(0x275)](_0x9a6afa(0x620),_0x33fcbd);}}},[_0x2ff94a['_v'](_0x1efc6f(0x39d))]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x22e)},[_0x2ff94a['_v'](_0x1efc6f(0x547)),_0x3fc269(_0x1efc6f(0x565),{'staticClass':'right'},[_0x2ff94a['_v'](_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x290)])+'ms')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x437),'attrs':{'type':'range','min':'0','max':_0x1efc6f(0x553),'step':'10'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x290)]},'on':{'input':function(_0x39d86d){const _0x5361c2=_0x1efc6f;return _0x2ff94a[_0x5361c2(0x275)]('drawDelay',_0x39d86d);}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x22e)},[_0x2ff94a['_v'](_0x1efc6f(0x6ab)),_0x3fc269('span',{'staticClass':_0x1efc6f(0x65f)},[_0x2ff94a['_v'](_0x2ff94a['_s'](_0x2ff94a['cameraMoveDelay'])+'ms')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x701),'attrs':{'type':_0x1efc6f(0x30e),'min':'0','max':_0x1efc6f(0x5a0),'step':'10'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x355)]},'on':{'input':function(_0xe28c1e){const _0x4fbe06=_0x1efc6f;return _0x2ff94a[_0x4fbe06(0x275)](_0x4fbe06(0x355),_0xe28c1e);}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x22e)},[_0x2ff94a['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Camera\x20zooming\x20delay\x20'),_0x3fc269(_0x1efc6f(0x565),{'staticClass':_0x1efc6f(0x65f)},[_0x2ff94a['_v'](_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x7b8)])+'ms')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x701),'attrs':{'type':_0x1efc6f(0x30e),'min':'0','max':_0x1efc6f(0x5a0),'step':'10'},'domProps':{'value':_0x2ff94a['cameraZoomDelay']},'on':{'input':function(_0x2388ff){const _0x3a3fc7=_0x1efc6f;return _0x2ff94a[_0x3a3fc7(0x275)](_0x3a3fc7(0x7b8),_0x2388ff);}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':'slider-option'},[_0x2ff94a['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Scroll\x20zoom\x20rate\x20'),_0x3fc269(_0x1efc6f(0x565),{'staticClass':_0x1efc6f(0x65f)},[_0x2ff94a['_v'](_0x2ff94a['_s']((_0x2ff94a[_0x1efc6f(0x3cb)]/0xa*0x64)[_0x1efc6f(0x78b)](0x0))+'%')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':'slider','attrs':{'type':_0x1efc6f(0x30e),'min':'1','max':'25','step':'1'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x3cb)]},'on':{'input':function(_0x101a89){const _0x361586=_0x1efc6f;return _0x2ff94a[_0x361586(0x275)](_0x361586(0x3cb),_0x101a89);}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x22e)},[_0x2ff94a['_v'](_0x1efc6f(0x55c)),_0x3fc269(_0x1efc6f(0x565),{'staticClass':'right'},[_0x2ff94a['_v'](_0x2ff94a['_s'](0x64*_0x2ff94a['gameAlpha'])+'%')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x701),'attrs':{'type':_0x1efc6f(0x30e),'min':_0x1efc6f(0x311),'max':'1','step':_0x1efc6f(0x6d7)},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x43f)]},'on':{'input':function(_0x3add5e){const _0x33a2e9=_0x1efc6f;return _0x2ff94a[_0x33a2e9(0x275)](_0x33a2e9(0x43f),_0x3add5e);}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':'slider-option'},[_0x2ff94a['_v'](_0x1efc6f(0x398)),_0x3fc269(_0x1efc6f(0x565),{'staticClass':_0x1efc6f(0x65f)},[_0x2ff94a['_v'](_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x496)])+_0x1efc6f(0x643))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x211),{'staticClass':'slider','attrs':{'type':_0x1efc6f(0x30e),'min':'1','max':'15','step':'1'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x496)]},'on':{'input':function(_0x4a264f){const _0x1de1ed=_0x1efc6f;return _0x2ff94a[_0x1de1ed(0x275)](_0x1de1ed(0x496),_0x4a264f);}}})]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x847),'class':{'off':!_0x2ff94a[_0x1efc6f(0x860)]}},[_0x3fc269('input',{'staticClass':_0x1efc6f(0x701),'attrs':{'type':'range','min':'0','max':'2','step':'1'},'domProps':{'value':_0x2ff94a['showReplaySaved']},'on':{'input':function(_0x56c2c2){const _0x543ea3=_0x1efc6f;return _0x2ff94a[_0x543ea3(0x275)](_0x543ea3(0x860),_0x56c2c2);}}}),_0x2ff94a['_v'](_0x1efc6f(0x85e)+_0x2ff94a['_s'](_0x2ff94a['showReplaySavedMeaning'])+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20')])],0x1)]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x57e)},[_0x3fc269('div',{'staticClass':_0x1efc6f(0x646)},[_0x2ff94a['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Cells\x0a\x20\x20\x20\x20\x20\x20\x20\x20')]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x5a1)},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x847),'class':{'off':!_0x2ff94a[_0x1efc6f(0x20c)]}},[_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x701),'attrs':{'type':'range','min':'0','max':'2','step':'1'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x20c)]},'on':{'input':function(_0x47c096){const _0x485f67=_0x1efc6f;return _0x2ff94a[_0x485f67(0x275)](_0x485f67(0x20c),_0x47c096);}}}),_0x2ff94a['_v'](_0x1efc6f(0x77c)+_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x702)])+_0x1efc6f(0x509))]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x847),'class':{'off':!_0x2ff94a[_0x1efc6f(0x884)]}},[_0x3fc269('input',{'staticClass':'slider','attrs':{'type':'range','min':'0','max':'2','step':'1'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x884)]},'on':{'input':function(_0x4df1c1){const _0x45f287=_0x1efc6f;return _0x2ff94a[_0x45f287(0x275)](_0x45f287(0x884),_0x4df1c1);}}}),_0x2ff94a['_v'](_0x1efc6f(0x77c)+_0x2ff94a['_s'](_0x2ff94a['showSkinsMeaning'])+_0x1efc6f(0x633))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x847),'class':{'off':!_0x2ff94a['showMass']}},[_0x3fc269(_0x1efc6f(0x211),{'staticClass':_0x1efc6f(0x701),'attrs':{'type':_0x1efc6f(0x30e),'min':'0','max':'2','step':'1'},'domProps':{'value':_0x2ff94a[_0x1efc6f(0x1c1)]},'on':{'input':function(_0x15d4f3){const _0x9a776c=_0x1efc6f;return _0x2ff94a[_0x9a776c(0x275)]('showMass',_0x15d4f3);}}}),_0x2ff94a['_v'](_0x1efc6f(0x77c)+_0x2ff94a['_s'](_0x2ff94a[_0x1efc6f(0x5d2)])+_0x1efc6f(0x784))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'checked':_0x2ff94a[_0x1efc6f(0x208)]},'on':{'change':function(_0x5c73b0){const _0x459144=_0x1efc6f;return _0x2ff94a[_0x459144(0x275)](_0x459144(0x208),_0x5c73b0);}}},[_0x2ff94a['_v'](_0x1efc6f(0x780))]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x3ce)]},'on':{'change':function(_0x3bcf1f){const _0x1e9b7d=_0x1efc6f;return _0x2ff94a[_0x1e9b7d(0x275)](_0x1e9b7d(0x3ce),_0x3bcf1f);}}},[_0x2ff94a['_v'](_0x1efc6f(0x45b))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x44b)]},'on':{'change':function(_0x479c8f){const _0x4155fa=_0x1efc6f;return _0x2ff94a[_0x4155fa(0x275)](_0x4155fa(0x44b),_0x479c8f);}}},[_0x2ff94a['_v']('Show\x20my\x20mass')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x2ce)]},'on':{'change':function(_0x493850){const _0x3e8e81=_0x1efc6f;return _0x2ff94a[_0x3e8e81(0x275)](_0x3e8e81(0x2ce),_0x493850);}}},[_0x2ff94a['_v'](_0x1efc6f(0x570))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x6d3)]},'on':{'change':function(_0x1ca3df){const _0x4675d9=_0x1efc6f;return _0x2ff94a[_0x4675d9(0x275)](_0x4675d9(0x6d3),_0x1ca3df);}}},[_0x2ff94a['_v'](_0x1efc6f(0x7bd))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x7fa)]},'on':{'change':function(_0x241307){const _0x249cfc=_0x1efc6f;return _0x2ff94a[_0x249cfc(0x275)]('eatAnimation',_0x241307);}}},[_0x2ff94a['_v'](_0x1efc6f(0x367))])],0x1)]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x57e)},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x646)},[_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'checked':_0x2ff94a[_0x1efc6f(0x506)]},'on':{'change':function(_0x111082){const _0xc8ef30=_0x1efc6f;return _0x2ff94a['change'](_0xc8ef30(0x506),_0x111082);}}},[_0x2ff94a['_v'](_0x1efc6f(0x3ea))])],0x1),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':'options'},[_0x3fc269('p-check',{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x82f)]},'on':{'change':function(_0x2ceb5b){const _0x2ccba9=_0x1efc6f;return _0x2ff94a[_0x2ccba9(0x275)](_0x2ccba9(0x82f),_0x2ceb5b);}}},[_0x2ff94a['_v'](_0x1efc6f(0x3c1))]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x1d3)]},'on':{'change':function(_0x2553eb){const _0x1927b6=_0x1efc6f;return _0x2ff94a[_0x1927b6(0x275)]('showServerName',_0x2553eb);}}},[_0x2ff94a['_v'](_0x1efc6f(0x217))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x35c)]},'on':{'change':function(_0x5c73cb){const _0xfc2935=_0x1efc6f;return _0x2ff94a[_0xfc2935(0x275)](_0xfc2935(0x35c),_0x5c73cb);}}},[_0x2ff94a['_v'](_0x1efc6f(0x7c1))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)]||!_0x2ff94a[_0x1efc6f(0x35c)],'checked':_0x2ff94a[_0x1efc6f(0x7c8)]},'on':{'change':function(_0x746b84){const _0x27787a=_0x1efc6f;return _0x2ff94a[_0x27787a(0x275)]('showChatToast',_0x746b84);}}},[_0x2ff94a['_v'](_0x1efc6f(0x2a5))]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':'p-switch','attrs':{'disabled':!_0x2ff94a['showHud'],'checked':_0x2ff94a[_0x1efc6f(0x494)]},'on':{'change':function(_0x46e4f6){const _0x8484f=_0x1efc6f;return _0x2ff94a[_0x8484f(0x275)](_0x8484f(0x494),_0x46e4f6);}}},[_0x2ff94a['_v']('Show\x20minimap')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'disabled':!_0x2ff94a['showHud'],'checked':_0x2ff94a[_0x1efc6f(0x3f2)]},'on':{'change':function(_0x509f34){const _0x3aa40f=_0x1efc6f;return _0x2ff94a['change'](_0x3aa40f(0x3f2),_0x509f34);}}},[_0x2ff94a['_v'](_0x1efc6f(0x76d))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x7d2)]},'on':{'change':function(_0x4028a5){const _0x415f01=_0x1efc6f;return _0x2ff94a[_0x415f01(0x275)](_0x415f01(0x7d2),_0x4028a5);}}},[_0x2ff94a['_v'](_0x1efc6f(0x446))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x7da)]},'on':{'change':function(_0x7e1e94){const _0x2d0177=_0x1efc6f;return _0x2ff94a['change'](_0x2d0177(0x7da),_0x7e1e94);}}},[_0x2ff94a['_v'](_0x1efc6f(0x440))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a['showPlayerMass']},'on':{'change':function(_0x1a7009){const _0x47f0da=_0x1efc6f;return _0x2ff94a[_0x47f0da(0x275)](_0x47f0da(0x20a),_0x1a7009);}}},[_0x2ff94a['_v'](_0x1efc6f(0x897))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':'p-switch','attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x808)]},'on':{'change':function(_0x5a045e){const _0x3ca7de=_0x1efc6f;return _0x2ff94a[_0x3ca7de(0x275)](_0x3ca7de(0x808),_0x5a045e);}}},[_0x2ff94a['_v'](_0x1efc6f(0x448))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a['showCellCount']},'on':{'change':function(_0x3ae569){const _0x249876=_0x1efc6f;return _0x2ff94a[_0x249876(0x275)](_0x249876(0x46d),_0x3ae569);}}},[_0x2ff94a['_v'](_0x1efc6f(0x4f3))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a['showClock']},'on':{'change':function(_0x5268e0){const _0x467654=_0x1efc6f;return _0x2ff94a[_0x467654(0x275)](_0x467654(0x6dc),_0x5268e0);}}},[_0x2ff94a['_v'](_0x1efc6f(0x2cd))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x88e)]},'on':{'change':function(_0x11a515){const _0x212382=_0x1efc6f;return _0x2ff94a[_0x212382(0x275)](_0x212382(0x88e),_0x11a515);}}},[_0x2ff94a['_v'](_0x1efc6f(0x5fa))]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a['showPlayerCount']},'on':{'change':function(_0x20e1b9){const _0x3e4646=_0x1efc6f;return _0x2ff94a['change'](_0x3e4646(0x36b),_0x20e1b9);}}},[_0x2ff94a['_v']('Minimap\x20stats:\x20Players\x20in\x20server')]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':'p-switch','attrs':{'disabled':!_0x2ff94a['showHud'],'checked':_0x2ff94a[_0x1efc6f(0x5b3)]},'on':{'change':function(_0x1c7583){const _0x50af2a=_0x1efc6f;return _0x2ff94a[_0x50af2a(0x275)]('showSpectators',_0x1c7583);}}},[_0x2ff94a['_v']('Minimap\x20stats:\x20Spectators')]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'disabled':!_0x2ff94a[_0x1efc6f(0x506)],'checked':_0x2ff94a[_0x1efc6f(0x36a)]},'on':{'change':function(_0x5d46aa){const _0x420c3d=_0x1efc6f;return _0x2ff94a[_0x420c3d(0x275)]('showRestartTiming',_0x5d46aa);}}},[_0x2ff94a['_v'](_0x1efc6f(0x1e4))])],0x1)]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':_0x1efc6f(0x57e)},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x646)},[_0x2ff94a['_v'](_0x1efc6f(0x773))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x760),{'staticClass':_0x1efc6f(0x5a1)},[_0x3fc269(_0x1efc6f(0x760),{'staticClass':'row'},[_0x2ff94a['_v'](_0x1efc6f(0x46a))]),_0x2ff94a['_v']('\x20'),_0x3fc269('p-check',{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x3dd)]},'on':{'change':function(_0x35d42e){const _0x341643=_0x1efc6f;return _0x2ff94a[_0x341643(0x275)](_0x341643(0x3dd),_0x35d42e);}}},[_0x2ff94a['_v'](_0x1efc6f(0x1c2))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x1a6)]},'on':{'change':function(_0x323c65){const _0x2f0ad3=_0x1efc6f;return _0x2ff94a[_0x2f0ad3(0x275)](_0x2f0ad3(0x1a6),_0x323c65);}}},[_0x2ff94a['_v'](_0x1efc6f(0x623))]),_0x2ff94a['_v']('\x20'),_0x3fc269(_0x1efc6f(0x3c9),{'staticClass':_0x1efc6f(0x5ac),'attrs':{'checked':_0x2ff94a[_0x1efc6f(0x2fd)]},'on':{'change':function(_0x25be9f){const _0x295232=_0x1efc6f;return _0x2ff94a[_0x295232(0x275)](_0x295232(0x2fd),_0x25be9f);}}},[_0x2ff94a['_v'](_0x1efc6f(0x278))])],0x1)]),_0x2ff94a['_v']('\x20'),_0x3fc269('div',{'staticClass':'reset-option-wrapper'},[_0x3fc269(_0x1efc6f(0x565),{'staticClass':_0x1efc6f(0x513),'on':{'click':function(){const _0x2038e2=_0x1efc6f;return _0x2ff94a[_0x2038e2(0x2bb)]();}}},[_0x3fc269('i',{'staticClass':'fa\x20fa-undo'}),_0x2ff94a['_v'](_0x1efc6f(0x4df))])])]);};_0x200406['_withStripped']=!0x0;var _0x12eb15=_0x361a4e(0x1),_0x2cfaf2=_0x361a4e(0x4),_0x5e4aae=_0x361a4e(0x5),_0x414993=PIXI[_0x1f5228(0x389)][_0x1f5228(0x3a4)](),_0x58ba77=_0x414993&&_0x2cfaf2[_0x1f5228(0x58e)];function _0x3d0297(_0x24aaea){const _0x4c2cd7=_0x1f5228;switch(_0x24aaea){case 0x0:return _0x4c2cd7(0x685);case 0x1:return _0x4c2cd7(0x75b);case 0x2:return _0x4c2cd7(0x2f1);default:return _0x4c2cd7(0x546);}}var _0x3ca94d=(_0x361a4e(0xaa),Object(_0x174c36['a'])({'data':()=>({'clientHash':'','isWebGLSupported':_0x414993,'useWebGL':_0x58ba77,'gameResolution':_0x2cfaf2[_0x1f5228(0x75c)],'smallTextThreshold':_0x2cfaf2[_0x1f5228(0x247)],'autoZoom':_0x2cfaf2[_0x1f5228(0x4a8)],'rememeberEjecting':_0x2cfaf2[_0x1f5228(0x537)],'autoRespawn':_0x2cfaf2[_0x1f5228(0x620)],'mbAutorespawn':_0x2cfaf2[_0x1f5228(0x86b)],'mouseFreezeSoft':_0x2cfaf2[_0x1f5228(0x210)],'drawDelay':_0x2cfaf2[_0x1f5228(0x290)],'cameraMoveDelay':_0x2cfaf2[_0x1f5228(0x355)],'cameraZoomDelay':_0x2cfaf2['cameraZoomDelay'],'cameraZoomSpeed':_0x2cfaf2[_0x1f5228(0x3cb)],'replayDuration':_0x2cfaf2[_0x1f5228(0x496)],'showReplaySaved':_0x2cfaf2[_0x1f5228(0x860)],'showNames':_0x2cfaf2['showNames'],'showMass':_0x2cfaf2[_0x1f5228(0x1c1)],'showSkins':_0x2cfaf2[_0x1f5228(0x884)],'showOwnName':_0x2cfaf2['showOwnName'],'showOwnMass':_0x2cfaf2[_0x1f5228(0x44b)],'showOwnSkin':_0x2cfaf2['showOwnSkin'],'showCrown':_0x2cfaf2['showCrown'],'foodVisible':_0x2cfaf2[_0x1f5228(0x6d3)],'eatAnimation':_0x2cfaf2[_0x1f5228(0x7fa)],'showHud':_0x2cfaf2[_0x1f5228(0x506)],'showLeaderboard':_0x2cfaf2[_0x1f5228(0x82f)],'showServerName':_0x2cfaf2[_0x1f5228(0x1d3)],'showChat':_0x2cfaf2[_0x1f5228(0x35c)],'showChatToast':_0x2cfaf2[_0x1f5228(0x7c8)],'minimapEnabled':_0x2cfaf2[_0x1f5228(0x494)],'minimapLocations':_0x2cfaf2[_0x1f5228(0x3f2)],'showFPS':_0x2cfaf2[_0x1f5228(0x7d2)],'showPing':_0x2cfaf2['showPing'],'showCellCount':_0x2cfaf2[_0x1f5228(0x46d)],'showPlayerScore':_0x2cfaf2['showPlayerScore'],'showPlayerMass':_0x2cfaf2[_0x1f5228(0x20a)],'showClock':_0x2cfaf2[_0x1f5228(0x6dc)],'showSessionTime':_0x2cfaf2[_0x1f5228(0x88e)],'showPlayerCount':_0x2cfaf2[_0x1f5228(0x36b)],'showSpectators':_0x2cfaf2['showSpectators'],'showRestartTiming':_0x2cfaf2['showRestartTiming'],'debugStats':_0x2cfaf2[_0x1f5228(0x88b)],'clientStats':_0x2cfaf2['clientStats'],'playerStats':_0x2cfaf2['playerStats'],'chatColorOnlyPeople':_0x2cfaf2[_0x1f5228(0x868)],'showBlockedMessageCount':_0x2cfaf2[_0x1f5228(0x3dd)],'filterChatMessages':_0x2cfaf2[_0x1f5228(0x1a6)],'clearChatMessages':_0x2cfaf2[_0x1f5228(0x2fd)],'showCellLines':_0x2cfaf2[_0x1f5228(0x57d)],'showTag':_0x2cfaf2[_0x1f5228(0x312)],'showDir':_0x2cfaf2[_0x1f5228(0x82b)],'gameAlpha':_0x2cfaf2[_0x1f5228(0x43f)],'mbActive':_0x2cfaf2[_0x1f5228(0x23e)]}),'computed':{'showNamesMeaning'(){const _0x3af160=_0x1f5228;return _0x3d0297(this[_0x3af160(0x20c)]);},'showSkinsMeaning'(){return _0x3d0297(this['showSkins']);},'showMassMeaning'(){const _0x44ee78=_0x1f5228;return _0x3d0297(this[_0x44ee78(0x1c1)]);},'showReplaySavedMeaning'(){const _0x42bda2=_0x1f5228;switch(this[_0x42bda2(0x860)]){case 0x0:return _0x42bda2(0x223);case 0x1:return _0x42bda2(0x5a8);case 0x2:return _0x42bda2(0x299);default:return _0x42bda2(0x546);}},'showDualboxMeaning'(){const _0x26bf1d=_0x1f5228;return{0x0:_0x26bf1d(0x6ee),0x1:_0x26bf1d(0x650),0x2:_0x26bf1d(0x665),0x3:_0x26bf1d(0x665)}[this[_0x26bf1d(0x23e)]];}},'methods':{'promptRestart'(){const _0x306f33=_0x1f5228;_0x5e4aae[_0x306f33(0x459)](_0x306f33(0x308),()=>{setTimeout(()=>{const _0xaf3547=_0x3cc5;location[_0xaf3547(0x1a5)]();},0x1f4);});},'change'(_0x590879,_0x5e1d3c){const _0x373f5b=_0x1f5228;var _0x13e6d4;if(_0x13e6d4=_0x5e1d3c&&_0x5e1d3c[_0x373f5b(0x64e)]?isNaN(_0x5e1d3c[_0x373f5b(0x64e)][_0x373f5b(0x5eb)])?_0x5e1d3c[_0x373f5b(0x64e)][_0x373f5b(0x7ef)]:_0x5e1d3c[_0x373f5b(0x64e)]['valueAsNumber']:_0x5e1d3c,_0x2cfaf2[_0x590879]!=_0x13e6d4){switch(this[_0x590879]=_0x13e6d4,_0x2cfaf2[_0x373f5b(0x2df)](_0x590879,_0x13e6d4),_0x590879){case _0x373f5b(0x2f6):var _0xbdfa84=PIXI[_0x373f5b(0x389)][_0x373f5b(0x24e)](_0x13e6d4);_0x12eb15[_0x373f5b(0x57c)][_0x373f5b(0x2f6)]=_0xbdfa84;break;case _0x373f5b(0x3f2):_0x12eb15['events'][_0x373f5b(0x246)](_0x373f5b(0x5da),_0x13e6d4);break;case _0x373f5b(0x506):_0x12eb15[_0x373f5b(0x505)][_0x373f5b(0x506)]=_0x13e6d4;break;case _0x373f5b(0x7c8):_0x12eb15['events']['$emit'](_0x373f5b(0x85b),{'visibleToast':_0x13e6d4});}if(_0x12eb15['running'])switch(_0x590879){case _0x373f5b(0x20c):case'showSkins':case _0x373f5b(0x1c1):case'showOwnName':case'showOwnSkin':case _0x373f5b(0x44b):_0x12eb15[_0x373f5b(0x803)][_0x373f5b(0x30b)]();break;case'gameAlpha':GAME[_0x373f5b(0x6b8)][_0x373f5b(0x2c5)][_0x373f5b(0x592)]=_0x13e6d4;break;case _0x373f5b(0x6d3):_0x12eb15[_0x373f5b(0x6b8)]['food'][_0x373f5b(0x893)]=_0x13e6d4;break;case _0x373f5b(0x82f):_0x12eb15[_0x373f5b(0x7b4)][_0x373f5b(0x246)](_0x373f5b(0x528),_0x13e6d4);break;case _0x373f5b(0x494):_0x13e6d4?_0x12eb15[_0x373f5b(0x7b4)]['$emit'](_0x373f5b(0x518)):_0x12eb15['events'][_0x373f5b(0x246)](_0x373f5b(0x556));break;case'showFPS':case _0x373f5b(0x7da):case _0x373f5b(0x20a):case _0x373f5b(0x808):case _0x373f5b(0x46d):_0x12eb15[_0x373f5b(0x7b4)][_0x373f5b(0x246)](_0x373f5b(0x689));break;case'showClock':case _0x373f5b(0x88e):case _0x373f5b(0x5b3):case _0x373f5b(0x36b):case _0x373f5b(0x36a):_0x12eb15[_0x373f5b(0x7b4)][_0x373f5b(0x246)](_0x373f5b(0x3f6));break;case _0x373f5b(0x35c):_0x12eb15[_0x373f5b(0x7b4)][_0x373f5b(0x246)](_0x373f5b(0x85b),{'visible':_0x13e6d4});break;case'showBlockedMessageCount':_0x12eb15[_0x373f5b(0x7b4)]['$emit']('show-blocked-message-count',_0x13e6d4);}}},'confirmReset'(){const _0x592337=_0x1f5228;_0x5e4aae[_0x592337(0x459)](_0x592337(0x34e),()=>this[_0x592337(0x49d)]());},'reset'(){const _0x326cf0=_0x1f5228;var _0x11766a=[_0x326cf0(0x635),'isWebGLSupported'];for(var _0x5a109b in this[_0x326cf0(0x799)])_0x11766a[_0x326cf0(0x605)](_0x5a109b)||this[_0x326cf0(0x275)](_0x5a109b,_0x2cfaf2[_0x326cf0(0x404)](_0x5a109b));}}},_0x200406,[],!0x1,null,'3ddebeb3',null));_0x3ca94d[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x853);var _0x2a28a3=_0x3ca94d[_0x1f5228(0x6e4)],_0x1ded4d=function(){const _0x3bb11d=_0x1f5228;var _0x13fc96=this,_0x43b8b2=_0x13fc96[_0x3bb11d(0x413)],_0x53f235=_0x13fc96[_0x3bb11d(0x5e6)]['_c']||_0x43b8b2;return _0x53f235('div',{'staticClass':'container'},[_0x53f235('div',{'staticClass':_0x3bb11d(0x57e)},[_0x53f235('div',{'staticClass':_0x3bb11d(0x646)},[_0x13fc96['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20Colors\x20and\x20images\x0a\x20\x20\x20\x20')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'options\x20two-columns'},[_0x53f235(_0x3bb11d(0x565),[_0x53f235('div',{'staticClass':_0x3bb11d(0x323)},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v'](_0x3bb11d(0x84e))]),_0x13fc96['_v']('\x20'),_0x53f235('color-option',{'staticClass':_0x3bb11d(0x65f),'attrs':{'value':_0x13fc96[_0x3bb11d(0x2f6)]},'on':{'input':function(_0x299be2){const _0x382537=_0x3bb11d;return _0x13fc96[_0x382537(0x275)]('backgroundColor',_0x299be2);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x323)},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v']('Map\x20border')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':'right','attrs':{'value':_0x13fc96[_0x3bb11d(0x493)]},'on':{'input':function(_0x2b44bd){const _0x57fe77=_0x3bb11d;return _0x13fc96[_0x57fe77(0x275)](_0x57fe77(0x493),_0x2b44bd);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x323),'class':{'disabled':!_0x13fc96[_0x3bb11d(0x5df)]}},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v'](_0x3bb11d(0x577))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':'right','attrs':{'disabled':!_0x13fc96[_0x3bb11d(0x5df)],'value':_0x13fc96[_0x3bb11d(0x514)]},'on':{'input':function(_0x371994){const _0x413b37=_0x3bb11d;return _0x13fc96[_0x413b37(0x275)](_0x413b37(0x514),_0x371994);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x323)},[_0x53f235('span',[_0x13fc96['_v'](_0x3bb11d(0x3c5))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':_0x3bb11d(0x65f),'attrs':{'value':_0x13fc96['ejectedColor']},'on':{'input':function(_0x44f6b2){const _0x15ab8c=_0x3bb11d;return _0x13fc96[_0x15ab8c(0x275)](_0x15ab8c(0x2d1),_0x44f6b2);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x323)},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v']('Active\x20cell')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':_0x3bb11d(0x65f),'attrs':{'value':_0x13fc96[_0x3bb11d(0x62b)]},'on':{'input':function(_0x49ae49){const _0x19f688=_0x3bb11d;return _0x13fc96[_0x19f688(0x275)](_0x19f688(0x62b),_0x49ae49);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x323)},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v'](_0x3bb11d(0x432))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':_0x3bb11d(0x65f),'attrs':{'value':_0x13fc96['cellNameOutlineColor']},'on':{'input':function(_0x199530){const _0xb673f6=_0x3bb11d;return _0x13fc96[_0xb673f6(0x275)](_0xb673f6(0x27e),_0x199530);}}})],0x1)]),_0x13fc96['_v']('\x20'),_0x53f235('span',[_0x53f235('div',{'staticClass':'color-input'},[_0x53f235('span',[_0x13fc96['_v'](_0x3bb11d(0x35e))]),_0x13fc96['_v']('\x20'),_0x53f235('image-option',{'staticClass':_0x3bb11d(0x65f),'attrs':{'width':'32','defaults':'','value':_0x13fc96['cursorImageUrl']},'on':{'input':function(_0x111d05){const _0x1b3846=_0x3bb11d;return _0x13fc96[_0x1b3846(0x275)](_0x1b3846(0x397),_0x111d05);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'color-input','class':{'disabled':!_0x13fc96['showBackgroundImage']}},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v'](_0x3bb11d(0x331))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x5ab),{'staticClass':'right','attrs':{'width':_0x3bb11d(0x6bf),'defaults':_0x13fc96[_0x3bb11d(0x7ea)],'disabled':!_0x13fc96[_0x3bb11d(0x76a)],'value':_0x13fc96[_0x3bb11d(0x240)]},'on':{'input':function(_0x2d53ca){const _0x1ce417=_0x3bb11d;return _0x13fc96[_0x1ce417(0x275)](_0x1ce417(0x240),_0x2d53ca);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x323)},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v'](_0x3bb11d(0x2c3))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x5ab),{'staticClass':_0x3bb11d(0x65f),'attrs':{'width':'100','defaults':_0x13fc96[_0x3bb11d(0x569)],'value':_0x13fc96[_0x3bb11d(0x388)]},'on':{'input':function(_0x123c7d){const _0x5fd48e=_0x3bb11d;return _0x13fc96[_0x5fd48e(0x275)](_0x5fd48e(0x388),_0x123c7d);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'color-input'},[_0x53f235('span',[_0x13fc96['_v'](_0x3bb11d(0x810))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x5ab),{'staticClass':_0x3bb11d(0x65f),'attrs':{'width':_0x3bb11d(0x1a0),'defaults':_0x13fc96['mbArrowDefault'],'value':_0x13fc96['mbArrow']},'on':{'input':function(_0x394ab6){const _0x3f3401=_0x3bb11d;return _0x13fc96[_0x3f3401(0x275)](_0x3f3401(0x357),_0x394ab6);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':'color-input'},[_0x53f235(_0x3bb11d(0x565),[_0x13fc96['_v']('Mass\x20text')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':_0x3bb11d(0x65f),'attrs':{'value':_0x13fc96[_0x3bb11d(0x358)]},'on':{'input':function(_0xb6dd1e){const _0x25dad4=_0x3bb11d;return _0x13fc96[_0x25dad4(0x275)]('cellMassColor',_0xb6dd1e);}}})],0x1),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x323)},[_0x53f235('span',[_0x13fc96['_v'](_0x3bb11d(0x606))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x820),{'staticClass':'right','attrs':{'value':_0x13fc96[_0x3bb11d(0x2f0)]},'on':{'input':function(_0x524b22){const _0x188e41=_0x3bb11d;return _0x13fc96[_0x188e41(0x275)](_0x188e41(0x2f0),_0x524b22);}}})],0x1)])])]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x57e)},[_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x646)},[_0x13fc96['_v'](_0x3bb11d(0x292)),_0x13fc96[_0x3bb11d(0x58e)]?_0x13fc96['_e']():_0x53f235(_0x3bb11d(0x565),{'staticClass':'right\x20silent'},[_0x13fc96['_v'](_0x3bb11d(0x709))])]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'options'},[_0x53f235(_0x3bb11d(0x3c9),{'staticClass':_0x3bb11d(0x5ac),'attrs':{'checked':_0x13fc96['useFoodColor']},'on':{'change':function(_0x2a2c7f){const _0x1da57b=_0x3bb11d;return _0x13fc96[_0x1da57b(0x275)](_0x1da57b(0x5df),_0x2a2c7f);}}},[_0x13fc96['_v']('Custom\x20food\x20color')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x3c9),{'staticClass':_0x3bb11d(0x5ac),'attrs':{'disabled':!_0x13fc96[_0x3bb11d(0x58e)],'checked':_0x13fc96[_0x3bb11d(0x76a)]},'on':{'change':function(_0x411de0){const _0x3fa4f4=_0x3bb11d;return _0x13fc96[_0x3fa4f4(0x275)](_0x3fa4f4(0x76a),_0x411de0);}}},[_0x13fc96['_v']('Show\x20map\x20image')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x3c9),{'staticClass':'p-switch','attrs':{'disabled':!_0x13fc96[_0x3bb11d(0x58e)]||!_0x13fc96[_0x3bb11d(0x76a)],'checked':_0x13fc96[_0x3bb11d(0x6f8)]},'on':{'change':function(_0x437bc5){const _0x4b41b4=_0x3bb11d;return _0x13fc96[_0x4b41b4(0x275)](_0x4b41b4(0x6f8),_0x437bc5);}}},[_0x13fc96['_v'](_0x3bb11d(0x4d4))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x3c9),{'staticClass':_0x3bb11d(0x5ac),'attrs':{'disabled':!_0x13fc96[_0x3bb11d(0x58e)]||!_0x13fc96[_0x3bb11d(0x76a)],'checked':_0x13fc96['backgroundDefaultIfUnequal']},'on':{'change':function(_0x51833d){const _0x291d8c=_0x3bb11d;return _0x13fc96[_0x291d8c(0x275)](_0x291d8c(0x66b),_0x51833d);}}},[_0x13fc96['_v'](_0x3bb11d(0x73e))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x6e5),'class':{'disabled':!_0x13fc96[_0x3bb11d(0x58e)]||!_0x13fc96[_0x3bb11d(0x76a)]}},[_0x13fc96['_v'](_0x3bb11d(0x5c0)),_0x53f235(_0x3bb11d(0x565),{'staticClass':_0x3bb11d(0x65f)},[_0x13fc96['_v'](_0x13fc96['_s']((0x64*_0x13fc96[_0x3bb11d(0x37a)])[_0x3bb11d(0x78b)](0x0))+'%')]),_0x13fc96['_v']('\x20'),_0x53f235('input',{'staticClass':'slider','attrs':{'type':_0x3bb11d(0x30e),'disabled':!_0x13fc96['useWebGL']||!_0x13fc96['showBackgroundImage'],'min':_0x3bb11d(0x311),'max':'1','step':_0x3bb11d(0x6d7)},'domProps':{'value':_0x13fc96[_0x3bb11d(0x37a)]},'on':{'input':function(_0x3a6e98){const _0x5bb109=_0x3bb11d;return _0x13fc96[_0x5bb109(0x275)]('backgroundImageOpacity',_0x3a6e98);}}})])],0x1)]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'section\x20row'},[_0x53f235('div',{'staticClass':_0x3bb11d(0x646)},[_0x13fc96['_v'](_0x3bb11d(0x6ca))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'options'},[_0x53f235('div',{'staticClass':_0x3bb11d(0x7de)},[_0x13fc96['_v'](_0x3bb11d(0x6c2)),_0x53f235(_0x3bb11d(0x211),{'attrs':{'type':_0x3bb11d(0x858),'spellcheck':'false','placeholder':_0x3bb11d(0x562),'maxlength':'30'},'domProps':{'value':_0x13fc96[_0x3bb11d(0x703)]},'on':{'input':function(_0x35255a){const _0x28c408=_0x3bb11d;return _0x13fc96[_0x28c408(0x275)]('cellNameFont',_0x35255a);},'focus':function(){const _0x4a04ee=_0x3bb11d;return _0x13fc96[_0x4a04ee(0x343)]('name',!0x0);},'blur':function(){const _0x80869e=_0x3bb11d;return _0x13fc96[_0x80869e(0x343)](_0x80869e(0x3bb),!0x1);}}})]),_0x13fc96['_v']('\x20'),_0x13fc96['showNameFontWarning']?[_0x53f235(_0x3bb11d(0x760),{'staticClass':'silent'},[_0x13fc96['_v'](_0x3bb11d(0x29d))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x857)},[_0x13fc96['_v'](_0x3bb11d(0x88a))])]:_0x13fc96['_e'](),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x847)},[_0x53f235('input',{'staticClass':_0x3bb11d(0x701),'attrs':{'type':_0x3bb11d(0x30e),'min':'0','max':'2','step':'1'},'domProps':{'value':_0x13fc96[_0x3bb11d(0x6b6)]},'on':{'input':function(_0x127382){const _0x843c82=_0x3bb11d;return _0x13fc96[_0x843c82(0x275)](_0x843c82(0x6b6),_0x127382);}}}),_0x13fc96['_v'](_0x3bb11d(0x42f)+_0x13fc96['_s'](_0x13fc96[_0x3bb11d(0x73d)])+'\x20name\x20text\x0a\x20\x20\x20\x20\x20\x20\x20\x20')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x847),'class':{'off':!_0x13fc96[_0x3bb11d(0x583)]}},[_0x53f235(_0x3bb11d(0x211),{'staticClass':_0x3bb11d(0x701),'attrs':{'type':_0x3bb11d(0x30e),'min':'0','max':'3','step':'1'},'domProps':{'value':_0x13fc96[_0x3bb11d(0x583)]},'on':{'input':function(_0x30ca74){const _0x55c3f1=_0x3bb11d;return _0x13fc96[_0x55c3f1(0x275)](_0x55c3f1(0x583),_0x30ca74);}}}),_0x13fc96['_v'](_0x3bb11d(0x42f)+_0x13fc96['_s'](_0x13fc96[_0x3bb11d(0x816)])+'\x20name\x20outline\x0a\x20\x20\x20\x20\x20\x20\x20\x20')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x3c9),{'staticClass':_0x3bb11d(0x5ac),'attrs':{'checked':_0x13fc96[_0x3bb11d(0x7ae)]},'on':{'change':function(_0x4921fd){const _0x1bc7d5=_0x3bb11d;return _0x13fc96[_0x1bc7d5(0x275)](_0x1bc7d5(0x7ae),_0x4921fd);}}},[_0x13fc96['_v'](_0x3bb11d(0x306))]),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x22e)},[_0x13fc96['_v']('\x0d\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Long\x20name\x20threshold\x20'),_0x53f235(_0x3bb11d(0x565),{'staticClass':_0x3bb11d(0x65f)},[_0x13fc96['_v'](_0x13fc96['_s'](_0x13fc96[_0x3bb11d(0x376)])+'px')]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x211),{'staticClass':_0x3bb11d(0x701),'attrs':{'type':_0x3bb11d(0x30e),'min':'500','max':_0x3bb11d(0x5bb),'step':'50'},'domProps':{'value':_0x13fc96[_0x3bb11d(0x376)]},'on':{'input':function(_0x31784b){const _0x5312d8=_0x3bb11d;return _0x13fc96[_0x5312d8(0x275)]('cellLongNameThreshold',_0x31784b);}}})])],0x2)]),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x57e)},[_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x646)},[_0x13fc96['_v'](_0x3bb11d(0x7e8))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x5a1)},[_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x7de)},[_0x13fc96['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Font\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'),_0x53f235('input',{'attrs':{'type':_0x3bb11d(0x858),'spellcheck':_0x3bb11d(0x51c),'placeholder':_0x3bb11d(0x3c7),'maxlength':'30'},'domProps':{'value':_0x13fc96[_0x3bb11d(0x4a3)]},'on':{'input':function(_0x366657){const _0x3b111b=_0x3bb11d;return _0x13fc96['change'](_0x3b111b(0x4a3),_0x366657);},'focus':function(){const _0x22c83f=_0x3bb11d;return _0x13fc96['fontWarning'](_0x22c83f(0x70b),!0x0);},'blur':function(){const _0x2eaebd=_0x3bb11d;return _0x13fc96[_0x2eaebd(0x343)](_0x2eaebd(0x70b),!0x1);}}})]),_0x13fc96['_v']('\x20'),_0x13fc96[_0x3bb11d(0x4dd)]?[_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x857)},[_0x13fc96['_v'](_0x3bb11d(0x29d))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x857)},[_0x13fc96['_v'](_0x3bb11d(0x88a))])]:_0x13fc96['_e'](),_0x13fc96['_v']('\x20'),_0x53f235('div',{'staticClass':_0x3bb11d(0x847)},[_0x53f235(_0x3bb11d(0x211),{'staticClass':'slider','attrs':{'type':_0x3bb11d(0x30e),'min':'0','max':'2','step':'1'},'domProps':{'value':_0x13fc96['cellMassWeight']},'on':{'input':function(_0x1fa378){const _0x1474c5=_0x3bb11d;return _0x13fc96['change'](_0x1474c5(0x581),_0x1fa378);}}}),_0x13fc96['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x13fc96['_s'](_0x13fc96[_0x3bb11d(0x2a3)])+_0x3bb11d(0x681))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'inline-range','class':{'off':!_0x13fc96[_0x3bb11d(0x387)]}},[_0x53f235(_0x3bb11d(0x211),{'staticClass':_0x3bb11d(0x701),'attrs':{'type':_0x3bb11d(0x30e),'min':'0','max':'3','step':'1'},'domProps':{'value':_0x13fc96['cellMassOutline']},'on':{'input':function(_0x2b5db2){const _0x3f7da3=_0x3bb11d;return _0x13fc96[_0x3f7da3(0x275)](_0x3f7da3(0x387),_0x2b5db2);}}}),_0x13fc96['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x13fc96['_s'](_0x13fc96[_0x3bb11d(0x55e)])+_0x3bb11d(0x2c7))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':_0x3bb11d(0x847)},[_0x53f235('input',{'staticClass':_0x3bb11d(0x701),'attrs':{'type':'range','min':'0','max':'3','step':'1'},'domProps':{'value':_0x13fc96[_0x3bb11d(0x38e)]},'on':{'input':function(_0x149a91){const _0x285685=_0x3bb11d;return _0x13fc96[_0x285685(0x275)](_0x285685(0x38e),_0x149a91);}}}),_0x13fc96['_v'](_0x3bb11d(0x42f)+_0x13fc96['_s'](_0x13fc96[_0x3bb11d(0x5b8)])+_0x3bb11d(0x1e8))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x3c9),{'staticClass':_0x3bb11d(0x5ac),'attrs':{'checked':_0x13fc96[_0x3bb11d(0x24d)]},'on':{'change':function(_0x550d2e){const _0x539e40=_0x3bb11d;return _0x13fc96[_0x539e40(0x275)](_0x539e40(0x24d),_0x550d2e);}}},[_0x13fc96['_v'](_0x3bb11d(0x558))]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x3c9),{'staticClass':_0x3bb11d(0x5ac),'attrs':{'checked':_0x13fc96[_0x3bb11d(0x6f0)]},'on':{'change':function(_0x1e5b74){const _0x2bbfa4=_0x3bb11d;return _0x13fc96[_0x2bbfa4(0x275)]('shortMass',_0x1e5b74);}}},[_0x13fc96['_v'](_0x3bb11d(0x2e9))])],0x2)]),_0x13fc96['_v']('\x20'),_0x53f235(_0x3bb11d(0x760),{'staticClass':'reset-option-wrapper'},[_0x53f235(_0x3bb11d(0x565),{'staticClass':_0x3bb11d(0x513),'on':{'click':function(){return _0x13fc96['confirmReset']();}}},[_0x53f235('i',{'staticClass':_0x3bb11d(0x616)}),_0x13fc96['_v'](_0x3bb11d(0x2aa))])])]);};_0x1ded4d[_0x1f5228(0x222)]=!0x0;var _0x2ec713=function(){const _0x356ac6=_0x1f5228;var _0x5a8f49=this,_0x30d39f=_0x5a8f49[_0x356ac6(0x413)],_0x371584=_0x5a8f49['_self']['_c']||_0x30d39f;return _0x371584('div',{'staticClass':_0x356ac6(0x423),'class':{'disabled':_0x5a8f49[_0x356ac6(0x66e)]},'style':{'backgroundColor':'#'+_0x5a8f49[_0x356ac6(0x64f)]},'on':{'mousedown':function(){const _0x4cf7e3=_0x356ac6;_0x5a8f49[_0x4cf7e3(0x66e)]||_0x5a8f49[_0x4cf7e3(0x6ec)](!0x0);}}},[_0x5a8f49[_0x356ac6(0x51a)]?_0x371584(_0x356ac6(0x760),{'staticClass':_0x356ac6(0x242),'on':{'mousedown':function(_0x2a71c0){return _0x5a8f49['startMovingPivot'](_0x2a71c0);},'mousemove':function(_0x264373){return _0x5a8f49['movePivot'](_0x264373);},'mouseup':function(_0x77283a){const _0x3b71bb=_0x356ac6;return _0x5a8f49[_0x3b71bb(0x542)](_0x77283a);}}},[_0x371584('div',{'staticClass':_0x356ac6(0x36f)}),_0x5a8f49['_v']('\x20'),_0x371584(_0x356ac6(0x760),{'staticClass':_0x356ac6(0x479)},[_0x371584(_0x356ac6(0x211),{'directives':[{'name':_0x356ac6(0x529),'rawName':_0x356ac6(0x5de),'value':_0x5a8f49[_0x356ac6(0x4fb)],'expression':_0x356ac6(0x4fb)}],'staticClass':_0x356ac6(0x77d),'attrs':{'type':_0x356ac6(0x30e),'min':'0','max':_0x356ac6(0x4c9),'step':'1'},'domProps':{'value':_0x5a8f49[_0x356ac6(0x4fb)]},'on':{'change':function(){const _0x2ae7a8=_0x356ac6;return _0x5a8f49[_0x2ae7a8(0x74e)]();},'__r':function(_0x4ecf6d){const _0x5bb19e=_0x356ac6;_0x5a8f49[_0x5bb19e(0x4fb)]=_0x4ecf6d[_0x5bb19e(0x64e)][_0x5bb19e(0x7ef)];}}}),_0x5a8f49['_v']('\x20'),_0x371584('div',{'staticClass':'color-picker-clr','style':{'backgroundColor':_0x356ac6(0x408)+_0x5a8f49[_0x356ac6(0x4fb)]+',\x20100%,\x2050%)'}},[_0x371584(_0x356ac6(0x760),{'staticClass':'color-picker-sat'},[_0x371584('div',{'staticClass':'color-picker-val'},[_0x371584(_0x356ac6(0x760),{'staticClass':'color-picker-pivot','style':{'left':0x64*_0x5a8f49[_0x356ac6(0x421)]+'px','top':0x64-0x64*_0x5a8f49[_0x356ac6(0x468)]+'px'}})])])]),_0x5a8f49['_v']('\x20'),_0x371584(_0x356ac6(0x760),{'staticClass':_0x356ac6(0x26e)},[_0x371584('span',{'staticClass':'color-picker-hashtag'},[_0x5a8f49['_v']('#')]),_0x5a8f49['_v']('\x20'),_0x371584(_0x356ac6(0x211),{'directives':[{'name':_0x356ac6(0x529),'rawName':_0x356ac6(0x5de),'value':_0x5a8f49[_0x356ac6(0x64f)],'expression':_0x356ac6(0x64f)}],'staticClass':'color-picker-hex','attrs':{'type':_0x356ac6(0x858),'spellcheck':'false','maxlength':'6','placeholder':'000000'},'domProps':{'value':_0x5a8f49[_0x356ac6(0x64f)]},'on':{'input':[function(_0x2f63e3){const _0x4bc9ba=_0x356ac6;_0x2f63e3[_0x4bc9ba(0x64e)]['composing']||(_0x5a8f49[_0x4bc9ba(0x64f)]=_0x2f63e3[_0x4bc9ba(0x64e)]['value']);},function(){return _0x5a8f49['triggerInput']();}]}})])])]):_0x5a8f49['_e']()]);};_0x2ec713[_0x1f5228(0x222)]=!0x0;var _0x2d7b37=(_0x361a4e(0xac),Object(_0x174c36['a'])({'data':()=>({'pickerOpen':!0x1,'movingPivot':!0x1,'hue':0x0,'sat':0x0,'val':0x0}),'props':['value','disabled'],'computed':{'hex':{'get'(){const _0x434a9a=_0x1f5228;return function(_0x26f0a1,_0x4a2c68,_0x169cea){const _0x9c78a9=_0x3cc5;var _0x3be4ab,_0x2ef34a,_0x3d2412,_0x39068b,_0x23982a,_0x550a72,_0x5f56d8,_0x558d19;switch(_0x550a72=_0x169cea*(0x1-_0x4a2c68),_0x5f56d8=_0x169cea*(0x1-(_0x23982a=0x6*_0x26f0a1-(_0x39068b=Math[_0x9c78a9(0x579)](0x6*_0x26f0a1)))*_0x4a2c68),_0x558d19=_0x169cea*(0x1-(0x1-_0x23982a)*_0x4a2c68),_0x39068b%0x6){case 0x0:_0x3be4ab=_0x169cea,_0x2ef34a=_0x558d19,_0x3d2412=_0x550a72;break;case 0x1:_0x3be4ab=_0x5f56d8,_0x2ef34a=_0x169cea,_0x3d2412=_0x550a72;break;case 0x2:_0x3be4ab=_0x550a72,_0x2ef34a=_0x169cea,_0x3d2412=_0x558d19;break;case 0x3:_0x3be4ab=_0x550a72,_0x2ef34a=_0x5f56d8,_0x3d2412=_0x169cea;break;case 0x4:_0x3be4ab=_0x558d19,_0x2ef34a=_0x550a72,_0x3d2412=_0x169cea;break;case 0x5:_0x3be4ab=_0x169cea,_0x2ef34a=_0x550a72,_0x3d2412=_0x5f56d8;}return(_0x3be4ab=Math[_0x9c78a9(0x7a8)](0xff*_0x3be4ab)[_0x9c78a9(0x6fb)](0x10)[_0x9c78a9(0x767)](0x2,'0'))+(_0x2ef34a=Math[_0x9c78a9(0x7a8)](0xff*_0x2ef34a)[_0x9c78a9(0x6fb)](0x10)[_0x9c78a9(0x767)](0x2,'0'))+Math['ceil'](0xff*_0x3d2412)[_0x9c78a9(0x6fb)](0x10)[_0x9c78a9(0x767)](0x2,'0');}(this['hue']/0x168,this['sat'],this[_0x434a9a(0x468)]);},'set'(_0x2d9404){const _0x179a3c=_0x1f5228;if(_0x2d9404=_0x2d9404[_0x179a3c(0x522)](),/^[0-9a-f]{6}$/['test'](_0x2d9404)){var _0x508b5f,_0x396dee,_0x152488,_0x2bfa8f,_0x5dfbd5,_0x72b6d6,_0x3c6f39,_0x387848=(_0x508b5f=_0x2d9404,_0x396dee=parseInt(_0x508b5f[_0x179a3c(0x7fb)](0x0,0x2),0x10)/0xff,_0x152488=parseInt(_0x508b5f[_0x179a3c(0x7fb)](0x2,0x4),0x10)/0xff,_0x2bfa8f=parseInt(_0x508b5f[_0x179a3c(0x7fb)](0x4,0x6),0x10)/0xff,[0x3c*((_0x3c6f39=(_0x72b6d6=(_0x5dfbd5=Math[_0x179a3c(0x4de)](_0x396dee,_0x152488,_0x2bfa8f))-Math[_0x179a3c(0x844)](_0x396dee,_0x152488,_0x2bfa8f))&&(_0x5dfbd5==_0x396dee?(_0x152488-_0x2bfa8f)/_0x72b6d6:_0x5dfbd5==_0x152488?0x2+(_0x2bfa8f-_0x396dee)/_0x72b6d6:0x4+(_0x396dee-_0x152488)/_0x72b6d6))<0x0?_0x3c6f39+0x6:_0x3c6f39),_0x5dfbd5&&_0x72b6d6/_0x5dfbd5,_0x5dfbd5]);this[_0x179a3c(0x4fb)]=_0x387848[0x0],this[_0x179a3c(0x421)]=_0x387848[0x1],this[_0x179a3c(0x468)]=_0x387848[0x2];}}}},'methods':{'showPicker'(_0x28d829){this['pickerOpen']=_0x28d829;},'startMovingPivot'(_0x264710){const _0x2474c7=_0x1f5228;var _0x564d2d=_0x264710[_0x2474c7(0x64e)]['classList'];if(_0x564d2d[_0x2474c7(0x4aa)]('color-picker-overlay'))return this[_0x2474c7(0x6ec)](!0x1),void _0x264710['stopPropagation']();(_0x564d2d['contains'](_0x2474c7(0x58d))||_0x564d2d[_0x2474c7(0x4aa)](_0x2474c7(0x27b)))&&(this[_0x2474c7(0x582)]=!0x0,this[_0x2474c7(0x7f5)](_0x264710));},'movePivot'(_0x62f699){const _0x513c2c=_0x1f5228;if(this['movingPivot']){var _0xf71613=this[_0x513c2c(0x5ff)][_0x513c2c(0x7c9)](_0x513c2c(0x38a))['getBoundingClientRect'](),_0x1fb30a=_0x62f699['clientX']-_0xf71613['x'],_0x2798fc=_0x62f699[_0x513c2c(0x6d8)]-_0xf71613['y'];this[_0x513c2c(0x421)]=_0x1fb30a/0x64,this[_0x513c2c(0x468)]=0x1-_0x2798fc/0x64,this[_0x513c2c(0x421)]=Math[_0x513c2c(0x844)](Math[_0x513c2c(0x4de)](this[_0x513c2c(0x421)],0x0),0x1),this[_0x513c2c(0x468)]=Math[_0x513c2c(0x844)](Math['max'](this[_0x513c2c(0x468)],0x0),0x1);}},'stopMovingPivot'(_0x2ef168){const _0x143364=_0x1f5228;this[_0x143364(0x582)]&&(this[_0x143364(0x7f5)](_0x2ef168),this[_0x143364(0x582)]=!0x1,this[_0x143364(0x74e)]());},'triggerInput'(){const _0x24a42f=_0x1f5228;this[_0x24a42f(0x246)](_0x24a42f(0x211),this[_0x24a42f(0x64f)]);}},'created'(){const _0x2d5383=_0x1f5228;this[_0x2d5383(0x7ef)]&&(this['hex']=this[_0x2d5383(0x7ef)]);}},_0x2ec713,[],!0x1,null,_0x1f5228(0x7e0),null));_0x2d7b37[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x363);var _0x27f320=_0x2d7b37[_0x1f5228(0x6e4)],_0x4a086d=function(){const _0x34e36d=_0x1f5228;var _0x2aee77=this,_0x3955e6=_0x2aee77[_0x34e36d(0x413)],_0x148d37=_0x2aee77[_0x34e36d(0x5e6)]['_c']||_0x3955e6;return _0x148d37(_0x34e36d(0x760),{'staticClass':_0x34e36d(0x274),'class':{'disabled':_0x2aee77['disabled']},'style':{'backgroundColor':'#'+_0x2aee77[_0x34e36d(0x64f)]},'on':{'mousedown':function(){const _0x456f0b=_0x34e36d;_0x2aee77[_0x456f0b(0x66e)]||_0x2aee77[_0x456f0b(0x6ec)](!0x0);}}},[_0x148d37(_0x34e36d(0x760),{'staticClass':_0x34e36d(0x5d7)},[_0x2aee77['_v'](_0x34e36d(0x4ff))]),_0x2aee77['_v']('\x20'),_0x2aee77[_0x34e36d(0x51a)]?_0x148d37(_0x34e36d(0x760),{'staticClass':_0x34e36d(0x61b),'on':{'click':function(_0x395636){return _0x2aee77['tryHidePicker'](_0x395636);}}},[_0x148d37(_0x34e36d(0x760),{'staticClass':_0x34e36d(0x29e)}),_0x2aee77['_v']('\x20'),_0x148d37(_0x34e36d(0x760),{'staticClass':'image-picker\x20fade-box'},[_0x148d37('img',{'staticClass':'image-picker-preview','style':{'maxWidth':(_0x2aee77['value']?_0x2aee77['width']:0xc8)+'px'},'attrs':{'src':_0x2aee77[_0x34e36d(0x7ef)],'alt':'No\x20image\x20chosen\x20or\x20it\x20is\x20invalid'},'on':{'click':function(){const _0xbf48c2=_0x34e36d;return _0x2aee77[_0xbf48c2(0x50d)]();},'dragover':function(_0x430cac){const _0x73025e=_0x34e36d;return _0x2aee77[_0x73025e(0x770)](_0x430cac);},'drop':function(_0x580166){const _0x2a94bd=_0x34e36d;return _0x2aee77[_0x2a94bd(0x368)](_0x580166);}}}),_0x2aee77['_v']('\x20'),_0x148d37(_0x34e36d(0x760),{'staticClass':_0x34e36d(0x880)},[_0x2aee77['_v'](_0x34e36d(0x60e)),_0x148d37('br'),_0x2aee77['_v']('\x20'),_0x34e36d(0x5fb)in this?_0x148d37(_0x34e36d(0x565),{'staticClass':_0x34e36d(0x7d4),'on':{'click':function(){const _0x207f7f=_0x34e36d;return _0x2aee77[_0x207f7f(0x74e)](_0x2aee77[_0x207f7f(0x5fb)]);}}},[_0x2aee77['_v'](_0x34e36d(0x7b0))]):_0x2aee77['_e']()]),_0x2aee77['_v']('\x20'),_0x148d37(_0x34e36d(0x211),{'staticClass':'image-picker-input','attrs':{'type':_0x34e36d(0x54b),'accept':_0x34e36d(0x47d)},'on':{'change':function(_0x207125){const _0x28e9ee=_0x34e36d;return _0x2aee77[_0x28e9ee(0x49b)](_0x207125);}}})])]):_0x2aee77['_e']()]);};_0x4a086d['_withStripped']=!0x0;var _0x4d0532=(_0x361a4e(0xae),Object(_0x174c36['a'])({'data':()=>({'pickerOpen':!0x1,'fileReader':null}),'props':['value',_0x1f5228(0x339),_0x1f5228(0x66e),_0x1f5228(0x5fb)],'methods':{'showPicker'(_0x67a428){const _0x3dccac=_0x1f5228;!this['pickerOpen']&&_0x67a428&&(this[_0x3dccac(0x705)]=!0x1),this[_0x3dccac(0x51a)]=_0x67a428;},'tryHidePicker'(_0x5ef475){const _0x3e4d33=_0x1f5228;_0x5ef475[_0x3e4d33(0x64e)]['classList'][_0x3e4d33(0x4aa)](_0x3e4d33(0x29e))&&(this[_0x3e4d33(0x6ec)](!0x1),_0x5ef475[_0x3e4d33(0x59c)]());},'triggerInput'(_0x43799f){const _0x4c7395=_0x1f5228;this[_0x4c7395(0x246)](_0x4c7395(0x211),_0x43799f);},'openFileChooser'(){const _0x15b53b=_0x1f5228;this[_0x15b53b(0x5ff)][_0x15b53b(0x7c9)](_0x15b53b(0x5c2))[_0x15b53b(0x3e4)]();},'allowDrop'(_0xaeed3e){const _0x3dc378=_0x1f5228;_0xaeed3e[_0x3dc378(0x742)]();},'getFileReader'(){const _0x13951b=_0x1f5228;var _0x12b275=new FileReader();return _0x12b275[_0x13951b(0x427)]('load',_0x11374e=>{const _0x597c64=_0x13951b;this[_0x597c64(0x74e)](_0x11374e[_0x597c64(0x64e)][_0x597c64(0x6ef)]);}),_0x12b275;},'onImageSelect'(_0x2a0ef4){const _0x1ecb7d=_0x1f5228;if(0x0!==_0x2a0ef4[_0x1ecb7d(0x64e)]['files']['length']){var _0x3f143d=_0x2a0ef4[_0x1ecb7d(0x64e)][_0x1ecb7d(0x5d5)][0x0];_0x3f143d[_0x1ecb7d(0x3e7)]['startsWith'](_0x1ecb7d(0x279))&&this[_0x1ecb7d(0x51d)]()[_0x1ecb7d(0x729)](_0x3f143d);}},'onImageDrop'(_0x438621){const _0x23eb7b=_0x1f5228;if(_0x438621[_0x23eb7b(0x742)](),0x0!==_0x438621[_0x23eb7b(0x4c2)]['files'][_0x23eb7b(0x3cd)]){var _0xc273f8=_0x438621[_0x23eb7b(0x4c2)]['files'][0x0];_0xc273f8['type'][_0x23eb7b(0x3be)](_0x23eb7b(0x279))&&this[_0x23eb7b(0x51d)]()[_0x23eb7b(0x729)](_0xc273f8);}}}},_0x4a086d,[],!0x1,null,_0x1f5228(0x86e),null));_0x4d0532[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x25b);var _0x20b711=_0x4d0532[_0x1f5228(0x6e4)],_0x4c542a=function(){const _0x50c346=_0x1f5228;var _0x32ee41=this[_0x50c346(0x413)];return(this[_0x50c346(0x5e6)]['_c']||_0x32ee41)('div');};_0x4c542a[_0x1f5228(0x222)]=!0x0;var _0x45ce5c=Object(_0x174c36['a'])({'data':()=>({'hello':0x7b})},_0x4c542a,[],!0x1,null,_0x1f5228(0x1b3),null);_0x45ce5c[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x5d6),_0x45ce5c[_0x1f5228(0x6e4)];var _0x2a87f7=_0x361a4e(0x1),_0x2aa597=_0x361a4e(0x4),_0x24fdd=_0x361a4e(0x5);function _0x1fcdbf(_0x54eb6f){const _0x3508af=_0x1f5228;switch(_0x54eb6f){case 0x0:return _0x3508af(0x792);case 0x1:return _0x3508af(0x5c8);case 0x2:return _0x3508af(0x774);default:return _0x3508af(0x546);}}function _0x58e1f3(_0x4d16bf){const _0x3cef57=_0x1f5228;switch(_0x4d16bf){case 0x0:return'No';case 0x1:return'Thin';case 0x2:return _0x3cef57(0x374);case 0x3:return _0x3cef57(0x2c4);default:return _0x3cef57(0x546);}}function _0x235068(_0x224dda,_0x525ca1){return _0x224dda?new Promise((_0x55b1fb,_0x508bc0)=>{const _0x31508d=_0x3cc5;var _0x3cc139=new Image();_0x3cc139[_0x31508d(0x790)]=()=>{const _0x230e48=_0x31508d;var _0x21b653=document[_0x230e48(0x314)](_0x230e48(0x78c)),_0x5db0f2=_0x21b653['getContext']('2d'),_0x3348c6=Math[_0x230e48(0x4de)](_0x3cc139[_0x230e48(0x339)],_0x3cc139[_0x230e48(0x5ec)]),_0x3b0850=Math[_0x230e48(0x844)](_0x3cc139[_0x230e48(0x339)],_0x3cc139[_0x230e48(0x5ec)]),_0x577fc1=_0x3348c6===_0x3cc139['width'],_0x2402b0=Math[_0x230e48(0x844)](_0x3348c6,_0x525ca1)/_0x3348c6,_0x3a018a=(_0x577fc1?_0x3348c6:_0x3b0850)*_0x2402b0,_0x1489e4=(_0x577fc1?_0x3b0850:_0x3348c6)*_0x2402b0;_0x21b653['width']=_0x3a018a,_0x21b653[_0x230e48(0x5ec)]=_0x1489e4,_0x5db0f2[_0x230e48(0x29b)](_0x3cc139,0x0,0x0,_0x3a018a,_0x1489e4),_0x55b1fb(_0x21b653[_0x230e48(0x254)]());},_0x3cc139[_0x31508d(0x63b)]=_0x508bc0,_0x3cc139[_0x31508d(0x639)]=_0x224dda;}):null;}var _0x555dfd=PIXI[_0x1f5228(0x389)]['isWebGLSupported']()&&_0x2aa597[_0x1f5228(0x58e)],_0x16e981=(_0x361a4e(0xb0),Object(_0x174c36['a'])({'components':{'colorOption':_0x27f320,'imageOption':_0x20b711},'data':()=>({'useWebGL':_0x555dfd,'bgDefault':_0x2aa597['getDefault'](_0x1f5228(0x240)),'virusDefault':_0x2aa597[_0x1f5228(0x404)]('virusImageUrl'),'mbArrowDefault':_0x1f5228(0x615),'showNameFontWarning':!0x1,'showMassFontWarning':!0x1,'backgroundColor':_0x2aa597[_0x1f5228(0x2f6)],'borderColor':_0x2aa597[_0x1f5228(0x493)],'foodColor':_0x2aa597[_0x1f5228(0x514)],'ejectedColor':_0x2aa597[_0x1f5228(0x2d1)],'cellNameOutlineColor':_0x2aa597[_0x1f5228(0x27e)],'cursorImageUrl':_0x2aa597['cursorImageUrl'],'backgroundImageUrl':_0x2aa597[_0x1f5228(0x240)],'virusImageUrl':_0x2aa597[_0x1f5228(0x388)],'cellMassColor':_0x2aa597['cellMassColor'],'cellMassOutlineColor':_0x2aa597[_0x1f5228(0x2f0)],'cellNameFont':_0x2aa597[_0x1f5228(0x703)],'cellNameWeight':_0x2aa597[_0x1f5228(0x6b6)],'cellNameOutline':_0x2aa597[_0x1f5228(0x583)],'cellNameSmoothOutline':_0x2aa597[_0x1f5228(0x7ae)],'cellMassFont':_0x2aa597['cellMassFont'],'cellMassWeight':_0x2aa597['cellMassWeight'],'cellMassOutline':_0x2aa597[_0x1f5228(0x387)],'cellMassSmoothOutline':_0x2aa597[_0x1f5228(0x24d)],'cellMassTextSize':_0x2aa597[_0x1f5228(0x38e)],'cellLongNameThreshold':_0x2aa597[_0x1f5228(0x376)],'shortMass':_0x2aa597[_0x1f5228(0x6f0)],'showBackgroundImage':_0x2aa597['showBackgroundImage'],'backgroundImageRepeat':_0x2aa597['backgroundImageRepeat'],'backgroundDefaultIfUnequal':_0x2aa597[_0x1f5228(0x66b)],'backgroundImageOpacity':_0x2aa597['backgroundImageOpacity'],'useFoodColor':_0x2aa597[_0x1f5228(0x5df)],'mbArrow':_0x2aa597['mbArrow'],'mbColor':_0x2aa597['mbColor']}),'computed':{'cellNameWeightMeaning'(){return _0x1fcdbf(this['cellNameWeight']);},'cellMassWeightMeaning'(){const _0x2e079f=_0x1f5228;return _0x1fcdbf(this[_0x2e079f(0x581)]);},'cellNameOutlineMeaning'(){const _0x467f76=_0x1f5228;return _0x58e1f3(this[_0x467f76(0x583)]);},'cellMassOutlineMeaning'(){const _0x2c1365=_0x1f5228;return _0x58e1f3(this[_0x2c1365(0x387)]);},'cellMassTextSizeMeaning'(){const _0x2fc1d8=_0x1f5228;return function(_0x5a2cca){const _0x1f7b6f=_0x3cc5;switch(_0x5a2cca){case 0x0:return'Small';case 0x1:return _0x1f7b6f(0x5c8);case 0x2:return _0x1f7b6f(0x76b);case 0x3:return _0x1f7b6f(0x482);default:return _0x1f7b6f(0x546);}}(this[_0x2fc1d8(0x38e)]);}},'methods':{async 'change'(_0x2c2fc7,_0x35b2f1,_0x1cec63){const _0x511e98=_0x1f5228;var _0x407225;_0x407225=_0x35b2f1&&_0x35b2f1['target']?isNaN(_0x35b2f1[_0x511e98(0x64e)][_0x511e98(0x5eb)])?_0x35b2f1['target'][_0x511e98(0x7ef)]:_0x35b2f1['target']['valueAsNumber']:_0x35b2f1;try{switch(_0x2c2fc7){case _0x511e98(0x397):_0x407225=await _0x235068(_0x407225,0x20);break;case _0x511e98(0x240):_0x407225!==this[_0x511e98(0x7ea)]&&(_0x407225=await _0x235068(_0x407225,0xfa0));break;case'virusImageUrl':_0x407225!==this[_0x511e98(0x569)]&&(_0x407225=await _0x235068(_0x407225,0xc8));break;case'mbArrow':_0x2a87f7[_0x511e98(0x622)][_0x511e98(0x390)](_0x407225);}}catch(_0x3e861d){return void _0x24fdd[_0x511e98(0x3ac)](_0x511e98(0x39e));}if(_0x2aa597[_0x2c2fc7]!=_0x407225){var _0x540600=this[_0x2c2fc7];try{_0x2aa597[_0x511e98(0x2df)](_0x2c2fc7,_0x407225);}catch(_0x3831e4){return _0x2aa597[_0x511e98(0x2df)](_0x2c2fc7,_0x540600),void _0x24fdd[_0x511e98(0x3ac)]('Saving\x20this\x20setting\x20failed.\x20Perhaps\x20the\x20image\x20is\x20too\x20large?');}switch(this[_0x2c2fc7]=_0x407225,_0x2c2fc7){case _0x511e98(0x397):_0x2a87f7['events'][_0x511e98(0x246)](_0x511e98(0x7d7),_0x407225);break;case'backgroundColor':_0x2a87f7[_0x511e98(0x57c)][_0x511e98(0x2f6)]=PIXI[_0x511e98(0x389)][_0x511e98(0x24e)](_0x407225);break;case _0x511e98(0x27e):case'cellNameFont':case _0x511e98(0x6b6):case _0x511e98(0x583):case _0x511e98(0x7ae):_0x2a87f7[_0x511e98(0x2b2)]['compileNameFontStyle']();break;case _0x511e98(0x358):case _0x511e98(0x2f0):case'cellMassFont':case _0x511e98(0x581):case _0x511e98(0x387):case _0x511e98(0x24d):case _0x511e98(0x38e):_0x2a87f7[_0x511e98(0x2b2)]['compileMassFontStyle']();break;case _0x511e98(0x376):_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x4dc)]();}if(_0x2a87f7['running'])switch(_0x2c2fc7){case _0x511e98(0x493):_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x20f)]();break;case _0x511e98(0x514):_0x2aa597['useFoodColor']&&_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x3df)]();break;case _0x511e98(0x2d1):_0x2a87f7['scene'][_0x511e98(0x26f)]();break;case _0x511e98(0x388):_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x3b4)]();break;case _0x511e98(0x27e):case _0x511e98(0x703):case _0x511e98(0x6b6):case _0x511e98(0x583):case _0x511e98(0x7ae):_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x3a0)]();break;case'cellMassColor':case _0x511e98(0x2f0):case'cellMassFont':case _0x511e98(0x581):case _0x511e98(0x387):case'cellMassSmoothOutline':case _0x511e98(0x38e):_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x83e)](!0x0);break;case _0x511e98(0x76a):_0x2a87f7[_0x511e98(0x6b8)]['toggleBackgroundImage'](_0x407225);break;case _0x511e98(0x240):case _0x511e98(0x6f8):case _0x511e98(0x66b):case'backgroundImageOpacity':_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x433)]();break;case'useFoodColor':_0x2a87f7[_0x511e98(0x6b8)][_0x511e98(0x3df)]();}}},'confirmReset'(){const _0x9d5941=_0x1f5228;_0x24fdd[_0x9d5941(0x459)](_0x9d5941(0x34e),()=>this['reset']());},'reset'(){const _0x432bbb=_0x1f5228;var _0x16b5db=[_0x432bbb(0x58e),_0x432bbb(0x7ea),'virusDefault',_0x432bbb(0x516),_0x432bbb(0x4dd)];for(var _0x4de40a in this['$data'])_0x16b5db[_0x432bbb(0x605)](_0x4de40a)||this['change'](_0x4de40a,_0x2aa597['getDefault'](_0x4de40a));},'fontWarning'(_0xe79c0,_0x2d7c54){const _0x35cf0b=_0x1f5228;switch(_0xe79c0){case _0x35cf0b(0x3bb):this['showNameFontWarning']=_0x2d7c54;break;case _0x35cf0b(0x70b):this['showMassFontWarning']=_0x2d7c54;}}}},_0x1ded4d,[],!0x1,null,_0x1f5228(0x72b),null));_0x16e981['options'][_0x1f5228(0x3f9)]=_0x1f5228(0x478);var _0x1ea36d=_0x16e981['exports'],_0x24d6ad=function(){const _0x105cc6=_0x1f5228;var _0x1954b6=this,_0x2d487d=_0x1954b6[_0x105cc6(0x413)],_0x5e45af=_0x1954b6[_0x105cc6(0x5e6)]['_c']||_0x2d487d;return _0x5e45af(_0x105cc6(0x760),{'attrs':{'id':_0x105cc6(0x3a3)}},[_0x5e45af(_0x105cc6(0x760),{'staticClass':'hotkeys'},_0x1954b6['_l'](_0x1954b6[_0x105cc6(0x1be)],function(_0x96ad3c,_0x444aaa){const _0x15c6e4=_0x105cc6;return _0x5e45af('div',{'key':_0x444aaa,'staticClass':_0x15c6e4(0x52a)},[_0x5e45af(_0x15c6e4(0x565),{'staticClass':_0x15c6e4(0x1e3)},[_0x1954b6['_v'](_0x1954b6['_s'](_0x444aaa))]),_0x1954b6['_v']('\x20'),_0x5e45af(_0x15c6e4(0x565),{'staticClass':_0x15c6e4(0x5b4),'attrs':{'tabindex':'0'},'on':{'mousedown':function(_0xdf4ea6){const _0x1eb7b7=_0x15c6e4;return _0x1954b6[_0x1eb7b7(0x71f)](_0xdf4ea6,_0x96ad3c);},'keydown':function(_0x1b69c1){const _0x13a54f=_0x15c6e4;return _0x1b69c1[_0x13a54f(0x742)](),_0x1954b6[_0x13a54f(0x33a)](_0x1b69c1,_0x96ad3c);}}},[_0x1954b6['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x1954b6['_s'](_0x1954b6[_0x15c6e4(0x787)][_0x96ad3c])+_0x15c6e4(0x686))])]);}),0x0),_0x1954b6['_v']('\x20'),_0x5e45af(_0x105cc6(0x760),{'staticClass':_0x105cc6(0x281)},[_0x5e45af(_0x105cc6(0x565),{'staticClass':_0x105cc6(0x679),'on':{'click':_0x1954b6[_0x105cc6(0x1d8)]}},[_0x5e45af('i',{'staticClass':_0x105cc6(0x616)}),_0x1954b6['_v'](_0x105cc6(0x2aa))])])]);};_0x24d6ad[_0x1f5228(0x222)]=!0x0;var _0x1ff26e=_0x361a4e(0x42),_0x1ad906=_0x361a4e(0x5),_0x3f2f57=(_0x361a4e(0xb2),Object(_0x174c36['a'])({'data':()=>({'availableHotkeys':{'Dual':_0x1f5228(0x75a),'Select\x20player':_0x1f5228(0x6dd),'Feed':_0x1f5228(0x786),'Feed\x20macro':'feedMacro','Split':_0x1f5228(0x338),'Doublesplit':'splitx2','Triplesplit':_0x1f5228(0x5e0),'Quad\x20split':_0x1f5228(0x2f5),'Split\x2032':'split32','Split\x2064':_0x1f5228(0x393),'Split\x20128':_0x1f5228(0x862),'Split\x20256':_0x1f5228(0x721),'Dual\x20trick-split':'dual1','Dual\x20double-trick':_0x1f5228(0x822),'Dual\x20line-trick':_0x1f5228(0x68c),'Diagonal\x20linesplit':_0x1f5228(0x608),'Freeze\x20mouse':_0x1f5228(0x31b),'Lock\x20linesplit':_0x1f5228(0x80f),'Stop\x20movement':_0x1f5228(0x4ac),'Respawn':_0x1f5228(0x7c7),'Toggle\x20auto\x20respawn':_0x1f5228(0x5e2),'Toggle\x20skins':_0x1f5228(0x2be),'Toggle\x20names':'toggleNames','Toggle\x20food':_0x1f5228(0x3d8),'Toggle\x20mass':_0x1f5228(0x44a),'Toggle\x20chat':'toggleChat','Toggle\x20chat\x20popup':_0x1f5228(0x6c6),'Toggle\x20HUD':_0x1f5228(0x6c9),'Spectate\x20lock':_0x1f5228(0x333),'Save\x20replay':'saveReplay','Zoom\x20level\x201':_0x1f5228(0x54f),'Zoom\x20level\x202':_0x1f5228(0x7f6),'Zoom\x20level\x203':_0x1f5228(0x3b5),'Zoom\x20level\x204':_0x1f5228(0x22c),'Zoom\x20level\x205':_0x1f5228(0x3a5)},'hotkeys':_0x1ff26e['get']()}),'methods':{'onResetClick':function(){const _0x13f13a=_0x1f5228;_0x1ad906[_0x13f13a(0x459)](_0x13f13a(0x6c1),()=>{const _0x14aded=_0x13f13a;this[_0x14aded(0x787)]=_0x1ff26e[_0x14aded(0x49d)]();});},'onMouseDown':function(_0x1be4a3,_0x218a09){const _0x552c7=_0x1f5228;if(_0x1be4a3[_0x552c7(0x64e)]===document[_0x552c7(0x21e)]){var _0x4719d6=_0x552c7(0x5c3)+_0x1be4a3['button'];_0x1ff26e[_0x552c7(0x2df)](_0x218a09,_0x4719d6)&&(_0x1be4a3['preventDefault'](),this[_0x552c7(0x787)][_0x218a09]=_0x4719d6,_0x1be4a3[_0x552c7(0x64e)][_0x552c7(0x7b7)]());}},'onKeyDown':function(_0xe52487,_0x53ff43){const _0x20c5ad=_0x1f5228;var _0x28befb=_0x1ff26e[_0x20c5ad(0x73f)](_0xe52487['code']);_0x20c5ad(0x6fa)!==_0x28befb&&_0x20c5ad(0x574)!==_0x28befb?('DELETE'==_0x28befb&&(_0x28befb=''),_0x1ff26e[_0x20c5ad(0x2df)](_0x53ff43,_0x28befb)&&(this[_0x20c5ad(0x787)][_0x53ff43]=_0x28befb,_0xe52487['target'][_0x20c5ad(0x7b7)]())):_0xe52487['target'][_0x20c5ad(0x7b7)]();}}},_0x24d6ad,[],!0x1,null,'2dbed53e',null));_0x3f2f57[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x791);var _0x2a913f=_0x3f2f57['exports'],_0x29e45c=function(){const _0x4042fa=_0x1f5228;var _0x224006=this,_0x17b794=_0x224006[_0x4042fa(0x413)],_0x151b81=_0x224006[_0x4042fa(0x5e6)]['_c']||_0x17b794;return _0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x2c5)},[_0x151b81('input',{'ref':_0x4042fa(0x54b),'staticStyle':{'display':_0x4042fa(0x329)},'attrs':{'type':_0x4042fa(0x54b),'accept':_0x4042fa(0x501),'multiple':''},'on':{'change':function(_0x296a68){return _0x224006['onFile'](_0x296a68);}}}),_0x224006['_v']('\x20'),_0x151b81('div',{'staticClass':_0x4042fa(0x2c6)},[_0x151b81('span',{'staticClass':_0x4042fa(0x350)},[_0x224006['_v'](_0x224006['_s'](_0x224006[_0x4042fa(0x7f8)]?_0x224006['replayKeys'][_0x4042fa(0x3cd)]+_0x4042fa(0x852)+(0x1!==_0x224006[_0x4042fa(0x190)]['length']?'s':''):_0x4042fa(0x76c)))]),_0x224006['_v']('\x20'),_0x224006[_0x4042fa(0x7f8)]&&!_0x224006['keysEmpty']?_0x151b81(_0x4042fa(0x565),{'staticClass':_0x4042fa(0x24c)},[_0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x410)},[_0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x832)},[_0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x645)},[_0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x380)},[_0x151b81('i',{'staticClass':'fas\x20fa-chevron-left\x20prev','class':{'disabled':!_0x224006[_0x4042fa(0x1e7)]||0x0===_0x224006[_0x4042fa(0x75f)]},'on':{'click':function(){return _0x224006['updateReplayPage'](-0x1);}}}),_0x224006['_v']('\x20'),_0x151b81(_0x4042fa(0x565),[_0x224006['_v'](_0x224006['_s'](_0x224006[_0x4042fa(0x230)]))])]),_0x224006['_v']('\x20'),_0x224006['pageInputShown']?_0x224006['_e']():_0x151b81(_0x4042fa(0x760),{'staticClass':'real','on':{'click':function(){const _0x77f530=_0x4042fa;return _0x224006[_0x77f530(0x723)](!0x0);}}},[_0x151b81(_0x4042fa(0x565),[_0x224006['_v'](_0x224006['_s'](0x1+_0x224006[_0x4042fa(0x75f)]))])]),_0x224006['_v']('\x20'),_0x224006['pageInputShown']?_0x151b81(_0x4042fa(0x760),{'staticClass':'real-input'},[_0x151b81(_0x4042fa(0x760),{'staticClass':'overlay','on':{'click':function(){const _0x44b4d6=_0x4042fa;return _0x224006[_0x44b4d6(0x723)](!0x1);}}}),_0x224006['_v']('\x20'),_0x151b81('i',{'staticClass':_0x4042fa(0x5dc),'class':{'disabled':!_0x224006[_0x4042fa(0x1e7)]||0x0===_0x224006['pageIndex']},'on':{'click':function(){const _0x499537=_0x4042fa;return _0x224006[_0x499537(0x4d0)](-0x1);}}}),_0x224006['_v']('\x20'),_0x151b81(_0x4042fa(0x211),{'attrs':{'type':_0x4042fa(0x858)},'domProps':{'value':0x1+_0x224006[_0x4042fa(0x75f)]},'on':{'focus':function(_0x4b9e2e){const _0x2b8d2c=_0x4042fa;return _0x4b9e2e['target'][_0x2b8d2c(0x19c)]();},'change':function(_0x4bc910){return _0x224006['updateReplayPage'](_0x4bc910);}}})]):_0x224006['_e']()])]),_0x224006['_v'](_0x4042fa(0x5a5)),_0x151b81(_0x4042fa(0x760),{'staticClass':'right'},[_0x224006['_v'](_0x4042fa(0x663)+_0x224006['_s'](_0x224006[_0x4042fa(0x230)])+_0x4042fa(0x28f)),_0x151b81('i',{'staticClass':'fas\x20fa-chevron-right\x20next','class':{'disabled':!_0x224006[_0x4042fa(0x1e7)]||_0x224006[_0x4042fa(0x75f)]===_0x224006[_0x4042fa(0x230)]-0x1},'on':{'click':function(){const _0x1e0404=_0x4042fa;return _0x224006[_0x1e0404(0x4d0)](0x1);}}})])])]):_0x224006['_e'](),_0x224006['_v']('\x20'),_0x151b81(_0x4042fa(0x565),{'staticClass':_0x4042fa(0x652)},[_0x151b81(_0x4042fa(0x211),{'staticClass':_0x4042fa(0x690),'attrs':{'type':_0x4042fa(0x4ee),'disabled':!_0x224006[_0x4042fa(0x1e7)],'value':_0x4042fa(0x425)},'on':{'click':function(){const _0x450722=_0x4042fa;return _0x224006[_0x450722(0x394)][_0x450722(0x54b)][_0x450722(0x3e4)]();}}}),_0x224006['_v']('\x20'),_0x151b81(_0x4042fa(0x211),{'staticClass':_0x4042fa(0x690),'attrs':{'type':'button','disabled':!_0x224006[_0x4042fa(0x1e7)]||_0x224006[_0x4042fa(0x807)],'value':'Download\x20all'},'on':{'click':function(){return _0x224006['downloadAllReplays']();}}}),_0x224006['_v']('\x20'),_0x151b81('input',{'staticClass':'vanis-button','attrs':{'type':'button','disabled':!_0x224006[_0x4042fa(0x1e7)]||_0x224006[_0x4042fa(0x807)],'value':_0x4042fa(0x28a)},'on':{'click':function(){const _0x41771a=_0x4042fa;return _0x224006[_0x41771a(0x42e)]();}}})])]),_0x224006['_v']('\x20'),_0x151b81(_0x4042fa(0x760),{'staticClass':'replay-list'},[_0x224006['keysLoadedFirst']&&_0x224006['keysEmpty']?[_0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x3e5)},[_0x151b81(_0x4042fa(0x760),[_0x224006['_v']('Press\x20'),_0x151b81('b',[_0x224006['_v'](_0x224006['_s'](_0x224006['messageHotkey']))]),_0x224006['_v']('\x20in\x20game\x20to\x20save\x20last\x20'),_0x151b81('b',[_0x224006['_v'](_0x224006['_s'](_0x224006[_0x4042fa(0x458)]))]),_0x224006['_v'](_0x4042fa(0x1d5))]),_0x224006['_v']('\x20'),_0x151b81('div',{'staticStyle':{'color':_0x4042fa(0x31e),'font-weight':_0x4042fa(0x3e3)}},[_0x224006['_v'](_0x4042fa(0x47f))]),_0x224006['_v']('\x20'),_0x151b81(_0x4042fa(0x760),[_0x224006['_v']('They\x20get\x20permanently\x20erased\x20if\x20browser\x20data\x20gets\x20cleared.')])])]:_0x224006['_e'](),_0x224006['_v']('\x20'),_0x224006['keysLoadedFirst']&&!_0x224006['keysEmpty']?[_0x151b81('div',{'staticClass':_0x4042fa(0x263)},_0x224006['_l'](_0x224006['pageData'],function(_0xa9d486,_0xdcaad8){const _0xf9dc74=_0x4042fa;return _0x151b81(_0xf9dc74(0x572),{'key':_0xdcaad8,'attrs':{'replay':_0xa9d486}});}),0x1)]:_0x224006['_e']()],0x2),_0x224006['_v']('\x20'),_0x224006['bulkOperating']?_0x151b81('div',{'staticClass':_0x4042fa(0x6ed)},[_0x224006['_v']('\x0a\x20\x20\x20\x20\x20\x20\x20\x20Please\x20wait...\x0a\x20\x20\x20\x20\x20\x20\x20\x20'),_0x224006[_0x4042fa(0x5d4)]?_0x151b81('div',{'staticClass':_0x4042fa(0x756)},[_0x224006['_v'](_0x224006['_s'](_0x224006[_0x4042fa(0x5d4)]))]):_0x224006['_e'](),_0x224006['_v']('\x20'),_0x224006['showMultipleFilesWarning']?_0x151b81(_0x4042fa(0x760),{'staticClass':_0x4042fa(0x31c)},[_0x224006['_v'](_0x4042fa(0x6cd))]):_0x224006['_e']()]):_0x224006['_e']()]);};_0x29e45c[_0x1f5228(0x222)]=!0x0;var _0x5b055c=_0x361a4e(0x74),_0x32509b=_0x361a4e(0x59),_0x4f8a73=_0x361a4e(0xb4),_0x2ecd3d=_0x361a4e(0x1),_0x2554c8=_0x361a4e(0x42),_0x4094de=_0x361a4e(0x4),_0x40a874=_0x361a4e(0x5),_0x301e56=_0x361a4e(0x8),_0xd1c641=_0x2ecd3d['replay'][_0x1f5228(0x462)],_0x430791={'data':()=>({'keysLoadedFirst':!0x1,'keysLoaded':!0x1,'keysLoading':!0x1,'keysEmpty':!0x1,'replayKeys':[],'pageInputShown':!0x1,'pageLoadingCancel':null,'pageLoaded':!0x1,'pageIndex':0x0,'pageCount':0x0,'pageData':[],'bulkOperating':!0x1,'bulkOperationStatus':'','showMultipleFilesWarning':!0x1,'messageHotkey':_0x2554c8[_0x1f5228(0x7a0)]()[_0x1f5228(0x2ea)],'messageReplayDuration':_0x4094de[_0x1f5228(0x496)]}),'components':{'replayItem':_0x5b055c[_0x1f5228(0x559)]},'methods':{'togglePageInput'(_0x1d01fe){const _0x14ece4=_0x1f5228;this[_0x14ece4(0x395)]=_0x1d01fe;},'setBulkOp'(_0x1da683,_0x240d47){const _0x389088=_0x1f5228;_0x1da683?(this[_0x389088(0x6b9)]=!0x0,this[_0x389088(0x5d4)]=_0x240d47||''):setTimeout(()=>{const _0x120480=_0x389088;this[_0x120480(0x6b9)]=!0x1,this[_0x120480(0x5d4)]='';},0x3e8);},async 'onFile'(_0x76c45a){const _0xbe1285=_0x1f5228;if(!this['bulkOperating']){var _0x1185a1=Array[_0xbe1285(0x648)](_0x76c45a[_0xbe1285(0x64e)][_0xbe1285(0x5d5)]);if(_0x1185a1[_0xbe1285(0x3cd)]){_0x76c45a[_0xbe1285(0x64e)]&&(_0x76c45a[_0xbe1285(0x64e)]['value']=null);var _0x5b48a3=0x0,_0x17283d=_0x1185a1[_0xbe1285(0x3cd)],_0x21b42f=_0x1185a1[_0xbe1285(0x2dd)](async _0x51c0e3=>{const _0xb4c160=_0xbe1285;var _0x2192ba,_0x20db36;await _0xd1c641[_0xb4c160(0x41a)](_0x51c0e3[_0xb4c160(0x3bb)][_0xb4c160(0x26d)](/\.vanis$/,''),await(_0x2192ba=_0x51c0e3,new Promise((_0x1c105c,_0x482298)=>{const _0x49ce06=_0xb4c160;var _0x17e58c=new FileReader();_0x17e58c[_0x49ce06(0x790)]=_0x3c5b2f=>_0x1c105c(_0x3c5b2f[_0x49ce06(0x64e)][_0x49ce06(0x6ef)]),_0x17e58c[_0x49ce06(0x63b)]=_0x482298,_0x17e58c['readAsText'](_0x2192ba);}))),this[_0xb4c160(0x5ad)](!0x0,_0xb4c160(0x1cd)+ ++_0x5b48a3+_0xb4c160(0x321)+_0x17283d+')');});this['setBulkOp'](!0x0,'Importing\x20replays');try{await Promise[_0xbe1285(0x7c4)](_0x21b42f);}catch(_0x575f5d){_0x40a874[_0xbe1285(0x3ac)]('Error\x20importing\x20replays:\x20\x22'+_0x575f5d['message']+'\x22'),this['setBulkOp'](!0x1),this[_0xbe1285(0x3f1)]();}this[_0xbe1285(0x5ad)](!0x1),this['updateReplayKeys']();}}},async 'downloadAllReplays'(){const _0x2207e8=_0x1f5228;if(!this[_0x2207e8(0x6b9)]&&this['keysLoaded']){var _0x3e7f62=this[_0x2207e8(0x190)][_0x2207e8(0x3cd)],_0x2eb717=Math[_0x2207e8(0x7a8)](this[_0x2207e8(0x190)]['length']/0xc8),_0x23445d=_0x2eb717>0x1,_0x313f5d=_0x301e56['getTimestamp']();this['showMultipleFilesWarning']=_0x23445d,this[_0x2207e8(0x5ad)](!0x0,_0x2207e8(0x1e6)+_0x2eb717+')');for(var _0x2e3c20=0x0,_0x30fdae=0x0;_0x2e3c20<_0x3e7f62;_0x2e3c20+=0xc8,_0x30fdae++){for(var _0x1fadb2=new _0x4f8a73(),_0x7d45e1=_0x2e3c20;_0x7d45e1<_0x2e3c20+0xc8&&_0x7d45e1<_0x3e7f62;_0x7d45e1++){var _0x5cfb90=this['replayKeys'][_0x7d45e1];_0x1fadb2[_0x2207e8(0x54b)](_0x5cfb90+'.vanis',await _0xd1c641['getItem'](_0x5cfb90));}var _0x3acded=await _0x1fadb2[_0x2207e8(0x79f)]({'type':'blob'}),_0x3bb498='replays_'+_0x313f5d;_0x23445d&&(_0x3bb498+='_'+(_0x30fdae+0x1)),_0x3bb498+=_0x2207e8(0x597),_0x32509b[_0x2207e8(0x591)](_0x3acded,_0x3bb498),this[_0x2207e8(0x5ad)](!0x0,_0x2207e8(0x24f)+(_0x30fdae+0x1)+_0x2207e8(0x321)+_0x2eb717+')');}this[_0x2207e8(0x4b2)]=!0x1,this['setBulkOp'](!0x1);}},'deleteAllReplays'(){const _0x116293=_0x1f5228;if(!this[_0x116293(0x6b9)]){var _0x5eab9d=this;_0x40a874[_0x116293(0x459)](_0x116293(0x801),async()=>{const _0x2af2d1=_0x116293;this['setBulkOp'](!0x0,'Deleting\x20all\x20replays');try{await _0xd1c641['clear']();}catch(_0x2b12db){return void _0x40a874[_0x2af2d1(0x3ac)](_0x2af2d1(0x864)+_0x2b12db['message']);}this[_0x2af2d1(0x5ad)](!0x1),_0x5eab9d['updateReplayKeys']();});}},async 'updateReplayKeys'(){const _0x394542=_0x1f5228;if(!this['keysLoading']){this[_0x394542(0x1e7)]=!0x1,this['keysLoading']=!0x0;var _0x451392=await _0xd1c641[_0x394542(0x613)]();_0x451392=_0x451392[_0x394542(0x43c)](),this[_0x394542(0x190)][_0x394542(0x191)](0x0,this['replayKeys'][_0x394542(0x3cd)],..._0x451392),this[_0x394542(0x230)]=Math[_0x394542(0x4de)](Math[_0x394542(0x7a8)](_0x451392['length']/0xc),0x1),this[_0x394542(0x75f)]=Math['min'](this[_0x394542(0x75f)],this[_0x394542(0x230)]-0x1),this['keysLoaded']=!0x0,this[_0x394542(0x7f8)]=!0x0,this[_0x394542(0x2a8)]=!0x1,this['keysEmpty']=0x0===_0x451392[_0x394542(0x3cd)],await this[_0x394542(0x4d0)]();}},async 'updateReplayPage'(_0x5893e0){const _0x9f79b3=_0x1f5228;_0x5893e0&&('number'==typeof _0x5893e0?this[_0x9f79b3(0x75f)]+=_0x5893e0:this[_0x9f79b3(0x75f)]=parseInt(_0x5893e0[_0x9f79b3(0x64e)][_0x9f79b3(0x7ef)])-0x1||0x0),this['pageLoadingCancel']&&(this[_0x9f79b3(0x1cf)](),this[_0x9f79b3(0x1cf)]=null);var _0x2492d2=Math[_0x9f79b3(0x4de)](Math['min'](this[_0x9f79b3(0x75f)],this['pageCount']-0x1),0x0);this['pageIndex']!==_0x2492d2&&(this[_0x9f79b3(0x75f)]=_0x2492d2),this[_0x9f79b3(0x1fc)]=!0x1;var _0x3f8a74=[],_0x30474f=!0x1;this['pageLoadingCancel']=()=>_0x30474f=!0x0;for(var _0x949f40=0xc*this[_0x9f79b3(0x75f)],_0x6d5493=0xc*(0x1+this[_0x9f79b3(0x75f)]),_0xe8a641=_0x949f40;_0xe8a641<_0x6d5493&&_0xe8a641<this['replayKeys'][_0x9f79b3(0x3cd)]&&!_0x30474f;_0xe8a641++){var _0x5e7a50=this['replayKeys'][_0xe8a641],_0x4a2dc0={'name':_0x5e7a50,'data':await _0xd1c641[_0x9f79b3(0x80d)](_0x5e7a50)};_0x4a2dc0[_0x9f79b3(0x2e7)]&&typeof _0x4a2dc0[_0x9f79b3(0x2e7)]==='string'?(_0x4a2dc0[_0x9f79b3(0x2e7)][_0x9f79b3(0x3be)]('REPLAY')?_0x4a2dc0['image']=_0x4a2dc0[_0x9f79b3(0x2e7)][_0x9f79b3(0x338)]('|')[0x2]:_0x4a2dc0['image']=_0x9f79b3(0x5b2),_0x3f8a74['push'](_0x4a2dc0)):(_0x4a2dc0[_0x9f79b3(0x683)]=_0x9f79b3(0x5b2),_0x3f8a74[_0x9f79b3(0x491)](_0x4a2dc0));}_0x30474f||(this['pageData'][_0x9f79b3(0x191)](0x0,this[_0x9f79b3(0x564)][_0x9f79b3(0x3cd)],..._0x3f8a74),this[_0x9f79b3(0x1fc)]=!0x0);}},'created'(){const _0x29d5ea=_0x1f5228;this['updateReplayKeys'](),_0x2ecd3d[_0x29d5ea(0x7b4)]['$on'](_0x29d5ea(0x58f),this[_0x29d5ea(0x3f1)]),_0x2ecd3d[_0x29d5ea(0x7b4)][_0x29d5ea(0x2e6)](_0x29d5ea(0x3cf),this['updateReplayKeys']);},'beforeDestroy'(){const _0x5612c7=_0x1f5228;_0x2ecd3d['events']['$off']('replay-added',this[_0x5612c7(0x3f1)]),_0x2ecd3d[_0x5612c7(0x7b4)][_0x5612c7(0x6ac)](_0x5612c7(0x3cf),this['updateReplayKeys']);}},_0x5190ff=(_0x361a4e(0xdc),Object(_0x174c36['a'])(_0x430791,_0x29e45c,[],!0x1,null,_0x1f5228(0x4ed),null));_0x5190ff[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x710);var _0x46e995=_0x5190ff[_0x1f5228(0x6e4)],_0x4c17b4=function(){const _0x3e38a4=_0x1f5228;var _0x345434=this,_0x387f0c=_0x345434[_0x3e38a4(0x413)],_0x1c145a=_0x345434[_0x3e38a4(0x5e6)]['_c']||_0x387f0c;return _0x1c145a(_0x3e38a4(0x760),{'staticStyle':{'padding':_0x3e38a4(0x40d)}},[_0x1c145a('h2',{'staticStyle':{'margin':'0','margin-bottom':_0x3e38a4(0x4b6)}},[_0x345434['_v'](_0x345434['_s'](_0x345434[_0x3e38a4(0x5aa)]))]),_0x345434['_v']('\x20'),_0x345434[_0x3e38a4(0x504)]?_0x1c145a('div',[_0x345434['_v']('\x0a\x20\x20\x20\x20Failed\x20loading\x20season\x20leaderboard\x20data:\x0a\x20\x20\x20\x20'+_0x345434['_s'](_0x345434[_0x3e38a4(0x504)])+'\x0a')]):_0x345434['_e'](),_0x345434['_v']('\x20'),_0x345434['playerList'][_0x3e38a4(0x3cd)]?_0x1c145a(_0x3e38a4(0x760),[_0x1c145a('div',{'staticClass':_0x3e38a4(0x1da)},[_0x345434['_v'](_0x3e38a4(0x49a)),_0x1c145a('br'),_0x345434['_v'](_0x3e38a4(0x47c)),_0x1c145a('br'),_0x345434['_v'](_0x3e38a4(0x19b)),_0x1c145a('a',{'attrs':{'href':'https://vanis.io/discord'}},[_0x345434['_v'](_0x3e38a4(0x2ae))]),_0x345434['_v'](_0x3e38a4(0x83b)),_0x1c145a('br'),_0x345434['_v'](_0x3e38a4(0x49f)),_0x1c145a('b',[_0x345434['_v'](_0x345434['_s'](_0x345434[_0x3e38a4(0x3d1)]))])]),_0x345434['_v']('\x20'),_0x345434['_l'](_0x345434[_0x3e38a4(0x65e)],function(_0x30781e,_0x1512ca){const _0xe543f1=_0x3e38a4;return _0x1c145a(_0xe543f1(0x760),{'key':_0x1512ca,'staticClass':_0xe543f1(0x7ba),'class':{'me':!!_0x345434[_0xe543f1(0x584)]}},[_0x1c145a(_0xe543f1(0x565),{'staticClass':_0xe543f1(0x677)},[_0x345434['_v'](_0x345434['_s'](_0x1512ca+0x1)+'.')]),_0x345434['_v']('\x20'),_0x1c145a(_0xe543f1(0x565),{'staticClass':_0xe543f1(0x86f),'style':{'color':_0x30781e[_0xe543f1(0x33b)]}},[_0x345434['_v'](_0x345434['_s'](_0x30781e[_0xe543f1(0x3bb)]))]),_0x345434['_v']('\x20'),_0x1c145a(_0xe543f1(0x565),{'staticClass':_0xe543f1(0x22d)},[_0x345434['_v'](_0x345434['_s'](_0x30781e['xp'])+_0xe543f1(0x7fe))])]);})],0x2):_0x345434['_e']()]);};_0x4c17b4[_0x1f5228(0x222)]=!0x0;var _0x815250=_0x361a4e(0x1),_0xbec41b=_0x361a4e(0xe4),{checkBadWords:_0x5d977f}=_0x361a4e(0x11),_0x536274=[_0x1f5228(0x628),_0x1f5228(0x1f5),_0x1f5228(0x745),'Apr',_0x1f5228(0x4b0),_0x1f5228(0x307),_0x1f5228(0x64a),'Aug','Sep','Oct','Nov',_0x1f5228(0x824)],_0x5f4ca7=(_0x361a4e(0xde),Object(_0x174c36['a'])({'data':()=>({'playerList':[],'errorMessage':'','ownUid':null,'date':new Date(),'nextStartDate':Date[_0x1f5228(0x361)](new Date()[_0x1f5228(0x3aa)](),new Date()[_0x1f5228(0x337)]()+0x1),'seasonEndTime':null,'seasonEndTimeInterval':null,'selected':_0x1f5228(0x6b3)}),'computed':{'seasonLeaderboardText'(){const _0x20f11f=_0x1f5228;return _0x536274[this[_0x20f11f(0x23f)]['getUTCMonth']()]+'\x20'+this[_0x20f11f(0x23f)][_0x20f11f(0x3aa)]()+'\x20season';}},'methods':{'setSeasonEndTime'(){const _0x3ce783=_0x1f5228;this[_0x3ce783(0x3d1)]=function(_0x109826){const _0xfae9cf=_0x3ce783;if(_0x109826<0x0)return _0xfae9cf(0x737);var _0x265016=Math[_0xfae9cf(0x579)](_0x109826/0x3e8),_0x377a36=_0x265016%0x3c,_0x4bb1df=Math[_0xfae9cf(0x579)](_0x265016/0x3c),_0xb4e6fb=_0x4bb1df%0x3c,_0x4d0d18=Math[_0xfae9cf(0x579)](_0x4bb1df/0x3c),_0x1e2c7b=_0x4d0d18%0x18,_0x3a008c=Math[_0xfae9cf(0x579)](_0x4d0d18/0x18),_0x471030=[];return _0x3a008c>0x0&&_0x471030['push'](_0x3a008c+_0xfae9cf(0x86d)+(0x1!==_0x3a008c?'s':'')),_0x1e2c7b%0x18>0x0&&_0x471030[_0xfae9cf(0x491)](_0x1e2c7b+'\x20hour'+(0x1!==_0x1e2c7b?'s':'')),0x0===_0x3a008c&&_0xb4e6fb%0x3c>0x0&&_0x471030[_0xfae9cf(0x491)](_0xb4e6fb+_0xfae9cf(0x781)+(0x1!==_0xb4e6fb?'s':'')),0x0===_0x4d0d18&&_0x377a36%0x3c>0x0&&_0x471030[_0xfae9cf(0x491)](_0x377a36+'\x20second'+(0x1!==_0x377a36?'s':'')),_0x471030[_0xfae9cf(0x43e)]('\x20');}(this[_0x3ce783(0x3d3)]-Date['now']());}},async 'created'(){const _0x5668af=_0x1f5228;let _0xf54193=await _0xbec41b[_0x5668af(0x7a0)](_0x5668af(0x5ca));if(!_0xf54193['ok'])return;let _0xb9d2c6=await _0xf54193[_0x5668af(0x2af)]();this[_0x5668af(0x65e)]=_0xb9d2c6[_0x5668af(0x2dd)](_0x3d8745=>({'name':_0x3d8745[_0x5668af(0x694)]||_0x3d8745[_0x5668af(0x68b)],'name_color':'#'+(_0x3d8745[_0x5668af(0x7e9)]||_0x5668af(0x34f)),'badge':_0x3d8745[_0x5668af(0x81e)]||0x0,'xp':_0x3d8745[_0x5668af(0x3ff)],'isMe':_0x3d8745['me']})),_0x815250[_0x5668af(0x7b4)][_0x5668af(0x2e6)](_0x5668af(0x4b5),this[_0x5668af(0x849)]),this[_0x5668af(0x849)]();},'destroyed'(){_0x815250['events']['$off']('every-second',this['setSeasonEndTime']);}},_0x4c17b4,[],!0x1,null,'7179a145',null));_0x5f4ca7[_0x1f5228(0x5a1)]['__file']='src/components/meta-leaderboard.vue';var _0x34d792=_0x5f4ca7[_0x1f5228(0x6e4)],_0x27793f=(_0x361a4e(0x13),_0x361a4e(0x1)),_0x483a25=(_0x361a4e(0x5),{'components':{'modal':_0x49aa25['default'],'settings':_0x2a28a3,'theming':_0x1ea36d,'hotkeys':_0x2a913f,'replays3':_0x46e995,'metaLeaderboard':_0x34d792},'data':()=>({'activeModal':'','showSettings':!0x1,'showHotkeys':!0x1,'gameState':_0x27793f['state'],'nickname':_0x1f5228(0x7d3)==typeof localStorage[_0x1f5228(0x2fe)]?localStorage[_0x1f5228(0x2fe)]:'','teamtag':localStorage[_0x1f5228(0x72f)]||'','skinUrl':_0x1f5228(0x7d3)==typeof localStorage[_0x1f5228(0x28d)]?localStorage['skinUrl']:_0x1f5228(0x344)}),'created':function(){const _0x2a1ac1=_0x1f5228;_0x27793f['events'][_0x2a1ac1(0x2e6)]('skin-click',_0x13bbf2=>{const _0x364f67=_0x2a1ac1;this[_0x364f67(0x28d)]=localStorage[_0x364f67(0x28d)]=document[_0x364f67(0x1ca)](_0x364f67(0x325))[_0x364f67(0x639)]=_0x13bbf2;});},'methods':{'openModal':function(_0x14d3be){const _0x3de621=_0x1f5228;this[_0x3de621(0x313)]=_0x14d3be,this[_0x3de621(0x246)](_0x3de621(0x56e),!0x0);},'closeModal':function(){const _0x3e0ea3=_0x1f5228;this[_0x3e0ea3(0x313)]='',this[_0x3e0ea3(0x246)](_0x3e0ea3(0x56e),!0x1);},'play'(){const _0x5a3b61=_0x1f5228;_0x2134a1=localStorage['getItem'](_0x5a3b61(0x842))||'checked',_0x361d72=localStorage[_0x5a3b61(0x80d)](_0x5a3b61(0x1db))||_0x5a3b61(0x19e);const _0x54698e=localStorage['getItem']('userColors');_0x1171df=_0x54698e?JSON[_0x5a3b61(0x192)](_0x54698e):null;let {lifeState:_0x26818c}=this[_0x5a3b61(0x2a4)];if(0x1&_0x26818c){let {dual:_0x1019ae}=_0x27793f;0x2&_0x26818c?_0x1019ae[_0x5a3b61(0x2ab)]?_0x1019ae['spawn']():_0x27793f['actions']['join']():_0x1019ae['connected']&&(_0x1019ae[_0x5a3b61(0x2ab)]?_0x1019ae[_0x5a3b61(0x45c)]():_0x1019ae['switch']());}else _0x27793f[_0x5a3b61(0x1d4)][_0x5a3b61(0x43e)]();_0x27793f[_0x5a3b61(0x5ef)](!0x1);},'spectate'(){const _0x1d84ea=_0x1f5228;let {lifeState:_0x322ef8}=this[_0x1d84ea(0x2a4)];0x1&_0x322ef8||(_0x27793f[_0x1d84ea(0x1d4)][_0x1d84ea(0x470)](),_0x27793f['showMenu'](!0x1));},'onSkinUrlChange'(){const _0x28ebc7=_0x1f5228;_0x27793f[_0x28ebc7(0x7b4)]['$emit'](_0x28ebc7(0x4f4),this[_0x28ebc7(0x28d)]);},'onTeamTagChange'(){const _0x5c9acd=_0x1f5228;localStorage['setItem'](_0x5c9acd(0x72f),this[_0x5c9acd(0x72f)]);},'onNicknameChange'(){const _0x5e7375=_0x1f5228;localStorage[_0x5e7375(0x41a)](_0x5e7375(0x2fe),this[_0x5e7375(0x2fe)]);}}}),_0x4b2e76=(_0x361a4e(0xe0),Object(_0x174c36['a'])(_0x483a25,_0x1c794c,[function(){const _0x3dc2c2=_0x1f5228;var _0x3db0f0=this[_0x3dc2c2(0x413)],_0x554c02=this[_0x3dc2c2(0x5e6)]['_c']||_0x3db0f0;return _0x554c02(_0x3dc2c2(0x760),{'staticStyle':{'text-align':'center','height':'225px'}},[_0x554c02(_0x3dc2c2(0x760),{'staticStyle':{'padding':_0x3dc2c2(0x41d)}},[this['_v']('')])]);}],!0x1,null,_0x1f5228(0x215),null));_0x4b2e76[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x83f);var _0x30f6fd=_0x4b2e76[_0x1f5228(0x6e4)],_0x1137a4=function(){const _0x3f9f67=_0x1f5228;var _0xf0595e=this,_0x1aca66=_0xf0595e[_0x3f9f67(0x413)],_0x327d1d=_0xf0595e[_0x3f9f67(0x5e6)]['_c']||_0x1aca66;return _0x327d1d(_0x3f9f67(0x760),{'staticStyle':{'padding':_0x3f9f67(0x26c)}},[_0xf0595e['account']?_0xf0595e['_e']():_0x327d1d(_0x3f9f67(0x760),[_0x327d1d(_0x3f9f67(0x760),{'staticStyle':{'margin-top':_0x3f9f67(0x1ce),'margin-bottom':_0x3f9f67(0x5c4)}},[_0xf0595e['_v']('Login\x20with\x20Discord\x20to\x20save\x20your\x20progress\x20and\x20gain\x20perks!')]),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),{'staticClass':_0x3f9f67(0x587),'on':{'click':function(){return _0xf0595e['openDiscordLogin']();}}},[_0xf0595e[_0x3f9f67(0x430)]?[_0xf0595e[_0x3f9f67(0x430)]?_0x327d1d('i',{'staticClass':'fas\x20fa-sync\x20fa-spin','staticStyle':{'margin-right':_0x3f9f67(0x59e)}}):_0xf0595e['_e'](),_0xf0595e['_v'](_0x3f9f67(0x407))]:[_0x327d1d('i',{'staticClass':_0x3f9f67(0x264)}),_0xf0595e['_v']('\x20Login\x20with\x20Discord\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20')]],0x2)]),_0xf0595e['_v']('\x20'),_0xf0595e[_0x3f9f67(0x87e)]?_0x327d1d('div',{'staticClass':_0x3f9f67(0x87e)},[_0x327d1d(_0x3f9f67(0x760),{'staticStyle':{'margin-bottom':'3px'}},[_0x327d1d(_0x3f9f67(0x19d),{'staticClass':_0x3f9f67(0x2dc),'attrs':{'src':_0xf0595e['avatarUrl']}}),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),{'staticClass':_0x3f9f67(0x757)},[_0x327d1d(_0x3f9f67(0x760),{'style':{'color':_0xf0595e['nameColor']},'attrs':{'id':_0x3f9f67(0x31a)}},[_0xf0595e['_v'](_0xf0595e['_s'](_0xf0595e[_0x3f9f67(0x3bb)]))]),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),[_0xf0595e['_v'](_0x3f9f67(0x70d)+_0xf0595e['_s'](_0xf0595e[_0x3f9f67(0x87e)]['level']))]),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),[_0xf0595e['_v'](_0xf0595e['_s'](_0xf0595e[_0x3f9f67(0x87e)]['xp'])+'\x20total\x20XP')]),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),[_0xf0595e['_v'](_0xf0595e['_s'](Object[_0x3f9f67(0x732)](_0xf0595e['account'][_0x3f9f67(0x3ff)])[_0x3f9f67(0x193)]((_0x4ee004,_0x3223d5)=>_0x4ee004+_0x3223d5,0x0)||0x0)+'\x20season\x20XP')])])]),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),{'staticStyle':{'position':_0x3f9f67(0x2b3)}},[_0x327d1d(_0x3f9f67(0x486),{'staticClass':_0x3f9f67(0x560),'attrs':{'progress':_0xf0595e[_0x3f9f67(0x6bd)]}}),_0xf0595e['_v']('\x20'),_0x327d1d('div',{'staticClass':'xp-data'},[_0x327d1d('div',{'staticStyle':{'flex':'1','margin-left':'8px'}},[_0xf0595e['_v'](_0xf0595e['_s'](_0xf0595e[_0x3f9f67(0x1f3)]))]),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),{'staticStyle':{'margin-right':'7px'}},[_0xf0595e['_v'](_0xf0595e['_s'](_0xf0595e['xpAtNextLevel']))])])],0x1),_0xf0595e['_v']('\x20'),_0x327d1d(_0x3f9f67(0x760),{'staticClass':_0x3f9f67(0x56c),'on':{'click':function(){const _0x8775fd=_0x3f9f67;return _0xf0595e[_0x8775fd(0x56c)]();}}},[_0x327d1d('i',{'staticClass':'fas\x20fa-sign-out-alt'}),_0xf0595e['_v'](_0x3f9f67(0x6af))])]):_0xf0595e['_e']()]);};_0x1137a4[_0x1f5228(0x222)]=!0x0;var _0x45f01e=function(){const _0x24b9c5=_0x1f5228;var _0x227f67=this[_0x24b9c5(0x413)],_0x5c0a9c=this[_0x24b9c5(0x5e6)]['_c']||_0x227f67;return _0x5c0a9c(_0x24b9c5(0x760),{'staticClass':_0x24b9c5(0x612)},[_0x5c0a9c('div',{'staticClass':_0x24b9c5(0x486),'style':{'width':0x64*this[_0x24b9c5(0x6bd)]+'%'}})]);};_0x45f01e[_0x1f5228(0x222)]=!0x0;var _0xb531ff=(_0x361a4e(0xe2),Object(_0x174c36['a'])({'props':[_0x1f5228(0x6bd)]},_0x45f01e,[],!0x1,null,_0x1f5228(0x261),null));_0xb531ff[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x330);var _0x2356e6=_0xb531ff[_0x1f5228(0x6e4)],_0x5d3492=_0x361a4e(0xe4),_0x3ae67d=_0x361a4e(0x5),_0x438ddf=_0x361a4e(0x1),_0x1d3426=_0x361a4e(0xe5),_0x106565=(_0x361a4e(0xe6),Object(_0x174c36['a'])({'components':{'progressBar':_0x2356e6},'data':()=>({'accountTime':0x0,'account':null,'progress':0x0,'xpAtCurrentLevel':0x0,'xpAtNextLevel':0x0,'loading':!0x1,'avatarUrl':null,'nameColor':null,'name':null}),'created'(){const _0x1774b3=_0x1f5228;_0x438ddf[_0x1774b3(0x7b4)]['$on'](_0x1774b3(0x78e),this[_0x1774b3(0x632)]),this[_0x1774b3(0x649)](),this[_0x1774b3(0x619)]();},'beforeDestroy'(){const _0x1937d5=_0x1f5228;_0x438ddf[_0x1937d5(0x7b4)][_0x1937d5(0x6ac)]('xp-update',this[_0x1937d5(0x632)]);},'methods':{'listenForToken'(){const _0x3f41f4=_0x1f5228;window[_0x3f41f4(0x427)]('message',_0x5bc96c=>{const _0x3eb2e8=_0x3f41f4;var _0x2e0a08=_0x5bc96c[_0x3eb2e8(0x2e7)][_0x3eb2e8(0x416)];_0x2e0a08&&(this['onLoggedIn'](_0x2e0a08),_0x5bc96c[_0x3eb2e8(0x662)][_0x3eb2e8(0x4bc)](_0x3eb2e8(0x449),_0x5bc96c['origin']));});},'reloadUserData'(){const _0x351788=_0x1f5228;Date[_0x351788(0x737)]()-this[_0x351788(0x31f)]<=0xea60||(this[_0x351788(0x31f)]=Date[_0x351788(0x737)](),_0x5d3492[_0x351788(0x551)]&&this[_0x351788(0x235)]());},async 'loadUserData'(){const _0x1dc818=_0x1f5228;this[_0x1dc818(0x430)]=!0x0;let _0x9b0518=await _0x5d3492[_0x1dc818(0x7a0)]('/me');if(!_0x9b0518['ok']){this[_0x1dc818(0x430)]=!0x1;return;}let _0x42816c=await _0x9b0518[_0x1dc818(0x2af)]();this[_0x1dc818(0x44f)](_0x42816c),this['updateProgress'](this[_0x1dc818(0x87e)]['xp'],this['account'][_0x1dc818(0x57f)]),this[_0x1dc818(0x430)]=!0x1;},async 'logout'(){const _0x159d4a=_0x1f5228;try{await _0x5d3492[_0x159d4a(0x3f7)](_0x159d4a(0x21b),_0x159d4a(0x384));}catch(_0x507c04){var _0x1c628f=_0x507c04[_0x159d4a(0x5e7)];_0x1c628f&&0x191!==_0x1c628f[_0x159d4a(0x3c8)]&&_0x3ae67d[_0x159d4a(0x3ac)](_0x159d4a(0x888)+_0x507c04['message']);}_0x5d3492['clearToken'](),this[_0x159d4a(0x87e)]=null,this[_0x159d4a(0x3bb)]=null,this[_0x159d4a(0x2bf)]=null,this[_0x159d4a(0x490)]=null,_0x438ddf[_0x159d4a(0x828)]=null;},'getAvatarUrl':(_0x182067,_0x47e554)=>_0x47e554?'https://cdn.discordapp.com/avatars/'+_0x182067+'/'+_0x47e554+_0x1f5228(0x300):_0x1f5228(0x7ad),'setAccountData'(_0x59d807){const _0x175cb1=_0x1f5228;_0x59d807['permissions']&&(window['gameObj']=_0x438ddf),GAME[_0x175cb1(0x87e)]=_0x59d807,this[_0x175cb1(0x87e)]=_0x59d807,this[_0x175cb1(0x490)]=this[_0x175cb1(0x37d)](_0x59d807[_0x175cb1(0x5f4)],_0x59d807[_0x175cb1(0x5e1)]),this[_0x175cb1(0x3bb)]=_0x59d807[_0x175cb1(0x22f)]||_0x59d807['discord_name'],this[_0x175cb1(0x2bf)]=_0x59d807[_0x175cb1(0x33b)]?'#'+_0x59d807[_0x175cb1(0x33b)]:_0x175cb1(0x34a),_0x438ddf[_0x175cb1(0x828)]=_0x59d807[_0x175cb1(0x7f3)];},'onXpUpdate'(_0x5eaed2){const _0x80dbc2=_0x1f5228;if(this[_0x80dbc2(0x87e)]){var _0x4c2887=_0x1d3426[_0x80dbc2(0x503)](_0x5eaed2);this[_0x80dbc2(0x87e)]['season_xp']=parseInt(Object[_0x80dbc2(0x732)](_0x5eaed2['account'][_0x80dbc2(0x3ff)])[_0x80dbc2(0x193)]((_0x5216a7,_0x5cd711)=>_0x5216a7+_0x5cd711,0x0))||0x0+_0x5eaed2-this['account']['xp'],this[_0x80dbc2(0x87e)]['xp']=_0x5eaed2,this[_0x80dbc2(0x87e)][_0x80dbc2(0x57f)]=_0x4c2887,this[_0x80dbc2(0x865)](_0x5eaed2,_0x4c2887);}},'updateProgress'(_0x3e5d72,_0x2e09b9){const _0x3e3068=_0x1f5228;this[_0x3e3068(0x1f3)]=_0x1d3426[_0x3e3068(0x488)](_0x2e09b9),this[_0x3e3068(0x80a)]=_0x1d3426[_0x3e3068(0x488)](_0x2e09b9+0x1),this[_0x3e3068(0x6bd)]=(_0x3e5d72-this['xpAtCurrentLevel'])/(this['xpAtNextLevel']-this[_0x3e3068(0x1f3)]);},'openDiscordLogin':function(){const _0x2d8778=_0x1f5228;window[_0x2d8778(0x6aa)](_0x5d3492['url']+_0x2d8778(0x63d),'','width=500,\x20height=750');},'onLoggedIn'(_0x1eb45e){const _0x4ed49b=_0x1f5228;_0x5d3492[_0x4ed49b(0x575)](_0x1eb45e),this['loadUserData']();}}},_0x1137a4,[],!0x1,null,_0x1f5228(0x316),null));_0x106565[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x2f7);var _0x2ca6a2=_0x106565[_0x1f5228(0x6e4)],_0x23955d=function(){const _0x151768=_0x1f5228;var _0x5c73f9=this,_0x30b557=_0x5c73f9[_0x151768(0x413)],_0x128cde=_0x5c73f9[_0x151768(0x5e6)]['_c']||_0x30b557;return _0x128cde(_0x151768(0x760),{'attrs':{'id':_0x151768(0x412)}},[_0x128cde('div',{'attrs':{'id':'skins'}},[_0x5c73f9['_l'](_0x5c73f9[_0x151768(0x1ab)],function(_0x2e6f23,_0x2bd81c){const _0x38fa71=_0x151768;return _0x128cde(_0x38fa71(0x565),{'key':_0x2bd81c,'staticClass':_0x38fa71(0x30f)},[_0x128cde(_0x38fa71(0x19d),{'staticClass':_0x38fa71(0x285),'class':{'selected':_0x5c73f9[_0x38fa71(0x259)]===_0x2bd81c},'attrs':{'src':_0x2e6f23,'alt':''},'on':{'click':function(){const _0x17cf3a=_0x38fa71;return _0x5c73f9[_0x17cf3a(0x718)](_0x2bd81c);},'contextmenu':function(){const _0x886222=_0x38fa71;getModule(0x4)[_0x886222(0x2df)](_0x886222(0x618),GAME[_0x886222(0x204)][_0x886222(0x1ab)][_0x2bd81c]),document[_0x886222(0x1ca)]('skinDisplay2')[_0x886222(0x639)]=GAME[_0x886222(0x204)][_0x886222(0x1ab)][_0x2bd81c],window['SwalAlerts'][_0x886222(0x88d)]['fire']({'type':_0x886222(0x1da),'title':_0x886222(0x81c),'timer':0x5dc});}}}),_0x5c73f9['_v']('\x20'),_0x128cde('i',{'staticClass':'fas\x20fa-times\x20skin-remove-button','on':{'click':function(){const _0x85efef=_0x38fa71;return _0x5c73f9[_0x85efef(0x815)](_0x2bd81c);}}})]);}),_0x5c73f9['_v']('\x20'),_0x128cde(_0x151768(0x19d),{'staticClass':_0x151768(0x336),'attrs':{'src':_0x151768(0x4e1),'alt':''},'on':{'click':function(){const _0x33b2b7=_0x151768;return _0x5c73f9[_0x33b2b7(0x693)]();}}})],0x2)]);};_0x23955d[_0x1f5228(0x222)]=!0x0;var _0x240420=_0x361a4e(0x1),_0x4a29cb=(_0x361a4e(0xe8),Object(_0x174c36['a'])({'data':()=>({'selectedSkinIndex':0x0,'skins':[],'skinsLoaded':[]}),'created'(){const _0x90e8bb=_0x1f5228;_0x240420[_0x90e8bb(0x7b4)][_0x90e8bb(0x2e6)](_0x90e8bb(0x4f4),this[_0x90e8bb(0x7dd)][_0x90e8bb(0x5b4)](this)),this['skins']=this[_0x90e8bb(0x7ce)]()||this['getDefaultSkins']();var _0x3d2e70=Number(localStorage[_0x90e8bb(0x259)])||0x0;this[_0x90e8bb(0x718)](_0x3d2e70),GAME[_0x90e8bb(0x204)]=this;},'methods':{'loadSkins'(){const _0x3b340e=_0x1f5228;var _0x493482=localStorage[_0x3b340e(0x1ab)];if(!_0x493482)return!0x1;try{var _0x4dad53=JSON[_0x3b340e(0x192)](_0x493482);}catch(_0x587404){return!0x1;}if(!Array[_0x3b340e(0x43d)](_0x4dad53))return!0x1;for(var _0x3ec059=_0x4dad53['length'];_0x3ec059<0x2;_0x3ec059++)_0x4dad53['push'](_0x3b340e(0x344));return _0x4dad53;},'getDefaultSkins'(){const _0x15cb29=_0x1f5228;for(var _0x25ca60=[],_0x268b4d=0x0;_0x268b4d<0x8;_0x268b4d++)_0x25ca60[_0x15cb29(0x491)](_0x15cb29(0x344));return _0x25ca60;},'onSkinUrlChanged'(_0x3097f4){const _0x1a50a2=_0x1f5228;this[_0x1a50a2(0x1bb)](this[_0x1a50a2(0x1ab)],this[_0x1a50a2(0x259)],_0x3097f4),this[_0x1a50a2(0x6c0)]();},'selectSkin'(_0x38844d){const _0x3283ad=_0x1f5228;this[_0x3283ad(0x259)]=_0x38844d,localStorage['selectedSkinIndex']=_0x38844d;var _0xc0493f=this['skins'][_0x38844d];_0x240420['events'][_0x3283ad(0x246)](_0x3283ad(0x627),_0xc0493f);},'removeSkin'(_0x1c5dac){const _0x1e26fc=_0x1f5228;this[_0x1e26fc(0x1ab)][_0x1e26fc(0x191)](_0x1c5dac,0x1),this[_0x1e26fc(0x1ab)][_0x1e26fc(0x3cd)]<0x2&&this['skins'][_0x1e26fc(0x491)](_0x1e26fc(0x344)),this[_0x1e26fc(0x6c0)]();var _0x45b8f7=Math['max'](0x0,this[_0x1e26fc(0x259)]-0x1);this[_0x1e26fc(0x718)](_0x45b8f7);},'addSkin'(_0x53a4a2){const _0x28e0e9=_0x1f5228;if(!this[_0x28e0e9(0x1ab)][_0x28e0e9(0x605)](_0x53a4a2)){var _0x218186=this['skins'][_0x28e0e9(0x3cd)];this[_0x28e0e9(0x1ab)][_0x28e0e9(0x491)](_0x53a4a2||_0x28e0e9(0x344)),_0x53a4a2||this['selectSkin'](_0x218186),this[_0x28e0e9(0x6c0)]();}},'saveSkins'(){const _0x50df92=_0x1f5228;localStorage[_0x50df92(0x1ab)]=JSON[_0x50df92(0x7f0)](this['skins']);}}},_0x23955d,[],!0x1,null,'1c614894',null));_0x4a29cb[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x444);var _0x283bbe=_0x4a29cb[_0x1f5228(0x6e4)],_0x3da7f4=_0x361a4e(0x1),_0x5605cb=(_0x361a4e(0xea),Object(_0x174c36['a'])({'data':()=>({'isModalOpen':!0x1,'selectedTab':_0x1f5228(0x3fa),'gameState':_0x3da7f4[_0x1f5228(0x3f0)],'cursorStyleElem':null}),'methods':{'onModalChange':function(_0x524b77){const _0xb0bac=_0x1f5228;this[_0xb0bac(0x2e5)]=_0x524b77;},'setCursorUrl'(_0xbc261c){const _0x5e4039=_0x1f5228;var _0x2fd05a=null;_0xbc261c&&(_0x2fd05a=_0x5e4039(0x1b2)+_0xbc261c+_0x5e4039(0x2d8)),!_0x2fd05a&&this[_0x5e4039(0x740)]?(this[_0x5e4039(0x740)][_0x5e4039(0x218)](),this[_0x5e4039(0x740)]=null):_0x2fd05a&&!this[_0x5e4039(0x740)]&&(this[_0x5e4039(0x740)]=document[_0x5e4039(0x314)](_0x5e4039(0x48d)),document['head'][_0x5e4039(0x6f6)](this[_0x5e4039(0x740)])),this[_0x5e4039(0x740)]&&(this[_0x5e4039(0x740)][_0x5e4039(0x3b7)]=_0x2fd05a);}},'components':{'servers':_0x43a31f,'playerContainer':_0x30f6fd,'account':_0x2ca6a2,'skins':_0x283bbe},'created'(){const _0x366114=_0x1f5228;_0x3da7f4['events'][_0x366114(0x2e6)](_0x366114(0x7d7),_0x942c9c=>this[_0x366114(0x1c4)](_0x942c9c));},'mounted'(){const _0x1af967=_0x1f5228;this[_0x1af967(0x1c4)](_0x3da7f4[_0x1af967(0x2b2)][_0x1af967(0x397)]);}},_0x3f5c56,[],!0x1,null,_0x1f5228(0x86a),null));_0x5605cb[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x33c);var _0x10f3ef=_0x5605cb[_0x1f5228(0x6e4)],_0xe775e0=function(){const _0x1d02c9=_0x1f5228;this[_0x1d02c9(0x413)],this[_0x1d02c9(0x5e6)]['_c'];};_0xe775e0[_0x1f5228(0x222)]=!0x0,_0x361a4e(0xec);var _0x2ed151=Object(_0x174c36['a'])({},_0xe775e0,[function(){}],!0x1,null,_0x1f5228(0x68a),null);_0x2ed151[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x4f7);var _0x3ed59e=_0x2ed151['exports'],_0x5b43e9=function(){const _0x5c9353=_0x1f5228;return this['$createElement'],this[_0x5c9353(0x5e6)]['_c'],this['_m'](0x0);};_0x5b43e9['_withStripped']=!0x0;var _0x494489=(_0x361a4e(0xee),Object(_0x174c36['a'])({'data'(){}},_0x5b43e9,[function(){const _0xd05317=_0x1f5228;var _0x445dc5=this[_0xd05317(0x413)],_0x45fa3c=this['_self']['_c']||_0x445dc5;return _0x45fa3c(_0xd05317(0x760),{'staticClass':_0xd05317(0x2c5)},[_0x45fa3c('a',{'staticStyle':{'margin-left':_0xd05317(0x417)},'attrs':{'href':_0xd05317(0x499),'target':_0xd05317(0x671)}},[this['_v']('')]),this['_v']('\x20'),_0x45fa3c('span',{'staticClass':_0xd05317(0x5c5)},[this['_v']('')]),this['_v']('\x20'),_0x45fa3c('a',{'attrs':{'href':'tos.html','target':'_blank'}},[this['_v']('')])]);}],!0x1,null,'6843da33',null));_0x494489[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x2ad);var _0x482878=_0x494489[_0x1f5228(0x6e4)],_0x549ca8=function(){const _0x4f3c61=_0x1f5228;var _0x11dc77=this[_0x4f3c61(0x413)],_0x32ed8d=this[_0x4f3c61(0x5e6)]['_c']||_0x11dc77;return this[_0x4f3c61(0x260)]?_0x32ed8d(_0x4f3c61(0x760),{'staticClass':_0x4f3c61(0x70e),'style':{'top':this['y']+'px','left':this['x']+'px'}},[_0x32ed8d(_0x4f3c61(0x760),{'staticClass':_0x4f3c61(0x86f)},[this['_v'](this['_s'](this['playerName']))]),this['_v']('\x20'),_0x32ed8d(_0x4f3c61(0x760),[this['_v'](_0x4f3c61(0x4d5))]),this['_v']('\x20'),_0x32ed8d('div',{'on':{'click':this[_0x4f3c61(0x61d)]}},[this['_v']('Hide\x20Name')]),this['_v']('\x20'),_0x32ed8d('div',{'on':{'click':this['hideSkin']}},[this['_v']('Hide\x20Skin')]),this['_v']('\x20'),_0x32ed8d(_0x4f3c61(0x760),[this['_v'](_0x4f3c61(0x24b))]),this['_v']('\x20'),_0x32ed8d(_0x4f3c61(0x760),[this['_v'](_0x4f3c61(0x348))]),this['_v']('\x20'),_0x32ed8d(_0x4f3c61(0x760),[this['_v'](_0x4f3c61(0x798))])]):this['_e']();};_0x549ca8[_0x1f5228(0x222)]=!0x0,_0x361a4e(0x1);var _0x230885=(_0x361a4e(0xf0),Object(_0x174c36['a'])({'data':()=>({'show':!0x1,'playerName':'','x':0x64,'y':0x37}),'methods':{'open':function(_0x2c77f8,_0x4a1f9b){const _0x59c785=_0x1f5228;this[_0x59c785(0x6eb)]=_0x4a1f9b,this[_0x59c785(0x771)]=_0x4a1f9b[_0x59c785(0x3bb)],this['x']=_0x2c77f8['clientX'],this['y']=_0x2c77f8[_0x59c785(0x6d8)],this[_0x59c785(0x260)]=!0x0,document[_0x59c785(0x427)](_0x59c785(0x3e4),()=>{const _0x4853b5=_0x59c785;this[_0x4853b5(0x260)]=!0x1;},{'once':!0x0});},'hideName':function(){const _0x438144=_0x1f5228;this[_0x438144(0x6eb)][_0x438144(0x626)](''),this[_0x438144(0x6eb)][_0x438144(0x30b)]();},'hideSkin':function(){const _0x494b08=_0x1f5228;this[_0x494b08(0x6eb)][_0x494b08(0x72a)](''),this['player'][_0x494b08(0x30b)]();}},'created'(){}},_0x549ca8,[],!0x1,null,'4dbee04d',null));_0x230885[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x1d2);var _0x57181b=_0x230885[_0x1f5228(0x6e4)],_0x4c298a=function(){const _0x3c310e=_0x1f5228;var _0x1df49e=this[_0x3c310e(0x413)],_0x15acb6=this[_0x3c310e(0x5e6)]['_c']||_0x1df49e;return _0x15acb6(_0x3c310e(0x760),{'attrs':{'id':_0x3c310e(0x53b)}},[_0x15acb6(_0x3c310e(0x5f2)),this['_v']('\x20'),_0x15acb6(_0x3c310e(0x45a)),this['_v']('\x20'),_0x15acb6(_0x3c310e(0x1d9)),this['_v']('\x20'),_0x15acb6(_0x3c310e(0x48a)),this['_v']('\x20'),_0x15acb6(_0x3c310e(0x269))],0x1);};_0x4c298a['_withStripped']=!0x0;var _0x2cba56=function(){const _0x597d21=_0x1f5228;let _0x3e78cc=this[_0x597d21(0x5e6)]['_c']||this['$createElement'],_0xba6ab1=this['_s'],_0x581c22=this['_v'],_0x4e49c2=this['_l'],_0x930f81=this['_e'];return _0x3e78cc(_0x597d21(0x760),[_0x3e78cc(_0x597d21(0x760),{'staticClass':'server-cautions'},_0x4e49c2(this[_0x597d21(0x716)],_0x80914e=>_0x3e78cc(_0x597d21(0x760),[_0x581c22(_0xba6ab1(_0x80914e))])),0x0),_0x581c22('\x20'),_0x3e78cc(_0x597d21(0x760),{'staticClass':_0x597d21(0x269)},[!this[_0x597d21(0x568)]&&this[_0x597d21(0x3bd)]?_0x3e78cc('div',[_0x581c22(_0x597d21(0x305))]):_0x930f81(),_0x581c22('\x20'),!this[_0x597d21(0x568)]&&this[_0x597d21(0x82d)]?_0x3e78cc(_0x597d21(0x760),[_0x581c22(_0x597d21(0x6de)+this[_0x597d21(0x82d)]+']')]):_0x930f81(),_0x581c22('\x20'),!this[_0x597d21(0x568)]&&this[_0x597d21(0x1fa)]?_0x3e78cc(_0x597d21(0x760),[_0x581c22(_0x597d21(0x7d0)+this[_0x597d21(0x1fa)]+']')]):_0x930f81()])]);};_0x2cba56['_withStripped']=!0x0;var _0x24558e=_0x361a4e(0x1),_0x2aa370=(_0x361a4e(0xf2),Object(_0x174c36['a'])({'data':()=>({'showMouseFrozen':!0x1,'showMovementStopped':0x0,'showLinesplitting':0x0,'serverInfo':null}),'mounted'(){const _0x4b74c0=_0x1f5228;_0x24558e[_0x4b74c0(0x7b4)][_0x4b74c0(0x2e6)]('update-cautions',_0x5a2954=>{const _0x4295f5=_0x4b74c0;_0x4295f5(0x6a9)in _0x5a2954&&(this[_0x4295f5(0x3bd)]=_0x5a2954[_0x4295f5(0x6a9)]),'moveToCenterOfCells'in _0x5a2954&&(this[_0x4295f5(0x82d)]=_0x5a2954[_0x4295f5(0x4e3)]),'lockLinesplit'in _0x5a2954&&(this['showLinesplitting']=_0x5a2954[_0x4295f5(0x80f)]),_0x4295f5(0x3b6)in _0x5a2954&&(this[_0x4295f5(0x716)]=_0x5a2954['custom']['split'](/\r\n|\r|\n/));}),_0x24558e[_0x4b74c0(0x7b4)][_0x4b74c0(0x2e6)]('reset-cautions',()=>{const _0x2ba3e5=_0x4b74c0;this[_0x2ba3e5(0x3bd)]=!0x1,this[_0x2ba3e5(0x82d)]=0x0,this[_0x2ba3e5(0x1fa)]=0x0;}),_0x24558e[_0x4b74c0(0x7b4)]['$on'](_0x4b74c0(0x3b0),()=>{const _0x2aa328=_0x4b74c0;this[_0x2aa328(0x716)]=null;});}},_0x2cba56,[],!0x1,null,_0x1f5228(0x840),null));_0x2aa370[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x3e8);var _0x4e3ce4=_0x2aa370[_0x1f5228(0x6e4)],_0x589829=function(){const _0x542bf0=_0x1f5228;var _0x495702=this[_0x542bf0(0x413)],_0x41b009=this['_self']['_c']||_0x495702;return _0x41b009('div',{'directives':[{'name':_0x542bf0(0x260),'rawName':_0x542bf0(0x38f),'value':this[_0x542bf0(0x893)],'expression':'visible'}],'staticClass':'stats'},[_0x41b009(_0x542bf0(0x760),{'directives':[{'name':_0x542bf0(0x260),'rawName':'v-show','value':this[_0x542bf0(0x7d2)],'expression':_0x542bf0(0x7d2)}]},[this['_v'](_0x542bf0(0x708)+this['_s'](this['fps']||'-'))]),this['_v']('\x20'),_0x41b009('div',{'directives':[{'name':_0x542bf0(0x260),'rawName':'v-show','value':this[_0x542bf0(0x7da)],'expression':'showPing'}]},[this['_v'](_0x542bf0(0x49e)+this['_s'](this['ping']||'-'))]),this['_v']('\x20'),_0x41b009(_0x542bf0(0x760),{'directives':[{'name':_0x542bf0(0x260),'rawName':_0x542bf0(0x38f),'value':this[_0x542bf0(0x20a)]&&this[_0x542bf0(0x70b)],'expression':_0x542bf0(0x6c8)}]},[this['_v'](_0x542bf0(0x332)+this['_s'](this[_0x542bf0(0x70b)]))]),this['_v']('\x20'),_0x41b009('div',{'directives':[{'name':'show','rawName':'v-show','value':this[_0x542bf0(0x808)]&&this[_0x542bf0(0x77f)],'expression':_0x542bf0(0x286)}]},[this['_v'](_0x542bf0(0x61a)+this['_s'](this['score']))]),this['_v']('\x20'),_0x41b009('div',{'directives':[{'name':_0x542bf0(0x260),'rawName':'v-show','value':this[_0x542bf0(0x46d)]&&this['cells'],'expression':'showCellCount\x20&&\x20cells'}]},[this['_v'](_0x542bf0(0x40a)+this['_s'](this[_0x542bf0(0x670)]))])]);};_0x589829['_withStripped']=!0x0;var _0x52d7af=_0x361a4e(0x1),_0x1224e0=_0x361a4e(0x4),_0x300f9d=(_0x361a4e(0xf4),Object(_0x174c36['a'])({'data':()=>({'showFPS':_0x1224e0[_0x1f5228(0x7d2)],'showPing':_0x1224e0[_0x1f5228(0x7da)],'showPlayerMass':_0x1224e0['showPlayerMass'],'showPlayerScore':_0x1224e0[_0x1f5228(0x808)],'showCellCount':_0x1224e0[_0x1f5228(0x46d)],'visible':!0x1,'ping':0x0,'fps':0x0,'mass':0x0,'score':0x0,'cells':0x0}),'created'(){const _0x4647c6=_0x1f5228;_0x52d7af['events'][_0x4647c6(0x2e6)](_0x4647c6(0x7b5),_0x6b692=>this[_0x4647c6(0x893)]=_0x6b692),_0x52d7af['events'][_0x4647c6(0x2e6)](_0x4647c6(0x689),()=>{const _0x5edad3=_0x4647c6;this[_0x5edad3(0x7d2)]=_0x1224e0[_0x5edad3(0x7d2)],this[_0x5edad3(0x7da)]=_0x1224e0['showPing'],this['showPlayerMass']=_0x1224e0['showPlayerMass'],this[_0x5edad3(0x808)]=_0x1224e0[_0x5edad3(0x808)],this[_0x5edad3(0x46d)]=_0x1224e0[_0x5edad3(0x46d)];}),_0x52d7af[_0x4647c6(0x7b4)][_0x4647c6(0x2e6)](_0x4647c6(0x753),_0x4414ef=>this['cells']=_0x4414ef),_0x52d7af[_0x4647c6(0x7b4)][_0x4647c6(0x2e6)](_0x4647c6(0x41f),_0x20c79a=>{const _0x475a7e=_0x4647c6;this[_0x475a7e(0x595)]=_0x20c79a[_0x475a7e(0x595)]||0x0,this[_0x475a7e(0x27f)]=_0x20c79a[_0x475a7e(0x27f)]||0x0,this['mass']=_0x20c79a[_0x475a7e(0x70b)]?_0x52d7af[_0x475a7e(0x461)](_0x20c79a[_0x475a7e(0x70b)]):0x0,this[_0x475a7e(0x77f)]=_0x20c79a[_0x475a7e(0x77f)]?_0x52d7af[_0x475a7e(0x461)](_0x20c79a[_0x475a7e(0x77f)]):0x0;});}},_0x589829,[],!0x1,null,'0875ad82',null));_0x300f9d[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x855);var _0x49d3ee=_0x300f9d[_0x1f5228(0x6e4)],_0x563c57=function(){const _0x3660d8=_0x1f5228;var _0x5c9719=this,_0x2055ba=_0x5c9719[_0x3660d8(0x413)],_0x3751df=_0x5c9719[_0x3660d8(0x5e6)]['_c']||_0x2055ba;return _0x3751df(_0x3660d8(0x760),{'directives':[{'name':_0x3660d8(0x260),'rawName':_0x3660d8(0x38f),'value':_0x5c9719[_0x3660d8(0x893)],'expression':_0x3660d8(0x893)}],'attrs':{'id':_0x3660d8(0x682)},'on':{'click':function(_0x153df2){const _0x39a2cb=_0x3660d8;return _0x5c9719[_0x39a2cb(0x738)](_0x153df2);},'contextmenu':function(_0x60ad68){const _0x187086=_0x3660d8;return _0x5c9719[_0x187086(0x381)](_0x60ad68);}}},[_0x5c9719['visibleToast']?[_0x3751df(_0x3660d8(0x555),{'attrs':{'name':_0x3660d8(0x88d),'tag':'div','id':'toast-list'}},_0x5c9719['_l'](_0x5c9719[_0x3660d8(0x39b)],function(_0x313bae){const _0x4d3190=_0x3660d8;return _0x3751df('span',{'key':_0x313bae['id']},[_0x3751df(_0x4d3190(0x565),{'staticClass':'message-row'},[_0x313bae[_0x4d3190(0x23f)]?_0x3751df(_0x4d3190(0x565),{'staticClass':_0x4d3190(0x268),'style':{'color':_0x313bae['dateColor']}},[_0x5c9719['_v'](_0x5c9719['_s'](_0x313bae['date']))]):_0x5c9719['_e'](),_0x313bae[_0x4d3190(0x610)]?_0x3751df(_0x4d3190(0x565),{'staticClass':_0x4d3190(0x870)},[_0x3751df(_0x4d3190(0x19d),{'attrs':{'class':'badgeMessage','src':_0x313bae[_0x4d3190(0x610)],'alt':_0x4d3190(0x1f4)}})]):_0x5c9719['_e'](),_0x313bae[_0x4d3190(0x648)]?_0x3751df(_0x4d3190(0x565),{'staticClass':_0x4d3190(0x571),'style':{'color':_0x313bae[_0x4d3190(0x657)]},'attrs':{'data-pid':_0x313bae[_0x4d3190(0x544)]}},[_0x5c9719['_v'](_0x5c9719['_s'](_0x313bae[_0x4d3190(0x648)]))]):_0x5c9719['_e'](),_0x5c9719['_v'](_0x4d3190(0x2da)),_0x3751df(_0x4d3190(0x565),{'staticClass':_0x4d3190(0x6f9),'style':{'color':_0x313bae[_0x4d3190(0x736)]}},[_0x5c9719['_v'](_0x5c9719['_s'](_0x313bae[_0x4d3190(0x858)]))]),_0x313bae[_0x4d3190(0x73a)]?_0x3751df(_0x4d3190(0x565),{'staticClass':_0x4d3190(0x680)},[_0x3751df(_0x4d3190(0x19d),{'attrs':{'class':_0x4d3190(0x42b),'src':_0x313bae['imageUrl'],'alt':_0x4d3190(0x6ba)}})]):_0x5c9719['_e']()],0x2)]);}),0x0)]:_0x5c9719['_e'](),_0x5c9719['_v']('\x20'),_0x3751df(_0x3660d8(0x760),{'class':{'toasts':_0x5c9719[_0x3660d8(0x647)],'visible':_0x5c9719[_0x3660d8(0x845)]},'attrs':{'id':'chatbox'}},[_0x5c9719[_0x3660d8(0x3dd)]&&_0x5c9719[_0x3660d8(0x57a)]?_0x3751df(_0x3660d8(0x760),{'staticStyle':{'position':_0x3660d8(0x4f1),'top':_0x3660d8(0x262)}},[_0x5c9719['_v']('Blocked\x20messages:\x20'+_0x5c9719['_s'](_0x5c9719[_0x3660d8(0x57a)]))]):_0x5c9719['_e'](),_0x5c9719['_v']('\x20'),_0x5c9719[_0x3660d8(0x647)]?_0x5c9719['_e']():[_0x3751df('div',{'ref':_0x3660d8(0x1c7),'attrs':{'id':_0x3660d8(0x519)}},_0x5c9719['_l'](_0x5c9719[_0x3660d8(0x548)],function(_0x12d9e0,_0x27610a){const _0xd97fbb=_0x3660d8;return _0x3751df(_0xd97fbb(0x760),{'key':_0x27610a,'staticClass':_0xd97fbb(0x32d)},[_0x3751df(_0xd97fbb(0x565),{'staticClass':_0xd97fbb(0x268),'style':{'color':_0x12d9e0[_0xd97fbb(0x675)]}},[_0x5c9719['_v'](_0x5c9719['_s'](_0x12d9e0[_0xd97fbb(0x23f)]?_0x12d9e0[_0xd97fbb(0x23f)]:''))]),_0x12d9e0[_0xd97fbb(0x610)]?[_0x3751df(_0xd97fbb(0x565),{'staticClass':_0xd97fbb(0x870)},[_0x3751df(_0xd97fbb(0x19d),{'attrs':{'class':_0xd97fbb(0x52e),'src':_0x12d9e0[_0xd97fbb(0x610)],'alt':_0xd97fbb(0x1f4)}})])]:_0x5c9719['_e'](),_0x12d9e0['from']?[_0x3751df(_0xd97fbb(0x565),{'staticClass':_0xd97fbb(0x571),'style':{'color':_0x12d9e0[_0xd97fbb(0x657)]},'attrs':{'data-pid':_0x12d9e0['pid']}},[_0x5c9719['_v'](_0x5c9719['_s'](_0x12d9e0[_0xd97fbb(0x648)]))]),_0x5c9719['_v'](_0xd97fbb(0x659))]:_0x5c9719['_e'](),_0x3751df(_0xd97fbb(0x565),{'staticClass':_0xd97fbb(0x6f9),'style':{'color':_0x12d9e0[_0xd97fbb(0x736)]}},[_0x5c9719['_v'](_0x5c9719['_s'](_0x12d9e0[_0xd97fbb(0x858)]))]),_0x12d9e0[_0xd97fbb(0x73a)]?[_0x3751df(_0xd97fbb(0x565),{'staticClass':_0xd97fbb(0x680)},[_0x3751df(_0xd97fbb(0x19d),{'attrs':{'class':_0xd97fbb(0x42b),'src':_0x12d9e0[_0xd97fbb(0x73a)],'alt':_0xd97fbb(0x6ba)}})])]:_0x5c9719['_e']()],0x2);}),0x0)],_0x5c9719['_v']('\x20'),_0x3751df('input',{'directives':[{'name':_0x3660d8(0x529),'rawName':_0x3660d8(0x5de),'value':_0x5c9719[_0x3660d8(0x508)],'expression':_0x3660d8(0x508)}],'ref':_0x3660d8(0x211),'attrs':{'id':_0x3660d8(0x3e6),'type':_0x3660d8(0x858),'spellcheck':'false','autocomplete':_0x3660d8(0x4ba),'maxlength':_0x3660d8(0x553),'tabindex':'-1','placeholder':_0x3660d8(0x69f)},'domProps':{'value':_0x5c9719[_0x3660d8(0x508)]},'on':{'keydown':function(_0x36edfa){const _0x2c4b1e=_0x3660d8;if(!_0x36edfa[_0x2c4b1e(0x3e7)]['indexOf'](_0x2c4b1e(0x706))&&_0x5c9719['_k'](_0x36edfa[_0x2c4b1e(0x889)],_0x2c4b1e(0x715),0xd,_0x36edfa['key'],_0x2c4b1e(0x196)))return null;_0x5c9719['sendChatMessage']();},'input':function(_0x5ea07b){const _0x3da35d=_0x3660d8;_0x5ea07b[_0x3da35d(0x64e)]['composing']||(_0x5c9719['inputText']=_0x5ea07b[_0x3da35d(0x64e)]['value']);}}})],0x2)],0x2);};_0x563c57[_0x1f5228(0x222)]=!0x0;var _0x291004=_0x361a4e(0x1),_0x4ee43f=_0x361a4e(0x4),_0x748e2b=_0x361a4e(0x5),{replaceBadWordsChat:_0x2a8f72}=_0x361a4e(0x11),_0x466156={},_0x1ec80a=(_0x361a4e(0xf6),Object(_0x174c36['a'])({'data':()=>({'visible':!0x1,'visibleToast':_0x4ee43f['showChatToast'],'visibleInput':!0x1,'inputText':'','messages':[],'toastMessages':[],'showBlockedMessageCount':_0x4ee43f[_0x1f5228(0x3dd)],'blockedMessageCount':0x0,'nextMessageId':0x0}),'methods':{'onChatClick'(_0x5252cc){const _0x523344=_0x1f5228;let _0x202fc5=+_0x5252cc[_0x523344(0x64e)]['dataset'][_0x523344(0x544)];_0x202fc5&&(_0x291004[_0x523344(0x54a)]=_0x202fc5,_0x291004[_0x523344(0x1d4)][_0x523344(0x470)](_0x202fc5),_0x291004[_0x523344(0x1d4)][_0x523344(0x4af)](_0x202fc5));},'onChatRightClick'(_0x407a20){const _0x15d1ec=_0x1f5228;let _0x5aa96e=+_0x407a20[_0x15d1ec(0x64e)][_0x15d1ec(0x7a9)][_0x15d1ec(0x544)];if(!_0x5aa96e)return;let _0x41dda7=_0x291004[_0x15d1ec(0x803)]['getPlayer'](_0x5aa96e);if(!_0x41dda7)return void _0x748e2b[_0x15d1ec(0x3ac)](_0x15d1ec(0x83a));_0x5aa96e in _0x466156?this[_0x15d1ec(0x70c)](_0x41dda7):this['confirmBlockPlayer'](_0x41dda7);},'confirmBlockPlayer'(_0x41064a){const _0x5a5fc6=_0x1f5228;_0x748e2b['confirm'](_0x5a5fc6(0x4ca)+_0x41064a['name']+_0x5a5fc6(0x3d4),()=>{const _0x3519c4=_0x5a5fc6;_0x41064a[_0x3519c4(0x584)]?_0x748e2b[_0x3519c4(0x3ac)](_0x3519c4(0x422)):(_0x466156[_0x41064a[_0x3519c4(0x544)]]=_0x41064a[_0x3519c4(0x3bb)],_0x291004[_0x3519c4(0x7b4)]['$emit'](_0x3519c4(0x525),_0x3519c4(0x730)+_0x41064a['name']+'\x22'));});},'confirmUnblockPlayer'(_0x4759c5){const _0x3a36fb=_0x1f5228;_0x748e2b[_0x3a36fb(0x459)](_0x3a36fb(0x6fe)+_0x4759c5[_0x3a36fb(0x3bb)]+'\x22?',()=>{const _0xe3667=_0x3a36fb;delete _0x466156[_0x4759c5[_0xe3667(0x544)]],_0x291004[_0xe3667(0x7b4)][_0xe3667(0x246)](_0xe3667(0x525),_0xe3667(0x3b8)+_0x4759c5[_0xe3667(0x3bb)]+'\x22');});},'formatBypassRestrictions'(_0x2d617e){const _0x21517b=_0x1f5228;let _0x525874=_0x2d617e[_0x21517b(0x26d)](/https:\/\//g,_0x21517b(0x2f9));return _0x525874=_0x525874[_0x21517b(0x26d)](/\.com/g,_0x21517b(0x3c2))[_0x21517b(0x26d)](/\.fr/g,_0x21517b(0x6ae))[_0x21517b(0x26d)](/\.eu/g,_0x21517b(0x205))[_0x21517b(0x26d)](/\.pro/g,_0x21517b(0x84f))['replace'](/\.io/g,_0x21517b(0x7a1))[_0x21517b(0x26d)](/\.us/g,_0x21517b(0x4f8))[_0x21517b(0x26d)](/\.en/g,_0x21517b(0x272))[_0x21517b(0x26d)](/\.as/g,_0x21517b(0x830))[_0x21517b(0x26d)](/\.co/g,'.deltaco')[_0x21517b(0x26d)](/\.pw/g,'.deltapw'),_0x525874;},'sendChatMessage'(){const _0x7b55c5=_0x1f5228;let _0x3fc43b=this['inputText']['trim']();_0x3fc43b&&(_0x291004['connection'][_0x7b55c5(0x213)](this[_0x7b55c5(0x63c)](_0x3fc43b)),this[_0x7b55c5(0x508)]=''),_0x291004[_0x7b55c5(0x57c)][_0x7b55c5(0x630)]['focus'](),this[_0x7b55c5(0x227)](!0x0);},'onChatMessage'(_0x40d029){const _0x21b63b=_0x1f5228;if('string'==typeof _0x40d029)_0x40d029={'text':_0x40d029,'textColor':'#828282'};else{if(_0x4ee43f[_0x21b63b(0x868)]&&!('fromColor'in _0x40d029)&&!(_0x21b63b(0x736)in _0x40d029))return;}if(_0x466156[_0x40d029[_0x21b63b(0x544)]]){this['blockedMessageCount']++;return;}_0x4ee43f['filterChatMessages']&&(_0x40d029[_0x21b63b(0x858)]=_0x2a8f72(_0x40d029[_0x21b63b(0x858)])),_0x40d029['fromColor']=_0x40d029[_0x21b63b(0x383)]||'#ffffff',_0x40d029['textColor']=_0x40d029[_0x21b63b(0x736)]||_0x21b63b(0x34a),this[_0x21b63b(0x548)]['push'](_0x40d029),this[_0x21b63b(0x548)][_0x21b63b(0x3cd)]>0xc8&&this[_0x21b63b(0x548)][_0x21b63b(0x5b9)](),_0x40d029['id']=this[_0x21b63b(0x5a9)]++,_0x40d029[_0x21b63b(0x364)]=Date[_0x21b63b(0x737)]()+Math[_0x21b63b(0x4de)](0x1388,0x96*_0x40d029[_0x21b63b(0x858)][_0x21b63b(0x3cd)]),this[_0x21b63b(0x39b)][_0x21b63b(0x298)](_0x40d029),this[_0x21b63b(0x227)](!0x1);},'onVisibilityChange'({visible:_0x1cfe6f,visibleToast:_0x131b20}){const _0x322338=_0x1f5228;null!=_0x1cfe6f&&(this[_0x322338(0x893)]=_0x1cfe6f),null!=_0x131b20&&(this[_0x322338(0x647)]=_0x131b20,this['visibleInput']=this['visible']&&!_0x131b20),this[_0x322338(0x6a3)](()=>this[_0x322338(0x227)](!0x0));},'focusChat'(){const _0x2fbdef=_0x1f5228;this[_0x2fbdef(0x893)]&&(this[_0x2fbdef(0x845)]=!0x0,this['$nextTick'](()=>this[_0x2fbdef(0x394)][_0x2fbdef(0x211)][_0x2fbdef(0x328)]()));},'clearChat'(){const _0x1a71f2=_0x1f5228;_0x4ee43f[_0x1a71f2(0x2fd)]&&(this['messages']['splice'](0x0,this[_0x1a71f2(0x548)][_0x1a71f2(0x3cd)]),this['toastMessages'][_0x1a71f2(0x191)](0x0,this[_0x1a71f2(0x39b)][_0x1a71f2(0x3cd)]),this[_0x1a71f2(0x5a9)]=0x0);},'scrollBottom'(_0xd4f2f4=!0x1){const _0x9fd883=_0x1f5228;if(!this[_0x9fd883(0x647)]){var _0x4d0347=this['$refs'][_0x9fd883(0x1c7)],_0x1a0a52=_0x4d0347[_0x9fd883(0x1b6)]-_0x4d0347[_0x9fd883(0x6a5)];!_0xd4f2f4&&_0x1a0a52-_0x4d0347[_0x9fd883(0x672)]>0x1e||this[_0x9fd883(0x6a3)](()=>_0x4d0347[_0x9fd883(0x672)]=_0x4d0347[_0x9fd883(0x1b6)]);}},'filterToasts'(){const _0x1e5397=_0x1f5228;for(var _0x1864d9=0x0;_0x1864d9<this[_0x1e5397(0x39b)][_0x1e5397(0x3cd)];_0x1864d9++)this[_0x1e5397(0x39b)][_0x1864d9]['until']>=Date[_0x1e5397(0x737)]()||this[_0x1e5397(0x39b)][_0x1e5397(0x191)](_0x1864d9--,0x1);}},'created'(){const _0x549691=_0x1f5228;_0x291004[_0x549691(0x7b4)][_0x549691(0x2e6)]('chat-visible',this[_0x549691(0x895)]),_0x291004['events'][_0x549691(0x2e6)](_0x549691(0x4e6),this[_0x549691(0x823)]),_0x291004[_0x549691(0x7b4)]['$on'](_0x549691(0x525),this['onChatMessage']),_0x291004[_0x549691(0x7b4)][_0x549691(0x2e6)](_0x549691(0x550),this[_0x549691(0x3e0)]),_0x291004[_0x549691(0x7b4)]['$on'](_0x549691(0x4b5),this[_0x549691(0x71b)]),_0x291004[_0x549691(0x7b4)][_0x549691(0x2e6)](_0x549691(0x297),this['clearChat']),_0x291004[_0x549691(0x7b4)][_0x549691(0x2e6)](_0x549691(0x7cd),_0xb94085=>this[_0x549691(0x3dd)]=_0xb94085),_0x291004[_0x549691(0x7b4)][_0x549691(0x2e6)]('game-stopped',()=>{this['blockedMessageCount']=0x0,_0x466156={};}),document[_0x549691(0x427)](_0x549691(0x688),_0x1851fa=>{const _0x3510db=_0x549691;this['visibleInput']=!this[_0x3510db(0x647)]||_0x1851fa[_0x3510db(0x64e)]===this['$refs']['input'];});}},_0x563c57,[],!0x1,null,'4900a413',null));_0x1ec80a[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x561);var _0x5cd73f=_0x1ec80a[_0x1f5228(0x6e4)],_0x2108e3=function(){const _0x52e417=_0x1f5228;var _0x3211ad=this,_0x1bdafd=_0x3211ad[_0x52e417(0x413)],_0x43e9fe=_0x3211ad[_0x52e417(0x5e6)]['_c']||_0x1bdafd;return _0x43e9fe(_0x52e417(0x760),{'directives':[{'name':'show','rawName':_0x52e417(0x38f),'value':_0x3211ad[_0x52e417(0x1c8)]&&_0x3211ad['visible'],'expression':'userVisible\x20&&\x20visible'}],'attrs':{'id':_0x52e417(0x1d9)}},[_0x43e9fe(_0x52e417(0x760),{'directives':[{'name':'show','rawName':_0x52e417(0x38f),'value':_0x3211ad['headerVisible'],'expression':'headerVisible'}],'staticClass':'leaderboard-title'},[_0x3211ad['_v'](_0x3211ad['_s'](_0x3211ad[_0x52e417(0x755)]))]),_0x3211ad['_v']('\x20'),_0x43e9fe(_0x52e417(0x760),_0x3211ad['_l'](_0x3211ad[_0x52e417(0x1d9)],function(_0x3c394a,_0x7f6568){const _0x3ee69f=_0x52e417;return _0x43e9fe(_0x3ee69f(0x760),{'key':_0x7f6568,'staticClass':_0x3ee69f(0x25a)},[_0x3211ad['_v']('\x20'),_0x43e9fe('span',{'class':{'spectating':0x0==_0x3211ad['gameState']['lifeState']},'style':{'color':_0x9281ac(_0x3c394a[_0x3ee69f(0x858)]),'fontWeight':_0x3c394a[_0x3ee69f(0x3e3)]?'bold':_0x3ee69f(0x63a)},'attrs':{'data-pid':_0x3c394a[_0x3ee69f(0x544)]},'on':{'click':function(_0x7e20){const _0x1ce777=_0x3ee69f;return _0x3211ad[_0x1ce777(0x814)](_0x7e20);}}},[_0x3c394a[_0x3ee69f(0x610)]?_0x43e9fe(_0x3ee69f(0x19d),{'attrs':{'src':_0x3c394a[_0x3ee69f(0x610)],'alt':_0x3ee69f(0x610),'class':_0x3ee69f(0x489)}}):_0x3211ad['_e'](),_0x3211ad['_v'](_0x3211ad['_s'](_0x3c394a[_0x3ee69f(0x858)]))])]);}),0x0)]);};_0x2108e3[_0x1f5228(0x222)]=!0x0;var _0x52ca76=_0x361a4e(0x1),_0x50d51f=_0x361a4e(0x4),_0x44bc8=(_0x361a4e(0xf8),Object(_0x174c36['a'])({'data':()=>({'userVisible':_0x50d51f[_0x1f5228(0x82f)],'visible':!0x1,'headerVisible':!0x0,'headerText':_0x1f5228(0x32a),'leaderboard':[],'gameState':_0x52ca76['state']}),'methods':{'updateLeaderboard'(_0x1fe649,_0x38f691){const _0x3a9aea=_0x1f5228;if(this['leaderboard']=_0x1fe649,_0x38f691)this['headerVisible']=_0x38f691['visible'],this[_0x3a9aea(0x755)]=_0x38f691[_0x3a9aea(0x858)];else{if(_0x50d51f['showServerName']&&this[_0x3a9aea(0x2a4)][_0x3a9aea(0x37e)]){this[_0x3a9aea(0x788)]=!0x0;var _0x41f425=this[_0x3a9aea(0x2a4)]['selectedServer']['region']||'';_0x41f425&&(_0x41f425+='\x20'),this['headerText']=_0x41f425+this[_0x3a9aea(0x2a4)][_0x3a9aea(0x37e)]['name'];}else this['headerVisible']=!0x0,this[_0x3a9aea(0x755)]=_0x3a9aea(0x32a);}},'leftClickLabel'(){const _0x20d4fc=_0x1f5228;let _0x338cca=event['target']['dataset']['pid'];_0x338cca&&(_0x52ca76['selectedPlayer']=_0x338cca,_0x52ca76[_0x20d4fc(0x1d4)][_0x20d4fc(0x470)](_0x338cca),_0x52ca76[_0x20d4fc(0x1d4)]['targetPlayer'](_0x338cca));},'onLeaderboardShow'(){const _0x5d0333=_0x1f5228;this[_0x5d0333(0x893)]||(_0x52ca76[_0x5d0333(0x7b4)]['$on'](_0x5d0333(0x280),this['updateLeaderboard']),this[_0x5d0333(0x893)]=!0x0);},'onLeaderboardHide'(){const _0x1f18cd=_0x1f5228;this[_0x1f18cd(0x893)]&&(_0x52ca76[_0x1f18cd(0x7b4)][_0x1f18cd(0x6ac)](_0x1f18cd(0x280),this[_0x1f18cd(0x234)]),this[_0x1f18cd(0x1d9)]=[],this[_0x1f18cd(0x893)]=!0x1,this['selectedServer']=null);}},'created'(){const _0x20f7d6=_0x1f5228;_0x52ca76['events']['$on'](_0x20f7d6(0x528),_0x2a7609=>{const _0x543ef6=_0x20f7d6;this[_0x543ef6(0x1c8)]=_0x2a7609;}),_0x52ca76[_0x20f7d6(0x7b4)][_0x20f7d6(0x2e6)]('leaderboard-show',this['onLeaderboardShow']),_0x52ca76['events'][_0x20f7d6(0x2e6)](_0x20f7d6(0x607),this[_0x20f7d6(0x7c0)]);}},_0x2108e3,[],!0x1,null,_0x1f5228(0x843),null));_0x44bc8[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x202);var _0x518bc6=_0x44bc8[_0x1f5228(0x6e4)],_0x2fe6ec={'components':{'stats':_0x49d3ee,'chatbox':_0x5cd73f,'minimap':_0x361a4e(0x75)[_0x1f5228(0x559)],'leaderboard':_0x518bc6,'cautions':_0x4e3ce4}},_0x5248e5=(_0x361a4e(0xfc),Object(_0x174c36['a'])(_0x2fe6ec,_0x4c298a,[],!0x1,null,'339660d2',null));_0x5248e5[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x52c);var _0x48b245=_0x5248e5[_0x1f5228(0x6e4)],_0x2397f5=function(){const _0x2810b8=_0x1f5228;var _0x25057c=this,_0x2faba3=_0x25057c['$createElement'],_0x4ebdb5=_0x25057c[_0x2810b8(0x5e6)]['_c']||_0x2faba3;return _0x4ebdb5('transition',{'attrs':{'name':'menu'}},[_0x4ebdb5('div',{'staticClass':_0x2810b8(0x2c5)},[_0x4ebdb5(_0x2810b8(0x760),{'staticClass':_0x2810b8(0x68d)},[_0x4ebdb5('div',{'staticStyle':{'padding':_0x2810b8(0x41d)}},[_0x25057c['_v']('Advertisement')]),_0x25057c['_v']('\x20'),_0x4ebdb5(_0x2810b8(0x760),{'staticStyle':{'padding':'10px','padding-top':_0x2810b8(0x778)}},[_0x4ebdb5(_0x2810b8(0x760),{'attrs':{'id':'vanis-io_300x250_2'}})])]),_0x25057c['_v']('\x20'),_0x25057c['stats']?_0x4ebdb5('div',{'staticClass':_0x2810b8(0x492),'class':{'scroll':_0x25057c['isLoadingAd']}},[_0x4ebdb5(_0x2810b8(0x760),{'staticStyle':{'padding':_0x2810b8(0x40d)}},[_0x4ebdb5('div',[_0x25057c['_v']('Time\x20Alive:\x20'+_0x25057c['_s'](_0x25057c[_0x2810b8(0x74b)]))]),_0x25057c['_v']('\x20'),_0x4ebdb5(_0x2810b8(0x760),[_0x25057c['_v'](_0x2810b8(0x77e)+_0x25057c['_s'](_0x25057c[_0x2810b8(0x464)]))]),_0x25057c['_v']('\x20'),_0x4ebdb5('div',[_0x25057c['_v']('Players\x20Eaten:\x20'+_0x25057c['_s'](_0x25057c['stats']['killCount']))]),_0x25057c['_v']('\x20'),_0x4ebdb5(_0x2810b8(0x6d0),{'staticClass':'continue','nativeOn':{'click':function(_0x976349){const _0x3dcda7=_0x2810b8;return _0x25057c[_0x3dcda7(0x573)](_0x976349);}}},[_0x25057c['_v'](_0x2810b8(0x38b))])],0x1)]):_0x25057c['_e']()])]);};_0x2397f5['_withStripped']=!0x0;var _0x34704d=_0x361a4e(0x1),_0x57a71b=_0x361a4e(0x4d),_0x1510f4=(_0x361a4e(0xfe),Object(_0x174c36['a'])({'props':['stats'],'data':()=>({'isLoadingAd':!0x1}),'computed':{'timeAlive'(){const _0x4f81d0=_0x1f5228;var _0x40f2b8=this['stats'][_0x4f81d0(0x74b)];return _0x40f2b8<0x3c?_0x40f2b8+'s':Math[_0x4f81d0(0x579)](_0x40f2b8/0x3c)+_0x4f81d0(0x567)+_0x40f2b8%0x3c+'s';},'highscore'(){const _0x18b127=_0x1f5228;return _0x34704d[_0x18b127(0x461)](this['stats'][_0x18b127(0x464)]);}},'methods':{'loadAd'(){const _0x9049be=_0x1f5228;this[_0x9049be(0x4be)]=_0x57a71b[_0x9049be(0x2d9)]('death-box');},'onContinueClick'(){const _0x4402a5=_0x1f5228;_0x34704d[_0x4402a5(0x3f0)][_0x4402a5(0x452)]=!0x1,_0x34704d[_0x4402a5(0x505)][_0x4402a5(0x783)]=!0x1,_0x34704d[_0x4402a5(0x5ef)](!0x0);}},'created'(){const _0x2074a9=_0x1f5228;_0x34704d[_0x2074a9(0x7b4)][_0x2074a9(0x2e6)](_0x2074a9(0x752),this[_0x2074a9(0x67e)]);}},_0x2397f5,[],!0x1,null,_0x1f5228(0x360),null));_0x1510f4[_0x1f5228(0x5a1)]['__file']=_0x1f5228(0x1c3);var _0x211403=_0x1510f4['exports'],_0x182aa4=function(){const _0x31ea17=_0x1f5228;var _0x42f952=this[_0x31ea17(0x413)];return(this['_self']['_c']||_0x42f952)(_0x31ea17(0x4ee),{'staticClass':_0x31ea17(0x6d0)},[this['_t']('default',[this['_v'](_0x31ea17(0x5ba))])],0x2);};_0x182aa4[_0x1f5228(0x222)]=!0x0;var _0x47eedc=(_0x361a4e(0x100),Object(_0x174c36['a'])({},_0x182aa4,[],!0x1,null,'b0b10308',null));_0x47eedc[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x846);var _0x321807=_0x47eedc[_0x1f5228(0x6e4)],_0x106d7b=function(){const _0x93f4c2=_0x1f5228;var _0xbcbc71=this,_0x230535=_0xbcbc71[_0x93f4c2(0x413)],_0x595ec6=_0xbcbc71[_0x93f4c2(0x5e6)]['_c']||_0x230535;return _0xbcbc71[_0x93f4c2(0x260)]?_0x595ec6('div',{'class':{'auto-hide':_0xbcbc71[_0x93f4c2(0x73c)]},'attrs':{'id':_0x93f4c2(0x44d)}},[_0x595ec6(_0x93f4c2(0x760),{'staticStyle':{'text-align':'right'}},[_0x595ec6('div',[_0xbcbc71['_v']('Opacity\x20'+_0xbcbc71['_s'](_0xbcbc71['cellOpacity'])+'%')]),_0xbcbc71['_v']('\x20'),_0x595ec6(_0x93f4c2(0x760),[_0x595ec6(_0x93f4c2(0x211),{'directives':[{'name':_0x93f4c2(0x529),'rawName':'v-model','value':_0xbcbc71[_0x93f4c2(0x711)],'expression':_0x93f4c2(0x711)}],'staticClass':_0x93f4c2(0x38d),'staticStyle':{'width':'105px','display':_0x93f4c2(0x287)},'attrs':{'id':_0x93f4c2(0x764),'type':'range','min':'10','max':_0x93f4c2(0x1a0)},'domProps':{'value':_0xbcbc71[_0x93f4c2(0x711)]},'on':{'input':_0xbcbc71['onCellOpacitySlide'],'__r':function(_0x1161f1){const _0x56d763=_0x93f4c2;_0xbcbc71[_0x56d763(0x711)]=_0x1161f1[_0x56d763(0x64e)]['value'];}}})])]),_0xbcbc71['_v']('\x20'),_0x595ec6(_0x93f4c2(0x760),{'staticStyle':{'margin-bottom':_0x93f4c2(0x59e),'display':_0x93f4c2(0x347)}},[_0x595ec6('div',{'staticStyle':{'flex':'1'}},[_0xbcbc71['_v'](_0xbcbc71['_s'](_0xbcbc71[_0x93f4c2(0x354)][_0x93f4c2(0x78b)](0x1))+_0x93f4c2(0x643))]),_0xbcbc71['_v']('\x20'),_0x595ec6(_0x93f4c2(0x760),{'staticStyle':{'margin-right':_0x93f4c2(0x5c4)}},[_0x595ec6(_0x93f4c2(0x211),{'directives':[{'name':_0x93f4c2(0x529),'rawName':'v-model','value':_0xbcbc71[_0x93f4c2(0x73c)],'expression':_0x93f4c2(0x73c)}],'attrs':{'type':_0x93f4c2(0x2ac),'id':_0x93f4c2(0x80b)},'domProps':{'checked':Array[_0x93f4c2(0x43d)](_0xbcbc71[_0x93f4c2(0x73c)])?_0xbcbc71['_i'](_0xbcbc71[_0x93f4c2(0x73c)],null)>-0x1:_0xbcbc71['autoHideReplayControls']},'on':{'change':[function(_0x4099a9){const _0x2cee42=_0x93f4c2;var _0x1ac7bc=_0xbcbc71['autoHideReplayControls'],_0x3ad03d=_0x4099a9[_0x2cee42(0x64e)],_0x213915=!!_0x3ad03d['checked'];if(Array[_0x2cee42(0x43d)](_0x1ac7bc)){var _0x301948=_0xbcbc71['_i'](_0x1ac7bc,null);_0x3ad03d[_0x2cee42(0x26b)]?_0x301948<0x0&&(_0xbcbc71[_0x2cee42(0x73c)]=_0x1ac7bc['concat']([null])):_0x301948>-0x1&&(_0xbcbc71[_0x2cee42(0x73c)]=_0x1ac7bc[_0x2cee42(0x7fb)](0x0,_0x301948)['concat'](_0x1ac7bc['slice'](_0x301948+0x1)));}else _0xbcbc71[_0x2cee42(0x73c)]=_0x213915;},_0xbcbc71[_0x93f4c2(0x28e)]]}}),_0xbcbc71['_v']('\x20'),_0x595ec6(_0x93f4c2(0x3ba),{'attrs':{'for':_0x93f4c2(0x80b)}},[_0xbcbc71['_v'](_0x93f4c2(0x804))])])]),_0xbcbc71['_v']('\x20'),_0x595ec6('input',{'directives':[{'name':_0x93f4c2(0x529),'rawName':_0x93f4c2(0x5de),'value':_0xbcbc71[_0x93f4c2(0x7bf)],'expression':_0x93f4c2(0x7bf)}],'staticClass':'replay-slider','attrs':{'type':_0x93f4c2(0x30e),'min':_0xbcbc71[_0x93f4c2(0x271)],'max':_0xbcbc71[_0x93f4c2(0x310)]},'domProps':{'value':_0xbcbc71[_0x93f4c2(0x7bf)]},'on':{'input':_0xbcbc71[_0x93f4c2(0x1c9)],'change':_0xbcbc71[_0x93f4c2(0x5d0)],'__r':function(_0x191569){const _0x4379c7=_0x93f4c2;_0xbcbc71[_0x4379c7(0x7bf)]=_0x191569[_0x4379c7(0x64e)][_0x4379c7(0x7ef)];}}})]):_0xbcbc71['_e']();};_0x106d7b[_0x1f5228(0x222)]=!0x0;var _0x426839=_0x361a4e(0x1),_0xa0c586=(_0x361a4e(0x102),Object(_0x174c36['a'])({'data':()=>({'show':!0x1,'autoHideReplayControls':_0x426839[_0x1f5228(0x2b2)]['autoHideReplayControls'],'drawDelay':_0x426839[_0x1f5228(0x2b2)][_0x1f5228(0x290)],'cellOpacity':0x64,'rangeMin':0x0,'rangeIndex':0x0,'rangeMax':0x3e8,'replaySecond':0x0,'packetCount':0x0}),'created':function(){const _0x303399=_0x1f5228;_0x426839[_0x303399(0x7b4)]['$on']('show-replay-controls',this[_0x303399(0x5d9)]),_0x426839[_0x303399(0x7b4)][_0x303399(0x2e6)]('replay-index-change',this[_0x303399(0x237)]);},'methods':{'onShow'(_0x1fec81){const _0x38afae=_0x1f5228;_0x1fec81?(this[_0x38afae(0x260)]=!0x0,this['packetCount']=_0x1fec81):(this['show']=!0x1,this[_0x38afae(0x711)]=0x64,this['rangeIndex']=0x0,this[_0x38afae(0x30a)]=0x0);},'onReplayIndexChange'(_0xb98697,_0x1eb5f0=!0x0){const _0x4691d0=_0x1f5228;var _0x4facd5=_0xb98697/this['packetCount'];_0x1eb5f0&&(this[_0x4691d0(0x7bf)]=Math[_0x4691d0(0x579)](_0x4facd5*this[_0x4691d0(0x310)])),this['replaySecond']=_0xb98697/0x19;},'onSlide'(_0x2fc6cd){const _0x47b018=_0x1f5228;_0x426839[_0x47b018(0x24a)]&&(clearInterval(_0x426839[_0x47b018(0x24a)]),_0x426839[_0x47b018(0x24a)]=null);var _0x328c2d=Math[_0x47b018(0x579)](this[_0x47b018(0x7bf)]/this[_0x47b018(0x310)]*(this[_0x47b018(0x30a)]-0x1));_0x426839[_0x47b018(0x1ff)]['seek'](_0x328c2d),this[_0x47b018(0x237)](_0x328c2d,!0x1);},'onSlideEnd'(_0x178610){const _0x1a2245=_0x1f5228;_0x426839[_0x1a2245(0x24a)]||(_0x426839['moveInterval']=setInterval(_0x426839[_0x1a2245(0x1ff)]['next'][_0x1a2245(0x5b4)](_0x426839[_0x1a2245(0x1ff)]),0x28));},'onCellOpacitySlide'(){const _0x5a8a94=_0x1f5228;_0x426839[_0x5a8a94(0x6b8)][_0x5a8a94(0x5e5)][_0x5a8a94(0x592)]=this[_0x5a8a94(0x711)]/0x64;},'saveAutoHideControls'(){const _0x9bcded=_0x1f5228;_0x426839[_0x9bcded(0x2b2)][_0x9bcded(0x2df)](_0x9bcded(0x73c),this[_0x9bcded(0x73c)]);}}},_0x106d7b,[],!0x1,null,'c2c2ac08',null));_0xa0c586[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x4f2);var _0x1c85f8=_0xa0c586[_0x1f5228(0x6e4)],_0x5189d1=function(){const _0x7ddd37=_0x1f5228;var _0xf78515=this[_0x7ddd37(0x413)],_0x5e2855=this[_0x7ddd37(0x5e6)]['_c']||_0xf78515;return this['show']?_0x5e2855(_0x7ddd37(0x760),{'attrs':{'id':_0x7ddd37(0x3de)}},[this['_m'](0x0)]):this['_e']();};_0x5189d1[_0x1f5228(0x222)]=!0x0,_0x361a4e(0x13);var {isFirstVisit:_0x43ded2}=_0x361a4e(0x11),_0x163865=(_0x361a4e(0x104),Object(_0x174c36['a'])({'data':()=>({'show':!0x1}),'created'(){}},_0x5189d1,[function(){const _0x22b908=_0x1f5228;var _0x5e6be8=this[_0x22b908(0x413)],_0x407745=this[_0x22b908(0x5e6)]['_c']||_0x5e6be8;return _0x407745(_0x22b908(0x760),{'staticClass':_0x22b908(0x84a)},[_0x407745(_0x22b908(0x19d),{'staticStyle':{'width':_0x22b908(0x456)},'attrs':{'src':_0x22b908(0x3d2)}}),this['_v']('\x20'),_0x407745('p',{'staticStyle':{'font-size':_0x22b908(0x5bd)}},[this['_v'](_0x22b908(0x535))]),this['_v']('\x20'),_0x407745('p',{'staticStyle':{'font-size':_0x22b908(0x6ad),'margin-bottom':_0x22b908(0x40d)}},[this['_v']('We\x20use\x20advertisements\x20to\x20fund\x20our\x20servers!')]),this['_v']('\x20'),_0x407745(_0x22b908(0x19d),{'staticStyle':{'border-radius':'4px','box-shadow':_0x22b908(0x2cf)},'attrs':{'src':'/img/ab.gif'}})]);}],!0x1,null,_0x1f5228(0x4d6),null));_0x163865[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x2cc);var _0x29732f=_0x163865['exports'],_0x4e6ddb=function(){const _0x1207a1=_0x1f5228;var _0x5b2443=this[_0x1207a1(0x413)];return(this[_0x1207a1(0x5e6)]['_c']||_0x5b2443)(_0x1207a1(0x760),{'directives':[{'name':_0x1207a1(0x260),'rawName':_0x1207a1(0x38f),'value':this['show'],'expression':'show'}],'staticClass':_0x1207a1(0x4a7)},[this['_m'](0x0)]);};_0x4e6ddb[_0x1f5228(0x222)]=!0x0;var _0x4a6c27=_0x361a4e(0x1);_0x361a4e(0x19);var _0x12d958=window[_0x1f5228(0x60f)]={'data':()=>({'show':!0x1,'scriptLoadPromise':null,'captchaId':null,'wsId':null,'dualbox':!0x1}),'created'(){const _0x54b44b=_0x1f5228;_0x4a6c27[_0x54b44b(0x7b4)][_0x54b44b(0x2e6)](_0x54b44b(0x67b),()=>{const _0x55bf10=_0x54b44b;this[_0x55bf10(0x75a)]=null,this[_0x55bf10(0x260)]=!0x0,this['wsId']=_0x4a6c27[_0x55bf10(0x1d6)],grecaptcha['ready'](()=>this['renderCaptcha']());}),_0x4a6c27['events'][_0x54b44b(0x2e6)]('m-show-image-captcha',()=>{const _0x2d3e17=_0x54b44b;this[_0x2d3e17(0x75a)]=!0x0,this[_0x2d3e17(0x260)]=!0x0,this['wsId']=null,grecaptcha[_0x2d3e17(0x758)](()=>this[_0x2d3e17(0x53a)]());}),_0x4a6c27[_0x54b44b(0x7b4)][_0x54b44b(0x2e6)]('request-image-captcha',async()=>{const _0x1befe9=_0x54b44b;this[_0x1befe9(0x260)]=!0x0,grecaptcha[_0x1befe9(0x758)](()=>{const _0x386661=_0x1befe9;if(null!==this[_0x386661(0x27d)]){grecaptcha[_0x386661(0x49d)](this[_0x386661(0x27d)]);return;}let {client:_0x4e0837}=window,_0x4b3eff=document[_0x386661(0x1ca)](_0x386661(0x4c3));this[_0x386661(0x27d)]=grecaptcha[_0x386661(0x207)](_0x4b3eff,{'sitekey':_0x386661(0x85d),'callback':_0x4e0837[_0x386661(0x2d6)][_0x386661(0x5b4)](_0x4e0837)});});}),_0x4a6c27[_0x54b44b(0x7b4)]['$on'](_0x54b44b(0x5fe),()=>{const _0x337620=_0x54b44b;this[_0x337620(0x260)]=!0x1;});},'methods':{'renderCaptcha'(){const _0x31069e=_0x1f5228;if(null!==this[_0x31069e(0x27d)]){grecaptcha[_0x31069e(0x49d)](this[_0x31069e(0x27d)]);return;}this[_0x31069e(0x27d)]=grecaptcha['render'](document[_0x31069e(0x1ca)]('image-captcha-container'),{'sitekey':'6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi','callback':this[_0x31069e(0x2d6)][_0x31069e(0x5b4)](this)});},'onCaptchaToken'(_0x51137e){const _0x916adf=_0x1f5228;if(!this['dualbox']&&_0x4a6c27[_0x916adf(0x1d6)]!==this[_0x916adf(0x64b)]){this['show']=!0x1;return;}if(!_0x51137e){this[_0x916adf(0x53a)]();return;}_0x4a6c27[_0x916adf(0x25e)][_0x916adf(0x1cc)](_0x51137e,!!this[_0x916adf(0x75a)]),this[_0x916adf(0x260)]=!0x1;}}},_0xdbd332=(_0x361a4e(0x106),Object(_0x174c36['a'])(_0x12d958,_0x4e6ddb,[function(){const _0x41bcd8=_0x1f5228;let _0x2fc310=this[_0x41bcd8(0x5e6)]['_c']||this[_0x41bcd8(0x413)],_0x5a9b6b=this['_v'],_0xe13b1e=window['client']||Object[_0x41bcd8(0x79e)]({'captcha':{'solving':!0x1}});return _0x2fc310('div',{'staticClass':_0x41bcd8(0x50f)},[_0x2fc310(_0x41bcd8(0x760),{'staticStyle':{'margin-bottom':'6px'}},[_0x5a9b6b(_0xe13b1e[_0x41bcd8(0x60f)][_0x41bcd8(0x34b)]?_0x41bcd8(0x6a6)+_0xe13b1e[_0x41bcd8(0x60f)][_0x41bcd8(0x2d2)]+'\x27':_0x41bcd8(0x301))]),_0x5a9b6b('\x20'),_0x2fc310(_0x41bcd8(0x760),{'attrs':{'id':_0x41bcd8(0x4c3)}})]);}],!0x1,null,_0x1f5228(0x4a6),null));_0xdbd332['options'][_0x1f5228(0x3f9)]='src/components/image-captcha.vue';var _0x52399c=_0xdbd332[_0x1f5228(0x6e4)],_0x2d75a1=function(){const _0x27e17a=_0x1f5228;var _0x14dd9e=this,_0x4d0944=_0x14dd9e[_0x27e17a(0x413)],_0x12a58f=_0x14dd9e['_self']['_c']||_0x4d0944;return _0x14dd9e[_0x27e17a(0x260)]?_0x12a58f('div',{'staticClass':_0x27e17a(0x6bc)},[_0x12a58f(_0x27e17a(0x2c1),{'staticClass':_0x27e17a(0x81b),'attrs':{'width':_0x27e17a(0x83d),'height':_0x27e17a(0x3f3),'src':_0x14dd9e[_0x27e17a(0x800)],'frameborder':'0'}}),_0x14dd9e['_v']('\x20'),_0x12a58f('i',{'staticClass':_0x27e17a(0x55b),'on':{'click':function(){const _0x5278cf=_0x27e17a;return _0x14dd9e[_0x5278cf(0x39a)]();}}})]):_0x14dd9e['_e']();};_0x2d75a1[_0x1f5228(0x222)]=!0x0;var _0x2dddf9=_0x361a4e(0x108),_0xe744c3=(_0x361a4e(0x109),Object(_0x174c36['a'])({'data':()=>({'show':!0x1}),'props':[_0x1f5228(0x800),_0x1f5228(0x1dc)],'methods':{'hide'(){const _0x59cf62=_0x1f5228;_0x2dddf9[_0x59cf62(0x5a3)](this[_0x59cf62(0x1dc)]),this[_0x59cf62(0x260)]=!0x1;}},'created'(){const _0x153f75=_0x1f5228;_0x2dddf9[_0x153f75(0x277)](this['tag'])||(this[_0x153f75(0x260)]=!0x0);}},_0x2d75a1,[],!0x1,null,_0x1f5228(0x1f1),null));_0xe744c3[_0x1f5228(0x5a1)][_0x1f5228(0x3f9)]=_0x1f5228(0x7bb);var _0x3a3b23=_0xe744c3[_0x1f5228(0x6e4)];_0x41f858['a'][_0x1f5228(0x6d4)](_0x4bcf7f['a']);var _0x36cca2=_0x361a4e(0x4),_0xea10b3=_0x361a4e(0x1);_0x41f858['a'][_0x1f5228(0x696)](_0x1f5228(0x6d0),_0x321807),_0xea10b3[_0x1f5228(0x505)]=new _0x41f858['a']({'el':_0x1f5228(0x841),'data':{'showHud':_0x36cca2[_0x1f5228(0x506)],'showMenu':!0x0,'showDeathScreen':!0x1,'deathStats':null},'components':{'imageCaptcha':_0x52399c,'mainContainer':_0x10f3ef,'socialLinks':_0x3ed59e,'privacyTos':_0x482878,'contextMenu':_0x57181b,'hud':_0x48b245,'deathStats':_0x211403,'replayControls':_0x1c85f8,'abOverlay':_0x29732f,'shoutbox':_0x3a3b23}});}]),window['DELTATAG']=_0x5f4583(0x26a),localStorage['cid']||(localStorage[_0x5f4583(0x62c)]=makeid(0x1c)),GAME[_0x5f4583(0x5f3)]=_0x4b87ee=>{const _0x4367ed=_0x5f4583;GAME[_0x4367ed(0x7b4)]['$emit']('chat-message',_0x4b87ee);},GAME[_0x5f4583(0x303)]=_0x541d9f=>{const _0x69e1be=_0x5f4583;GAME[_0x69e1be(0x7b4)]['$emit'](_0x69e1be(0x7a5),{'custom':_0x541d9f});},GAME['aimbotnodes']=()=>{},window[_0x5f4583(0x789)]={'sprite':new PIXI[(_0x5f4583(0x4ec))][(_0x5f4583(0x648))]('https://i.postimg.cc/CdTpN3dt/pinpointer.png')},window[_0x5f4583(0x7cb)]=(_0x15a8b1,_0x1be853)=>{const _0x11fddb=_0x5f4583;switch(_0x15a8b1){case 0x1:getModule(0x4)[_0x11fddb(0x2df)](_0x11fddb(0x618),_0x1be853),document[_0x11fddb(0x7c9)](_0x11fddb(0x400))[_0x11fddb(0x639)]=_0x1be853,document[_0x11fddb(0x1ca)](_0x11fddb(0x733))['src']=_0x1be853;break;case 0x2:getModule(0x4)[_0x11fddb(0x2df)](_0x11fddb(0x81d),document[_0x11fddb(0x1ca)](_0x11fddb(0x81d))[_0x11fddb(0x7ef)]);break;case 0x3:getModule(0x4)['set'](_0x11fddb(0x195),document[_0x11fddb(0x1ca)](_0x11fddb(0x195))[_0x11fddb(0x26b)]);}};var _0x1c5220=document[_0x5f4583(0x314)](_0x5f4583(0x760));_0x1c5220['id']=_0x5f4583(0x88b),_0x1c5220[_0x5f4583(0x48d)]['position']=_0x5f4583(0x36d),_0x1c5220[_0x5f4583(0x48d)][_0x5f4583(0x65f)]=_0x5f4583(0x7d6),_0x1c5220[_0x5f4583(0x48d)][_0x5f4583(0x3ae)]=_0x5f4583(0x2b6),_0x1c5220[_0x5f4583(0x48d)][_0x5f4583(0x39c)]=_0x5f4583(0x65f),_0x1c5220['style']['fontWeight']=_0x5f4583(0x1a0),_0x1c5220[_0x5f4583(0x48d)][_0x5f4583(0x6e0)]='1',_0x1c5220[_0x5f4583(0x48d)][_0x5f4583(0x6b2)]=_0x5f4583(0x722),document[_0x5f4583(0x7c9)](_0x5f4583(0x334))['appendChild'](_0x1c5220),GAME['debugElement']=_0x1c5220,(_0x1c5220=document['createElement'](_0x5f4583(0x760)))['id']='playerStats',document['querySelector'](_0x5f4583(0x841))[_0x5f4583(0x6f6)](_0x1c5220),GAME[_0x5f4583(0x6f7)]=_0x1c5220,(_0x1c5220=document[_0x5f4583(0x314)](_0x5f4583(0x760)))['id']=_0x5f4583(0x65e),document[_0x5f4583(0x7c9)](_0x5f4583(0x841))[_0x5f4583(0x6f6)](_0x1c5220),window['yoinkSkinDual']=_0x4a80ad=>{const _0x126c36=_0x5f4583;window[_0x126c36(0x666)][_0x126c36(0x88d)]['fire']({'type':'info','title':_0x126c36(0x453),'timer':0x5dc}),GAME['skinPanel'][_0x126c36(0x693)](_0x4a80ad);},window[_0x5f4583(0x7bc)]=_0x1ffce5=>{const _0x8c9513=_0x5f4583;window[_0x8c9513(0x666)]['toast'][_0x8c9513(0x201)]({'type':_0x8c9513(0x1da),'title':_0x8c9513(0x6fd),'timer':0x5dc}),navigator[_0x8c9513(0x6da)][_0x8c9513(0x861)](_0x1ffce5);},window['getSwitch']=()=>{const _0x389b32=_0x5f4583;return _0x389b32(0x728);},window[_0x5f4583(0x819)]=()=>{const _0x60e892=_0x5f4583;lowPerformanceMode===_0x60e892(0x26b)?localStorage[_0x60e892(0x41a)](_0x60e892(0x754),_0x60e892(0x19e)):localStorage[_0x60e892(0x41a)]('lowPerformanceMode',_0x60e892(0x26b)),window[_0x60e892(0x3b1)][_0x60e892(0x1a5)]();},window['getTitleExtension']=()=>{const _0x1092d5=_0x5f4583,_0x555d56=[_0x1092d5(0x802),_0x1092d5(0x2d7),_0x1092d5(0x302),_0x1092d5(0x1a8),_0x1092d5(0x288),'Delta.io','Delta\x20above\x20all',_0x1092d5(0x2b8),_0x1092d5(0x885),_0x1092d5(0x2ed),_0x1092d5(0x4f9),_0x1092d5(0x6e3),_0x1092d5(0x7ca),_0x1092d5(0x866),'Fohz\x20the\x20tricker',_0x1092d5(0x356),_0x1092d5(0x480),'Duru\x20is\x20cuter\x20than\x20all','Deadly\x20World\x20the\x20solo',_0x1092d5(0x341),_0x1092d5(0x441),_0x1092d5(0x7b1),'Angel\x20the\x20mad',_0x1092d5(0x634),'Useful\x20the\x20splitrunner',_0x1092d5(0x63f),_0x1092d5(0x3c0),_0x1092d5(0x304),_0x1092d5(0x3a1),_0x1092d5(0x382),_0x1092d5(0x3dc)];return _0x555d56[Math[_0x1092d5(0x579)](Math[_0x1092d5(0x37b)]()*_0x555d56[_0x1092d5(0x3cd)])];},document[_0x5f4583(0x7c9)]('#player-data')[_0x5f4583(0x876)](_0x5f4583(0x760))[0x0]['innerHTML']+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22openSkins\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22gameConfigurationButton\x22\x20data-v-1bcde71e=\x22\x22\x20class=\x22tab\x20fas\x22><i\x20class=\x22fas\x20fa-user\x20gameConfigurationButtonIcon\x22></i>Player\x20configuration</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22dualProfile\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20id=\x22skinDisplay1\x22\x20src=\x22'+localStorage[_0x5f4583(0x28d)]+_0x5f4583(0x224)+settings[_0x5f4583(0x618)]+_0x5f4583(0x850),document[_0x5f4583(0x7c9)](_0x5f4583(0x1a2))[_0x5f4583(0x541)](_0x5f4583(0x637),_0x5f4583(0x2a9)+lowPerformanceMode+_0x5f4583(0x61c)),document[_0x5f4583(0x7c9)](_0x5f4583(0x78d))[_0x5f4583(0x541)](_0x5f4583(0x637),window['getSwitch']()),document['querySelector'](_0x5f4583(0x362))[_0x5f4583(0x3b7)]+=_0x5f4583(0x79d)+window[_0x5f4583(0x346)]()+'</titleextension>\x0a\x20\x20\x20\x20',document[_0x5f4583(0x7c9)](_0x5f4583(0x83c))['addEventListener'](_0x5f4583(0x3e4),()=>{const _0x1a694f=_0x5f4583,_0x6644f0='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-0eaeaf66=\x22\x22\x20data-v-1bcde71e=\x22\x22\x20class=\x22modal\x20modalCustom\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-0eaeaf66=\x22\x22\x20class=\x22overlay\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20data-v-0eaeaf66=\x22\x22\x20onclick=\x22document.querySelector(\x27.modalCustom\x27).remove()\x22\x20class=\x22fas\x20fa-times-circle\x20close-button\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-0eaeaf66=\x22\x22\x20class=\x22wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-0eaeaf66=\x22\x22\x20class=\x22content\x20fade-box\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22divDualSkins\x22\x20data-v-7179a145=\x22\x22\x20data-v-1bcde71e=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22dualSkins\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22header\x22>Dual\x20profile</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22options\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20id=\x22dualUseNickname\x22\x20onchange=\x22window.setDualData(3)\x22\x20'+(window['settings'][_0x1a694f(0x195)]?_0x1a694f(0x26b):'')+_0x1a694f(0x636)+window[_0x1a694f(0x2b2)][_0x1a694f(0x81d)]+_0x1a694f(0x6db)+window[_0x1a694f(0x2b2)][_0x1a694f(0x618)]+_0x1a694f(0x4a4);document[_0x1a694f(0x7c9)](_0x1a694f(0x1de))[_0x1a694f(0x541)](_0x1a694f(0x637),_0x6644f0);var _0x585dde='';JSON[_0x1a694f(0x192)](localStorage[_0x1a694f(0x1ab)])['forEach'](_0x1fdacd=>{const _0x9d6d3=_0x1a694f;_0x585dde+='<img\x20class=\x22skinItemGalery\x22\x20onclick=\x22window.setDualData(1,\x20\x27'+_0x1fdacd+'\x27)\x22\x20src=\x22'+(''==_0x1fdacd?_0x9d6d3(0x344):_0x1fdacd)+'\x22\x20onerror=\x22this.src=\x27https://i.ibb.co/g9Sj8gK/transparent-skin.png\x27\x22>';}),document[_0x1a694f(0x7c9)]('.dualSkinGalery')['insertAdjacentHTML'](_0x1a694f(0x637),_0x585dde);});}();lowPerformanceMode==='unchecked'?fetch(_0x323643(0x653))['then'](_0x3954c4=>_0x3954c4[_0x323643(0x858)]())[_0x323643(0x32e)](_0x1cc336=>{const _0x2555fe=_0x323643,_0x4b2e0a=document[_0x2555fe(0x314)](_0x2555fe(0x735));_0x4b2e0a[_0x2555fe(0x7a2)]=_0x1cc336,(document[_0x2555fe(0x4ae)]||document[_0x2555fe(0x48c)])[_0x2555fe(0x6f6)](_0x4b2e0a),_0x4b2e0a[_0x2555fe(0x218)]();}):document['querySelector']('.loadingDelta')[_0x323643(0x218)]();function _0x5b6d(){const _0x454802=['indexOf','success','Dual\x20active\x20cell:\x20','teamtag','Blocked\x20player\x20\x22','setTagSprite','values','skinDisplay2','massEnabled','script','textColor','now','onChatClick','readUInt8','imageUrl','toHHMMSS','autoHideReplayControls','cellNameWeightMeaning','Always\x20crop\x20map\x20image','convertKey','cursorStyleElem','^([^\x20]+(\x20+[^\x20]+)+)+[^\x20]}','preventDefault','mode','circle','Mar','replays3','Click\x20a\x20player\x20to\x20lock\x20triggerbot','downloadReplay','dkvej','Tag','timeAlive','removeEventListener','c084ff','triggerInput','&amp;','endsWith','onSkinUrlChange','refresh-deathscreen-ad','cells-changed','lowPerformanceMode','headerText','small','player-info','ready','Are\x20you\x20sure\x20you\x20want\x20to\x20close\x20the\x20page?','dualbox','tag\x20players\x27','gameResolution','binaryType','nwDataTotal','pageIndex','div','fill','toggleNames','mouseup','replay-opacity-slider','resetObsoleteHotkeys','squares','padStart','jkvn5t','wheelDelta','showBackgroundImage','Large','Loading','Show\x20minimap\x20locations','loadSkinAndRender','8239736IXWYcy','allowDrop','playerName','getAd','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Chat\x0a\x20\x20\x20\x20','Bold','undefined','1008920aiGNDS','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Game\x0a\x20\x20\x20\x20\x20\x20\x20\x20','0px','-316px','menu-opened','addCell','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Show\x20','color-picker-hue','Highscore:\x20','score','Show\x20my\x20name','\x20minute','Unnamed','showDeathScreen','\x20mass\x0a\x20\x20\x20\x20\x20\x20\x20\x20','\x20<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','feed','hotkeys','headerVisible','pings','\x20ejecting','toFixed','canvas','#main-container','xp-update','readString16','onload','src/components/hotkeys.vue','Thin','13308OglidB','translate','connect','xcikpc','setUint16','Mute','$data','t6rg','updates','isAlive','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22statBar\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<titlemod>(Dual\x20mod)</titlemod>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<titleextension>','seal','generateAsync','get','.deltaio','textContent','getUint8','tagSprite','update-cautions','highestScore','waitInterval','ceil','dataset','WebSocket','sin','switch','https://cdn.discordapp.com/embed/avatars/0.png','cellNameSmoothOutline','endFill','Reset\x20to\x20default','Zimek\x20the\x20precursor','exception','pc|k','events','stats-visible','lastServerListReloadTime','blur','cameraZoomDelay','onRejected','player-row','src/components/shoutbox.vue','copySkinDual','Show\x20food','autoDetectRenderer','rangeIndex','onLeaderboardHide','Show\x20chat','onTeamTagChange','(((.+)+)+)+$','all','create','drawLocationGrid','respawn','showChatToast','querySelector','Luka\x20will\x20recruit\x20Fohz?','setDualData','pkiic','show-blocked-message-count','loadSkins','getInternalSettings','LINESPLITTING\x20[TAB\x20','minimapFPS','showFPS','string','image-picker-reset','\x20|\x20PID:\x20','250px','set-cursor-url','charAt','mouseZoomMin','showPing','Auto\x20zoom','removeChild','onSkinUrlChanged','bottom-margin','.fr','5b0666af','instantiate','constructor','newPosition','background','clearCachedData','Watching\x20replay\x20error','spectators','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Mass\x20text\x0a\x20\x20\x20\x20','perk_color','bgDefault','Ticker','plugins','clearRect','&quot;','value','stringify','pushAd','94WoNZQl','uid','Safari\x20browser\x20is\x20not\x20supported\x20:(','movePivot','zoomLevel2','fromBuffer','keysLoadedFirst','replay-header','eatAnimation','slice','getMinutes','vanis-io_300x250_2','\x20XP','\x20y:\x20','url','Are\x20you\x20absolutely\x20sure\x20that\x20you\x20want\x20to\x20delete\x20all\x20replays?','+220\x20users\x20on\x20Delta','playerManager','Auto\x20Hide\x20Controls','clearCells','isEjected','keysEmpty','showPlayerScore','server-name','xpAtNextLevel','replay-auto-hide-controls','minimap-stats','getItem','Auto\x20respawn\x20','lockLinesplit','Dual\x20arrow','getInt8','p3i','minimap-stats-changed','leftClickLabel','removeSkin','cellNameOutlineMeaning','game-replays','basicd','changePerformanceMode','Show\x20cell\x20aim','shoutbox-player','Updated\x20dualbox\x20skin','dualNickname','perk_badges','spectating','color-option','[Delta\x20image]','dual2','focusChat','Dec','mouseZoom','add','showMinimap','ownUid','regionServers','regionCode','showDir','.com','showMovementStopped','\x20player','showLeaderboard','.deltaas','build','left','setCrown','updatePoints','createNode','keydown','composing','__proto__','send','Player\x20does\x20not\x20exist\x20or\x20disconnected','\x20for\x20more\x20information.','#openSkins','300','resetMassTextStyle','src/components/player.vue','b7599310','#app','timeChat','8a0c31c6','min','visibleInput','src/components/btn.vue','inline-range','message','setSeasonEndTime','content','loadHandlers','extraServers','backgroundSprite','Background','.deltapro','\x22\x20onerror=\x22this.src=\x27https://i.ibb.co/g9Sj8gK/transparent-skin.png\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','onmessage','\x20replay','src/components/settings.vue','performance','src/components/stats.vue','onbeforeunload','silent','text','texture','main-container','chat-visible','trim','6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22Replay\x20saved\x22\x20','minimap-stats-visible','showReplaySaved','writeText','split128','bot','Error\x20clearing\x20replays:\x20','updateProgress','Join\x20discord\x20now','updateStamp','chatColorOnlyPeople','createInstance','ebed1606','mbAutorespawn','arc','\x20day','641581b7','player-name','message-badge','return\x20/\x22\x20+\x20this\x20+\x20\x22/','closePath','onClosed','spectateLockToggle','isDead','getElementsByTagName','Remember\x20ejecting','currentPlayers','4c95bd45','Client\x20info','ctrlKey','live-marker','xci3pc','account','96BkNcfq','image-picker-information','skinShown','parsePlayers','closeModal','showSkins','Delta\x20will\x20carry\x20you','Show\x20teams','&apos;','Error:\x20','keyCode','If\x20it\x20still\x20doesn\x27t\x20show,\x20restart\x20your\x20PC','debugStats','startTime','toast','showSessionTime','setInt32','createLoader','link','hasOwnProperty','visible','ensureCapacity','onVisibilityChange','setUint32','Stats:\x20Current\x20mass','replayKeys','splice','parse','reduce','confidential','dualUseNickname','Enter','YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsZT0+e2xldCBzPWUuZGF0YTtmZXRjaChzLHttb2RlOiJjb3JzIn0pLnRoZW4oZT0+ZS5ibG9iKCkpLnRoZW4oZT0+Y3JlYXRlSW1hZ2VCaXRtYXAoZSkpLnRoZW4oZT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsaW1hZ2U6ZX0pKS5jYXRjaCgoKT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsZXJyb3JlZDohMH0pKX0pOw==','charCodeAt','Vanis\x20','instance','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Check\x20our\x20','select','img','unchecked','replay-button\x20fas\x20fa-cloud-download-alt','100','innerHeight','#overlay','release','replay-name','reload','filterChatMessages','interaction','Vanish.io','offset','read','skins','releaseHandlers','toLocaleTimeString','setZoomLevel','player-modal','vanis1','j3vngt','#canvas,\x20#hud\x20>\x20*\x20{\x20cursor:\x20url(\x27','384e68ec','continent_code','beginPath','scrollHeight','reloadServers','compileMassFontStyle','X0123456789','showSpectators\x20&&\x20spectators','$set','replay-button\x20fas\x20fa-trash-alt','reconnect-server','availableHotkeys','instanceSeed','tagId','showMass','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Show\x20blocked\x20message\x20count','src/components/death-stats.vue','setCursorUrl','onclose','updatePositions','list','userVisible','onSlide','getElementById','962px','sendRecaptchaToken','Importing\x20replays\x20(','6px','pageLoadingCancel','abortSkinLoader','pivot','src/components/context-menu.vue','showServerName','actions','\x20seconds\x20of\x20gameplay.','currentWsId','getFullYear','onResetClick','leaderboard','info','timeChatRainbow','tag','error','#player-container','h6iiqv','4592ONKkCF','Swal','lineStyle','action','Minimap\x20stats:\x20Server\x20restart\x20time','handleDeath','Packing\x20replays\x20(0\x20/\x20','keysLoaded','\x20mass\x20text\x20size\x0a\x20\x20\x20\x20\x20\x20\x20\x20','readInt16LE','clearedFromCache','\x20<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','textureSize','.co','updateStats','modeId','showLocations','559d1d3c','removePlayer','xpAtCurrentLevel','chat-badge','Feb','debugElement','cuujqng','21167tTFvUd','uninstallMassTextFont','showLinesplitting','p3iigt','pageLoaded','lineTo','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22playerStalkText\x22>','playback','saveSeen','fire','src/components/leaderboard.vue','.statBar','skinPanel','.deltaeu','connected','render','showOwnName','writeInt32BE','showPlayerMass','arrowSprite','showNames','skinLoader','_free','resetBorder','mouseFreezeSoft','input','/img/crown.png','sendChatMessage','compileNameFontStyle','1bcde71e','getTagColor','Leaderboard:\x20Server\x20name','remove','game-started','massTextStyle','DELETE','minimap-create-node','save','activeElement','minimapSize','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<b>PID:</b>\x20','baseURL','_withStripped','nowhere','\x22\x20onerror=\x22this.src=\x27https://i.ibb.co/g9Sj8gK/transparent-skin.png\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20id=\x22skinDisplay2\x22\x20src=\x22','crownSprite','_skid3','scrollBottom','newPositionScale','right\x20silent','destroySkin','eof','zoomLevel4','player-xp','slider-option','locked_name','pageCount','nSize','locations','yj2tg','updateLeaderboard','loadUserData','sendMouse','onReplayIndexChange','skipHello','activePid','stopMovePackets','destroyedCells','directionSprite','catchedServers','mbActive','date','backgroundImageUrl','sessionTime','color-picker-wrapper','safari','seenList','restore','$emit','smallTextThreshold','ejectedSize','locals','moveInterval','Kick','replay-list-page','cellMassSmoothOutline','string2hex','Packing\x20replays\x20(','lastUpdateTick','maxPlayers','return\x20this','start','toDataURL','ownerPosition','showDualboxMeaning','ejkpm','checkBadSkinUrl','selectedSkinIndex','leaderboard-label','src/components/image-option.vue','Texture','table','connection','nameTextStyle','show','4e838c74','-28px','replay-page','fab\x20fa-discord','destroyNode','cache','fillText','message-date','cautions','DELTA','checked','12px\x2015px','replace','color-picker-hex','reloadEjectedTextures','src/components/replay-item.vue','rangeMin','.deltaen','catch','image-button','change','makeid','isSeen','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Clear\x20on\x20disconnect','image/','angle','color-picker-val','isPlayerCell','captchaId','cellNameOutlineColor','fps','leaderboard-update','footer','virus','{}.constructor(\x22return\x20this\x22)(\x20)','TAB','skin','showPlayerScore\x20&&\x20score','inline-block','Raf\x20x\x20Duru\x20x\x20Fohz','slots','Delete\x20all','onUpdate','44800063wNatMl','skinUrl','saveAutoHideControls','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','drawDelay','feedMacro','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Map\x0a\x20\x20\x20\x20\x20\x20\x20\x20','splitCount','destroyMinimap','index','getRegionCode','chat-clear','unshift','as\x20notification','clearToken','drawImage','Browser\x20support\x20limited','It\x20must\x20be\x20installed\x20on\x20your\x20device.','image-picker-overlay','writeUInt8','cos','grecaptcha','socketCount','cellMassWeightMeaning','gameState','Show\x20chat\x20as\x20popups','removeCrown','middle','keysLoading','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22p-switch\x20pretty\x20performanceSwitch\x22\x20p-checkbox=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22checkbox\x22\x20','\x20Reset\x0a\x20\x20\x20\x20','focused','checkbox','src/components/privacy-tos.vue','Discord','json','allowed','fromSize','settings','relative','worker','vanis-io_728x90','20px','zoom','Delta\x20on\x20top','autoRespawning','onTick','confirmReset','addFood','renderCell','toggleSkins','nameColor','showPlayerCount\x20&&\x20playerCount','iframe','day','Viruses','Thickest','container','replay-list-header','\x20mass\x20outline\x0d\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<b>Mouse\x20x:</b>\x20','playersRemoving','updateLineVisibility','cellSize','src/components/ab-overlay.vue','Minimap\x20stats:\x20System\x20time','showCrown','0\x200\x2010px\x20black','rqtp','ejectedColor','for','client','packets','food','onCaptchaToken','Alis.io','\x27),\x20auto\x20!important;\x20}','refreshAd',':\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','loadVirusFromUrl','avatar','map','<1min','set','triggerbot','updateOutlines','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Delta\x20settings\x0a\x20\x20\x20\x20','minimap-destroy-node','hci','isModalOpen','$on','data','0647fbb0','Short\x20mass\x20format','saveReplay','sweepRemovedPlayers','radius','Delta\x20best\x20ext\x20?','Skins\x20might\x20not\x20work\x20properly\x20in\x20this\x20browser.<br>Please\x20consider\x20using\x20Chrome.','cpcn','cellMassOutlineColor','everybody\x27s','liveMarker','every-minute','[^s]*','splitMax','backgroundColor','src/components/account.vue','&lt;','deltaimage:','pop','innerWidth','Nunito','clearChatMessages','nickname','textBaseline','.png','Login\x20and\x20level\x20up\x20to\x20skip\x20captcha!','Vanis.io','setText','DM\x20Luka\x20to\x20recruit\x20Fohz!','MOUSE\x20FROZEN','Smooth\x20name\x20outline','Jun','Refresh\x20page\x20to\x20apply\x20changes?','abs','packetCount','invalidateVisibility','reset-cautions','readEscapedString','range','skin-container','rangeMax','0.1','showTag','activeModal','createElement','pow','661435cd','HEAPU32','pkii5t','maxSize','account-name','freezeMouse','small\x20warning','theming','red','accountTime','find','\x20/\x20','Nickname','color-input','singleView','skinDisplay1','removeChildren','Only\x20colored\x20name\x20in\x20chat','focus','none','Leaderboard','dualCombo','lineJoin','message-row','then','Download','src/components/progressBar.vue','Map\x20image','Mass:\x20','spectateLock','#hud','pressHandlers','skin\x20add-skin','getUTCMonth','split','width','onKeyDown','name_color','src/components/main-container.vue','__esModule','opened','cors','center','Yuu\x20the\x20hat\x20coder','checkInUrl','fontWarning','https://skins.vanis.io/s/Qkfih2','white','getTitleExtension','flex','Ban','menu-banner','#ffffff','solving','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-skull\x20barIcon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22statBarKills\x22>','gamemodeId','Are\x20you\x20sure\x20you\x20want\x20to\x20reset\x20all\x20setting\x20options?','ffffff','replay-list-count','addCrown','tab-menu','gdprShowConsentTool','replaySecond','cameraMoveDelay','BBN\x20the\x20SK','mbArrow','cellMassColor','log','hwem','meta-leaderboard','showChat','server-list','Cursor','byteLength','3249d726','UTC','.bar','src/components/color-option.vue','until','Instant','zIndex','Show\x20eat\x20animation','onImageDrop','gameData','showRestartTiming','showPlayerCount','massShown','fixed','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','color-picker-overlay','dualboxPid','fillStyle','HEAPU8','reason','Thick','borderSprite','cellLongNameThreshold','skinSprite','ffa500','FFA','backgroundImageOpacity','random','playButtonText','getAvatarUrl','selectedServer','onSkinLoaded','phantom','onChatRightClick','Pi\x20the\x20legend','fromColor','/me','globalAlpha','Play','cellMassOutline','virusImageUrl','utils','.color-picker-val','Continue','nameShown','replay-slider','cellMassTextSize','v-show','reloadArrow','mixin','Unknown','split64','$refs','pageInputShown','destroy','cursorImageUrl','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Replay\x20duration\x20','pingStamp','hide','toastMessages','textAlign','Auto\x20respawn','This\x20image\x20is\x20too\x20large\x20to\x20even\x20be\x20loaded.','\x0a\x20\x20\x20\x20','resetNameTextStyle','Luka\x20need\x20Fohz\x20?','85821TdLILt','hotkey-container','isWebGLSupported','zoomLevel5','drawLocations','replay','webpackJsonp','mainContext','getUTCFullYear','hypot','alert','menu-box','top','setUint8','game-stopped','location','https://ipapi.co/json','selectedRegion','reloadVirusTexture','zoomLevel3','custom','innerHTML','Unblocked\x20player\x20\x22','outlineGraphic','label','name','eqem','showMouseFrozen','startsWith','loadSkin','Eva,\x20don\x27t\x20hate\x20Fohz','Show\x20leaderboard','.deltacom','clientVersion','skinurl','Ejected\x20cells','restart-timing-changed','Ubuntu','status','p-check','getTexture','cameraZoomSpeed','Are\x20you\x20sure\x20that\x20you\x20want\x20to\x20delete\x20this\x20replay?','length','showOwnSkin','replay-removed','loadServers','seasonEndTime','/img/sad.png','nextStartDate','\x22\x20until\x20restart?','buffer','eventListeners','nwDataSent','toggleFood','minSize','death-box','maxx','Who\x27s\x20Miracle..?','showBlockedMessageCount','ab-overlay','reloadFoodTextures','onServerMessage','addAd','massTextPool','bold','click','notification','chatbox-input','type','src/components/cautions.vue','p3ii','HUD','updateText','onDestroy','round','feedTimeout','getUint32','state','updateReplayKeys','minimapLocations','200','GAME','ws://localhost:8080','minimap-stats-invalidate-shown','call','update','__file','servers','warn','deserialize','color','cellCount','season_xp','.configSkin','scrolled','Dual\x20connected','load','getDefault','hotkeyManager','metaLeaderboard','\x20Loading\x0a\x20\x20\x20\x20\x20\x20\x20\x20','hsl(','BitmapText','Cells:\x20','BitmapFont','TilingSprite','15px','replaying','moveTo','anchor','removeItem','skins-container','$createElement','https://vanis.io/api','pkiigt','vanis_token','20.59px','toUpperCase','Lacking\x20mandatory\x20data','setItem','p6|k','toggleChat','4px','Module','stats-changed','camera','sat','You\x20can\x20not\x20block\x20yourself','color-button','m-feedMacro','Import','3.8.4','addEventListener','Local\x20server\x20(to\x20configure)','fromCharCode','Network\x20info','imageMessage','\x20Kb/s\x20<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<b>Net\x20peak:</b>\x20','headers','deleteAllReplays','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','loading','tab\x20fas\x20fa-palette','Name\x20outline','setBackgroundImage','DOMMouseScroll','nwDataMax','init','slider\x20draw-delay','d3vej','LIVE','detail','img/background.png','reverse','isArray','join','gameAlpha','Stats:\x20Ping','Splat\x20the\x20YouTuber','getDate','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Use\x20GPU\x20rendering','src/components/skins.vue','nwData','Stats:\x20FPS','shouldAutoRespawn','Stats:\x20Score','loggedIn','toggleMass','showOwnMass','\x20session','replay-controls','visitedBefore','setAccountData','warning','toggleBackgroundImage','deathDelay','Skin\x20yoinked','press','writeInt8','120px','deleteReplay','messageReplayDuration','confirm','chatbox','Show\x20my\x20skin','spawn','hcii2v','timer','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Renderer\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','_skid4','getMassText','database','101010','highscore','tFoL46WDlZuRja7W6qCl','initRenderer','body','val','stroke','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20You\x20can\x20right-click\x20name\x20in\x20chat\x20to\x20block\x20them\x20until\x20server\x20restart\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','callbacks','clientX','showCellCount','me--','n/a','spectate','linesplitUnlock','minimap-positions','write','writeIndex','cellBorderSize','destroySprite','clear','src/components/theming.vue','color-picker\x20fade-box','p3ii6','triggerDeathDelay','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Top\x20few\x20players\x20earn\x20colored\x20names.','image/png,\x20image/jpeg,\x20image/bmp,\x20image/webp','playerId','Replays\x20are\x20saved\x20in\x20browser\x20memory!','Exe\x20the\x20legend','pressed','Largest','1px','cellContainer','aiptag','progress-bar','You\x20have\x20been\x20disconnected','getXp','badgeLeaderboard','minimap','Delta\x20-\x20Dual','documentElement','style','848484','parseSeen','avatarUrl','push','fade-box','borderColor','minimapEnabled','strokeThickness','replayDuration','text/javascript','console','privacy.html','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Season\x20XP\x20counts\x20for\x20this\x20season\x20only.','onImageSelect','Captcha\x20library\x20is\x20not\x20loaded','reset','Ping:\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20Season\x20ends\x20in\x20','spec-button','thin','namesEnabled','cellMassFont','\x22\x20onerror=\x22this.src=\x27https://i.ibb.co/g9Sj8gK/transparent-skin.png\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22section\x20row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22header\x22>Skin\x20galery</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20data-v-3ddebeb3=\x22\x22\x20class=\x22options\x20dualSkinGalery\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','mousedown','76d60428','image-captcha-overlay','autoZoom','1dbc6ed9','contains','ticker','stopMovement','writeUInt16BE','head','targetPlayer','May','updateStates','showMultipleFilesWarning','arrayBuffer','ownedCells','every-second','14px','\x20<br>','everySecond','running','off','chatted','postMessage','clientStats','isLoadingAd','getModule','After\x20changing\x20tab,\x20you\x20','vanis-io_300x250','dataTransfer','image-captcha-container','modal','elementId','parseScrimmageLeaderboard','keyup','tab\x20far\x20fa-keyboard','360','Block\x20player\x20\x22','r2tp','getInt16','showMinimapCircle','botCount','killCount','updateReplayPage','parseMessage','updateMouse','4416650hJXBbJ','Repeat\x20map\x20image','Block','1611deb4','prototype','000000','targetPid','ads','1\x20second','resetPlayerLongNames','showMassFontWarning','max','\x20Reset\x0a\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22playerStalkImage\x20beautifulSkin\x22\x20src=\x22','/img/skin-add.png','connectionUrl','moveToCenterOfCells','accessibility','arraybuffer','chat-focus','rawMouse','filter','setPlayerData','bar','reloadTexture','Sprite','4a996e52','button','img/virus.png','lastRefresh','absolute','src/components/replay-controls.vue','Stats:\x20Cell\x20count','skin-url-edit','url(\x27','tgvctf','src/components/social-links.vue','.deltaus','Alis.io\x20legends','strokeStyle','hue','parentNode','children','src/components/modal.vue','...','userAgent','.vanis','flags','getLevel','errorMessage','app','showHud','m-show-image-captcha','inputText','\x20names\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','tcrg','selectRegion','updateCamera','openFileChooser','initialDataPacket','center-screen','<b>(DUAL\x20PID)</b>\x20','Connection\x20rejected','destroyBackgroundImage','reset-option','foodColor','HEAPF32','showNameFontWarning','email','minimap-show','message-list','pickerOpen','parseMinimap','false','getFileReader','uninstall','forEach','destroyPixiPlugins','rwuu{','toLowerCase','openModal','clearCallbacks','chat-message','Client\x20error','devicePixelRatio','leaderboard-visible','model','row','handleMessage','src/components/hud.vue','isFood','badgeMessage','play','deathTimeout','readUInt16LE','unwv','scale','players','Adblock\x20Detected','https://skins.vanis.io/s/','rememeberEjecting','beginFill','Player\x20tracker','renderCaptcha','hud','setStartingFrame','.pw','\x27)\x22>','wrapper','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Renderer\x20resolution\x20','insertAdjacentHTML','stopMovingPivot','lerp','pid','game-buttons','???','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Draw\x20delay\x20','messages','basic','selectedPlayer','file','Dual\x20system\x20error','skinsEnabled','Connected\x20to\x20','zoomLevel1','server-message','vanisToken','_skid','1000','drawCircle','transition-group','minimap-hide','restartTime','Smooth\x20mass\x20outline','default','destroyCell','fas\x20fa-times\x20close-button','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Cells\x20transparency\x20','You\x20will\x20be\x20disconnected','cellMassOutlineMeaning','recording','xp-progress','src/components/chatbox.vue','Hind\x20Madurai','onopen','pageData','span','\x20Kb/s\x20<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<b>Net\x20total:</b>\x20','min\x20','stopped','virusDefault','setInt8','timeStamp','logout','lifeState','modal-open','src/components/minimap.vue','Show\x20crown','message-from','replay-item','onContinueClick','ENTER','setToken','0eaeaf66','Food','readUInt32LE','floor','blockedMessageCount','content\x20fade-box','renderer','showCellLines','section\x20row','level','speed','cellMassWeight','movingPivot','cellNameOutline','isMe','systemTime','minimapStatsBottom','discord','strokeText','addChild','setNameColor','interval','return\x20(function()\x20','color-picker-pivot','useWebGL','replay-added','miny','saveAs','alpha','mask','playerCount','ping','alive','.zip','allCells','players-menu','parseLeaderboard','replay-index-change','stopPropagation','createThumbnail','5px','Please\x20consider\x20using\x20Google\x20Chrome.','1500','options','playButtonDisabled','setSeen','stop','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20/\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','You\x20don\x27t\x20have\x20set\x20any\x20image\x20for\x20arrow','fontSize','in\x20chat\x20only','nextMessageId','seasonLeaderboardText','image-option','p-switch','setBulkOp','initializing','loaders','hide-captcha-badge','mouse','https://vanis.io/img/replay-placeholder.png','showSpectators','bind','connectWait','hasCrown','newURL','cellMassTextSizeMeaning','shift','Here\x20should\x20be\x20something','1250','hr\x20','3em','userDefinedSettings','readInt16BE','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Map\x20image\x20opacity\x20','Only\x20Vanis.io\x20can\x20read\x20replay\x20files.<br>It\x20consists\x20of\x20player\x20positions\x20and\x20other\x20game\x20related\x20data.','.image-picker-input','MOUSE','10px','line','contextmenu','getSeconds','Normal','customResolution','/leaderboard/season_xp/100','toBuffer','ycpm','apply','prepend','drawRect','onSlideEnd','fade-box\x20two','showMassMeaning','wheel','bulkOperationStatus','files','src/components/template.vue','image-button-text','getMonth','onShow','minimap-show-locations','sendJoinData','fas\x20fa-chevron-left\x20prev','regionCodes','v-model','useFoodColor','splitx3','discord_avatar','toggleAutoRespawn','has','stepSize','foreground','_self','response','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-trophy\x20barIcon\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22statBarScore\x22>','parseCells','addLine','valueAsNumber','height','writeUInt32LE','rect','showMenu','writeString','showRestartTiming\x20&&\x20restartTime','stats','sendServer','discord_id','border','<div\x20class=\x22playerStalkContainer\x22\x20oncontextmenu=\x22window.copySkinDual(\x27','abortSkinLoaderIfExist','nameSprite','tab\x20fas\x20fa-cog','Minimap\x20stats:\x20Session\x20time','defaults','getCellColor','Graphics','hide-image-captcha','$el','moveWaitUntil','application/json,\x20text/plain','sub','applyNameToSprite','destroyed','includes','Mass\x20outline','leaderboard-hide','linesplit','1234567890k.','omit','rotation','hciiqv','position','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Click\x20or\x20drop\x20onto\x20image\x20to\x20change.','captcha','badge','overlay','progress\x20progress-striped','keys','useGame','https://i.postimg.cc/6pvLJ2TW/image.png','fa\x20fa-undo','deathScreen','dualSkin','listenForToken','Score:\x20','image-picker-wrapper','=\x22\x22\x20onchange=\x22changePerformanceMode()\x22\x20tip=\x22By\x20activating\x20this\x20option,\x20Delta\x20features\x20are\x20disabled\x20in\x20order\x20to\x20have\x20the\x20best\x20possible\x20performance.\x20Very\x20useful\x20for\x20small\x20and\x20underpowered\x20computers\x22>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<label>Low\x20performance\x20mode</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','hideName','j3vn5t','MOUSE1','autoRespawn','promptRestart','dual','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Filter\x20profanity','transition','readUInt32BE','setName','skin-click','Jan','sqrt','loadUserDefinedSettings','mbColor','cid','triggerAutoRespawn','Error\x20saving\x20replay','.en','view','_malloc','onXpUpdate','\x20skins\x0a\x20\x20\x20\x20\x20\x20\x20\x20','Grouk\x20the\x20legend','clientHash','>\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22state\x22>\x20<label>Use\x20dual</label></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20oninput=\x22window.setDualData(2)\x22\x20id=\x22dualNickname\x22\x20value=\x22','beforeend','items','src','normal','onerror','formatBypassRestrictions','/login/discord','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<b>Net:</b>\x20','Frenchies\x20on\x20top','setTagId','neon','playerStats','\x20seconds','toggleMovement','current','header','visibleToast','from','reloadUserData','Jul','wsId','defineProperty','massText','target','hex','Border','readInt8','replay-list-bulk','https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js','seek','close','seededRandom','nicknameColor','getContext',':\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','crownPool','readString','drawLocationCodes','https://i.postimg.cc/vmZmWCRR/4-Point-Star.png','playerList','right','edge','tab\x20fas\x20fa-film','source','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','dry','Arrow','SwalAlerts','sprite','sort','setNameSprite','visibility','backgroundDefaultIfUnequal','player-container','pkii','disabled','findPlayerUnderMouse','cells','_blank','scrollTop','userColors','minimap-destroy','dateColor','.us','player-nr','setPosition','reset-button2','mousemove','show-image-captcha','Server\x20restarting...','search','loadAd','player-data','message-image','\x20mass\x20text\x0a\x20\x20\x20\x20\x20\x20\x20\x20','chat-container','image','RenderTexture','nobody\x20else\x27s','\x0a\x20\x20\x20\x20\x20\x20\x20\x20','resolution','focusin','stats-invalidate-shown','4d0670e9','discord_name','dual3','fade-box\x20box-1','&gt;','oSize','vanis-button','getDistanceFromOwner','BaseTexture','addSkin','perk_name','setOutline','component','replayUpdates','tabs','cmd','/img/coin.png','data:application/wasm;base64,AGFzbQEAAAABKAdgAX8Bf2ABfwBgA39/fwBgAAF/YAAAYAJ/fwBgCX9/f39/f39/fwACUQQDZW52C2FkZE9yVXBkYXRlAAYDZW52B2Rlc3Ryb3kABQNlbnYDZWF0AAIDZW52H2Vtc2NyaXB0ZW5fbm90aWZ5X21lbW9yeV9ncm93dGgAAQMLCgQCAwAAAAEDAQAEBQFwAQICBQcBAYACgIACBgkBfwFBgIzAAgsHjQEKBm1lbW9yeQIAC2Rlc2VyaWFsaXplAAULX2luaXRpYWxpemUABBlfX2luZGlyZWN0X2Z1bmN0aW9uX3RhYmxlAQAQX19lcnJub19sb2NhdGlvbgAGCXN0YWNrU2F2ZQALDHN0YWNrUmVzdG9yZQAMCnN0YWNrQWxsb2MADQZtYWxsb2MACQRmcmVlAAoJBwEAQQELAQQKjT8KAwABC6oEAQt/QQEhAyAALQAAIgYEQANAIAZB/wFxIQhBACEKAkAgBkEfcUEBRwRAQQAhCwwBCyAAIAVqLQACIAAgA2otAABBCHRyIQsgBUEDaiEDCyAAIANqIgUvAAAhByADQQJqIQQCQCAIQSBxBEBBACEMDAELIAUtAAMgACAEai0AAEEIdHIhCiAFLwAEIgRBCHQgBEEIdnIhDCADQQZqIQQLIAdBCHYhBSAHQQh0IQlBACEDAkAgCEHAAHEEQEEAIQcMAQsgACAEai8AACIHQQh0IAdBCHZyIQcgBEECaiEECyAGQQ9xIQ0gBSAJciEJIAZBGHRBGHVBf0oEfyAEBSAAIARqLQAAIQMgBEEBagshBSACIAggCyAJQf//A3EgCkEQdEEQdSAMQRB0QRB1IAdB//8DcSADIA1BBEYgA0H/AXFBD0tyckH/AXEgARAAIAVBAWohAyAAIAVqLQAAIgYNAAsLIANBAmohBAJAIAAgBWotAAIgACADai0AAEEIdHIiBUUEQCADIQYMAQsDQCACIAAgA2otAAMgACAEIgZqLQAAQQh0chABIARBAmohBCAGIQMgBUEBayIFQf//A3ENAAsLIAAgBmotAAMgACAEai0AAEEIdHIiAwRAA0AgACAGaiEBIAIgACAGQQRqIgZqLwAAIgRBCHQgBEEIdnJB//8DcSABLwAGIgFBCHQgAUEIdnJB//8DcRACIANBAWsiA0H//wNxDQALCwsFAEGECAsjACAAPwBBEHRrQf//A2pBEHZAAEF/RgRAQQAPC0EAEANBAQtSAQJ/QYAIKAIAIgEgAEEDakF8cSICaiEAAkAgAkEBTkEAIAAgAU0bDQA/AEEQdCAASQRAIAAQB0UNAQtBgAggADYCACABDwtBhAhBMDYCAEF/C5ctAQx/IwBBEGsiDCQAAkACQAJAAkACQAJAAkACQAJAAkACQAJAIABB9AFNBEBBiAgoAgAiBUEQIABBC2pBeHEgAEELSRsiCEEDdiICdiIBQQNxBEAgAUF/c0EBcSACaiIDQQN0IgFBuAhqKAIAIgRBCGohAAJAIAQoAggiAiABQbAIaiIBRgRAQYgIIAVBfiADd3E2AgAMAQsgAiABNgIMIAEgAjYCCAsgBCADQQN0IgFBA3I2AgQgASAEaiIBIAEoAgRBAXI2AgQMDQsgCEGQCCgCACIKTQ0BIAEEQAJAQQIgAnQiAEEAIABrciABIAJ0cSIAQQAgAGtxQQFrIgAgAEEMdkEQcSICdiIBQQV2QQhxIgAgAnIgASAAdiIBQQJ2QQRxIgByIAEgAHYiAUEBdkECcSIAciABIAB2IgFBAXZBAXEiAHIgASAAdmoiA0EDdCIAQbgIaigCACIEKAIIIgEgAEGwCGoiAEYEQEGICCAFQX4gA3dxIgU2AgAMAQsgASAANgIMIAAgATYCCAsgBEEIaiEAIAQgCEEDcjYCBCAEIAhqIgIgA0EDdCIBIAhrIgNBAXI2AgQgASAEaiADNgIAIAoEQCAKQQN2IgFBA3RBsAhqIQdBnAgoAgAhBAJ/IAVBASABdCIBcUUEQEGICCABIAVyNgIAIAcMAQsgBygCCAshASAHIAQ2AgggASAENgIMIAQgBzYCDCAEIAE2AggLQZwIIAI2AgBBkAggAzYCAAwNC0GMCCgCACIGRQ0BIAZBACAGa3FBAWsiACAAQQx2QRBxIgJ2IgFBBXZBCHEiACACciABIAB2IgFBAnZBBHEiAHIgASAAdiIBQQF2QQJxIgByIAEgAHYiAUEBdkEBcSIAciABIAB2akECdEG4CmooAgAiASgCBEF4cSAIayEDIAEhAgNAAkAgAigCECIARQRAIAIoAhQiAEUNAQsgACgCBEF4cSAIayICIAMgAiADSSICGyEDIAAgASACGyEBIAAhAgwBCwsgASAIaiIJIAFNDQIgASgCGCELIAEgASgCDCIERwRAIAEoAggiAEGYCCgCAEkaIAAgBDYCDCAEIAA2AggMDAsgAUEUaiICKAIAIgBFBEAgASgCECIARQ0EIAFBEGohAgsDQCACIQcgACIEQRRqIgIoAgAiAA0AIARBEGohAiAEKAIQIgANAAsgB0EANgIADAsLQX8hCCAAQb9/Sw0AIABBC2oiAEF4cSEIQYwIKAIAIglFDQBBHyEFQQAgCGshAwJAAkACQAJ/IAhB////B00EQCAAQQh2IgAgAEGA/j9qQRB2QQhxIgJ0IgAgAEGA4B9qQRB2QQRxIgF0IgAgAEGAgA9qQRB2QQJxIgB0QQ92IAEgAnIgAHJrIgBBAXQgCCAAQRVqdkEBcXJBHGohBQsgBUECdEG4CmooAgAiAkULBEBBACEADAELQQAhACAIQQBBGSAFQQF2ayAFQR9GG3QhAQNAAkAgAigCBEF4cSAIayIHIANPDQAgAiEEIAciAw0AQQAhAyACIQAMAwsgACACKAIUIgcgByACIAFBHXZBBHFqKAIQIgJGGyAAIAcbIQAgAUEBdCEBIAINAAsLIAAgBHJFBEBBAiAFdCIAQQAgAGtyIAlxIgBFDQMgAEEAIABrcUEBayIAIABBDHZBEHEiAnYiAUEFdkEIcSIAIAJyIAEgAHYiAUECdkEEcSIAciABIAB2IgFBAXZBAnEiAHIgASAAdiIBQQF2QQFxIgByIAEgAHZqQQJ0QbgKaigCACEACyAARQ0BCwNAIAAoAgRBeHEgCGsiASADSSECIAEgAyACGyEDIAAgBCACGyEEIAAoAhAiAQR/IAEFIAAoAhQLIgANAAsLIARFDQAgA0GQCCgCACAIa08NACAEIAhqIgYgBE0NASAEKAIYIQUgBCAEKAIMIgFHBEAgBCgCCCIAQZgIKAIASRogACABNgIMIAEgADYCCAwKCyAEQRRqIgIoAgAiAEUEQCAEKAIQIgBFDQQgBEEQaiECCwNAIAIhByAAIgFBFGoiAigCACIADQAgAUEQaiECIAEoAhAiAA0ACyAHQQA2AgAMCQsgCEGQCCgCACICTQRAQZwIKAIAIQMCQCACIAhrIgFBEE8EQEGQCCABNgIAQZwIIAMgCGoiADYCACAAIAFBAXI2AgQgAiADaiABNgIAIAMgCEEDcjYCBAwBC0GcCEEANgIAQZAIQQA2AgAgAyACQQNyNgIEIAIgA2oiACAAKAIEQQFyNgIECyADQQhqIQAMCwsgCEGUCCgCACIGSQRAQZQIIAYgCGsiATYCAEGgCEGgCCgCACICIAhqIgA2AgAgACABQQFyNgIEIAIgCEEDcjYCBCACQQhqIQAMCwtBACEAIAhBL2oiCQJ/QeALKAIABEBB6AsoAgAMAQtB7AtCfzcCAEHkC0KAoICAgIAENwIAQeALIAxBDGpBcHFB2KrVqgVzNgIAQfQLQQA2AgBBxAtBADYCAEGAIAsiAWoiBUEAIAFrIgdxIgIgCE0NCkHACygCACIEBEBBuAsoAgAiAyACaiIBIANNDQsgASAESw0LC0HECy0AAEEEcQ0FAkACQEGgCCgCACIDBEBByAshAANAIAMgACgCACIBTwRAIAEgACgCBGogA0sNAwsgACgCCCIADQALC0EAEAgiAUF/Rg0GIAIhBUHkCygCACIDQQFrIgAgAXEEQCACIAFrIAAgAWpBACADa3FqIQULIAUgCE0NBiAFQf7///8HSw0GQcALKAIAIgQEQEG4CygCACIDIAVqIgAgA00NByAAIARLDQcLIAUQCCIAIAFHDQEMCAsgBSAGayAHcSIFQf7///8HSw0FIAUQCCIBIAAoAgAgACgCBGpGDQQgASEACwJAIAhBMGogBU0NACAAQX9GDQBB6AsoAgAiASAJIAVrakEAIAFrcSIBQf7///8HSwRAIAAhAQwICyABEAhBf0cEQCABIAVqIQUgACEBDAgLQQAgBWsQCBoMBQsgACIBQX9HDQYMBAsAC0EAIQQMBwtBACEBDAULIAFBf0cNAgtBxAtBxAsoAgBBBHI2AgALIAJB/v///wdLDQEgAhAIIgFBABAIIgBPDQEgAUF/Rg0BIABBf0YNASAAIAFrIgUgCEEoak0NAQtBuAtBuAsoAgAgBWoiADYCAEG8CygCACAASQRAQbwLIAA2AgALAkACQAJAQaAIKAIAIgcEQEHICyEAA0AgASAAKAIAIgMgACgCBCICakYNAiAAKAIIIgANAAsMAgtBmAgoAgAiAEEAIAAgAU0bRQRAQZgIIAE2AgALQQAhAEHMCyAFNgIAQcgLIAE2AgBBqAhBfzYCAEGsCEHgCygCADYCAEHUC0EANgIAA0AgAEEDdCIDQbgIaiADQbAIaiICNgIAIANBvAhqIAI2AgAgAEEBaiIAQSBHDQALQZQIIAVBKGsiA0F4IAFrQQdxQQAgAUEIakEHcRsiAGsiAjYCAEGgCCAAIAFqIgA2AgAgACACQQFyNgIEIAEgA2pBKDYCBEGkCEHwCygCADYCAAwCCyABIAdNDQAgAyAHSw0AIAAoAgxBCHENACAAIAIgBWo2AgRBoAggB0F4IAdrQQdxQQAgB0EIakEHcRsiAGoiAjYCAEGUCEGUCCgCACAFaiIBIABrIgA2AgAgAiAAQQFyNgIEIAEgB2pBKDYCBEGkCEHwCygCADYCAAwBC0GYCCgCACABSwRAQZgIIAE2AgALIAEgBWohAkHICyEAAkACQAJAAkACQAJAA0AgAiAAKAIARwRAIAAoAggiAA0BDAILCyAALQAMQQhxRQ0BC0HICyEAA0AgByAAKAIAIgJPBEAgAiAAKAIEaiIEIAdLDQMLIAAoAgghAAwACwALIAAgATYCACAAIAAoAgQgBWo2AgQgAUF4IAFrQQdxQQAgAUEIakEHcRtqIgkgCEEDcjYCBCACQXggAmtBB3FBACACQQhqQQdxG2oiBSAJayAIayECIAggCWohBiAFIAdGBEBBoAggBjYCAEGUCEGUCCgCACACaiIANgIAIAYgAEEBcjYCBAwDCyAFQZwIKAIARgRAQZwIIAY2AgBBkAhBkAgoAgAgAmoiADYCACAGIABBAXI2AgQgACAGaiAANgIADAMLIAUoAgQiAEEDcUEBRgRAIABBeHEhBwJAIABB/wFNBEAgBSgCCCIDIABBA3YiAEEDdEGwCGpGGiADIAUoAgwiAUYEQEGICEGICCgCAEF+IAB3cTYCAAwCCyADIAE2AgwgASADNgIIDAELIAUoAhghCAJAIAUgBSgCDCIBRwRAIAUoAggiACABNgIMIAEgADYCCAwBCwJAIAVBFGoiACgCACIDDQAgBUEQaiIAKAIAIgMNAEEAIQEMAQsDQCAAIQQgAyIBQRRqIgAoAgAiAw0AIAFBEGohACABKAIQIgMNAAsgBEEANgIACyAIRQ0AAkAgBSAFKAIcIgNBAnRBuApqIgAoAgBGBEAgACABNgIAIAENAUGMCEGMCCgCAEF+IAN3cTYCAAwCCyAIQRBBFCAIKAIQIAVGG2ogATYCACABRQ0BCyABIAg2AhggBSgCECIABEAgASAANgIQIAAgATYCGAsgBSgCFCIARQ0AIAEgADYCFCAAIAE2AhgLIAUgB2ohBSACIAdqIQILIAUgBSgCBEF+cTYCBCAGIAJBAXI2AgQgAiAGaiACNgIAIAJB/wFNBEAgAkEDdiIAQQN0QbAIaiECAn9BiAgoAgAiAUEBIAB0IgBxRQRAQYgIIAAgAXI2AgAgAgwBCyACKAIICyEAIAIgBjYCCCAAIAY2AgwgBiACNgIMIAYgADYCCAwDC0EfIQAgAkH///8HTQRAIAJBCHYiACAAQYD+P2pBEHZBCHEiA3QiACAAQYDgH2pBEHZBBHEiAXQiACAAQYCAD2pBEHZBAnEiAHRBD3YgASADciAAcmsiAEEBdCACIABBFWp2QQFxckEcaiEACyAGIAA2AhwgBkIANwIQIABBAnRBuApqIQQCQEGMCCgCACIDQQEgAHQiAXFFBEBBjAggASADcjYCACAEIAY2AgAgBiAENgIYDAELIAJBAEEZIABBAXZrIABBH0YbdCEAIAQoAgAhAQNAIAEiAygCBEF4cSACRg0DIABBHXYhASAAQQF0IQAgAyABQQRxaiIEKAIQIgENAAsgBCAGNgIQIAYgAzYCGAsgBiAGNgIMIAYgBjYCCAwCC0GUCCAFQShrIgNBeCABa0EHcUEAIAFBCGpBB3EbIgBrIgI2AgBBoAggACABaiIANgIAIAAgAkEBcjYCBCABIANqQSg2AgRBpAhB8AsoAgA2AgAgByAEQScgBGtBB3FBACAEQSdrQQdxG2pBL2siACAAIAdBEGpJGyICQRs2AgQgAkHQCykCADcCECACQcgLKQIANwIIQdALIAJBCGo2AgBBzAsgBTYCAEHICyABNgIAQdQLQQA2AgAgAkEYaiEAA0AgAEEHNgIEIABBCGohASAAQQRqIQAgASAESQ0ACyACIAdGDQMgAiACKAIEQX5xNgIEIAcgAiAHayIEQQFyNgIEIAIgBDYCACAEQf8BTQRAIARBA3YiAEEDdEGwCGohAgJ/QYgIKAIAIgFBASAAdCIAcUUEQEGICCAAIAFyNgIAIAIMAQsgAigCCAshACACIAc2AgggACAHNgIMIAcgAjYCDCAHIAA2AggMBAtBHyEAIAdCADcCECAEQf///wdNBEAgBEEIdiIAIABBgP4/akEQdkEIcSICdCIAIABBgOAfakEQdkEEcSIBdCIAIABBgIAPakEQdkECcSIAdEEPdiABIAJyIAByayIAQQF0IAQgAEEVanZBAXFyQRxqIQALIAcgADYCHCAAQQJ0QbgKaiEDAkBBjAgoAgAiAkEBIAB0IgFxRQRAQYwIIAEgAnI2AgAgAyAHNgIAIAcgAzYCGAwBCyAEQQBBGSAAQQF2ayAAQR9GG3QhACADKAIAIQEDQCABIgIoAgRBeHEgBEYNBCAAQR12IQEgAEEBdCEAIAIgAUEEcWoiAygCECIBDQALIAMgBzYCECAHIAI2AhgLIAcgBzYCDCAHIAc2AggMAwsgAygCCCIAIAY2AgwgAyAGNgIIIAZBADYCGCAGIAM2AgwgBiAANgIICyAJQQhqIQAMBQsgAigCCCIAIAc2AgwgAiAHNgIIIAdBADYCGCAHIAI2AgwgByAANgIIC0GUCCgCACIAIAhNDQBBlAggACAIayIBNgIAQaAIQaAIKAIAIgIgCGoiADYCACAAIAFBAXI2AgQgAiAIQQNyNgIEIAJBCGohAAwDC0GECEEwNgIAQQAhAAwCCwJAIAVFDQACQCAEKAIcIgJBAnRBuApqIgAoAgAgBEYEQCAAIAE2AgAgAQ0BQYwIIAlBfiACd3EiCTYCAAwCCyAFQRBBFCAFKAIQIARGG2ogATYCACABRQ0BCyABIAU2AhggBCgCECIABEAgASAANgIQIAAgATYCGAsgBCgCFCIARQ0AIAEgADYCFCAAIAE2AhgLAkAgA0EPTQRAIAQgAyAIaiIAQQNyNgIEIAAgBGoiACAAKAIEQQFyNgIEDAELIAQgCEEDcjYCBCAGIANBAXI2AgQgAyAGaiADNgIAIANB/wFNBEAgA0EDdiIAQQN0QbAIaiECAn9BiAgoAgAiAUEBIAB0IgBxRQRAQYgIIAAgAXI2AgAgAgwBCyACKAIICyEAIAIgBjYCCCAAIAY2AgwgBiACNgIMIAYgADYCCAwBC0EfIQAgA0H///8HTQRAIANBCHYiACAAQYD+P2pBEHZBCHEiAnQiACAAQYDgH2pBEHZBBHEiAXQiACAAQYCAD2pBEHZBAnEiAHRBD3YgASACciAAcmsiAEEBdCADIABBFWp2QQFxckEcaiEACyAGIAA2AhwgBkIANwIQIABBAnRBuApqIQICQAJAIAlBASAAdCIBcUUEQEGMCCABIAlyNgIAIAIgBjYCACAGIAI2AhgMAQsgA0EAQRkgAEEBdmsgAEEfRht0IQAgAigCACEIA0AgCCIBKAIEQXhxIANGDQIgAEEddiECIABBAXQhACABIAJBBHFqIgIoAhAiCA0ACyACIAY2AhAgBiABNgIYCyAGIAY2AgwgBiAGNgIIDAELIAEoAggiACAGNgIMIAEgBjYCCCAGQQA2AhggBiABNgIMIAYgADYCCAsgBEEIaiEADAELAkAgC0UNAAJAIAEoAhwiAkECdEG4CmoiACgCACABRgRAIAAgBDYCACAEDQFBjAggBkF+IAJ3cTYCAAwCCyALQRBBFCALKAIQIAFGG2ogBDYCACAERQ0BCyAEIAs2AhggASgCECIABEAgBCAANgIQIAAgBDYCGAsgASgCFCIARQ0AIAQgADYCFCAAIAQ2AhgLAkAgA0EPTQRAIAEgAyAIaiIAQQNyNgIEIAAgAWoiACAAKAIEQQFyNgIEDAELIAEgCEEDcjYCBCAJIANBAXI2AgQgAyAJaiADNgIAIAoEQCAKQQN2IgBBA3RBsAhqIQRBnAgoAgAhAgJ/QQEgAHQiACAFcUUEQEGICCAAIAVyNgIAIAQMAQsgBCgCCAshACAEIAI2AgggACACNgIMIAIgBDYCDCACIAA2AggLQZwIIAk2AgBBkAggAzYCAAsgAUEIaiEACyAMQRBqJAAgAAunDAEHfwJAIABFDQAgAEEIayIDIABBBGsoAgAiAUF4cSIAaiEFAkAgAUEBcQ0AIAFBA3FFDQEgAyADKAIAIgFrIgNBmAgoAgBJDQEgACABaiEAIANBnAgoAgBHBEAgAUH/AU0EQCADKAIIIgIgAUEDdiIEQQN0QbAIakYaIAIgAygCDCIBRgRAQYgIQYgIKAIAQX4gBHdxNgIADAMLIAIgATYCDCABIAI2AggMAgsgAygCGCEGAkAgAyADKAIMIgFHBEAgAygCCCICIAE2AgwgASACNgIIDAELAkAgA0EUaiICKAIAIgQNACADQRBqIgIoAgAiBA0AQQAhAQwBCwNAIAIhByAEIgFBFGoiAigCACIEDQAgAUEQaiECIAEoAhAiBA0ACyAHQQA2AgALIAZFDQECQCADIAMoAhwiAkECdEG4CmoiBCgCAEYEQCAEIAE2AgAgAQ0BQYwIQYwIKAIAQX4gAndxNgIADAMLIAZBEEEUIAYoAhAgA0YbaiABNgIAIAFFDQILIAEgBjYCGCADKAIQIgIEQCABIAI2AhAgAiABNgIYCyADKAIUIgJFDQEgASACNgIUIAIgATYCGAwBCyAFKAIEIgFBA3FBA0cNAEGQCCAANgIAIAUgAUF+cTYCBCADIABBAXI2AgQgACADaiAANgIADwsgAyAFTw0AIAUoAgQiAUEBcUUNAAJAIAFBAnFFBEAgBUGgCCgCAEYEQEGgCCADNgIAQZQIQZQIKAIAIABqIgA2AgAgAyAAQQFyNgIEIANBnAgoAgBHDQNBkAhBADYCAEGcCEEANgIADwsgBUGcCCgCAEYEQEGcCCADNgIAQZAIQZAIKAIAIABqIgA2AgAgAyAAQQFyNgIEIAAgA2ogADYCAA8LIAFBeHEgAGohAAJAIAFB/wFNBEAgBSgCCCICIAFBA3YiBEEDdEGwCGpGGiACIAUoAgwiAUYEQEGICEGICCgCAEF+IAR3cTYCAAwCCyACIAE2AgwgASACNgIIDAELIAUoAhghBgJAIAUgBSgCDCIBRwRAIAUoAggiAkGYCCgCAEkaIAIgATYCDCABIAI2AggMAQsCQCAFQRRqIgIoAgAiBA0AIAVBEGoiAigCACIEDQBBACEBDAELA0AgAiEHIAQiAUEUaiICKAIAIgQNACABQRBqIQIgASgCECIEDQALIAdBADYCAAsgBkUNAAJAIAUgBSgCHCICQQJ0QbgKaiIEKAIARgRAIAQgATYCACABDQFBjAhBjAgoAgBBfiACd3E2AgAMAgsgBkEQQRQgBigCECAFRhtqIAE2AgAgAUUNAQsgASAGNgIYIAUoAhAiAgRAIAEgAjYCECACIAE2AhgLIAUoAhQiAkUNACABIAI2AhQgAiABNgIYCyADIABBAXI2AgQgACADaiAANgIAIANBnAgoAgBHDQFBkAggADYCAA8LIAUgAUF+cTYCBCADIABBAXI2AgQgACADaiAANgIACyAAQf8BTQRAIABBA3YiAUEDdEGwCGohAAJ/QYgIKAIAIgJBASABdCIBcUUEQEGICCABIAJyNgIAIAAMAQsgACgCCAshAiAAIAM2AgggAiADNgIMIAMgADYCDCADIAI2AggPC0EfIQIgA0IANwIQIABB////B00EQCAAQQh2IgEgAUGA/j9qQRB2QQhxIgF0IgIgAkGA4B9qQRB2QQRxIgJ0IgQgBEGAgA9qQRB2QQJxIgR0QQ92IAEgAnIgBHJrIgFBAXQgACABQRVqdkEBcXJBHGohAgsgAyACNgIcIAJBAnRBuApqIQECQAJAAkBBjAgoAgAiBEEBIAJ0IgdxRQRAQYwIIAQgB3I2AgAgASADNgIAIAMgATYCGAwBCyAAQQBBGSACQQF2ayACQR9GG3QhAiABKAIAIQEDQCABIgQoAgRBeHEgAEYNAiACQR12IQEgAkEBdCECIAQgAUEEcWoiB0EQaigCACIBDQALIAcgAzYCECADIAQ2AhgLIAMgAzYCDCADIAM2AggMAQsgBCgCCCIAIAM2AgwgBCADNgIIIANBADYCGCADIAQ2AgwgAyAANgIIC0GoCEGoCCgCAEEBayIAQX8gABs2AgALCwQAIwALBgAgACQACxAAIwAgAGtBcHEiACQAIAALCwkBAEGBCAsCBlA=','readInt32BE','ticksSinceDeath','uint8Array','Type\x20your\x20message\x20here','context-menu','packetId','Dual','$nextTick','18gflkEv','clientHeight','Solve\x20the\x20captcha\x20for\x20minion\x20\x27','loadHotkeys','time','mouseFrozen','open','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Camera\x20panning\x20delay\x20','$off','1.5em','.deltafr','\x20Logout\x0a\x20\x20\x20\x20','serverTick','writeEscapedStringNT','display','sxp','onMinimapShow','getUint16','cellNameWeight','HEAPU16','scene','bulkOperating','chat-image','Long\x20Name','shoutbox','progress','\x20<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<b>Cells\x20in\x20server:</b>\x20','330','saveSkins','Are\x20you\x20sure\x20you\x20want\x20to\x20reset\x20all\x20hotkeys?','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Font\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','title','\x27)\x22\x20onclick=\x22window.yoinkSkinDual(\x27','isVirus','toggleChatToast','resize','showPlayerMass\x20&&\x20mass','toggleHud','\x0d\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Name\x20text\x0d\x0a\x20\x20\x20\x20\x20\x20\x20\x20','saveHotkeys','sendOpcode','Allow\x20page\x20to\x20download\x20multiple\x20files\x20if\x20asked','Authorization','minx','btn','activeContexts','ujkv','foodVisible','use','show-replay-controls','writeInt16LE','0.05','clientY','size','clipboard','\x22\x20type=\x22text\x22\x20spellcheck=\x22false\x22\x20placeholder=\x22Dual\x20nickname\x22\x20maxlength=\x2215\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22configSkin\x22\x20src=\x22','showClock','selectPlayer','MOVEMENT\x20STOPPED\x20[TAB\x20','region','opacity','assert','writeInt32LE','Want\x20a\x20badge?\x20DM\x20Fohz','exports','slider-option\x20bottom-margin','getHours','code','WW91IGhhdmUgcmVhY2hlZCBsZXZlbA==','2.5','writeStringNT','player','showPicker','overlay\x20bulk-operation-overlay','None','result','shortMass','https://','addArrow','server-list-item','nameFromServer','Text','appendChild','playerElement','backgroundImageRepeat','message-text','ESCAPE','toString','createCellContainer','Skin\x20copied','Unblock\x20player\x20\x22','p3iic','uint8','slider','showNamesMeaning','cellNameFont','protocol','imageLoadedOnce','key','.as','FPS:\x20','Needs\x20GPU\x20rendering','showNameColor','mass','confirmUnblockPlayer','Level\x20','context-menu\x20fade','addChildAt','src/components/replays3.vue','cellOpacity','test','assign','resetTexture','enter','serverInfo','nameColorFromServer','selectSkin','match','next','filterToasts','showMinimapStats','readInt32LE','Container','onMouseDown','restartTick','split256','block','togglePageInput','delete','jkvngt','getPlayer','maxy','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22switchSingle\x20switchButton\x22\x20onclick=\x22window.location.href\x20=\x20\x27https://vanis.io\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Switch\x20to\x20single</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20style=\x22margin-top:\x204px\x22\x20class=\x22fas\x20fa-exchange-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','readAsDataURL','setSkin','15c13b66'];_0x5b6d=function(){return _0x454802;};return _0x5b6d();}
+const VERSION = '3.9';
+let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
+
+! function e() {
+    let timeChat = localStorage.getItem('timeChat') || 'checked';
+    let timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
+    const userColors = localStorage.getItem('userColors');
+    let userColorsJson = userColors ? JSON.parse(userColors) : null;
+
+    document.title = "Delta - Dual";
+
+    function getLocalStorageItem(key, defaultValue) {
+        return localStorage.getItem(key) || defaultValue;
+    }
+
+    function getImageUrlFromMessage(message) {
+        const imageRegex = /deltaimage:(\S+)/;
+        const match = message.match(imageRegex);
+
+        if (match && match.length > 1) {
+            let imageUrl = "https://" + match[1];
+
+            imageUrl = imageUrl
+                .replace(/\.deltacom/g, '.com')
+                .replace(/\.deltafr/g, '.fr')
+                .replace(/\.deltaeu/g, '.eu')
+                .replace(/\.deltapro/g, '.pro')
+                .replace(/\.deltaio/g, '.io')
+                .replace(/\.deltaus/g, '.us')
+                .replace(/\.deltaen/g, '.en')
+                .replace(/\.deltaas/g, '.as')
+                .replace(/\.deltaco/g, '.co')
+                .replace(/\.deltapw/g, '.pw')
+            ;
+
+            if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) return { newURL: imageUrl,  baseURL: match[0] };
+        }
+        return null;
+    }
+
+    function generateRandomHexColor() {
+        if (timeChatRainbow !== 'checked') return 'white';
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        const hexColor = `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
+        return hexColor;
+    }
+
+    function getUserBadge(nickname) {
+        if (!nickname) return null;
+        const userData = userColorsJson[nickname.trim()];
+        return (userData && userData.badge) ? userData.badge : null;
+    }
+
+    function getUserColor(nickname) {
+        if (!nickname) return null;
+        const userData = userColorsJson[nickname.trim()];
+        return (userData && userData.color) ? userData.color : null;
+    }
+
+    function getUserCellColor(nickname, def) {
+        if (!nickname) return def;
+        const userData = userColorsJson[nickname.trim()];
+        return (userData && userData.color) ? userData.color.replace('#', '') : def;
+    }
+
+    function sendTimedSwal(title, text, timer, confirm) {
+        Swal.fire({
+            title: title,
+            text: text,
+            timer: timer,
+            showConfirmButton: confirm,
+        });
+    }
+
+    function getCurrentDate() {
+        if (timeChat !== 'checked') return ``;
+        const currentDate = new Date();
+        const hours = currentDate.getHours().toString().padStart(2, '0');
+        const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+        const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+        return `[${hours}:${minutes}:${seconds}] `;
+    }
+
+    class s {
+        constructor(e, t) {
+            if (this.view = null, e instanceof DataView) this.view = e;
+            else {
+                if (!(e instanceof ArrayBuffer)) throw TypeError("First argument to SmartBuffer constructor must be an ArrayBuffer or DataView");
+                this.view = new DataView(e)
+            }
+            this.offset = t || 0
+        }
+        ensureCapacity(e) {
+            let t = this.offset + e;
+            if (t > this.length) {
+                let s = new ArrayBuffer(t),
+                    i = new Uint8Array(s);
+                i.set(new Uint8Array(this.buffer)), this.view = new DataView(s)
+            }
+        }
+        static fromSize(e) {
+            return new this(new ArrayBuffer(e), 0)
+        }
+        static fromBuffer(e, t) {
+            return new this(e, t || 0)
+        }
+        toBuffer() {
+            return this.buffer
+        }
+        get buffer() {
+            return this.view?.buffer || null
+        }
+        get length() {
+            return this.view?.byteLength || 0
+        }
+        get eof() {
+            return this.offset >= this.length
+        }
+        read(e, t, s, i) {
+            let a = e.call(this.view, i ?? this.offset, s);
+            return null == i && (this.offset += t), a
+        }
+        write(e, t, s, i) {
+            this.ensureCapacity(t), e.call(this.view, this.offset, s, i), this.offset += t
+        }
+        readInt8(e) {
+            return this.read(DataView.prototype.getInt8, 1, null, e)
+        }
+        readUInt8(e) {
+            return this.read(DataView.prototype.getUint8, 1, null, e)
+        }
+        readInt16LE(e) {
+            return this.read(DataView.prototype.getInt16, 2, !0, e)
+        }
+        readInt16BE(e) {
+            return this.read(DataView.prototype.getInt16, 2, !1, e)
+        }
+        readUInt16LE(e) {
+            return this.read(DataView.prototype.getUint16, 2, !0, e)
+        }
+        readUInt16BE(e) {
+            return this.read(DataView.prototype.getUint16, 2, !1, e)
+        }
+        readInt32LE(e) {
+            return this.read(DataView.prototype.getInt32, 4, !0, e)
+        }
+        readInt32BE(e) {
+            return this.read(DataView.prototype.getInt32, 4, !1, e)
+        }
+        readUInt32LE(e) {
+            return this.read(DataView.prototype.getUint32, 4, !0, e)
+        }
+        readUInt32BE(e) {
+            return this.read(DataView.prototype.getUint32, 4, !1, e)
+        }
+        readString16() {
+            let e = "";
+            for (;;) {
+                let t = this.eof ? 0 : this.readUInt16LE();
+                if (0 === t) break;
+                e += String.fromCharCode(t)
+            }
+            return e
+        }
+        readString() {
+            let e = "";
+            for (;;) {
+                let t = this.eof ? 0 : this.readUInt8();
+                if (0 === t) break;
+                e += String.fromCharCode(t)
+            }
+            return e
+        }
+        readEscapedString() {
+            return decodeURIComponent(escape(this.readString()))
+        }
+        writeInt8(e) {
+            this.write(DataView.prototype.setInt8, 1, e, null)
+        }
+        writeUInt8(e) {
+            this.write(DataView.prototype.setUint8, 1, e, null)
+        }
+        writeInt16LE(e) {
+            this.write(DataView.prototype.setInt16, 2, e, !0)
+        }
+        writeInt16BE(e) {
+            this.write(DataView.prototype.setInt16, 2, e, !1)
+        }
+        writeUInt16LE(e) {
+            this.write(DataView.prototype.setUint16, 2, e, !0)
+        }
+        writeUInt16BE(e) {
+            this.write(DataView.prototype.setUint16, 2, e, !1)
+        }
+        writeInt32LE(e) {
+            this.write(DataView.prototype.setInt32, 4, e, !0)
+        }
+        writeInt32BE(e) {
+            this.write(DataView.prototype.setInt32, 4, e, !1)
+        }
+        writeUInt32LE(e) {
+            this.write(DataView.prototype.setUint32, 4, e, !0)
+        }
+        writeUInt32BE(e) {
+            this.write(DataView.prototype.setUint32, 4, e, !1)
+        }
+        writeString(e) {
+            let t = e.length;
+            this.ensureCapacity(t);
+            let s = this.offset;
+            for (this.offset += t; t--;) this.view.setUint8(s + t, e.charCodeAt(t))
+        }
+        writeStringNT(e) {
+            this.writeString(e), this.writeUInt8(0)
+        }
+        writeEscapedString(e) {
+            this.writeString(unescape(encodeURIComponent(e)))
+        }
+        writeEscapedStringNT(e) {
+            this.writeStringNT(unescape(encodeURIComponent(e)))
+        }
+    }
+    window.SmartBuffer = s;
+    let i = [5, 104, 253, 62, 175, 116, 238, 41];
+    class a {
+        constructor(e) {
+            this.data = e
+        }
+        writeIndex(e, t) {
+            let s = this.data[t],
+                a = s + 5 & 7,
+                n = e[t > 0 ? t - 1 : 0] ^ i[t];
+            e.push(((s << a | s >>> 8 - a) & 255 ^ n ^ 62) & 255)
+        }
+        build(e = !1) {
+            let t = [];
+            for (let s = 0; s < 8; s++) this.writeIndex(t, s);
+            let i = 1 + Math.floor(2147483646 * Math.random());
+            return t.push((t[0] ^ i >> 24) & 255), t.push((t[1] ^ i >> 16) & 255), t.push((t[2] ^ i >> 8) & 255), t.push((i ^ t[3]) & 255), t.push((t[0] ^ +e ^ 31) & 255), t
+        }
+    }
+    var n = [.79, 1.52, 2.35, 3, 3.92, 4.7, 5.5, 6.2];
+
+    function o(e) {
+        for (var t = 9e9, s = 0, i = 0; e.length < i; i++) e[i].id < t && (s = i, t = e[i].id);
+        return e.splice(s, 1), e
+    }
+    String.prototype.toHHMMSS = function() {
+        var e = parseInt(this, 10),
+            t = Math.floor(e / 3600),
+            s = Math.floor((e - 3600 * t) / 60);
+        return `${0!==s?`${s}m `:""}${e-3600*t-60*s}s`
+    }, window.makeid = e => {
+        for (var t = "", s = "X0123456789", i = s.length, a = 0; a < e; a++) t += s.charAt(Math.floor(Math.random() * i));
+        return t
+    }, window.$ = (e, t = document) => t.querySelector(e), window.extraServers = [{
+        name: "Local server (to configure)",
+        domain: "localhost",
+        port: 8080,
+        mode: "Instant",
+        players: "0",
+        slots: "0",
+        region: "EU",
+        url: "ws://localhost:8080"
+    }],
+        function(e) {
+            var t, s = (t = !0, function(e, s) {
+                var i = t ? function() {
+                    if (s) {
+                        var t = s.apply(e, arguments);
+                        return s = null, t
+                    }
+                } : function() {};
+                return t = !1, i
+            });
+
+            function i(t) {
+                var i = s(this, function() {
+                    var e = function() {
+                        return !e.constructor('return /" + this + "/')().constructor("^([^ ]+( +[^ ]+)+)+[^ ]}").test(i)
+                    };
+                    return e()
+                });
+                i();
+                for (var n, l, c = t[0], h = t[1], d = t[2], u = 0, g = []; u < c.length; u++) l = c[u], Object.prototype.hasOwnProperty.call(o, l) && o[l] && g.push(o[l][0]), o[l] = 0;
+                for (n in h) Object.prototype.hasOwnProperty.call(h, n) && (e[n] = h[n]);
+                for (p && p(t); g.length;) g.shift()();
+                return r.push.apply(r, d || []), a()
+            }
+
+            function a() {
+                for (var e, t = 0; t < r.length; t++) {
+                    for (var s = r[t], i = !0, a = 1; a < s.length; a++) 0 !== o[s[a]] && (i = !1);
+                    i && (r.splice(t--, 1), e = l(l.s = s[0]))
+                }
+                return e
+            }
+            var n = {},
+                o = {
+                    0: 0
+                },
+                r = [];
+
+            function l(t) {
+                if (n[t]) return n[t].exports;
+                var s = n[t] = {
+                    i: t,
+                    l: !1,
+                    exports: {}
+                };
+                return e[t].call(s.exports, s, s.exports, l), s.l = !0, s.exports
+            }
+            window.getModule = l, l.m = e, l.c = n, l.d = function(e, t, s) {
+                l.o(e, t) || Object.defineProperty(e, t, {
+                    enumerable: !0,
+                    get: s
+                })
+            }, l.r = function(e) {
+                "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+                    value: "Module"
+                }), Object.defineProperty(e, "__esModule", {
+                    value: !0
+                })
+            }, l.t = function(e, t) {
+                if (1 & t && (e = l(e)), 8 & t || 4 & t && "object" == typeof e && e && e.__esModule) return e;
+                var s = Object.create(null);
+                if (l.r(s), Object.defineProperty(s, "default", {
+                    enumerable: !0,
+                    value: e
+                }), 2 & t && "string" != typeof e)
+                    for (var i in e) l.d(s, i, (function(t) {
+                        return e[t]
+                    }).bind(null, i));
+                return s
+            }, l.n = function(e) {
+                var t = e && e.__esModule ? function() {
+                    return e.default
+                } : function() {
+                    return e
+                };
+                return l.d(t, "a", t), t
+            }, l.o = function(e, t) {
+                return Object.prototype.hasOwnProperty.call(e, t)
+            }, l.p = "";
+            var c = window.webpackJsonp = window.webpackJsonp || [],
+                h = c.push.bind(c);
+            c.push = i, c = c.slice();
+            for (var d = 0; d < c.length; d++) i(c[d]);
+            var p = h;
+            r.push([118, 1]), a()
+        }([, function(e, t, i) {
+            let n = i(5),
+                {
+                    writeUserData: o
+                } = i(8),
+                r = i(4),
+                l = i(24),
+                c = i(121),
+                h = i(125),
+                d = i(78),
+                p = i(12),
+                u = i(23),
+                g = i(128),
+                {
+                    lerp: A,
+                    clampNumber: m,
+                    hideCaptchaBadge: v
+                } = i(8),
+                {
+                    htmlEncode: f
+                } = i(8),
+                C, y = {
+                    connectionUrl: null,
+                    selectedServer: null,
+                    spectators: 0,
+                    lifeState: 0,
+                    allowed: !1,
+                    playButtonDisabled: !1,
+                    playButtonText: "Play",
+                    deathDelay: !1,
+                    autoRespawning: !1
+                },
+                w = (e, t) => {
+                    n.toast.fire({
+                        type: t ? "error" : "info",
+                        title: e,
+                        timer: t ? 5e3 : 2e3
+                    })
+                },
+                I = (e, t) => {
+                    for (; e.length;) e.pop().destroy(t)
+                };
+            document.body.oncontextmenu = e => e.target?.id === "email";
+            class k {
+                constructor() {
+                    this.running = !1, this.protocol, this.modeId, this.instanceSeed, this.replaying, this.nwDataMax, this.nwDataSent, this.nwDataTotal, this.nwData, this.playerId, this.dualboxPid, this.activePid, this.tagId, this.spectating, this.alive = !1, this.center = {
+                        x: 0,
+                        y: 0
+                    }, y.spectators, y.lifeState, this.score = 0, this.highestScore = 0, this.killCount = 0, this.timeAlive = 0, this.clientVersion = 26, this.events = new u, this.settings = r, this.renderer = l, this.skinLoader = new g, p.virus.loadVirusFromUrl(r.virusImageUrl), this.state = y, h.useGame(this), this.playback, this.connection = new class e {
+                        constructor() {
+                            this.socketCount = 0, this.opened = !1
+                        }
+                        onClosed(e) {
+                            delete C.currentWsId, this.opened = !1, C.running && C.stop();
+                            let t;
+                            if (1003 === e.code) t = 1500, w("Server restarting...", !1);
+                            else {
+                                t = 3500 + ~~(100 * Math.random());
+                                let s = "You have been disconnected";
+                                e.reason && (s += ` (${e.reason})`), w(s, !0)
+                            }
+                            setTimeout(() => {
+                                this.opened || C.events.$emit("reconnect-server")
+                            }, t), C.showMenu(!0)
+                        }
+                        onRejected() {
+                            delete C.currentWsId, this.opened = !1, w("Connection rejected", !0)
+                        }
+                        open(e) {
+                            C.dual.close(), C.running && C.stop(), this.close(), C.events.$emit("chat-clear"), this.opened = !0;
+                            let t = C.ws = new WebSocket(e, "tFoL46WDlZuRja7W6qCl");
+                            t.binaryType = "arraybuffer", t.packetCount = 0, t.onopen = () => {
+                                this.opened && (C.currentWsId = t.id = this.socketCount++, C.state.connectionUrl = e, t.onclose = this.onClosed.bind(this))
+                            }, t.onclose = this.onRejected.bind(this), t.onmessage = e => {
+                                let {
+                                    data: t
+                                } = e;
+                                C.nwData += t.byteLength, C.parseMessage(s.fromBuffer(t))
+                            }
+                        }
+                        close() {
+                            C.dual.close(), C.debugElement.innerHTML = "";
+                            let {
+                                ws: e
+                            } = C;
+                            e && (e.onmessage = null, e.onclose = null, e.onerror = null, e.close(), delete C.ws, delete C.state.connectionUrl, this.opened = !1)
+                        }
+                        send(e, t, i = !1) {
+                            e instanceof s && (e = e.view), t = !!t;
+                            let {
+                                dual: a
+                            } = C;
+                            if (t ? !(a.opened && (i || a.ready)) : !this.opened) return !1;
+                            let n = t ? a.ws : C.ws;
+                            return console.assert(!!n, "Socket not defined?"), n.send(e), !0
+                        }
+                        sendMouse() {
+                            let e = s.fromSize(5);
+                            e.writeUInt8(16);
+                            let {
+                                x: t,
+                                y: i
+                            } = C.mouse;
+                            e.writeInt16LE(t), e.writeInt16LE(i);
+                            let {
+                                dual: a
+                            } = C;
+                            this.send(e, a.focused), a.connected && (C.isAlive(!1) && C.isAlive(!0) || this.send(e, C.isAlive(!1)))
+                        }
+                        sendOpcode(e, t) {
+                            let i = s.fromSize(1);
+                            i.writeUInt8(e), this.send(i, t)
+                        }
+                        ping() {
+                            C.pingStamp = performance.now(), this.sendOpcode(3)
+                        }
+                        sendJoinData(e, t) {
+                            let i = s.fromSize(2 + e.length + 7);
+                            i.writeUInt8(5), i.writeUInt8(C.clientVersion), i.ensureCapacity(e.length), e.forEach(e => i.writeUInt8(e)), o(i, !!t);
+                            let a = localStorage.vanisToken;
+                            a && /^wss?:\/\/[a-zA-Z0-9_-]+\.vanis\.io/i.test(C.ws.url) && i.writeStringNT(a), this.send(i, t, !!t)
+                        }
+                        sendRecaptchaToken(e, t) {
+                            e = unescape(encodeURIComponent(e));
+                            let i = s.fromSize(1 + e.length + 1);
+                            i.writeUInt8(11), i.writeStringNT(e), this.send(i, t)
+                        }
+                        sendChatMessage(e, t) {
+                            if ((e = unescape(encodeURIComponent(e))).startsWith("/")) {
+                                window.client && window.client.chatted(e);
+                                return
+                            }
+                            let i = s.fromSize(1 + e.length + 1);
+                            i.writeUInt8(99), i.writeString(e), this.send(i, t)
+                        }
+                    }, this.dual, this.pingStamp, this.timeStamp, this.serverTick, this.cells = new Map, this.destroyedCells = [], this.cellCount = 0, this.ownedCells = new Set, this.rawMouse, this.mouse, this.mouseZoom, this.mouseZoomMin, this.camera, this.massTextPool = [], this.crownPool = [], c.useGame(this), this.scene, this.playerManager, this.ticker, this.splitCount, this.moveWaitUntil, this.stopMovePackets, this.mouseFrozen, this.moveInterval, setInterval(() => this.events.$emit("every-second"), 1e3), setInterval(() => this.events.$emit("every-minute"), 6e4)
+                }
+                isAlive(e = !1) {
+                    let {
+                        dual: t
+                    } = this;
+                    return e ? t.opened && t.alive : this.connection.opened && this.alive
+                }
+                get allCells() {
+                    let e = this.cells,
+                        {
+                            dual: t
+                        } = this;
+                    if (!t.opened) return e;
+                    e = new Map([...e]);
+                    let s = t.cells;
+                    return s.forEach((t, s) => {
+                        e.has(s) || e.set(s, t)
+                    }), e
+                }
+                updateStates(e) {
+                    let t = !1,
+                        s = !1,
+                        {
+                            dual: i
+                        } = this;
+                    return C.allCells.forEach(e => {
+                        e.pid && (e.pid == this.playerId ? this.alive = t = !0 : i.opened && e.pid == i.pid && (i.alive = s = !0))
+                    }), this.alive && !t && (this.alive = !1), i.alive && !s && (i.alive = !1), y.lifeState = (t ? 1 : 0) + (s ? 2 : 0), e ? s : t
+                }
+                start(e) {
+                    if (!(e.protocol && e.instanceSeed && e.playerId && e.border)) throw Error("Lacking mandatory data");
+                    this.running = !0, this.protocol = e.protocol, this.modeId = e.gamemodeId || 0, this.instanceSeed = e.instanceSeed, this.replaying = !!e.replayUpdates, this.nwDataMax = this.nwDataSent = this.nwDataTotal = this.nwData = 0, this.pingStamp = 0, this.timeStamp = 0, this.serverTick = 0, this.playerId = e.playerId, this.dualboxPid = 0, this.activePid = this.playerId, this.tagId = null, this.spectating = !1, this.alive = !1, y.spectators = 0, y.lifeState = 0, this.score = 0, this.highestScore = 0, this.cellCount = 0, this.rawMouse = {
+                        x: 0,
+                        y: 0
+                    }, this.mouse = {
+                        x: 0,
+                        y: 0
+                    };
+                    let t = this.border = e.border;
+                    this.food = e.food, this.mouseZoom = .3, this.mouseZoomMin = .01, this.camera = {
+                        time: 0,
+                        sx: 0,
+                        sy: 0,
+                        ox: t.x,
+                        nx: t.x,
+                        oy: t.y,
+                        ny: t.y,
+                        oz: this.mouseZoom,
+                        nz: this.mouseZoom
+                    }, this.massTextPool = [], this.crownPool = [];
+                    let i = PIXI.utils.isWebGLSupported() && r.useWebGL && r.showBackgroundImage,
+                        a = this.scene = new c(t, i);
+                    if (a.container.alpha = r.gameAlpha || 1, a.container.pivot.set(t.x, t.y), a.container.scale.set(this.zoom), this.playerManager = new h, this.ticker = new PIXI.Ticker, this.ticker.add(this.onTick.bind(this)), y.selectedServer && y.connectionUrl !== y.selectedServer.url && (y.selectedServer = null), this.replaying) {
+                        let {
+                            playback: n
+                        } = this, o = e.replayUpdates;
+                        n.set(o), this.moveInterval = setInterval(n.next.bind(n), 40), this.events.$emit("show-replay-controls", o.length), this.events.$emit("minimap-stats-visible", !1)
+                    } else this.splitCount = 0, this.moveWaitUntil = 0, this.stopMovePackets = 0, this.moveToCenterOfCells = 0, this.mouseFrozen = !1, r.minimapEnabled && this.events.$emit("minimap-show"), r.showChat && this.events.$emit("chat-visible", {
+                        visible: !0
+                    }), this.events.$emit("leaderboard-show"), this.events.$emit("stats-visible", !0), this.moveInterval = setInterval(() => {
+                        let {
+                            dual: e
+                        } = this;
+                        if (this.stopMovePackets === 1 + +e.focused) return;
+                        let t = this.moveToCenterOfCells;
+                        if (0 != t && this.connection.sendOpcode(9, 2 == t), e.focused ? 2 == t : 1 == t) return;
+                        let i = s.fromSize(5);
+                        i.writeUInt8(16);
+                        let {
+                            x: a,
+                            y: n
+                        } = this.mouse;
+                        i.writeInt16LE(a), i.writeInt16LE(n), this.connection.send(i, e.focused)
+                    }, 40), this.events.$on("every-second", k.everySecond), y.allowed = !0;
+                    this.ticker.start(), this.eventListeners(!0), this.events.$emit("game-started")
+                }
+                stop() {
+                    let {
+                        dual: e
+                    } = this;
+                    e.opened && e.close(), this.running = !1, delete this.protocol, delete this.modeId, delete this.instanceSeed, delete this.replaying, delete this.nwDataMax, delete this.nwDataSent, delete this.nwDataTotal, delete this.nwData, delete this.playerId, delete this.dualboxPid, delete this.activePid, delete this.tagId, this.spectating = !1, this.alive = !1, y.spectators = 0, y.lifeState = 0, y.allowed = !1, y.playButtonDisabled = !1, y.playButtonText = "Play", this.eventListeners(!1), delete this.score, delete this.highestScore, delete this.pingStamp, delete this.timeStamp, delete this.serverTick, delete this.playerId, delete this.dualboxPid, delete this.activePid, delete this.tagId, delete this.spectating, this.clearCells(), delete this.cellCount, delete this.rawMouse, delete this.mouse, delete this.mouseZoom, delete this.mouseZoomMin, delete this.camera, this.ticker && (this.ticker.stop(), delete this.ticker), delete this.splitCount, delete this.moveWaitUntil, delete this.stopMovePackets, delete this.moveToCenterOfCells, delete this.mouseFrozen, clearInterval(this.moveInterval), delete this.moveInterval, this.playback.reset(), this.events.$off("every-second", k.everySecond), this.skinLoader.clearCallbacks(), this.events.$emit("minimap-stats-visible", !0), this.events.$emit("stats-visible", !1), this.events.$emit("chat-visible", {
+                        visible: !1
+                    }), this.events.$emit("leaderboard-hide"), this.events.$emit("minimap-hide"), this.events.$emit("minimap-destroy"), this.events.$emit("show-replay-controls", !1), this.events.$emit("cells-changed", 0), this.events.$emit("reset-cautions"), this.events.$emit("game-stopped"), this.playerManager.destroy(), delete this.playerManager;
+                    let {
+                        scene: t
+                    } = this;
+                    t && (t.destroyBackgroundImage(!1), t.uninstallMassTextFont(), t.container.destroy({
+                        children: !0
+                    }), delete this.scene), this.renderer.clear(), p.cells.destroyCache(), p.squares.destroyCache(), I(this.massTextPool, !0), I(this.crownPool), delete this.massTextPool, delete this.crownPool
+                }
+                showMenu(e) {
+                    if (e ??= !this.app.showMenu, this.app.showDeathScreen) return !1;
+                    if (this.app.showMenu = e, this.actions.stopMovement(e), e) this.events.$emit("menu-opened");
+                    else {
+                        let t = document.activeElement;
+                        t?.id !== "chatbox-input" && l.view.focus(), this.stopMovePackets = 0, v()
+                    }
+                    return e
+                }
+                updateStats(e) {
+                    this.events.$emit("stats-changed", {
+                        ping: e,
+                        fps: Math.round(this.ticker.FPS),
+                        mass: this.score,
+                        score: this.highestScore
+                    }), this.events.$emit("minimap-stats-changed", {
+                        playerCount: this.playerManager.playerCount,
+                        spectators: y.spectators
+                    })
+                }
+                static everySecond() {
+                    (C.isAlive(!1) || C.isAlive(!0)) && C.timeAlive++, C.nwData > C.nwDataMax && (C.nwDataMax = C.nwData), C.nwDataTotal += C.nwData;
+                    let {
+                        connection: e
+                    } = C, {
+                        debugElement: t
+                    } = C;
+                    if (t) {
+                        if ((r.debugStats || r.clientStats) && e.opened) {
+                            let s = C.dual.connected;
+                            let i = "";
+
+                            if (r.debugStats && !C.replaying) {
+                                i += `
+                                    <b>Net:</b> ${(C.nwData / 1024).toFixed(0)} Kb/s <br>
+                                    <b>Net peak:</b> ${(C.nwDataMax / 1024).toFixed(0)} Kb/s <br>
+                                    <b>Net total:</b> ${(C.nwDataTotal / 1024 / 1024).toFixed(0)} MB <br>
+                                `;
+                            }
+
+                            if (r.clientStats) {
+                                let { x: a, y: n } = C.mouse;
+                                i += `
+                                    <b>Mouse x:</b> ${a.toFixed(0)} y: ${n.toFixed(0)} <br>
+                                    ${s ? `<b>(DUAL PID)</b> ${C.dualboxPid} <br>` : ""}
+                                    <b>PID:</b> ${C.playerId} <br>
+                                    <b>Cells in server:</b> ${C.allCells.size} <br>
+                                `;
+                            }
+
+                            t.innerHTML = i;
+                        } else if (t.innerHTML !== "") {
+                            t.innerHTML = "";
+                        }
+                    }
+                    C.nwData = 0, e.opened && e.ping();
+                    let {
+                        dual: o
+                    } = C;
+                    o.connected && (o.pingStamp = performance.now(), e.sendOpcode(3, !0))
+                }
+                clearCells() {
+                    this.cells.forEach(e => e.destroy(1));
+                    let {
+                        destroyedCells: e
+                    } = this;
+                    for (; e.length;) e.pop().destroySprite()
+                }
+                onTick() {
+                    let e = this.timeStamp = performance.now();
+                    e >= this.moveWaitUntil && (this.updateMouse(), this.splitCount = 0);
+                    let {
+                        destroyedCells: t
+                    } = this, s = t.length;
+                    for (; s--;) {
+                        let i = t[s];
+                        i.update() && (i.destroySprite(), t.splice(s, 1))
+                    }
+                    let a = 0;
+                    this.allCells.forEach(e => {
+                        e.update(), e.pid == this.activePid && a++
+                    }), this.cellCount != a && (this.cellCount = a, this.events.$emit("cells-changed", a));
+                    let {
+                        scene: n
+                    } = this;
+                    n.sort();
+                    let o = this.updateCamera();
+                    if (o) {
+                        this.score = o;
+                        let {
+                            highestScore: r
+                        } = this;
+                        this.highestScore = r ? r < o ? o : r : o
+                    } else this.isAlive(!0) || this.isAlive(!1) || (this.score = 0);
+                    this.renderer.render(n.container)
+                }
+                updateCamera(e = !1) {
+                    let {
+                        scene: t,
+                        camera: s
+                    } = this, i = this.timeStamp - s.time, a = m(i / r.cameraMoveDelay, 0, 1), n = m(i / r.cameraZoomDelay, 0, 1), o = t.container.pivot.x = 1 == a ? s.nx : A(s.ox, s.nx, a), l = t.container.pivot.y = 1 == a ? s.ny : A(s.oy, s.ny, a), c = 1 == n ? s.nz : A(s.oz, s.nz, n);
+                    t.container.scale.set(c);
+                    let h = this.mouseZoom,
+                        d = 0,
+                        p = 0,
+                        u = 0;
+                    if (this.spectating) {
+                        let {
+                            sx: g,
+                            sy: v
+                        } = s;
+                        d = g, p = v
+                    } else {
+                        let f = !1;
+                        if (!this.replaying) {
+                            let {
+                                dual: y
+                            } = this;
+                            if (y.connected) {
+                                let w = y.getDistanceFromOwner();
+                                f = !!r.singleView || null == w || w > 8e3
+                            }
+                        }
+                        let I = 0,
+                            k;
+                        for (k of this.ownedCells.values()) {
+                            if (f && k.pid != C.activePid) continue;
+                            let b = Math.round(Math.pow(k.nSize / 10, 2));
+                            d += k.nx * b, p += k.ny * b, I += k.nSize, u += b
+                        }
+                        u ? (d /= u, p /= u, r.autoZoom && (h *= Math.pow(Math.min(64 / I, 1), .27))) : (d = s.nx, p = s.ny)
+                    }
+                    return e ? (s.ox = o, s.oy = l, s.oz = c, s.nx = d, s.ny = p, s.nz = h, s.time = this.timeStamp, 0) : u
+                }
+                updateMouse(e = !1) {
+                    let t = this.scene.container,
+                        {
+                            x: s,
+                            y: i
+                        } = this.rawMouse;
+                    "client" in window && (client.mouse = {
+                        x: s,
+                        y: i
+                    }), (!this.mouseFrozen || e) && (this.mouse.x = m(t.pivot.x + (s - window.innerWidth / 2) / t.scale.x, -32768, 32767), this.mouse.y = m(t.pivot.y + (i - window.innerHeight / 2) / t.scale.y, -32768, 32767))
+                }
+                seededRandom(e) {
+                    return (e = Math.sin(e) * (1e4 + this.instanceSeed)) - Math.floor(e)
+                }
+                createThumbnail(e = 240, t = 135) {
+                    let s = this.scene.container,
+                        i = new PIXI.Container;
+                    i.pivot.x = s.position.x, i.pivot.y = s.position.y, i.position.x = e / 2, i.position.y = t / 2, i.scale.set(.25), i.addChild(s);
+                    let {
+                        renderer: a
+                    } = this, n = PIXI.RenderTexture.create(e, t);
+                    a.render(i, n), i.removeChild(s);
+                    let o = a.plugins.extract.canvas(n),
+                        l = document.createElement("canvas");
+                    l.width = e, l.height = t;
+                    let c = l.getContext("2d");
+                    c.beginPath(), c.rect(0, 0, e, t), c.fillStyle = "#" + r.backgroundColor, c.fill(), c.drawImage(o, 0, 0, e, t);
+                    let h = l.toDataURL();
+                    return i.destroy(!0), h
+                }
+                setTagId(e) {
+                    return e || (e = null), e !== this.tagId && (this.tagId = e, !0)
+                }
+                getMassText(e) {
+                    return !r.shortMass || e < 1e3 ? e.toFixed(0) : (e / 1e3).toFixed(1) + "k"
+                }
+                shouldAutoRespawn(e) {
+                    return !this.app.showMenu && (e ? r.mbAutorespawn : r.autoRespawn)
+                }
+                triggerDeathDelay(e) {
+                    function getConvertedTimeToSeconds(str) {
+                        if (typeof str !== 'string') return 0;
+                        return str.split(' ').reduce((total, part) => {
+                            const value = parseFloat(part);
+                            if (part.endsWith('s')) return total + value;
+                            if (part.endsWith('m')) return total + value * 60;
+                            if (part.endsWith('h')) return total + value * 3600;
+                            return total;
+                        }, 0);
+                    }
+
+                    function getConvertedStringToNumber(str) {
+                        if (typeof str !== 'string') return 0;
+                        return parseFloat(str.replace(/,|\s+/g, ''));
+                    }
+
+                    function updateColors() {
+                        timeChat = localStorage.getItem('timeChat') || 'checked';
+                        timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
+                        const userColors = localStorage.getItem('userColors');
+                        userColorsJson = userColors ? JSON.parse(userColors) : null;
+                    }
+
+                    function updateStatBar(that) {
+                        const statBarItem = `
+                            <i class="fas fa-skull barIcon"></i>
+                            <p class="statBarKills">${that.killCount}</p>
+                            <i class="fas fa-clock barIcon"></i>
+                            <p class="statBarTime">${that.timeAlive.toString().toHHMMSS()}</p>
+                            <i class="fas fa-trophy barIcon"></i>
+                            <p class="statBarScore">${that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}</p>
+                        `;
+
+                        document.querySelector('.statBar').innerHTML = statBarItem;
+                    }
+
+                    function updateStatData(that) {
+                        localStorage.setItem('sT', (parseInt(getLocalStorageItem('sT', '0')) + getConvertedTimeToSeconds(that.timeAlive.toString().toHHMMSS())).toString());
+                        localStorage.setItem('sM', (parseInt(getLocalStorageItem('sM', '0')) + getConvertedStringToNumber(that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g,","))).toString());
+                        localStorage.setItem('sK', (parseInt(getLocalStorageItem('sK', '0')) + that.killCount).toString());
+                        localStorage.setItem('sG', (parseInt(getLocalStorageItem('sG', '1')) + 1).toString());
+                    }
+
+                    clearTimeout(this.deathTimeout);
+                    delete this.deathTimeout;
+
+                    if (e) {
+                        delete this.dual.autoRespawning;
+                    } else {
+                        y.deathDelay = false;
+                        y.autoRespawning = false;
+                    }
+
+                    updateColors();
+                    updateStatBar(this);
+                    updateStatData(this);
+
+                    this.killCount = 0;
+                    this.timeAlive = 0;
+                }
+                triggerAutoRespawn(e) {
+                    if (e) {
+                        let {
+                            dual: t
+                        } = this;
+                        t.autoRespawning = !1, t.spawn()
+                    } else y.deathDelay = !1, y.autoRespawning = !1, this.actions.join()
+                }
+                handleDeath(e, t) {
+                    e.readUInt16LE(), this.killCount += e.readUInt16LE(), e.readUInt32LE(), t || (y.deathDelay = !0);
+                    let {
+                        dual: s
+                    } = this;
+                    this.shouldAutoRespawn(t) ? t ? (s.autoRespawning = !0, s.ticksSinceDeath = 0) : (y.autoRespawning = !0, this.ticksSinceDeath = 0) : this.deathTimeout = setTimeout(this.triggerDeathDelay.bind(this, t), 900), s.updateOutlines()
+                }
+                parseLeaderboard(e) {
+                    let t = [];
+                    for (;;) {
+                        let s = e.readUInt16LE();
+                        if (0 == s) {
+                            this.events.$emit("leaderboard-update", t);
+                            return
+                        }
+                        let i = this.playerManager.getPlayer(s);
+                        if (!i) continue;
+                        let a = {
+                            pid: s,
+                            position: t.length + 1,
+                            text: i.name,
+                            badge: getUserBadge(i.name),
+                            bold: !!i.nameColor
+                        };
+                        t.push(a)
+                    }
+                }
+                parseScrimmageLeaderboard(e) {
+                    let t = [];
+                    for (;;) {
+                        let s = e.readUInt8();
+                        if (0 == s) break;
+                        let i = {};
+                        if (1 & s && (i.position = e.readUInt8()), 2 & s && (i.pid = e.readUInt16LE()), 4 & s) i.text = e.readEscapedString(), i.color = "#ffffff";
+                        else {
+                            let a = 2 & s && this.playerManager.getPlayer(i.pid);
+                            i.text = a ? a.name : "n/a"
+                        }
+                        8 & s && (i.score = e.readEscapedString()), 16 & s && (i.color = "#" + ("00" + e.readUInt8().toString(16)).slice(-2) + ("00" + e.readUInt8().toString(16)).slice(-2) + ("00" + e.readUInt8().toString(16)).slice(-2)), 32 & s && (i.bold = !0), 64 & s && (i.link = e.readEscapedString()), t.push(i)
+                    }
+                    let n = null;
+                    if (e.offset !== e.length) {
+                        let o = e.readEscapedString();
+                        n = {
+                            visible: 0 != o.length,
+                            text: o
+                        }
+                    }
+                    this.events.$emit("leaderboard-update", t, n)
+                }
+                parseMinimap(e) {
+                    let t = [];
+                    for (;;) {
+                        let s = e.readUInt16LE();
+                        if (0 == s) {
+                            this.events.$emit("minimap-positions", t);
+                            return
+                        }
+                        e.offset++;
+                        let i = e.readUInt8(),
+                            a = e.readUInt8();
+                        t.push({
+                            pid: s,
+                            x: i / 255,
+                            y: a / 255
+                        })
+                    }
+                }
+                parsePlayers(e) {
+                    let t = JSON.parse(e.readEscapedString()),
+                        s = t.find(e => e.pid === this.playerId),
+                        i = s && this.setTagId(s.tagId),
+                        {
+                            playerManager: a
+                        } = this,
+                        n = [];
+                    for (let o of t) {
+                        let r = a.setPlayerData(o);
+                        n.push(r)
+                    }
+                    i && (this.events.$emit("minimap-positions", []), a.invalidateVisibility(n))
+                }
+                parseMessage(e) {
+                    let t = e.readUInt8();
+                    switch (t) {
+                        case 1: {
+                            let s = d(e);
+                            this.initialDataPacket = e.view, this.start(s);
+                            return
+                        }
+                        case 2: {
+                            let i = new Uint8Array(e.buffer, 1);
+                            this.connection.sendJoinData(new a(i).build(), !1);
+                            return
+                        }
+                        case 3: {
+                            let o = performance.now() - this.pingStamp;
+                            this.updateStats(Math.round(o));
+                            return
+                        }
+                        case 4: {
+                            let {
+                                playerManager: r
+                            } = this;
+                            for (;;) {
+                                let l = e.readUInt16LE();
+                                if (0 == l) return;
+                                r.delayedRemovePlayer(l)
+                            }
+                        }
+                        case 6:
+                            this.connection.sendOpcode(6);
+                            return;
+                        case 7: {
+                            let c = e.readUInt8(),
+                                h, p;
+                            if (1 & c) {
+                                let u = e.readUInt16LE();
+                                p = this.playerManager.getPlayer(u)
+                            }
+                            if (2 & c) {
+                                let g = e.readUInt16LE();
+                                h = this.playerManager.getPlayer(g)
+                            }
+                            h && h.setCrown(!1), p && p.setCrown(!0);
+                            return
+                        }
+                        case 8:
+                            if (this.dualboxPid) return;
+                            this.dualboxPid = e.readUInt16LE();
+                            return;
+                        case 9: {
+                            let {
+                                playerManager: A
+                            } = this, m = this.activePid;
+                            m && A.getPlayer(m).setOutline(16777215), m = this.activePid = e.readUInt16LE(), A.getPlayer(m).setOutline(16711935);
+                            return
+                        }
+                        case 10: {
+                            this.timeStamp = performance.now();
+                            let v = e.packetId || (e.packetId = this.ws.packetCount++);
+                            this.parseCells(e, v), this.updateStates(!0);
+                            let w = this.alive;
+                            w && (this.spectating = !1);
+                            let {
+                                dual: I
+                            } = this, {
+                                replay: k
+                            } = this;
+                            w && !this.replaying ? k.add(e.view, !1) : I.alive || k.clear(!1), !w && y.autoRespawning && 37 == ++this.ticksSinceDeath && this.triggerAutoRespawn(!1), this.serverTick++, this.playerManager.sweepRemovedPlayers(), I.focused || this.updateCamera(!0);
+                            return
+                        }
+                        case 11:
+                            this.parseLeaderboard(e);
+                            return;
+                        case 12:
+                            this.parseMinimap(e);
+                            return;
+                        case 13: {
+                            let b = {
+                                pid: e.readUInt16LE(),
+                                text: e.readEscapedString()
+                            };
+                            if (0 == b.pid) {
+                                let {
+                                    selectedServer: _
+                                } = y;
+                                _ && /Welcome to Delta,.+\!/.test(b.text) && (b.text = `Connected to ${_.region} ${_.name}`), this.events.$emit("chat-message", b.text);
+                                return
+                            }
+                            let S = this.playerManager.getPlayer(b.pid);
+                            if (!S) return;
+                            const image = getImageUrlFromMessage(b.text);
+                            b.from = S.name;
+                            const color = getUserColor(b.from);
+                            b.date = getCurrentDate();
+                            b.dateColor = generateRandomHexColor();
+                            b.badge = getUserBadge(b.from);
+                            b.nicknameColor = color ? color : '#ffffff';
+                            b.imageUrl = image ? image.newURL : null;
+                            b.text = image ? b.text.replace(image.baseURL, '[Delta image]') : b.text;
+                            let {
+                                nameColorCss: E
+                            } = S;
+                            E && (b.fromColor = E), this.events.$emit("chat-message", b);
+                            return
+                        }
+                        case 14: {
+                            let x = e.readUInt8(),
+                                B = {};
+                            if (2 & x) {
+                                let Q = e.readUInt8();
+                                typeId > 0 && typeId < 4 && (B.type = ({
+                                    1: "success",
+                                    2: "error",
+                                    3: "warning",
+                                    4: "info"
+                                })[Q])
+                            }
+                            4 & x && (B.timer = e.readUInt16LE());
+                            let M = e.readEscapedString();
+                            B.title = f(M), n.toast.fire(B);
+                            return
+                        }
+                        case 15: {
+                            let {
+                                playerManager: T
+                            } = this;
+                            for (;;) {
+                                let D = e.readUInt16LE();
+                                if (0 === D) return;
+                                let L = e.readString16(),
+                                    N = e.readEscapedString(),
+                                    U = {
+                                        pid: D,
+                                        nickname: L,
+                                        skinUrl: N
+                                    };
+                                T.setPlayerData(U)
+                            }
+                        }
+                        case 16:
+                            this.parsePlayers(e);
+                            return;
+                        case 17:
+                            C.camera.sx = e.readInt16LE(), C.camera.sy = e.readInt16LE();
+                            return;
+                        case 18: {
+                            let {
+                                replay: R
+                            } = this;
+                            R.clear(!1), this.clearCells();
+                            return
+                        }
+                        case 19: {
+                            let P = 0 !== e.readUInt8();
+                            if (this.events.$emit("xp-update", e.readUInt32LE()), !P) return;
+                            let F = e.readUInt16LE(),
+                                G = atob("WW91IGhhdmUgcmVhY2hlZCBsZXZlbA==");
+                            n.toast.fire({
+                                background: "#b58b00",
+                                title: `${G} ${F}!`,
+                                type: "success",
+                                timer: 4e3
+                            });
+                            return
+                        }
+                        case 20:
+                            this.handleDeath(e, !1);
+                            return;
+                        case 21:
+                        case 27:
+                            return;
+                        case 22:
+                            if (!window.grecaptcha) return void alert("Captcha library is not loaded");
+                            this.events.$emit("show-image-captcha");
+                            return;
+                        case 23:
+                            y.spectators = e.readUInt16LE();
+                            return;
+                        case 24:
+                            this.serverTick = e.readUInt32LE(), this.events.$emit("restart-timing-changed", e.readUInt32LE());
+                            return;
+                        case 25:
+                            this.events.$emit("update-cautions", {
+                                custom: e.readEscapedString()
+                            });
+                            return;
+                        case 26:
+                            y.playButtonDisabled = !!e.readUInt8(), e.length > e.offset + 1 && (y.playButtonText = e.readEscapedString() || "Play");
+                            return;
+                        case 28:
+                            C.parseScrimmageLeaderboard(e);
+                            return
+                    }
+                }
+            }
+            e.exports = C = window.GAME = new k
+        }, , , function(e) {
+            var t = {
+                useWebGL: !0,
+                gameResolution: 1,
+                smallTextThreshold: 40,
+                autoZoom: !1,
+                rememeberEjecting: !0,
+                autoRespawn: !1,
+                mouseFreezeSoft: !0,
+                drawDelay: 120,
+                cameraMoveDelay: 150,
+                cameraZoomDelay: 150,
+                cameraZoomSpeed: 10,
+                replayDuration: 8,
+                showReplaySaved: 2,
+                showNames: 2,
+                showMass: 2,
+                showSkins: 1,
+                showOwnName: !0,
+                showOwnMass: !0,
+                showOwnSkin: !0,
+                showCrown: !0,
+                foodVisible: !0,
+                eatAnimation: !0,
+                showHud: !0,
+                showLeaderboard: !0,
+                showServerName: !1,
+                showChat: !0,
+                showChatToast: !1,
+                minimapEnabled: !0,
+                minimapLocations: !0,
+                showFPS: !0,
+                showPing: !0,
+                showCellCount: !0,
+                showPlayerScore: !1,
+                showPlayerMass: !0,
+                showClock: !1,
+                showSessionTime: !1,
+                showPlayerCount: !1,
+                showSpectators: !1,
+                showRestartTiming: !1,
+                showBlockedMessageCount: !0,
+                filterChatMessages: !0,
+                clearChatMessages: !0,
+                backgroundColor: "101010",
+                borderColor: "000000",
+                foodColor: "ffffff",
+                ejectedColor: "ffa500",
+                cellNameOutlineColor: "000000",
+                cursorImageUrl: null,
+                backgroundImageUrl: "img/background.png",
+                virusImageUrl: "img/virus.png",
+                cellMassColor: "ffffff",
+                cellMassOutlineColor: "000000",
+                cellNameFont: "Hind Madurai",
+                cellNameWeight: 1,
+                cellNameOutline: 2,
+                cellNameSmoothOutline: !0,
+                cellLongNameThreshold: 750,
+                cellMassFont: "Ubuntu",
+                cellMassWeight: 2,
+                cellMassOutline: 2,
+                cellMassTextSize: 0,
+                cellMassSmoothOutline: !0,
+                shortMass: !0,
+                showBackgroundImage: !0,
+                backgroundImageRepeat: !0,
+                backgroundDefaultIfUnequal: !0,
+                backgroundImageOpacity: .6,
+                useFoodColor: !1,
+                namesEnabled: !0,
+                skinsEnabled: !0,
+                massEnabled: !0,
+                showLocations: !1,
+                cellBorderSize: 1,
+                autoHideReplayControls: !1,
+                minimapSize: 220,
+                minimapFPS: 30,
+                minimapSmoothing: .08,
+                mbColor: "c084ff",
+                dualSkin: "https://skins.vanis.io/s/Qkfih2",
+                mbActive: 1,
+                mbAutorespawn: !1,
+                gameAlpha: 1,
+                dualNickname: "Delta Dual",
+                dualUseNickname: !1,
+                debugStats: !1,
+                clientStats: !1,
+                playerStats: !0,
+                showCellLines: !1,
+                showTag: !1,
+                showDir: !1,
+                chatColorOnlyPeople: !1,
+                mbArrow: "https://i.postimg.cc/6pvLJ2TW/image.png"
+            };
+
+            function s(e) {
+                switch (e) {
+                    case 2:
+                        return "bold";
+                    case 0:
+                        return "thin";
+                    default:
+                        return "normal"
+                }
+            }
+
+            function i(e, t) {
+                var s;
+                switch (e) {
+                    case 3:
+                        s = t / 5;
+                        break;
+                    case 1:
+                        s = t / 20;
+                        break;
+                    default:
+                        s = t / 10
+                }
+                return Math.ceil(s)
+            }
+            e.exports = window.settings = new class {
+                constructor() {
+                    this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle()
+                }
+                getInternalSettings() {
+                    this.cellSize = 512
+                }
+                compileNameFontStyle() {
+                    var e = {
+                        fontFamily: this.cellNameFont,
+                        fontSize: 80,
+                        fontWeight: s(this.cellNameWeight)
+                    };
+                    return this.cellNameOutline && (e.stroke = PIXI.utils.string2hex(this.cellNameOutlineColor), e.strokeThickness = i(this.cellNameOutline, e.fontSize), e.lineJoin = this.cellNameSmoothOutline ? "round" : "miter"), this.nameTextStyle = e
+                }
+                compileMassFontStyle() {
+                    var e = {
+                        fontFamily: this.cellMassFont,
+                        fontSize: 56 + 20 * this.cellMassTextSize,
+                        fontWeight: s(this.cellMassWeight),
+                        lineJoin: "round",
+                        fill: PIXI.utils.string2hex(this.cellMassColor)
+                    };
+                    return this.cellMassOutline && (e.stroke = PIXI.utils.string2hex(this.cellMassOutlineColor), e.strokeThickness = i(this.cellMassOutline, e.fontSize), e.lineJoin = this.cellMassSmoothOutline ? "round" : "miter"), this.massTextStyle = e
+                }
+                loadUserDefinedSettings() {
+                    if (!localStorage.settings) return {};
+                    try {
+                        return JSON.parse(localStorage.settings)
+                    } catch (e) {
+                        return {}
+                    }
+                }
+                getDefault(e) {
+                    return t[e]
+                }
+                set(e, t) {
+                    return this[e] !== t && (this[e] = t, this.userDefinedSettings[e] = t, localStorage.settings = JSON.stringify(this.userDefinedSettings), !0)
+                }
+            }
+        }, function(e, t, s) {
+            var i = s(270).default,
+                a = i.mixin({
+                    toast: !0,
+                    position: "top",
+                    showConfirmButton: !1,
+                    showCloseButton: !0
+                });
+            window.Swal = i, window.SwalAlerts = e.exports = {
+                toast: a,
+                alert: function(e) {
+                    i.fire({
+                        text: e,
+                        confirmButtonText: "OK"
+                    })
+                },
+                confirm: function(e, t, s) {
+                    i.fire({
+                        text: e,
+                        showCancelButton: !0,
+                        confirmButtonText: "Continue"
+                    }).then(e => {
+                        e.value ? t() : s && s()
+                    })
+                },
+                instance: i
+            }
+        }, , , function(e, t, s) {
+            let i = s(4),
+                a = !1;
+            e.exports = {
+                lerp: (e, t, s) => e + (t - e) * s,
+                clampNumber: (e, t, s) => Math.min(s, Math.max(t, e)),
+                getTimeString: function(e, t, s) {
+                    e instanceof Date && (e = e.getTime());
+                    var i = t ? 1 : 1e3,
+                        a = 60 * i,
+                        n = 60 * a;
+                    if (e < i) return "1 second";
+                    for (var o = [24 * n, n, a, i], r = ["day", "hour", "minute", "second"], l = !1, c = [], h = 0; h < o.length; h++) {
+                        var d = o[h],
+                            p = Math.floor(e / d);
+                        if (p) {
+                            var u = r[h],
+                                g = p > 1 ? "s" : "";
+                            c.push(p + " " + u + g), e %= d
+                        }
+                        if (l) break;
+                        p && !s && (l = !0)
+                    }
+                    return c.join(", ")
+                },
+                encodeHTML: e => e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, "&apos;").replace(/"/g, "&quot;"),
+                getTimestamp() {
+                    let e = new Date,
+                        t = e.getFullYear(),
+                        s = e.getMonth() + 1,
+                        i = e.getDate(),
+                        a = [t, (s > 9 ? "" : "0") + s, (i > 9 ? "" : "0") + i].join(""),
+                        n = [("0" + e.getHours()).slice(-2), ("0" + e.getMinutes()).slice(-2), ("0" + e.getSeconds()).slice(-2)].join("");
+                    return a + "-" + n
+                },
+                loadImage: e => fetch(e, {
+                    mode: "cors"
+                }).then(e => e.blob()).then(e => createImageBitmap(e)),
+                hideCaptchaBadge() {
+                    a || (document.body.classList.add("hide-captcha-badge"), a = !0)
+                },
+                destroyPixiPlugins(e) {
+                    ["interaction", "accessibility"].forEach(t => {
+                        let s = e.plugins[t];
+                        s && (s.destroy(), delete e.plugins[t])
+                    })
+                },
+                writeUserData(e, t) {
+                    let s = t && i.dualUseNickname ? i.dualNickname || "Dual" : document.getElementById("nickname").value,
+                        a = t ? i.dualSkin || "vanis1" : document.getElementById("skinurl").value,
+                        n = document.getElementById("teamtag").value;
+                    e.writeEscapedStringNT(s), e.writeEscapedStringNT(a), e.writeEscapedStringNT(n)
+                }
+            }
+        }, , , , function(e, t, s) {
+            let i = s(4);
+            class a {
+                constructor() {
+                    this.cache = new Map, this.textureSize = i.cellSize, this.cellSize = this.textureSize / 2
+                }
+                destroyCache() {
+                    let {
+                        cache: e
+                    } = this;
+                    e.forEach(e => e.destroy(!0)), e.clear()
+                }
+            }
+            let n = s(24),
+                o = s(124);
+            e.exports = {
+                cells: new class e extends a {
+                    getTexture(e) {
+                        let {
+                            cache: t
+                        } = this;
+                        if (t.has(e)) return t.get(e);
+                        {
+                            let {
+                                cellSize: s,
+                                textureSize: i
+                            } = this, a = new PIXI.Graphics().beginFill(e).drawCircle(0, 0, s).endFill();
+                            a.position.set(s);
+                            let o = PIXI.RenderTexture.create(i, i);
+                            return t.set(e, o), n.render(a, o), o
+                        }
+                    }
+                },
+                squares: new class e extends a {
+                    getTexture(e) {
+                        let {
+                            cache: t
+                        } = this;
+                        if (t.has(e)) return t.get(e);
+                        {
+                            let {
+                                cellSize: s,
+                                textureSize: i
+                            } = this, a = new PIXI.Graphics().beginFill(e).drawRect(-s, -s, 2 * s, 2 * s).endFill();
+                            a.position.set(s);
+                            let o = PIXI.RenderTexture.create(i, i);
+                            return t.set(e, o), n.render(a, o), o
+                        }
+                    }
+                },
+                virus: o
+            }
+        }, , function(e, t, s) {
+            let i = s(1),
+                a = s(4),
+                {
+                    cells: n
+                } = s(12),
+                {
+                    clampNumber: o
+                } = s(8);
+            class r {
+                constructor({
+                                id: e,
+                                x: t,
+                                y: s,
+                                size: i,
+                                flags: a,
+                                texture: o,
+                                context: r
+                            }) {
+                    o = o || n.getTexture(0), this.flags = a, this.oSize = this.size = i, this.destroyed = !1, this.id = e || 0;
+                    let l = this.sprite = new PIXI.Sprite(this.texture = o);
+                    l.anchor.set(.5), l.gameData = this, this.x = this.ox = l.position.x = t, this.y = this.oy = this.sprite.position.y = s, this.mainContext = r, this.activeContexts = 1
+                }
+                update() {
+                    let e = i.timeStamp - this.updateStamp,
+                        t = o(e / a.drawDelay, 0, 1);
+                    if (this.destroyed && (1 === t || this.texture.clearedFromCache)) return !0;
+                    let s = 2 * (this.size = t * (this.nSize - this.oSize) + this.oSize),
+                        {
+                            sprite: n
+                        } = this;
+                    if (!n) return !0;
+                    n.width = n.height = s;
+                    let {
+                        position: r
+                    } = n;
+                    return r.x = this.x = t * this.newPositionScale * (this.nx - this.ox) + this.ox, r.y = this.y = t * this.newPositionScale * (this.ny - this.oy) + this.oy, this.onUpdate && this.onUpdate(), !1
+                }
+                destroy(e, t = !1) {
+                    if (this.destroyed) return !1;
+                    let {
+                        dual: s
+                    } = i, {
+                        cells: a
+                    } = 1 & e ? i : s, {
+                        id: n
+                    } = this;
+                    if (a.delete(n), s.opened) {
+                        let o = this.mainContext,
+                            r = --this.activeContexts;
+                        if (o == e) {
+                            let {
+                                cells: l
+                            } = 2 & e ? i : s;
+                            if (l.has(n)) return this.mainContext = 1 & e ? 2 : 1, !1
+                        }
+                        if (0 != r) return !1
+                    }
+                    return this.onDestroy && this.onDestroy(), this.pid && i.ownedCells.delete(this), this.destroyed = !0, t ? i.destroyedCells.push(this) : this.destroySprite(), !0
+                }
+                destroySprite() {
+                    this.sprite && (this.sprite.destroy(), this.sprite = null)
+                }
+            }
+            r.prototype.type = 0, r.prototype.updateStamp = 0, r.prototype.newPositionScale = 1, e.exports = r
+        }, , , function(e, t, s) {
+            var i = s(5);
+
+            function a() {
+                i.instance.fire({
+                    type: "warning",
+                    title: "Browser support limited",
+                    html: "Skins might not work properly in this browser.<br>Please consider using Chrome.",
+                    allowOutsideClick: !1
+                })
+            }
+
+            function n(e) {
+                for (var t = "", s = 0; s < e.length; s++) t += String.fromCharCode(e.charCodeAt(s) - 2);
+                return t
+            }
+            var o = ["pkiigt", "p3iigt", "pkii5t", "pkiic", "p3iic", "p3ii6", "pkii", "p3ii", "p3i", "hciiqv", "h6iiqv", "hcii2v", "hci", "cpcn", "cuujqng", "ewpv", "rwuu{", "xcikpc", "xci3pc", "eqem", "e2em", "uewo", "ycpm", "yjqtg", "yj2tg", "unwv", "dkvej", "d3vej", "rqtp", "r2tp", "tcrg", "t6rg", "jkvngt", "j3vngt", "jkvn5t", "j3vn5t", "pc|k", "p6|k", "tgvctf", "ejkpm", "hwem", "ujkv"],
+                r = o.map(n),
+                l = o.map(n).sort((e, t) => t.length - e.length).map(e => RegExp("[^s]*" + e.split("").join("s*") + "[^s]*", "gi"));
+            e.exports = {
+                noop: function() {},
+                checkBadWords: function(e) {
+                    return e = e.toLowerCase(), r.some(t => e.includes(t))
+                },
+                replaceBadWordsChat: function(e) {
+                    for (var t = 0; t < l.length; t++) e = e.replace(l[t], e => Array(e.length).fill("*").join(""));
+                    return e
+                },
+                notifyUnsupportedBrowser: async function() {
+                    window.safari || /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ? i.instance.fire({
+                        type: "warning",
+                        title: "Safari browser is not supported :(",
+                        html: "Please consider using Google Chrome.",
+                        allowOutsideClick: !1,
+                        showCloseButton: !1,
+                        showCancelButton: !1,
+                        showConfirmButton: !1
+                    }) : !localStorage.skipUnsupportedAlert && ((localStorage.skipUnsupportedAlert = !0, navigator.userAgent.toLowerCase().includes("edge")) ? a() : await new Promise(e => {
+                        var t = new Image;
+                        t.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA", t.onload = t.onerror = () => {
+                            e(2 === t.height)
+                        }
+                    }) || a())
+                },
+                isFirstVisit: !localStorage.visitedBefore && (localStorage.visitedBefore = !0, !0)
+            }
+        }, , , , , , , function(e, t, s) {
+            var i = s(4),
+                a = s(8);
+            PIXI.utils.skipHello();
+            var n = document.getElementById("canvas"),
+                o = {
+                    resolution: i.customResolution || window.devicePixelRatio || 1,
+                    view: n,
+                    forceCanvas: !i.useWebGL,
+                    antialias: !1,
+                    powerPreference: "high-performance",
+                    backgroundColor: PIXI.utils.string2hex(i.backgroundColor)
+                };
+            o.resolution = i.gameResolution;
+            var r = PIXI.autoDetectRenderer(o);
+
+            function l() {
+                r.resize(window.innerWidth, window.innerHeight)
+            }
+            l(), a.destroyPixiPlugins(r), window.addEventListener("resize", l), r.clear(), e.exports = r
+        }, function(e) {
+            function t() {
+                this.data = []
+            }
+            e.exports = t, t.prototype.write = function() {
+                return new Uint8Array(this.data)
+            }, t.prototype.uint8 = function(e) {
+                this.data.push(e)
+            }, t.prototype.uint8Array = function(e) {
+                for (var t = 0; t < e.length; t++) this.data.push(e[t])
+            }, t.prototype.utf8 = function(e) {
+                e = unescape(encodeURIComponent(e));
+                for (var t = 0; t < e.length; t++) this.data.push(e.charCodeAt(t));
+                this.data.push(0)
+            }
+        }, , , , function(e, t, s) {
+            var i = s(2),
+                a = s(167);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(31),
+                a = s.n(i);
+            t.default = a.a
+        }, function(e) {
+            e.exports = {
+                data: () => ({})
+            }
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(169);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(171);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(173);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(175);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(177);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(179);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(39),
+                a = s.n(i);
+            t.default = a.a
+        }, function(e, t, s) {
+            var i = s(89),
+                a = s(1),
+                n = s(5),
+                o = a.replay.database;
+            e.exports = {
+                props: ["replay"],
+                methods: {
+                    async play(e) {
+                        if (!a.connection.opened || await new Promise(e => {
+                            n.confirm("You will be disconnected", () => e(!0), () => e(!1))
+                        })) try {
+                            a.replay.play(e)
+                        } catch (t) {
+                            sendTimedSwal(`Watching replay error`, `Waching replays on Delta currently does not work, please watch them with Single mode or render them!`, 3000, false);
+                            a.stop();
+                        }
+                    },
+                    downloadReplay(e) {
+                        n.instance.fire({
+                            input: "text",
+                            inputValue: e.name,
+                            showCancelButton: !0,
+                            confirmButtonText: "Download",
+                            html: "Only Vanis.io can read replay files.<br>It consists of player positions and other game related data."
+                        }).then(t => {
+                            var s = t.value;
+                            if (s) {
+                                var a = new Blob([e.data], {
+                                    type: "text/plain;charset=utf-8"
+                                });
+                                i.saveAs(a, s + ".vanis")
+                            }
+                        })
+                    },
+                    deleteReplay(e) {
+                        n.confirm("Are you sure that you want to delete this replay?", () => {
+                            o.removeItem(e, () => {
+                                a.events.$emit("replay-removed")
+                            })
+                        })
+                    }
+                }
+            }
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(219);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(221);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(223);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(225);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(227);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(231);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(233);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(235);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(237);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(239);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(241);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(243);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(245);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(247);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(249);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(56),
+                a = s.n(i);
+            t.default = a.a
+        }, function(e, t, s) {
+            var i = s(1),
+                a = s(8),
+                n = s(4),
+                o = n.minimapSize,
+                r = n.minimapFPS,
+                l = n.minimapSmoothing,
+                c = new PIXI.Container,
+                h = {};
+
+            function d() {
+                return (new Date).toLocaleTimeString()
+            }
+
+            function p(e, t = !1) {
+                if (t && e < 1) return "instant";
+                e = Math.floor(e);
+                let s = Math.floor(e / 60),
+                    i = Math.floor(s / 60);
+                return s < 1 ? t ? e + "s" : "<1min" : i < 1 ? s + "min" : s % 60 == 0 ? i + "hr" : i + "hr " + s % 60 + "min"
+            }
+            e.exports = {
+                data: () => ({
+                    showMinimap: !1,
+                    showMinimapCircle: !1,
+                    showMinimapStats: !0,
+                    showLocations: n.minimapLocations,
+                    interval: null,
+                    minimapStatsBottom: 10,
+                    showClock: n.showClock,
+                    showSessionTime: n.showSessionTime,
+                    showSpectators: n.showSpectators,
+                    showPlayerCount: n.showPlayerCount,
+                    showRestartTiming: n.showRestartTiming,
+                    systemTime: d(),
+                    sessionTime: p(0, !1),
+                    restartTime: p(0, !0),
+                    spectators: 0,
+                    playerCount: 0,
+                    restartTick: 0,
+                    startTime: null,
+                    gameState: i.state
+                }),
+                computed: {
+                    playerCountDisplayed() {
+                        if (this.gameState.selectedServer) {
+                            var e = this.gameState.selectedServer.slots;
+                            return Math.min(this.playerCount, e) + " / " + e + " players"
+                        }
+                        return this.playerCount + " player" + (1 === this.playerCount ? "" : "s")
+                    }
+                },
+                methods: {
+                    initRenderer(e) {
+                        var t = PIXI.autoDetectRenderer({
+                            resolution: 1,
+                            view: e,
+                            width: o,
+                            height: o,
+                            forceCanvas: !n.useWebGL,
+                            antialias: !1,
+                            powerPreference: "high-performance",
+                            transparent: !0
+                        });
+                        a.destroyPixiPlugins(t), t.clear(), this.renderer = t
+                    },
+                    destroyMinimap() {
+                        c.destroy(!0), c = new PIXI.Container, this.renderer.clear()
+                    },
+                    onMinimapShow() {
+                        this.interval || (this.showMinimap = !0, this.minimapStatsBottom = o + 10, i.events.$on("minimap-positions", this.updatePositions), this.interval = setInterval(this.render, 1e3 / r))
+                    },
+                    onMinimapHide() {
+                        this.interval && (this.showMinimap = !1, this.minimapStatsBottom = 10, i.events.$off("minimap-positions", this.updatePositions), clearInterval(this.interval), this.interval = null, this.spectators = 0, this.playerCount = 0)
+                    },
+                    createNode(e, t, s, i) {
+                        e in h && h[e].destroy(!0), s = s || 16777215, i = i || 16777215;
+                        let a = new PIXI.Container;
+                        a.newPosition = {};
+                        let n = new PIXI.Graphics().beginFill(i).drawCircle(0, 0, 5).endFill();
+                        if (a.addChild(n), t) {
+                            let o = new PIXI.Text(t, {
+                                strokeThickness: 4,
+                                lineJoin: "round",
+                                fontFamily: "Nunito",
+                                fill: s,
+                                fontSize: 12
+                            });
+                            o.anchor.set(.5), o.pivot.y = 15, a.addChild(o)
+                        }
+                        h[e] = a
+                    },
+                    destroyNode(e) {
+                        var t = h[e];
+                        t && (t.destroy(!0), delete h[e])
+                    },
+                    updatePositions(e) {
+                        c.removeChildren();
+                        for (var t = 0; t < e.length; t++) {
+                            var s = e[t],
+                                i = h[s.pid];
+                            i && (i.newPosition.x = s.x * o, i.newPosition.y = s.y * o, c.addChild(i))
+                        }
+                        this.render()
+                    },
+                    render() {
+                        for (var e = c.children, t = l * (30 / r), s = 0; s < e.length; s++) {
+                            var i = e[s];
+                            i.position.x = a.lerp(i.position.x, i.newPosition.x, t), i.position.y = a.lerp(i.position.y, i.newPosition.y, t)
+                        }
+                        this.renderer.render(c)
+                    },
+                    drawLocationGrid(e, t) {
+                        var s = o / t;
+                        e.globalAlpha = .1, e.strokeStyle = "#202020", e.beginPath();
+                        for (var i = 1; i < t; i++) {
+                            var a = i * s;
+                            e.moveTo(a, 0), e.lineTo(a, o), e.moveTo(0, a), e.lineTo(o, a)
+                        }
+                        e.stroke(), e.closePath()
+                    },
+                    drawLocationCodes(e, t) {
+                        var s = o / t,
+                            i = s / 2;
+                        e.globalAlpha = .1, e.font = "14px Nunito", e.textAlign = "center", e.textBaseline = "middle", e.fillStyle = "#ffffff";
+                        for (var a = 0; a < t; a++)
+                            for (var n = a * s + i, r = 0; r < t; r++) {
+                                var l = String.fromCharCode(97 + r).toUpperCase() + (a + 1),
+                                    c = r * s + i;
+                                e.strokeText(l, n, c), e.fillText(l, n, c)
+                            }
+                    },
+                    drawLocations(e) {
+                        e.width = e.height = o;
+                        var t = e.getContext("2d"),
+                            s = o / 2;
+                        if (this.showLocations) {
+                            if (t.save(), this.showMinimapCircle) {
+                                var i = new Path2D;
+                                i.ellipse(s, s, s, s, 0, 0, 2 * Math.PI), t.clip(i)
+                            }
+                            this.drawLocationGrid(t, 5), this.drawLocationCodes(t, 5)
+                        }
+                        t.restore(), this.showMinimapCircle && (t.globalAlpha = .45, t.beginPath(), t.arc(s, s, s + 1, -Math.PI / 2, 0), t.lineTo(o, 0), t.closePath(), t.fill())
+                    }
+                },
+                created() {
+                    i.events.$on("minimap-show", this.onMinimapShow), i.events.$on("minimap-hide", this.onMinimapHide), i.events.$on("minimap-destroy", this.destroyMinimap), i.events.$on("minimap-create-node", this.createNode), i.events.$on("minimap-destroy-node", this.destroyNode), i.events.$on("minimap-show-locations", e => {
+                        this.showLocations = e, this.drawLocations(this.$refs.locations)
+                    }), i.events.$on("minimap-stats-visible", e => this.showMinimapStats = e), i.events.$on("minimap-stats-changed", e => {
+                        this.spectators = e.spectators, this.playerCount = e.playerCount
+                    }), i.events.$on("restart-timing-changed", e => this.restartTick = e), i.events.$on("game-started", () => {
+                        this.showMinimapCircle = i.border.circle, this.drawLocations(this.$refs.locations)
+                    }), i.events.$on("game-stopped", () => this.restartTick = 0), i.events.$on("minimap-stats-invalidate-shown", () => {
+                        this.showClock = n.showClock, this.showSessionTime = n.showSessionTime, this.showSpectators = n.showSpectators, this.showPlayerCount = n.showPlayerCount, this.showRestartTiming = n.showRestartTiming
+                    }), i.events.$on("every-second", () => {
+                        this.systemTime = d();
+                        var e = (Date.now() - this.startTime) / 1e3;
+                        this.sessionTime = p(e, !1), this.restartTick && i.serverTick ? (e = (this.restartTick - i.serverTick) / 25, this.restartTime = p(e, !0)) : this.restartTime = null
+                    })
+                },
+                mounted() {
+                    this.initRenderer(this.$refs.minimap), this.startTime = Date.now()
+                }
+            }
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(251);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(253);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(255);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(257);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(259);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(261);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(263);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(266);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, , function(e, t, s) {
+            let i = s(1),
+                a = s(4),
+                n = s(5),
+                o = i.actions,
+                r = {
+                    toggleAutoRespawn() {
+                        let e = a.autoRespawn;
+                        a.set("autoRespawn", !e), e && i.state.autoRespawning && i.triggerAutoRespawn(!1);
+                        let t = "Auto respawn ";
+                        t += e ? "disabled" : "enabled", n.toast.fire({
+                            type: "info",
+                            title: t,
+                            timer: 1500
+                        })
+                    },
+                    respawn() {
+                        o.join(i.dual.focused), i.showMenu(!1)
+                    },
+                    feed: o.feed.bind(o),
+                    feedMacro: o.feed.bind(o, !0),
+                    split: o.split.bind(o, 1),
+                    splitx2: o.split.bind(o, 2),
+                    splitx3: o.split.bind(o, 3),
+                    splitMax: o.split.bind(o, 4),
+                    split32: o.split.bind(o, 5),
+                    split64: o.split.bind(o, 6),
+                    split128: o.split.bind(o, 7),
+                    split256: o.split.bind(o, 8),
+                    dual1: o.dualCombo.bind(o, 1),
+                    dual2: o.dualCombo.bind(o, 2),
+                    dual3: o.dualCombo.bind(o, 3),
+                    linesplit: o.linesplit.bind(o),
+                    freezeMouse: o.freezeMouse.bind(o),
+                    lockLinesplit: o.lockLinesplit.bind(o),
+                    stopMovement: o.stopMovement.bind(o),
+                    toggleSkins: o.toggleSkins.bind(o),
+                    toggleNames: o.toggleNames.bind(o),
+                    toggleFood: o.toggleFood.bind(o),
+                    toggleMass: o.toggleMass.bind(o),
+                    toggleChat: o.toggleChat.bind(o),
+                    toggleChatToast: o.toggleChatToast.bind(o),
+                    toggleHud: o.toggleHud.bind(o),
+                    spectateLock: o.spectateLockToggle.bind(o),
+                    selectPlayer: o.targetPlayer.bind(o),
+                    saveReplay() {
+                        let {
+                            dual: e
+                        } = i;
+                        i.replay.save(e.focused)
+                    },
+                    zoomLevel1: o.setZoomLevel.bind(o, 1),
+                    zoomLevel2: o.setZoomLevel.bind(o, 2),
+                    zoomLevel3: o.setZoomLevel.bind(o, 3),
+                    zoomLevel4: o.setZoomLevel.bind(o, 4),
+                    zoomLevel5: o.setZoomLevel.bind(o, 5),
+                    dualbox() {
+                        let {
+                            dual: e
+                        } = i;
+                        e.switch()
+                    }
+                };
+            window.client && Object.assign(r, {
+                "m-feed": client.feed.bind(client),
+                "m-feedMacro": client.feed.bind(client, !0),
+                "m-split": client.split.bind(client, 1),
+                "m-splitx2": client.split.bind(client, 2),
+                "m-splitx3": client.split.bind(client, 3),
+                "m-splitMax": client.split.bind(client, 4),
+                "m-split32": client.split.bind(client, 5),
+                "m-split64": client.split.bind(client, 6),
+                "m-linesplit": client.lineSplit.bind(client),
+                "m-stopMovement": client.toggleMovement.bind(client),
+                "m-respawn": client.spawn.bind(client),
+                "m-focus": client.focus.bind(client, !0),
+                "m-unfocus": client.focus.bind(client, !1)
+            });
+            let l = {
+                dualbox: "TAB",
+                feed: "",
+                feedMacro: "W",
+                split: "SPACE",
+                splitx2: "G",
+                splitx3: "H",
+                splitMax: "T",
+                split32: "",
+                split64: "",
+                split128: "",
+                split256: "",
+                dual1: "",
+                dual2: "",
+                dual3: "",
+                linesplit: "Z",
+                lockLinesplit: "",
+                respawn: "",
+                toggleAutoRespawn: "",
+                stopMovement: "",
+                toggleSkins: "",
+                toggleNames: "",
+                toggleMass: "",
+                spectateLock: "Q",
+                selectPlayer: "MOUSE1",
+                saveReplay: "R",
+                toggleChat: "",
+                toggleChatToast: "",
+                toggleHud: "",
+                zoomLevel1: "1",
+                zoomLevel2: "2",
+                zoomLevel3: "3",
+                zoomLevel4: "4",
+                zoomLevel5: "5"
+            };
+            e.exports = i.hotkeyManager = new class e {
+                constructor() {
+                    this.version = 2, this.pressHandlers = null, this.releaseHandlers = null, this.resetObsoleteHotkeys(), this.load()
+                }
+                resetObsoleteHotkeys() {}
+                load() {
+                    this.hotkeys = this.loadHotkeys(), this.loadHandlers(this.hotkeys)
+                }
+                loadHotkeys() {
+                    let e = Object.assign({}, l),
+                        t = localStorage.hotkeys;
+                    if (!t) return e;
+                    t = JSON.parse(t);
+                    let s = Object.values(t);
+                    return Object.keys(e).forEach(t => {
+                        let i = e[t];
+                        i && s.includes(i) && (e[t] = "")
+                    }), Object.assign(e, t)
+                }
+                saveHotkeys(e) {
+                    localStorage.hotkeys = JSON.stringify(e)
+                }
+                reset() {
+                    return localStorage.removeItem("hotkeys"), this.load(), this.hotkeys
+                }
+                get() {
+                    return this.hotkeys
+                }
+                set(e, t) {
+                    if (!(e in r)) return !1;
+                    if (this.hotkeys[e] === t) return !0;
+                    if (t)
+                        for (let s in this.hotkeys) this.hotkeys[s] === t && (this.hotkeys[s] = "");
+                    return this.hotkeys[e] = t, this.saveHotkeys(this.hotkeys), this.loadHandlers(this.hotkeys), !0
+                }
+                loadHandlers(e) {
+                    for (let t in this.pressHandlers = {}, e) {
+                        if (!(t in r)) continue;
+                        let s = r[t],
+                            i = e[t];
+                        this.pressHandlers[i] = s
+                    }
+                    this.releaseHandlers = {}, "feedMacro" in e && (this.releaseHandlers[e.feedMacro] = o.feed.bind(o, !1)), window.client && "m-feedMacro" in e && (this.releaseHandlers[e["m-feedMacro"]] = client.feed.bind(o, !1))
+                }
+                press(e) {
+                    let t = this.pressHandlers[e];
+                    return !!t && (t(), !0)
+                }
+                release(e) {
+                    let t = this.releaseHandlers[e];
+                    t?.()
+                }
+                convertKey(e) {
+                    return e ? e.toString().toUpperCase().replace(/^(LEFT|RIGHT|NUMPAD|DIGIT|KEY)/, "") : "Unknown"
+                }
+            }
+        }, , , , , , , function(e, t, s) {
+            "use strict";
+            var i = function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return t("div", [t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showMinimapStats,
+                            expression: "showMinimapStats"
+                        }],
+                        staticClass: "minimap-stats",
+                        style: {
+                            bottom: this.minimapStatsBottom + "px"
+                        }
+                    }, [t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showClock,
+                            expression: "showClock"
+                        }]
+                    }, [this._v(this._s(this.systemTime))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showSessionTime,
+                            expression: "showSessionTime"
+                        }]
+                    }, [this._v(this._s(this.sessionTime) + " session")]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showPlayerCount && this.playerCount,
+                            expression: "showPlayerCount && playerCount"
+                        }]
+                    }, [this._v(this._s(this.playerCountDisplayed))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showSpectators && this.spectators,
+                            expression: "showSpectators && spectators"
+                        }]
+                    }, [this._v(this._s(this.spectators) + " spectator" + this._s(1 === this.spectators ? "" : "s"))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showRestartTiming && this.restartTime,
+                            expression: "showRestartTiming && restartTime"
+                        }]
+                    }, [this._v("Restart in " + this._s(this.restartTime))])]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showMinimap,
+                            expression: "showMinimap"
+                        }],
+                        staticClass: "container",
+                        class: {
+                            circle: this.showMinimapCircle
+                        }
+                    }, [t("canvas", {
+                        ref: "locations",
+                        attrs: {
+                            id: "locations"
+                        }
+                    }), this._v(" "), t("canvas", {
+                        ref: "minimap",
+                        attrs: {
+                            id: "minimap"
+                        }
+                    })])])
+                },
+                a = [];
+            i._withStripped = !0, s.d(t, "a", function() {
+                return i
+            }), s.d(t, "b", function() {
+                return a
+            })
+        }, function(e, t, s) {
+            "use strict";
+            var i = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("transition", {
+                        attrs: {
+                            name: "fade",
+                            appear: ""
+                        }
+                    }, [s("div", {
+                        staticClass: "modal"
+                    }, [s("div", {
+                        staticClass: "overlay",
+                        on: {
+                            click: function() {
+                                return e.$emit("close")
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "fas fa-times-circle close-button",
+                        on: {
+                            click: function() {
+                                return e.$emit("close")
+                            }
+                        }
+                    }), e._v(" "), s("div", {
+                        staticClass: "wrapper"
+                    }, [s("transition", {
+                        attrs: {
+                            name: "scale",
+                            appear: ""
+                        }
+                    }, [s("div", {
+                        staticClass: "content fade-box"
+                    }, [e._t("default", [e._v("Here should be something")])], 2)])], 1)])])
+                },
+                a = [];
+            i._withStripped = !0, s.d(t, "a", function() {
+                return i
+            }), s.d(t, "b", function() {
+                return a
+            })
+        }, function(e, t, s) {
+            "use strict";
+            var i = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticClass: "replay-item",
+                        style: {
+                            backgroundImage: "url('" + e.replay.image + "')"
+                        },
+                        on: {
+                            click: function() {
+                                return e.play(e.replay.data)
+                            }
+                        }
+                    }, [s("div", {
+                        staticClass: "replay-header",
+                        on: {
+                            click: function(e) {
+                                e.stopPropagation()
+                            }
+                        }
+                    }, [s("div", {
+                        staticClass: "replay-name"
+                    }, [e._v(e._s(e.replay.name))]), e._v(" "), s("div", [s("i", {
+                        staticClass: "replay-button fas fa-cloud-download-alt",
+                        on: {
+                            click: function(t) {
+                                return t.stopPropagation(), e.downloadReplay(e.replay)
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "replay-button fas fa-trash-alt",
+                        on: {
+                            click: function(t) {
+                                return t.stopPropagation(), e.deleteReplay(e.replay.name)
+                            }
+                        }
+                    })])])])
+                },
+                a = [];
+            i._withStripped = !0, s.d(t, "a", function() {
+                return i
+            }), s.d(t, "b", function() {
+                return a
+            })
+        }, function(e, t) {
+            t.neon = [16776960, 65280, 65535, 16711935], t.basic = [16711680, 16744448, 16776960, 8453888, 65280, 65408, 65535, 33023, 8388863, 16711935, 16711808], t.basicd = t.basic.map(e => {
+                var t = e >> 16 & 255,
+                    s = e >> 8 & 255,
+                    i = 255 & e;
+                return (t *= .5) << 16 | (s *= .5) << 8 | (i *= .5) >> 0
+            })
+        }, function(e) {
+            var t = new class {
+                constructor() {
+                    this.ads = {}
+                }
+                addAd(e, t, s) {
+                    this.ads[e] = {
+                        elementId: t,
+                        lastRefresh: 0,
+                        waitInterval: s || 0
+                    }
+                }
+                getAd(e) {
+                    return this.ads[e] || null
+                }
+                pushAd(e) {
+                    aiptag.cmd.display.push(function() {
+                        aipDisplayTag.display(e)
+                    })
+                }
+                refreshAd(e) {
+                    var t = this.getAd(e);
+                    if (!t) return !1;
+                    var s = Date.now();
+                    return !(t.lastRefresh + 1e3 * t.waitInterval > s) && (t.lastRefresh = s, this.pushAd(t.elementId), !0)
+                }
+            };
+            t.addAd("menu-box", "vanis-io_300x250", 30), t.addAd("menu-banner", "vanis-io_728x90", 120), t.addAd("death-box", "vanis-io_300x250_2", 30), e.exports = {
+                loadAdinplay(e) {
+                    var t = window.aiptag = t || {};
+                    t.cmd = t.cmd || [], t.cmd.display = t.cmd.display || [], t.gdprShowConsentTool = !0;
+                    var s = document.createElement("script");
+                    s.onload = e, s.src = "//api.adinplay.com/libs/aiptag/pub/VAN/vanis.io/tag.min.js", document.head.appendChild(s)
+                },
+                refreshAd: e => t.refreshAd(e)
+            }
+        }, function(e) {
+            let t = e => {
+                let t = {
+                    border: {},
+                    food: {}
+                };
+                if (t.protocol = e.readUInt8(), t.protocol >= 4) {
+                    t.gamemodeId = e.readUInt8(), t.instanceSeed = e.readUInt16LE(), t.playerId = e.readUInt16LE(), t.border.minx = e.readInt16LE(), t.border.miny = e.readInt16LE(), t.border.maxx = e.readInt16LE(), t.border.maxy = e.readInt16LE(), t.flags = e.readUInt8(), t.border.circle = !!(1 & t.flags), t.border.width = t.border.maxx - t.border.minx, t.border.height = t.border.maxy - t.border.miny;
+                    let {
+                        food: s
+                    } = t;
+                    if (2 & t.flags) {
+                        let i = s.minSize = e.readUInt16LE(),
+                            a = s.maxSize = e.readUInt16LE();
+                        s.stepSize = a - i
+                    }
+                    4 & t.flags && (s.ejectedSize = e.readUInt16LE())
+                } else {
+                    if (t.protocol >= 2) t.gamemodeId = e.readUInt8(), t.instanceSeed = e.readUInt16LE(), t.playerId = e.readUInt16LE(), t.border.width = e.readUInt32LE(), t.border.height = e.readUInt32LE();
+                    else {
+                        t.gamemodeId = 1, t.instanceSeed = e.readInt16LE(), t.playerId = e.readInt16LE();
+                        let n = e.readUInt16LE();
+                        t.border.width = n, t.border.height = n
+                    }
+                    t.border.minx = -t.border.width / 2, t.border.miny = -t.border.height / 2, t.border.maxx = +t.border.width / 2, t.border.maxy = +t.border.height / 2
+                }
+                return t.border.x = (t.border.minx + t.border.maxx) / 2, t.border.y = (t.border.miny + t.border.maxy) / 2, t
+            };
+            e.exports = t
+        }, function(e, t, s) {
+            let i = s(1),
+                a = s(4),
+                {
+                    PlayerCell: n,
+                    Virus: o,
+                    EjectedMass: r,
+                    Food: l,
+                    Crown: c,
+                    DeadCell: h
+                } = s(133),
+                d = s(14),
+                {
+                    clampNumber: p
+                } = s(8);
+            class u extends d {
+                constructor(e) {
+                    e.texture = PIXI.Texture.from("/img/coin.png"), super(e)
+                }
+            }
+            u.prototype.type = 9, u.prototype.isCoin = !0;
+            let g = (e, t, s, a, d, p, g, A, m = 1) => {
+                    let v = 15 & e;
+                    if ((3 == v || 4 == v) && (void 0 == a || void 0 == p)) {
+                        let {
+                            food: f
+                        } = i, C = p = 3 == v ? f.ejectedSize || 1 : f.minSize + s % f.stepSize || 1;
+                        if (4 == v) {
+                            let {
+                                border: y
+                            } = i;
+                            a = y.minx + C + (y.width - 2 * C) * i.seededRandom(65536 + s), d = y.miny + C + (y.height - 2 * C) * i.seededRandom(131072 + s)
+                        }
+                    }
+                    let {
+                        dual: w
+                    } = i, {
+                        cells: I
+                    } = 1 & m ? i : w, k;
+                    if (I.has(s))(k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
+                    else {
+                        let b = {
+                                type: e,
+                                id: s,
+                                pid: t,
+                                x: a,
+                                y: d,
+                                size: p,
+                                flags: g,
+                                context: m
+                            },
+                            _ = !1;
+                        if (w.opened) {
+                            let {
+                                cells: S
+                            } = 2 & m ? i : w;
+                            if (S.has(s)) {
+                                if (1 != v) return;
+                                k = S.get(s), k.activeContexts++, I.set(s, k), _ = !0
+                            }
+                        }
+                        switch (v) {
+                            case 1: {
+                                if (_) break;
+                                let E = i.playerManager.getPlayer(t);
+                                if (!E) return;
+                                b.texture = E.texture, k = new n(b, E);
+                                break
+                            }
+                            case 2:
+                                k = new o(b);
+                                break;
+                            case 3:
+                                k = new r(b);
+                                break;
+                            case 4:
+                                k = new l(b);
+                                break;
+                            case 6:
+                                k = new c(b);
+                                break;
+                            case 9:
+                                k = new u(b);
+                                break;
+                            default: {
+                                let x = 4210752,
+                                    B = !1;
+                                g > 1 && (x = 0, 128 & g && (x |= 7340032), 64 & g && (x |= 28672), 32 & g && (x |= 112), 16 & g && (B = !0)), k = new h(b, x, B)
+                            }
+                        }
+                        if (!_) {
+                            let {
+                                scene: Q
+                            } = i;
+                            Q[1 & g ? "addFood" : "addCell"](k.sprite)
+                        }
+                        I.set(s, k)
+                    }
+                    void 0 != a && (k.nx = a, k.ny = d), void 0 != p && (k.nSize = p), k.updateStamp = i.timeStamp;
+                    let {
+                        player: M
+                    } = k;
+                    if (!M || 2 & m) return;
+                    let {
+                        replay: T
+                    } = i;
+                    T.recording() ? M.lastUpdateTick = A : delete M.lastUpdateTick
+                },
+                A = (e, t, s) => {
+                    let {
+                        cells: n
+                    } = 1 & s ? i : i.dual;
+                    if (!n.has(e)) return;
+                    let o = n.get(e);
+                    if (o.destroyed) return;
+                    if (!n.has(t)) return void o.destroy(s);
+                    let r = n.get(t);
+                    if (o.update(), !o.destroy(s, a.eatAnimation)) return;
+                    o.nx = r.nx, o.ny = r.ny;
+                    let l = o.nSize;
+                    o.nSize = 0, o.newPositionScale = p(l / r.nSize, 0, 1), o.updateStamp = i.timeStamp
+                },
+                m = (e, t) => {
+                    let {
+                        cells: s
+                    } = 1 & t ? i : i.dual;
+                    s.has(e) && s.get(e).destroy(t)
+                },
+                v = new class e {
+                    async init() {
+                        if (this.initializing || this.instance) return !1;
+                        this.initializing = !0;
+                        let e = await fetch("data:application/wasm;base64,AGFzbQEAAAABKAdgAX8Bf2ABfwBgA39/fwBgAAF/YAAAYAJ/fwBgCX9/f39/f39/fwACUQQDZW52C2FkZE9yVXBkYXRlAAYDZW52B2Rlc3Ryb3kABQNlbnYDZWF0AAIDZW52H2Vtc2NyaXB0ZW5fbm90aWZ5X21lbW9yeV9ncm93dGgAAQMLCgQCAwAAAAEDAQAEBQFwAQICBQcBAYACgIACBgkBfwFBgIzAAgsHjQEKBm1lbW9yeQIAC2Rlc2VyaWFsaXplAAULX2luaXRpYWxpemUABBlfX2luZGlyZWN0X2Z1bmN0aW9uX3RhYmxlAQAQX19lcnJub19sb2NhdGlvbgAGCXN0YWNrU2F2ZQALDHN0YWNrUmVzdG9yZQAMCnN0YWNrQWxsb2MADQZtYWxsb2MACQRmcmVlAAoJBwEAQQELAQQKjT8KAwABC6oEAQt/QQEhAyAALQAAIgYEQANAIAZB/wFxIQhBACEKAkAgBkEfcUEBRwRAQQAhCwwBCyAAIAVqLQACIAAgA2otAABBCHRyIQsgBUEDaiEDCyAAIANqIgUvAAAhByADQQJqIQQCQCAIQSBxBEBBACEMDAELIAUtAAMgACAEai0AAEEIdHIhCiAFLwAEIgRBCHQgBEEIdnIhDCADQQZqIQQLIAdBCHYhBSAHQQh0IQlBACEDAkAgCEHAAHEEQEEAIQcMAQsgACAEai8AACIHQQh0IAdBCHZyIQcgBEECaiEECyAGQQ9xIQ0gBSAJciEJIAZBGHRBGHVBf0oEfyAEBSAAIARqLQAAIQMgBEEBagshBSACIAggCyAJQf//A3EgCkEQdEEQdSAMQRB0QRB1IAdB//8DcSADIA1BBEYgA0H/AXFBD0tyckH/AXEgARAAIAVBAWohAyAAIAVqLQAAIgYNAAsLIANBAmohBAJAIAAgBWotAAIgACADai0AAEEIdHIiBUUEQCADIQYMAQsDQCACIAAgA2otAAMgACAEIgZqLQAAQQh0chABIARBAmohBCAGIQMgBUEBayIFQf//A3ENAAsLIAAgBmotAAMgACAEai0AAEEIdHIiAwRAA0AgACAGaiEBIAIgACAGQQRqIgZqLwAAIgRBCHQgBEEIdnJB//8DcSABLwAGIgFBCHQgAUEIdnJB//8DcRACIANBAWsiA0H//wNxDQALCwsFAEGECAsjACAAPwBBEHRrQf//A2pBEHZAAEF/RgRAQQAPC0EAEANBAQtSAQJ/QYAIKAIAIgEgAEEDakF8cSICaiEAAkAgAkEBTkEAIAAgAU0bDQA/AEEQdCAASQRAIAAQB0UNAQtBgAggADYCACABDwtBhAhBMDYCAEF/C5ctAQx/IwBBEGsiDCQAAkACQAJAAkACQAJAAkACQAJAAkACQAJAIABB9AFNBEBBiAgoAgAiBUEQIABBC2pBeHEgAEELSRsiCEEDdiICdiIBQQNxBEAgAUF/c0EBcSACaiIDQQN0IgFBuAhqKAIAIgRBCGohAAJAIAQoAggiAiABQbAIaiIBRgRAQYgIIAVBfiADd3E2AgAMAQsgAiABNgIMIAEgAjYCCAsgBCADQQN0IgFBA3I2AgQgASAEaiIBIAEoAgRBAXI2AgQMDQsgCEGQCCgCACIKTQ0BIAEEQAJAQQIgAnQiAEEAIABrciABIAJ0cSIAQQAgAGtxQQFrIgAgAEEMdkEQcSICdiIBQQV2QQhxIgAgAnIgASAAdiIBQQJ2QQRxIgByIAEgAHYiAUEBdkECcSIAciABIAB2IgFBAXZBAXEiAHIgASAAdmoiA0EDdCIAQbgIaigCACIEKAIIIgEgAEGwCGoiAEYEQEGICCAFQX4gA3dxIgU2AgAMAQsgASAANgIMIAAgATYCCAsgBEEIaiEAIAQgCEEDcjYCBCAEIAhqIgIgA0EDdCIBIAhrIgNBAXI2AgQgASAEaiADNgIAIAoEQCAKQQN2IgFBA3RBsAhqIQdBnAgoAgAhBAJ/IAVBASABdCIBcUUEQEGICCABIAVyNgIAIAcMAQsgBygCCAshASAHIAQ2AgggASAENgIMIAQgBzYCDCAEIAE2AggLQZwIIAI2AgBBkAggAzYCAAwNC0GMCCgCACIGRQ0BIAZBACAGa3FBAWsiACAAQQx2QRBxIgJ2IgFBBXZBCHEiACACciABIAB2IgFBAnZBBHEiAHIgASAAdiIBQQF2QQJxIgByIAEgAHYiAUEBdkEBcSIAciABIAB2akECdEG4CmooAgAiASgCBEF4cSAIayEDIAEhAgNAAkAgAigCECIARQRAIAIoAhQiAEUNAQsgACgCBEF4cSAIayICIAMgAiADSSICGyEDIAAgASACGyEBIAAhAgwBCwsgASAIaiIJIAFNDQIgASgCGCELIAEgASgCDCIERwRAIAEoAggiAEGYCCgCAEkaIAAgBDYCDCAEIAA2AggMDAsgAUEUaiICKAIAIgBFBEAgASgCECIARQ0EIAFBEGohAgsDQCACIQcgACIEQRRqIgIoAgAiAA0AIARBEGohAiAEKAIQIgANAAsgB0EANgIADAsLQX8hCCAAQb9/Sw0AIABBC2oiAEF4cSEIQYwIKAIAIglFDQBBHyEFQQAgCGshAwJAAkACQAJ/IAhB////B00EQCAAQQh2IgAgAEGA/j9qQRB2QQhxIgJ0IgAgAEGA4B9qQRB2QQRxIgF0IgAgAEGAgA9qQRB2QQJxIgB0QQ92IAEgAnIgAHJrIgBBAXQgCCAAQRVqdkEBcXJBHGohBQsgBUECdEG4CmooAgAiAkULBEBBACEADAELQQAhACAIQQBBGSAFQQF2ayAFQR9GG3QhAQNAAkAgAigCBEF4cSAIayIHIANPDQAgAiEEIAciAw0AQQAhAyACIQAMAwsgACACKAIUIgcgByACIAFBHXZBBHFqKAIQIgJGGyAAIAcbIQAgAUEBdCEBIAINAAsLIAAgBHJFBEBBAiAFdCIAQQAgAGtyIAlxIgBFDQMgAEEAIABrcUEBayIAIABBDHZBEHEiAnYiAUEFdkEIcSIAIAJyIAEgAHYiAUECdkEEcSIAciABIAB2IgFBAXZBAnEiAHIgASAAdiIBQQF2QQFxIgByIAEgAHZqQQJ0QbgKaigCACEACyAARQ0BCwNAIAAoAgRBeHEgCGsiASADSSECIAEgAyACGyEDIAAgBCACGyEEIAAoAhAiAQR/IAEFIAAoAhQLIgANAAsLIARFDQAgA0GQCCgCACAIa08NACAEIAhqIgYgBE0NASAEKAIYIQUgBCAEKAIMIgFHBEAgBCgCCCIAQZgIKAIASRogACABNgIMIAEgADYCCAwKCyAEQRRqIgIoAgAiAEUEQCAEKAIQIgBFDQQgBEEQaiECCwNAIAIhByAAIgFBFGoiAigCACIADQAgAUEQaiECIAEoAhAiAA0ACyAHQQA2AgAMCQsgCEGQCCgCACICTQRAQZwIKAIAIQMCQCACIAhrIgFBEE8EQEGQCCABNgIAQZwIIAMgCGoiADYCACAAIAFBAXI2AgQgAiADaiABNgIAIAMgCEEDcjYCBAwBC0GcCEEANgIAQZAIQQA2AgAgAyACQQNyNgIEIAIgA2oiACAAKAIEQQFyNgIECyADQQhqIQAMCwsgCEGUCCgCACIGSQRAQZQIIAYgCGsiATYCAEGgCEGgCCgCACICIAhqIgA2AgAgACABQQFyNgIEIAIgCEEDcjYCBCACQQhqIQAMCwtBACEAIAhBL2oiCQJ/QeALKAIABEBB6AsoAgAMAQtB7AtCfzcCAEHkC0KAoICAgIAENwIAQeALIAxBDGpBcHFB2KrVqgVzNgIAQfQLQQA2AgBBxAtBADYCAEGAIAsiAWoiBUEAIAFrIgdxIgIgCE0NCkHACygCACIEBEBBuAsoAgAiAyACaiIBIANNDQsgASAESw0LC0HECy0AAEEEcQ0FAkACQEGgCCgCACIDBEBByAshAANAIAMgACgCACIBTwRAIAEgACgCBGogA0sNAwsgACgCCCIADQALC0EAEAgiAUF/Rg0GIAIhBUHkCygCACIDQQFrIgAgAXEEQCACIAFrIAAgAWpBACADa3FqIQULIAUgCE0NBiAFQf7///8HSw0GQcALKAIAIgQEQEG4CygCACIDIAVqIgAgA00NByAAIARLDQcLIAUQCCIAIAFHDQEMCAsgBSAGayAHcSIFQf7///8HSw0FIAUQCCIBIAAoAgAgACgCBGpGDQQgASEACwJAIAhBMGogBU0NACAAQX9GDQBB6AsoAgAiASAJIAVrakEAIAFrcSIBQf7///8HSwRAIAAhAQwICyABEAhBf0cEQCABIAVqIQUgACEBDAgLQQAgBWsQCBoMBQsgACIBQX9HDQYMBAsAC0EAIQQMBwtBACEBDAULIAFBf0cNAgtBxAtBxAsoAgBBBHI2AgALIAJB/v///wdLDQEgAhAIIgFBABAIIgBPDQEgAUF/Rg0BIABBf0YNASAAIAFrIgUgCEEoak0NAQtBuAtBuAsoAgAgBWoiADYCAEG8CygCACAASQRAQbwLIAA2AgALAkACQAJAQaAIKAIAIgcEQEHICyEAA0AgASAAKAIAIgMgACgCBCICakYNAiAAKAIIIgANAAsMAgtBmAgoAgAiAEEAIAAgAU0bRQRAQZgIIAE2AgALQQAhAEHMCyAFNgIAQcgLIAE2AgBBqAhBfzYCAEGsCEHgCygCADYCAEHUC0EANgIAA0AgAEEDdCIDQbgIaiADQbAIaiICNgIAIANBvAhqIAI2AgAgAEEBaiIAQSBHDQALQZQIIAVBKGsiA0F4IAFrQQdxQQAgAUEIakEHcRsiAGsiAjYCAEGgCCAAIAFqIgA2AgAgACACQQFyNgIEIAEgA2pBKDYCBEGkCEHwCygCADYCAAwCCyABIAdNDQAgAyAHSw0AIAAoAgxBCHENACAAIAIgBWo2AgRBoAggB0F4IAdrQQdxQQAgB0EIakEHcRsiAGoiAjYCAEGUCEGUCCgCACAFaiIBIABrIgA2AgAgAiAAQQFyNgIEIAEgB2pBKDYCBEGkCEHwCygCADYCAAwBC0GYCCgCACABSwRAQZgIIAE2AgALIAEgBWohAkHICyEAAkACQAJAAkACQAJAA0AgAiAAKAIARwRAIAAoAggiAA0BDAILCyAALQAMQQhxRQ0BC0HICyEAA0AgByAAKAIAIgJPBEAgAiAAKAIEaiIEIAdLDQMLIAAoAgghAAwACwALIAAgATYCACAAIAAoAgQgBWo2AgQgAUF4IAFrQQdxQQAgAUEIakEHcRtqIgkgCEEDcjYCBCACQXggAmtBB3FBACACQQhqQQdxG2oiBSAJayAIayECIAggCWohBiAFIAdGBEBBoAggBjYCAEGUCEGUCCgCACACaiIANgIAIAYgAEEBcjYCBAwDCyAFQZwIKAIARgRAQZwIIAY2AgBBkAhBkAgoAgAgAmoiADYCACAGIABBAXI2AgQgACAGaiAANgIADAMLIAUoAgQiAEEDcUEBRgRAIABBeHEhBwJAIABB/wFNBEAgBSgCCCIDIABBA3YiAEEDdEGwCGpGGiADIAUoAgwiAUYEQEGICEGICCgCAEF+IAB3cTYCAAwCCyADIAE2AgwgASADNgIIDAELIAUoAhghCAJAIAUgBSgCDCIBRwRAIAUoAggiACABNgIMIAEgADYCCAwBCwJAIAVBFGoiACgCACIDDQAgBUEQaiIAKAIAIgMNAEEAIQEMAQsDQCAAIQQgAyIBQRRqIgAoAgAiAw0AIAFBEGohACABKAIQIgMNAAsgBEEANgIACyAIRQ0AAkAgBSAFKAIcIgNBAnRBuApqIgAoAgBGBEAgACABNgIAIAENAUGMCEGMCCgCAEF+IAN3cTYCAAwCCyAIQRBBFCAIKAIQIAVGG2ogATYCACABRQ0BCyABIAg2AhggBSgCECIABEAgASAANgIQIAAgATYCGAsgBSgCFCIARQ0AIAEgADYCFCAAIAE2AhgLIAUgB2ohBSACIAdqIQILIAUgBSgCBEF+cTYCBCAGIAJBAXI2AgQgAiAGaiACNgIAIAJB/wFNBEAgAkEDdiIAQQN0QbAIaiECAn9BiAgoAgAiAUEBIAB0IgBxRQRAQYgIIAAgAXI2AgAgAgwBCyACKAIICyEAIAIgBjYCCCAAIAY2AgwgBiACNgIMIAYgADYCCAwDC0EfIQAgAkH///8HTQRAIAJBCHYiACAAQYD+P2pBEHZBCHEiA3QiACAAQYDgH2pBEHZBBHEiAXQiACAAQYCAD2pBEHZBAnEiAHRBD3YgASADciAAcmsiAEEBdCACIABBFWp2QQFxckEcaiEACyAGIAA2AhwgBkIANwIQIABBAnRBuApqIQQCQEGMCCgCACIDQQEgAHQiAXFFBEBBjAggASADcjYCACAEIAY2AgAgBiAENgIYDAELIAJBAEEZIABBAXZrIABBH0YbdCEAIAQoAgAhAQNAIAEiAygCBEF4cSACRg0DIABBHXYhASAAQQF0IQAgAyABQQRxaiIEKAIQIgENAAsgBCAGNgIQIAYgAzYCGAsgBiAGNgIMIAYgBjYCCAwCC0GUCCAFQShrIgNBeCABa0EHcUEAIAFBCGpBB3EbIgBrIgI2AgBBoAggACABaiIANgIAIAAgAkEBcjYCBCABIANqQSg2AgRBpAhB8AsoAgA2AgAgByAEQScgBGtBB3FBACAEQSdrQQdxG2pBL2siACAAIAdBEGpJGyICQRs2AgQgAkHQCykCADcCECACQcgLKQIANwIIQdALIAJBCGo2AgBBzAsgBTYCAEHICyABNgIAQdQLQQA2AgAgAkEYaiEAA0AgAEEHNgIEIABBCGohASAAQQRqIQAgASAESQ0ACyACIAdGDQMgAiACKAIEQX5xNgIEIAcgAiAHayIEQQFyNgIEIAIgBDYCACAEQf8BTQRAIARBA3YiAEEDdEGwCGohAgJ/QYgIKAIAIgFBASAAdCIAcUUEQEGICCAAIAFyNgIAIAIMAQsgAigCCAshACACIAc2AgggACAHNgIMIAcgAjYCDCAHIAA2AggMBAtBHyEAIAdCADcCECAEQf///wdNBEAgBEEIdiIAIABBgP4/akEQdkEIcSICdCIAIABBgOAfakEQdkEEcSIBdCIAIABBgIAPakEQdkECcSIAdEEPdiABIAJyIAByayIAQQF0IAQgAEEVanZBAXFyQRxqIQALIAcgADYCHCAAQQJ0QbgKaiEDAkBBjAgoAgAiAkEBIAB0IgFxRQRAQYwIIAEgAnI2AgAgAyAHNgIAIAcgAzYCGAwBCyAEQQBBGSAAQQF2ayAAQR9GG3QhACADKAIAIQEDQCABIgIoAgRBeHEgBEYNBCAAQR12IQEgAEEBdCEAIAIgAUEEcWoiAygCECIBDQALIAMgBzYCECAHIAI2AhgLIAcgBzYCDCAHIAc2AggMAwsgAygCCCIAIAY2AgwgAyAGNgIIIAZBADYCGCAGIAM2AgwgBiAANgIICyAJQQhqIQAMBQsgAigCCCIAIAc2AgwgAiAHNgIIIAdBADYCGCAHIAI2AgwgByAANgIIC0GUCCgCACIAIAhNDQBBlAggACAIayIBNgIAQaAIQaAIKAIAIgIgCGoiADYCACAAIAFBAXI2AgQgAiAIQQNyNgIEIAJBCGohAAwDC0GECEEwNgIAQQAhAAwCCwJAIAVFDQACQCAEKAIcIgJBAnRBuApqIgAoAgAgBEYEQCAAIAE2AgAgAQ0BQYwIIAlBfiACd3EiCTYCAAwCCyAFQRBBFCAFKAIQIARGG2ogATYCACABRQ0BCyABIAU2AhggBCgCECIABEAgASAANgIQIAAgATYCGAsgBCgCFCIARQ0AIAEgADYCFCAAIAE2AhgLAkAgA0EPTQRAIAQgAyAIaiIAQQNyNgIEIAAgBGoiACAAKAIEQQFyNgIEDAELIAQgCEEDcjYCBCAGIANBAXI2AgQgAyAGaiADNgIAIANB/wFNBEAgA0EDdiIAQQN0QbAIaiECAn9BiAgoAgAiAUEBIAB0IgBxRQRAQYgIIAAgAXI2AgAgAgwBCyACKAIICyEAIAIgBjYCCCAAIAY2AgwgBiACNgIMIAYgADYCCAwBC0EfIQAgA0H///8HTQRAIANBCHYiACAAQYD+P2pBEHZBCHEiAnQiACAAQYDgH2pBEHZBBHEiAXQiACAAQYCAD2pBEHZBAnEiAHRBD3YgASACciAAcmsiAEEBdCADIABBFWp2QQFxckEcaiEACyAGIAA2AhwgBkIANwIQIABBAnRBuApqIQICQAJAIAlBASAAdCIBcUUEQEGMCCABIAlyNgIAIAIgBjYCACAGIAI2AhgMAQsgA0EAQRkgAEEBdmsgAEEfRht0IQAgAigCACEIA0AgCCIBKAIEQXhxIANGDQIgAEEddiECIABBAXQhACABIAJBBHFqIgIoAhAiCA0ACyACIAY2AhAgBiABNgIYCyAGIAY2AgwgBiAGNgIIDAELIAEoAggiACAGNgIMIAEgBjYCCCAGQQA2AhggBiABNgIMIAYgADYCCAsgBEEIaiEADAELAkAgC0UNAAJAIAEoAhwiAkECdEG4CmoiACgCACABRgRAIAAgBDYCACAEDQFBjAggBkF+IAJ3cTYCAAwCCyALQRBBFCALKAIQIAFGG2ogBDYCACAERQ0BCyAEIAs2AhggASgCECIABEAgBCAANgIQIAAgBDYCGAsgASgCFCIARQ0AIAQgADYCFCAAIAQ2AhgLAkAgA0EPTQRAIAEgAyAIaiIAQQNyNgIEIAAgAWoiACAAKAIEQQFyNgIEDAELIAEgCEEDcjYCBCAJIANBAXI2AgQgAyAJaiADNgIAIAoEQCAKQQN2IgBBA3RBsAhqIQRBnAgoAgAhAgJ/QQEgAHQiACAFcUUEQEGICCAAIAVyNgIAIAQMAQsgBCgCCAshACAEIAI2AgggACACNgIMIAIgBDYCDCACIAA2AggLQZwIIAk2AgBBkAggAzYCAAsgAUEIaiEACyAMQRBqJAAgAAunDAEHfwJAIABFDQAgAEEIayIDIABBBGsoAgAiAUF4cSIAaiEFAkAgAUEBcQ0AIAFBA3FFDQEgAyADKAIAIgFrIgNBmAgoAgBJDQEgACABaiEAIANBnAgoAgBHBEAgAUH/AU0EQCADKAIIIgIgAUEDdiIEQQN0QbAIakYaIAIgAygCDCIBRgRAQYgIQYgIKAIAQX4gBHdxNgIADAMLIAIgATYCDCABIAI2AggMAgsgAygCGCEGAkAgAyADKAIMIgFHBEAgAygCCCICIAE2AgwgASACNgIIDAELAkAgA0EUaiICKAIAIgQNACADQRBqIgIoAgAiBA0AQQAhAQwBCwNAIAIhByAEIgFBFGoiAigCACIEDQAgAUEQaiECIAEoAhAiBA0ACyAHQQA2AgALIAZFDQECQCADIAMoAhwiAkECdEG4CmoiBCgCAEYEQCAEIAE2AgAgAQ0BQYwIQYwIKAIAQX4gAndxNgIADAMLIAZBEEEUIAYoAhAgA0YbaiABNgIAIAFFDQILIAEgBjYCGCADKAIQIgIEQCABIAI2AhAgAiABNgIYCyADKAIUIgJFDQEgASACNgIUIAIgATYCGAwBCyAFKAIEIgFBA3FBA0cNAEGQCCAANgIAIAUgAUF+cTYCBCADIABBAXI2AgQgACADaiAANgIADwsgAyAFTw0AIAUoAgQiAUEBcUUNAAJAIAFBAnFFBEAgBUGgCCgCAEYEQEGgCCADNgIAQZQIQZQIKAIAIABqIgA2AgAgAyAAQQFyNgIEIANBnAgoAgBHDQNBkAhBADYCAEGcCEEANgIADwsgBUGcCCgCAEYEQEGcCCADNgIAQZAIQZAIKAIAIABqIgA2AgAgAyAAQQFyNgIEIAAgA2ogADYCAA8LIAFBeHEgAGohAAJAIAFB/wFNBEAgBSgCCCICIAFBA3YiBEEDdEGwCGpGGiACIAUoAgwiAUYEQEGICEGICCgCAEF+IAR3cTYCAAwCCyACIAE2AgwgASACNgIIDAELIAUoAhghBgJAIAUgBSgCDCIBRwRAIAUoAggiAkGYCCgCAEkaIAIgATYCDCABIAI2AggMAQsCQCAFQRRqIgIoAgAiBA0AIAVBEGoiAigCACIEDQBBACEBDAELA0AgAiEHIAQiAUEUaiICKAIAIgQNACABQRBqIQIgASgCECIEDQALIAdBADYCAAsgBkUNAAJAIAUgBSgCHCICQQJ0QbgKaiIEKAIARgRAIAQgATYCACABDQFBjAhBjAgoAgBBfiACd3E2AgAMAgsgBkEQQRQgBigCECAFRhtqIAE2AgAgAUUNAQsgASAGNgIYIAUoAhAiAgRAIAEgAjYCECACIAE2AhgLIAUoAhQiAkUNACABIAI2AhQgAiABNgIYCyADIABBAXI2AgQgACADaiAANgIAIANBnAgoAgBHDQFBkAggADYCAA8LIAUgAUF+cTYCBCADIABBAXI2AgQgACADaiAANgIACyAAQf8BTQRAIABBA3YiAUEDdEGwCGohAAJ/QYgIKAIAIgJBASABdCIBcUUEQEGICCABIAJyNgIAIAAMAQsgACgCCAshAiAAIAM2AgggAiADNgIMIAMgADYCDCADIAI2AggPC0EfIQIgA0IANwIQIABB////B00EQCAAQQh2IgEgAUGA/j9qQRB2QQhxIgF0IgIgAkGA4B9qQRB2QQRxIgJ0IgQgBEGAgA9qQRB2QQJxIgR0QQ92IAEgAnIgBHJrIgFBAXQgACABQRVqdkEBcXJBHGohAgsgAyACNgIcIAJBAnRBuApqIQECQAJAAkBBjAgoAgAiBEEBIAJ0IgdxRQRAQYwIIAQgB3I2AgAgASADNgIAIAMgATYCGAwBCyAAQQBBGSACQQF2ayACQR9GG3QhAiABKAIAIQEDQCABIgQoAgRBeHEgAEYNAiACQR12IQEgAkEBdCECIAQgAUEEcWoiB0EQaigCACIBDQALIAcgAzYCECADIAQ2AhgLIAMgAzYCDCADIAM2AggMAQsgBCgCCCIAIAM2AgwgBCADNgIIIANBADYCGCADIAQ2AgwgAyAANgIIC0GoCEGoCCgCAEEBayIAQX8gABs2AgALCwQAIwALBgAgACQACxAAIwAgAGtBcHEiACQAIAALCwkBAEGBCAsCBlA="),
+                            t = this.instance = await WebAssembly.instantiate(await WebAssembly.compile(await e.arrayBuffer()), {
+                                env: {
+                                    addOrUpdate(e, t, s, a, n, o, r, l, c) {
+                                        let {
+                                            playback: h
+                                        } = i;
+                                        if (h.dry) {
+                                            let {
+                                                updates: d
+                                            } = h, p = d[0][0];
+                                            p[a] = {
+                                                type: t,
+                                                pid: s,
+                                                id: a,
+                                                x: n,
+                                                y: o,
+                                                size: r,
+                                                flags: l
+                                            };
+                                            return
+                                        }
+                                        n = 32 & t ? void 0 : n, r = 64 & t ? void 0 : r, g(15 & t, s, a, n, o, r, l, c, e)
+                                    },
+                                    destroy(e, t) {
+                                        let {
+                                            playback: s
+                                        } = i;
+                                        if (s.dry) {
+                                            s.destroyCell(t);
+                                            return
+                                        }
+                                        m(t, e)
+                                    },
+                                    eat(e, t, s) {
+                                        let {
+                                            playback: a
+                                        } = i;
+                                        if (a.dry) {
+                                            a.eatCell(t, s);
+                                            return
+                                        }
+                                        A(t, s, e)
+                                    },
+                                    emscripten_notify_memory_growth(e) {}
+                                }
+                            }),
+                            {
+                                memory: s
+                            } = t.exports;
+                        return this.HEAPU8 = new Uint8Array(s.buffer), this.HEAPU16 = new Uint8Array(s.buffer), this.HEAPF32 = new Uint8Array(s.buffer), this.HEAPU32 = new Uint8Array(s.buffer), delete this.initializing, !0
+                    }
+                    deserialize(e, t, s) {
+                        if (!this.instance) return 0;
+                        let {
+                            deserialize: i,
+                            malloc: a,
+                            free: n
+                        } = this.instance.exports, o = t.byteLength, r = a(o);
+                        this.HEAPU8.set(t, r), i(r, s, e), n(r)
+                    }
+                };
+            v.init(), window.Module = v, i.parseCells = e => v.deserialize(1, new Uint8Array(e.buffer, 1), e.packetId), e.exports = {
+                wasmModule: v,
+                addOrUpdateCell: g,
+                destroyCell: m,
+                eatCell: A
+            }
+        }, function(e, t, s) {
+            var i = s(140);
+
+            function a(e, t, s, a) {
+                var n = e.length,
+                    o = i._malloc(n),
+                    r = new Uint8Array(i.HEAPU8.buffer, o, n);
+                r.set(e);
+                var l = t(o, a);
+                if (!s) {
+                    var c = new Uint8Array(new ArrayBuffer(n));
+                    c.set(r)
+                }
+                return i._free(o), s ? l : c
+            }
+            s(141), e.exports = {
+                skid: e => a(e, i._skid, !1),
+                skid3: (e, t) => a(e, i._skid3, !0, t),
+                skid4: (e, t) => a(e, i._skid4, !0, t)
+            }
+        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function(e, t, s) {
+            "use strict";
+            var i = s(74),
+                a = s(30),
+                n = Object((s(168), s(0)).a)(a.default, i.a, i.b, !1, null, "0eaeaf66", null);
+            n.options.__file = "src/components/modal.vue", t.default = n.exports
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(75),
+                a = s(38),
+                n = Object((s(218), s(0)).a)(a.default, i.a, i.b, !1, null, "1dbc6ed9", null);
+            n.options.__file = "src/components/replay-item.vue", t.default = n.exports
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(73),
+                a = s(55),
+                n = Object((s(250), s(0)).a)(a.default, i.a, i.b, !1, null, "4c95bd45", null);
+            n.options.__file = "src/components/minimap.vue", t.default = n.exports
+        }, function(e, t, s) {
+            "use strict";
+            s(17).notifyUnsupportedBrowser(), s(1), s(130), s(132), s(142), s(148), s(269), s(267), s(268)
+        }, function(e, t, s) {
+            var i = s(2),
+                a = s(120);
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+                [e.i, a, ""]
+            ]);
+            var n = (i(a, {
+                insert: "head",
+                singleton: !1
+            }), a.locals ? a.locals : {});
+            e.exports = n
+        }, function() {}, function(e, t, s) {
+            let i, a = s(4),
+                n = s(12),
+                o = ({
+                         width: e,
+                         height: t,
+                         circle: s
+                     }) => {
+                    let i = PIXI.utils.string2hex(a.borderColor),
+                        n = new PIXI.Graphics;
+                    return n.lineStyle(100, i, 1, .5), s ? n.drawEllipse(e / 2, t / 2, e / 2, t / 2) : n.drawRect(0, 0, e, t), n.endFill(), n.pivot.set(e / 2, t / 2), n
+                },
+                r = ({
+                         width: e,
+                         height: t
+                     }) => {
+                    let s = new PIXI.Graphics().beginFill(16777215).drawEllipse(e / 2, t / 2, e / 2, t / 2).endFill();
+                    return s.pivot.set(e / 2, t / 2), s
+                };
+            e.exports = class e {
+                constructor(e, t) {
+                    this.border = e, this.container = new PIXI.Container, this.background = new PIXI.Container, this.borderSprite = o(e), this.background.addChild(this.borderSprite), this.foreground = new PIXI.Container, this.food = new PIXI.Container, this.food.visible = a.foodVisible, this.resetMassTextStyle(!1), this.container.addChild(this.background, this.food, this.foreground), this.setPosition(), t && this.setBackgroundImage(), this.background.position.x = e.x, this.background.position.y = e.y
+                }
+                static useGame(e) {
+                    i = e
+                }
+                setPosition() {
+                    this.container.position.x = window.innerWidth / 2, this.container.position.y = window.innerHeight / 2
+                }
+                sort() {
+                    this.foreground.children.sort((e, t) => (e = e.gameData).size === (t = t.gameData).size ? e.id - t.id : e.size - t.size)
+                }
+                addCell(e) {
+                    this.foreground.addChild(e)
+                }
+                addFood(e) {
+                    this.food.addChild(e)
+                }
+                toggleBackgroundImage(e) {
+                    e && !this.backgroundSprite ? this.setBackgroundImage() : e || this.destroyBackgroundImage(!0)
+                }
+                setBackgroundImage() {
+                    let e = a.backgroundImageUrl;
+                    if (!e) {
+                        this.destroyBackgroundImage();
+                        return
+                    }
+                    let t = (a.backgroundImageRepeat ? PIXI.TilingSprite : PIXI.Sprite).from(e, {});
+                    t.width = this.border.width, t.height = this.border.height, t.alpha = a.backgroundImageOpacity, t.anchor.set(.5);
+                    let s = this.backgroundSprite;
+                    if (s) {
+                        let i = t.texture !== s.texture;
+                        this.destroyBackgroundImage(i)
+                    }
+                    if (this.backgroundSprite = t, this.background.addChildAt(t, 0), !this.border.circle) return;
+                    let n = r(this.border);
+                    this.background.addChildAt(n, 1), this.backgroundSprite.mask = n
+                }
+                destroyBackgroundImage(e) {
+                    this.backgroundSprite && (this.backgroundSprite.destroy(!!e), delete this.backgroundSprite)
+                }
+                resetBorder() {
+                    this.borderSprite.destroy(), this.borderSprite = o(this.border), this.background.addChild(this.borderSprite)
+                }
+                reloadFoodTextures() {
+                    i.allCells.forEach(e => {
+                        e.isFood && e.reloadTexture()
+                    })
+                }
+                reloadEjectedTextures() {
+                    i.allCells.forEach(e => {
+                        e.isEjected && e.reloadTexture()
+                    })
+                }
+                reloadVirusTexture() {
+                    n.virus.loadVirusFromUrl(a.virusImageUrl)
+                }
+                resetPlayerLongNames() {
+                    i.playerManager.players.forEach(e => e.applyNameToSprite())
+                }
+                resetNameTextStyle() {
+                    [...i.allCells.values()].filter(e => !!e.isPlayerCell).forEach(e => {
+                        e.nameSprite && (e.nameSprite.destroy(!1), e.nameSprite = null)
+                    });
+                    let e = a.nameTextStyle;
+                    i.playerManager.players.forEach(t => {
+                        let s = t.nameSprite;
+                        if (!s) return;
+                        let i = s.style.fill;
+                        s.style = e, s.style.fill = i, s.updateText()
+                    })
+                }
+                resetMassTextStyle(e) {
+                    e && this.uninstallMassTextFont();
+                    let t = a.massTextStyle;
+                    for (PIXI.BitmapFont.from("mass", t, {
+                        chars: "1234567890k."
+                    }); i.massTextPool.length;) i.massTextPool.pop().destroy(!1);
+                    [...i.allCells.values()].filter(e => !!e.isPlayerCell).forEach(e => {
+                        e.massText && e.sprite && (e.sprite.removeChild(e.massText), e.massText.destroy(!1), e.massText = null)
+                    })
+                }
+                uninstallMassTextFont() {
+                    PIXI.BitmapFont.uninstall("mass")
+                }
+            }
+        }, function(e, t, s) {
+            var i = s(4),
+                a = s(24),
+                n = {};
+            e.exports = {
+                getTexture: function(e) {
+                    var t, s, o, r, l, c, h, d;
+                    return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawCircle(0, 0, s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
+                },
+                destroyCache: function() {
+                    for (var e in n) n[e].destroy(!0), delete n[e]
+                }
+            }
+        }, function(e, t, s) {
+            var i = s(4),
+                a = s(24),
+                n = {};
+            e.exports = {
+                getTexture: function(e) {
+                    var t, s, o, r, l, c, h, d;
+                    return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawRect(-s, -s, 2 * s, 2 * s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
+                },
+                destroyCache: function() {
+                    for (var e in n) n[e].destroy(!0), delete n[e]
+                }
+            }
+        }, function(e, t, s) {
+            var i = s(24),
+                {
+                    loadImage: a
+                } = s(8),
+                n = PIXI.RenderTexture.create(200, 200),
+                o = Promise.resolve();
+            e.exports = {
+                getTexture: function() {
+                    return n
+                },
+                loadVirusFromUrl: async function(e) {
+                    await o, o = new Promise(async t => {
+                        var s = await a(e),
+                            o = PIXI.Sprite.from(s, void 0, 18);
+                        o.width = o.height = 200, i.render(o, n, !0), o.destroy(!0), t()
+                    })
+                }
+            }
+        }, function(e, t, s) {
+            let i, a = s(126);
+            e.exports = class e {
+                constructor() {
+                    this.playersRemoving = [], this.players = new Map, this.botCount = 0
+                }
+                static useGame(e) {
+                    i = e, a.useGame(e)
+                }
+                get playerCount() {
+                    return this.players.size - this.botCount
+                }
+                getPlayer(e) {
+                    return this.players.has(e) ? this.players.get(e) : null
+                }
+                setPlayerData({
+                                  pid: e,
+                                  nickname: t,
+                                  skin: s,
+                                  skinUrl: i,
+                                  nameColor: n,
+                                  tagId: o,
+                                  bot: r
+                              }) {
+                    !this.players.has(e) && (this.players.set(e, new a(e, r)), r && this.botCount++);
+                    let l = this.players.get(e);
+                    s && (i = `https://skins.vanis.io/s/${s}`);
+                    let c = l.setName(t, n),
+                        h = l.setSkin(i),
+                        d = l.setTagId(o);
+                    return (c || h || d) && l.invalidateVisibility(), l
+                }
+                invalidateVisibility(e = []) {
+                    for (let t of this.players.values()) 0 > e.indexOf(t) && t.invalidateVisibility()
+                }
+                sweepRemovedPlayers() {
+                    let {
+                        replay: e
+                    } = i, t = e.packets[0], s = t[0]?.packetId, a = 0;
+                    for (; a < this.playersRemoving.length;) {
+                        let n = this.playersRemoving[a];
+                        if (!this.players.has(n)) {
+                            this.playersRemoving.splice(a, 1);
+                            continue
+                        }
+                        let o = this.players.get(n);
+                        s && o.lastUpdateTick && !(s > o.lastUpdateTick) ? a++ : (this.removePlayer(n), this.playersRemoving.splice(a, 1))
+                    }
+                }
+                delayedRemovePlayer(e) {
+                    this.playersRemoving.push(e)
+                }
+                removePlayer(e) {
+                    if (!this.players.has(e)) return;
+                    let t = this.players.get(e);
+                    t.bot && this.botCount--, t.clearCachedData(), this.players.delete(e)
+                }
+                destroy() {
+                    for (let e of this.players.keys()) this.removePlayer(e);
+                    this.botCount = 0, this.playersRemoving.splice(0, this.playersRemoving.length)
+                }
+            }
+        }, function(e, t, s) {
+            let i = s(4),
+                {
+                    basic: a,
+                    basicd: n
+                } = s(76),
+                o = i.cellSize,
+                r = o / 2,
+                l = i.cellBorderSize,
+                c = e => {
+                    e = e || 0;
+                    let t = new PIXI.Graphics().lineStyle(l, 0, .5).beginFill(e).drawCircle(0, 0, r).endFill();
+                    return t
+                },
+                h = null;
+            e.exports = class e {
+                constructor(e, t) {
+                    this.pid = e, this.bot = t || !1, this.skinUrl = null, (e === h.playerId || e === h.dualboxPid) && (this.isMe = !0), this.texture = PIXI.RenderTexture.create(o, o), this.cellContainer = this.createCellContainer(), this.renderCell()
+                }
+                static useGame(e) {
+                    h = e
+                }
+                get visibility() {
+                    return 1 + +(h.tagId !== this.tagId)
+                }
+                setOutline(e, t = 15, s = !1) {
+                    if (this.outlineGraphic && (this.outlineGraphic.destroy(), delete this.outlineGraphic), s) return void this.renderCell();
+                    e = e || 0;
+                    let i = this.outlineGraphic = new PIXI.Graphics().lineStyle(t, e, 1).drawCircle(0, 0, r - (t - 1) / 2).endFill();
+                    i.pivot.set(-r), h.renderer.render(i, this.texture, !1)
+                }
+                setCrown(e) {
+                    this.hasCrown = e;
+                    let t = this.pid;
+                    h.allCells.forEach(s => {
+                        s.isPlayerCell && s.pid === t && (e ? s.addCrown() : s.removeCrown())
+                    })
+                }
+                createCellContainer() {
+                    let e = new PIXI.Container;
+                    return e.pivot.set(-o / 2), e.addChild(c(this.getCellColor())), e
+                }
+                createSkinSprite(e) {
+                    let t = new PIXI.BaseTexture(e),
+                        s = new PIXI.Texture(t),
+                        i = new PIXI.Sprite(s);
+                    return i.width = i.height = o, i.anchor.set(.5), i
+                }
+                renderCell() {
+                    h.renderer.render(this.cellContainer, this.texture, !0)
+                }
+                setTagId(e) {
+                    return e || (e = null), this.tagId !== e && (this.tagId = e, this.bot || this.setTagSprite(), !0)
+                }
+                setNameColor(bot, name) {
+                    let color = 'ffffff';
+                    if (bot === true) color = '848484';
+                    else color = getUserCellColor(name, 'ffffff');
+                    color = parseInt(color, 16);
+                    return color, this.nameColorCss = color && PIXI.utils.hex2string(color), color;
+                }
+                setName(e, t) {
+                    return e || (e = "Unnamed"), (this.nameFromServer !== e || this.nameColorFromServer !== t) && (this.nameFromServer = e, this.nameColorFromServer = t, this.applyNameToSprite(), !0)
+                }
+                applyNameToSprite() {
+                    let e = "Unnamed" === this.nameFromServer,
+                        t = "Long Name" === this.nameFromServer,
+                        s = e ? "" : this.nameFromServer,
+                        a = this.name,
+                        n = this.nameColor,
+                        o;
+                    const isBot = !!this.bot;
+                    if (o = e || t ? this.setNameColor(null, null) : this.setNameColor(isBot, this.nameFromServer), this.setNameSprite(s, o), e || t || !(this.nameSprite.texture.width > i.cellLongNameThreshold) || (t = !0, s = "Long Name", o = this.setNameColor(null, null), this.setNameSprite(s, o)), this.name = e ? "Unnamed" : s, a !== this.name || n !== this.nameColor) {
+                        let r = o || (this.isMe ? 16747520 : null);
+                        h.events.$emit("minimap-create-node", this.pid, s, o, r)
+                    }
+                }
+                setNameSprite(e, t) {
+                    this.nameSprite ? this.nameSprite.text = e : this.nameSprite = new PIXI.Text(e, i.nameTextStyle), this.nameSprite.style.fill = t || 16777215, this.nameSprite.updateText()
+                }
+                setTagSprite() {
+                    let e = `Team ${null==this.tagId?0:this.tagId}`;
+                    if (this.tagSprite) this.tagSprite.text = e;
+                    else {
+                        let t = {
+                            ...i.nameTextStyle
+                        };
+                        t.fontSize = 50, this.tagSprite = new PIXI.Text(e, t)
+                    }
+                    this.tagSprite.style.fill = this.getTagColor(), this.tagSprite.updateText()
+                }
+                getTagColor() {
+                    if (null != this.tagId) {
+                        let e = [6946705, 6946800, 6908927, 16738803, 16768105, 16738665, 16776960, 65280, 65535, 16711935],
+                            t = h.seededRandom(this.tagId || 0);
+                        return e[Math.floor(t * e.length)]
+                    }
+                    return 16777215
+                }
+                setSkin(e) {
+                    if ((e = e || null) === this.skinUrl) return !1;
+                    this.abortSkinLoaderIfExist();
+                    let t = this.destroySkin();
+                    return t && this.renderCell(), this.skinUrl = e, this.skinShown && this.loadSkinAndRender(), !0
+                }
+                destroySkin() {
+                    return !!this.skinSprite && (this.skinSprite.mask.destroy(!0), this.skinSprite.destroy(!0), this.skinSprite = null, !0)
+                }
+                loadSkinAndRender() {
+                    this.abortSkinLoaderIfExist(), this.abortSkinLoader = h.skinLoader.loadSkin(this.skinUrl, e => {
+                        this.skinSprite = this.createSkinSprite(e), this.skinSprite.mask = c(), this.cellContainer.addChild(this.skinSprite.mask, this.skinSprite), this.renderCell()
+                    })
+                }
+                invalidateVisibility() {
+                    let e, t, s;
+                    this.isMe ? (e = i.showOwnName, t = i.showOwnSkin, s = i.showOwnMass) : (e = i.showNames >= this.visibility, t = i.showSkins >= this.visibility, s = i.showMass >= this.visibility), e = i.namesEnabled && e, t = i.skinsEnabled && t, s = i.massEnabled && s, t && !this.skinShown ? this.skinSprite ? (this.skinSprite.visible = !0, this.renderCell()) : this.skinUrl && this.loadSkinAndRender() : !t && this.skinShown && (this.abortSkinLoaderIfExist(), this.skinSprite && (this.skinSprite.visible = !1, this.renderCell())), this.nameShown = e, this.skinShown = t, this.massShown = s, this.nameColorShown = i.showNameColor
+                }
+                abortSkinLoaderIfExist() {
+                    this.abortSkinLoader && (this.abortSkinLoader(), this.abortSkinLoader = null)
+                }
+                getCellColor() {
+                    let e = h.seededRandom(this.pid),
+                        t = Math.floor(e * a.length);
+                    return (this.bot ? n : a)[t]
+                }
+                clearCachedData() {
+                    this.abortSkinLoaderIfExist(), this.destroySkin(), this.cellContainer.destroy(!0), this.texture.clearedFromCache = !0, this.texture.destroy(!0), this.nameSprite && this.nameSprite.destroy(!0), this.tagSprite && this.tagSprite.destroy(!0), h.events.$emit("minimap-destroy-node", this.pid)
+                }
+            }
+        }, , function(e, t, s) {
+            let i = s(129),
+                a = (e, t) => {
+                    let s = e.callbacks.indexOf(t);
+                    s >= 0 && e.callbacks.splice(s, 1)
+                };
+            e.exports = class e {
+                constructor() {
+                    this.loaders = new Map, this.worker = new i, this.worker.addEventListener("message", this.onSkinLoaded.bind(this))
+                }
+                createLoader(e) {
+                    return {
+                        image: null,
+                        errored: null,
+                        callbacks: [e]
+                    }
+                }
+                clearCallbacks() {
+                    this.loaders.clear()
+                }
+                loadSkin(e, t) {
+                    if (!this.loaders.has(e)) {
+                        let s = this.createLoader(t);
+                        return this.loaders.set(e, s), this.worker.postMessage(e), a.bind(null, s, t)
+                    }
+                    let i = this.loaders.get(e);
+                    if (i.image) t(i.image);
+                    else if (!i.errored) return i.callbacks.push(t), a.bind(null, i, t);
+                    return null
+                }
+                onSkinLoaded(e) {
+                    let {
+                        url: t,
+                        image: s,
+                        errored: i
+                    } = e.data, a = this.loaders.get(t);
+                    if (i) a.errored = !0, a.callbacks = [];
+                    else {
+                        a.image = s;
+                        let {
+                            callbacks: n
+                        } = a;
+                        for (; n.length;) n.pop()(s)
+                    }
+                }
+            }
+        }, function(e, t, s) {
+            let i = atob("YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsZT0+e2xldCBzPWUuZGF0YTtmZXRjaChzLHttb2RlOiJjb3JzIn0pLnRoZW4oZT0+ZS5ibG9iKCkpLnRoZW4oZT0+Y3JlYXRlSW1hZ2VCaXRtYXAoZSkpLnRoZW4oZT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsaW1hZ2U6ZX0pKS5jYXRjaCgoKT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsZXJyb3JlZDohMH0pKX0pOw==");
+            e.exports = function() {
+                return new Worker(URL.createObjectURL(new Blob([i], {
+                    type: "text/javascript"
+                })))
+            }
+        }, function(e, t, i) {
+            let a = i(131),
+                n = i(1),
+                {
+                    getTimestamp: o
+                } = i(8),
+                r = i(5),
+                l = i(4),
+                c = i(78),
+                h = a.createInstance({
+                    name: "game-replays"
+                }),
+                d = e => btoa(String.fromCharCode.apply(null, new Uint8Array(e))),
+                p = e => {
+                    e = atob(e);
+                    let t = e.length,
+                        s = new ArrayBuffer(t),
+                        i = new Uint8Array(s);
+                    for (let a = 0; a < t; a++) i[a] = e.charCodeAt(a);
+                    return s
+                },
+                u = d(new ArrayBuffer(1)),
+                g = e => {
+                    let t = e.map(e => {
+                            let t = {
+                                pid: e.pid,
+                                nickname: e.nameFromServer,
+                                skinUrl: e.skinUrl
+                            };
+                            return e.bot && (t.bot = !0), e.tagId && (t.tagId = e.tagId), e.nameColorFromServer && (t.nameColor = e.nameColorFromServer), t
+                        }),
+                        i = JSON.stringify(t);
+                    i = unescape(encodeURIComponent(i));
+                    let a = s.fromSize(1 + i.length + 1);
+                    return a.writeUInt8(16), a.writeStringNT(i), d(a.buffer)
+                },
+                A = e => {
+                    let t = 0,
+                        i = e.length;
+                    for (let a = 0; a < i; a++) {
+                        let n = e[a];
+                        t += 1 + (1 === n.type ? 2 : 0) + 2 + 2 + 2 + 2 + (n.flags ? 1 : 0)
+                    }
+                    let o = s.fromSize(1 + t + 1 + 2 + 2);
+                    o.writeUInt8(10);
+                    for (let r = 0; r < i; r++) {
+                        let l = e[r],
+                            c = 254 & l.flags;
+                        o.writeUInt8(l.type | (c ? 128 : 0)), 1 === l.type && o.writeUInt16BE(l.pid), o.writeUInt16BE(l.id), o.writeInt16BE(l.x), o.writeInt16BE(l.y), o.writeUInt16BE(l.size), c && o.writeUInt8(c)
+                    }
+                    return o.writeUInt8(0), o.writeUInt16BE(0), o.writeUInt16BE(0), o.view
+                };
+            n.replay = new class e {
+                constructor() {
+                    this.cells = [
+                        [],
+                        []
+                    ], this.packets = [
+                        [],
+                        []
+                    ], this.database = h
+                }
+                recording() {
+                    let e = this.packets[0];
+                    return 0 != e.length
+                }
+                add(e, t) {
+                    let s = this.cells[+t],
+                        i = this.packets[+t],
+                        a = [...(t ? n.dual : n).cells.values()];
+                    s.push(a.map(e => ({
+                        type: e.type,
+                        id: e.id,
+                        pid: e.pid,
+                        x: e.nx,
+                        y: e.ny,
+                        size: e.nSize,
+                        flags: e.flags
+                    }))), i.push(e);
+                    let o = 25 * l.replayDuration;
+                    i.length > o && (i.shift(), s.shift())
+                }
+                clear(e) {
+                    let t = this.cells[+e],
+                        s = this.packets[+e];
+                    t.length = 0, s.length = 0
+                }
+                play(e) {
+                    n.running && n.stop(), n.connection.close(), r.toast.close();
+                    let t = 1,
+                        i = e.split("|");
+                    "REPLAY" === i.at(0) && (t = parseInt(i[1]), i = i.slice(3));
+                    let a = i.map(e => s.fromBuffer(p(e), 1)),
+                        o = c(a.shift()),
+                        l = [];
+                    if (t >= 4) {
+                        let h;
+                        for (;
+                            (h = a[0]).readUInt8(0);) {
+                            let {
+                                view: d
+                            } = h;
+                            d.packetId = 1, h.offset = 0, l.push(h), a.shift()
+                        }
+                        a.shift()
+                    } else l.push(a.shift());
+                    o.replayUpdates = a, n.start(o), l.forEach(e => n.parseMessage(e)), n.playback.setStartingFrame(), n.showMenu(!1)
+                }
+                save(e) {
+                    let t = this.cells[+e].slice(0),
+                        i = this.packets[+e].slice(0);
+                    if (!i.length) return;
+                    let a = [...n.playerManager.players.values()];
+                    i.splice(0, 1, A(t.at(0)));
+                    let c = ["REPLAY", 4];
+                    c.push(n.createThumbnail()), c.push(d(n.initialDataPacket.buffer));
+                    let {
+                        dual: p
+                    } = n;
+                    if (p.connected) {
+                        let m = s.fromSize(3);
+                        m.writeUInt8(8), m.writeUInt16LE(p.pid), c.push(d(m.buffer))
+                    }
+                    c.push(g(a)), c.push(u), c.push(i.map(e => d(e.buffer)).join("|"));
+                    let v = c.join("|");
+                    h.setItem(o(), v, () => {
+                        n.events.$emit("replay-added");
+                        let e = "Replay saved!";
+                        1 === l.showReplaySaved ? n.events.$emit("chat-message", e) : r.toast.fire({
+                            type: "info",
+                            title: e,
+                            timer: 1500
+                        })
+                    }).catch(e => {
+                        sendTimedSwal(`Error saving replay`, `${e}`, 3000, false);
+                        let t = "Error saving replay";
+                        "string" == typeof e ? t += `: ${e}` : e && e.message && (t += `: ${e.message}`), r.toast.fire({
+                            type: "error",
+                            title: t
+                        })
+                    })
+                }
+            }
+        }, , function(e, t, s) {
+            let i = s(1),
+                {
+                    wasmModule: a,
+                    addOrUpdateCell: n,
+                    destroyCell: o,
+                    eatCell: r
+                } = s(79);
+            e.exports = i.playback = new class e {
+                constructor() {
+                    this.updates = [], this.dry = !1, this.index = 0
+                }
+                destroyCell(e) {
+                    let {
+                        updates: t
+                    } = this, s = t[0];
+                    s[3][e] = !0;
+                    let i = s[1];
+                    i.push(e)
+                }
+                eatCell(e, t) {
+                    let {
+                        updates: s
+                    } = this, i = s[0];
+                    i[3][e] = !0;
+                    let a = i[2];
+                    a.push(e, t)
+                }
+                parse(e) {
+                    a.deserialize(1, new Uint8Array(e.buffer, 1), 1)
+                }
+                reset() {
+                    let {
+                        updates: e
+                    } = this;
+                    e.splice(0, e.length), delete e.index
+                }
+                set(e) {
+                    this.reset(), this.dry = !0;
+                    let {
+                        updates: t
+                    } = this, s = e.length, i = 0;
+                    for (; s--;) t.unshift([{},
+                        [],
+                        [], {}
+                    ]), this.parse(e[i++]);
+                    t.reverse(), delete this.dry, this.index = 0
+                }
+                setStartingFrame() {
+                    let {
+                        cells: e
+                    } = i, {
+                        updates: t
+                    } = this, [s, a, n, o] = t;
+                    for (let r of e.keys()) {
+                        let l = e.get(r);
+                        r in o || (r in s ? s[r].pid = l.pid : s[r] = {
+                            type: l.type,
+                            id: l.id,
+                            pid: l.pid,
+                            x: l.nx,
+                            y: l.ny,
+                            size: l.nSize,
+                            flags: l.flags
+                        })
+                    }
+                    for (let c = 1; c < t.length; c++) {
+                        let h = t[c - 1],
+                            d = t[c];
+                        for (let p in d[0]) {
+                            if (!(p in h[0])) continue;
+                            let u = d[0][p],
+                                g = h[0][p];
+                            16 & u.type && (u.pid = g.pid), 32 & u.type && (u.x = g.x, u.y = g.y), 64 & u.type && (u.size = g.size)
+                        }
+                        for (let A in h[0]) A in d[3] || A in d[0] || (d[0][A] = h[0][A])
+                    }
+                }
+                seek(e, t) {
+                    let {
+                        cells: s
+                    } = i, a = this.updates[e];
+                    for (let r of s.keys()) !t && r in a[0] || o(r, 1);
+                    for (let l of Object.values(a[0])) {
+                        let {
+                            type: c,
+                            pid: h,
+                            id: d,
+                            x: p,
+                            y: u,
+                            size: g,
+                            flags: A
+                        } = l;
+                        n(c, h, d, p, u, g, A, 1, 1)
+                    }
+                    this.index = e, i.updateCamera(!0)
+                }
+                next() {
+                    let {
+                        updates: e
+                    } = this;
+                    if (this.index < e.length) {
+                        let [t, s, a] = e[this.index++];
+                        for (let l of Object.values(t)) {
+                            let {
+                                type: c,
+                                pid: h,
+                                id: d,
+                                x: p,
+                                y: u,
+                                size: g,
+                                flags: A
+                            } = l;
+                            n(c, h, d, p, u, g, A, 1, 1)
+                        }
+                        let m = s.length,
+                            v = 0;
+                        for (; v < m;) o(s[v++], 1);
+                        for (m = a.length, v = 0; v < m;) r(a[v++], a[v++], 1);
+                        i.updateCamera(!0)
+                    } else this.seek(0, !0);
+                    i.events.$emit("replay-index-change", this.index)
+                }
+            }
+        }, function(e, t, s) {
+            e.exports = {
+                PlayerCell: s(134),
+                Food: s(135),
+                Virus: s(136),
+                EjectedMass: s(137),
+                DeadCell: s(138),
+                Crown: s(139)
+            }
+        }, function(e, t, s) {
+            let i = s(1),
+                a = s(4),
+                o = s(14),
+                r = e => {
+                    let t = new PIXI.BitmapText("", {
+                            fontName: "mass",
+                            align: "right"
+                        }),
+                        s = e.strokeThickness || 0;
+                    return t.position.set(-s / 2, -s / 2), t.anchor.set(.5, -.6), t
+                };
+            class l extends PIXI.Graphics {
+                constructor(e) {
+                    super(), this.alpha = .35, this.updatePoints(e)
+                }
+                updatePoints(e, t, s, i) {
+                    e && t && s && i && (this.clear(), this.lineStyle(12, 16777215), this.moveTo(e, t), this.lineTo(s, i))
+                }
+            }
+            class c extends o {
+                constructor(e, t) {
+                    super(e), this.player = t, this.pid = t.pid;
+                    let s = this.isMe = this.pid == i.playerId || this.pid === i.dualboxPid,
+                        {
+                            ownedCells: a
+                        } = i;
+                    s && !a.has(this) && a.add(this), t.hasCrown && this.addCrown(), !i.replaying && s && (this.addArrow(), this.addLine())
+                }
+                updateLineVisibility() {
+                    let {
+                        line: e
+                    } = this;
+                    if (e) {
+                        if (a.showCellLines) {
+                            let {
+                                dual: t
+                            } = i;
+                            t.connected ? e.visible = this.pid === i.activePid : e.visible = !0
+                        } else e.visible = !1
+                    }
+                }
+                addLine() {
+                    let {
+                        x: e,
+                        y: t
+                    } = i.mouse;
+                    this.line = new l([this.x, this.y, e, t]), i.scene.container.addChild(this.line), this.updateLineVisibility()
+                }
+                addArrow() {
+                    let {
+                        dual: e
+                    } = i;
+                    if (!e.arrowSprite) {
+                        Swal.fire({
+                            title: 'Dual system error',
+                            text: 'You don\'t have set any image for arrow',
+                            showConfirmButton: 'OK',
+                        });
+                        return
+                    }
+                    let t = this.arrowSprite = new PIXI.Sprite.from(e.arrowSprite.texture);
+                    t.visible = a.mbActive >= 2 && this.pid === i.activePid, t.anchor.set(.5), t.width = t.height = 130, t.alpha = .95, t.y = -310, this.sprite.addChild(t)
+                }
+                addCrown() {
+                    if (!this.sprite || this.crownSprite) return;
+                    let e = i.crownPool,
+                        t;
+                    e.length ? t = e.pop() : ((t = PIXI.Sprite.from("/img/crown.png")).scale.set(.7), t.pivot.set(0, 643), t.anchor.x = .5, t.rotation = -.5, t.alpha = .7, t.zIndex = 2), this.crownSprite = t, this.sprite.addChild(t);
+                }
+                removeCrown() {
+                    if (!this.sprite || !this.crownSprite) return;
+                    var e = this.crownSprite;
+                    this.sprite.removeChild(e);
+                    i.crownPool.push(e);
+                    this.crownSprite = null;
+                }
+                onUpdate() {
+                    if (a.showDir && !this.directionSprite) {
+                        let e = this.directionSprite = new PIXI.Sprite.from("https://i.postimg.cc/vmZmWCRR/4-Point-Star.png");
+                        e.scale.set(.1), e.alpha = .7, e.anchor.set(3.5, 3.5), this.sprite.addChild(e)
+                    }
+                    let t = i.scene.container.scale.x * this.size * i.renderer.resolution,
+                        s = t > a.smallTextThreshold,
+                        {
+                            player: o
+                        } = this;
+                    if (o.massShown && !this.massText && s && (this.massText = i.massTextPool.pop() || r(a.massTextStyle), this.massText.zIndex = 0, this.sprite.addChild(this.massText)), o.nameShown && !this.nameSprite && o.nameSprite && s && (this.nameSprite = new PIXI.Sprite(o.nameSprite.texture), this.nameSprite.anchor.set(.5), this.nameSprite.zIndex = 1, this.sprite.addChild(this.nameSprite)), a.showTag && !this.tagSprite && o.tagSprite && (o.tagId !== i.tagId || null === i.tagId)) {
+                        let l = this.tagSprite = new PIXI.Sprite(o.tagSprite.texture);
+                        l.anchor.set(.5), l.y = 180, l.zIndex = 1, this.sprite.addChild(l)
+                    }
+                    let {
+                        line: c
+                    } = this;
+                    if (c && c.visible) {
+                        let {
+                            x: h,
+                            y: d
+                        } = i.mouse;
+                        c.updatePoints(this.x, this.y, h, d)
+                    }
+                    this.crownSprite && (this.crownSprite.visible = t > 16 && a.showCrown), this.nameSprite && (this.nameSprite.visible = o.nameShown && s), this.tagSprite && (this.tagSprite.visible = a.showTag);
+                    let {
+                        directionSprite: p
+                    } = this;
+                    if (p && (p.visible = a.showDir && !o.isMe)) {
+                        let u = 0,
+                            g = !1,
+                            {
+                                ox: A,
+                                oy: m,
+                                nx: v,
+                                ny: f
+                            } = this;
+                        v > A ? (v - A < 3 && (g = !0), u = f < m ? g ? 0 : m - f < 3 ? 2 : 1 : g ? 4 : f - m < 3 ? 2 : 3) : (A - v < 3 && (g = !0), u = f < m ? g ? 0 : m - f < 3 ? 6 : 7 : g ? 4 : f - m < 3 ? 6 : 5), p.rotation = n[u]
+                    }
+                    let {
+                        massText: C
+                    } = this;
+                    if (C) {
+                        if (o.massShown && s) {
+                            let y = i.getMassText(this.nSize * this.nSize / 100);
+                            C.text = y, C.visible = !0
+                        } else C.visible && (C.visible = !1)
+                    }
+                }
+                onDestroy() {
+                    this.arrowSprite && (this.sprite.removeChild(this.arrowSprite), this.arrowSprite.destroy(), delete this.arrowSprite), this.tagSprite && (this.sprite.removeChild(this.tagSprite), this.tagSprite.destroy(), delete this.tagSprite), this.directionSprite && (this.sprite.removeChild(this.directionSprite), this.directionSprite.destroy(), delete this.directionSprite), this.line && (i.scene.container.removeChild(this.line), this.line.destroy(), delete this.line), this.massText && (this.sprite.removeChild(this.massText), i.massTextPool.push(this.massText)), this.crownSprite && this.removeCrown()
+                }
+            }
+            c.prototype.type = 1, c.prototype.isPlayerCell = !0, e.exports = c
+        }, function(e, t, s) {
+            let i = s(4),
+                {
+                    cells: a
+                } = s(12),
+                {
+                    neon: n
+                } = s(76),
+                o = s(14),
+                r = e => a.getTexture(i.useFoodColor ? parseInt(i.foodColor, 16) : n[e % n.length]);
+            class l extends o {
+                constructor(e) {
+                    e.texture = r(e.id), super(e)
+                }
+                reloadTexture() {
+                    this.sprite.texture = this.texture = r(this.id)
+                }
+            }
+            l.prototype.type = 4, l.prototype.isFood = !0, e.exports = l
+        }, function(e, t, s) {
+            let i = s(14),
+                {
+                    virus: a
+                } = s(12);
+            class n extends i {
+                constructor(e) {
+                    e.texture = a.getTexture(), super(e)
+                }
+                resetTexture() {
+                    this.destroySprite(), this.texture = a.getTexture(), this.sprite = new PIXI.Sprite(this.texture), this.sprite.anchor.set(.5), this.sprite.gameData = this
+                }
+            }
+            n.prototype.type = 2, n.prototype.isVirus = !0, e.exports = n
+        }, function(e, t, s) {
+            let i = s(1),
+                a = s(4),
+                {
+                    cells: n
+                } = s(12),
+                o = s(14),
+                r = () => n.getTexture(parseInt(a.ejectedColor, 16)),
+                {
+                    clampNumber: l
+                } = s(8);
+            class c extends o {
+                constructor(e) {
+                    e.texture = r(), super(e), this.sprite.alpha = 0
+                }
+                reloadTexture() {
+                    this.sprite.texture = this.texture = r()
+                }
+                onUpdate() {
+                    let {
+                        sprite: e
+                    } = this;
+                    if (!e || 1 == e.alpha) return;
+                    let t = i.timeStamp - this.updateStamp,
+                        s = l(t / 1e3, 0, 1);
+                    e.alpha = Math.min(e.alpha + s, 1)
+                }
+            }
+            c.prototype.type = 3, c.prototype.isEjected = !0, e.exports = c
+        }, function(e, t, s) {
+            let i = s(14),
+                {
+                    squares: a,
+                    cells: n
+                } = s(12);
+            class o extends i {
+                constructor(e, t, s) {
+                    e.texture = (s ? a : n).getTexture(t || 4210752), super(e), this.sprite.alpha = .5
+                }
+            }
+            o.prototype.type = 5, o.prototype.isDead = !0, e.exports = o
+        }, function(e, t, s) {
+            let i = s(14);
+            class a extends i {
+                constructor(e) {
+                    e.texture = PIXI.Texture.from("/img/crown.png"), super(e), this.sprite.alpha = .7
+                }
+            }
+            a.prototype.type = 6, a.prototype.isCrown = !0, e.exports = a
+        }, function(e, t, s) {}, function(e, t, s) {}, function(e, t, i) {
+            let n = i(1),
+                {
+                    state: o
+                } = n,
+                r = i(78),
+                {
+                    wasmModule: l
+                } = i(79);
+            e.exports = n.dual = new class e {
+                constructor() {
+                    this.ws = null, this.focused = !1, this.opened = !1, this.pid = null, this.pingStamp = 0, this.autoRespawning, this.alive, this.ticksSinceDeath = 0, this.cells = new Map, this.arrowSprite = null, this.reloadArrow()
+                }
+                log(e) {
+                    n.events.$emit("chat-message", e)
+                }
+                get connected() {
+                    return this.opened && !!this.ready
+                }
+                open() {
+                    let {
+                        connectionUrl: e
+                    } = o;
+                    if (!e) return;
+                    let t = this.ws = new WebSocket(e, "tFoL46WDlZuRja7W6qCl");
+                    t.binaryType = "arraybuffer", t.packetCount = 0, this.opened = !0, t.onopen = () => {
+                        this.opened && (this.ws.onclose = this.onClosed.bind(this), this.reloadArrow())
+                    }, t.onmessage = e => {
+                        let {
+                            data: t
+                        } = e;
+                        n.nwData += t.byteLength, this.handleMessage(new DataView(t))
+                    }, t.onclose = this.onRejected.bind(this)
+                }
+                close() {
+                    let {
+                        ws: e
+                    } = this;
+                    e && (e.onmessage = null, e.onclose = null, e.onerror = null, e.close(), this.ws = null), this.focused = !1, this.opened = !1, this.pid = n.dualboxPid = null, this.pingStamp = 0, delete this.alive, this.ticksSinceDeath = 0, delete this.ready, this.clearCells(), this.feedTimeout && (clearTimeout(this.feedTimeout), delete this.feedTimeout)
+                }
+                onRejected() {
+                    let e = atob("RHVhbCBmYWlsZWQgdG8gY29ubmVjdA==");
+                    this.log(e)
+                }
+                onClosed(e) {
+                    let t = "Dual disconnected";
+                    e.reason && (t += ` (${e.reason})`), this.log(t), this.close()
+                }
+                parseCells(e) {
+                    l.deserialize(2, new Uint8Array(e.buffer, 1), this.ws.packetCount++)
+                }
+                handleMessage(e) {
+                    let t = new s(e),
+                        i = t.readUInt8();
+                    switch (i) {
+                        case 1: {
+                            let o = r(t);
+                            n.dualboxPid = this.pid = o.playerId, this.log("Dual connected"), setTimeout(() => {
+                                this.ready = !0;
+                                let e = n.playerManager.getPlayer(this.pid);
+                                e.isMe = !0, n.replay.clear(!1)
+                            }, 500);
+                            return
+                        }
+                        case 2: {
+                            let l = new Uint8Array(e.buffer, 1);
+                            n.connection.sendJoinData(new a(l).build(), !0);
+                            return
+                        }
+                        case 6:
+                            n.connection.sendOpcode(6, !0);
+                            return;
+                        case 10: {
+                            n.timeStamp = performance.now(), this.parseCells(t), n.updateStates(!1);
+                            let c = this.alive,
+                                {
+                                    replay: h
+                                } = n;
+                            if (c ? h.add(e, !0) : n.alive || h.clear(!0), !this.alive && this.autoRespawning && 37 == ++this.ticksSinceDeath && n.triggerAutoRespawn(!0), !this.focused) return;
+                            n.updateCamera(!0);
+                            return
+                        }
+                        case 18: {
+                            let {
+                                replay: d
+                            } = n;
+                            d.clear(!0), this.clearCells();
+                            return
+                        }
+                        case 20:
+                            n.handleDeath(t, !0);
+                            return;
+                        case 22:
+                            n.events.$emit("m-show-image-captcha");
+                            return
+                    }
+                }
+                ping() {
+                    this.pingStamp = performance.now(), n.connection.sendOpcode(3, !0)
+                }
+                spawn() {
+                    this.connected && (n.actions.join(!0), this.updateOutlines())
+                }
+                updateOutlines() {
+                    let e = n.playerId,
+                        t = this.pid,
+                        {
+                            players: s
+                        } = n.playerManager;
+                    if (!s.has(e) || !s.has(t)) return;
+                    let i = s.get(e),
+                        a = s.get(t),
+                        o = [];
+                    switch (n.allCells.forEach(e => {
+                        e.pid && e.isMe && e.arrowSprite && o.push(e)
+                    }), settings.mbActive) {
+                        case 0:
+                            break;
+                        case 1: {
+                            o.length > 0 && o.forEach(e => {
+                                e.arrowSprite.visible = !1
+                            });
+                            let r = +("0x" + settings.mbColor);
+                            this.focused ? (i.setOutline(16777215), a.setOutline(r)) : (a.setOutline(16777215), i.setOutline(r));
+                            break
+                        }
+                        case 2:
+                        case 3:
+                            i.outlineGraphic && i.setOutline(0, 0, !0), a.outlineGraphic && a.setOutline(0, 0, !0), o.forEach(e => {
+                                e.arrowSprite.visible = e.pid === n.activePid
+                            })
+                    }
+                    settings.showCellLines && n.allCells.forEach(e => {
+                        e.line && e.updateLineVisibility()
+                    })
+                }
+                reloadArrow() {
+                    if (this.arrowSprite && this.arrowSprite.destroy(), settings.mbArrow.startsWith("data:image")) {
+                        let e = document.createElement("img");
+                        e.src = settings.mbArrow;
+                        let t = new PIXI.BaseTexture(e),
+                            s = new PIXI.Texture(t);
+                        this.arrowSprite = new PIXI.Sprite(s)
+                    } else this.arrowSprite = new PIXI.Sprite.from(settings.mbArrow)
+                }
+                get position() {
+                    let e = 0,
+                        t = 0,
+                        s = [...this.cells.values()].filter(e => e.pid && e.pid == this.pid && !!e.sprite);
+                    if (0 == s.length) return [];
+                    s.forEach(({
+                                   x: s,
+                                   y: i
+                               }) => {
+                        e += s, t += i
+                    });
+                    let i = s.length;
+                    return [e / i, t / i]
+                }
+                get ownerPosition() {
+                    let e = 0,
+                        t = 0,
+                        s = [...n.cells.values()].filter(e => e.pid && e.pid == n.playerId && !!e.sprite);
+                    if (0 == s.length) return [];
+                    s.forEach(({
+                                   x: s,
+                                   y: i
+                               }) => {
+                        e += s, t += i
+                    });
+                    let i = s.length;
+                    return [e / i, t / i]
+                }
+                getDistanceFromOwner() {
+                    let [e, t] = this.position;
+                    if (void 0 == e) return null;
+                    let [s, i] = this.ownerPosition;
+                    return null == s ? null : Math.hypot(s - e, i - t)
+                }
+                clearCells() {
+                    this.cells.forEach(e => e.destroy(2));
+                    let {
+                        destroyedCells: e
+                    } = n, t = e.length;
+                    for (; t--;) {
+                        let s = e[t];
+                        s.destroySprite(), e.splice(t, 1)
+                    }
+                }
+                switch () {
+                    if (n.spectating && (n.spectating = !1), !this.opened) return void this.open();
+                    if (!this.ready) return;
+                    let e = this.focused;
+                    this.feedTimeout && (clearTimeout(this.feedTimeout), delete this.feedTimeout), settings.rememeberEjecting || (this.feedTimeout = setTimeout(() => {
+                        if (n.isAlive(e)) {
+                            let t = s.fromSize(2);
+                            t.writeUInt8(21), t.writeUInt8(0), n.connection.send(t, e)
+                        }
+                    }, 120)), e ? (n.isAlive(!1) || o.autoRespawning || n.actions.join(), n.activePid = n.playerId, this.focused = !1) : (n.isAlive(!0) || this.autoRespawning || this.spawn(), n.activePid = this.pid, this.focused = !0), this.updateOutlines()
+                }
+            }
+        }, function(e, t, s) {}, function(e) {
+            e.exports = function(e) {
+                var t = 1,
+                    s = e.getInt16(t, !0);
+                t += 2;
+                for (var i = "", a = ""; 0 != (a = e.getUint16(t, !0));) t += 2, i += String.fromCharCode(a);
+                return {
+                    pid: s,
+                    text: i
+                }
+            }
+        }, function(e) {
+            e.exports = function(e) {
+                for (var t = 1, s = [];;) {
+                    var i = e.getUint16(t, !0);
+                    if (t += 3, !i) break;
+                    var a = e.getUint8(t, !0) / 255;
+                    t += 1;
+                    var n = e.getUint8(t, !0) / 255;
+                    t += 1, s.push({
+                        pid: i,
+                        x: a,
+                        y: n
+                    })
+                }
+                return s
+            }
+        }, function(e) {
+            e.exports = function(e, t) {
+                for (var s = 1, i = [];;) {
+                    var a = t.getUint16(s, !0);
+                    if (s += 2, !a) break;
+                    var n = e.playerManager.getPlayer(a);
+                    n && i.push({
+                        pid: a,
+                        position: 1 + i.length,
+                        text: n.name,
+                        bold: !!n.nameColor
+                    })
+                }
+                return i
+            }
+        }, function(e) {
+            e.exports = window.WebSocket
+        }, function(e, t, s) {
+            let i = s(1);
+            s(149);
+            let a = s(66),
+                n = i.renderer.view,
+                o = a.pressed = new Set;
+            window.addEventListener("blur", () => {
+                o.clear()
+            });
+            let r = /firefox/i.test(navigator.userAgent) ? "DOMMouseScroll" : "wheel",
+                l = e => {
+                    let t = i.actions.findPlayerUnderMouse(),
+                        s = t && t.player;
+                    s && i.events.$emit("context-menu", e, s)
+                },
+                c = () => {
+                    i.scene.setPosition()
+                },
+                h = e => i.actions.zoom(e),
+                d = e => {
+                    let t = {
+                        x: e.clientX,
+                        y: e.clientY
+                    };
+                    Object.assign(i.rawMouse, t), i.updateMouse()
+                },
+                p = e => {
+                    e.preventDefault(), n.focus();
+                    let t = `MOUSE${e.button}`;
+                    if (0 === e.button && i.spectating) {
+                        let s = i.actions.findPlayerUnderMouse();
+                        s && i.actions.spectate(s.pid)
+                    } else a.press(t)
+                },
+                u = e => {
+                    let t = "MOUSE" + e.button;
+                    a.release(t), o.delete(t)
+                },
+                g = e => {
+                    let t = e.target === n;
+                    if (!t && e.target !== document.body) return;
+                    let s = a.convertKey(e.code);
+                    if (!o.has(s) && (!e.ctrlKey || "TAB" !== s)) {
+                        if (o.add(s), "ESCAPE" === s) {
+                            if (i.replaying) o.clear(), i.stop(), i.showMenu(!0);
+                            else {
+                                let r = !!i.dual.autoRespawning;
+                                (i.state.autoRespawning || r) && i.triggerDeathDelay(r), i.showMenu()
+                            }
+                            return
+                        }
+                        if ("ENTER" === s) {
+                            i.events.$emit("chat-focus");
+                            return
+                        }
+                        t && a.press(s) && e.preventDefault()
+                    }
+                },
+                A = e => {
+                    let t = a.convertKey(e.code);
+                    a.release(t), o.delete(t)
+                };
+            i.eventListeners = e => {
+                e ? (n.addEventListener("contextmenu", l), window.addEventListener("resize", c), n.addEventListener(r, h, {
+                    passive: !0
+                }), document.body.addEventListener("mousemove", d), n.addEventListener("mousedown", p), document.addEventListener("mouseup", u), document.body.addEventListener("keydown", g), document.body.addEventListener("keyup", A), window.onbeforeunload = () => "Are you sure you want to close the page?") : (n.removeEventListener("contextmenu", l), window.removeEventListener("resize", c), n.removeEventListener(r, h), document.body.removeEventListener("mousemove", d), n.removeEventListener("mousedown", p), document.removeEventListener("mouseup", u), document.body.removeEventListener("keydown", g), document.body.removeEventListener("keyup", A), window.onbeforeunload = null)
+            }
+        }, function(e, t, i) {
+            let a = i(1),
+                n = i(4),
+                {
+                    writeUserData: o,
+                    clampNumber: r
+                } = i(8);
+            a.actions = new class e {
+                constructor() {
+                    this.linesplitUnlock
+                }
+                spectate(e, t) {
+                    a.spectating = !0;
+                    let i = s.fromSize(e ? 3 : 1);
+                    i.writeUInt8(2), e && i.writeInt16LE(e), a.connection.send(i, t)
+                }
+                join(e) {
+                    a.events.$emit("reset-cautions");
+                    let t = s.fromSize(8);
+                    t.writeUInt8(1), o(t, e), a.connection.send(t, e)
+                }
+                spectateLockToggle() {
+                    a.connection.sendOpcode(10)
+                }
+                feed(e) {
+                    let t = 1 === arguments.length,
+                        i = s.fromSize(t ? 2 : 1);
+                    i.writeUInt8(21), t && i.writeUInt8(+e), a.connection.send(i, a.dual.focused)
+                }
+                freezeMouse(e) {
+                    a.running && ((e ??= !a.mouseFrozen) && (this.stopMovement(!1), this.lockLinesplit(!1), a.updateMouse(!0), a.connection.sendMouse()), a.mouseFrozen = e, a.events.$emit("update-cautions", {
+                        mouseFrozen: e
+                    }))
+                }
+                stopMovement(e) {
+                    a.running && ((e ??= !a.moveToCenterOfCells) && (this.freezeMouse(!1), this.lockLinesplit(!1), e = a.dual.focused ? 2 : 1), a.moveToCenterOfCells = e, a.events.$emit("update-cautions", {
+                        moveToCenterOfCells: e
+                    }))
+                }
+                lockLinesplit(e) {
+                    a.running && ((e ??= !a.stopMovePackets) && (a.updateMouse(), a.connection.sendMouse(), a.connection.sendOpcode(15, a.dual.focused), e = a.dual.focused ? 2 : 1), a.stopMovePackets = e, a.events.$emit("update-cautions", {
+                        lockLinesplit: e
+                    }))
+                }
+                linesplit() {
+                    this.freezeMouse(!0), this.split(3, !0), this.linesplitUnlock && clearTimeout(this.linesplitUnlock), this.linesplitUnlock = setTimeout(() => {
+                        delete this.linesplitUnlock, this.freezeMouse(!1)
+                    }, 1250)
+                }
+                split(e, t, i) {
+                    if (a.stopMovePackets || (t || this.freezeMouse(!1), a.connection.sendMouse()), i) return void setTimeout(() => this.split(e), i);
+                    let n = s.fromSize(2);
+                    n.writeUInt8(17), n.writeUInt8(e), a.connection.send(n, a.dual.focused), a.splitCount += e, a.splitCount <= 2 ? a.moveWaitUntil = performance.now() + 300 : (a.moveWaitUntil = 0, a.splitCount = 0)
+                }
+                triggerbot() {
+                    let e = a.targetPid;
+                    if (e) {
+                        delete a.targetPid;
+                        let t = a.playerManager.getPlayer(e);
+                        t && t.setOutline(0, 0, !0), a.setText("")
+                    } else a.targetPid = null, a.setText("Click a player to lock triggerbot")
+                }
+                dualCombo(e) {
+                    if (!a.isAlive(!1) || !a.isAlive(!0)) return;
+                    let {
+                        dual: t
+                    } = a;
+                    switch (e) {
+                        case 1:
+                            this.split(1), t.focused = !t.focused, a.connection.sendMouse(), this.split(6), setTimeout(() => this.split(6), 30);
+                            break;
+                        case 2:
+                            this.split(2), t.focused = !t.focused, a.connection.sendMouse(), this.split(6), setTimeout(() => this.split(6), 30);
+                            break;
+                        case 3:
+                            this.linesplit(), t.focused = !t.focused, a.connection.sendMouse(), this.split(6, !0), setTimeout(() => this.split(6, !0), 30)
+                    }
+                    setTimeout(() => {
+                        t.focused = !t.focused
+                    }, 45)
+                }
+                zoom(e) {
+                    let t = 1 - n.cameraZoomSpeed / 100,
+                        s = 0;
+                    e.detail ? s = e.detail / 3 : e.wheelDelta && (s = -(e.wheelDelta / 120));
+                    let i = Math.pow(t, s);
+                    a.mouseZoom = r(a.mouseZoom * i, a.mouseZoomMin, 1)
+                }
+                setZoomLevel(e) {
+                    a.mouseZoom = .8 / Math.pow(2, e - 1)
+                }
+                targetPlayer(e) {
+                    "string" == typeof e && (e = +e);
+                    let t;
+                    if (e) a.selectedPlayer = e, t = a.playerManager.getPlayer(e);
+                    else {
+                        let s = this.findPlayerUnderMouse();
+                        s && (t = s && s.player) && (a.selectedPlayer = s.pid)
+                    }
+                    n.playerStats && t ? a.playerElement.innerHTML = `
+                        ${t.skinUrl ? `<div class="playerStalkContainer" oncontextmenu="window.copySkinDual('${t.skinUrl}')" onclick="window.yoinkSkinDual('${t.skinUrl}')">`:``}
+                            <img class="playerStalkImage beautifulSkin" src="${t.skinUrl ? t.skinUrl : 'https://skins.vanis.io/s/Qkfih2'}">
+                            <p class="playerStalkText">${t.name} | PID: ${t.pid}</p>
+                        </div>
+                    ` : a.playerElement.innerHTML = ""
+                }
+                findPlayerUnderMouse() {
+                    let {
+                        x: e,
+                        y: t
+                    } = a.mouse, s = 0, i = null, n = [...a.allCells.values()].filter(e => e.pid).sort((e, t) => e.size - t.size);
+                    return n.forEach(a => {
+                        if (!a.isPlayerCell) return;
+                        let n = a.x - e,
+                            o = a.y - t,
+                            r = Math.sqrt(Math.abs(n * n + o * o)) - a.size;
+                        if (r < s) s = r, i = a;
+                        else if (r <= 0) return a
+                    }), i
+                }
+                toggleSkins(e) {
+                    e ??= !n.skinsEnabled, n.set("skinsEnabled", e), a.playerManager.invalidateVisibility()
+                }
+                toggleNames(e) {
+                    e ??= !n.namesEnabled, n.set("namesEnabled", e), a.playerManager.invalidateVisibility()
+                }
+                toggleMass() {
+                    let e = !n.massEnabled;
+                    n.set("massEnabled", e), a.playerManager.invalidateVisibility()
+                }
+                toggleFood(e) {
+                    e ??= !n.foodVisible, n.set("foodVisible", e), a.scene.food.visible = e
+                }
+                toggleHud() {
+                    let {
+                        app: e
+                    } = a, t = !e.showHud;
+                    e.showHud = t, n.set("showHud", t)
+                }
+                toggleChat() {
+                    let e = !n.showChat;
+                    n.set("showChat", e), a.running && a.events.$emit("chat-visible", {
+                        visible: e
+                    })
+                }
+                toggleChatToast() {
+                    let e = !n.showChatToast;
+                    n.set("showChatToast", e), a.events.$emit("chat-visible", {
+                        visibleToast: e
+                    })
+                }
+            }
+        }, , , , , , , , , , , , , , , , , function(e, t, s) {
+            "use strict";
+            var i = s(29);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(32);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(33);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(34);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(35);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(36);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(37);
+            s.n(i).a
+        }, function() {}, , , , , , function() {}, , function() {}, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function(e, t, s) {
+            "use strict";
+            var i = s(40);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(41);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(42);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(43);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(44);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            e.exports = new class e {
+                constructor(e, t) {
+                    this.url = e, this.vanisToken = t
+                }
+                setToken(e) {
+                    this.vanisToken = e, localStorage.vanisToken = e
+                }
+                clearToken() {
+                    this.vanisToken = null, delete localStorage.vanisToken
+                }
+                async call(e, t) {
+                    let s = {
+                        method: e,
+                        credentials: "omit",
+                        mode: "same-origin",
+                        redirect: "error",
+                        headers: {
+                            Accept: "application/json, text/plain"
+                        }
+                    };
+                    this.vanisToken && (s.headers.Authorization = `Vanis ${this.vanisToken}`);
+                    try {
+                        return await fetch(this.url + t, s)
+                    } catch (i) {
+                        return {
+                            ok: !1,
+                            status: 0,
+                            statusText: "Client error",
+                            text: async () => i.message
+                        }
+                    }
+                }
+                get(e) {
+                    return this.call("GET", e)
+                }
+            }("https://vanis.io/api", localStorage.vanisToken || null)
+        }, function(e) {
+            e.exports = {
+                getXp: function(e) {
+                    return Math.round(e * e / (.1 * .1))
+                },
+                getLevel: function(e) {
+                    return Math.floor(.1 * Math.sqrt(e))
+                }
+            }
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(45);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(46);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(47);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(48);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(49);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(50);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(51);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(52);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(53);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(54);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(57);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(58);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(59);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(60);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(61);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(62);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            "use strict";
+            var i = s(63);
+            s.n(i).a
+        }, function() {}, function(e) {
+            var t = "seenNotifications";
+            e.exports = new class {
+                constructor() {
+                    this.seenList = this.parseSeen(localStorage[t])
+                }
+                parseSeen(e) {
+                    if (!e) return [];
+                    try {
+                        var t = JSON.parse(e);
+                        if (Array.isArray(t)) return t
+                    } catch (s) {}
+                    return []
+                }
+                saveSeen() {
+                    try {
+                        localStorage[t] = JSON.stringify(this.seenList)
+                    } catch (e) {}
+                }
+                isSeen(e) {
+                    return this.seenList.includes(e)
+                }
+                setSeen(e) {
+                    this.isSeen(e) || (this.seenList.push(e), this.saveSeen())
+                }
+            }
+        }, function(e, t, s) {
+            "use strict";
+            var i = s(64);
+            s.n(i).a
+        }, function() {}, function(e, t, s) {
+            var i, a, n, o, r = s(1),
+                l = document.createElement("canvas"),
+                c = l.getContext("2d");
+
+            function h() {
+                i = l.width = window.innerWidth, a = l.height = window.innerHeight, n = i / 2, o = a / 2
+            }
+            window.addEventListener("resize", h), h();
+            class d {
+                spawn(e) {
+                    this.x = e.x, this.y = e.y, this.angle = Math.atan2(this.y, this.x), this.radius = .1, this.speed = .4 + 3.3 * Math.random()
+                }
+                update(e) {
+                    var t = this.speed * e;
+                    this.x += Math.cos(this.angle) * t, this.y += Math.sin(this.angle) * t, this.radius += .0035 * t
+                }
+            }
+            var p = Array(200).fill(null).map(() => new d),
+                u = !1,
+                g = 0,
+                A = 0;
+
+            function m(e) {
+                if (r.running) return window.removeEventListener("resize", h), void(l.parentNode && l.parentNode.removeChild(l));
+                var t, s = window.performance && window.performance.now ? window.performance.now() : Date.now();
+                g || (g = A = s), e = (s - A) / 6;
+                var d = s - g - 550;
+                if (d > 0) {
+                    var v = d / 1e3;
+                    v > 1.2 && (v = 1.2), e /= Math.pow(3, v)
+                }
+                requestAnimationFrame(m), c.clearRect(0, 0, i, a), c.save(), c.translate(n, o), t = e, c.beginPath(), c.fillStyle = "#00b8ff", c.globalAlpha = .9, p.forEach(e => {
+                    var s, r, l, h, d;
+                    (u || (r = n + (s = e).radius, l = o + s.radius, s.x < -r || s.x > r || s.y < -l || s.y > l)) && e.spawn((h = i, {
+                        x: Math.random() * h * 2 - h,
+                        y: Math.random() * (d = a) * 2 - d
+                    })), e.update(t), c.moveTo(e.x, e.y), c.arc(e.x, e.y, e.radius, 0, 2 * Math.PI)
+                }), u = !1, c.fill(), c.restore(), A = s
+            }
+
+            function v() {
+                u = !0, g = A = 0, c.clearRect(0, 0, i, a), document.getElementById("overlay").prepend(l), setTimeout(m, 2e3)
+            }
+            r.events.$on("game-stopped", v), v()
+        }, function(e, t, s) {
+            var i = s(1);
+            i.events.$on("players-menu", e => {
+                if ("visible" === e) {
+                    (t = document.getElementById("player-modal")).children;
+                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                        t.sub = e
+                    })
+                }
+                if ("hidden" === e)
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                        t.sub = e
+                    });
+                if ("scrolled" === e)
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                        t.sub = e
+                    })
+            }), i.events.$on("chatbox-menu", e => {
+                if ("visible" === e) {
+                    (t = document.getElementById("chatbox")).children;
+                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                        t.sub = e
+                    })
+                }
+                if ("hidden" === e)
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                        t.sub = e
+                    });
+                if ("scrolled" === e)
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                        t.sub = e
+                    });
+                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete[].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
+            });
+            var a = "me--"
+        }, function(e, t, s) {
+            "use strict";
+            s.r(t);
+            var i = s(23),
+                a = s.n(i),
+                n = s(114),
+                o = s.n(n),
+                r = function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return t("transition", {
+                        attrs: {
+                            name: this.isModalOpen || this.gameState.lifeState < 3 ? "" : "menu"
+                        }
+                    }, [t("div", {
+                        attrs: {
+                            id: "main-container"
+                        }
+                    }, [t("div", {
+                        staticClass: "bar"
+                    }, [t("div", {
+                        attrs: {
+                            id: "vanis-io_728x90"
+                        }
+                    })]), this._v(" "), t("servers", {
+                        staticClass: "fade-box two"
+                    }), this._v(" "), t("player-container", {
+                        staticClass: "fade-box two",
+                        on: {
+                            "modal-open": this.onModalChange
+                        }
+                    }), this._v(" "), t("account", {
+                        staticClass: "fade-box"
+                    }), this._v(" "), t("skins", {
+                        staticClass: "fade-box"
+                    })], 1)])
+                };
+            r._withStripped = !0;
+            var l = function() {
+                var e = this,
+                    t = e.$createElement,
+                    s = e._self._c || t;
+                return s("div", {
+                    attrs: {
+                        id: "tab-menu"
+                    }
+                }, [s("div", {
+                    staticClass: "tabs"
+                }, e._l(e.regionCodes, function(t, i) {
+                    return s("div", {
+                        key: i,
+                        staticClass: "tab",
+                        class: {
+                            active: e.selectedRegion === t
+                        },
+                        on: {
+                            click: function() {
+                                return e.selectRegion(t)
+                            }
+                        }
+                    }, [e._v("\n        " + e._s(t) + "\n    ")])
+                }), 0), e._v(" "), s("div", {
+                    staticClass: "server-list",
+                    class: {
+                        "cursor-loading": e.connectWait
+                    }
+                }, e._l(e.regionServers, function(t, i) {
+                    return s("div", {
+                        key: i,
+                        staticClass: "server-list-item",
+                        class: {
+                            active: e.gameState.connectionUrl === t.url
+                        },
+                        on: {
+                            click: function() {
+                                return e.connect(t)
+                            }
+                        }
+                    }, [s("div", {
+                        staticClass: "server-name"
+                    }, [e._v(e._s(t.name))]), e._v(" "), null == t.liveMarker ? s("div", [e._v(e._s(t.players) + " / " + e._s(t.slots))]) : !0 === t.liveMarker ? s("div", {
+                        staticClass: "live-marker-wrapper"
+                    }, [s("span", {
+                        staticClass: "live-marker"
+                    }, [e._v("LIVE")])]) : e._e()])
+                }), 0)])
+            };
+            l._withStripped = !0;
+            var c = s(19),
+                h = s(1),
+                d = s(5),
+                {
+                    noop: p
+                } = s(17),
+                u = {
+                    Tournament: 1,
+                    FFA: 2,
+                    Instant: 3,
+                    Gigasplit: 4,
+                    Megasplit: 5,
+                    Crazy: 6,
+                    "Self-Feed": 7,
+                    Scrimmage: 8
+                };
+
+            function g(e, t) {
+                var s = (u[e.mode] || 99) - (u[t.mode] || 99);
+                return 0 !== s ? s : e.name.localeCompare(t.name, "en", {
+                    numeric: !0,
+                    ignorePunctuation: !0
+                })
+            }
+
+            function A(e) {
+                if (e.region) return e.region.toUpperCase();
+                var t = e.url.toLowerCase().match(/game-([a-z]{2})/);
+                return t ? t[1].toUpperCase() : ""
+            }
+            var m, v = (s(166), s(0)),
+                f = Object(v.a)({
+                    data: () => ({
+                        lastServerListReloadTime: 0,
+                        regionCodes: ["EU", "NA", "AS"],
+                        connectWait: 0,
+                        gameState: h.state,
+                        selectedRegion: "",
+                        error: null,
+                        servers: []
+                    }),
+                    created() {
+                        h.events.$on("reconnect-server", () => this.connect(this.gameState.selectedServer)), h.events.$on("menu-opened", this.reloadServers), h.events.$on("every-minute", this.reloadServers), this.loadServers(), this.getRegionCode(e => {
+                            e || (e = "EU"), this.regionCodes.includes(e) || (e = "EU"), this.selectRegion(e)
+                        })
+                    },
+                    computed: {
+                        regionServers: function() {
+                            var e = this.selectedRegion.toUpperCase();
+                            return this.servers.filter(t => {
+                                var s = A(t);
+                                return !s || s === e
+                            })
+                        }
+                    },
+                    methods: {
+                        connectEmptyFFA() {
+                            var e = this.regionServers.filter(e => "FFA" === e.mode).sort((e, t) => e.currentPlayers - t.currentPlayers);
+                            if (!e.length) return !1;
+                            this.connect(e[0])
+                        },
+                        selectRegion(e) {
+                            localStorage.regionCode = e, this.selectedRegion = e
+                        },
+                        getRegionCode(e) {
+                            var t = localStorage.regionCode;
+                            t ? e(t) : c.get("https://ipapi.co/json").then(t => {
+                                e(t.data.continent_code)
+                            }).catch(() => e(null))
+                        },
+                        connect(e) {
+                            var t;
+                            this.connectWait || (this.connectWait++, d.toast.close(), this.checkBadSkinUrl(), this.gameState.selectedServer = {
+                                url: e.url,
+                                region: A(e),
+                                name: e.name,
+                                slots: e.maxPlayers || e.slots,
+                                checkInUrl: e.checkInUrl
+                            }, t = e, h.connection.open(t.url), setTimeout(() => this.connectWait--, 3200))
+                        },
+                        checkBadSkinUrl() {
+                            var e = document.getElementById("skinurl").value;
+                            e && /^https:\/\/[a-z0-9_-]+.vanis\.io\/[./a-z0-9_-]+$/i.test(e)
+                        },
+                        reloadServers() {
+                            h.app.showMenu && Date.now() > this.lastServerListReloadTime + 6e4 && this.loadServers()
+                        },
+                        loadServers(e) {
+                            e = e || p, this.lastServerListReloadTime = Date.now(), c.get("https://vanis.io/gameservers.json").then(t => {
+                                var s = t.data.sort(g);
+                                window.extraServers.forEach(e => {
+                                    s.unshift(e)
+                                }), localStorage.catchedServers = JSON.stringify(s), m = s, this.servers = s, this.error = null, e(!0)
+                            }).catch(t => {
+                                localStorage.catchedServers ? (m = this.servers = JSON.parse(localStorage.catchedServers), this.error = null, e(!0)) : (this.servers = m || [], this.error = t, e(!1))
+                            })
+                        }
+                    }
+                }, l, [], !1, null, "0647fbb0", null);
+            f.options.__file = "src/components/servers.vue";
+            var C = f.exports,
+                y = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        attrs: {
+                            id: "player-container"
+                        }
+                    }, [s("div", {
+                        staticClass: "tabs"
+                    }, [s("i", {
+                        staticClass: "tab fas fa-cog",
+                        on: {
+                            click: function() {
+                                return e.openModal("settings")
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "tab fas fa-palette",
+                        on: {
+                            click: function() {
+                                return e.openModal("theming")
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "tab far fa-keyboard",
+                        on: {
+                            click: function() {
+                                return e.openModal("hotkeys")
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "tab fas fa-film",
+                        on: {
+                            click: function() {
+                                return e.openModal("replays3")
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        attrs: {
+                            id: "player-data"
+                        }
+                    }, [e._m(0), e._v(" "), s("div", {
+                        staticClass: "row"
+                    }, [s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.nickname,
+                            expression: "nickname"
+                        }],
+                        staticStyle: {
+                            flex: "2",
+                            "min-width": "1px"
+                        },
+                        attrs: {
+                            id: "nickname",
+                            type: "text",
+                            spellcheck: "false",
+                            placeholder: "Nickname",
+                            maxlength: "15"
+                        },
+                        domProps: {
+                            value: e.nickname
+                        },
+                        on: {
+                            change: e.onNicknameChange,
+                            input: function(t) {
+                                t.target.composing || (e.nickname = t.target.value)
+                            }
+                        }
+                    }), e._v(" "), s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.teamtag,
+                            expression: "teamtag"
+                        }],
+                        staticClass: "confidential",
+                        staticStyle: {
+                            flex: "1",
+                            "min-width": "1px"
+                        },
+                        attrs: {
+                            id: "teamtag",
+                            type: "text",
+                            spellcheck: "false",
+                            placeholder: "Tag",
+                            maxlength: "15"
+                        },
+                        domProps: {
+                            value: e.teamtag
+                        },
+                        on: {
+                            change: e.onTeamTagChange,
+                            input: function(t) {
+                                t.target.composing || (e.teamtag = t.target.value)
+                            }
+                        }
+                    })]), e._v(" "), s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.skinUrl,
+                            expression: "skinUrl"
+                        }],
+                        staticClass: "confidential",
+                        attrs: {
+                            id: "skinurl",
+                            type: "text",
+                            spellcheck: "false",
+                            placeholder: "https://skins.vanis.io/s/"
+                        },
+                        domProps: {
+                            value: e.skinUrl
+                        },
+                        on: {
+                            focus: function(e) {
+                                return e.target.select()
+                            },
+                            change: e.onSkinUrlChange,
+                            input: function(t) {
+                                t.target.composing || (e.skinUrl = t.target.value)
+                            }
+                        }
+                    }), e._v(" "), s("div", {
+                        attrs: {
+                            id: "game-buttons"
+                        }
+                    }, [s("button", {
+                        attrs: {
+                            id: "play-button",
+                            disabled: !e.gameState.allowed || e.gameState.playButtonDisabled || e.gameState.deathScreen || e.gameState.deathDelay
+                        },
+                        on: {
+                            click: e.play
+                        }
+                    }, [e.gameState.deathDelay ? s("i", {
+                        staticClass: "fas fa-sync fa-spin"
+                    }) : [e._v(e._s(e.gameState.playButtonText))]], 2), e._v(" "), s("button", {
+                        attrs: {
+                            id: "spec-button",
+                            disabled: !e.gameState.allowed || 0 != e.gameState.lifeState || e.gameState.deathDelay
+                        },
+                        on: {
+                            click: e.spectate
+                        }
+                    }, [s("i", {
+                        staticClass: "fa fa-eye"
+                    })])])]), e._v(" "), "settings" === e.activeModal ? s("modal", {
+                        on: {
+                            close: function() {
+                                return e.closeModal()
+                            }
+                        }
+                    }, [s("settings")], 1) : e._e(), e._v(" "), "theming" === e.activeModal ? s("modal", {
+                        on: {
+                            close: function() {
+                                return e.closeModal()
+                            }
+                        }
+                    }, [s("theming")], 1) : e._e(), e._v(" "), "hotkeys" === e.activeModal ? s("modal", {
+                        on: {
+                            close: function() {
+                                return e.closeModal()
+                            }
+                        }
+                    }, [s("hotkeys")], 1) : e._e(), e._v(" "), "replays3" === e.activeModal ? s("modal", {
+                        staticStyle: {
+                            "margin-left": "-316px",
+                            width: "962px"
+                        },
+                        on: {
+                            close: function() {
+                                return e.closeModal()
+                            }
+                        }
+                    }, [s("replays3")], 1) : e._e(), e._v(" "), "metaLeaderboard" === e.activeModal ? s("modal", {
+                        on: {
+                            close: function() {
+                                return e.closeModal()
+                            }
+                        }
+                    }, [s("meta-leaderboard")], 1) : e._e()], 1)
+                };
+            y._withStripped = !0;
+            var w = s(115),
+                I = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticClass: "container"
+                    }, [s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n            Renderer\n            "), e.isWebGLSupported ? s("span", {
+                        staticClass: "right silent"
+                    }, [e._v("")]) : e._e()]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.isWebGLSupported,
+                            checked: e.useWebGL
+                        },
+                        on: {
+                            change: function(t) {
+                                e.change("useWebGL", t), e.promptRestart()
+                            }
+                        }
+                    }, [e._v("\n            Use GPU rendering")]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Renderer resolution "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s((100 * e.gameResolution).toFixed(0)) + "%")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0.1",
+                            max: "2.5",
+                            step: "0.1"
+                        },
+                        domProps: {
+                            value: e.gameResolution
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("gameResolution", t)
+                            },
+                            change: function() {
+                                return e.promptRestart()
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Text hiding threshold "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.smallTextThreshold) + "px")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "10",
+                            max: "60",
+                            step: "5"
+                        },
+                        domProps: {
+                            value: e.smallTextThreshold
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("smallTextThreshold", t)
+                            }
+                        }
+                    })])], 1)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Delta settings\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.mbActive
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.mbActive
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("mbActive", t)
+                            }
+                        }
+                    }), e._v("Dual active cell: " + e._s(e.showDualboxMeaning))]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.mbAutorespawn
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("mbAutorespawn", t)
+                            }
+                        }
+                    }, [e._v("Dual auto respawn")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showCellLines
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showCellLines", t)
+                            }
+                        }
+                    }, [e._v("Show cell aim")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showDir
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showDir", t)
+                            }
+                        }
+                    }, [e._v("Show cell direction")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showTag
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showTag", t)
+                            }
+                        }
+                    }, [e._v("Show teams")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.chatColorOnlyPeople
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("chatColorOnlyPeople", t)
+                            }
+                        }
+                    }, [e._v("Only colored name in chat")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.playerStats
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("playerStats", t)
+                            }
+                        }
+                    }, [e._v("Player tracker")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.debugStats
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("debugStats", t)
+                            }
+                        }
+                    }, [e._v("Network info")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.clientStats
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("clientStats", t)
+                            }
+                        }
+                    }, [e._v("Client info")])], 1)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Game\n        "), s("span", {
+                        staticClass: "right silent"
+                    }, [e._v(e._s(e.clientHash))])]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.autoZoom
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("autoZoom", t)
+                            }
+                        }
+                    }, [e._v("Auto zoom")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.rememeberEjecting
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("rememeberEjecting", t)
+                            }
+                        }
+                    }, [e._v("Remember ejecting")]), e._v(" "), s("div", {
+                        staticClass: "silent"
+                    }, e.rememeberEjecting ? [e._v("After changing tab, you "), s("b", [e._v("keep")]), e._v(" ejecting")] : [e._v("After changing tab, you "), s("b", [e._v("stop")]), e._v(" ejecting")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.autoRespawn
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("autoRespawn", t)
+                            }
+                        }
+                    }, [e._v("Auto respawn")]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n                Draw delay "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.drawDelay) + "ms")]), e._v(" "), s("input", {
+                        staticClass: "slider draw-delay",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "1000",
+                            step: "10"
+                        },
+                        domProps: {
+                            value: e.drawDelay
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("drawDelay", t)
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Camera panning delay "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.cameraMoveDelay) + "ms")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "1500",
+                            step: "10"
+                        },
+                        domProps: {
+                            value: e.cameraMoveDelay
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cameraMoveDelay", t)
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Camera zooming delay "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.cameraZoomDelay) + "ms")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "1500",
+                            step: "10"
+                        },
+                        domProps: {
+                            value: e.cameraZoomDelay
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cameraZoomDelay", t)
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Scroll zoom rate "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s((e.cameraZoomSpeed / 10 * 100).toFixed(0)) + "%")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "1",
+                            max: "25",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.cameraZoomSpeed
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cameraZoomSpeed", t)
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Cells transparency "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(100 * e.gameAlpha) + "%")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0.1",
+                            max: "1",
+                            step: "0.05"
+                        },
+                        domProps: {
+                            value: e.gameAlpha
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("gameAlpha", t)
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Replay duration "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.replayDuration) + " seconds")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "1",
+                            max: "15",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.replayDuration
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("replayDuration", t)
+                            }
+                        }
+                    })]), e._v(" "), s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.showReplaySaved
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.showReplaySaved
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("showReplaySaved", t)
+                            }
+                        }
+                    }), e._v('\n            "Replay saved" ' + e._s(e.showReplaySavedMeaning) + "\n        ")])], 1)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n            Cells\n        ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.showNames
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.showNames
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("showNames", t)
+                            }
+                        }
+                    }), e._v("\n            Show " + e._s(e.showNamesMeaning) + " names\n            ")]), e._v(" "), s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.showSkins
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.showSkins
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("showSkins", t)
+                            }
+                        }
+                    }), e._v("\n            Show " + e._s(e.showSkinsMeaning) + " skins\n        ")]), e._v(" "), s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.showMass
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.showMass
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("showMass", t)
+                            }
+                        }
+                    }), e._v("\n            Show " + e._s(e.showMassMeaning) + " mass\n        ")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showOwnName
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showOwnName", t)
+                            }
+                        }
+                    }, [e._v("Show my name")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showOwnSkin
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showOwnSkin", t)
+                            }
+                        }
+                    }, [e._v("Show my skin")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showOwnMass
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showOwnMass", t)
+                            }
+                        }
+                    }, [e._v("Show my mass")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showCrown
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showCrown", t)
+                            }
+                        }
+                    }, [e._v("Show crown")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.foodVisible
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("foodVisible", t)
+                            }
+                        }
+                    }, [e._v("Show food")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.eatAnimation
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("eatAnimation", t)
+                            }
+                        }
+                    }, [e._v("Show eat animation")])], 1)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showHud
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showHud", t)
+                            }
+                        }
+                    }, [e._v("HUD")])], 1), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showLeaderboard
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showLeaderboard", t)
+                            }
+                        }
+                    }, [e._v("Show leaderboard")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showServerName
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showServerName", t)
+                            }
+                        }
+                    }, [e._v("Leaderboard: Server name")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showChat
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showChat", t)
+                            }
+                        }
+                    }, [e._v("Show chat")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud || !e.showChat,
+                            checked: e.showChatToast
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showChatToast", t)
+                            }
+                        }
+                    }, [e._v("Show chat as popups")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.minimapEnabled
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("minimapEnabled", t)
+                            }
+                        }
+                    }, [e._v("Show minimap")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.minimapLocations
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("minimapLocations", t)
+                            }
+                        }
+                    }, [e._v("Show minimap locations")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showFPS
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showFPS", t)
+                            }
+                        }
+                    }, [e._v("Stats: FPS")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showPing
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showPing", t)
+                            }
+                        }
+                    }, [e._v("Stats: Ping")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showPlayerMass
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showPlayerMass", t)
+                            }
+                        }
+                    }, [e._v("Stats: Current mass")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showPlayerScore
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showPlayerScore", t)
+                            }
+                        }
+                    }, [e._v("Stats: Score")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showCellCount
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showCellCount", t)
+                            }
+                        }
+                    }, [e._v("Stats: Cell count")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showClock
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showClock", t)
+                            }
+                        }
+                    }, [e._v("Minimap stats: System time")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showSessionTime
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showSessionTime", t)
+                            }
+                        }
+                    }, [e._v("Minimap stats: Session time")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showPlayerCount
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showPlayerCount", t)
+                            }
+                        }
+                    }, [e._v("Minimap stats: Players in server")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showSpectators
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showSpectators", t)
+                            }
+                        }
+                    }, [e._v("Minimap stats: Spectators")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.showRestartTiming
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showRestartTiming", t)
+                            }
+                        }
+                    }, [e._v("Minimap stats: Server restart time")])], 1)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Chat\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("div", {
+                        staticClass: "row"
+                    }, [e._v("\n                You can right-click name in chat to block them until server restart\n            ")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showBlockedMessageCount
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showBlockedMessageCount", t)
+                            }
+                        }
+                    }, [e._v("\n            Show blocked message count")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.filterChatMessages
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("filterChatMessages", t)
+                            }
+                        }
+                    }, [e._v("\n            Filter profanity")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.clearChatMessages
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("clearChatMessages", t)
+                            }
+                        }
+                    }, [e._v("\n            Clear on disconnect")])], 1)]), e._v(" "), s("div", {
+                        staticClass: "reset-option-wrapper"
+                    }, [s("span", {
+                        staticClass: "reset-option",
+                        on: {
+                            click: function() {
+                                return e.confirmReset()
+                            }
+                        }
+                    }, [s("i", {
+                        staticClass: "fa fa-undo"
+                    }), e._v(" Reset\n        ")])])])
+                };
+            I._withStripped = !0;
+            var k = s(1),
+                b = s(4),
+                _ = s(5),
+                S = PIXI.utils.isWebGLSupported(),
+                E = S && b.useWebGL;
+
+            function x(e) {
+                switch (e) {
+                    case 0:
+                        return "nobody else's";
+                    case 1:
+                        return "tag players'";
+                    case 2:
+                        return "everybody's";
+                    default:
+                        return "???"
+                }
+            }
+            var B = (s(170), Object(v.a)({
+                data: () => ({
+                    clientHash: "",
+                    isWebGLSupported: S,
+                    useWebGL: E,
+                    gameResolution: b.gameResolution,
+                    smallTextThreshold: b.smallTextThreshold,
+                    autoZoom: b.autoZoom,
+                    rememeberEjecting: b.rememeberEjecting,
+                    autoRespawn: b.autoRespawn,
+                    mbAutorespawn: b.mbAutorespawn,
+                    mouseFreezeSoft: b.mouseFreezeSoft,
+                    drawDelay: b.drawDelay,
+                    cameraMoveDelay: b.cameraMoveDelay,
+                    cameraZoomDelay: b.cameraZoomDelay,
+                    cameraZoomSpeed: b.cameraZoomSpeed,
+                    replayDuration: b.replayDuration,
+                    showReplaySaved: b.showReplaySaved,
+                    showNames: b.showNames,
+                    showMass: b.showMass,
+                    showSkins: b.showSkins,
+                    showOwnName: b.showOwnName,
+                    showOwnMass: b.showOwnMass,
+                    showOwnSkin: b.showOwnSkin,
+                    showCrown: b.showCrown,
+                    foodVisible: b.foodVisible,
+                    eatAnimation: b.eatAnimation,
+                    showHud: b.showHud,
+                    showLeaderboard: b.showLeaderboard,
+                    showServerName: b.showServerName,
+                    showChat: b.showChat,
+                    showChatToast: b.showChatToast,
+                    minimapEnabled: b.minimapEnabled,
+                    minimapLocations: b.minimapLocations,
+                    showFPS: b.showFPS,
+                    showPing: b.showPing,
+                    showCellCount: b.showCellCount,
+                    showPlayerScore: b.showPlayerScore,
+                    showPlayerMass: b.showPlayerMass,
+                    showClock: b.showClock,
+                    showSessionTime: b.showSessionTime,
+                    showPlayerCount: b.showPlayerCount,
+                    showSpectators: b.showSpectators,
+                    showRestartTiming: b.showRestartTiming,
+                    debugStats: b.debugStats,
+                    clientStats: b.clientStats,
+                    playerStats: b.playerStats,
+                    chatColorOnlyPeople: b.chatColorOnlyPeople,
+                    showBlockedMessageCount: b.showBlockedMessageCount,
+                    filterChatMessages: b.filterChatMessages,
+                    clearChatMessages: b.clearChatMessages,
+                    showCellLines: b.showCellLines,
+                    showTag: b.showTag,
+                    showDir: b.showDir,
+                    gameAlpha: b.gameAlpha,
+                    mbActive: b.mbActive
+                }),
+                computed: {
+                    showNamesMeaning() {
+                        return x(this.showNames)
+                    },
+                    showSkinsMeaning() {
+                        return x(this.showSkins)
+                    },
+                    showMassMeaning() {
+                        return x(this.showMass)
+                    },
+                    showReplaySavedMeaning() {
+                        switch (this.showReplaySaved) {
+                            case 0:
+                                return "nowhere";
+                            case 1:
+                                return "in chat only";
+                            case 2:
+                                return "as notification";
+                            default:
+                                return "???"
+                        }
+                    },
+                    showDualboxMeaning() {
+                        return ({
+                            0: "None",
+                            1: "Border",
+                            2: "Arrow",
+                            3: "Arrow"
+                        })[this.mbActive]
+                    }
+                },
+                methods: {
+                    promptRestart() {
+                        _.confirm("Refresh page to apply changes?", () => {
+                            setTimeout(() => {
+                                location.reload()
+                            }, 500)
+                        })
+                    },
+                    change(e, t) {
+                        var s;
+                        if (s = t && t.target ? isNaN(t.target.valueAsNumber) ? t.target.value : t.target.valueAsNumber : t, b[e] != s) {
+                            switch (this[e] = s, b.set(e, s), e) {
+                                case "backgroundColor":
+                                    var i = PIXI.utils.string2hex(s);
+                                    k.renderer.backgroundColor = i;
+                                    break;
+                                case "minimapLocations":
+                                    k.events.$emit("minimap-show-locations", s);
+                                    break;
+                                case "showHud":
+                                    k.app.showHud = s;
+                                    break;
+                                case "showChatToast":
+                                    k.events.$emit("chat-visible", {
+                                        visibleToast: s
+                                    })
+                            }
+                            if (k.running) switch (e) {
+                                case "showNames":
+                                case "showSkins":
+                                case "showMass":
+                                case "showOwnName":
+                                case "showOwnSkin":
+                                case "showOwnMass":
+                                    k.playerManager.invalidateVisibility();
+                                    break;
+                                case "gameAlpha":
+                                    GAME.scene.container.alpha = s;
+                                    break;
+                                case "foodVisible":
+                                    k.scene.food.visible = s;
+                                    break;
+                                case "showLeaderboard":
+                                    k.events.$emit("leaderboard-visible", s);
+                                    break;
+                                case "minimapEnabled":
+                                    s ? k.events.$emit("minimap-show") : k.events.$emit("minimap-hide");
+                                    break;
+                                case "showFPS":
+                                case "showPing":
+                                case "showPlayerMass":
+                                case "showPlayerScore":
+                                case "showCellCount":
+                                    k.events.$emit("stats-invalidate-shown");
+                                    break;
+                                case "showClock":
+                                case "showSessionTime":
+                                case "showSpectators":
+                                case "showPlayerCount":
+                                case "showRestartTiming":
+                                    k.events.$emit("minimap-stats-invalidate-shown");
+                                    break;
+                                case "showChat":
+                                    k.events.$emit("chat-visible", {
+                                        visible: s
+                                    });
+                                    break;
+                                case "showBlockedMessageCount":
+                                    k.events.$emit("show-blocked-message-count", s)
+                            }
+                        }
+                    },
+                    confirmReset() {
+                        _.confirm("Are you sure you want to reset all setting options?", () => this.reset())
+                    },
+                    reset() {
+                        var e = ["clientHash", "isWebGLSupported"];
+                        for (var t in this.$data) e.includes(t) || this.change(t, b.getDefault(t))
+                    }
+                }
+            }, I, [], !1, null, "3ddebeb3", null));
+            B.options.__file = "src/components/settings.vue";
+            var Q = B.exports,
+                M = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticClass: "container"
+                    }, [s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Colors and images\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options two-columns"
+                    }, [s("span", [s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Background")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.backgroundColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("backgroundColor", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Map border")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.borderColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("borderColor", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input",
+                        class: {
+                            disabled: !e.useFoodColor
+                        }
+                    }, [s("span", [e._v("Food")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            disabled: !e.useFoodColor,
+                            value: e.foodColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("foodColor", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Ejected cells")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.ejectedColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("ejectedColor", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Active cell")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.mbColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("mbColor", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Name outline")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.cellNameOutlineColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellNameOutlineColor", t)
+                            }
+                        }
+                    })], 1)]), e._v(" "), s("span", [s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Cursor")]), e._v(" "), s("image-option", {
+                        staticClass: "right",
+                        attrs: {
+                            width: "32",
+                            defaults: "",
+                            value: e.cursorImageUrl
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cursorImageUrl", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input",
+                        class: {
+                            disabled: !e.showBackgroundImage
+                        }
+                    }, [s("span", [e._v("Map image")]), e._v(" "), s("image-option", {
+                        staticClass: "right",
+                        attrs: {
+                            width: "330",
+                            defaults: e.bgDefault,
+                            disabled: !e.showBackgroundImage,
+                            value: e.backgroundImageUrl
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("backgroundImageUrl", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Viruses")]), e._v(" "), s("image-option", {
+                        staticClass: "right",
+                        attrs: {
+                            width: "100",
+                            defaults: e.virusDefault,
+                            value: e.virusImageUrl
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("virusImageUrl", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Dual arrow")]), e._v(" "), s("image-option", {
+                        staticClass: "right",
+                        attrs: {
+                            width: "100",
+                            defaults: e.mbArrowDefault,
+                            value: e.mbArrow
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("mbArrow", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Mass text")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.cellMassColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellMassColor", t)
+                            }
+                        }
+                    })], 1), e._v(" "), s("div", {
+                        staticClass: "color-input"
+                    }, [s("span", [e._v("Mass outline")]), e._v(" "), s("color-option", {
+                        staticClass: "right",
+                        attrs: {
+                            value: e.cellMassOutlineColor
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellMassOutlineColor", t)
+                            }
+                        }
+                    })], 1)])])]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Map\n        "), e.useWebGL ? e._e() : s("span", {
+                        staticClass: "right silent"
+                    }, [e._v("Needs GPU rendering")])]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.useFoodColor
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("useFoodColor", t)
+                            }
+                        }
+                    }, [e._v("Custom food color")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.useWebGL,
+                            checked: e.showBackgroundImage
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showBackgroundImage", t)
+                            }
+                        }
+                    }, [e._v("Show map image")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.useWebGL || !e.showBackgroundImage,
+                            checked: e.backgroundImageRepeat
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("backgroundImageRepeat", t)
+                            }
+                        }
+                    }, [e._v("Repeat map image")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.useWebGL || !e.showBackgroundImage,
+                            checked: e.backgroundDefaultIfUnequal
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("backgroundDefaultIfUnequal", t)
+                            }
+                        }
+                    }, [e._v("Always crop map image")]), e._v(" "), s("div", {
+                        staticClass: "slider-option bottom-margin",
+                        class: {
+                            disabled: !e.useWebGL || !e.showBackgroundImage
+                        }
+                    }, [e._v("\n            Map image opacity "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s((100 * e.backgroundImageOpacity).toFixed(0)) + "%")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            disabled: !e.useWebGL || !e.showBackgroundImage,
+                            min: "0.1",
+                            max: "1",
+                            step: "0.05"
+                        },
+                        domProps: {
+                            value: e.backgroundImageOpacity
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("backgroundImageOpacity", t)
+                            }
+                        }
+                    })])], 1)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\r\n            Name text\r\n        ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("div", {
+                        staticClass: "bottom-margin"
+                    }, [e._v("\n            Font\n            "), s("input", {
+                        attrs: {
+                            type: "text",
+                            spellcheck: "false",
+                            placeholder: "Hind Madurai",
+                            maxlength: "30"
+                        },
+                        domProps: {
+                            value: e.cellNameFont
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellNameFont", t)
+                            },
+                            focus: function() {
+                                return e.fontWarning("name", !0)
+                            },
+                            blur: function() {
+                                return e.fontWarning("name", !1)
+                            }
+                        }
+                    })]), e._v(" "), e.showNameFontWarning ? [s("div", {
+                        staticClass: "silent"
+                    }, [e._v("It must be installed on your device.")]), e._v(" "), s("div", {
+                        staticClass: "silent"
+                    }, [e._v("If it still doesn't show, restart your PC")])] : e._e(), e._v(" "), s("div", {
+                        staticClass: "inline-range"
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.cellNameWeight
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellNameWeight", t)
+                            }
+                        }
+                    }), e._v("\n            " + e._s(e.cellNameWeightMeaning) + " name text\n        ")]), e._v(" "), s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.cellNameOutline
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "3",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.cellNameOutline
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellNameOutline", t)
+                            }
+                        }
+                    }), e._v("\n            " + e._s(e.cellNameOutlineMeaning) + " name outline\n        ")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.cellNameSmoothOutline
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("cellNameSmoothOutline", t)
+                            }
+                        }
+                    }, [e._v("Smooth name outline")]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\r\n                Long name threshold "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.cellLongNameThreshold) + "px")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "500",
+                            max: "1250",
+                            step: "50"
+                        },
+                        domProps: {
+                            value: e.cellLongNameThreshold
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellLongNameThreshold", t)
+                            }
+                        }
+                    })])], 2)]), e._v(" "), s("div", {
+                        staticClass: "section row"
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Mass text\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("div", {
+                        staticClass: "bottom-margin"
+                    }, [e._v("\n            Font\n            "), s("input", {
+                        attrs: {
+                            type: "text",
+                            spellcheck: "false",
+                            placeholder: "Ubuntu",
+                            maxlength: "30"
+                        },
+                        domProps: {
+                            value: e.cellMassFont
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellMassFont", t)
+                            },
+                            focus: function() {
+                                return e.fontWarning("mass", !0)
+                            },
+                            blur: function() {
+                                return e.fontWarning("mass", !1)
+                            }
+                        }
+                    })]), e._v(" "), e.showMassFontWarning ? [s("div", {
+                        staticClass: "silent"
+                    }, [e._v("It must be installed on your device.")]), e._v(" "), s("div", {
+                        staticClass: "silent"
+                    }, [e._v("If it still doesn't show, restart your PC")])] : e._e(), e._v(" "), s("div", {
+                        staticClass: "inline-range"
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "2",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.cellMassWeight
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellMassWeight", t)
+                            }
+                        }
+                    }), e._v("\n            " + e._s(e.cellMassWeightMeaning) + " mass text\n        ")]), e._v(" "), s("div", {
+                        staticClass: "inline-range",
+                        class: {
+                            off: !e.cellMassOutline
+                        }
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "3",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.cellMassOutline
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellMassOutline", t)
+                            }
+                        }
+                    }), e._v("\n            " + e._s(e.cellMassOutlineMeaning) + " mass outline\r\n            ")]), e._v(" "), s("div", {
+                        staticClass: "inline-range"
+                    }, [s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "0",
+                            max: "3",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.cellMassTextSize
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("cellMassTextSize", t)
+                            }
+                        }
+                    }), e._v("\n            " + e._s(e.cellMassTextSizeMeaning) + " mass text size\n        ")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.cellMassSmoothOutline
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("cellMassSmoothOutline", t)
+                            }
+                        }
+                    }, [e._v("Smooth mass outline")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.shortMass
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("shortMass", t)
+                            }
+                        }
+                    }, [e._v("Short mass format")])], 2)]), e._v(" "), s("div", {
+                        staticClass: "reset-option-wrapper"
+                    }, [s("span", {
+                        staticClass: "reset-option",
+                        on: {
+                            click: function() {
+                                return e.confirmReset()
+                            }
+                        }
+                    }, [s("i", {
+                        staticClass: "fa fa-undo"
+                    }), e._v(" Reset\n    ")])])])
+                };
+            M._withStripped = !0;
+            var T = function() {
+                var e = this,
+                    t = e.$createElement,
+                    s = e._self._c || t;
+                return s("div", {
+                    staticClass: "color-button",
+                    class: {
+                        disabled: e.disabled
+                    },
+                    style: {
+                        backgroundColor: "#" + e.hex
+                    },
+                    on: {
+                        mousedown: function() {
+                            e.disabled || e.showPicker(!0)
+                        }
+                    }
+                }, [e.pickerOpen ? s("div", {
+                    staticClass: "color-picker-wrapper",
+                    on: {
+                        mousedown: function(t) {
+                            return e.startMovingPivot(t)
+                        },
+                        mousemove: function(t) {
+                            return e.movePivot(t)
+                        },
+                        mouseup: function(t) {
+                            return e.stopMovingPivot(t)
+                        }
+                    }
+                }, [s("div", {
+                    staticClass: "color-picker-overlay"
+                }), e._v(" "), s("div", {
+                    staticClass: "color-picker fade-box"
+                }, [s("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: e.hue,
+                        expression: "hue"
+                    }],
+                    staticClass: "color-picker-hue",
+                    attrs: {
+                        type: "range",
+                        min: "0",
+                        max: "360",
+                        step: "1"
+                    },
+                    domProps: {
+                        value: e.hue
+                    },
+                    on: {
+                        change: function() {
+                            return e.triggerInput()
+                        },
+                        __r: function(t) {
+                            e.hue = t.target.value
+                        }
+                    }
+                }), e._v(" "), s("div", {
+                    staticClass: "color-picker-clr",
+                    style: {
+                        backgroundColor: "hsl(" + e.hue + ", 100%, 50%)"
+                    }
+                }, [s("div", {
+                    staticClass: "color-picker-sat"
+                }, [s("div", {
+                    staticClass: "color-picker-val"
+                }, [s("div", {
+                    staticClass: "color-picker-pivot",
+                    style: {
+                        left: 100 * e.sat + "px",
+                        top: 100 - 100 * e.val + "px"
+                    }
+                })])])]), e._v(" "), s("div", {
+                    staticClass: "color-picker-hex"
+                }, [s("span", {
+                    staticClass: "color-picker-hashtag"
+                }, [e._v("#")]), e._v(" "), s("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: e.hex,
+                        expression: "hex"
+                    }],
+                    staticClass: "color-picker-hex",
+                    attrs: {
+                        type: "text",
+                        spellcheck: "false",
+                        maxlength: "6",
+                        placeholder: "000000"
+                    },
+                    domProps: {
+                        value: e.hex
+                    },
+                    on: {
+                        input: [function(t) {
+                            t.target.composing || (e.hex = t.target.value)
+                        }, function() {
+                            return e.triggerInput()
+                        }]
+                    }
+                })])])]) : e._e()])
+            };
+            T._withStripped = !0;
+            var D = (s(172), Object(v.a)({
+                data: () => ({
+                    pickerOpen: !1,
+                    movingPivot: !1,
+                    hue: 0,
+                    sat: 0,
+                    val: 0
+                }),
+                props: ["value", "disabled"],
+                computed: {
+                    hex: {
+                        get() {
+                            return function(e, t, s) {
+                                var i, a, n, o, r, l, c, h;
+                                switch (l = s * (1 - t), c = s * (1 - (r = 6 * e - (o = Math.floor(6 * e))) * t), h = s * (1 - (1 - r) * t), o % 6) {
+                                    case 0:
+                                        i = s, a = h, n = l;
+                                        break;
+                                    case 1:
+                                        i = c, a = s, n = l;
+                                        break;
+                                    case 2:
+                                        i = l, a = s, n = h;
+                                        break;
+                                    case 3:
+                                        i = l, a = c, n = s;
+                                        break;
+                                    case 4:
+                                        i = h, a = l, n = s;
+                                        break;
+                                    case 5:
+                                        i = s, a = l, n = c
+                                }
+                                return (i = Math.ceil(255 * i).toString(16).padStart(2, "0")) + (a = Math.ceil(255 * a).toString(16).padStart(2, "0")) + Math.ceil(255 * n).toString(16).padStart(2, "0")
+                            }(this.hue / 360, this.sat, this.val)
+                        },
+                        set(e) {
+                            if (e = e.toLowerCase(), /^[0-9a-f]{6}$/.test(e)) {
+                                var t, s, i, a, n, o, r, l = (t = e, s = parseInt(t.slice(0, 2), 16) / 255, i = parseInt(t.slice(2, 4), 16) / 255, a = parseInt(t.slice(4, 6), 16) / 255, [60 * ((r = (o = (n = Math.max(s, i, a)) - Math.min(s, i, a)) && (n == s ? (i - a) / o : n == i ? 2 + (a - s) / o : 4 + (s - i) / o)) < 0 ? r + 6 : r), n && o / n, n]);
+                                this.hue = l[0], this.sat = l[1], this.val = l[2]
+                            }
+                        }
+                    }
+                },
+                methods: {
+                    showPicker(e) {
+                        this.pickerOpen = e
+                    },
+                    startMovingPivot(e) {
+                        var t = e.target.classList;
+                        if (t.contains("color-picker-overlay")) return this.showPicker(!1), void e.stopPropagation();
+                        (t.contains("color-picker-pivot") || t.contains("color-picker-val")) && (this.movingPivot = !0, this.movePivot(e))
+                    },
+                    movePivot(e) {
+                        if (this.movingPivot) {
+                            var t = this.$el.querySelector(".color-picker-val").getBoundingClientRect(),
+                                s = e.clientX - t.x,
+                                i = e.clientY - t.y;
+                            this.sat = s / 100, this.val = 1 - i / 100, this.sat = Math.min(Math.max(this.sat, 0), 1), this.val = Math.min(Math.max(this.val, 0), 1)
+                        }
+                    },
+                    stopMovingPivot(e) {
+                        this.movingPivot && (this.movePivot(e), this.movingPivot = !1, this.triggerInput())
+                    },
+                    triggerInput() {
+                        this.$emit("input", this.hex)
+                    }
+                },
+                created() {
+                    this.value && (this.hex = this.value)
+                }
+            }, T, [], !1, null, "5b0666af", null));
+            D.options.__file = "src/components/color-option.vue";
+            var L = D.exports,
+                N = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticClass: "image-button",
+                        class: {
+                            disabled: e.disabled
+                        },
+                        style: {
+                            backgroundColor: "#" + e.hex
+                        },
+                        on: {
+                            mousedown: function() {
+                                e.disabled || e.showPicker(!0)
+                            }
+                        }
+                    }, [s("div", {
+                        staticClass: "image-button-text"
+                    }, [e._v("...")]), e._v(" "), e.pickerOpen ? s("div", {
+                        staticClass: "image-picker-wrapper",
+                        on: {
+                            click: function(t) {
+                                return e.tryHidePicker(t)
+                            }
+                        }
+                    }, [s("div", {
+                        staticClass: "image-picker-overlay"
+                    }), e._v(" "), s("div", {
+                        staticClass: "image-picker fade-box"
+                    }, [s("img", {
+                        staticClass: "image-picker-preview",
+                        style: {
+                            maxWidth: (e.value ? e.width : 200) + "px"
+                        },
+                        attrs: {
+                            src: e.value,
+                            alt: "No image chosen or it is invalid"
+                        },
+                        on: {
+                            click: function() {
+                                return e.openFileChooser()
+                            },
+                            dragover: function(t) {
+                                return e.allowDrop(t)
+                            },
+                            drop: function(t) {
+                                return e.onImageDrop(t)
+                            }
+                        }
+                    }), e._v(" "), s("div", {
+                        staticClass: "image-picker-information"
+                    }, [e._v("\n            Click or drop onto image to change."), s("br"), e._v(" "), "defaults" in this ? s("span", {
+                        staticClass: "image-picker-reset",
+                        on: {
+                            click: function() {
+                                return e.triggerInput(e.defaults)
+                            }
+                        }
+                    }, [e._v("Reset to default")]) : e._e()]), e._v(" "), s("input", {
+                        staticClass: "image-picker-input",
+                        attrs: {
+                            type: "file",
+                            accept: "image/png, image/jpeg, image/bmp, image/webp"
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.onImageSelect(t)
+                            }
+                        }
+                    })])]) : e._e()])
+                };
+            N._withStripped = !0;
+            var U = (s(174), Object(v.a)({
+                data: () => ({
+                    pickerOpen: !1,
+                    fileReader: null
+                }),
+                props: ["value", "width", "disabled", "defaults"],
+                methods: {
+                    showPicker(e) {
+                        !this.pickerOpen && e && (this.imageLoadedOnce = !1), this.pickerOpen = e
+                    },
+                    tryHidePicker(e) {
+                        e.target.classList.contains("image-picker-overlay") && (this.showPicker(!1), e.stopPropagation())
+                    },
+                    triggerInput(e) {
+                        this.$emit("input", e)
+                    },
+                    openFileChooser() {
+                        this.$el.querySelector(".image-picker-input").click()
+                    },
+                    allowDrop(e) {
+                        e.preventDefault()
+                    },
+                    getFileReader() {
+                        var e = new FileReader;
+                        return e.addEventListener("load", e => {
+                            this.triggerInput(e.target.result)
+                        }), e
+                    },
+                    onImageSelect(e) {
+                        if (0 !== e.target.files.length) {
+                            var t = e.target.files[0];
+                            t.type.startsWith("image/") && this.getFileReader().readAsDataURL(t)
+                        }
+                    },
+                    onImageDrop(e) {
+                        if (e.preventDefault(), 0 !== e.dataTransfer.files.length) {
+                            var t = e.dataTransfer.files[0];
+                            t.type.startsWith("image/") && this.getFileReader().readAsDataURL(t)
+                        }
+                    }
+                }
+            }, N, [], !1, null, "641581b7", null));
+            U.options.__file = "src/components/image-option.vue";
+            var R = U.exports,
+                P = function() {
+                    var e = this.$createElement;
+                    return (this._self._c || e)("div")
+                };
+            P._withStripped = !0;
+            var F = Object(v.a)({
+                data: () => ({
+                    hello: 123
+                })
+            }, P, [], !1, null, "384e68ec", null);
+            F.options.__file = "src/components/template.vue", F.exports;
+            var G = s(1),
+                H = s(4),
+                O = s(5);
+
+            function Y(e) {
+                switch (e) {
+                    case 0:
+                        return "Thin";
+                    case 1:
+                        return "Normal";
+                    case 2:
+                        return "Bold";
+                    default:
+                        return "???"
+                }
+            }
+
+            function z(e) {
+                switch (e) {
+                    case 0:
+                        return "No";
+                    case 1:
+                        return "Thin";
+                    case 2:
+                        return "Thick";
+                    case 3:
+                        return "Thickest";
+                    default:
+                        return "???"
+                }
+            }
+
+            function W(e, t) {
+                return e ? new Promise((s, i) => {
+                    var a = new Image;
+                    a.onload = () => {
+                        var e = document.createElement("canvas"),
+                            i = e.getContext("2d"),
+                            n = Math.max(a.width, a.height),
+                            o = Math.min(a.width, a.height),
+                            r = n === a.width,
+                            l = Math.min(n, t) / n,
+                            c = (r ? n : o) * l,
+                            h = (r ? o : n) * l;
+                        e.width = c, e.height = h, i.drawImage(a, 0, 0, c, h), s(e.toDataURL())
+                    }, a.onerror = i, a.src = e
+                }) : null
+            }
+            var Z = PIXI.utils.isWebGLSupported() && H.useWebGL,
+                j = (s(176), Object(v.a)({
+                    components: {
+                        colorOption: L,
+                        imageOption: R
+                    },
+                    data: () => ({
+                        useWebGL: Z,
+                        bgDefault: H.getDefault("backgroundImageUrl"),
+                        virusDefault: H.getDefault("virusImageUrl"),
+                        mbArrowDefault: "https://i.postimg.cc/6pvLJ2TW/image.png",
+                        showNameFontWarning: !1,
+                        showMassFontWarning: !1,
+                        backgroundColor: H.backgroundColor,
+                        borderColor: H.borderColor,
+                        foodColor: H.foodColor,
+                        ejectedColor: H.ejectedColor,
+                        cellNameOutlineColor: H.cellNameOutlineColor,
+                        cursorImageUrl: H.cursorImageUrl,
+                        backgroundImageUrl: H.backgroundImageUrl,
+                        virusImageUrl: H.virusImageUrl,
+                        cellMassColor: H.cellMassColor,
+                        cellMassOutlineColor: H.cellMassOutlineColor,
+                        cellNameFont: H.cellNameFont,
+                        cellNameWeight: H.cellNameWeight,
+                        cellNameOutline: H.cellNameOutline,
+                        cellNameSmoothOutline: H.cellNameSmoothOutline,
+                        cellMassFont: H.cellMassFont,
+                        cellMassWeight: H.cellMassWeight,
+                        cellMassOutline: H.cellMassOutline,
+                        cellMassSmoothOutline: H.cellMassSmoothOutline,
+                        cellMassTextSize: H.cellMassTextSize,
+                        cellLongNameThreshold: H.cellLongNameThreshold,
+                        shortMass: H.shortMass,
+                        showBackgroundImage: H.showBackgroundImage,
+                        backgroundImageRepeat: H.backgroundImageRepeat,
+                        backgroundDefaultIfUnequal: H.backgroundDefaultIfUnequal,
+                        backgroundImageOpacity: H.backgroundImageOpacity,
+                        useFoodColor: H.useFoodColor,
+                        mbArrow: H.mbArrow,
+                        mbColor: H.mbColor
+                    }),
+                    computed: {
+                        cellNameWeightMeaning() {
+                            return Y(this.cellNameWeight)
+                        },
+                        cellMassWeightMeaning() {
+                            return Y(this.cellMassWeight)
+                        },
+                        cellNameOutlineMeaning() {
+                            return z(this.cellNameOutline)
+                        },
+                        cellMassOutlineMeaning() {
+                            return z(this.cellMassOutline)
+                        },
+                        cellMassTextSizeMeaning() {
+                            return function(e) {
+                                switch (e) {
+                                    case 0:
+                                        return "Small";
+                                    case 1:
+                                        return "Normal";
+                                    case 2:
+                                        return "Large";
+                                    case 3:
+                                        return "Largest";
+                                    default:
+                                        return "???"
+                                }
+                            }(this.cellMassTextSize)
+                        }
+                    },
+                    methods: {
+                        async change(e, t, s) {
+                            var i;
+                            i = t && t.target ? isNaN(t.target.valueAsNumber) ? t.target.value : t.target.valueAsNumber : t;
+                            try {
+                                switch (e) {
+                                    case "cursorImageUrl":
+                                        i = await W(i, 32);
+                                        break;
+                                    case "backgroundImageUrl":
+                                        i !== this.bgDefault && (i = await W(i, 4e3));
+                                        break;
+                                    case "virusImageUrl":
+                                        i !== this.virusDefault && (i = await W(i, 200));
+                                        break;
+                                    case "mbArrow":
+                                        G.dual.reloadArrow(i)
+                                }
+                            } catch (a) {
+                                return void O.alert("This image is too large to even be loaded.")
+                            }
+                            if (H[e] != i) {
+                                var n = this[e];
+                                try {
+                                    H.set(e, i)
+                                } catch (o) {
+                                    return H.set(e, n), void O.alert("Saving this setting failed. Perhaps the image is too large?")
+                                }
+                                switch (this[e] = i, e) {
+                                    case "cursorImageUrl":
+                                        G.events.$emit("set-cursor-url", i);
+                                        break;
+                                    case "backgroundColor":
+                                        G.renderer.backgroundColor = PIXI.utils.string2hex(i);
+                                        break;
+                                    case "cellNameOutlineColor":
+                                    case "cellNameFont":
+                                    case "cellNameWeight":
+                                    case "cellNameOutline":
+                                    case "cellNameSmoothOutline":
+                                        G.settings.compileNameFontStyle();
+                                        break;
+                                    case "cellMassColor":
+                                    case "cellMassOutlineColor":
+                                    case "cellMassFont":
+                                    case "cellMassWeight":
+                                    case "cellMassOutline":
+                                    case "cellMassSmoothOutline":
+                                    case "cellMassTextSize":
+                                        G.settings.compileMassFontStyle();
+                                        break;
+                                    case "cellLongNameThreshold":
+                                        G.scene.resetPlayerLongNames()
+                                }
+                                if (G.running) switch (e) {
+                                    case "borderColor":
+                                        G.scene.resetBorder();
+                                        break;
+                                    case "foodColor":
+                                        H.useFoodColor && G.scene.reloadFoodTextures();
+                                        break;
+                                    case "ejectedColor":
+                                        G.scene.reloadEjectedTextures();
+                                        break;
+                                    case "virusImageUrl":
+                                        G.scene.reloadVirusTexture();
+                                        break;
+                                    case "cellNameOutlineColor":
+                                    case "cellNameFont":
+                                    case "cellNameWeight":
+                                    case "cellNameOutline":
+                                    case "cellNameSmoothOutline":
+                                        G.scene.resetNameTextStyle();
+                                        break;
+                                    case "cellMassColor":
+                                    case "cellMassOutlineColor":
+                                    case "cellMassFont":
+                                    case "cellMassWeight":
+                                    case "cellMassOutline":
+                                    case "cellMassSmoothOutline":
+                                    case "cellMassTextSize":
+                                        G.scene.resetMassTextStyle(!0);
+                                        break;
+                                    case "showBackgroundImage":
+                                        G.scene.toggleBackgroundImage(i);
+                                        break;
+                                    case "backgroundImageUrl":
+                                    case "backgroundImageRepeat":
+                                    case "backgroundDefaultIfUnequal":
+                                    case "backgroundImageOpacity":
+                                        G.scene.setBackgroundImage();
+                                        break;
+                                    case "useFoodColor":
+                                        G.scene.reloadFoodTextures()
+                                }
+                            }
+                        },
+                        confirmReset() {
+                            O.confirm("Are you sure you want to reset all setting options?", () => this.reset())
+                        },
+                        reset() {
+                            var e = ["useWebGL", "bgDefault", "virusDefault", "showNameFontWarning", "showMassFontWarning"];
+                            for (var t in this.$data) e.includes(t) || this.change(t, H.getDefault(t))
+                        },
+                        fontWarning(e, t) {
+                            switch (e) {
+                                case "name":
+                                    this.showNameFontWarning = t;
+                                    break;
+                                case "mass":
+                                    this.showMassFontWarning = t
+                            }
+                        }
+                    }
+                }, M, [], !1, null, "15c13b66", null));
+            j.options.__file = "src/components/theming.vue";
+            var J = j.exports,
+                K = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        attrs: {
+                            id: "hotkey-container"
+                        }
+                    }, [s("div", {
+                        staticClass: "hotkeys"
+                    }, e._l(e.availableHotkeys, function(t, i) {
+                        return s("div", {
+                            key: i,
+                            staticClass: "row"
+                        }, [s("span", {
+                            staticClass: "action"
+                        }, [e._v(e._s(i))]), e._v(" "), s("span", {
+                            staticClass: "bind",
+                            attrs: {
+                                tabindex: "0"
+                            },
+                            on: {
+                                mousedown: function(s) {
+                                    return e.onMouseDown(s, t)
+                                },
+                                keydown: function(s) {
+                                    return s.preventDefault(), e.onKeyDown(s, t)
+                                }
+                            }
+                        }, [e._v("\n            " + e._s(e.hotkeys[t]) + "\n        ")])])
+                    }), 0), e._v(" "), s("div", {
+                        staticClass: "footer"
+                    }, [s("span", {
+                        staticClass: "reset-button2",
+                        on: {
+                            click: e.onResetClick
+                        }
+                    }, [s("i", {
+                        staticClass: "fa fa-undo"
+                    }), e._v(" Reset\n    ")])])])
+                };
+            K._withStripped = !0;
+            var V = s(66),
+                X = s(5),
+                q = (s(178), Object(v.a)({
+                    data: () => ({
+                        availableHotkeys: {
+                            Dual: "dualbox",
+                            "Select player": "selectPlayer",
+                            Feed: "feed",
+                            "Feed macro": "feedMacro",
+                            Split: "split",
+                            Doublesplit: "splitx2",
+                            Triplesplit: "splitx3",
+                            "Quad split": "splitMax",
+                            "Split 32": "split32",
+                            "Split 64": "split64",
+                            "Split 128": "split128",
+                            "Split 256": "split256",
+                            "Dual trick-split": "dual1",
+                            "Dual double-trick": "dual2",
+                            "Dual line-trick": "dual3",
+                            "Diagonal linesplit": "linesplit",
+                            "Freeze mouse": "freezeMouse",
+                            "Lock linesplit": "lockLinesplit",
+                            "Stop movement": "stopMovement",
+                            Respawn: "respawn",
+                            "Toggle auto respawn": "toggleAutoRespawn",
+                            "Toggle skins": "toggleSkins",
+                            "Toggle names": "toggleNames",
+                            "Toggle food": "toggleFood",
+                            "Toggle mass": "toggleMass",
+                            "Toggle chat": "toggleChat",
+                            "Toggle chat popup": "toggleChatToast",
+                            "Toggle HUD": "toggleHud",
+                            "Spectate lock": "spectateLock",
+                            "Save replay": "saveReplay",
+                            "Zoom level 1": "zoomLevel1",
+                            "Zoom level 2": "zoomLevel2",
+                            "Zoom level 3": "zoomLevel3",
+                            "Zoom level 4": "zoomLevel4",
+                            "Zoom level 5": "zoomLevel5"
+                        },
+                        hotkeys: V.get()
+                    }),
+                    methods: {
+                        onResetClick: function() {
+                            X.confirm("Are you sure you want to reset all hotkeys?", () => {
+                                this.hotkeys = V.reset()
+                            })
+                        },
+                        onMouseDown: function(e, t) {
+                            if (e.target === document.activeElement) {
+                                var s = "MOUSE" + e.button;
+                                V.set(t, s) && (e.preventDefault(), this.hotkeys[t] = s, e.target.blur())
+                            }
+                        },
+                        onKeyDown: function(e, t) {
+                            var s = V.convertKey(e.code);
+                            "ESCAPE" !== s && "ENTER" !== s ? ("DELETE" == s && (s = ""), V.set(t, s) && (this.hotkeys[t] = s, e.target.blur())) : e.target.blur()
+                        }
+                    }
+                }, K, [], !1, null, "2dbed53e", null));
+            q.options.__file = "src/components/hotkeys.vue";
+            var ee = q.exports,
+                et = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticClass: "container"
+                    }, [s("input", {
+                        ref: "file",
+                        staticStyle: {
+                            display: "none"
+                        },
+                        attrs: {
+                            type: "file",
+                            accept: ".vanis",
+                            multiple: ""
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.onFile(t)
+                            }
+                        }
+                    }), e._v(" "), s("div", {
+                        staticClass: "replay-list-header"
+                    }, [s("span", {
+                        staticClass: "replay-list-count"
+                    }, [e._v(e._s(e.keysLoadedFirst ? e.replayKeys.length + " replay" + (1 !== e.replayKeys.length ? "s" : "") : "Loading"))]), e._v(" "), e.keysLoadedFirst && !e.keysEmpty ? s("span", {
+                        staticClass: "replay-list-page"
+                    }, [s("div", {
+                        staticClass: "anchor"
+                    }, [s("div", {
+                        staticClass: "left"
+                    }, [s("div", {
+                        staticClass: "current"
+                    }, [s("div", {
+                        staticClass: "phantom"
+                    }, [s("i", {
+                        staticClass: "fas fa-chevron-left prev",
+                        class: {
+                            disabled: !e.keysLoaded || 0 === e.pageIndex
+                        },
+                        on: {
+                            click: function() {
+                                return e.updateReplayPage(-1)
+                            }
+                        }
+                    }), e._v(" "), s("span", [e._v(e._s(e.pageCount))])]), e._v(" "), e.pageInputShown ? e._e() : s("div", {
+                        staticClass: "real",
+                        on: {
+                            click: function() {
+                                return e.togglePageInput(!0)
+                            }
+                        }
+                    }, [s("span", [e._v(e._s(1 + e.pageIndex))])]), e._v(" "), e.pageInputShown ? s("div", {
+                        staticClass: "real-input"
+                    }, [s("div", {
+                        staticClass: "overlay",
+                        on: {
+                            click: function() {
+                                return e.togglePageInput(!1)
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "fas fa-chevron-left prev",
+                        class: {
+                            disabled: !e.keysLoaded || 0 === e.pageIndex
+                        },
+                        on: {
+                            click: function() {
+                                return e.updateReplayPage(-1)
+                            }
+                        }
+                    }), e._v(" "), s("input", {
+                        attrs: {
+                            type: "text"
+                        },
+                        domProps: {
+                            value: 1 + e.pageIndex
+                        },
+                        on: {
+                            focus: function(e) {
+                                return e.target.select()
+                            },
+                            change: function(t) {
+                                return e.updateReplayPage(t)
+                            }
+                        }
+                    })]) : e._e()])]), e._v("\n            /\n            "), s("div", {
+                        staticClass: "right"
+                    }, [e._v("\n                " + e._s(e.pageCount) + "\n                    "), s("i", {
+                        staticClass: "fas fa-chevron-right next",
+                        class: {
+                            disabled: !e.keysLoaded || e.pageIndex === e.pageCount - 1
+                        },
+                        on: {
+                            click: function() {
+                                return e.updateReplayPage(1)
+                            }
+                        }
+                    })])])]) : e._e(), e._v(" "), s("span", {
+                        staticClass: "replay-list-bulk"
+                    }, [s("input", {
+                        staticClass: "vanis-button",
+                        attrs: {
+                            type: "button",
+                            disabled: !e.keysLoaded,
+                            value: "Import"
+                        },
+                        on: {
+                            click: function() {
+                                return e.$refs.file.click()
+                            }
+                        }
+                    }), e._v(" "), s("input", {
+                        staticClass: "vanis-button",
+                        attrs: {
+                            type: "button",
+                            disabled: !e.keysLoaded || e.keysEmpty,
+                            value: "Download all"
+                        },
+                        on: {
+                            click: function() {
+                                return e.downloadAllReplays()
+                            }
+                        }
+                    }), e._v(" "), s("input", {
+                        staticClass: "vanis-button",
+                        attrs: {
+                            type: "button",
+                            disabled: !e.keysLoaded || e.keysEmpty,
+                            value: "Delete all"
+                        },
+                        on: {
+                            click: function() {
+                                return e.deleteAllReplays()
+                            }
+                        }
+                    })])]), e._v(" "), s("div", {
+                        staticClass: "replay-list"
+                    }, [e.keysLoadedFirst && e.keysEmpty ? [s("div", {
+                        staticClass: "notification"
+                    }, [s("div", [e._v("Press "), s("b", [e._v(e._s(e.messageHotkey))]), e._v(" in game to save last "), s("b", [e._v(e._s(e.messageReplayDuration))]), e._v(" seconds of gameplay.")]), e._v(" "), s("div", {
+                        staticStyle: {
+                            color: "red",
+                            "font-weight": "bold"
+                        }
+                    }, [e._v("Replays are saved in browser memory!")]), e._v(" "), s("div", [e._v("They get permanently erased if browser data gets cleared.")])])] : e._e(), e._v(" "), e.keysLoadedFirst && !e.keysEmpty ? [s("div", {
+                        staticClass: "replay-page"
+                    }, e._l(e.pageData, function(e, t) {
+                        return s("replay-item", {
+                            key: t,
+                            attrs: {
+                                replay: e
+                            }
+                        })
+                    }), 1)] : e._e()], 2), e._v(" "), e.bulkOperating ? s("div", {
+                        staticClass: "overlay bulk-operation-overlay"
+                    }, [e._v("\n        Please wait...\n        "), e.bulkOperationStatus ? s("div", {
+                        staticClass: "small"
+                    }, [e._v(e._s(e.bulkOperationStatus))]) : e._e(), e._v(" "), e.showMultipleFilesWarning ? s("div", {
+                        staticClass: "small warning"
+                    }, [e._v("Allow page to download multiple files if asked")]) : e._e()]) : e._e()])
+                };
+            et._withStripped = !0;
+            var es = s(116),
+                ei = s(89),
+                ea = s(180),
+                en = s(1),
+                eo = s(66),
+                er = s(4),
+                el = s(5),
+                ec = s(8),
+                eh = en.replay.database,
+                ed = {
+                    data: () => ({
+                        keysLoadedFirst: !1,
+                        keysLoaded: !1,
+                        keysLoading: !1,
+                        keysEmpty: !1,
+                        replayKeys: [],
+                        pageInputShown: !1,
+                        pageLoadingCancel: null,
+                        pageLoaded: !1,
+                        pageIndex: 0,
+                        pageCount: 0,
+                        pageData: [],
+                        bulkOperating: !1,
+                        bulkOperationStatus: "",
+                        showMultipleFilesWarning: !1,
+                        messageHotkey: eo.get().saveReplay,
+                        messageReplayDuration: er.replayDuration
+                    }),
+                    components: {
+                        replayItem: es.default
+                    },
+                    methods: {
+                        togglePageInput(e) {
+                            this.pageInputShown = e
+                        },
+                        setBulkOp(e, t) {
+                            e ? (this.bulkOperating = !0, this.bulkOperationStatus = t || "") : setTimeout(() => {
+                                this.bulkOperating = !1, this.bulkOperationStatus = ""
+                            }, 1e3)
+                        },
+                        async onFile(e) {
+                            if (!this.bulkOperating) {
+                                var t = Array.from(e.target.files);
+                                if (t.length) {
+                                    e.target && (e.target.value = null);
+                                    var s = 0,
+                                        i = t.length,
+                                        a = t.map(async e => {
+                                            var t, a;
+                                            await eh.setItem(e.name.replace(/\.vanis$/, ""), await (t = e, new Promise((e, s) => {
+                                                var i = new FileReader;
+                                                i.onload = t => e(t.target.result), i.onerror = s, i.readAsText(t)
+                                            }))), this.setBulkOp(!0, "Importing replays (" + ++s + " / " + i + ")")
+                                        });
+                                    this.setBulkOp(!0, "Importing replays");
+                                    try {
+                                        await Promise.all(a)
+                                    } catch (n) {
+                                        el.alert('Error importing replays: "' + n.message + '"'), this.setBulkOp(!1), this.updateReplayKeys()
+                                    }
+                                    this.setBulkOp(!1), this.updateReplayKeys()
+                                }
+                            }
+                        },
+                        async downloadAllReplays() {
+                            if (!this.bulkOperating && this.keysLoaded) {
+                                var e = this.replayKeys.length,
+                                    t = Math.ceil(this.replayKeys.length / 200),
+                                    s = t > 1,
+                                    i = ec.getTimestamp();
+                                this.showMultipleFilesWarning = s, this.setBulkOp(!0, "Packing replays (0 / " + t + ")");
+                                for (var a = 0, n = 0; a < e; a += 200, n++) {
+                                    for (var o = new ea, r = a; r < a + 200 && r < e; r++) {
+                                        var l = this.replayKeys[r];
+                                        o.file(l + ".vanis", await eh.getItem(l))
+                                    }
+                                    var c = await o.generateAsync({
+                                            type: "blob"
+                                        }),
+                                        h = "replays_" + i;
+                                    s && (h += "_" + (n + 1)), h += ".zip", ei.saveAs(c, h), this.setBulkOp(!0, "Packing replays (" + (n + 1) + " / " + t + ")")
+                                }
+                                this.showMultipleFilesWarning = !1, this.setBulkOp(!1)
+                            }
+                        },
+                        deleteAllReplays() {
+                            if (!this.bulkOperating) {
+                                var e = this;
+                                el.confirm("Are you absolutely sure that you want to delete all replays?", async () => {
+                                    this.setBulkOp(!0, "Deleting all replays");
+                                    try {
+                                        await eh.clear()
+                                    } catch (t) {
+                                        return void el.alert("Error clearing replays: " + t.message)
+                                    }
+                                    this.setBulkOp(!1), e.updateReplayKeys()
+                                })
+                            }
+                        },
+                        async updateReplayKeys() {
+                            if (!this.keysLoading) {
+                                this.keysLoaded = !1, this.keysLoading = !0;
+                                var e = await eh.keys();
+                                e = e.reverse(), this.replayKeys.splice(0, this.replayKeys.length, ...e), this.pageCount = Math.max(Math.ceil(e.length / 12), 1), this.pageIndex = Math.min(this.pageIndex, this.pageCount - 1), this.keysLoaded = !0, this.keysLoadedFirst = !0, this.keysLoading = !1, this.keysEmpty = 0 === e.length, await this.updateReplayPage()
+                            }
+                        },
+                        async updateReplayPage(e) {
+                            e && ("number" == typeof e ? this.pageIndex += e : this.pageIndex = parseInt(e.target.value) - 1 || 0), this.pageLoadingCancel && (this.pageLoadingCancel(), this.pageLoadingCancel = null);
+                            var t = Math.max(Math.min(this.pageIndex, this.pageCount - 1), 0);
+                            this.pageIndex !== t && (this.pageIndex = t), this.pageLoaded = !1;
+                            var s = [],
+                                i = !1;
+                            this.pageLoadingCancel = () => i = !0;
+                            for (var a = 12 * this.pageIndex, n = 12 * (1 + this.pageIndex), o = a; o < n && o < this.replayKeys.length && !i; o++) {
+                                var r = this.replayKeys[o],
+                                    l = {
+                                        name: r,
+                                        data: await eh.getItem(r)
+                                    };
+                                if (l.data && typeof l.data === 'string') {
+                                    l.data.startsWith("REPLAY") ? l.image = l.data.split("|")[2] : l.image = "https://vanis.io/img/replay-placeholder.png", s.push(l)
+                                } else {
+                                    l.image = "https://vanis.io/img/replay-placeholder.png", s.push(l)
+                                }
+                            }
+                            i || (this.pageData.splice(0, this.pageData.length, ...s), this.pageLoaded = !0)
+                        }
+                    },
+                    created() {
+                        this.updateReplayKeys(), en.events.$on("replay-added", this.updateReplayKeys), en.events.$on("replay-removed", this.updateReplayKeys)
+                    },
+                    beforeDestroy() {
+                        en.events.$off("replay-added", this.updateReplayKeys), en.events.$off("replay-removed", this.updateReplayKeys)
+                    }
+                },
+                ep = (s(220), Object(v.a)(ed, et, [], !1, null, "4a996e52", null));
+            ep.options.__file = "src/components/replays3.vue";
+            var eu = ep.exports,
+                eg = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticStyle: {
+                            padding: "15px"
+                        }
+                    }, [s("h2", {
+                        staticStyle: {
+                            margin: "0",
+                            "margin-bottom": "14px"
+                        }
+                    }, [e._v(e._s(e.seasonLeaderboardText))]), e._v(" "), e.errorMessage ? s("div", [e._v("\n    Failed loading season leaderboard data:\n    " + e._s(e.errorMessage) + "\n")]) : e._e(), e._v(" "), e.playerList.length ? s("div", [s("div", {
+                        staticClass: "info"
+                    }, [e._v("\n        Season XP counts for this season only."), s("br"), e._v("\n            Top few players earn colored names."), s("br"), e._v("\n        Check our "), s("a", {
+                        attrs: {
+                            href: "https://vanis.io/discord"
+                        }
+                    }, [e._v("Discord")]), e._v(" for more information."), s("br"), e._v("\n        Season ends in "), s("b", [e._v(e._s(e.seasonEndTime))])]), e._v(" "), e._l(e.playerList, function(t, i) {
+                        return s("div", {
+                            key: i,
+                            staticClass: "player-row",
+                            class: {
+                                me: !!e.isMe
+                            }
+                        }, [s("span", {
+                            staticClass: "player-nr"
+                        }, [e._v(e._s(i + 1) + ".")]), e._v(" "), s("span", {
+                            staticClass: "player-name",
+                            style: {
+                                color: t.name_color
+                            }
+                        }, [e._v(e._s(t.name))]), e._v(" "), s("span", {
+                            staticClass: "player-xp"
+                        }, [e._v(e._s(t.xp) + " XP")])])
+                    })], 2) : e._e()])
+                };
+            eg._withStripped = !0;
+            var eA = s(1),
+                em = s(228),
+                {
+                    checkBadWords: ev
+                } = s(17),
+                ef = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                eC = (s(222), Object(v.a)({
+                    data: () => ({
+                        playerList: [],
+                        errorMessage: "",
+                        ownUid: null,
+                        date: new Date,
+                        nextStartDate: Date.UTC((new Date).getUTCFullYear(), (new Date).getUTCMonth() + 1),
+                        seasonEndTime: null,
+                        seasonEndTimeInterval: null,
+                        selected: "sxp"
+                    }),
+                    computed: {
+                        seasonLeaderboardText() {
+                            return ef[this.date.getUTCMonth()] + " " + this.date.getUTCFullYear() + " season"
+                        }
+                    },
+                    methods: {
+                        setSeasonEndTime() {
+                            this.seasonEndTime = function(e) {
+                                if (e < 0) return "now";
+                                var t = Math.floor(e / 1e3),
+                                    s = t % 60,
+                                    i = Math.floor(t / 60),
+                                    a = i % 60,
+                                    n = Math.floor(i / 60),
+                                    o = n % 24,
+                                    r = Math.floor(n / 24),
+                                    l = [];
+                                return r > 0 && l.push(r + " day" + (1 !== r ? "s" : "")), o % 24 > 0 && l.push(o + " hour" + (1 !== o ? "s" : "")), 0 === r && a % 60 > 0 && l.push(a + " minute" + (1 !== a ? "s" : "")), 0 === n && s % 60 > 0 && l.push(s + " second" + (1 !== s ? "s" : "")), l.join(" ")
+                            }(this.nextStartDate - Date.now())
+                        }
+                    },
+                    async created() {
+                        let e = await em.get("/leaderboard/season_xp/100");
+                        if (!e.ok) return;
+                        let t = await e.json();
+                        this.playerList = t.map(e => ({
+                            name: e.perk_name || e.discord_name,
+                            name_color: "#" + (e.perk_color || "ffffff"),
+                            badge: e.perk_badges || 0,
+                            xp: e.season_xp,
+                            isMe: e.me
+                        })), eA.events.$on("every-second", this.setSeasonEndTime), this.setSeasonEndTime()
+                    },
+                    destroyed() {
+                        eA.events.$off("every-second", this.setSeasonEndTime)
+                    }
+                }, eg, [], !1, null, "7179a145", null));
+            eC.options.__file = "src/components/meta-leaderboard.vue";
+            var ey = eC.exports,
+                ew = (s(19), s(1)),
+                eI = (s(5), {
+                    components: {
+                        modal: w.default,
+                        settings: Q,
+                        theming: J,
+                        hotkeys: ee,
+                        replays3: eu,
+                        metaLeaderboard: ey
+                    },
+                    data: () => ({
+                        activeModal: "",
+                        showSettings: !1,
+                        showHotkeys: !1,
+                        gameState: ew.state,
+                        nickname: "string" == typeof localStorage.nickname ? localStorage.nickname : "",
+                        teamtag: localStorage.teamtag || "",
+                        skinUrl: "string" == typeof localStorage.skinUrl ? localStorage.skinUrl : "https://skins.vanis.io/s/Qkfih2"
+                    }),
+                    created: function() {
+                        ew.events.$on("skin-click", e => {
+                            this.skinUrl = localStorage.skinUrl = document.getElementById("skinDisplay1").src = e
+                        })
+                    },
+                    methods: {
+                        openModal: function(e) {
+                            this.activeModal = e, this.$emit("modal-open", !0)
+                        },
+                        closeModal: function() {
+                            this.activeModal = "", this.$emit("modal-open", !1)
+                        },
+                        play() {
+                            timeChat = localStorage.getItem('timeChat') || 'checked';
+                            timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
+                            const userColors = localStorage.getItem('userColors');
+                            userColorsJson = userColors ? JSON.parse(userColors) : null;
+
+                            let {
+                                lifeState: e
+                            } = this.gameState;
+                            if (1 & e) {
+                                let {
+                                    dual: t
+                                } = ew;
+                                2 & e ? t.focused ? t.spawn() : ew.actions.join() : t.connected && (t.focused ? t.spawn() : t.switch())
+                            } else ew.actions.join();
+                            ew.showMenu(!1)
+                        },
+                        spectate() {
+                            let {
+                                lifeState: e
+                            } = this.gameState;
+                            1 & e || (ew.actions.spectate(), ew.showMenu(!1))
+                        },
+                        onSkinUrlChange() {
+                            ew.events.$emit("skin-url-edit", this.skinUrl)
+                        },
+                        onTeamTagChange() {
+                            localStorage.setItem("teamtag", this.teamtag)
+                        },
+                        onNicknameChange() {
+                            localStorage.setItem("nickname", this.nickname)
+                        }
+                    }
+                }),
+                e$ = (s(224), Object(v.a)(eI, y, [function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return t("div", {
+                        staticStyle: {
+                            "text-align": "center",
+                            height: "225px"
+                        }
+                    }, [t("div", {
+                        staticStyle: {
+                            padding: "4px"
+                        }
+                    }, [this._v("")])])
+                }], !1, null, "1bcde71e", null));
+            e$.options.__file = "src/components/player.vue";
+            var ek = e$.exports,
+                eb = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        staticStyle: {
+                            padding: "12px 15px"
+                        }
+                    }, [e.account ? e._e() : s("div", [s("div", {
+                        staticStyle: {
+                            "margin-top": "6px",
+                            "margin-bottom": "10px"
+                        }
+                    }, [e._v("Login with Discord to save your progress and gain perks!")]), e._v(" "), s("div", {
+                        staticClass: "discord",
+                        on: {
+                            click: function() {
+                                return e.openDiscordLogin()
+                            }
+                        }
+                    }, [e.loading ? [e.loading ? s("i", {
+                        staticClass: "fas fa-sync fa-spin",
+                        staticStyle: {
+                            "margin-right": "5px"
+                        }
+                    }) : e._e(), e._v(" Loading\n        ")] : [s("i", {
+                        staticClass: "fab fa-discord"
+                    }), e._v(" Login with Discord\n            ")]], 2)]), e._v(" "), e.account ? s("div", {
+                        staticClass: "account"
+                    }, [s("div", {
+                        staticStyle: {
+                            "margin-bottom": "3px"
+                        }
+                    }, [s("img", {
+                        staticClass: "avatar",
+                        attrs: {
+                            src: e.avatarUrl
+                        }
+                    }), e._v(" "), s("div", {
+                        staticClass: "player-info"
+                    }, [s("div", {
+                        style: {
+                            color: e.nameColor
+                        },
+                        attrs: {
+                            id: "account-name"
+                        }
+                    }, [e._v(e._s(e.name))]), e._v(" "), s("div", [e._v("Level " + e._s(e.account.level))]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s(Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0) || 0) + " season XP")])])]), e._v(" "), s("div", {
+                        staticStyle: {
+                            position: "relative"
+                        }
+                    }, [s("progress-bar", {
+                        staticClass: "xp-progress",
+                        attrs: {
+                            progress: e.progress
+                        }
+                    }), e._v(" "), s("div", {
+                        staticClass: "xp-data"
+                    }, [s("div", {
+                        staticStyle: {
+                            flex: "1",
+                            "margin-left": "8px"
+                        }
+                    }, [e._v(e._s(e.xpAtCurrentLevel))]), e._v(" "), s("div", {
+                        staticStyle: {
+                            "margin-right": "7px"
+                        }
+                    }, [e._v(e._s(e.xpAtNextLevel))])])], 1), e._v(" "), s("div", {
+                        staticClass: "logout",
+                        on: {
+                            click: function() {
+                                return e.logout()
+                            }
+                        }
+                    }, [s("i", {
+                        staticClass: "fas fa-sign-out-alt"
+                    }), e._v(" Logout\n    ")])]) : e._e()])
+                };
+            eb._withStripped = !0;
+            var e_ = function() {
+                var e = this.$createElement,
+                    t = this._self._c || e;
+                return t("div", {
+                    staticClass: "progress progress-striped"
+                }, [t("div", {
+                    staticClass: "progress-bar",
+                    style: {
+                        width: 100 * this.progress + "%"
+                    }
+                })])
+            };
+            e_._withStripped = !0;
+            var eS = (s(226), Object(v.a)({
+                props: ["progress"]
+            }, e_, [], !1, null, "4e838c74", null));
+            eS.options.__file = "src/components/progressBar.vue";
+            var eE = eS.exports,
+                ex = s(228),
+                eB = s(5),
+                e8 = s(1),
+                e0 = s(229),
+                eQ = (s(230), Object(v.a)({
+                    components: {
+                        progressBar: eE
+                    },
+                    data: () => ({
+                        accountTime: 0,
+                        account: null,
+                        progress: 0,
+                        xpAtCurrentLevel: 0,
+                        xpAtNextLevel: 0,
+                        loading: !1,
+                        avatarUrl: null,
+                        nameColor: null,
+                        name: null
+                    }),
+                    created() {
+                        e8.events.$on("xp-update", this.onXpUpdate), this.reloadUserData(), this.listenForToken()
+                    },
+                    beforeDestroy() {
+                        e8.events.$off("xp-update", this.onXpUpdate)
+                    },
+                    methods: {
+                        listenForToken() {
+                            window.addEventListener("message", e => {
+                                var t = e.data.vanis_token;
+                                t && (this.onLoggedIn(t), e.source.postMessage("loggedIn", e.origin))
+                            })
+                        },
+                        reloadUserData() {
+                            Date.now() - this.accountTime <= 6e4 || (this.accountTime = Date.now(), ex.vanisToken && this.loadUserData())
+                        },
+                        async loadUserData() {
+                            this.loading = !0;
+                            let e = await ex.get("/me");
+                            if (!e.ok) {
+                                this.loading = !1;
+                                return
+                            }
+                            let t = await e.json();
+                            this.setAccountData(t), this.updateProgress(this.account.xp, this.account.level), this.loading = !1
+                        },
+                        async logout() {
+                            try {
+                                await ex.call("DELETE", "/me")
+                            } catch (e) {
+                                var t = e.response;
+                                t && 401 !== t.status && eB.alert("Error: " + e.message)
+                            }
+                            ex.clearToken(), this.account = null, this.name = null, this.nameColor = null, this.avatarUrl = null, e8.ownUid = null
+                        },
+                        getAvatarUrl: (e, t) => t ? "https://cdn.discordapp.com/avatars/" + e + "/" + t + ".png" : "https://cdn.discordapp.com/embed/avatars/0.png",
+                        setAccountData(e) {
+                            e.permissions && (window.gameObj = e8), GAME.account = e, this.account = e, this.avatarUrl = this.getAvatarUrl(e.discord_id, e.discord_avatar), this.name = e.locked_name || e.discord_name, this.nameColor = e.name_color ? "#" + e.name_color : "#ffffff", e8.ownUid = e.uid
+                        },
+                        onXpUpdate(e) {
+                            if (this.account) {
+                                var t = e0.getLevel(e);
+                                this.account.season_xp = parseInt(Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0)) || 0 + e - this.account.xp, this.account.xp = e, this.account.level = t, this.updateProgress(e, t)
+                            }
+                        },
+                        updateProgress(e, t) {
+                            this.xpAtCurrentLevel = e0.getXp(t), this.xpAtNextLevel = e0.getXp(t + 1), this.progress = (e - this.xpAtCurrentLevel) / (this.xpAtNextLevel - this.xpAtCurrentLevel)
+                        },
+                        openDiscordLogin: function() {
+                            window.open(ex.url + "/login/discord", "", "width=500, height=750")
+                        },
+                        onLoggedIn(e) {
+                            ex.setToken(e), this.loadUserData()
+                        }
+                    }
+                }, eb, [], !1, null, "661435cd", null));
+            eQ.options.__file = "src/components/account.vue";
+            var eM = eQ.exports,
+                eT = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        attrs: {
+                            id: "skins-container"
+                        }
+                    }, [s("div", {
+                        attrs: {
+                            id: "skins"
+                        }
+                    }, [e._l(e.skins, function(t, i) {
+                        return s("span", {
+                            key: i,
+                            staticClass: "skin-container"
+                        }, [s("img", {
+                            staticClass: "skin",
+                            class: {
+                                selected: e.selectedSkinIndex === i
+                            },
+                            attrs: {
+                                src: t,
+                                alt: ""
+                            },
+                            on: {
+                                click: function() {
+                                    return e.selectSkin(i)
+                                },
+                                contextmenu: function() {
+                                    getModule(4).set("dualSkin", GAME.skinPanel.skins[i]), document.getElementById("skinDisplay2").src = GAME.skinPanel.skins[i], window.SwalAlerts.toast.fire({
+                                        type: "info",
+                                        title: "Updated dualbox skin",
+                                        timer: 1500
+                                    })
+                                }
+                            }
+                        }), e._v(" "), s("i", {
+                            staticClass: "fas fa-times skin-remove-button",
+                            on: {
+                                click: function() {
+                                    return e.removeSkin(i)
+                                }
+                            }
+                        })])
+                    }), e._v(" "), s("img", {
+                        staticClass: "skin add-skin",
+                        attrs: {
+                            src: "/img/skin-add.png",
+                            alt: ""
+                        },
+                        on: {
+                            click: function() {
+                                return e.addSkin()
+                            }
+                        }
+                    })], 2)])
+                };
+            eT._withStripped = !0;
+            var eD = s(1),
+                eL = (s(232), Object(v.a)({
+                    data: () => ({
+                        selectedSkinIndex: 0,
+                        skins: [],
+                        skinsLoaded: []
+                    }),
+                    created() {
+                        eD.events.$on("skin-url-edit", this.onSkinUrlChanged.bind(this)), this.skins = this.loadSkins() || this.getDefaultSkins();
+                        var e = Number(localStorage.selectedSkinIndex) || 0;
+                        this.selectSkin(e), GAME.skinPanel = this
+                    },
+                    methods: {
+                        loadSkins() {
+                            var e = localStorage.skins;
+                            if (!e) return !1;
+                            try {
+                                var t = JSON.parse(e)
+                            } catch (s) {
+                                return !1
+                            }
+                            if (!Array.isArray(t)) return !1;
+                            for (var i = t.length; i < 2; i++) t.push("https://skins.vanis.io/s/Qkfih2");
+                            return t
+                        },
+                        getDefaultSkins() {
+                            for (var e = [], t = 0; t < 8; t++) e.push("https://skins.vanis.io/s/Qkfih2");
+                            return e
+                        },
+                        onSkinUrlChanged(e) {
+                            this.$set(this.skins, this.selectedSkinIndex, e), this.saveSkins()
+                        },
+                        selectSkin(e) {
+                            this.selectedSkinIndex = e, localStorage.selectedSkinIndex = e;
+                            var t = this.skins[e];
+                            eD.events.$emit("skin-click", t)
+                        },
+                        removeSkin(e) {
+                            this.skins.splice(e, 1), this.skins.length < 2 && this.skins.push("https://skins.vanis.io/s/Qkfih2"), this.saveSkins();
+                            var t = Math.max(0, this.selectedSkinIndex - 1);
+                            this.selectSkin(t)
+                        },
+                        addSkin(e) {
+                            if (!this.skins.includes(e)) {
+                                var t = this.skins.length;
+                                this.skins.push(e || "https://skins.vanis.io/s/Qkfih2"), e || this.selectSkin(t), this.saveSkins()
+                            }
+                        },
+                        saveSkins() {
+                            localStorage.skins = JSON.stringify(this.skins)
+                        }
+                    }
+                }, eT, [], !1, null, "1c614894", null));
+            eL.options.__file = "src/components/skins.vue";
+            var eN = eL.exports,
+                eU = s(1),
+                eR = (s(234), Object(v.a)({
+                    data: () => ({
+                        isModalOpen: !1,
+                        selectedTab: "servers",
+                        gameState: eU.state,
+                        cursorStyleElem: null
+                    }),
+                    methods: {
+                        onModalChange: function(e) {
+                            this.isModalOpen = e
+                        },
+                        setCursorUrl(e) {
+                            var t = null;
+                            e && (t = "#canvas, #hud > * { cursor: url('" + e + "'), auto !important; }"), !t && this.cursorStyleElem ? (this.cursorStyleElem.remove(), this.cursorStyleElem = null) : t && !this.cursorStyleElem && (this.cursorStyleElem = document.createElement("style"), document.head.appendChild(this.cursorStyleElem)), this.cursorStyleElem && (this.cursorStyleElem.innerHTML = t)
+                        }
+                    },
+                    components: {
+                        servers: C,
+                        playerContainer: ek,
+                        account: eM,
+                        skins: eN
+                    },
+                    created() {
+                        eU.events.$on("set-cursor-url", e => this.setCursorUrl(e))
+                    },
+                    mounted() {
+                        this.setCursorUrl(eU.settings.cursorImageUrl)
+                    }
+                }, r, [], !1, null, "ebed1606", null));
+            eR.options.__file = "src/components/main-container.vue";
+            var eP = eR.exports,
+                eF = function() {
+                    this.$createElement, this._self._c
+                };
+            eF._withStripped = !0, s(236);
+            var e1 = Object(v.a)({}, eF, [function() {}], !1, null, "4d0670e9", null);
+            e1.options.__file = "src/components/social-links.vue";
+            var e4 = e1.exports,
+                eG = function() {
+                    return this.$createElement, this._self._c, this._m(0)
+                };
+            eG._withStripped = !0;
+            var eH = (s(238), Object(v.a)({
+                data() {}
+            }, eG, [function() {
+                var e = this.$createElement,
+                    t = this._self._c || e;
+                return t("div", {
+                    staticClass: "container"
+                }, [t("a", {
+                    staticStyle: {
+                        "margin-left": "20.59px"
+                    },
+                    attrs: {
+                        href: "privacy.html",
+                        target: "_blank"
+                    }
+                }, [this._v("")]), this._v(" "), t("span", {
+                    staticClass: "line"
+                }, [this._v("")]), this._v(" "), t("a", {
+                    attrs: {
+                        href: "tos.html",
+                        target: "_blank"
+                    }
+                }, [this._v("")])])
+            }], !1, null, "6843da33", null));
+            eH.options.__file = "src/components/privacy-tos.vue";
+            var e3 = eH.exports,
+                e2 = function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return this.show ? t("div", {
+                        staticClass: "context-menu fade",
+                        style: {
+                            top: this.y + "px",
+                            left: this.x + "px"
+                        }
+                    }, [t("div", {
+                        staticClass: "player-name"
+                    }, [this._v(this._s(this.playerName))]), this._v(" "), t("div", [this._v("Block")]), this._v(" "), t("div", {
+                        on: {
+                            click: this.hideName
+                        }
+                    }, [this._v("Hide Name")]), this._v(" "), t("div", {
+                        on: {
+                            click: this.hideSkin
+                        }
+                    }, [this._v("Hide Skin")]), this._v(" "), t("div", [this._v("Kick")]), this._v(" "), t("div", [this._v("Ban")]), this._v(" "), t("div", [this._v("Mute")])]) : this._e()
+                };
+            e2._withStripped = !0, s(1);
+            var e9 = (s(240), Object(v.a)({
+                data: () => ({
+                    show: !1,
+                    playerName: "",
+                    x: 100,
+                    y: 55
+                }),
+                methods: {
+                    open: function(e, t) {
+                        this.player = t, this.playerName = t.name, this.x = e.clientX, this.y = e.clientY, this.show = !0, document.addEventListener("click", () => {
+                            this.show = !1
+                        }, {
+                            once: !0
+                        })
+                    },
+                    hideName: function() {
+                        this.player.setName(""), this.player.invalidateVisibility()
+                    },
+                    hideSkin: function() {
+                        this.player.setSkin(""), this.player.invalidateVisibility()
+                    }
+                },
+                created() {}
+            }, e2, [], !1, null, "4dbee04d", null));
+            e9.options.__file = "src/components/context-menu.vue";
+            var eO = e9.exports,
+                eY = function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return t("div", {
+                        attrs: {
+                            id: "hud"
+                        }
+                    }, [t("stats"), this._v(" "), t("chatbox"), this._v(" "), t("leaderboard"), this._v(" "), t("minimap"), this._v(" "), t("cautions")], 1)
+                };
+            eY._withStripped = !0;
+            var e6 = function() {
+                let e = this._self._c || this.$createElement,
+                    t = this._s,
+                    s = this._v,
+                    i = this._l,
+                    a = this._e;
+                return e("div", [e("div", {
+                    staticClass: "server-cautions"
+                }, i(this.serverInfo, i => e("div", [s(t(i))])), 0), s(" "), e("div", {
+                    staticClass: "cautions"
+                }, [!this.stopped && this.showMouseFrozen ? e("div", [s("MOUSE FROZEN")]) : a(), s(" "), !this.stopped && this.showMovementStopped ? e("div", [s(`MOVEMENT STOPPED [TAB ${this.showMovementStopped}]`)]) : a(), s(" "), !this.stopped && this.showLinesplitting ? e("div", [s(`LINESPLITTING [TAB ${this.showLinesplitting}]`)]) : a()])])
+            };
+            e6._withStripped = !0;
+            var ez = s(1),
+                eW = (s(242), Object(v.a)({
+                    data: () => ({
+                        showMouseFrozen: !1,
+                        showMovementStopped: 0,
+                        showLinesplitting: 0,
+                        serverInfo: null
+                    }),
+                    mounted() {
+                        ez.events.$on("update-cautions", e => {
+                            "mouseFrozen" in e && (this.showMouseFrozen = e.mouseFrozen), "moveToCenterOfCells" in e && (this.showMovementStopped = e.moveToCenterOfCells), "lockLinesplit" in e && (this.showLinesplitting = e.lockLinesplit), "custom" in e && (this.serverInfo = e.custom.split(/\r\n|\r|\n/))
+                        }), ez.events.$on("reset-cautions", () => {
+                            this.showMouseFrozen = !1, this.showMovementStopped = 0, this.showLinesplitting = 0
+                        }), ez.events.$on("game-stopped", () => {
+                            this.serverInfo = null
+                        })
+                    }
+                }, e6, [], !1, null, "b7599310", null));
+            eW.options.__file = "src/components/cautions.vue";
+            var eZ = eW.exports,
+                e7 = function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.visible,
+                            expression: "visible"
+                        }],
+                        staticClass: "stats"
+                    }, [t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showFPS,
+                            expression: "showFPS"
+                        }]
+                    }, [this._v("FPS: " + this._s(this.fps || "-"))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showPing,
+                            expression: "showPing"
+                        }]
+                    }, [this._v("Ping: " + this._s(this.ping || "-"))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showPlayerMass && this.mass,
+                            expression: "showPlayerMass && mass"
+                        }]
+                    }, [this._v("Mass: " + this._s(this.mass))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showPlayerScore && this.score,
+                            expression: "showPlayerScore && score"
+                        }]
+                    }, [this._v("Score: " + this._s(this.score))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.showCellCount && this.cells,
+                            expression: "showCellCount && cells"
+                        }]
+                    }, [this._v("Cells: " + this._s(this.cells))])])
+                };
+            e7._withStripped = !0;
+            var ej = s(1),
+                e5 = s(4),
+                eJ = (s(244), Object(v.a)({
+                    data: () => ({
+                        showFPS: e5.showFPS,
+                        showPing: e5.showPing,
+                        showPlayerMass: e5.showPlayerMass,
+                        showPlayerScore: e5.showPlayerScore,
+                        showCellCount: e5.showCellCount,
+                        visible: !1,
+                        ping: 0,
+                        fps: 0,
+                        mass: 0,
+                        score: 0,
+                        cells: 0
+                    }),
+                    created() {
+                        ej.events.$on("stats-visible", e => this.visible = e), ej.events.$on("stats-invalidate-shown", () => {
+                            this.showFPS = e5.showFPS, this.showPing = e5.showPing, this.showPlayerMass = e5.showPlayerMass, this.showPlayerScore = e5.showPlayerScore, this.showCellCount = e5.showCellCount
+                        }), ej.events.$on("cells-changed", e => this.cells = e), ej.events.$on("stats-changed", e => {
+                            this.ping = e.ping || 0, this.fps = e.fps || 0, this.mass = e.mass ? ej.getMassText(e.mass) : 0, this.score = e.score ? ej.getMassText(e.score) : 0
+                        })
+                    }
+                }, e7, [], !1, null, "0875ad82", null));
+            eJ.options.__file = "src/components/stats.vue";
+            var eK = eJ.exports,
+                eV = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: e.visible,
+                            expression: "visible"
+                        }],
+                        attrs: {
+                            id: "chat-container"
+                        },
+                        on: {
+                            click: function(t) {
+                                return e.onChatClick(t)
+                            },
+                            contextmenu: function(t) {
+                                return e.onChatRightClick(t)
+                            }
+                        }
+                    }, [e.visibleToast ? [s("transition-group", {
+                        attrs: {
+                            name: "toast",
+                            tag: "div",
+                            id: "toast-list"
+                        }
+                    }, e._l(e.toastMessages, function(t) {
+                            return s("span", {
+                                key: t.id
+                            }, [
+                                s("span", {
+                                    staticClass: "message-row"
+                                }, [
+                                    t.date ? s("span", {
+                                        staticClass: "message-date",
+                                        style: {
+                                            color: t.dateColor
+                                        }
+                                    }, [e._v(e._s(t.date))]) : e._e(),
+
+                                    t.badge ? s("span", {
+                                        staticClass: "message-badge",
+                                    }, [
+                                        s("img", {
+                                            attrs: {
+                                                class: 'badgeMessage',
+                                                src: t.badge,
+                                                alt: "chat-badge"
+                                            }
+                                        })
+                                    ]) : e._e(),
+
+                                    t.from ? s("span", {
+                                        staticClass: "message-from",
+                                        style: {
+                                            color: t.nicknameColor
+                                        },
+                                        attrs: {
+                                            "data-pid": t.pid
+                                        }
+                                    }, [e._v(e._s(t.from))]) : e._e(),
+                                    e._v(":\n                "),
+
+                                    s("span", {
+                                        staticClass: "message-text",
+                                        style: {
+                                            color: t.textColor
+                                        }
+                                    }, [e._v(e._s(t.text))]),
+
+                                    t.imageUrl ? s("span", {
+                                        staticClass: "message-image",
+                                    }, [
+                                        s("img", {
+                                            attrs: {
+                                                class: 'imageMessage',
+                                                src: t.imageUrl,
+                                                alt: "chat-image"
+                                            }
+                                        })
+                                    ]) : e._e()
+                                ], 2)
+                            ]);
+                        }
+                    ), 0)] : e._e(), e._v(" "), s("div", {
+                        class: {
+                            toasts: e.visibleToast,
+                            visible: e.visibleInput
+                        },
+                        attrs: {
+                            id: "chatbox"
+                        }
+                    }, [e.showBlockedMessageCount && e.blockedMessageCount ? s("div", {
+                        staticStyle: {
+                            position: "absolute",
+                            top: "-28px"
+                        }
+                    }, [e._v("Blocked messages: " + e._s(e.blockedMessageCount))]) : e._e(), e._v(" "), e.visibleToast ? e._e() : [s("div", {
+                        ref: "list",
+                        attrs: {
+                            id: "message-list"
+                        }
+                    }, e._l(e.messages,
+                        function(t, i) {
+                            return s("div", {
+                                key: i,
+                                staticClass: "message-row"
+                            }, [
+                                s("span", {
+                                    staticClass: "message-date",
+                                    style: {
+                                        color: t.dateColor
+                                    }
+                                }, [e._v(e._s(t.date ? t.date : ''))]),
+
+                                t.badge ? [
+                                    s("span", {
+                                        staticClass: "message-badge",
+                                    }, [
+                                        s("img", {
+                                            attrs: {
+                                                class: 'badgeMessage',
+                                                src: t.badge,
+                                                alt: "chat-badge"
+                                            }
+                                        })
+                                    ])
+                                ] : e._e(),
+
+                                t.from ? [
+                                    s("span", {
+                                        staticClass: "message-from",
+                                        style: {
+                                            color: t.nicknameColor
+                                        },
+                                        attrs: {
+                                            "data-pid": t.pid
+                                        }
+                                    }, [e._v(e._s(t.from))]), e._v(":\n                    ")
+                                ] : e._e(),
+
+                                s("span", {
+                                    staticClass: "message-text",
+                                    style: {
+                                        color: t.textColor
+                                    }
+                                }, [e._v(e._s(t.text))]),
+
+                                t.imageUrl ? [
+                                    s("span", {
+                                        staticClass: "message-image",
+                                    }, [
+                                        s("img", {
+                                            attrs: {
+                                                class: 'imageMessage',
+                                                src: t.imageUrl,
+                                                alt: "chat-image"
+                                            }
+                                        })
+                                    ])
+                                ] : e._e()
+                            ], 2)
+                        }
+                    ), 0)], e._v(" "), s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.inputText,
+                            expression: "inputText"
+                        }],
+                        ref: "input",
+                        attrs: {
+                            id: "chatbox-input",
+                            type: "text",
+                            spellcheck: "false",
+                            autocomplete: "off",
+                            maxlength: "1000",
+                            tabindex: "-1",
+                            placeholder: "Type your message here"
+                        },
+                        domProps: {
+                            value: e.inputText
+                        },
+                        on: {
+                            keydown: function(t) {
+                                if (!t.type.indexOf("key") && e._k(t.keyCode, "enter", 13, t.key, "Enter")) return null;
+                                e.sendChatMessage()
+                            },
+                            input: function(t) {
+                                t.target.composing || (e.inputText = t.target.value)
+                            }
+                        }
+                    })], 2)], 2)
+                };
+            eV._withStripped = !0;
+            var eX = s(1),
+                eq = s(4),
+                te = s(5),
+                {
+                    replaceBadWordsChat: tt
+                } = s(17),
+                ts = {},
+                ti = (s(246), Object(v.a)({
+                    data: () => ({
+                        visible: !1,
+                        visibleToast: eq.showChatToast,
+                        visibleInput: !1,
+                        inputText: "",
+                        messages: [],
+                        toastMessages: [],
+                        showBlockedMessageCount: eq.showBlockedMessageCount,
+                        blockedMessageCount: 0,
+                        nextMessageId: 0
+                    }),
+                    methods: {
+                        onChatClick(e) {
+                            let t = +e.target.dataset.pid;
+                            t && (eX.selectedPlayer = t, eX.actions.spectate(t), eX.actions.targetPlayer(t))
+                        },
+                        onChatRightClick(e) {
+                            let t = +e.target.dataset.pid;
+                            if (!t) return;
+                            let s = eX.playerManager.getPlayer(t);
+                            if (!s) return void te.alert("Player does not exist or disconnected");
+                            t in ts ? this.confirmUnblockPlayer(s) : this.confirmBlockPlayer(s)
+                        },
+                        confirmBlockPlayer(e) {
+                            te.confirm('Block player "' + e.name + '" until restart?', () => {
+                                e.isMe ? te.alert("You can not block yourself") : (ts[e.pid] = e.name, eX.events.$emit("chat-message", 'Blocked player "' + e.name + '"'))
+                            })
+                        },
+                        confirmUnblockPlayer(e) {
+                            te.confirm('Unblock player "' + e.name + '"?', () => {
+                                delete ts[e.pid], eX.events.$emit("chat-message", 'Unblocked player "' + e.name + '"')
+                            })
+                        },
+                        formatBypassRestrictions(message) {
+                            let formattedMessage = message.replace(/https:\/\//g, 'deltaimage:');
+                            formattedMessage = formattedMessage
+                                .replace(/\.com/g, '.deltacom')
+                                .replace(/\.fr/g, '.deltafr')
+                                .replace(/\.eu/g, '.deltaeu')
+                                .replace(/\.pro/g, '.deltapro')
+                                .replace(/\.io/g, '.deltaio')
+                                .replace(/\.us/g, '.deltaus')
+                                .replace(/\.en/g, '.deltaen')
+                                .replace(/\.as/g, '.deltaas')
+                                .replace(/\.co/g, '.deltaco')
+                                .replace(/\.pw/g, '.deltapw')
+                            ;
+                            return formattedMessage;
+                        },
+                        sendChatMessage() {
+                            let e = this.inputText.trim();
+                            e && (eX.connection.sendChatMessage(this.formatBypassRestrictions(e)), this.inputText = ""), eX.renderer.view.focus(), this.scrollBottom(!0)
+                        },
+                        onChatMessage(e) {
+                            if ("string" == typeof e) e = {
+                                text: e,
+                                textColor: "#828282"
+                            };
+                            else if (eq.chatColorOnlyPeople && !("fromColor" in e) && !("textColor" in e)) return;
+                            if (ts[e.pid]) {
+                                this.blockedMessageCount++;
+                                return
+                            }
+                            eq.filterChatMessages && (e.text = tt(e.text)), e.fromColor = e.fromColor || "#ffffff", e.textColor = e.textColor || "#ffffff", this.messages.push(e), this.messages.length > 200 && this.messages.shift(), e.id = this.nextMessageId++, e.until = Date.now() + Math.max(5e3, 150 * e.text.length), this.toastMessages.unshift(e), this.scrollBottom(!1)
+                        },
+                        onVisibilityChange({
+                                               visible: e,
+                                               visibleToast: t
+                                           }) {
+                            null != e && (this.visible = e), null != t && (this.visibleToast = t, this.visibleInput = this.visible && !t), this.$nextTick(() => this.scrollBottom(!0))
+                        },
+                        focusChat() {
+                            this.visible && (this.visibleInput = !0, this.$nextTick(() => this.$refs.input.focus()))
+                        },
+                        clearChat() {
+                            eq.clearChatMessages && (this.messages.splice(0, this.messages.length), this.toastMessages.splice(0, this.toastMessages.length), this.nextMessageId = 0)
+                        },
+                        scrollBottom(e = !1) {
+                            if (!this.visibleToast) {
+                                var t = this.$refs.list,
+                                    s = t.scrollHeight - t.clientHeight;
+                                !e && s - t.scrollTop > 30 || this.$nextTick(() => t.scrollTop = t.scrollHeight)
+                            }
+                        },
+                        filterToasts() {
+                            for (var e = 0; e < this.toastMessages.length; e++) this.toastMessages[e].until >= Date.now() || this.toastMessages.splice(e--, 1)
+                        }
+                    },
+                    created() {
+                        eX.events.$on("chat-visible", this.onVisibilityChange), eX.events.$on("chat-focus", this.focusChat), eX.events.$on("chat-message", this.onChatMessage), eX.events.$on("server-message", this.onServerMessage), eX.events.$on("every-second", this.filterToasts), eX.events.$on("chat-clear", this.clearChat), eX.events.$on("show-blocked-message-count", e => this.showBlockedMessageCount = e), eX.events.$on("game-stopped", () => {
+                            this.blockedMessageCount = 0, ts = {}
+                        }), document.addEventListener("focusin", e => {
+                            this.visibleInput = !this.visibleToast || e.target === this.$refs.input
+                        })
+                    }
+                }, eV, [], !1, null, "4900a413", null));
+            ti.options.__file = "src/components/chatbox.vue";
+            var ta = ti.exports,
+                tn = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: e.userVisible && e.visible,
+                            expression: "userVisible && visible"
+                        }],
+                        attrs: {
+                            id: "leaderboard"
+                        }
+                    }, [s("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: e.headerVisible,
+                            expression: "headerVisible"
+                        }],
+                        staticClass: "leaderboard-title"
+                    }, [e._v(e._s(e.headerText))]), e._v(" "), s("div", e._l(e.leaderboard,
+                        function(t, i) {
+                            return s("div", {
+                                key: i,
+                                staticClass: "leaderboard-label"
+                            }, [
+                                e._v(" "),
+                                s("span", {
+                                    class: {
+                                        spectating: 0 == e.gameState.lifeState
+                                    },
+                                    style: {
+                                        color: getUserColor(t.text),
+                                        fontWeight: t.bold ? "bold" : "normal"
+                                    },
+                                    attrs: {
+                                        "data-pid": t.pid
+                                    },
+                                    on: {
+                                        click: function(t) {
+                                            return e.leftClickLabel(t)
+                                        }
+                                    }
+                                }, [
+                                    t.badge ? s("img", {
+                                        attrs: {
+                                            src: t.badge,
+                                            alt: "badge",
+                                            class: "badgeLeaderboard"
+                                        }
+                                    }) : e._e(),
+                                    e._v(e._s(t.text))
+                                ])
+                            ]);
+                        }
+                    ), 0)])
+                };
+            tn._withStripped = !0;
+            var to = s(1),
+                tr = s(4),
+                tl = (s(248), Object(v.a)({
+                    data: () => ({
+                        userVisible: tr.showLeaderboard,
+                        visible: !1,
+                        headerVisible: !0,
+                        headerText: "Leaderboard",
+                        leaderboard: [],
+                        gameState: to.state
+                    }),
+                    methods: {
+                        updateLeaderboard(e, t) {
+                            if (this.leaderboard = e, t) this.headerVisible = t.visible, this.headerText = t.text;
+                            else if (tr.showServerName && this.gameState.selectedServer) {
+                                this.headerVisible = !0;
+                                var s = this.gameState.selectedServer.region || "";
+                                s && (s += " "), this.headerText = s + this.gameState.selectedServer.name
+                            } else this.headerVisible = !0, this.headerText = "Leaderboard"
+                        },
+                        leftClickLabel() {
+                            let e = event.target.dataset.pid;
+                            e && (to.selectedPlayer = e, to.actions.spectate(e), to.actions.targetPlayer(e))
+                        },
+                        onLeaderboardShow() {
+                            this.visible || (to.events.$on("leaderboard-update", this.updateLeaderboard), this.visible = !0)
+                        },
+                        onLeaderboardHide() {
+                            this.visible && (to.events.$off("leaderboard-update", this.updateLeaderboard), this.leaderboard = [], this.visible = !1, this.selectedServer = null)
+                        }
+                    },
+                    created() {
+                        to.events.$on("leaderboard-visible", e => {
+                            this.userVisible = e
+                        }), to.events.$on("leaderboard-show", this.onLeaderboardShow), to.events.$on("leaderboard-hide", this.onLeaderboardHide)
+                    }
+                }, tn, [], !1, null, "8a0c31c6", null));
+            tl.options.__file = "src/components/leaderboard.vue";
+            var tc = tl.exports,
+                th = {
+                    components: {
+                        stats: eK,
+                        chatbox: ta,
+                        minimap: s(117).default,
+                        leaderboard: tc,
+                        cautions: eZ
+                    }
+                },
+                td = (s(252), Object(v.a)(th, eY, [], !1, null, "339660d2", null));
+            td.options.__file = "src/components/hud.vue";
+            var tp = td.exports,
+                tu = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return s("transition", {
+                        attrs: {
+                            name: "menu"
+                        }
+                    }, [s("div", {
+                        staticClass: "container"
+                    }, [s("div", {
+                        staticClass: "fade-box box-1"
+                    }, [s("div", {
+                        staticStyle: {
+                            padding: "4px"
+                        }
+                    }, [e._v("Advertisement")]), e._v(" "), s("div", {
+                        staticStyle: {
+                            padding: "10px",
+                            "padding-top": "0px"
+                        }
+                    }, [s("div", {
+                        attrs: {
+                            id: "vanis-io_300x250_2"
+                        }
+                    })])]), e._v(" "), e.stats ? s("div", {
+                        staticClass: "fade-box",
+                        class: {
+                            scroll: e.isLoadingAd
+                        }
+                    }, [s("div", {
+                        staticStyle: {
+                            padding: "15px"
+                        }
+                    }, [s("div", [e._v("Time Alive: " + e._s(e.timeAlive))]), e._v(" "), s("div", [e._v("Highscore: " + e._s(e.highscore))]), e._v(" "), s("div", [e._v("Players Eaten: " + e._s(e.stats.killCount))]), e._v(" "), s("btn", {
+                        staticClass: "continue",
+                        nativeOn: {
+                            click: function(t) {
+                                return e.onContinueClick(t)
+                            }
+                        }
+                    }, [e._v("Continue")])], 1)]) : e._e()])])
+                };
+            tu._withStripped = !0;
+            var tg = s(1),
+                tA = s(77),
+                tm = (s(254), Object(v.a)({
+                    props: ["stats"],
+                    data: () => ({
+                        isLoadingAd: !1
+                    }),
+                    computed: {
+                        timeAlive() {
+                            var e = this.stats.timeAlive;
+                            return e < 60 ? e + "s" : Math.floor(e / 60) + "min " + e % 60 + "s"
+                        },
+                        highscore() {
+                            return tg.getMassText(this.stats.highscore)
+                        }
+                    },
+                    methods: {
+                        loadAd() {
+                            this.isLoadingAd = tA.refreshAd("death-box")
+                        },
+                        onContinueClick() {
+                            tg.state.deathDelay = !1, tg.app.showDeathScreen = !1, tg.showMenu(!0)
+                        }
+                    },
+                    created() {
+                        tg.events.$on("refresh-deathscreen-ad", this.loadAd)
+                    }
+                }, tu, [], !1, null, "3249d726", null));
+            tm.options.__file = "src/components/death-stats.vue";
+            var tv = tm.exports,
+                tf = function() {
+                    var e = this.$createElement;
+                    return (this._self._c || e)("button", {
+                        staticClass: "btn"
+                    }, [this._t("default", [this._v("Here should be something")])], 2)
+                };
+            tf._withStripped = !0;
+            var tC = (s(256), Object(v.a)({}, tf, [], !1, null, "b0b10308", null));
+            tC.options.__file = "src/components/btn.vue";
+            var ty = tC.exports,
+                tw = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return e.show ? s("div", {
+                        class: {
+                            "auto-hide": e.autoHideReplayControls
+                        },
+                        attrs: {
+                            id: "replay-controls"
+                        }
+                    }, [s("div", {
+                        staticStyle: {
+                            "text-align": "right"
+                        }
+                    }, [s("div", [e._v("Opacity " + e._s(e.cellOpacity) + "%")]), e._v(" "), s("div", [s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.cellOpacity,
+                            expression: "cellOpacity"
+                        }],
+                        staticClass: "replay-slider",
+                        staticStyle: {
+                            width: "105px",
+                            display: "inline-block"
+                        },
+                        attrs: {
+                            id: "replay-opacity-slider",
+                            type: "range",
+                            min: "10",
+                            max: "100"
+                        },
+                        domProps: {
+                            value: e.cellOpacity
+                        },
+                        on: {
+                            input: e.onCellOpacitySlide,
+                            __r: function(t) {
+                                e.cellOpacity = t.target.value
+                            }
+                        }
+                    })])]), e._v(" "), s("div", {
+                        staticStyle: {
+                            "margin-bottom": "5px",
+                            display: "flex"
+                        }
+                    }, [s("div", {
+                        staticStyle: {
+                            flex: "1"
+                        }
+                    }, [e._v(e._s(e.replaySecond.toFixed(1)) + " seconds")]), e._v(" "), s("div", {
+                        staticStyle: {
+                            "margin-right": "10px"
+                        }
+                    }, [s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.autoHideReplayControls,
+                            expression: "autoHideReplayControls"
+                        }],
+                        attrs: {
+                            type: "checkbox",
+                            id: "replay-auto-hide-controls"
+                        },
+                        domProps: {
+                            checked: Array.isArray(e.autoHideReplayControls) ? e._i(e.autoHideReplayControls, null) > -1 : e.autoHideReplayControls
+                        },
+                        on: {
+                            change: [function(t) {
+                                var s = e.autoHideReplayControls,
+                                    i = t.target,
+                                    a = !!i.checked;
+                                if (Array.isArray(s)) {
+                                    var n = e._i(s, null);
+                                    i.checked ? n < 0 && (e.autoHideReplayControls = s.concat([null])) : n > -1 && (e.autoHideReplayControls = s.slice(0, n).concat(s.slice(n + 1)))
+                                } else e.autoHideReplayControls = a
+                            }, e.saveAutoHideControls]
+                        }
+                    }), e._v(" "), s("label", {
+                        attrs: {
+                            for: "replay-auto-hide-controls"
+                        }
+                    }, [e._v("Auto Hide Controls")])])]), e._v(" "), s("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: e.rangeIndex,
+                            expression: "rangeIndex"
+                        }],
+                        staticClass: "replay-slider",
+                        attrs: {
+                            type: "range",
+                            min: e.rangeMin,
+                            max: e.rangeMax
+                        },
+                        domProps: {
+                            value: e.rangeIndex
+                        },
+                        on: {
+                            input: e.onSlide,
+                            change: e.onSlideEnd,
+                            __r: function(t) {
+                                e.rangeIndex = t.target.value
+                            }
+                        }
+                    })]) : e._e()
+                };
+            tw._withStripped = !0;
+            var tI = s(1),
+                t$ = (s(258), Object(v.a)({
+                    data: () => ({
+                        show: !1,
+                        autoHideReplayControls: tI.settings.autoHideReplayControls,
+                        drawDelay: tI.settings.drawDelay,
+                        cellOpacity: 100,
+                        rangeMin: 0,
+                        rangeIndex: 0,
+                        rangeMax: 1e3,
+                        replaySecond: 0,
+                        packetCount: 0
+                    }),
+                    created: function() {
+                        tI.events.$on("show-replay-controls", this.onShow), tI.events.$on("replay-index-change", this.onReplayIndexChange)
+                    },
+                    methods: {
+                        onShow(e) {
+                            e ? (this.show = !0, this.packetCount = e) : (this.show = !1, this.cellOpacity = 100, this.rangeIndex = 0, this.packetCount = 0)
+                        },
+                        onReplayIndexChange(e, t = !0) {
+                            var s = e / this.packetCount;
+                            t && (this.rangeIndex = Math.floor(s * this.rangeMax)), this.replaySecond = e / 25
+                        },
+                        onSlide(e) {
+                            tI.moveInterval && (clearInterval(tI.moveInterval), tI.moveInterval = null);
+                            var t = Math.floor(this.rangeIndex / this.rangeMax * (this.packetCount - 1));
+                            tI.playback.seek(t), this.onReplayIndexChange(t, !1)
+                        },
+                        onSlideEnd(e) {
+                            tI.moveInterval || (tI.moveInterval = setInterval(tI.playback.next.bind(tI.playback), 40))
+                        },
+                        onCellOpacitySlide() {
+                            tI.scene.foreground.alpha = this.cellOpacity / 100
+                        },
+                        saveAutoHideControls() {
+                            tI.settings.set("autoHideReplayControls", this.autoHideReplayControls)
+                        }
+                    }
+                }, tw, [], !1, null, "c2c2ac08", null));
+            t$.options.__file = "src/components/replay-controls.vue";
+            var tk = t$.exports,
+                tb = function() {
+                    var e = this.$createElement,
+                        t = this._self._c || e;
+                    return this.show ? t("div", {
+                        attrs: {
+                            id: "ab-overlay"
+                        }
+                    }, [this._m(0)]) : this._e()
+                };
+            tb._withStripped = !0, s(19);
+            var {
+                isFirstVisit: t_
+            } = s(17), tS = (s(260), Object(v.a)({
+                data: () => ({
+                    show: !1
+                }),
+                created() {}
+            }, tb, [function() {
+                var e = this.$createElement,
+                    t = this._self._c || e;
+                return t("div", {
+                    staticClass: "content"
+                }, [t("img", {
+                    staticStyle: {
+                        width: "120px"
+                    },
+                    attrs: {
+                        src: "/img/sad.png"
+                    }
+                }), this._v(" "), t("p", {
+                    staticStyle: {
+                        "font-size": "3em"
+                    }
+                }, [this._v("Adblock Detected")]), this._v(" "), t("p", {
+                    staticStyle: {
+                        "font-size": "1.5em",
+                        "margin-bottom": "15px"
+                    }
+                }, [this._v("We use advertisements to fund our servers!")]), this._v(" "), t("img", {
+                    staticStyle: {
+                        "border-radius": "4px",
+                        "box-shadow": "0 0 10px black"
+                    },
+                    attrs: {
+                        src: "/img/ab.gif"
+                    }
+                })])
+            }], !1, null, "1611deb4", null));
+            tS.options.__file = "src/components/ab-overlay.vue";
+            var tE = tS.exports,
+                tx = function() {
+                    var e = this.$createElement;
+                    return (this._self._c || e)("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.show,
+                            expression: "show"
+                        }],
+                        staticClass: "image-captcha-overlay"
+                    }, [this._m(0)])
+                };
+            tx._withStripped = !0;
+            var tB = s(1);
+            s(25);
+            var t8 = window.captcha = {
+                    data: () => ({
+                        show: !1,
+                        scriptLoadPromise: null,
+                        captchaId: null,
+                        wsId: null,
+                        dualbox: !1
+                    }),
+                    created() {
+                        tB.events.$on("show-image-captcha", () => {
+                            this.dualbox = null, this.show = !0, this.wsId = tB.currentWsId, grecaptcha.ready(() => this.renderCaptcha())
+                        }), tB.events.$on("m-show-image-captcha", () => {
+                            this.dualbox = !0, this.show = !0, this.wsId = null, grecaptcha.ready(() => this.renderCaptcha())
+                        }), tB.events.$on("request-image-captcha", async () => {
+                            this.show = !0, grecaptcha.ready(() => {
+                                if (null !== this.captchaId) {
+                                    grecaptcha.reset(this.captchaId);
+                                    return
+                                }
+                                let {
+                                    client: e
+                                } = window, t = document.getElementById("image-captcha-container");
+                                this.captchaId = grecaptcha.render(t, {
+                                    sitekey: "6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi",
+                                    callback: e.onCaptchaToken.bind(e)
+                                })
+                            })
+                        }), tB.events.$on("hide-image-captcha", () => {
+                            this.show = !1
+                        })
+                    },
+                    methods: {
+                        renderCaptcha() {
+                            if (null !== this.captchaId) {
+                                grecaptcha.reset(this.captchaId);
+                                return
+                            }
+                            this.captchaId = grecaptcha.render(document.getElementById("image-captcha-container"), {
+                                sitekey: "6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi",
+                                callback: this.onCaptchaToken.bind(this)
+                            })
+                        },
+                        onCaptchaToken(e) {
+                            if (!this.dualbox && tB.currentWsId !== this.wsId) {
+                                this.show = !1;
+                                return
+                            }
+                            if (!e) {
+                                this.renderCaptcha();
+                                return
+                            }
+                            tB.connection.sendRecaptchaToken(e, !!this.dualbox), this.show = !1
+                        }
+                    }
+                },
+                t0 = (s(262), Object(v.a)(t8, tx, [function() {
+                    let e = this._self._c || this.$createElement,
+                        t = this._v,
+                        s = window.client || Object.seal({
+                            captcha: {
+                                solving: !1
+                            }
+                        });
+                    return e("div", {
+                        staticClass: "center-screen"
+                    }, [e("div", {
+                        staticStyle: {
+                            "margin-bottom": "6px"
+                        }
+                    }, [t(s.captcha.solving ? `Solve the captcha for minion '${s.captcha.for}'` : "Login and level up to skip captcha!")]), t(" "), e("div", {
+                        attrs: {
+                            id: "image-captcha-container"
+                        }
+                    })])
+                }], !1, null, "76d60428", null));
+            t0.options.__file = "src/components/image-captcha.vue";
+            var tQ = t0.exports,
+                tM = function() {
+                    var e = this,
+                        t = e.$createElement,
+                        s = e._self._c || t;
+                    return e.show ? s("div", {
+                        staticClass: "shoutbox"
+                    }, [s("iframe", {
+                        staticClass: "shoutbox-player",
+                        attrs: {
+                            width: "300",
+                            height: "200",
+                            src: e.url,
+                            frameborder: "0"
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "fas fa-times close-button",
+                        on: {
+                            click: function() {
+                                return e.hide()
+                            }
+                        }
+                    })]) : e._e()
+                };
+            tM._withStripped = !0;
+            var tT = s(264),
+                tD = (s(265), Object(v.a)({
+                    data: () => ({
+                        show: !1
+                    }),
+                    props: ["url", "tag"],
+                    methods: {
+                        hide() {
+                            tT.setSeen(this.tag), this.show = !1
+                        }
+                    },
+                    created() {
+                        tT.isSeen(this.tag) || (this.show = !0)
+                    }
+                }, tM, [], !1, null, "559d1d3c", null));
+            tD.options.__file = "src/components/shoutbox.vue";
+            var tL = tD.exports;
+            a.a.use(o.a);
+            var tN = s(4),
+                tU = s(1);
+            a.a.component("btn", ty), tU.app = new a.a({
+                el: "#app",
+                data: {
+                    showHud: tN.showHud,
+                    showMenu: !0,
+                    showDeathScreen: !1,
+                    deathStats: null
+                },
+                components: {
+                    imageCaptcha: tQ,
+                    mainContainer: eP,
+                    socialLinks: e4,
+                    privacyTos: e3,
+                    contextMenu: eO,
+                    hud: tp,
+                    deathStats: tv,
+                    replayControls: tk,
+                    abOverlay: tE,
+                    shoutbox: tL
+                }
+            })
+        }]), window.DELTATAG = "DELTA", localStorage.cid || (localStorage.cid = makeid(28)), GAME.sendServer = e => {
+        GAME.events.$emit("chat-message", e)
+    }, GAME.setText = e => {
+        GAME.events.$emit("update-cautions", {
+            custom: e
+        })
+    }, GAME.aimbotnodes = () => {}, window.pings = {
+        sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/pinpointer.png")
+    }, window.setDualData = (e, t) => {
+        switch (e) {
+            case 1:
+                getModule(4).set("dualSkin", t), document.querySelector(".configSkin").src = t, document.getElementById("skinDisplay2").src = t;
+                break;
+            case 2:
+                getModule(4).set("dualNickname", document.getElementById("dualNickname").value);
+                break;
+            case 3:
+                getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked)
+        }
+    };
+    var r = document.createElement("div");
+    r.id = "debugStats", r.style.position = "fixed", r.style.right = "250px", r.style.top = "20px", r.style.textAlign = "right", r.style.fontWeight = "100", r.style.opacity = "1", r.style.display = "block", document.querySelector("#hud").appendChild(r), GAME.debugElement = r, (r = document.createElement("div")).id = "playerStats", document.querySelector("#app").appendChild(r), GAME.playerElement = r, (r = document.createElement("div")).id = "playerList", document.querySelector("#app").appendChild(r), window.yoinkSkinDual = e => {
+        window.SwalAlerts.toast.fire({
+            type: "info",
+            title: "Skin yoinked",
+            timer: 1500
+        }), GAME.skinPanel.addSkin(e)
+    }, window.copySkinDual = e => {
+        window.SwalAlerts.toast.fire({
+            type: "info",
+            title: "Skin copied",
+            timer: 1500
+        }), navigator.clipboard.writeText(e)
+    }, window.getSwitch = () => {
+        return `
+            <div class="switchSingle switchButton" onclick="window.location.href = 'https://vanis.io'">
+                <p>Switch to single</p>
+                <i style="margin-top: 4px" class="fas fa-exchange-alt"></i>
+            </div>
+        `;
+    }, window.changePerformanceMode = () => {
+        if (lowPerformanceMode === 'checked') {
+            localStorage.setItem('lowPerformanceMode', 'unchecked');
+        } else {
+            localStorage.setItem('lowPerformanceMode', 'checked');
+        }
+        window.location.reload();
+    }, window.getTitleExtension = () => {
+        const titles = [
+            "+220 users on Delta",
+            "Alis.io",
+            "Vanis.io",
+            "Vanish.io",
+            "Raf x Duru x Fohz",
+            "Delta.io",
+            "Delta above all",
+            "Delta on top",
+            "Delta will carry you",
+            "Delta best ext ?",
+            "Alis.io legends",
+            "Want a badge? DM Fohz",
+            "Luka will recruit Fohz?",
+            "Join discord now",
+            "Fohz the tricker",
+            "BBN the SK",
+            "Exe the legend",
+            "Duru is cuter than all",
+            "Deadly World the solo",
+            "Yuu the hat coder",
+            "Splat the YouTuber",
+            "Zimek the precursor",
+            "Angel the mad",
+            "Grouk the legend",
+            "Useful the splitrunner",
+            "Frenchies on top",
+            "Eva, don't hate Fohz",
+            "DM Luka to recruit Fohz!",
+            "Luka need Fohz ?",
+            "Pi the legend",
+            "Who's Miracle..?",
+        ];
+        return titles[Math.floor(Math.random() * titles.length)];
+    }, document.querySelector("#player-data").getElementsByTagName("div")[0].innerHTML += `
+        <div id="openSkins">
+           <p class="gameConfigurationButton" data-v-1bcde71e="" class="tab fas"><i class="fas fa-user gameConfigurationButtonIcon"></i>Player configuration</p>
+        </div>
+        <div class="dualProfile">
+            <img id="skinDisplay1" src="${localStorage.skinUrl}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
+            <img id="skinDisplay2" src="${settings.dualSkin}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
+        </div>
+    `, document.querySelector('#overlay').insertAdjacentHTML('beforeend', `
+        <div data-v-3ddebeb3="" class="p-switch pretty performanceSwitch" p-checkbox="">
+            <input type="checkbox" ${lowPerformanceMode}="" onchange="changePerformanceMode()" tip="By activating this option, Delta features are disabled in order to have the best possible performance. Very useful for small and underpowered computers"> 
+            <div class="state">
+                <label>Low performance mode</label>
+            </div>
+        </div>
+    `), document.querySelector("#main-container").insertAdjacentHTML('beforeend', window.getSwitch()), document.querySelector(".bar").innerHTML += `
+        <div class="statBar"></div>
+        <titlemod>(Dual mod)</titlemod>
+        <titleextension>${window.getTitleExtension()}</titleextension>
+    `, document.querySelector("#openSkins").addEventListener("click", () => {
+        const modal = `
+            <div data-v-0eaeaf66="" data-v-1bcde71e="" class="modal modalCustom">
+                <div data-v-0eaeaf66="" class="overlay"></div>
+                <i data-v-0eaeaf66="" onclick="document.querySelector('.modalCustom').remove()" class="fas fa-times-circle close-button"></i>
+                <div data-v-0eaeaf66="" class="wrapper">
+                    <div data-v-0eaeaf66="" class="content fade-box">
+                        <div class="divDualSkins" data-v-7179a145="" data-v-1bcde71e="">
+                            <div id="dualSkins">
+                                <div data-v-3ddebeb3="" class="section row">
+                                    <div data-v-3ddebeb3="" class="header">Dual profile</div>
+                                    <div data-v-3ddebeb3="" class="options">
+                                        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                            <input type="checkbox" id="dualUseNickname" onchange="window.setDualData(3)" ${window.settings.dualUseNickname ? "checked" : ""}> 
+                                            <div class="state"> <label>Use dual</label></div>
+                                        </div>
+                                        <input oninput="window.setDualData(2)" id="dualNickname" value="${window.settings.dualNickname}" type="text" spellcheck="false" placeholder="Dual nickname" maxlength="15">
+                                        <img class="configSkin" src="${window.settings.dualSkin}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
+                                    </div>
+                                </div>
+                                <div data-v-3ddebeb3="" class="section row">
+                                    <div data-v-3ddebeb3="" class="header">Skin galery</div>
+                                    <div data-v-3ddebeb3="" class="options dualSkinGalery"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
+        var skinItems = ``;
+        JSON.parse(localStorage.skins).forEach(e => {
+            skinItems += `<img class="skinItemGalery" onclick="window.setDualData(1, '${e}')" src="${"" == e ? "https://skins.vanis.io/s/Qkfih2" : e}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">`
+        });
+        document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
+    })
+}();
+
+if (lowPerformanceMode === 'unchecked') {
+    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
+        .then(response => response.text())
+        .then(code => {
+            const script = document.createElement('script');
+            script.textContent = code;
+            (document.head || document.documentElement).appendChild(script);
+            script.remove();
+        })
+    ;
+} else {
+    document.querySelector('.loadingDelta').remove();
+}

@@ -3,7 +3,7 @@ const APP = {
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
-    reserved: { value: false, color: '#ffffff' },
+    reserved: {value: false, color: '#ffffff'},
     blacklist: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "k", "K", "m", "M", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "D3", "D4", "D5", "E1", "E2", "E3", "E4", "E5", "Unnamed", "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           ", "            ", "             ", "              ", "               ", "                "],
 }
 
@@ -144,13 +144,14 @@ function firebaseSignOut() {
 }
 
 function firebaseAccount(callback) {
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             getLocalValues(user);
             getDatabase();
             callback();
         } else {
-            initRegisterForm(() => {});
+            initRegisterForm(() => {
+            });
         }
     });
 }
@@ -208,8 +209,8 @@ function initRegisterPage() {
 
 function initAnimationsForm() {
     const submitButton = $(ATTRS.selectors.submitButton);
-    const submitButtonHoverStyle = { transform: 'scale(0.9)', transition: 'all 0.3s' };
-    const submitButtonNormalStyle = { transform: 'scale(1)', transition: 'all 0.3s' };
+    const submitButtonHoverStyle = {transform: 'scale(0.9)', transition: 'all 0.3s'};
+    const submitButtonNormalStyle = {transform: 'scale(1)', transition: 'all 0.3s'};
 
     const handleInput = () => {
         $(ATTRS.selectors.submitText).text('Login/create (automatic)');
@@ -584,10 +585,10 @@ function listenerComponents() {
 
     if (APP.mode === 2) {
         const target = document.querySelector(ATTRS.selectors.bar);
-        const config = { characterData: true, childList: true, subtree: true };
+        const config = {characterData: true, childList: true, subtree: true};
 
-        let callback = function(mutationsList, observer) {
-            for(var mutation of mutationsList) {
+        let callback = function (mutationsList, observer) {
+            for (var mutation of mutationsList) {
                 if (mutation.type === 'childList' || mutation.type === 'characterData') {
                     onActionPressed();
                     break;
@@ -700,11 +701,11 @@ function displaySwitch() {
     `);
 }
 
-/***********************
+/*****************
  *
- *  Skin profile OPTIX
+ *  Skin profile
  *
- ***********************/
+ *****************/
 function createSkinProfile() {
     const skinUrl = $(ATTRS.selectors.skinUrl).val();
 
@@ -738,31 +739,31 @@ function skinValidation(inputURL) {
     }
 }
 
-/*************************
+/******************
  *
- *  Reserved name OPTIX
+ *  Reserved name
  *
- *************************/
+ ******************/
 function getReservedName() {
     const colorUser = LISTS.colors[USER.configurations.nickname.trim()];
 
     if (colorUser && colorUser.uid !== USER.credentials.uid) {
         sendTimedSwal('Reserved nickname', 'Your actual nickname is reserved by another Delta player, if you want to play with your color, change your nickname', 10000, 'OK');
-        $(ATTRS.selectors.nicknameProfile).css({'color' : colorUser.color, 'font-style' : 'italic'});
+        $(ATTRS.selectors.nicknameProfile).css({'color': colorUser.color, 'font-style': 'italic'});
         $(ATTRS.selectors.nickname).css('font-style', 'italic');
-        APP.reserved = { value : true, color : colorUser.color };
+        APP.reserved = {value: true, color: colorUser.color};
     } else {
-        $(ATTRS.selectors.nicknameProfile).css({'color' : USER.configurations.nicknameColor, 'font-style' : 'normal'});
+        $(ATTRS.selectors.nicknameProfile).css({'color': USER.configurations.nicknameColor, 'font-style': 'normal'});
         $(ATTRS.selectors.nickname).css('font-style', 'normal');
-        APP.reserved = { value : false, color : USER.configurations.nicknameColor };
+        APP.reserved = {value: false, color: USER.configurations.nicknameColor};
     }
 }
 
-/***********************
+/*****************
  *
- *  Page creator OPTIX
+ *  Page creator
  *
- ***********************/
+ *****************/
 function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec) {
     if (typeof functionExec === 'function') functionExec();
 
@@ -789,11 +790,11 @@ function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec) {
     }
 }
 
-/*************************
+/*******************
  *
- *  Boxes creator OPTIX
+ *  Boxes creator
  *
- *************************/
+ *******************/
 function createBoxes() {
     createNewIcon(true, 'fas fa-users', 'userIcon', drawUsersModal);
     createNewIcon(true, 'fas fa-user', 'statIcon', drawStatisticsModal);
@@ -867,8 +868,7 @@ function createColorObserver(selectorGlobal, selectorText) {
                         node.querySelectorAll(selectorText).forEach(applyColorToElement);
                     }
                 });
-            }
-            else if (mutation.type === 'characterData') {
+            } else if (mutation.type === 'characterData') {
                 const parent = mutation.target.parentElement;
                 if (parent && parent.matches(selectorText)) {
                     applyColorToElement(parent);
@@ -884,11 +884,11 @@ function createColorObserver(selectorGlobal, selectorText) {
     });
 }
 
-/**********************
+/***************
  *
- *  Users page OPTIX
+ *  Users page
  *
- **********************/
+ ***************/
 function drawUsersModal() {
     if ($(ATTRS.selectors.userBox).length > 0) return;
     const modal = usersModal(LISTS.users);
@@ -898,7 +898,7 @@ function drawUsersModal() {
 
 function usersModal(users) {
     const me = users[USER.credentials.uid];
-    let { listOnline, listOffline, userCount } = updateUserLists(users, me);
+    let {listOnline, listOffline, userCount} = updateUserLists(users, me);
 
     return {
         meHeader: `<h3 class="titleSubBox">My profile</h3>`,
@@ -914,7 +914,7 @@ function usersModal(users) {
 function updateUserLists(users, me) {
     let listOnline = '';
     let listOffline = '';
-    let userCount = { online: 0, offline: 0, total: 0 };
+    let userCount = {online: 0, offline: 0, total: 0};
 
     Object.values(users).forEach(user => {
         if (user === me) return;
@@ -932,7 +932,7 @@ function updateUserLists(users, me) {
         userCount.total++;
     });
 
-    return { listOnline, listOffline, userCount };
+    return {listOnline, listOffline, userCount};
 }
 
 function injectUser(user, status) {
@@ -1006,11 +1006,11 @@ function injectConnectionsStats() {
     return `Total install: ${values.total - 1}\nOnline users: ${values.online - 1}\nDaily active users: ${values.daily - 1}\nActive last 2 days: ${values.last2days - 1}\nActive this week: ${values.last7days - 1}`;
 }
 
-/*********************************
+/**************************
  *
- *  Users box utilitaries OPTIX
+ *  Users box utilitaries
  *
- *********************************/
+ **************************/
 function getUsersTime(time) {
     function getTimeAgo(days, hours, minutes) {
         if (days >= 2) {
@@ -1065,11 +1065,11 @@ function getUsersMode(userMode) {
     }
 }
 
-/***************************
+/********************
  *
- *  Statistics page OPTIX
+ *  Statistics page
  *
- ***************************/
+ ********************/
 function drawStatisticsModal() {
     if ($(ATTRS.selectors.toolBox).length > 0) return;
     const modal = statisticsModal(USER.statistics);
@@ -1152,11 +1152,11 @@ function generateStatisticItem(label, value, tooltip = '') {
     `;
 }
 
-/*************************************
+/*******************
  *
- *  Statistics box utilitaries OPTIX
+ *  Statistics box
  *
- *************************************/
+ *******************/
 function getConvertedTimeToSeconds(str) {
     if (typeof str !== 'string') return 0;
     return str.split(' ').reduce((total, part) => {
@@ -1242,11 +1242,11 @@ function confirmResetStatistics() {
     ;
 }
 
-/******************************
+/**********************
  *
- *  Leeaderboard page OPTIX
+ *  Leaderboard page
  *
- ******************************/
+ **********************/
 function drawLeaderboardModal() {
     if ($(ATTRS.selectors.toolBox).length > 0) return;
 
@@ -1264,12 +1264,12 @@ function drawLeaderboardModal() {
 
 function addLeaderboardModal() {
     const buttons = [
-        { id: 0, text: 'K/D', filter: 'kda', class: 'leaderbordKdaButton' },
-        { id: 1, text: 'Kills', filter: 'killTotal', class: 'leaderbordKillsButton' },
-        { id: 2, text: 'Deaths', filter: 'gameTotal', class: 'leaderbordGamesButton' },
-        { id: 3, text: 'Mass total', filter: 'massTotal', class: 'leaderbordMassTotalButton' },
-        { id: 4, text: 'Mass avg', filter: 'massAvg', class: 'leaderbordMassAvgButton' },
-        { id: 5, text: 'Time total', filter: 'timeTotal', class: 'leaderbordTimeButton' }
+        {id: 0, text: 'K/D', filter: 'kda', class: 'leaderbordKdaButton'},
+        {id: 1, text: 'Kills', filter: 'killTotal', class: 'leaderbordKillsButton'},
+        {id: 2, text: 'Deaths', filter: 'gameTotal', class: 'leaderbordGamesButton'},
+        {id: 3, text: 'Mass total', filter: 'massTotal', class: 'leaderbordMassTotalButton'},
+        {id: 4, text: 'Mass avg', filter: 'massAvg', class: 'leaderbordMassAvgButton'},
+        {id: 5, text: 'Time total', filter: 'timeTotal', class: 'leaderbordTimeButton'}
     ];
 
     const buttonHTML = buttons.map(button => `
@@ -1356,11 +1356,11 @@ function injectLeaderboard(item, itemId, position, filter) {
     `;
 }
 
-/**********************
+/***************
  *
- *  Tools page OPTIX
+ *  Tools page
  *
- **********************/
+ ***************/
 function drawToolsModal() {
     if ($(ATTRS.selectors.toolBox).length > 0) return;
 
@@ -1380,7 +1380,6 @@ function drawToolsModal() {
         addToolsModal();
     }
 }
-
 
 function addToolsModal() {
     const configurations = fetchItem(LISTS.configurations, injectConfiguration);
@@ -1515,11 +1514,11 @@ function toolsModal(tools, total, badges) {
     `;
 }
 
-/**********************
+/***************
  *
- *  Skins page OPTIX
+ *  Skins page
  *
- **********************/
+ ***************/
 async function drawSkinsModal() {
     if ($(ATTRS.selectors.skinBox).length > 0) return;
 
@@ -1546,11 +1545,11 @@ function injectSkinPages() {
     `;
 }
 
-/*************************************
+/*******************************
  *
- *  Skins page renderer system OPTIX
+ *  Skins page renderer system
  *
- ************************************/
+ *******************************/
 function renderSkinsFromList(title, content, list) {
     $(ATTRS.selectors.boxTitle).text(title);
 
@@ -1569,11 +1568,11 @@ function itemSkinModal(skin, list) {
     `);
 }
 
-/*****************************
+/***********************
  *
- *  Skins page loaders OPTIX
+ *  Skins page loader
  *
- *****************************/
+ ***********************/
 async function loadAllSkins() {
     if (SKINS.all.length > 0) {
         renderSkinsFromList('Public skins', SKINS.all, ATTRS.selectors.skinsNavAllPage);
@@ -1616,11 +1615,11 @@ async function loadFavSkins() {
     }
 }
 
-/**********************************
+/****************************
  *
- *  Skins page mandafetcher OPTIX
+ *  Skins page mandafetcher
  *
- **********************************/
+ ****************************/
 async function fetchSkins(url, errorMessage) {
     try {
         const response = await fetch(url, {
@@ -1632,7 +1631,7 @@ async function fetchSkins(url, errorMessage) {
         });
 
         if (!response.ok) {
-            sendTimedSwal(`Server bad response`,`Server responded with ${response.status}: ${response.statusText}`, 3000);
+            sendTimedSwal(`Server bad response`, `Server responded with ${response.status}: ${response.statusText}`, 3000);
         }
 
         return await response.json();
@@ -1642,11 +1641,11 @@ async function fetchSkins(url, errorMessage) {
     }
 }
 
-/*******************************
+/*************************
  *
- *  Skins page functions OPTIX
+ *  Skins page functions
  *
- *******************************/
+ *************************/
 function openSkin(skinUrl, skinId) {
     $(ATTRS.selectors.overlay).append(`
         <div class="overlaySkin">
@@ -1691,11 +1690,11 @@ function yoinkSkin(skinUrl) {
     sendTimedSwal("Skin yoinked", `The skin has been yoinked, need to refresh the page to save`, 1500, false);
 }
 
-/*****************************
+/********************
  *
- *  Injector system OPTIX
+ *  Injector system
  *
- *****************************/
+ ********************/
 function injectConfiguration(item, itemId) {
     const skins = injectSkin(item.skins);
     const tag = injectTag(item.teamtag);
@@ -1734,7 +1733,7 @@ function injectConfiguration(item, itemId) {
 }
 
 function injectSkin(skins) {
-    if (!skins) return { list: '', count: 0, };
+    if (!skins) return {list: '', count: 0,};
     const skinUrls = JSON.parse(skins);
     const skinElements = skinUrls.slice(0, 50).map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
 
@@ -1762,11 +1761,11 @@ function injectBadge(item, itemId) {
     `;
 }
 
-/********************************
+/**************************
  *
- *  Delete configurations OPTIX
+ *  Delete configurations
  *
- ********************************/
+ **************************/
 function deleteSuccess(configId) {
     const node = $('#' + configId);
 
@@ -1797,11 +1796,11 @@ function deleteConfiguration(configId) {
     });
 }
 
-/********************************
+/**************************
  *
- *  Update configurations OPTIX
+ *  Update configurations
  *
- ********************************/
+ **************************/
 function updateSuccess(configId) {
     const config = LISTS.configurations[configId];
 
@@ -1834,11 +1833,11 @@ function updateConfiguration(configId) {
     callSwal(configId);
 }
 
-/***************************
+/*****************
  *
- *  Sortable creator OPTIX
+ *  Sortable lib
  *
- ***************************/
+ *****************/
 function updateSkinsLocally() {
     let urlList = '[';
 
@@ -1898,11 +1897,11 @@ function createChatboxResizable() {
     });
 }
 
-/************************************
+/***********************
  *
- *  Change user color manager OPTIX
+ *  User color manager
  *
- ************************************/
+ ***********************/
 function changeUserColor(color) {
     USER.configurations.nicknameColor = color;
     localStorage.setItem('nicknameColor', color);
@@ -1914,11 +1913,11 @@ function changeUserColor(color) {
     pushUserOnline();
 }
 
-/*****************************
+/***********************
  *
- *  Cell color manager OPTIX
+ *  Cell color manager
  *
- *****************************/
+ ***********************/
 function changeCellColor(nicknameToUpdate) {
     const originalFillText = CanvasRenderingContext2D.prototype.fillText;
 
@@ -2287,13 +2286,13 @@ function getAllSelectors() {
         toolsPageButtonConfigurations: '.toolsNavConfigurationsTab',
 
         // Leaderboard page
-        leaderboardList : '.leaderboardList',
-        leaderbordKdaButton : '.leaderbordKdaButton',
-        leaderbordKillsButton : '.leaderbordKillsButton',
-        leaderbordGamesButton : '.leaderbordGamesButton',
-        leaderbordMassTotalButton : '.leaderbordMassTotalButton',
-        leaderbordMassAvgButton : '.leaderbordMassAvgButton',
-        leaderbordTimeButton : '.leaderbordTimeButton',
+        leaderboardList: '.leaderboardList',
+        leaderbordKdaButton: '.leaderbordKdaButton',
+        leaderbordKillsButton: '.leaderbordKillsButton',
+        leaderbordGamesButton: '.leaderbordGamesButton',
+        leaderbordMassTotalButton: '.leaderbordMassTotalButton',
+        leaderbordMassAvgButton: '.leaderbordMassAvgButton',
+        leaderbordTimeButton: '.leaderbordTimeButton',
     };
 }
 
