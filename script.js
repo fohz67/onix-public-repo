@@ -1331,7 +1331,7 @@ function injectLeaderboard(item, itemId, position, filter) {
             statisticValue = getFormatedMass(item.massAvg);
             break;
         case 'timeTotal':
-            statisticValue = getElapsedTime(item.timeTotal, false, false, false);
+            statisticValue = getElapsedTime(item.timeTotal, false, false, false, true, true, false);
             break;
         default:
             statisticValue = item.kda.toFixed(2) + ' K/D';
