@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.9',
+    version: '3.9.1',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',

@@ -1,4 +1,4 @@
-const VERSION = '3.9';
+const VERSION = '3.9.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -7318,7 +7318,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         attrs: {
                             id: "account-name"
                         }
-                    }, [e._v(e._s(e.name))]), e._v(" "), s("div", [e._v("Level " + e._s(e.account.level))]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s(Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0) || 0) + " season XP")])])]), e._v(" "), s("div", {
+                    }, [e._v(e._s(e.name))]), e._v(" "), s("div", [e._v("Level " + e._s(e.account.level))]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s(Object.values(e.account.season_xp || `{0: 0}`).reduce((acc, xp) => acc + xp, 0) || 0) + " season XP")])])]), e._v(" "), s("div", {
                         staticStyle: {
                             position: "relative"
                         }
@@ -7429,7 +7429,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         onXpUpdate(e) {
                             if (this.account) {
                                 var t = e0.getLevel(e);
-                                this.account.season_xp = parseInt(Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0)) || 0 + e - this.account.xp, this.account.xp = e, this.account.level = t, this.updateProgress(e, t)
+                                this.account.season_xp = parseInt(Object.values(e.account.season_xp || `{0: 0}`).reduce((acc, xp) => acc + xp, 0)) || 0 + e - this.account.xp, this.account.xp = e, this.account.level = t, this.updateProgress(e, t)
                             }
                         },
                         updateProgress(e, t) {
