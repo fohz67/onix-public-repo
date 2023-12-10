@@ -1712,7 +1712,7 @@ function injectConfiguration(item, itemId) {
                     <div class="configHeader">
                         <div class="configHeaderTitle">
                             <p class="configName">${item.browser} ${item.platform}</p>
-                            <p class="configDate">${item.date}</p>
+                            ${getMachineId() === item.machineId ? `<p class="configActual">Active</p>`: `<p class="configDate">${item.date}</p>`}
                         </div>
                         <div class="configButtons">
                             <i class="fas fa-trash configDelete" onclick="deleteConfiguration('${itemId}')"></i>

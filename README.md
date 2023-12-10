@@ -1,16 +1,17 @@
+
 # Delta project
 
 Delta extension for Vanis.io game
 
 ![](https://i.ibb.co/hFjxqCv/x.png)  
-![](https://i.ibb.co/F8z2w6c/x.png)
+![](https://i.ibb.co/SVBbnNH/x.png)
 
 
 ## Download
 
 1- Install tampermonkey : https://tampermonkey.net  
 2- Install Delta : https : https://deltavanis.eu/install/script.user.js  
-3- Enjoy in Vanis.io  
+3- Enjoy in Vanis.io
 ## Modes
 
 Delta has two modes to suit each player.
@@ -53,7 +54,3 @@ Same functionalities for the **Single** and **Dual** mode
 ![](https://i.ibb.co/0CJ8ssL/x.png)
 
 - Others functionalities : Draggable skin to move them, resizable chatbox in game, time before message (with rainbox color or not), reserved name, skin yoinking (by Zimek), teamtag indicator (by Zimek) and more...
-
-![](https://i.ibb.co/2vx91CG/x.png)  
-![](https://i.ibb.co/4VLtZGw/x.png)  
-![](https://i.ibb.co/prsBsZm/x.png)
