@@ -675,12 +675,12 @@ function displayTitle() {
 function displaySocial() {
     const socialContainer = $(ATTRS.selectors.socialContainer);
     const discordLink = `
-        <a data-v-7a126fed href="https://discord.gg/wthDcUb6nY" target="_blank" rel="noopener" class="discord-link">
+        <a data-v-0b519856 href="https://discord.gg/wthDcUb6nY" target="_blank" rel="noopener" class="discord-link">
             <i class="fas fa-heart"></i> Delta Discord
         </a>
     `;
     const bugLink = `
-        <a data-v-7a126fed href="https://discord.gg/cJByExsnub" target="_blank" rel="noopener" class="bug-link">
+        <a data-v-0b519856 href="https://discord.gg/cJByExsnub" target="_blank" rel="noopener" class="bug-link">
             <i class="fas fa-bug"></i> Report a bug
         </a>
     `;
@@ -1712,7 +1712,7 @@ function injectConfiguration(item, itemId) {
                     <div class="configHeader">
                         <div class="configHeaderTitle">
                             <p class="configName">${item.browser} ${item.platform}</p>
-                            ${getMachineId() === item.machineId ? `<p class="configActual">Active</p>`: `<p class="configDate">${item.date}</p>`}
+                            ${getMachineId() === item.machineId ? `<p class="configActual">Actual backup</p>`: `<p class="configDate">${item.date}</p>`}
                         </div>
                         <div class="configButtons">
                             <i class="fas fa-trash configDelete" onclick="deleteConfiguration('${itemId}')"></i>
