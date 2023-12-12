@@ -1,4 +1,4 @@
-const VERSION = '3.9.2.1';
+const VERSION = '3.9.2.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -1175,11 +1175,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 minimapSize: 220,
                 minimapFPS: 30,
                 minimapSmoothing: .08,
-                dualColor: "e2ff00",
+                dualColor: "a537ff",
                 dualSkin: "https://skins.vanis.io/s/Qkfih2",
                 dualActive: 1,
                 dualAutorespawn: !1,
-                dualArrow: "https://i.ibb.co/FHDfzBF/i.png",
+                dualArrow: "https://i.ibb.co/Tbr7M8J/i.png",
                 gameAlpha: 1,
                 dualNickname: "Delta Dual",
                 dualUseNickname: !1,
@@ -6510,7 +6510,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         useWebGL: Z,
                         bgDefault: H.getDefault("backgroundImageUrl"),
                         virusDefault: "https://i.ibb.co/V9tdfcY/i.png",
-                        dualArrowDefault: "https://i.ibb.co/FHDfzBF/i.png",
+                        dualArrowDefault: "https://i.ibb.co/Tbr7M8J/i.png",
                         showNameFontWarning: !1,
                         showMassFontWarning: !1,
                         backgroundColor: H.backgroundColor,
