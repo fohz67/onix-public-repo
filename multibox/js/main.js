@@ -747,7 +747,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     return !r.shortMass || e < 1e3 ? e.toFixed(0) : (e / 1e3).toFixed(1) + "k"
                 }
                 shouldAutoRespawn(e) {
-                    return !this.app.showMenu && (e ? r.mbAutorespawn : r.autoRespawn)
+                    return !this.app.showMenu && (e ? r.dualAutorespawn : r.autoRespawn)
                 }
                 triggerDeathDelay(e) {
                     function getConvertedTimeToSeconds(str) {
@@ -1143,11 +1143,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 backgroundColor: "101010",
                 borderColor: "000000",
                 foodColor: "ffffff",
-                ejectedColor: "ffa500",
+                ejectedColor: "ffffff",
                 cellNameOutlineColor: "000000",
                 cursorImageUrl: null,
                 backgroundImageUrl: "img/background.png",
-                virusImageUrl: "img/virus.png",
+                virusImageUrl: "https://i.ibb.co/V9tdfcY/i.png",
                 cellMassColor: "ffffff",
                 cellMassOutlineColor: "000000",
                 cellNameFont: "Hind Madurai",
@@ -1175,10 +1175,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 minimapSize: 220,
                 minimapFPS: 30,
                 minimapSmoothing: .08,
-                mbColor: "c084ff",
+                dualColor: "e2ff00",
                 dualSkin: "https://skins.vanis.io/s/Qkfih2",
-                mbActive: 1,
-                mbAutorespawn: !1,
+                dualActive: 1,
+                dualAutorespawn: !1,
+                dualArrow: "https://i.ibb.co/FHDfzBF/i.png"
                 gameAlpha: 1,
                 dualNickname: "Delta Dual",
                 dualUseNickname: !1,
@@ -1189,7 +1190,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 showTag: !1,
                 showDir: !1,
                 chatColorOnlyPeople: !1,
-                mbArrow: "https://i.postimg.cc/6pvLJ2TW/image.png"
             };
 
             function s(e) {
@@ -3491,7 +3491,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         return
                     }
                     let t = this.arrowSprite = new PIXI.Sprite.from(e.arrowSprite.texture);
-                    t.visible = a.mbActive >= 2 && this.pid === i.activePid, t.anchor.set(.5), t.width = t.height = 130, t.alpha = .95, t.y = -310, this.sprite.addChild(t)
+                    t.visible = a.dualActive >= 2 && this.pid === i.activePid, t.anchor.set(.5), t.width = t.height = 130, t.alpha = .95, t.y = -310, this.sprite.addChild(t)
                 }
                 addCrown() {
                     if (!this.sprite || this.crownSprite) return;
@@ -3508,7 +3508,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 onUpdate() {
                     if (a.showDir && !this.directionSprite) {
-                        let e = this.directionSprite = new PIXI.Sprite.from("https://i.postimg.cc/vmZmWCRR/4-Point-Star.png");
+                        let e = this.directionSprite = new PIXI.Sprite.from("https://i.postimg.cc/vmZmWCRR/i.png");
                         e.scale.set(.1), e.alpha = .7, e.anchor.set(3.5, 3.5), this.sprite.addChild(e)
                     }
                     let t = i.scene.container.scale.x * this.size * i.renderer.resolution,
@@ -3757,14 +3757,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         o = [];
                     switch (n.allCells.forEach(e => {
                         e.pid && e.isMe && e.arrowSprite && o.push(e)
-                    }), settings.mbActive) {
+                    }), settings.dualActive) {
                         case 0:
                             break;
                         case 1: {
                             o.length > 0 && o.forEach(e => {
                                 e.arrowSprite.visible = !1
                             });
-                            let r = +("0x" + settings.mbColor);
+                            let r = +("0x" + settings.dualColor);
                             this.focused ? (i.setOutline(16777215), a.setOutline(r)) : (a.setOutline(16777215), i.setOutline(r));
                             break
                         }
@@ -3779,13 +3779,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 }
                 reloadArrow() {
-                    if (this.arrowSprite && this.arrowSprite.destroy(), settings.mbArrow.startsWith("data:image")) {
+                    if (this.arrowSprite && this.arrowSprite.destroy(), settings.dualArrow.startsWith("data:image")) {
                         let e = document.createElement("img");
-                        e.src = settings.mbArrow;
+                        e.src = settings.dualArrow;
                         let t = new PIXI.BaseTexture(e),
                             s = new PIXI.Texture(t);
                         this.arrowSprite = new PIXI.Sprite(s)
-                    } else this.arrowSprite = new PIXI.Sprite.from(settings.mbArrow)
+                    } else this.arrowSprite = new PIXI.Sprite.from(settings.dualArrow)
                 }
                 get position() {
                     let e = 0,
@@ -4831,7 +4831,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("div", {
                         staticClass: "inline-range",
                         class: {
-                            off: !e.mbActive
+                            off: !e.dualActive
                         }
                     }, [s("input", {
                         staticClass: "slider",
@@ -4842,21 +4842,21 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             step: "1"
                         },
                         domProps: {
-                            value: e.mbActive
+                            value: e.dualActive
                         },
                         on: {
                             input: function(t) {
-                                return e.change("mbActive", t)
+                                return e.change("dualActive", t)
                             }
                         }
                     }), e._v("Dual active cell: " + e._s(e.showDualboxMeaning))]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
-                            checked: e.mbAutorespawn
+                            checked: e.dualAutorespawn
                         },
                         on: {
                             change: function(t) {
-                                return e.change("mbAutorespawn", t)
+                                return e.change("dualAutorespawn", t)
                             }
                         }
                     }, [e._v("Dual auto respawn")]), e._v(" "), s("p-check", {
@@ -5511,7 +5511,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     autoZoom: b.autoZoom,
                     rememeberEjecting: b.rememeberEjecting,
                     autoRespawn: b.autoRespawn,
-                    mbAutorespawn: b.mbAutorespawn,
+                    dualAutorespawn: b.dualAutorespawn,
                     mouseFreezeSoft: b.mouseFreezeSoft,
                     drawDelay: b.drawDelay,
                     cameraMoveDelay: b.cameraMoveDelay,
@@ -5556,7 +5556,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     showTag: b.showTag,
                     showDir: b.showDir,
                     gameAlpha: b.gameAlpha,
-                    mbActive: b.mbActive
+                    dualActive: b.dualActive
                 }),
                 computed: {
                     showNamesMeaning() {
@@ -5586,7 +5586,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             1: "Border",
                             2: "Arrow",
                             3: "Arrow"
-                        })[this.mbActive]
+                        })[this.dualActive]
                     }
                 },
                 methods: {
@@ -5741,11 +5741,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("span", [e._v("Active cell")]), e._v(" "), s("color-option", {
                         staticClass: "right",
                         attrs: {
-                            value: e.mbColor
+                            value: e.dualColor
                         },
                         on: {
                             input: function(t) {
-                                return e.change("mbColor", t)
+                                return e.change("dualColor", t)
                             }
                         }
                     })], 1), e._v(" "), s("div", {
@@ -5812,12 +5812,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "right",
                         attrs: {
                             width: "100",
-                            defaults: e.mbArrowDefault,
-                            value: e.mbArrow
+                            defaults: e.dualArrowDefault,
+                            value: e.dualArrow
                         },
                         on: {
                             input: function(t) {
-                                return e.change("mbArrow", t)
+                                return e.change("dualArrow", t)
                             }
                         }
                     })], 1), e._v(" "), s("div", {
@@ -6509,8 +6509,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     data: () => ({
                         useWebGL: Z,
                         bgDefault: H.getDefault("backgroundImageUrl"),
-                        virusDefault: H.getDefault("virusImageUrl"),
-                        mbArrowDefault: "https://i.postimg.cc/6pvLJ2TW/image.png",
+                        virusDefault: "https://i.ibb.co/V9tdfcY/i.png",
+                        dualArrowDefault: "https://i.ibb.co/FHDfzBF/i.png",
                         showNameFontWarning: !1,
                         showMassFontWarning: !1,
                         backgroundColor: H.backgroundColor,
@@ -6539,8 +6539,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         backgroundDefaultIfUnequal: H.backgroundDefaultIfUnequal,
                         backgroundImageOpacity: H.backgroundImageOpacity,
                         useFoodColor: H.useFoodColor,
-                        mbArrow: H.mbArrow,
-                        mbColor: H.mbColor
+                        dualArrow: H.dualArrow,
+                        dualColor: H.dualColor
                     }),
                     computed: {
                         cellNameWeightMeaning() {
@@ -6587,7 +6587,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                     case "virusImageUrl":
                                         i !== this.virusDefault && (i = await W(i, 200));
                                         break;
-                                    case "mbArrow":
+                                    case "dualArrow":
                                         G.dual.reloadArrow(i)
                                 }
                             } catch (a) {
@@ -8658,7 +8658,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             custom: e
         })
     }, GAME.aimbotnodes = () => {}, window.pings = {
-        sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/pinpointer.png")
+        sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/i.png")
     }, window.setDualData = (e, t) => {
         switch (e) {
             case 1:
