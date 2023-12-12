@@ -1,4 +1,4 @@
-const VERSION = '3.9.2';
+const VERSION = '3.9.2.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -1179,7 +1179,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 dualSkin: "https://skins.vanis.io/s/Qkfih2",
                 dualActive: 1,
                 dualAutorespawn: !1,
-                dualArrow: "https://i.ibb.co/FHDfzBF/i.png"
+                dualArrow: "https://i.ibb.co/FHDfzBF/i.png",
                 gameAlpha: 1,
                 dualNickname: "Delta Dual",
                 dualUseNickname: !1,
@@ -1189,7 +1189,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 showCellLines: !1,
                 showTag: !1,
                 showDir: !1,
-                chatColorOnlyPeople: !1,
+                chatColorOnlyPeople: !1
             };
 
             function s(e) {
