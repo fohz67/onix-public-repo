@@ -1,9 +1,12 @@
 const APP = {
-    version: '3.9.1',
+    version: '3.9.2',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
-    reserved: {value: false, color: '#ffffff'},
+    reserved: {
+        value: false,
+        color: '#ffffff'
+    },
     blacklist: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "k", "K", "m", "M", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "D3", "D4", "D5", "E1", "E2", "E3", "E4", "E5", "Unnamed", "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           ", "            ", "             ", "              ", "               ", "                "],
 }
 
@@ -58,23 +61,19 @@ if (document.readyState === 'submitLoading') {
  *
  **********************/
 function onDocumentReady() {
-    const appName = (APP.mode === 1) ? 'Delta - Single' : 'Delta - Dual';
-
-    pageConfiguration(appName);
+    pageConfiguration();
     onAttributesReady().then();
 }
 
 async function onAttributesReady() {
     try {
         await loadScript(ATTRS.libraries.firebaseApp);
-
         await Promise.all([
             loadScript(ATTRS.libraries.jquery),
             loadScript(ATTRS.libraries.firebaseAuth),
             loadScript(ATTRS.libraries.firebaseDatabase),
             loadScript(ATTRS.libraries.sortable),
         ]);
-
         await onScriptsReady();
     } catch (error) {
         const errorPromise = parseInt(localStorage.getItem('promiseError') || 0) || 0;
@@ -137,8 +136,8 @@ function firebaseSignOut() {
             .then(() => {
                 window.location.reload();
             }).catch(() => {
-            displayError(ERROR.title + 'Signout failed' + ERROR.content);
-        })
+                displayError(ERROR.title + 'Signout failed' + ERROR.content);
+            })
         ;
     }
 }
@@ -298,7 +297,7 @@ function pushUserInfos() {
         anonymous: USER.configurations.anonymous,
     }
 
-    if ($(ATTRS.selectors.discordBtn).length === 0) data.level = $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] || 0;
+    if ($(ATTRS.selectors.discordBtn)) data.level = $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] || 0;
     pushDatabase(DB.references.meUser, data);
 }
 
@@ -383,6 +382,7 @@ function pushUserBadge(item) {
         $(`.badge${badgeEach.id}`).css('opacity', 0.4);
     });
     $(`.badge${badge.id}`).css('opacity', 1);
+
     pushDatabase(DB.references.meColorBadge, badge);
     pushDatabase(DB.references.meUserBadge, badge);
 }
@@ -491,9 +491,8 @@ function fetchColorChanged() {
 
 function fetchBanned() {
     const me = LISTS.users[USER.credentials.uid];
-    if (me.banned) {
-        displayError(`You've been banned from Delta by Fohz. Reason: ${me.banned}`);
-    }
+    const message = me ? me.banned : undefined;
+    if (message) displayError(`You've been banned from Delta by Fohz. Reason: ${message}`);
 }
 
 function fetchItem(elements, functionExec) {
@@ -508,7 +507,7 @@ function fetchItem(elements, functionExec) {
  *  Page configuration
  *
  ***********************/
-function pageConfiguration(appName) {
+function pageConfiguration() {
     let link = document.querySelector(ATTRS.selectors.link) || document.createElement('link');
 
     link.type = 'image/x-icon';
@@ -516,7 +515,7 @@ function pageConfiguration(appName) {
     link.href = ATTRS.images.deltaLogo;
 
     document.getElementsByTagName(ATTRS.selectors.head)[0].appendChild(link);
-    document.title = appName;
+    document.title = APP.mode === 1 ? 'Delta - Single' : 'Delta - Dual';
 }
 
 /******************
@@ -571,8 +570,10 @@ function onActionPressed() {
 function onColorChanged(that) {
     const color = $(that).val();
 
-    if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)) {
+    if (color && /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)) {
         changeUserColor(color);
+    } else {
+        sendTimedSwal('Bad color used', 'You must select a real color', 3000, 'OK');
     }
 }
 
@@ -656,11 +657,8 @@ function createHUD() {
     displayTitle();
     displaySocial();
 
-    const levelText = $(ATTRS.selectors.level).text().trim();
-
-    if ($(ATTRS.selectors.discordBtn).length === 0 && levelText.match(/\d+/)[0] >= 5) {
-        displaySwitch();
-    }
+    const level = $(ATTRS.selectors.level).text().trim();
+    if (level && $(ATTRS.selectors.discordBtn).length === 0 && level.match(/\d+/)[0] >= 5) displaySwitch();
 }
 
 function displayTitle() {
@@ -674,11 +672,14 @@ function displayTitle() {
 
 function displaySocial() {
     const socialContainer = $(ATTRS.selectors.socialContainer);
+    if (!socialContainer) return;
+
     const discordLink = `
         <a data-v-0b519856 href="https://discord.gg/wthDcUb6nY" target="_blank" rel="noopener" class="discord-link">
             <i class="fas fa-heart"></i> Delta Discord
         </a>
     `;
+
     const bugLink = `
         <a data-v-0b519856 href="https://discord.gg/cJByExsnub" target="_blank" rel="noopener" class="bug-link">
             <i class="fas fa-bug"></i> Report a bug
@@ -686,14 +687,8 @@ function displaySocial() {
     `;
 
     socialContainer.append(discordLink, bugLink);
-
-    socialContainer.mouseover(function () {
-        socialContainer.fadeTo(250, 1);
-    });
-
-    socialContainer.mouseleave(function () {
-        socialContainer.stop(true, true).fadeTo(250, 0.1);
-    });
+    socialContainer.mouseover(function () {socialContainer.fadeTo(250, 1);});
+    socialContainer.mouseleave(function () {socialContainer.stop(true, true).fadeTo(250, 0.1);});
 }
 
 function displaySwitch() {
@@ -711,36 +706,43 @@ function displaySwitch() {
  *
  *****************/
 function createSkinProfile() {
-    const skinUrl = $(ATTRS.selectors.skinUrl).val();
+    const skin = $(ATTRS.selectors.skinUrl);
+    const skinURL = skin ? skin.val() : undefined;
+    if (!skinURL) return;
 
     $(ATTRS.selectors.playerData).before(`
         <div class="profile-image">
-            <img class="skinProfile beautifulSkin" alt="" src="${skinUrl}">
+            <img class="skinProfile beautifulSkin" alt="" src="${skinURL}">
             <span class="nicknameProfile" style="color: ${USER.configurations.nicknameColor}">${USER.configurations.nickname}</span>
         </div>
     `);
 
-    skinValidation(skinUrl);
+    skinValidation(skinURL);
 }
 
-function skinValidation(inputURL) {
-    if (inputURL === ATTRS.images.imageAddVanis) {
+function skinValidation(url) {
+    if (url === ATTRS.images.imageAddVanis) {
         $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.vanisSkin);
-    } else {
-        const image = new Image();
-
-        image.onload = function () {
-            $(ATTRS.selectors.skinProfile).attr('src', inputURL);
-            pushUserOnline();
-        }
-
-        image.onerror = function () {
-            $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.transparentSkin);
-            pushUserOnline();
-        }
-
-        image.src = inputURL;
+        return;
     }
+
+    skinChecker(url);
+}
+
+function skinChecker(url) {
+    const image = new Image();
+
+    image.onload = function () {
+        $(ATTRS.selectors.skinProfile).attr('src', url);
+        pushUserOnline();
+    }
+
+    image.onerror = function () {
+        $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.transparentSkin);
+        pushUserOnline();
+    }
+
+    image.src = url;
 }
 
 /******************
@@ -897,6 +899,7 @@ function drawUsersModal() {
     if ($(ATTRS.selectors.userBox).length > 0) return;
     const modal = usersModal(LISTS.users);
     const list = modal.meHeader + modal.profileHeader + modal.onlineHeader + modal.onlineList + modal.offlineHeader + modal.offlineList;
+
     createNewBox(list, modal.counts.total + ' Players', injectAnonymousSwitch(), injectConnectionsStats());
 }
 
@@ -922,7 +925,6 @@ function updateUserLists(users, me) {
 
     Object.values(users).forEach(user => {
         if (user === me) return;
-
         const status = getUsersTime(user.status);
         const userHTML = injectUser(user, status);
 
@@ -986,6 +988,7 @@ function injectConnectionsStats() {
         last7days: 0,
         last15days: 0,
     }
+
     let times = {
         now: new Date().getTime(),
         online: 1800000,
@@ -998,7 +1001,6 @@ function injectConnectionsStats() {
     for (let uid in LISTS.users) {
         if (LISTS.users.hasOwnProperty(uid)) {
             let time = LISTS.users[uid].status;
-
             if (times.now - time <= times.online) values.online++;
             if (times.now - time <= times.daily) values.daily++;
             if (times.now - time <= times.last2days) values.last2days++;
@@ -1017,15 +1019,10 @@ function injectConnectionsStats() {
  **************************/
 function getUsersTime(time) {
     function getTimeAgo(days, hours, minutes) {
-        if (days >= 2) {
-            return undefined;
-        } else if (days > 0) {
-            return `${days}d ago`;
-        } else if (hours > 0) {
-            return `${hours}h ago`;
-        } else if (minutes > 0) {
-            return `${minutes} min ago`;
-        }
+        if (days >= 2) return undefined;
+        else if (days > 0) return `${days}d ago`;
+        else if (hours > 0) return `${hours}h ago`;
+        else if (minutes > 0) return `${minutes} min ago`;
         return 'Offline';
     }
 
@@ -1037,9 +1034,7 @@ function getUsersTime(time) {
     const hours = Math.floor(remainingMinutes / 60);
     const minutes = remainingMinutes % 60;
 
-    if (timeDifferenceMillis < 1800000) {
-        return 'Online';
-    }
+    if (timeDifferenceMillis < 1800000) return 'Online';
 
     return getTimeAgo(days, hours % 24, minutes);
 }
@@ -1060,13 +1055,9 @@ function getUsersTip(user, userServer, status) {
 }
 
 function getUsersMode(userMode) {
-    if (userMode === 'Single') {
-        return ATTRS.images.singleMode
-    } else if (userMode === 'Dual') {
-        return ATTRS.images.dualMode
-    } else {
-        return ATTRS.images.undefMode;
-    }
+    if (userMode === 'Single') return ATTRS.images.singleMode
+    else if (userMode === 'Dual') return ATTRS.images.dualMode
+    else return ATTRS.images.undefMode;
 }
 
 /********************
@@ -1077,6 +1068,7 @@ function getUsersMode(userMode) {
 function drawStatisticsModal() {
     if ($(ATTRS.selectors.toolBox).length > 0) return;
     const modal = statisticsModal(USER.statistics);
+
     createNewBox(modal.list, 'Profile & stats', modal.logout);
 }
 
@@ -1316,8 +1308,8 @@ function injectCustomLeaderboard(filter) {
 function injectLeaderboard(item, itemId, position, filter) {
     const itemUser = LISTS.users[item.uid];
     if (!itemUser) return ``;
-
     let statisticValue;
+
     switch (filter) {
         case 'killTotal':
             statisticValue = item.killTotal;
@@ -1550,17 +1542,16 @@ function injectSkinPages() {
  *  Skins page renderer system
  *
  *******************************/
-function renderSkinsFromList(title, content, list) {
-    $(ATTRS.selectors.boxTitle).text(title);
-
-    if ($(list).find('img').length != content.length) {
+function renderSkinsFromList(content, list) {
+    if (!Array.isArray(content) || content.length === 0) return;
+    if ($(list).find('img').length !== content.length) {
         content.forEach(skin => {
             itemSkinModal(skin, list);
         });
     }
 }
-
 function itemSkinModal(skin, list) {
+    if (!skin.id) return;
     const skinUrl = `https://skins.vanis.io/s/${skin.id}`;
 
     $(list).append(`
@@ -1573,53 +1564,6 @@ function itemSkinModal(skin, list) {
  *  Skins page loader
  *
  ***********************/
-async function loadAllSkins() {
-    if (SKINS.all.length > 0) {
-        renderSkinsFromList('Public skins', SKINS.all, ATTRS.selectors.skinsNavAllPage);
-        return;
-    }
-
-    for (let pageNumber = 0; pageNumber <= 50; pageNumber++) {
-        const data = await fetchSkins(`https://cors-proxy.fringe.zone/https://skins.vanis.io/api/public-skins?page=${pageNumber}`, `Page ${pageNumber} error`);
-        if (data) {
-            SKINS.all.push(...data);
-            data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavAllPage));
-        }
-    }
-}
-
-async function loadMySkins() {
-    if (SKINS.me.length > 0) {
-        renderSkinsFromList('My skins', SKINS.me, ATTRS.selectors.skinsNavMePage);
-        return;
-    }
-
-    const data = await fetchSkins('https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/skins', 'Fetching my skins error');
-    if (data) {
-        SKINS.me.push(...data);
-        data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavMePage));
-    }
-}
-
-async function loadFavSkins() {
-    if (SKINS.fav.length > 0) {
-        renderSkinsFromList('Favorite skins', SKINS.fav, ATTRS.selectors.skinsNavFavPage);
-        return;
-    }
-
-    const data = await fetchSkins('https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/favorites', 'Fetching my favorites skins error');
-
-    if (data) {
-        SKINS.fav.push(...data);
-        data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavFavPage));
-    }
-}
-
-/****************************
- *
- *  Skins page mandafetcher
- *
- ****************************/
 async function fetchSkins(url, errorMessage) {
     try {
         const response = await fetch(url, {
@@ -1632,12 +1576,55 @@ async function fetchSkins(url, errorMessage) {
 
         if (!response.ok) {
             sendTimedSwal(`Server bad response`, `Server responded with ${response.status}: ${response.statusText}`, 3000);
+            return null;
         }
 
         return await response.json();
     } catch (error) {
         sendTimedSwal(errorMessage, error.toString(), 3000, false);
         return null;
+    }
+}
+
+async function loadSkins(title, storage, apiUrl, errorMessage, pageSelector) {
+    $(ATTRS.selectors.boxTitle).text(title);
+
+    if (storage.length > 0) {
+        renderSkinsFromList(title, storage, pageSelector);
+        return;
+    }
+
+    const data = await fetchSkins(apiUrl, errorMessage);
+
+    if (data) {
+        storage.push(...data);
+        data.forEach(skin => itemSkinModal(skin, pageSelector));
+        return;
+    }
+}
+
+async function loadMySkins() {
+    await loadSkins('My skins', SKINS.me, 'https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/skins', 'Fetching my skins error', ATTRS.selectors.skinsNavMePage);
+}
+
+async function loadFavSkins() {
+    await loadSkins('Favorite skins', SKINS.fav, 'https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/favorites', 'Fetching my favorites skins error', ATTRS.selectors.skinsNavFavPage);
+}
+
+async function loadAllSkins() {
+    $(ATTRS.selectors.boxTitle).text('Public skins');
+
+    if (SKINS.all.length > 0) {
+        renderSkinsFromList(SKINS.all, ATTRS.selectors.skinsNavAllPage);
+        return;
+    }
+
+    for (let pageNumber = 0; pageNumber <= 50; pageNumber++) {
+        const data = await fetchSkins(`https://cors-proxy.fringe.zone/https://skins.vanis.io/api/public-skins?page=${pageNumber}`, `Page ${pageNumber} error`);
+        if (data) {
+            SKINS.all.push(...data);
+            data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavAllPage));
+        }
     }
 }
 
@@ -1905,6 +1892,7 @@ function createChatboxResizable() {
 function changeUserColor(color) {
     USER.configurations.nicknameColor = color;
     localStorage.setItem('nicknameColor', color);
+
     $(ATTRS.selectors.nicknameProfile).css('color', APP.reserved.value ? APP.reserved.color : color);
     $(ATTRS.selectors.colorPickerInput).val(color);
     $(ATTRS.selectors.colorPickerSelector).val(color);
@@ -1923,13 +1911,9 @@ function changeCellColor(nicknameToUpdate) {
 
     CanvasRenderingContext2D.prototype.fillText = function (text, x, y) {
         if (!APP.blacklist.includes(text)) {
-            if (text === USER.configurations.nickname) {
-                this.fillStyle = USER.configurations.nicknameColor;
-            } else if (text === nicknameToUpdate && LISTS.colors[nicknameToUpdate] && LISTS.colors[nicknameToUpdate].color) {
-                this.fillStyle = LISTS.colors[nicknameToUpdate].color;
-            } else if (LISTS.colors[text] && LISTS.colors[text].color) {
-                this.fillStyle = LISTS.colors[text].color;
-            }
+            if (text === USER.configurations.nickname) this.fillStyle = USER.configurations.nicknameColor;
+            else if (text === nicknameToUpdate && LISTS.colors[nicknameToUpdate] && LISTS.colors[nicknameToUpdate].color) this.fillStyle = LISTS.colors[nicknameToUpdate].color;
+            else if (LISTS.colors[text] && LISTS.colors[text].color) this.fillStyle = LISTS.colors[text].color;
         }
 
         originalFillText.apply(this, arguments);
@@ -2019,10 +2003,7 @@ function switchManagerSpecificChange(userSettings, userSettingsLabel) {
         $(ATTRS.selectors.chatboxContainer).css('backdrop-filter', style);
         $(ATTRS.selectors.minimapContainer).css('backdrop-filter', style);
         $(ATTRS.selectors.messageToast).css('backdrop-filter', style);
-
-        if (APP.mode === 2) {
-            $(ATTRS.selectors.playerStalkContainer).css('backdrop-filter', style);
-        }
+        if (APP.mode === 2) $(ATTRS.selectors.playerStalkContainer).css('backdrop-filter', style);
     }
 }
 
@@ -2083,22 +2064,13 @@ function getNavigator() {
         Chromium: "Chromium",
     };
 
-    for (const browser in browsers) {
-        if (userAgent.includes(browser)) {
-            return browsers[browser];
-        }
-    }
-
+    for (const browser in browsers) if (userAgent.includes(browser)) return browsers[browser];
     return 'Browser';
 }
 
 function getPlatform() {
-    if (navigator.userAgentData && navigator.userAgentData.platform) {
-        return navigator.userAgentData.platform;
-    }
-    if (navigator.platform) {
-        return navigator.platform;
-    }
+    if (navigator.userAgentData && navigator.userAgentData.platform) return navigator.userAgentData.platform;
+    if (navigator.platform) return navigator.platform;
     return 'Unknown';
 }
 
@@ -2376,11 +2348,7 @@ async function drawStyle() {
     try {
         const cache = `${ATTRS.libraries.css}?=${new Date().getTime()}`;
         const response = await fetch(cache);
-
-        if (!response.ok) {
-            displayError(ATTRS.errors.title + 'Css fetcher failed' + ATTRS.errors.content);
-        }
-
+        if (!response.ok) displayError(ATTRS.errors.title + 'Css fetcher failed' + ATTRS.errors.content);
         const css = await response.text();
 
         $('<style>').text(css).appendTo('head');
