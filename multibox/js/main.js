@@ -1,4 +1,4 @@
-const VERSION = '3.9.3';
+const VERSION = '3.9.4';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -2834,7 +2834,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 }
                 reloadVirusTexture() {
-                    n.virus.loadVirusFromUrl(a.virusImageUrl)
+                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {})
                 }
                 resetPlayerLongNames() {
                     i.playerManager.players.forEach(e => e.applyNameToSprite())
@@ -7233,7 +7233,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }),
                     created: function() {
                         ew.events.$on("skin-click", e => {
-                            this.skinUrl = localStorage.skinUrl = document.getElementById("skinDisplay1").src = e
+                            const skin = document.getElementById("skinDisplay1");
+                            this.skinUrl = localStorage.skinUrl = e;
+                            if (skin) skin.src = e;
                         })
                     },
                     methods: {
@@ -7340,7 +7342,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         attrs: {
                             id: "account-name"
                         }
-                    }, [e._v(e._s(e.name))]), e._v(" "), s("div", [e._v("Level " + e._s(e.account.level))]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s(Object.values(e.account.season_xp || `{0: 0}`).reduce((acc, xp) => acc + xp, 0) || 0) + " season XP")])])]), e._v(" "), s("div", {
+                    }, [e._v(e._s(e.name))]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s(Object.values(e.account.season_xp || `{0: 0}`).reduce((acc, xp) => acc + xp, 0) || 0) + " total season XP")])])]), e._v(" "), s("div", {
                         staticStyle: {
                             position: "relative"
                         }
@@ -7356,7 +7358,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             flex: "1",
                             "margin-left": "8px"
                         }
-                    }, [e._v(e._s(e.xpAtCurrentLevel))]), e._v(" "), s("div", {
+                    }, [e._v(e._s('Level ' + e.account.level))]), e._v(" "), s("div", {
                         staticStyle: {
                             "margin-right": "7px"
                         }
@@ -7369,7 +7371,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }, [s("i", {
                         staticClass: "fas fa-sign-out-alt"
-                    }), e._v(" Logout\n    ")])]) : e._e()])
+                    }), e._v(" \n    ")])]) : e._e()])
                 };
             eb._withStripped = !0;
             var e_ = function() {
@@ -7559,9 +7561,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             this.$set(this.skins, this.selectedSkinIndex, e), this.saveSkins()
                         },
                         selectSkin(e) {
-                            this.selectedSkinIndex = e, localStorage.selectedSkinIndex = e;
-                            var t = this.skins[e];
-                            eD.events.$emit("skin-click", t)
+                            if (e) {
+                                this.selectedSkinIndex = e, localStorage.selectedSkinIndex = e;
+                                var t = this.skins[e];
+                                if (t) {
+                                    eD.events.$emit("skin-click", t)
+                                }
+                            }
                         },
                         removeSkin(e) {
                             this.skins.splice(e, 1), this.skins.length < 2 && this.skins.push("https://skins.vanis.io/s/Qkfih2"), this.saveSkins();
@@ -8722,7 +8728,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         window.location.reload();
     }, window.getTitleExtension = () => {
         const titles = [
-            "+220 users on Delta",
+            "+330 users on Delta",
             "Alis.io",
             "Vanis.io",
             "Vanish.io",
@@ -8757,7 +8763,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         return titles[Math.floor(Math.random() * titles.length)];
     }, document.querySelector("#player-data").getElementsByTagName("div")[0].innerHTML += `
         <div id="openSkins">
-           <p class="gameConfigurationButton" data-v-1bcde71e="" class="tab fas"><i class="fas fa-user gameConfigurationButtonIcon"></i>Player configuration</p>
+           <p class="gameConfigurationButton" data-v-1bcde71e="" class="tab fas"><i class="fas fa-user gameConfigurationButtonIcon"></i>Dualbox configuration</p>
         </div>
         <div class="dualProfile">
             <img id="skinDisplay1" src="${localStorage.skinUrl}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">

@@ -298,7 +298,7 @@ function pushUserInfos() {
         anonymous: USER.configurations.anonymous,
     }
 
-    if ($(ATTRS.selectors.discordBtn).length === 0) data.level = (APP.mode === 1 ? $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] : $(ATTRS.selectors.levelDual).text().split(' ')[1]) || 0;
+    if ($(ATTRS.selectors.discordBtn).length === 0) data.level = $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] || 0;
     pushDatabase(DB.references.meUser, data);
 }
 
@@ -2180,9 +2180,8 @@ function getAllSelectors() {
 
         // Account Information
         level: '.xp-data>div:first-child',
-        levelDual: '.player-info div:nth-child(2)',
         teamTag: '#teamtag',
-        xp: '.xp-data > div:last-child',
+        xp: '.xp-data>div:last-child',
 
         // Chatbox Elements
         chatboxContainer: APP.mode === 1 ? '.chatbox' : '#chatbox',
@@ -2334,7 +2333,7 @@ function getAllErrors() {
 
 function getAllTitle() {
     return [
-        "+220 users on Delta",
+        "+330 users on Delta",
         "Alis.io",
         "Vanis.io",
         "Vanish.io",
