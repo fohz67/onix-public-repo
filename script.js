@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.9.2',
+    version: '3.9.3',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -2369,10 +2369,10 @@ async function drawStyle() {
 function checkAnnouncement() {
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
-    if (announcement < 40) {
+    if (announcement < 41) {
         setTimeout(() => {
-            sendTimedSwal('New badges are available !', 'Check it out in Delta perks ;) If you want a badge, send a message in #support in Discord', 10000, 'OK')
-            localStorage.setItem('announcement', '40');
+            sendTimedSwal('Big update for dual mode', 'active cell border resizable in settings, new in game font', 10000, 'OK')
+            localStorage.setItem('announcement', '41');
         }, 1500);
     }
 }

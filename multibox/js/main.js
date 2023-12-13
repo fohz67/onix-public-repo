@@ -1,4 +1,4 @@
-const VERSION = '3.9.4.1';
+const VERSION = '3.9.5';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -1141,7 +1141,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 filterChatMessages: !0,
                 clearChatMessages: !0,
                 backgroundColor: "101010",
-                borderColor: "000000",
+                borderColor: "202020",
                 foodColor: "ffffff",
                 ejectedColor: "ffffff",
                 cellNameOutlineColor: "000000",
@@ -1150,7 +1150,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 virusImageUrl: "https://i.ibb.co/V9tdfcY/i.png",
                 cellMassColor: "ffffff",
                 cellMassOutlineColor: "000000",
-                cellNameFont: "Hind Madurai",
+                cellNameFont: "Ubuntu",
                 cellNameWeight: 1,
                 cellNameOutline: 2,
                 cellNameSmoothOutline: !0,
@@ -1161,7 +1161,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 cellMassTextSize: 0,
                 cellMassSmoothOutline: !0,
                 shortMass: !0,
-                showBackgroundImage: !0,
+                showBackgroundImage: !1,
                 backgroundImageRepeat: !0,
                 backgroundDefaultIfUnequal: !0,
                 backgroundImageOpacity: .6,
@@ -1175,7 +1175,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 minimapSize: 220,
                 minimapFPS: 30,
                 minimapSmoothing: .08,
-                dualColor: "a537ff",
+                dualColor: "ff00af",
                 dualSkin: "https://skins.vanis.io/s/Qkfih2",
                 dualActive: 1,
                 dualActiveCellBorderSize: 15,
