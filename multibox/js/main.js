@@ -1,4 +1,4 @@
-const VERSION = '3.9.2.2';
+const VERSION = '3.9.3';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -1178,6 +1178,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 dualColor: "a537ff",
                 dualSkin: "https://skins.vanis.io/s/Qkfih2",
                 dualActive: 1,
+                dualActiveCellBorderSize: 15,
                 dualAutorespawn: !1,
                 dualArrow: "https://i.ibb.co/Tbr7M8J/i.png",
                 gameAlpha: 1,
@@ -2996,7 +2997,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 get visibility() {
                     return 1 + +(h.tagId !== this.tagId)
                 }
-                setOutline(e, t = 15, s = !1) {
+                setOutline(e, t = settings.dualActiveCellBorderSize || 15, s = !1) {
                     if (this.outlineGraphic && (this.outlineGraphic.destroy(), delete this.outlineGraphic), s) return void this.renderCell();
                     e = e || 0;
                     let i = this.outlineGraphic = new PIXI.Graphics().lineStyle(t, e, 1).drawCircle(0, 0, r - (t - 1) / 2).endFill();
@@ -4849,7 +4850,27 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("dualActive", t)
                             }
                         }
-                    }), e._v("Dual active cell: " + e._s(e.showDualboxMeaning))]), e._v(" "), s("p-check", {
+                    }), e._v("Dual active cell: " + e._s(e.showDualboxMeaning))]), e._v(" "), s("div", {
+                        staticClass: "slider-option"
+                    }, [e._v("\n            Dual active cell border size "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s(e.dualActiveCellBorderSize) + "px")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            min: "1",
+                            max: "100",
+                            step: "1"
+                        },
+                        domProps: {
+                            value: e.dualActiveCellBorderSize
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("dualActiveCellBorderSize", t)
+                            }
+                        }
+                    })]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.dualAutorespawn
@@ -5556,6 +5577,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     showTag: b.showTag,
                     showDir: b.showDir,
                     gameAlpha: b.gameAlpha,
+                    dualActiveCellBorderSize: b.dualActiveCellBorderSize,
                     dualActive: b.dualActive
                 }),
                 computed: {
