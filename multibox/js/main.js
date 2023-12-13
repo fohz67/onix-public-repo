@@ -1,4 +1,4 @@
-const VERSION = '3.9.4';
+const VERSION = '3.9.4.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -7561,13 +7561,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             this.$set(this.skins, this.selectedSkinIndex, e), this.saveSkins()
                         },
                         selectSkin(e) {
-                            if (e) {
-                                this.selectedSkinIndex = e, localStorage.selectedSkinIndex = e;
-                                var t = this.skins[e];
-                                if (t) {
-                                    eD.events.$emit("skin-click", t)
-                                }
-                            }
+                            this.selectedSkinIndex = e, localStorage.selectedSkinIndex = e;
+                            var t = this.skins[e];
+                            eD.events.$emit("skin-click", t)
                         },
                         removeSkin(e) {
                             this.skins.splice(e, 1), this.skins.length < 2 && this.skins.push("https://skins.vanis.io/s/Qkfih2"), this.saveSkins();
