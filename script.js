@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.9.3.2',
+    version: '3.9.3.3',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -1583,7 +1583,6 @@ async function loadSkins(title, storage, apiUrl, errorMessage, pageSelector) {
     if (data) {
         storage.push(...data);
         data.forEach(skin => itemSkinModal(skin, pageSelector));
-        return;
     }
 }
 
