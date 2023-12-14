@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.9.3.1',
+    version: '3.9.3.2',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -373,16 +373,18 @@ function pushUserStatisticsLocally() {
 }
 
 function pushUserBadge(item) {
-    const badge = JSON.parse(unescape(item));
-    delete badge.owners;
+    const badge = JSONSafeParser(unescape(item));
+    if (badge !== {}) {
+        delete badge.owners;
 
-    Object.values(LISTS.badges).forEach(badgeEach => {
-        $(`.badge${badgeEach.id}`).css('opacity', 0.4);
-    });
-    $(`.badge${badge.id}`).css('opacity', 1);
+        Object.values(LISTS.badges).forEach(badgeEach => {
+            $(`.badge${badgeEach.id}`).css('opacity', 0.4);
+        });
+        $(`.badge${badge.id}`).css('opacity', 1);
 
-    pushDatabase(DB.references.meColorBadge, badge);
-    pushDatabase(DB.references.meUserBadge, badge);
+        pushDatabase(DB.references.meColorBadge, badge);
+        pushDatabase(DB.references.meUserBadge, badge);
+    }
 }
 
 /************************
@@ -571,7 +573,7 @@ function onColorChanged(that) {
     if (color && /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)) {
         changeUserColor(color);
     } else {
-        sendTimedSwal('Bad color used', 'You must select a real color', 3000, 'OK');
+        sendTimedSwal('Error', 'Bad color selected, you must select a real color', 3000, 'OK');
     }
 }
 
@@ -1227,7 +1229,7 @@ function confirmResetStatistics() {
             setTimeout(() => window.location.reload(), 1500);
         })
         .catch((e) => {
-            sendTimedSwal("Error", "Deleting your statistics failed", 3000, false);
+            sendTimedSwal('Error', 'Deleting your statistics failed: ' + e.message, 10000, 'OK');
         })
     ;
 }
@@ -1557,7 +1559,7 @@ async function fetchSkins(url, errorMessage) {
         });
 
         if (!response.ok) {
-            sendTimedSwal(`Server bad response`, `Server responded with ${response.status}: ${response.statusText}`, 3000);
+            sendTimedSwal('Error', `Server responded with ${response.status}: ${response.statusText}`, 10000, 'OK');
             return null;
         }
 
@@ -1645,18 +1647,20 @@ function openSkin(skinUrl, skinId) {
 
 function copySkin(skinUrl) {
     navigator.clipboard.writeText(skinUrl).then(() => {
-        sendTimedSwal("Skin copied", `The skin has been copied to the clipboard`, 1500, false)
-    }).catch(() => {
-        sendTimedSwal("Skin not copied", `An error has occured`, 3000, false)
+        sendTimedSwal('Skin copied', 'The skin has been copied to the clipboard', 1500, false)
+    }).catch((e) => {
+        sendTimedSwal('Error', 'An error occurred while copying the skin: ' + e.message, 10000, 'OK')
     })
 }
 
 function yoinkSkin(skinUrl) {
-    let arraySkins = JSON.parse(localStorage.getItem('skins')) || [];
-
-    arraySkins.push(skinUrl);
-    localStorage.setItem('skins', JSON.stringify(arraySkins));
-    sendTimedSwal("Skin yoinked", `The skin has been yoinked, need to refresh the page to save`, 1500, false);
+    const allSkins = getLocalStorageItem('skins', '["https://skins.vanis.io/s/Qkfih2","https://skins.vanis.io/s/Qkfih2"]');
+    let arraySkins = JSONSafeParser(allSkins);
+    if (arraySkins != {}) {
+        arraySkins.push(skinUrl);
+        localStorage.setItem('skins', JSON.stringify(arraySkins));
+        sendTimedSwal('Skin yoinked', 'The skin has been yoinked, need to refresh the page to save', 1500, false);
+    }
 }
 
 /********************
@@ -1670,7 +1674,8 @@ function injectConfiguration(item, itemId) {
 
     function getHotkeysCount(hotkeys) {
         if (!hotkeys) return 0
-        const hotkeysJSON = JSON.parse(hotkeys);
+        const hotkeysJSON = JSONSafeParser(hotkeys);
+        if (hotkeysJSON === {}) return 0;
         return Object.keys(hotkeysJSON).filter(key => hotkeysJSON[key] !== '').length;
     }
 
@@ -1704,12 +1709,14 @@ function injectConfiguration(item, itemId) {
 function injectSkin(skins) {
     if (!skins) return {list: '', count: 0,};
     const skinUrls = JSON.parse(skins);
-    const skinElements = skinUrls.slice(0, 50).map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
+    if (skinUrls !== {}) {
+        const skinElements = skinUrls.slice(0, 50).map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
 
-    return {
-        list: `<div class="listSkins">${skinElements.join('')}</div>`,
-        count: Object.keys(skinUrls).length,
-    };
+        return {
+            list: `<div class="listSkins">${skinElements.join('')}</div>`,
+            count: Object.keys(skinUrls).length,
+        };
+    }
 }
 
 function injectTag(tag) {
@@ -1723,7 +1730,7 @@ function injectBadge(item, itemId) {
     const isSelected = userBadge && userBadge.id === item.id;
     const onClickAttribute = isOwner ?
         `onclick="pushUserBadge('${escape(JSON.stringify(item))}')" ` :
-        `onclick="sendTimedSwal('Badge not found', 'You don\\'t have this badge in your collection', 10000, 'OK')"`;
+        `onclick="sendTimedSwal('Badge not found', 'You don\\'t have this badge in your collection', 1500, 'OK')"`;
 
     return `
         <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${onClickAttribute} style="opacity: ${isSelected ? 1 : 0.4};"/>
@@ -1742,11 +1749,11 @@ function deleteSuccess(configId) {
         .then(() => {
             if (node.length) {
                 node.remove();
-                sendTimedSwal("Deleted", "The configuration have been successfully deleted", 1500, false);
+                sendTimedSwal('Deleted', 'The configuration have been successfully deleted', 1500, false);
             }
         })
-        .catch(() => {
-            sendTimedSwal("Error", "Deleting your configuration failed", 3000, false);
+        .catch((e) => {
+            sendTimedSwal('Error', 'Deleting your configuration failed: ' + e.message, 10000, 'OK');
         })
     ;
 }
@@ -1780,7 +1787,7 @@ function updateSuccess(configId) {
     });
 
     localStorage.setItem('MachineId', configId);
-    sendTimedSwal("Success", "The configuration has been changed, the page will reload...", 1500, false);
+    sendTimedSwal('Success', "The configuration has been changed, the page will reload...", 1500, false);
     setTimeout(() => window.location.reload(), 1500);
 }
 
@@ -1927,6 +1934,23 @@ function fetchUserData() {
  *  Data manager
  *
  *****************/
+function JSONSafeParser(elem) {
+    try {
+        const obj = JSON.parse(elem);
+        return obj;
+    } catch (e) {
+        sendTimedSwal('Error', 'JSON parsing error: ' + e.message, 10000, 'OK');
+        return {};
+    }
+}
+
+function reformatAllSettings(settings) {
+    const obj = JSONSafeParser(settings);
+    if (obj !== {}) {
+
+    }
+}
+
 function getLocalStorageItem(key, defaultValue) {
     return localStorage.getItem(key) || defaultValue;
 }
@@ -2080,6 +2104,7 @@ function getAllConfigurations() {
         date: new Date().toLocaleDateString('fr-FR'),
         skins: getLocalStorageItem('skins', '{}'),
         hotkeys: getLocalStorageItem('hotkeys', '{}'),
+        //settings: reformatAllSettings(getLocalStorageItem('hotkeys', '{}')),
         nicknameColor: getLocalStorageItem('nicknameColor', ATTRS.colors.defaultColor),
         nickname: getLocalStorageItem('nickname', ''),
         anonymous: getLocalStorageItem('anonymous', 'unchecked'),
