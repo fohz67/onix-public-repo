@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.9.3.3',
+    version: '3.9.4',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -1843,31 +1843,26 @@ function createSortable() {
 function createChatboxResizable() {
     const chatContainer = $(ATTRS.selectors.chatboxContainer);
 
-    chatContainer.addClass('resizable');
     chatContainer.on('mousedown', function (e) {
-        if ($(e.target).hasClass('resizable')) {
-            e.preventDefault();
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = parseInt(chatContainer.css('width'), 10);
+        const startHeight = parseInt(chatContainer.css('height'), 10);
 
-            const startX = e.clientX;
-            const startY = e.clientY;
-            const startWidth = parseInt(chatContainer.css('width'), 10);
-            const startHeight = parseInt(chatContainer.css('height'), 10);
+        $(document).on('mousemove', resize);
+        $(document).on('mouseup', stopResize);
 
-            $(document).on('mousemove', resize);
-            $(document).on('mouseup', stopResize);
+        function resize(e) {
+            const newWidth = startWidth + e.clientX - startX;
+            const newHeight = startHeight + startY - e.clientY;
 
-            function resize(e) {
-                const newWidth = startWidth + e.clientX - startX;
-                const newHeight = startHeight + startY - e.clientY;
+            chatContainer.css('width', `${newWidth}px`);
+            chatContainer.css('height', `${newHeight}px`);
+        }
 
-                chatContainer.css('width', `${newWidth}px`);
-                chatContainer.css('height', `${newHeight}px`);
-            }
-
-            function stopResize() {
-                $(document).off('mousemove', resize);
-                $(document).off('mouseup', stopResize);
-            }
+        function stopResize() {
+            $(document).off('mousemove', resize);
+            $(document).off('mouseup', stopResize);
         }
     });
 }
