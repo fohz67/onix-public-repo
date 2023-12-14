@@ -1,4 +1,4 @@
-const VERSION = '3.9.5.1';
+const VERSION = '3.9.6';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -4062,9 +4062,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         let s = this.findPlayerUnderMouse();
                         s && (t = s && s.player) && (a.selectedPlayer = s.pid)
                     }
+                    const okSkin = `<div class="playerStalkContainer" oncontextmenu="window.copySkinDual('${t.skinUrl}')" onclick="window.yoinkSkinDual('${t.skinUrl}')">`;
+                    const noSkin = `<div class="playerStalkContainer" oncontextmenu="window.errorSkinDual()" onclick="window.errorSkinDual()">`;
                     n.playerStats && t ? a.playerElement.innerHTML = `
-                        ${t.skinUrl ? `<div class="playerStalkContainer" oncontextmenu="window.copySkinDual('${t.skinUrl}')" onclick="window.yoinkSkinDual('${t.skinUrl}')">`:``}
-                            <img class="playerStalkImage beautifulSkin" src="${t.skinUrl ? t.skinUrl : 'https://skins.vanis.io/s/Qkfih2'}">
+                        ${t.skinUrl ? okSkin : noSkin}
+                            <img class="playerStalkImage beautifulSkin" src="${t.skinUrl ? t.skinUrl : 'https://i.ibb.co/g9Sj8gK/i.png'}">
                             <p class="playerStalkText">${t.name} | PID: ${t.pid}</p>
                         </div>
                     ` : a.playerElement.innerHTML = ""
@@ -8734,6 +8736,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         window.SwalAlerts.toast.fire({
             type: "info",
             title: "Skin copied",
+            timer: 1500
+        }), navigator.clipboard.writeText(e)
+    }, window.errorSkinDual = e => {
+        window.SwalAlerts.toast.fire({
+            type: "error",
+            title: "This player have not skin",
             timer: 1500
         }), navigator.clipboard.writeText(e)
     }, window.getSwitch = () => {
