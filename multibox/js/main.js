@@ -1,4 +1,4 @@
-const VERSION = '3.9.5';
+const VERSION = '3.9.5.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -766,6 +766,24 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         return parseFloat(str.replace(/,|\s+/g, ''));
                     }
 
+                    function updateRespawn(e, that) {
+                        const titlemod = document.querySelector('titlemod');
+                        if (titlemod) titlemod.remove();
+
+                        clearTimeout(that.deathTimeout);
+                        delete that.deathTimeout;
+
+                        if (e) {
+                            delete that.dual.autoRespawning;
+                        } else {
+                            y.deathDelay = false;
+                            y.autoRespawning = false;
+                        }
+
+                        that.killCount = 0;
+                        that.timeAlive = 0;
+                    }
+
                     function updateColors() {
                         timeChat = localStorage.getItem('timeChat') || 'checked';
                         timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
@@ -793,22 +811,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         localStorage.setItem('sG', (parseInt(getLocalStorageItem('sG', '1')) + 1).toString());
                     }
 
-                    clearTimeout(this.deathTimeout);
-                    delete this.deathTimeout;
-
-                    if (e) {
-                        delete this.dual.autoRespawning;
-                    } else {
-                        y.deathDelay = false;
-                        y.autoRespawning = false;
-                    }
-
+                    updateRespawn(e, this);
                     updateColors();
                     updateStatBar(this);
                     updateStatData(this);
-
-                    this.killCount = 0;
-                    this.timeAlive = 0;
                 }
                 triggerAutoRespawn(e) {
                     if (e) {
