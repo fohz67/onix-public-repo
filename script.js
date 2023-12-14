@@ -1,5 +1,5 @@
 const APP = {
-    version: '3.9.3',
+    version: '3.9.3.1',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -328,8 +328,6 @@ function pushUserConfigurations() {
             skins: USER.configurations.skins,
             hotkeys: USER.configurations.hotkeys,
             blurredHUD: USER.configurations.blurredHUD,
-            timeChat: USER.configurations.timeChat,
-            timeChatRainbow: USER.configurations.timeChatRainbow,
             resizableChatbox: USER.configurations.resizableChatbox,
             colorNicknameCell: USER.configurations.colorNicknameCell,
             colorNicknameChatbox: USER.configurations.colorNicknameChatbox,
@@ -1383,21 +1381,6 @@ function addToolsModal() {
 }
 
 function toolsModal(tools, total, badges) {
-    const timeChatItem = `
-        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-            <input type="checkbox" id="timeChat" ${USER.configurations.timeChat}="" onchange="USER.configurations.timeChat = switchManager(USER.configurations.timeChat, 'timeChat')" tip=""> 
-            <div class="state">
-                <label>Show time before message</label>
-            </div>
-        </div>
-        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-            <input type="checkbox" id="timeChat" ${USER.configurations.timeChatRainbow}="" onchange="USER.configurations.timeChatRainbow = switchManager(USER.configurations.timeChatRainbow, 'timeChatRainbow')" tip=""> 
-            <div class="state">
-                <label>Rainbow color for message time</label>
-            </div>
-        </div>
-    `;
-
     const colorParam = `
         <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
             <input type="checkbox" id="colorSwitchNickChatbox" ${USER.configurations.colorNicknameChatbox}="" onchange="USER.configurations.colorNicknameChatbox = switchManager(USER.configurations.colorNicknameChatbox, 'colorNicknameChatbox')"> 
@@ -1470,7 +1453,6 @@ function toolsModal(tools, total, badges) {
                         </div>
                         <div data-v-2c5139e0="" class="options">
                             ${APP.mode === 1 ? colorParam : ``}
-                            ${APP.mode === 2 ? timeChatItem : ``}
                             <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
                                 <input type="checkbox" id="blurredHUD" ${USER.configurations.blurredHUD}="" onchange="USER.configurations.blurredHUD = switchManager(USER.configurations.blurredHUD, 'blurredHUD')" tip=""> 
                                 <div class="state">
@@ -1791,7 +1773,7 @@ function deleteConfiguration(configId) {
 function updateSuccess(configId) {
     const config = LISTS.configurations[configId];
 
-    ['skins', 'hotkeys', 'blurredHUD', 'timeChat', 'timeChatRainbow', 'resizableChatbox', 'colorNicknameCell', 'colorNicknameChatbox', 'colorNicknameLeaderboard', 'nicknameColor', 'nickname', 'teamtag'].forEach(key => {
+    ['skins', 'hotkeys', 'blurredHUD', 'resizableChatbox', 'colorNicknameCell', 'colorNicknameChatbox', 'colorNicknameLeaderboard', 'nicknameColor', 'nickname', 'teamtag'].forEach(key => {
         if (config[key] && config[key] !== '' && config[key] !== '{}') {
             localStorage.setItem(key, config[key]);
         }
@@ -2106,8 +2088,6 @@ function getAllConfigurations() {
         colorNicknameCell: getLocalStorageItem('colorNicknameCell', 'checked'),
         autoSynchronization: getLocalStorageItem('autoSynchronization', 'checked'),
         blurredHUD: getLocalStorageItem('blurredHUD', 'checked'),
-        timeChat: getLocalStorageItem('timeChat', 'checked'),
-        timeChatRainbow: getLocalStorageItem('timeChatRainbow', 'unchecked'),
         resizableChatbox: getLocalStorageItem('resizableChatbox', 'unchecked'),
     }
 }

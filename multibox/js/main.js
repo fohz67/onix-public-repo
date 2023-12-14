@@ -2,12 +2,11 @@ const VERSION = '3.9.5.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
-    let timeChat = localStorage.getItem('timeChat') || 'checked';
-    let timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
-    const userColors = localStorage.getItem('userColors');
-    let userColorsJson = userColors ? JSON.parse(userColors) : null;
-
     document.title = "Delta - Dual";
+
+    let showTimeMessageG = rainbowColorTimeMessageG = undefined;
+    const userColors = getLocalStorageItem('userColors', undefined);
+    let userColorsJson = userColors ? JSON.parse(userColors) : null;
 
     function getLocalStorageItem(key, defaultValue) {
         return localStorage.getItem(key) || defaultValue;
@@ -39,7 +38,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     }
 
     function generateRandomHexColor() {
-        if (timeChatRainbow !== 'checked') return 'white';
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);
@@ -75,7 +73,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     }
 
     function getCurrentDate() {
-        if (timeChat !== 'checked') return ``;
         const currentDate = new Date();
         const hours = currentDate.getHours().toString().padStart(2, '0');
         const minutes = currentDate.getMinutes().toString().padStart(2, '0');
@@ -785,8 +782,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
 
                     function updateColors() {
-                        timeChat = localStorage.getItem('timeChat') || 'checked';
-                        timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
                         const userColors = localStorage.getItem('userColors');
                         userColorsJson = userColors ? JSON.parse(userColors) : null;
                     }
@@ -996,20 +991,24 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                             let S = this.playerManager.getPlayer(b.pid);
                             if (!S) return;
+
+                            const settings = getLocalStorageItem('settings', undefined);
+                            const storage = settings ? JSON.parse(settings) : undefined;
                             const image = getImageUrlFromMessage(b.text);
+                            const color = getUserColor(S.name);
+
                             b.from = S.name;
-                            const color = getUserColor(b.from);
-                            b.date = getCurrentDate();
-                            b.dateColor = generateRandomHexColor();
+                            b.date = showTimeMessageG ? getCurrentDate() : '';
+                            b.dateColor = rainbowColorTimeMessageG ? generateRandomHexColor() : 'white';
                             b.badge = getUserBadge(b.from);
                             b.nicknameColor = color ? color : '#ffffff';
                             b.imageUrl = image ? image.newURL : null;
                             b.text = image ? b.text.replace(image.baseURL, '[Delta image]') : b.text;
-                            let {
-                                nameColorCss: E
-                            } = S;
+
+                            let {nameColorCss: E} = S;
                             E && (b.fromColor = E), this.events.$emit("chat-message", b);
-                            return
+
+                            return;
                         }
                         case 14: {
                             let x = e.readUInt8(),
@@ -1195,6 +1194,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 playerStats: !0,
                 showCellLines: !1,
                 showTag: !1,
+                showTimeMessage: !0,
+                rainbowColorTimeMessage: !1,
                 showDir: !1,
                 chatColorOnlyPeople: !1
             };
@@ -1226,7 +1227,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
             e.exports = window.settings = new class {
                 constructor() {
-                    this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle()
+                    this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle();
+                    showTimeMessageG = this.userDefinedSettings.showTimeMessage, rainbowColorTimeMessageG = this.userDefinedSettings.rainbowColorTimeMessage;
                 }
                 getInternalSettings() {
                     this.cellSize = 512
@@ -4919,6 +4921,26 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._v("Show teams")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            checked: e.showTimeMessage
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showTimeMessage", t), showTimeMessageG = t
+                            }
+                        }
+                    }, [e._v("Show message time")]), e._v(" "),  s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.rainbowColorTimeMessage
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageG = t
+                            }
+                        }
+                    }, [e._v("Rainbow color message time")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
                             checked: e.chatColorOnlyPeople
                         },
                         on: {
@@ -5581,6 +5603,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     clearChatMessages: b.clearChatMessages,
                     showCellLines: b.showCellLines,
                     showTag: b.showTag,
+                    showTimeMessage: b.showTimeMessage,
+                    rainbowColorTimeMessage: b.rainbowColorTimeMessage,
                     showDir: b.showDir,
                     gameAlpha: b.gameAlpha,
                     dualActiveCellBorderSize: b.dualActiveCellBorderSize,
@@ -7252,8 +7276,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             this.activeModal = "", this.$emit("modal-open", !1)
                         },
                         play() {
-                            timeChat = localStorage.getItem('timeChat') || 'checked';
-                            timeChatRainbow = localStorage.getItem('timeChatRainbow') || 'unchecked';
                             const userColors = localStorage.getItem('userColors');
                             userColorsJson = userColors ? JSON.parse(userColors) : null;
 
