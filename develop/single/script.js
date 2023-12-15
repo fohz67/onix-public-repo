@@ -2406,10 +2406,10 @@ async function drawStyle() {
 function checkAnnouncement() {
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
-    if (announcement < 41) {
+    if (announcement < 42) {
         setTimeout(() => {
-            sendTimedSwal('Big update for dual mode', 'active cell border resizable in settings, new in game font', 10000, 'OK')
-            localStorage.setItem('announcement', '41');
+            sendTimedSwal('Location background image', 'Dual mode users, check in your graphic settings, you will see "Show location background image" switch, to have the location IN ADDITION to your background image.', 10000, 'OK')
+            localStorage.setItem('announcement', '42');
         }, 1500);
     }
 }
