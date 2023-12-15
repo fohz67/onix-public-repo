@@ -90,7 +90,7 @@ h4 {
     box-shadow:none!important
 }
 
-.chatbox>input[data-v-1664b5c5]::placeholder {
+.chatbox > input[data-v-1664b5c5]::placeholder {
     color:#ffffff6b
 }
 
@@ -139,7 +139,7 @@ input[type=number],input[type=text],select {
     flex:3
 }
 
-#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row>.button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],#submit-account {
+#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],#submit-account {
     background:#b69cff;
     border-radius:12px;
     box-shadow:none;
@@ -150,17 +150,17 @@ input[type=number],input[type=text],select {
     padding:8px
 }
 
-#player-container #game-buttons #play-button[data-v-5190ae12]:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row>.button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,#submit-account:hover {
+#player-container #game-buttons #play-button[data-v-5190ae12]:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,#submit-account:hover {
     background:#b69cff;
     text-shadow:none;
     box-shadow:none
 }
 
-#player-container #game-buttons #play-button[data-v-5190ae12]:active,#player-container #game-buttons #spec-button[data-v-5190ae12]:active,.confirm-button[data-v-2c5139e0]:active,.btn[data-v-73f7fbfc]:active,.perk-color-update[data-v-2c5139e0]:active,.button-row>.button:active,.swal2-styled.swal2-confirm:active,.swal2-styled.swal2-cancel:active,.server-button[data-v-4aaf8f72]:active,#submit-account:active {
+#player-container #game-buttons #play-button[data-v-5190ae12]:active,#player-container #game-buttons #spec-button[data-v-5190ae12]:active,.confirm-button[data-v-2c5139e0]:active,.btn[data-v-73f7fbfc]:active,.perk-color-update[data-v-2c5139e0]:active,.button-row > .button:active,.swal2-styled.swal2-confirm:active,.swal2-styled.swal2-cancel:active,.server-button[data-v-4aaf8f72]:active,#submit-account:active {
     background:#b69cff
 }
 
-#player-container #game-buttons #play-button[data-v-5190ae12]:disabled,#player-container #game-buttons #spec-button[data-v-5190ae12]:disabled,.confirm-button[data-v-2c5139e0]:disabled,.btn[data-v-73f7fbfc]:disabled,.perk-color-update[data-v-2c5139e0]:disabled,.button-row>.button:disabled,.swal2-styled.swal2-confirm:disabled,.swal2-styled.swal2-cancel:disabled,.server-button[data-v-4aaf8f72]:disabled,#submit-account:disabled {
+#player-container #game-buttons #play-button[data-v-5190ae12]:disabled,#player-container #game-buttons #spec-button[data-v-5190ae12]:disabled,.confirm-button[data-v-2c5139e0]:disabled,.btn[data-v-73f7fbfc]:disabled,.perk-color-update[data-v-2c5139e0]:disabled,.button-row > .button:disabled,.swal2-styled.swal2-confirm:disabled,.swal2-styled.swal2-cancel:disabled,.server-button[data-v-4aaf8f72]:disabled,#submit-account:disabled {
     background:#956dff6e;
     color:#c8b4ff;
     transition:all .3s
@@ -173,7 +173,7 @@ input[type=number],input[type=text],select {
     padding:0 15px 15px
 }
 
-#nickname[data-v-5190ae12],#teamtag[data-v-5190ae12],#colorPickerInput,#player-container #player-data>[data-v-5190ae12] {
+#nickname[data-v-5190ae12],#teamtag[data-v-5190ae12],#colorPickerInput,#player-container #player-data > [data-v-5190ae12] {
     border-radius:12px;
     height:42px;
     text-align-last:center;
@@ -213,7 +213,7 @@ input[type=number],input[type=text],select {
     width:150px!important
 }
 
-.button-row>.button,.server-button[data-v-4aaf8f72],.perk-color-update[data-v-2c5139e0] {
+.button-row > .button,.server-button[data-v-4aaf8f72],.perk-color-update[data-v-2c5139e0] {
     font-size:14px!important;
     margin:0!important
 }
@@ -270,7 +270,7 @@ input[type=number],input[type=text],select {
     display:none
 }
 
-.container>.section>.options.two-columns[data-v-c41b640a] {
+.container > .section > .options.two-columns[data-v-c41b640a] {
     font-size:14px
 }
 
@@ -608,7 +608,7 @@ input[type=number],input[type=text],select {
     border-radius:0
 }
 
-.color-input>.right[data-v-c41b640a] {
+.color-input > .right[data-v-c41b640a] {
     border-radius:12px;
     height:35px;
     width:35px;
@@ -661,7 +661,7 @@ input[type=number],input[type=text],select {
     margin-right:0!important
 }
 
-.lobby-list[data-v-4aaf8f72]>.row {
+.lobby-list[data-v-4aaf8f72] > .row {
     border-bottom:none!important
 }
 
@@ -670,7 +670,7 @@ input[type=number],input[type=text],select {
     border-bottom:none!important
 }
 
-.section>.options[data-v-22117250],.section>.options[data-v-2c5139e0],.section>.options[data-v-c41b640a],.section>.options[data-v-24d5bfb4],.section>.options[data-v-0a751125] {
+.section > .options[data-v-22117250],.section > .options[data-v-2c5139e0],.section > .options[data-v-c41b640a],.section > .options[data-v-24d5bfb4],.section > .options[data-v-0a751125] {
     padding:17px
 }
 
@@ -681,7 +681,7 @@ input[type=number],input[type=text],select {
     box-shadow:0 0 30px 0 #0000003b
 }
 
-.section>.header[data-v-22117250],.section>.header[data-v-2c5139e0],.section>.header[data-v-c41b640a],.section>.header[data-v-24d5bfb4],.section>.header[data-v-0a751125] {
+.section > .header[data-v-22117250],.section > .header[data-v-2c5139e0],.section > .header[data-v-c41b640a],.section > .header[data-v-24d5bfb4],.section > .header[data-v-0a751125] {
     background:linear-gradient(281deg,#8159ef,#512eaa);
     border-bottom:none;
     padding:14px;
@@ -689,7 +689,7 @@ input[type=number],input[type=text],select {
     text-shadow:0 0 15px #00000054
 }
 
-.inline-range>input[data-v-24d5bfb4] {
+.inline-range > input[data-v-24d5bfb4] {
     height:20px;
     align-self:center
 }
@@ -832,6 +832,15 @@ titlemod {
     align-self:center
 }
 
+.userItem {
+    display:flex;
+    margin:10px 10px 0!important
+}
+
+.userItem:last-child {
+    margin:10px 10px 15px!important
+}
+
 .userPhoto {
     width:50px;
     height:50px;
@@ -948,13 +957,13 @@ titlemod {
     animation:svelte-1k2e827-background-gradient 7s linear infinite
 }
 
-.bottom-margin>input {
+.bottom-margin > input {
     margin:7px 0 10px;
     text-align:center;
     font-size:16px
 }
 
-.content.fade-box>.wrapper>.container[data-v-4aaf8f72] {
+.content.fade-box > .wrapper > .container[data-v-4aaf8f72] {
     padding:20px
 }
 
@@ -1061,7 +1070,7 @@ input.swal2-input {
     border-bottom:none!important
 }
 
-.player-row.me>.player-name {
+.player-row.me > .player-name {
     color:#241931!important
 }
 
@@ -1139,7 +1148,7 @@ input.swal2-input {
     padding:10px 0
 }
 
-.chat-input>input {
+.chat-input > input {
     height:43px
 }
 
@@ -1357,10 +1366,10 @@ input[type="color"]::-webkit-color-swatch {
     gap:10px
 }
 
-.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row>.button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin[data-v-49f260b2]:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-0b519856]:hover,.tournaments-link[data-v-0b519856]:hover,.skins-link[data-v-0b519856]:hover,.bug-link[data-v-0b519856]:hover {
+.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin[data-v-49f260b2]:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-0b519856]:hover,.tournaments-link[data-v-0b519856]:hover,.skins-link[data-v-0b519856]:hover,.bug-link[data-v-0b519856]:hover {
     scale:.9
 }
 
-.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row>.button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin[data-v-49f260b2],.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-0b519856],.tournaments-link[data-v-0b519856],.skins-link[data-v-0b519856],.bug-link[data-v-0b519856] {
+.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin[data-v-49f260b2],.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-0b519856],.tournaments-link[data-v-0b519856],.skins-link[data-v-0b519856],.bug-link[data-v-0b519856] {
     transition:all .3s
 }

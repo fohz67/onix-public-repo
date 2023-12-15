@@ -1753,7 +1753,7 @@ function injectConfiguration(item, itemId) {
                 </div>
                 <div class="configContentList">
                     ${APP.machineId === item.machineId ? `<p class="configActual configCard">Actual backup</p>`: ``}
-                    ${item.nickname && item.nickname !== '' ? `<p class="configNickname configCard">Name: ${item.teamtag}</p>` : ``}
+                    ${item.nickname && item.nickname !== '' ? `<p class="configNickname configCard" style="color: ${item.nicknameColor ? item.nicknameColor : `#ffffff`}">Name: ${item.nickname}</p>` : ``}
                     ${item.teamtag ? `<p class="configTeamTag configCard">Tag: ${item.teamtag}</p>` : ``}
                     <p class="configHotkeys configCard">${getHotkeysCount(item.hotkeys)} hotkeys</p>
                     <p class="configSkins configCard">${skins.count} skins</p>
