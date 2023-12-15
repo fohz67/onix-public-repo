@@ -1,10 +1,11 @@
-const VERSION = '4.1';
+const VERSION = '4.1.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
     document.title = "Delta - Dual";
 
-    let showTimeMessageG = rainbowColorTimeMessageG = undefined;
+    let rainbowColorTimeMessageG = undefined;
+    let showTimeMessageG = undefined;
     const userColors = getLocalStorageItem('userColors', undefined);
     let userColorsJson = userColors ? JSON.parse(userColors) : null;
 
@@ -811,10 +812,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         localStorage.setItem('sG', (parseInt(getLocalStorageItem('sG', '1')) + 1).toString());
                     }
 
-                    updateRespawn(e, this);
                     updateColors();
                     updateStatBar(this);
                     updateStatData(this);
+                    updateRespawn(e, this);
                 }
                 triggerAutoRespawn(e) {
                     if (e) {
