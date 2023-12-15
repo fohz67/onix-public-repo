@@ -8915,3 +8915,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
     })
 }();
+
+if (lowPerformanceMode === 'unchecked') {
+    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
+        .then(response => response.text())
+        .then(code => {
+            const script = document.createElement('script');
+            script.textContent = code;
+            (document.head || document.documentElement).appendChild(script);
+            script.remove();
+        })
+    ;
+} else {
+    document.querySelector('.loadingDelta').remove();
+}
