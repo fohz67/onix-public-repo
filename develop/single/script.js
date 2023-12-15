@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.0',
+    version: '4.1',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),

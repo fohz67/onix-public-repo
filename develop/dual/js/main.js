@@ -1,4 +1,4 @@
-const VERSION = '4.0';
+const VERSION = '4.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -1177,6 +1177,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 backgroundImageRepeat: !0,
                 backgroundDefaultIfUnequal: !0,
                 backgroundImageOpacity: .6,
+                showBackgroundLocationImage: !1,
+                backgroundLocationImageOpacity: .1,
                 useFoodColor: !1,
                 namesEnabled: !0,
                 skinsEnabled: !0,
@@ -2795,7 +2797,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 };
             e.exports = class e {
                 constructor(e, t) {
-                    this.border = e, this.container = new PIXI.Container, this.background = new PIXI.Container, this.borderSprite = o(e), this.background.addChild(this.borderSprite), this.foreground = new PIXI.Container, this.food = new PIXI.Container, this.food.visible = a.foodVisible, this.resetMassTextStyle(!1), this.container.addChild(this.background, this.food, this.foreground), this.setPosition(), t && this.setBackgroundImage(), this.background.position.x = e.x, this.background.position.y = e.y
+                    this.backgroundLocationImage = null, this.border = e, this.container = new PIXI.Container, this.background = new PIXI.Container, this.borderSprite = o(e), this.background.addChild(this.borderSprite), this.foreground = new PIXI.Container, this.food = new PIXI.Container, this.food.visible = a.foodVisible, this.resetMassTextStyle(!1), this.container.addChild(this.background, this.food, this.foreground), this.setPosition(), t && this.setBackgroundImage(), this.background.position.x = e.x, this.background.position.y = e.y, this.initBackgroundLocationImage(), this.backgroundLocationImage.visible = a.showBackgroundLocationImage
                 }
                 static useGame(e) {
                     i = e
@@ -2878,6 +2880,21 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 uninstallMassTextFont() {
                     PIXI.BitmapFont.uninstall("mass")
+                }
+
+                toggleBackgroundLocationImage(active) {
+                    if (active && !this.backgroundLocationImage) this.initBackgroundLocationImage();
+                    else if (!active && this.backgroundLocationImage) this.destroyBackgroundLocationImage();
+                }
+
+                initBackgroundLocationImage(alphaChange = false) {
+                    if (alphaChange) return this.backgroundLocationImage.alpha = a.backgroundLocationImageOpacity;
+                    let imageUrl = 'https://i.ibb.co/B6gfmrr/map.png', sprite = new PIXI.Sprite.from(imageUrl, {});
+                    sprite.width = this.border.width, sprite.height = this.border.height, sprite.alpha = a.backgroundLocationImageOpacity, sprite.anchor.set(.5), this.backgroundLocationImage = sprite, this.background.addChild(sprite);
+                }
+
+                destroyBackgroundLocationImage() {
+                    if (this.backgroundLocationImage) this.background.removeChild(this.backgroundLocationImage), this.backgroundLocationImage.destroy(), this.backgroundLocationImage = null;
                 }
             }
         }, function(e, t, s) {
@@ -5927,6 +5944,41 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "p-switch",
                         attrs: {
                             disabled: !e.useWebGL,
+                            checked: e.showBackgroundLocationImage
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showBackgroundLocationImage", t)
+                            }
+                        }
+                    }, [e._v("Show background location")]), e._v(" "), s("div", {
+                        staticClass: "slider-option bottom-margin",
+                        class: {
+                            disabled: !e.useWebGL || !e.showBackgroundLocationImage
+                        }
+                    }, [e._v("\n            Background location opacity "), s("span", {
+                        staticClass: "right"
+                    }, [e._v(e._s((100 * e.backgroundLocationImageOpacity).toFixed(0)) + "%")]), e._v(" "), s("input", {
+                        staticClass: "slider",
+                        attrs: {
+                            type: "range",
+                            disabled: !e.useWebGL || !e.showBackgroundLocationImage,
+                            min: "0.01",
+                            max: "1",
+                            step: "0.01"
+                        },
+                        domProps: {
+                            value: e.backgroundLocationImageOpacity
+                        },
+                        on: {
+                            input: function(t) {
+                                return e.change("backgroundLocationImageOpacity", t)
+                            }
+                        }
+                    })]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.useWebGL,
                             checked: e.showBackgroundImage
                         },
                         on: {
@@ -6596,6 +6648,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         cellLongNameThreshold: H.cellLongNameThreshold,
                         shortMass: H.shortMass,
                         showBackgroundImage: H.showBackgroundImage,
+                        showBackgroundLocationImage: H.showBackgroundLocationImage,
+                        backgroundLocationImageOpacity: H.backgroundLocationImageOpacity,
                         backgroundImageRepeat: H.backgroundImageRepeat,
                         backgroundDefaultIfUnequal: H.backgroundDefaultIfUnequal,
                         backgroundImageOpacity: H.backgroundImageOpacity,
@@ -6719,11 +6773,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                     case "showBackgroundImage":
                                         G.scene.toggleBackgroundImage(i);
                                         break;
+                                    case "showBackgroundLocationImage":
+                                        G.scene.toggleBackgroundLocationImage(i);
+                                        break;
                                     case "backgroundImageUrl":
                                     case "backgroundImageRepeat":
                                     case "backgroundDefaultIfUnequal":
                                     case "backgroundImageOpacity":
                                         G.scene.setBackgroundImage();
+                                        break;
+                                    case "backgroundLocationImageOpacity":
+                                        G.scene.initBackgroundLocationImage(true);
                                         break;
                                     case "useFoodColor":
                                         G.scene.reloadFoodTextures()
@@ -8855,16 +8915,3 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
     })
 }();
-
-if (lowPerformanceMode === 'unchecked') {
-    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
-        .then(response => response.text())
-        .then(code => {
-            const script = document.createElement('script');
-            script.textContent = code;
-            (document.head || document.documentElement).appendChild(script);
-            script.remove();
-        });
-} else {
-    document.querySelector('.loadingDelta').remove();
-}
