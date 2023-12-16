@@ -110,7 +110,7 @@ h4 {
     margin-top:-252px
 }
 
-.social-container[data-v-0b519856] {
+.social-container[data-v-ac7fee74] {
     width:60%;
     max-width:none!important;
     transition:opacity .5s;
@@ -266,7 +266,7 @@ input[type=number],input[type=text],select {
     border-right:none!important
 }
 
-.container[data-v-ba56a55e],.tag[data-v-0b519856] {
+.container[data-v-ba56a55e],.tag[data-v-ac7fee74] {
     display:none
 }
 
@@ -281,30 +281,30 @@ input[type=number],input[type=text],select {
     border-radius:20%
 }
 
-.discord-link[data-v-0b519856],.tournaments-link[data-v-0b519856],.skins-link[data-v-0b519856],.bug-link[data-v-0b519856] {
+.discord-link[data-v-ac7fee74],.tournaments-link[data-v-ac7fee74],.skins-link[data-v-ac7fee74],.bug-link[data-v-ac7fee74] {
     background:transparent;
     border-radius:8px;
     box-shadow:none!important;
     text-shadow:0 0 14px #000
 }
 
-.discord-link[data-v-0b519856]:hover {
+.discord-link[data-v-ac7fee74]:hover {
     background:#4350ff
 }
 
-.tournaments-link[data-v-0b519856]:hover {
+.tournaments-link[data-v-ac7fee74]:hover {
     background:#ff6e0f
 }
 
-.skins-link[data-v-0b519856]:hover {
+.skins-link[data-v-ac7fee74]:hover {
     background:#30e6ff
 }
 
-.bug-link[data-v-0b519856]:hover {
+.bug-link[data-v-ac7fee74]:hover {
     background:#8d2aff
 }
 
-.bug-link[data-v-0b519856] {
+.bug-link[data-v-ac7fee74] {
     color:#dadada;
     cursor:pointer;
     font-size:16px;
@@ -1366,10 +1366,10 @@ input[type="color"]::-webkit-color-swatch {
     gap:10px
 }
 
-.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin[data-v-49f260b2]:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-0b519856]:hover,.tournaments-link[data-v-0b519856]:hover,.skins-link[data-v-0b519856]:hover,.bug-link[data-v-0b519856]:hover {
+.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin[data-v-49f260b2]:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-ac7fee74]:hover,.tournaments-link[data-v-ac7fee74]:hover,.skins-link[data-v-ac7fee74]:hover,.bug-link[data-v-ac7fee74]:hover {
     scale:.9
 }
 
-.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin[data-v-49f260b2],.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-0b519856],.tournaments-link[data-v-0b519856],.skins-link[data-v-0b519856],.bug-link[data-v-0b519856] {
+.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin[data-v-49f260b2],.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-ac7fee74],.tournaments-link[data-v-ac7fee74],.skins-link[data-v-ac7fee74],.bug-link[data-v-ac7fee74] {
     transition:all .3s
 }
