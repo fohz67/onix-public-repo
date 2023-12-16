@@ -1361,7 +1361,6 @@ input[type="color"]::-webkit-color-swatch {
 .badgeListPerks,.hatListPerks {
     overflow-x:auto;
     white-space:nowrap;
-    padding:0 0 15px;
     display:flex;
     gap:10px
 }

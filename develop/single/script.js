@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1',
+    version: '4.1.1',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -8,7 +8,7 @@ const APP = {
         value: false,
         color: '#ffffff'
     },
-    blacklist: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "k", "K", "m", "M", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "C1", "C2", "C3", "C4", "C5", "D1", "D2", "D3", "D4", "D5", "E1", "E2", "E3", "E4", "E5", "Unnamed", "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           ", "            ", "             ", "              ", "               ", "                "],
+    blacklist: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'k', 'K', 'm', 'M', 'A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 'E1', 'E2', 'E3', 'E4', 'E5', 'Unnamed', '', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         ', '          ', '           ', '            ', '             ', '              ', '               ', '                '],
 }
 
 const ATTRS = {
@@ -108,17 +108,17 @@ async function onScriptsReady() {
  ***************************/
 function firebaseConfiguration(callback) {
     const firebaseConfig = {
-        apiKey: "AIzaSyCc_St6TMlGM6fmeYre_gHjCXYriPc3wtM",
-        authDomain: "delta-client.firebaseapp.com",
-        projectId: "delta-client",
-        storageBucket: "delta-client.appspot.com",
-        messagingSenderId: "68762024822",
-        appId: "1:68762024822:web:c4f0497b6b914ac9ce9857",
-        measurementId: "G-G5YSMYFCXJ",
-        databaseURL: "https://delta-client-default-rtdb.europe-west1.firebasedatabase.app"
+        apiKey: 'AIzaSyCc_St6TMlGM6fmeYre_gHjCXYriPc3wtM',
+        authDomain: 'delta-client.firebaseapp.com',
+        projectId: 'delta-client',
+        storageBucket: 'delta-client.appspot.com',
+        messagingSenderId: '68762024822',
+        appId: '1:68762024822:web:c4f0497b6b914ac9ce9857',
+        measurementId: 'G-G5YSMYFCXJ',
+        databaseURL: 'https://delta-client-default-rtdb.europe-west1.firebasedatabase.app'
     };
 
-    if (typeof firebase !== "undefined") {
+    if (typeof firebase !== 'undefined') {
         firebase.initializeApp(firebaseConfig);
         callback();
     } else {
@@ -376,8 +376,8 @@ function pushUserStatisticsLocally() {
 }
 
 function pushUserBadge(item) {
-    const badge = JSONSafeParser(unescape(item));
-    if (badge !== {}) {
+    const badge = JSONSafeParser(decodeURIComponent(item));
+    if (Object.keys(badge).length > 0) {
         delete badge.owners;
 
         Object.values(LISTS.badges).forEach(badgeEach => {
@@ -599,8 +599,8 @@ function listenerComponents() {
             subtree: true
         };
 
-        let callback = function(mutationsList, observer) {
-            for (var mutation of mutationsList) {
+        let callback = function(mutationsList) {
+            for (let mutation of mutationsList) {
                 if (mutation.type === 'childList' || mutation.type === 'characterData') {
                     onActionPressed();
                     break;
@@ -1262,7 +1262,7 @@ function swalResetStatistics() {
 function confirmResetStatistics() {
     DB.references.meStat.remove()
         .then(() => {
-            sendTimedSwal("Deleted", "Your statistics have been successfully deleted, the page will reload...", 1500, false);
+            sendTimedSwal('Deleted', 'Your statistics have been successfully deleted, the page will reload...', 1500, false);
             setTimeout(() => window.location.reload(), 1500);
         })
         .catch((e) => {
@@ -1564,7 +1564,7 @@ async function drawSkinsModal() {
     if ($(ATTRS.selectors.skinBox).length > 0) return;
 
     createNewBox(injectSkinPages(), 'Public skins', '', '', true);
-    loadAllSkins();
+    await loadAllSkins();
 }
 
 function injectSkinPages() {
@@ -1721,10 +1721,12 @@ function copySkin(skinUrl) {
 function yoinkSkin(skinUrl) {
     const allSkins = getLocalStorageItem('skins', '["https://skins.vanis.io/s/Qkfih2","https://skins.vanis.io/s/Qkfih2"]');
     let arraySkins = JSONSafeParser(allSkins);
-    if (arraySkins != {}) {
+    if (Object.keys(arraySkins).length > 0) {
         arraySkins.push(skinUrl);
         localStorage.setItem('skins', JSON.stringify(arraySkins));
         sendTimedSwal('Skin yoinked', 'The skin has been yoinked, need to refresh the page to save', 1500, false);
+    } else {
+        sendTimedSwal('Error', 'An error occurred while yoinking the skin', 10000, 'OK')
     }
 }
 
@@ -1735,12 +1737,11 @@ function yoinkSkin(skinUrl) {
  ********************/
 function injectConfiguration(item, itemId) {
     const skins = injectSkin(item.skins);
-    const tag = injectTag(item.teamtag);
 
     function getHotkeysCount(hotkeys) {
-        if (!hotkeys) return 0
+        if (!hotkeys) return 0;
         const hotkeysJSON = JSONSafeParser(hotkeys);
-        if (hotkeysJSON === {}) return 0;
+        if (Object.keys(hotkeysJSON).length === 0) return 0;
         return Object.keys(hotkeysJSON).filter(key => hotkeysJSON[key] !== '').length;
     }
 
@@ -1752,7 +1753,7 @@ function injectConfiguration(item, itemId) {
                     <p class="configDate">${item.date}</p>
                 </div>
                 <div class="configContentList">
-                    ${APP.machineId === item.machineId ? `<p class="configActual configCard">Actual backup</p>`: ``}
+                    ${APP.machineId === item.machineId ? `<p class="configActual configCard">Actual backup</p>` : ``}
                     ${item.nickname && item.nickname !== '' ? `<p class="configNickname configCard" style="color: ${item.nicknameColor ? item.nicknameColor : `#ffffff`}">Name: ${item.nickname}</p>` : ``}
                     ${item.teamtag ? `<p class="configTeamTag configCard">Tag: ${item.teamtag}</p>` : ``}
                     <p class="configHotkeys configCard">${getHotkeysCount(item.hotkeys)} hotkeys</p>
@@ -1773,21 +1774,13 @@ function injectConfiguration(item, itemId) {
 }
 
 function injectSkin(skins) {
-    if (!skins) return {
-        list: '',
-        count: 0,
-    };
-
-    const skinUrls = JSON.parse(skins);
-
-    if (skinUrls !== {}) {
+    if (!skins) return {list: '', count: 0};
+    const skinUrls = JSONSafeParser(skins);
+    if (Object.keys(skinUrls).length > 0) {
         const skinElements = skinUrls.slice(0, 50).map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
-
-        return {
-            list: `<div class="listSkins">${skinElements.join('')}</div>`,
-            count: Object.keys(skinUrls).length,
-        };
+        return {list: `<div class="listSkins">${skinElements.join('')}</div>`, count: Object.keys(skinUrls).length};
     }
+    return {list: '', count: 0};
 }
 
 function injectTag(tag) {
@@ -1795,16 +1788,16 @@ function injectTag(tag) {
     return ``;
 }
 
-function injectBadge(item, itemId) {
+function injectBadge(item) {
     const isOwner = item.owners[USER.credentials.uid];
     const userBadge = LISTS.users[USER.credentials.uid].badge;
     const isSelected = userBadge && userBadge.id === item.id;
     const onClickAttribute = isOwner ?
-        `onclick="pushUserBadge('${escape(JSON.stringify(item))}')" ` :
+        `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')" ` :
         `onclick="sendTimedSwal('Badge not found', 'You don\\'t have this badge in your collection', 1500, 'OK')"`;
 
     return `
-        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${onClickAttribute} style="opacity: ${isSelected ? 1 : 0.4};"/>
+        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${onClickAttribute} style="opacity: ${isSelected ? 1 : 0.4};" alt="badge-image"/>
     `;
 }
 
@@ -1907,7 +1900,7 @@ function createSortable() {
 
     new Sortable(container, {
         handle: '.skin-container',
-        onEnd: function(e) {
+        onEnd: function() {
             updateSkinsLocally();
         },
     });
@@ -2003,8 +1996,7 @@ function fetchUserData() {
  *****************/
 function JSONSafeParser(elem) {
     try {
-        const obj = JSON.parse(elem);
-        return obj;
+        return JSON.parse(elem);
     } catch (e) {
         sendTimedSwal('Error', 'JSON parsing error: ' + e.message, 10000, 'OK');
         return {};
@@ -2154,7 +2146,7 @@ function getAllReferences() {
     const db = DB.database;
 
     return {
-        color: db.ref("Colors"),
+        color: db.ref('Colors'),
         user: db.ref(`Users`),
         statistics: db.ref(`Statistics`),
         badges: db.ref(`Badges`),
@@ -2172,7 +2164,7 @@ function getAllLibrary() {
     return {
         firebaseApp: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js',
         firebaseDatabase: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js',
-        firebaseAuth: "https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js",
+        firebaseAuth: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js',
         jquery: 'https://code.jquery.com/jquery-3.7.1.min.js',
         css: 'https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/styles.css',
         deltaDual: 'https://vanis.io/delta-dual',
@@ -2342,37 +2334,37 @@ function getAllErrors() {
 
 function getAllTitle() {
     return [
-        "+330 users on Delta",
-        "Alis.io",
-        "Vanis.io",
-        "Vanish.io",
-        "Raf x Duru x Fohz",
-        "Delta.io",
-        "Delta above all",
-        "Delta on top",
-        "Delta will carry you",
-        "Delta best ext ?",
-        "Alis.io legends",
-        "Want a badge? DM Fohz",
-        "Luka will recruit Fohz?",
-        "Join discord now",
-        "Fohz the tricker",
-        "BBN the SK",
-        "Exe the legend",
-        "Duru is cuter than all",
-        "Deadly World the solo",
-        "Yuu the hat coder",
-        "Splat the YouTuber",
-        "Zimek the precursor",
-        "Angel the mad",
-        "Grouk the legend",
-        "Useful the splitrunner",
-        "Frenchies on top",
-        "Eva, don't hate Fohz",
-        "DM Luka to recruit Fohz!",
-        "Luka need Fohz ?",
-        "Pi the legend",
-        "Who's Miracle..?",
+        '+330 users on Delta',
+        'Alis.io',
+        'Vanis.io',
+        'Vanish.io',
+        'Raf x Duru x Fohz',
+        'Delta.io',
+        'Delta above all',
+        'Delta on top',
+        'Delta will carry you',
+        'Delta best ext ?',
+        'Alis.io legends',
+        'Want a badge? DM Fohz',
+        'Luka will recruit Fohz?',
+        'Join discord now',
+        'Fohz the tricker',
+        'BBN the SK',
+        'Exe the legend',
+        'Duru is cuter than all',
+        'Deadly World the solo',
+        'Yuu the hat coder',
+        'Splat the YouTuber',
+        'Zimek the precursor',
+        'Angel the mad',
+        'Grouk the legend',
+        'Useful the splitrunner',
+        'Frenchies on top',
+        'Eva, don\'t hate Fohz',
+        'DM Luka to recruit Fohz!',
+        'Luka need Fohz ?',
+        'Pi the legend',
+        'Who\'s Miracle..?',
     ];
 }
 
@@ -2390,7 +2382,7 @@ async function drawStyle() {
 
         $('<style>').text(css).appendTo('head');
         $(ATTRS.selectors.loadingDelta).remove();
-        localStorage.setItem('promiseError', 0);
+        localStorage.setItem('promiseError', '0');
 
         checkAnnouncement();
     } catch (error) {
