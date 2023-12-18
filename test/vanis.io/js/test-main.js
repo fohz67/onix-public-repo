@@ -44,8 +44,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);
-        const hexColor = `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
-        return hexColor;
+        return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
     }
 
     function getUserBadge(nickname) {
@@ -81,6 +80,35 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         const minutes = currentDate.getMinutes().toString().padStart(2, '0');
         const seconds = currentDate.getSeconds().toString().padStart(2, '0');
         return `[${hours}:${minutes}:${seconds}] `;
+    }
+
+    function getPerkBadgeImage(n) {
+        const badge = {
+            1: ["admin", "Administrator"],
+            2: ["mod", "Moderator"],
+            4: ["skin_mod", "Skin moderator"],
+            8: ["contributor", "Contributor"],
+            16: ["organizer", "Official tournament organizer"],
+            32: ["referee", "Official tournament referee"],
+            256: ["youtuber", "YouTuber"],
+            1024: ["editor", "Editor"],
+            4096: ["level_100", "Level 100 reached"],
+            8192: ["level_200", "Level 200 reached"],
+            16384: ["level_300", "Level 300 reached"],
+            65536: ["ffa_winner", "FFA tournament winner"],
+            131072: ["instant_winner", "Instant tournament winner"],
+            262144: ["gigasplit_winner", "Gigasplit tournament winner"],
+            524288: ["megasplit_winner", "Megasplit tournament winner"],
+            1048576: ["crazy_winner", "Crazy tournament winner"],
+            2097152: ["self-feed_winner", "Self-feed tournament winner"],
+            33554432: ["server_booster", "Discord server booster"],
+            67108864: ["place_contributor_2023", "r/place contributor (2023)"],
+            16777216: ["place_contributor_2022", "r/place contributor (2022)"],
+            268435456: ["slb_winner", "Topped season leaderboard"],
+            2147483648: ["official", "Official message", true]
+        };
+
+        return badge[n][0];
     }
 
     class s {
@@ -7397,6 +7425,26 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
+                    function getPerkName() {
+                        const val = e["_data"]["account"]["perk_name_picked"];
+                        if (!val) return e.name;
+                        return val;
+                    }
+                    function getPerkBadge() {
+                        const val = e["_data"]["account"]["perk_badge_set"];
+                        if (!val) return {badge: null, width: "0", margin: "0"};
+                        return {badge: "/img/badge/" + getPerkBadgeImage(val) + ".png?2", width: "25px", margin: "3px"};
+                    }
+                    function getPerkNameColor() {
+                        const val = e["_data"]["account"]["perk_color_picked"];
+                        if (!val) return "#ffffff";
+                        return "#" + val;
+                    }
+                    const user = {
+                        name: getPerkName(),
+                        badge: getPerkBadge(),
+                        color: getPerkNameColor()
+                    }
                     return s("div", {
                         staticStyle: {
                             padding: "12px 15px"
@@ -7434,13 +7482,27 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }), e._v(" "), s("div", {
                         staticClass: "player-info"
                     }, [s("div", {
+                        staticStyle: {
+                            display: "flex",
+                            alignItems: "center"
+                        }
+                    }, [s("img", {
+                        staticClass: "badge",
+                        staticStyle: {
+                            width: user.badge.width,
+                            marginRight: user.badge.margin
+                        },
+                        attrs: {
+                            src: user.badge.badge
+                        }
+                    }), s("div", {
                         style: {
-                            color: e.nameColor
+                            color: user.color
                         },
                         attrs: {
                             id: "account-name"
                         }
-                    }, [e._v(e._s(e.name))]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s((e.account.season_xp ? Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0) : 0) + " total season XP"))])])]), e._v(" "), s("div", {
+                    }, [e._v(e._s(user.name))])]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s((e.account.season_xp ? Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0) : 0) + " total season XP"))])])]), e._v(" "), s("div", {
                         staticStyle: {
                             position: "relative"
                         }
