@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.2',
+    version: '4.1.3',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -365,9 +365,9 @@ function pushUserStatisticsLocally() {
     USER.statistics.massTotal += mass;
     USER.statistics.killTotal += kill;
     USER.statistics.gameTotal += 1;
-    USER.statistics.timeAvg = USER.statistics.timeTotal / game;
-    USER.statistics.massAvg = USER.statistics.massTotal / game;
-    USER.statistics.kda = USER.statistics.killTotal / game;
+    USER.statistics.timeAvg = USER.statistics.timeTotal / USER.statistics.gameTotal;
+    USER.statistics.massAvg = USER.statistics.massTotal / USER.statistics.gameTotal;
+    USER.statistics.kda = USER.statistics.killTotal / USER.statistics.gameTotal;
 
     localStorage.setItem('sT', time.toString());
     localStorage.setItem('sM', mass.toString());
