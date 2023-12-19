@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.1',
+    version: '4.1.2',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -8,7 +8,7 @@ const APP = {
         value: false,
         color: '#ffffff'
     },
-    blacklist: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'k', 'K', 'm', 'M', 'A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 'E1', 'E2', 'E3', 'E4', 'E5', 'Unnamed', '', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         ', '          ', '           ', '            ', '             ', '              ', '               ', '                '],
+    blacklist: ['.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'k', 'K', 'm', 'M', 'A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 'E1', 'E2', 'E3', 'E4', 'E5', 'Unnamed', '', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         ', '          ', '           ', '            ', '             ', '              ', '               ', '                '],
 }
 
 const ATTRS = {
@@ -1777,7 +1777,7 @@ function injectSkin(skins) {
     if (!skins) return {list: '', count: 0};
     const skinUrls = JSONSafeParser(skins);
     if (Object.keys(skinUrls).length > 0) {
-        const skinElements = skinUrls.slice(0, 50).map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
+        const skinElements = skinUrls.map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
         return {list: `<div class="listSkins">${skinElements.join('')}</div>`, count: Object.keys(skinUrls).length};
     }
     return {list: '', count: 0};

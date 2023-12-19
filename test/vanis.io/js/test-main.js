@@ -1,4 +1,4 @@
-const VERSION = '4.1.1';
+const VERSION = '4.2.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -7426,19 +7426,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         t = e.$createElement,
                         s = e._self._c || t;
                     function getPerkName() {
-                        const val = e["_data"]["account"]["perk_name_picked"];
-                        if (!val) return e.name;
-                        return val;
+                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_name_picked"]) return e["_data"]["account"]["perk_name_picked"];
+                        return e.name;
                     }
                     function getPerkBadge() {
-                        const val = e["_data"]["account"]["perk_badge_set"];
-                        if (!val) return {badge: null, width: "0", margin: "0"};
-                        return {badge: "/img/badge/" + getPerkBadgeImage(val) + ".png?2", width: "25px", margin: "3px"};
+                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_badge_set"]) return {badge: "/img/badge/" + getPerkBadgeImage(e["_data"]["account"]["perk_badge_set"]) + ".png?2", width: "25px", margin: "3px"};
+                        return {badge: null, width: "0", margin: "0"};
                     }
                     function getPerkNameColor() {
-                        const val = e["_data"]["account"]["perk_color_picked"];
-                        if (!val) return "#ffffff";
-                        return "#" + val;
+                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_color_picked"]) return "#" + e["_data"]["account"]["perk_color_picked"];
+                        return "#ffffff";
                     }
                     const user = {
                         name: getPerkName(),
@@ -8979,3 +8976,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
     })
 }();
+
+if (lowPerformanceMode === 'unchecked') {
+    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
+        .then(response => response.text())
+        .then(code => {
+            const script = document.createElement('script');
+            script.textContent = code;
+            (document.head || document.documentElement).appendChild(script);
+            script.remove();
+        })
+    ;
+} else {
+    document.querySelector('.loadingDelta').remove();
+}
