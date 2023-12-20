@@ -680,13 +680,13 @@ function displaySocial() {
     if (!socialContainer) return;
 
     const discordLink = `
-        <a data-v-ac7fee74 href="https://discord.gg/wthDcUb6nY" target="_blank" rel="noopener" class="discord-link">
+        <a data-v-3f8f826c href="https://discord.gg/wthDcUb6nY" target="_blank" rel="noopener" class="discord-link">
             <i class="fas fa-heart"></i> Delta Discord
         </a>
     `;
 
     const bugLink = `
-        <a data-v-ac7fee74 href="https://discord.gg/cJByExsnub" target="_blank" rel="noopener" class="bug-link">
+        <a data-v-3f8f826c href="https://discord.gg/cJByExsnub" target="_blank" rel="noopener" class="bug-link">
             <i class="fas fa-bug"></i> Report a bug
         </a>
     `;
