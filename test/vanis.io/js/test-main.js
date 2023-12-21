@@ -1,4 +1,4 @@
-const VERSION = '4.3';
+const VERSION = '4.3.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -925,9 +925,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             playerManager: a
                         } = this,
                         n = [];
-                    for (const player of t) {
+                    if (Array.isArray(t) && t.length === 1) {
+                        const player = t[0];
                         currentServerPlayerList[player.pid] = player;
-                    }
+                    } else if (Array.isArray(t) && t.length > 1) for (const player of t) currentServerPlayerList[player.pid] = player;
+                    else if (!Array.isArray(t)) currentServerPlayerList[t.pid] = t;
                     for (let o of t) {
                         let r = a.setPlayerData(o);
                         n.push(r)
@@ -963,7 +965,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                         case 6:
-                            currentServerPlayerList = {};
                             this.connection.sendOpcode(6);
                             return;
                         case 7: {
@@ -1119,7 +1120,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             y.spectators = e.readUInt16LE();
                             return;
                         case 24:
-                            currentServerPlayerList = {};
                             this.serverTick = e.readUInt32LE(), this.events.$emit("restart-timing-changed", e.readUInt32LE());
                             return;
                         case 25:
