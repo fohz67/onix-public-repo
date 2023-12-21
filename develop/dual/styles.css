@@ -3680,13 +3680,13 @@ titleExtension {
     position:absolute
 }
 
-.badgeMessage,.badgeLeaderboard {
-    height:15px;
-    margin-right:5px;
-    object-position:0 2px;
+.badgeMessage,.badgeLeaderboard,.badgeVanillaLeaderboard,.badgeVanillaMessage {
+    height:16px;
+    margin-right:8px;
+    object-position:2px 2px;
     overflow:visible;
-    scale:1.1;
-    width:15px
+    scale:1.3;
+    width:16px
 }
 
 .swal2-toast {

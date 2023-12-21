@@ -1,13 +1,14 @@
-const VERSION = '4.2.1';
+const VERSION = '4.3';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
     document.title = "Delta - Dual";
 
-    let rainbowColorTimeMessageG = undefined;
-    let showTimeMessageG = undefined;
     const userColors = getLocalStorageItem('userColors', undefined);
     let userColorsJson = userColors ? JSON.parse(userColors) : null;
+    let rainbowColorTimeMessageG = undefined;
+    let showTimeMessageG = undefined;
+    let currentServerPlayerList = {};
 
     function getLocalStorageItem(key, defaultValue) {
         return localStorage.getItem(key) || defaultValue;
@@ -47,22 +48,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
     }
 
-    function getUserBadge(nickname) {
-        if (!nickname) return null;
+    function getUserField(nickname, pid, field, def = null) {
+        if (!nickname || !pid) return def;
         const userData = userColorsJson[nickname.trim()];
-        return (userData && userData.badge) ? userData.badge : null;
+        return (userData && userData[field]) ? userData[field] : def;
     }
 
-    function getUserColor(nickname) {
-        if (!nickname) return null;
-        const userData = userColorsJson[nickname.trim()];
-        return (userData && userData.color) ? userData.color : null;
-    }
-
-    function getUserCellColor(nickname, def) {
-        if (!nickname) return def;
-        const userData = userColorsJson[nickname.trim()];
-        return (userData && userData.color) ? userData.color.replace('#', '') : def;
+    function getUserFieldVanilla(nickname, pid, field, def = null) {
+        if (!nickname || !pid) return def;
+        const userData = currentServerPlayerList[pid];
+        return (userData && userData[field]) ? userData[field] : def;
     }
 
     function sendTimedSwal(title, text, timer, confirm) {
@@ -874,7 +869,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             pid: s,
                             position: t.length + 1,
                             text: i.name,
-                            badge: getUserBadge(i.name),
+                            badge: getUserField(i.name, s, "badge", null),
+                            badgeVanilla: getUserFieldVanilla(i.name, s, "perk_badges", null),
                             bold: !!i.nameColor
                         };
                         t.push(a)
@@ -929,6 +925,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             playerManager: a
                         } = this,
                         n = [];
+                    for (const player of t) {
+                        currentServerPlayerList[player.pid] = player;
+                    }
                     for (let o of t) {
                         let r = a.setPlayerData(o);
                         n.push(r)
@@ -964,6 +963,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                         case 6:
+                            currentServerPlayerList = {};
                             this.connection.sendOpcode(6);
                             return;
                         case 7: {
@@ -1026,15 +1026,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             let S = this.playerManager.getPlayer(b.pid);
                             if (!S) return;
 
-                            const settings = getLocalStorageItem('settings', undefined);
-                            const storage = settings ? JSON.parse(settings) : undefined;
                             const image = getImageUrlFromMessage(b.text);
-                            const color = getUserColor(S.name);
+                            const color = getUserField(S.name, b.pid, "color", '#ffffff');
 
                             b.from = S.name;
                             b.date = showTimeMessageG ? getCurrentDate() : '';
                             b.dateColor = rainbowColorTimeMessageG ? generateRandomHexColor() : 'white';
-                            b.badge = getUserBadge(b.from);
+                            b.badge = getUserField(b.from, b.pid, "badge", null);
+                            b.badgeVanilla = getUserFieldVanilla(b.from, b.pid, "perk_badges", null);
                             b.nicknameColor = color ? color : '#ffffff';
                             b.imageUrl = image ? image.newURL : null;
                             b.text = image ? b.text.replace(image.baseURL, '[Delta image]') : b.text;
@@ -1120,6 +1119,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             y.spectators = e.readUInt16LE();
                             return;
                         case 24:
+                            currentServerPlayerList = {};
                             this.serverTick = e.readUInt32LE(), this.events.$emit("restart-timing-changed", e.readUInt32LE());
                             return;
                         case 25:
@@ -3087,10 +3087,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 setTagId(e) {
                     return e || (e = null), this.tagId !== e && (this.tagId = e, this.bot || this.setTagSprite(), !0)
                 }
-                setNameColor(bot, name) {
+                setNameColor(bot, pid, name) {
                     let color = 'ffffff';
                     if (bot === true) color = '848484';
-                    else color = getUserCellColor(name, 'ffffff');
+                    else color = getUserField(name, pid, "color", '#ffffff').replace('#', '');
                     color = parseInt(color, 16);
                     return color, this.nameColorCss = color && PIXI.utils.hex2string(color), color;
                 }
@@ -3105,7 +3105,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         n = this.nameColor,
                         o;
                     const isBot = !!this.bot;
-                    if (o = e || t ? this.setNameColor(null, null) : this.setNameColor(isBot, this.nameFromServer), this.setNameSprite(s, o), e || t || !(this.nameSprite.texture.width > i.cellLongNameThreshold) || (t = !0, s = "Long Name", o = this.setNameColor(null, null), this.setNameSprite(s, o)), this.name = e ? "Unnamed" : s, a !== this.name || n !== this.nameColor) {
+                    if (o = e || t ? this.setNameColor(null, null,null) : this.setNameColor(isBot, this.pid, this.nameFromServer), this.setNameSprite(s, o), e || t || !(this.nameSprite.texture.width > i.cellLongNameThreshold) || (t = !0, s = "Long Name", o = this.setNameColor(null, null), this.setNameSprite(s, o)), this.name = e ? "Unnamed" : s, a !== this.name || n !== this.nameColor) {
                         let r = o || (this.isMe ? 16747520 : null);
                         h.events.$emit("minimap-create-node", this.pid, s, o, r)
                     }
@@ -8030,6 +8030,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                     })
                                 ]) : e._e(),
 
+                                t.badgeVanilla ? s("span", {
+                                    staticClass: "message-badge-vanilla",
+                                }, [
+                                    s("img", {
+                                        attrs: {
+                                            class: 'badgeVanillaMessage',
+                                            src: "/img/badge/" + getPerkBadgeImage(t.badgeVanilla) + ".png?2",
+                                            alt: "chat-badge-vanilla"
+                                        }
+                                    })
+                                ]) : e._e(),
+
                                 t.from ? s("span", {
                                     staticClass: "message-from",
                                     style: {
@@ -8105,6 +8117,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         })
                                     ])
                                 ] : e._e(),
+
+                                t.badgeVanilla ? s("span", {
+                                    staticClass: "message-badge-vanilla",
+                                }, [
+                                    s("img", {
+                                        attrs: {
+                                            class: 'badgeVanillaMessage',
+                                            src: "/img/badge/" + getPerkBadgeImage(t.badgeVanilla) + ".png?2",
+                                            alt: "chat-badge-vanilla"
+                                        }
+                                    })
+                                ]) : e._e(),
 
                                 t.from ? [
                                     s("span", {
@@ -8311,7 +8335,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         spectating: 0 == e.gameState.lifeState
                                     },
                                     style: {
-                                        color: getUserColor(t.text),
+                                        color: getUserField(t.text, t.pid, "color", '#ffffff'),
                                         fontWeight: t.bold ? "bold" : "normal"
                                     },
                                     attrs: {
@@ -8328,6 +8352,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                             src: t.badge,
                                             alt: "badge",
                                             class: "badgeLeaderboard"
+                                        }
+                                    }) : e._e(),
+                                    t.badgeVanilla ? s("img", {
+                                        attrs: {
+                                            src: "/img/badge/" + getPerkBadgeImage(t.badgeVanilla) + ".png?2",
+                                            alt: "badgeVanilla",
+                                            class: "badgeVanillaLeaderboard"
                                         }
                                     }) : e._e(),
                                     e._v(e._s(t.text))
