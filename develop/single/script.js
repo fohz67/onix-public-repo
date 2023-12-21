@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.3',
+    version: '4.1.4',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -2398,10 +2398,10 @@ async function drawStyle() {
 function checkAnnouncement() {
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
-    if (announcement < 42) {
+    if (announcement < 43) {
         setTimeout(() => {
-            sendTimedSwal('Location background image', 'Dual mode users, check in your graphic settings, you will see "Show location background image" switch, to have the location IN ADDITION to your background image.', 10000, 'OK')
-            localStorage.setItem('announcement', '42');
+            sendTimedSwal('Vanis.io official badges', 'ALL Vanis.io official badges are now displayed into Dual mode !!! Enjoy <3', 10000, 'OK')
+            localStorage.setItem('announcement', '43');
         }, 1500);
     }
 }
