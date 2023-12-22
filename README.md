@@ -2,9 +2,6 @@
 
 Extension for Vanis.io
 
-<img src="https://i.ibb.co/jy7GLZ4/Capture-d-e-cran-2023-12-21-a-06-23-03.png" alt="Screenshot 1" height="auto">
-<img src="https://i.ibb.co/w7mFKQ9/Capture-d-e-cran-2023-12-21-a-06-25-23.png" alt="Screenshot 2" height="auto">
-
 ## Installation
 
 - Install Tampermonkey: [INSTALL](https://www.tampermonkey.net)
@@ -25,49 +22,65 @@ Delta has 2 modes to suit each player.
 
 Visible by all Delta users, you can change it whenever you want.
 
-<img src="https://i.ibb.co/XZHbLFY/Capture-d-e-cran-2023-12-21-a-06-18-34.png" alt="Colored Names Screenshot" width="200" height="auto">
-
 ### Player List
 
 You can see all online and offline people, the server, the mode, and their level. So you can hide by putting Anonymous mode!
-
-<img src="https://i.ibb.co/1061jhY/Capture-d-e-cran-2023-12-21-a-06-19-48.png" alt="Player List Screenshot" width="200" height="auto">
 
 ### Statistics
 
 All stats are saved like K/D, kills, time played, mass ate, and more...
 
-<img src="https://i.ibb.co/kKs1T8N/Capture-d-e-cran-2023-12-21-a-06-17-29.png" alt="Statistics Screenshot" width="200" height="auto">
-
 ### Deltaboard
 
 Thanks to statistics, players are classified by categories: K/D, kills, total time played, and more...
-
-<img src="https://i.ibb.co/d5G56wc/Capture-d-e-cran-2023-12-21-a-06-17-40.png" alt="Deltaboard Screenshot" width="200" height="auto">
 
 ### Skins Gallery
 
 The public skin gallery is available inside Vanis.io with 1000 skins loaded at once, without the delay of [skins.vanis.io](https://skins.vanis.io) website.
 
-<img src="https://i.ibb.co/6s4gLYC/Capture-d-e-cran-2023-12-21-a-07-54-59.png" alt="Skins Gallery Screenshot" width="400" height="auto">
-
 ### Backups
 
 You can save your configurations to load them from any computer just by logging into your Delta account. No more losing skins and hotkeys when you delete your history!
-
-<img src="https://i.ibb.co/z5bwh9Q/Capture-d-e-cran-2023-12-21-a-06-19-15.png" alt="Backups Screenshot 1" width="200" height="auto">
-<img src="https://i.ibb.co/JQCN9zF/Capture-d-e-cran-2023-12-21-a-06-19-20.png" alt="Backups Screenshot 2" width="200" height="auto">
 
 ### Draggable Skins
 
 You can easily drag your skin to reorganize your gallery.
 
-<img src="https://i.ibb.co/wddKQsX/Capture-d-e-cran-2023-12-21-a-06-20-33.png" alt="Draggable Skins Screenshot" width="200" height="auto">
-
 ### Resizable Chatbox
 
 You can easily resize the chatbox in-game by long click + move.
 
-<img src="https://i.ibb.co/7g7VsCH/Capture-d-e-cran-2023-12-21-a-06-26-10.png" alt="Resizable Chatbox Screenshot" width="200" height="auto">
+## Dual only functionalities
 
-And more...
+### Badges in game
+
+You can see both the official badge as well as the Delta badge.
+
+### Cell aim
+
+Show a white line from the center of each player cell towards the cursor to see the exact direction.
+
+### Cell direction
+
+Displays a small star to show which direction players are heading.
+
+### Show teams
+
+Displays "Team 0" "Team 1" etc. for each different existing tag, this allows you to see who is in a tag with whom.
+
+### Message time and rainbow message time
+
+Displays the date before each message sent in the chat, the rainbow option allows it to be displayed with random colors instead of white.
+
+### Player tracker
+
+Allows you to copy/add a skin directly in-game, by pressing the macro defined in the hotkeys settings.
+Left click to add skin, right click to copy the skin, works equally well in chat, in the leaderboard and even in cells directly in game.
+
+### Network info and client info
+
+Displays data relating to the internet connection and the player.
+
+### Show background location
+
+Displays in addition to the background image, a map with all the locations, A1, A2.... E5.
