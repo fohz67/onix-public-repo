@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.4',
+    version: '4.1.5',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -143,13 +143,14 @@ function firebaseSignOut() {
 }
 
 function firebaseAccount(callback) {
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             getLocalValues(user);
             getDatabase();
             callback();
         } else {
-            initRegisterForm(() => {});
+            initRegisterForm(() => {
+            });
         }
     });
 }
@@ -261,7 +262,7 @@ function initForm() {
         }
     };
 
-    submitButton.on('click', function() {
+    submitButton.on('click', function () {
         if (passwordInput.val().length > 6) {
             setLoadingState();
 
@@ -378,10 +379,11 @@ function pushUserStatisticsLocally() {
 function pushUserBadge(item) {
     const badge = JSONSafeParser(decodeURIComponent(item));
     if (Object.keys(badge).length > 0) {
-        delete badge.owners;
+        if (badge.owners) delete badge.owners;
+        if (badge.earn) delete badge.earn;
 
         Object.values(LISTS.badges).forEach(badgeEach => {
-            $(`.badge${badgeEach.id}`).css('opacity', 0.4);
+            $(`.badge${badgeEach.id}`).css('opacity', 0.3);
         });
         $(`.badge${badge.id}`).css('opacity', 1);
 
@@ -548,7 +550,7 @@ function removeAds() {
 }
 
 function removeCookie() {
-    setTimeout(function() {
+    setTimeout(function () {
         if ($(ATTRS.selectors.cmp)) {
             $(ATTRS.selectors.cmpButton).click();
             $(ATTRS.selectors.cmp).remove();
@@ -582,11 +584,11 @@ function onColorChanged(that) {
 
 function listenerComponents() {
     if (APP.mode === 1) {
-        $(ATTRS.selectors.skinUrl).on('change', function() {
+        $(ATTRS.selectors.skinUrl).on('change', function () {
             skinValidation($(this).val());
         });
 
-        $(ATTRS.selectors.skinElem).on('click', function() {
+        $(ATTRS.selectors.skinElem).on('click', function () {
             skinValidation($(this).attr('src'));
         });
     }
@@ -599,7 +601,7 @@ function listenerComponents() {
             subtree: true
         };
 
-        let callback = function(mutationsList) {
+        let callback = function (mutationsList) {
             for (let mutation of mutationsList) {
                 if (mutation.type === 'childList' || mutation.type === 'characterData') {
                     onActionPressed();
@@ -612,16 +614,16 @@ function listenerComponents() {
         observer.observe(target, config);
     }
 
-    $(ATTRS.selectors.nickname).on('input', function() {
+    $(ATTRS.selectors.nickname).on('input', function () {
         if (APP.mode === 1) $(ATTRS.selectors.nicknameProfile).text($(this).val());
         USER.configurations.nickname = $(this).val();
-    }).on('change', function() {
+    }).on('change', function () {
         getReservedName();
         pushUserColors();
         pushUserOnline();
     });
 
-    $(ATTRS.selectors.serverListItem).on('click', function() {
+    $(ATTRS.selectors.serverListItem).on('click', function () {
         USER.server = $(this).find(ATTRS.selectors.serverName).text();
         APP.resize = 0;
         pushUserOnline();
@@ -692,10 +694,10 @@ function displaySocial() {
     `;
 
     socialContainer.append(discordLink, bugLink);
-    socialContainer.mouseover(function() {
+    socialContainer.mouseover(function () {
         socialContainer.fadeTo(250, 1);
     });
-    socialContainer.mouseleave(function() {
+    socialContainer.mouseleave(function () {
         socialContainer.stop(true, true).fadeTo(250, 0.1);
     });
 }
@@ -741,12 +743,12 @@ function skinValidation(url) {
 function skinChecker(url) {
     const image = new Image();
 
-    image.onload = function() {
+    image.onload = function () {
         $(ATTRS.selectors.skinProfile).attr('src', url);
         pushUserOnline();
     }
 
-    image.onerror = function() {
+    image.onerror = function () {
         $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.transparentSkin);
         pushUserOnline();
     }
@@ -1783,21 +1785,24 @@ function injectSkin(skins) {
     return {list: '', count: 0};
 }
 
-function injectTag(tag) {
-    if (tag && tag !== '') return `<p class="configTag">Tag: ${tag}</p>`;
-    return ``;
-}
-
 function injectBadge(item) {
-    const isOwner = item.owners[USER.credentials.uid];
     const userBadge = LISTS.users[USER.credentials.uid].badge;
     const isSelected = userBadge && userBadge.id === item.id;
-    const onClickAttribute = isOwner ?
-        `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')" ` :
-        `onclick="sendTimedSwal('Badge not found', 'You don\\'t have this badge in your collection', 1500, 'OK')"`;
+
+    let isOwner = false;
+
+    if (item.owners && item.owners[USER.credentials.uid]) {
+        isOwner = true;
+    } else if (item.earn) {
+        if (item.earn.type === 'kill' && item.earn.value <= USER.statistics.killTotal) {
+            isOwner = true;
+        } else if (item.earn.type === 'time' && item.earn.value <= USER.statistics.timeTotal) {
+            isOwner = true;
+        }
+    }
 
     return `
-        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${onClickAttribute} style="opacity: ${isSelected ? 1 : 0.4};" alt="badge-image"/>
+        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} style="opacity: ${isSelected ? 1 : 0.3}; cursor: ${isOwner ? 'pointer' : 'not-allowed'};" alt=""/>
     `;
 }
 
@@ -1882,7 +1887,7 @@ function updateConfiguration(configId) {
 function updateSkinsLocally() {
     let urlList = '[';
 
-    $(ATTRS.selectors.skinElem).each(function() {
+    $(ATTRS.selectors.skinElem).each(function () {
         const url = $(this).attr('src');
 
         if (url && url !== '/img/skin-add.png') {
@@ -1900,7 +1905,7 @@ function createSortable() {
 
     new Sortable(container, {
         handle: '.skin-container',
-        onEnd: function() {
+        onEnd: function () {
             updateSkinsLocally();
         },
     });
@@ -1909,7 +1914,7 @@ function createSortable() {
 function createChatboxResizable() {
     const chatContainer = $(ATTRS.selectors.chatboxContainer);
 
-    chatContainer.on('mousedown', function(e) {
+    chatContainer.on('mousedown', function (e) {
         const startX = e.clientX;
         const startY = e.clientY;
         const startWidth = parseInt(chatContainer.css('width'), 10);
@@ -1958,7 +1963,7 @@ function changeUserColor(color) {
 function changeCellColor(nicknameToUpdate) {
     const originalFillText = CanvasRenderingContext2D.prototype.fillText;
 
-    CanvasRenderingContext2D.prototype.fillText = function(text, x, y) {
+    CanvasRenderingContext2D.prototype.fillText = function (text, x, y) {
         if (!APP.blacklist.includes(text)) {
             if (text === USER.configurations.nickname) this.fillStyle = USER.configurations.nicknameColor;
             else if (text === nicknameToUpdate && LISTS.colors[nicknameToUpdate] && LISTS.colors[nicknameToUpdate].color) this.fillStyle = LISTS.colors[nicknameToUpdate].color;
