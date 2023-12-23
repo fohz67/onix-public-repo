@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.5',
+    version: '4.1.6',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -8,6 +8,7 @@ const APP = {
         value: false,
         color: '#ffffff'
     },
+    selected: false,
     blacklist: ['.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'k', 'K', 'm', 'M', 'A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 'E1', 'E2', 'E3', 'E4', 'E5', 'Unnamed', '', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         ', '          ', '           ', '            ', '             ', '              ', '               ', '                '],
 }
 
@@ -378,17 +379,22 @@ function pushUserStatisticsLocally() {
 
 function pushUserBadge(item) {
     const badge = JSONSafeParser(decodeURIComponent(item));
+
     if (Object.keys(badge).length > 0) {
         if (badge.owners) delete badge.owners;
         if (badge.earn) delete badge.earn;
+        if (APP.selected === badge.id) badge.url = null;
 
         Object.values(LISTS.badges).forEach(badgeEach => {
             $(`.badge${badgeEach.id}`).css('opacity', 0.3);
         });
-        $(`.badge${badge.id}`).css('opacity', 1);
+        $(`.badge${badge.id}`).css('opacity', APP.selected === badge.id ? 0.3 : 1);
 
         pushDatabase(DB.references.meColorBadge, badge);
         pushDatabase(DB.references.meUserBadge, badge);
+
+        if (APP.selected === badge.id) APP.selected = false;
+        else APP.selected = badge.id;
     }
 }
 
@@ -990,7 +996,7 @@ function injectUser(user, status) {
             <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
             <div class="listTextItem userTextElem">
                 <div class="userNickLine">
-                    ${user.badge ? `<img class="userBadgeDiv" alt="" src="${user.badge.url}" tip="${user.badge.tip}">` : ``}
+                    ${user.badge && user.badge.url ? `<img class="userBadgeDiv" alt="" src="${user.badge.url}" tip="${user.badge.tip}">` : ``}
                     <p class="userNickname" style="color: ${user.color}">${user.nickname}
                         <span class="userLevel">${user.level === 0 ? '' : ' - Lvl ' + user.level}</span>
                     </p>
@@ -1408,7 +1414,7 @@ function injectLeaderboard(item, itemId, position, filter) {
     return `
         <div class="leaderboardItem ${itemUser.uid === USER.credentials.uid ? 'leaderboardItemMe' : ''}">
             <p class="leaderboardPosition">${position}. </p>
-            ${itemUser.badge ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.badge.url}" tip="${itemUser.badge.tip}">` : ``}
+            ${itemUser.badge && user.badge.url ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.badge.url}" tip="${itemUser.badge.tip}">` : ``}
             <p class="leaderboardNickname ${itemUser.uid === USER.credentials.uid ? 'leaderboardNicknameMe' : ''}" style="color: ${itemUser.color}">${itemUser.nickname}</p>
             <p class="leaderboardStatisticValue ${itemUser.uid === USER.credentials.uid ? 'leaderboardStatisticValueMe' : ''}">${statisticValue}</p>
         </div>
@@ -1786,10 +1792,9 @@ function injectSkin(skins) {
 }
 
 function injectBadge(item) {
-    const userBadge = LISTS.users[USER.credentials.uid].badge;
-    const isSelected = userBadge && userBadge.id === item.id;
-
+    const badge = LISTS.users[USER.credentials.uid].badge;
     let isOwner = false;
+    APP.selected = (badge && badge.id === item.id && badge.url) ? badge.id : false;
 
     if (item.owners && item.owners[USER.credentials.uid]) {
         isOwner = true;
@@ -1802,7 +1807,7 @@ function injectBadge(item) {
     }
 
     return `
-        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} style="opacity: ${isSelected ? 1 : 0.3}; cursor: ${isOwner ? 'pointer' : 'not-allowed'};" alt=""/>
+        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} style="opacity: ${APP.selected ? 1 : 0.3}; cursor: ${isOwner ? 'pointer' : 'not-allowed'};" alt=""/>
     `;
 }
 
@@ -2033,6 +2038,12 @@ function getDatabase() {
 function pushDatabase(ref, data) {
     if (window.firebase) {
         ref.update(data);
+    }
+}
+
+function removeDatabase(ref) {
+    if (window.firebase) {
+        ref.remove(data);
     }
 }
 

@@ -1,4 +1,4 @@
-const VERSION = '4.4.4';
+const VERSION = '4.4.4.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 !function e() {
@@ -1009,10 +1009,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             playerManager: a
                         } = this,
                         n = [];
-                    if (!Array.isArray(t) || t.length === 0) {
-                        currentServerPlayerList = {};
-                    } else if (Array.isArray(t)) {
-                        currentServerPlayerList = {};
+
+
+                    if (Array.isArray(t)) {
+                        if (t.length > 1) currentServerPlayerList = {};
                         for (const player of t) currentServerPlayerList[player.pid] = player;
                     }
                     for (let o of t) {
