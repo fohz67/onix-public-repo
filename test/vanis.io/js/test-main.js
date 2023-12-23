@@ -1,4 +1,4 @@
-const VERSION = '4.4';
+const VERSION = '4.4.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 !function e() {
@@ -4805,7 +4805,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     </div>
                 `;
             }
-            function showPlayerList(url, name, nb) {
+            function showPlayerList(url, name, nb, slots) {
                 let userList = "";
 
                 for (const pid in currentServerPlayerList) {
@@ -4893,7 +4893,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             },
                             on: {
                                 click: function () {
-                                    showPlayerList(e.gameState.connectionUrl, t.name, t.players)
+                                    showPlayerList(e.gameState.connectionUrl, t.name, t.players, t.slots)
                                 }
                             }
                         }, [
