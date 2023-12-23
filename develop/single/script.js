@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.6',
+    version: '4.1.7',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1414,7 +1414,7 @@ function injectLeaderboard(item, itemId, position, filter) {
     return `
         <div class="leaderboardItem ${itemUser.uid === USER.credentials.uid ? 'leaderboardItemMe' : ''}">
             <p class="leaderboardPosition">${position}. </p>
-            ${itemUser.badge && user.badge.url ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.badge.url}" tip="${itemUser.badge.tip}">` : ``}
+            ${itemUser.badge && itemUser.badge.url ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.badge.url}" tip="${itemUser.badge.tip}">` : ``}
             <p class="leaderboardNickname ${itemUser.uid === USER.credentials.uid ? 'leaderboardNicknameMe' : ''}" style="color: ${itemUser.color}">${itemUser.nickname}</p>
             <p class="leaderboardStatisticValue ${itemUser.uid === USER.credentials.uid ? 'leaderboardStatisticValueMe' : ''}">${statisticValue}</p>
         </div>
