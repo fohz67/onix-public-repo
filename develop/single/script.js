@@ -2403,10 +2403,10 @@ async function drawStyle() {
 function checkAnnouncement() {
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
-    if (announcement < 43) {
+    if (announcement < 44) {
         setTimeout(() => {
-            sendTimedSwal('Vanis.io official badges', 'ALL Vanis.io official badges are now displayed into Dual mode !!! Enjoy <3', 10000, 'OK')
-            localStorage.setItem('announcement', '43');
+            sendTimedSwal('New feature in Dual mode !!', 'You can see all the players on the server you are playing on, a button will appear after joining a server, click on it and enjoy !!!', 10000, 'OK')
+            localStorage.setItem('announcement', '44');
         }, 1500);
     }
 }
