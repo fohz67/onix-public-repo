@@ -1,7 +1,7 @@
-const VERSION = '4.3.1';
+const VERSION = '4.4';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
-! function e() {
+!function e() {
     document.title = "Delta - Dual";
 
     const userColors = getLocalStorageItem('userColors', undefined);
@@ -115,6 +115,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
             this.offset = t || 0
         }
+
         ensureCapacity(e) {
             let t = this.offset + e;
             if (t > this.length) {
@@ -123,140 +124,179 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 i.set(new Uint8Array(this.buffer)), this.view = new DataView(s)
             }
         }
+
         static fromSize(e) {
             return new this(new ArrayBuffer(e), 0)
         }
+
         static fromBuffer(e, t) {
             return new this(e, t || 0)
         }
+
         toBuffer() {
             return this.buffer
         }
+
         get buffer() {
             return this.view?.buffer || null
         }
+
         get length() {
             return this.view?.byteLength || 0
         }
+
         get eof() {
             return this.offset >= this.length
         }
+
         read(e, t, s, i) {
             let a = e.call(this.view, i ?? this.offset, s);
             return null == i && (this.offset += t), a
         }
+
         write(e, t, s, i) {
             this.ensureCapacity(t), e.call(this.view, this.offset, s, i), this.offset += t
         }
+
         readInt8(e) {
             return this.read(DataView.prototype.getInt8, 1, null, e)
         }
+
         readUInt8(e) {
             return this.read(DataView.prototype.getUint8, 1, null, e)
         }
+
         readInt16LE(e) {
             return this.read(DataView.prototype.getInt16, 2, !0, e)
         }
+
         readInt16BE(e) {
             return this.read(DataView.prototype.getInt16, 2, !1, e)
         }
+
         readUInt16LE(e) {
             return this.read(DataView.prototype.getUint16, 2, !0, e)
         }
+
         readUInt16BE(e) {
             return this.read(DataView.prototype.getUint16, 2, !1, e)
         }
+
         readInt32LE(e) {
             return this.read(DataView.prototype.getInt32, 4, !0, e)
         }
+
         readInt32BE(e) {
             return this.read(DataView.prototype.getInt32, 4, !1, e)
         }
+
         readUInt32LE(e) {
             return this.read(DataView.prototype.getUint32, 4, !0, e)
         }
+
         readUInt32BE(e) {
             return this.read(DataView.prototype.getUint32, 4, !1, e)
         }
+
         readString16() {
             let e = "";
-            for (;;) {
+            for (; ;) {
                 let t = this.eof ? 0 : this.readUInt16LE();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
             }
             return e
         }
+
         readString() {
             let e = "";
-            for (;;) {
+            for (; ;) {
                 let t = this.eof ? 0 : this.readUInt8();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
             }
             return e
         }
+
         readEscapedString() {
             return decodeURIComponent(escape(this.readString()))
         }
+
         writeInt8(e) {
             this.write(DataView.prototype.setInt8, 1, e, null)
         }
+
         writeUInt8(e) {
             this.write(DataView.prototype.setUint8, 1, e, null)
         }
+
         writeInt16LE(e) {
             this.write(DataView.prototype.setInt16, 2, e, !0)
         }
+
         writeInt16BE(e) {
             this.write(DataView.prototype.setInt16, 2, e, !1)
         }
+
         writeUInt16LE(e) {
             this.write(DataView.prototype.setUint16, 2, e, !0)
         }
+
         writeUInt16BE(e) {
             this.write(DataView.prototype.setUint16, 2, e, !1)
         }
+
         writeInt32LE(e) {
             this.write(DataView.prototype.setInt32, 4, e, !0)
         }
+
         writeInt32BE(e) {
             this.write(DataView.prototype.setInt32, 4, e, !1)
         }
+
         writeUInt32LE(e) {
             this.write(DataView.prototype.setUint32, 4, e, !0)
         }
+
         writeUInt32BE(e) {
             this.write(DataView.prototype.setUint32, 4, e, !1)
         }
+
         writeString(e) {
             let t = e.length;
             this.ensureCapacity(t);
             let s = this.offset;
             for (this.offset += t; t--;) this.view.setUint8(s + t, e.charCodeAt(t))
         }
+
         writeStringNT(e) {
             this.writeString(e), this.writeUInt8(0)
         }
+
         writeEscapedString(e) {
             this.writeString(unescape(encodeURIComponent(e)))
         }
+
         writeEscapedStringNT(e) {
             this.writeStringNT(unescape(encodeURIComponent(e)))
         }
     }
+
     window.SmartBuffer = s;
     let i = [5, 104, 253, 62, 175, 116, 238, 41];
+
     class a {
         constructor(e) {
             this.data = e
         }
+
         writeIndex(e, t) {
             let s = this.data[t],
                 a = s + 5 & 7,
                 n = e[t > 0 ? t - 1 : 0] ^ i[t];
             e.push(((s << a | s >>> 8 - a) & 255 ^ n ^ 62) & 255)
         }
+
         build(e = !1) {
             let t = [];
             for (let s = 0; s < 8; s++) this.writeIndex(t, s);
@@ -264,17 +304,19 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             return t.push((t[0] ^ i >> 24) & 255), t.push((t[1] ^ i >> 16) & 255), t.push((t[2] ^ i >> 8) & 255), t.push((i ^ t[3]) & 255), t.push((t[0] ^ +e ^ 31) & 255), t
         }
     }
+
     var n = [.79, 1.52, 2.35, 3, 3.92, 4.7, 5.5, 6.2];
 
     function o(e) {
         for (var t = 9e9, s = 0, i = 0; e.length < i; i++) e[i].id < t && (s = i, t = e[i].id);
         return e.splice(s, 1), e
     }
-    String.prototype.toHHMMSS = function() {
+
+    String.prototype.toHHMMSS = function () {
         var e = parseInt(this, 10),
             t = Math.floor(e / 3600),
             s = Math.floor((e - 3600 * t) / 60);
-        return `${0!==s?`${s}m `:""}${e-3600*t-60*s}s`
+        return `${0 !== s ? `${s}m ` : ""}${e - 3600 * t - 60 * s}s`
     }, window.makeid = e => {
         for (var t = "", s = "X0123456789", i = s.length, a = 0; a < e; a++) t += s.charAt(Math.floor(Math.random() * i));
         return t
@@ -288,20 +330,21 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         region: "EU",
         url: "ws://localhost:8080"
     }],
-        function(e) {
-            var t, s = (t = !0, function(e, s) {
-                var i = t ? function() {
+        function (e) {
+            var t, s = (t = !0, function (e, s) {
+                var i = t ? function () {
                     if (s) {
                         var t = s.apply(e, arguments);
                         return s = null, t
                     }
-                } : function() {};
+                } : function () {
+                };
                 return t = !1, i
             });
 
             function i(t) {
-                var i = s(this, function() {
-                    var e = function() {
+                var i = s(this, function () {
+                    var e = function () {
                         return !e.constructor('return /" + this + "/')().constructor("^([^ ]+( +[^ ]+)+)+[^ ]}").test(i)
                     };
                     return e()
@@ -320,6 +363,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 return e
             }
+
             var n = {},
                 o = {
                     0: 0
@@ -335,36 +379,37 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 };
                 return e[t].call(s.exports, s, s.exports, l), s.l = !0, s.exports
             }
-            window.getModule = l, l.m = e, l.c = n, l.d = function(e, t, s) {
+
+            window.getModule = l, l.m = e, l.c = n, l.d = function (e, t, s) {
                 l.o(e, t) || Object.defineProperty(e, t, {
                     enumerable: !0,
                     get: s
                 })
-            }, l.r = function(e) {
+            }, l.r = function (e) {
                 "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
                     value: "Module"
                 }), Object.defineProperty(e, "__esModule", {
                     value: !0
                 })
-            }, l.t = function(e, t) {
+            }, l.t = function (e, t) {
                 if (1 & t && (e = l(e)), 8 & t || 4 & t && "object" == typeof e && e && e.__esModule) return e;
                 var s = Object.create(null);
                 if (l.r(s), Object.defineProperty(s, "default", {
                     enumerable: !0,
                     value: e
                 }), 2 & t && "string" != typeof e)
-                    for (var i in e) l.d(s, i, (function(t) {
+                    for (var i in e) l.d(s, i, (function (t) {
                         return e[t]
                     }).bind(null, i));
                 return s
-            }, l.n = function(e) {
-                var t = e && e.__esModule ? function() {
+            }, l.n = function (e) {
+                var t = e && e.__esModule ? function () {
                     return e.default
-                } : function() {
+                } : function () {
                     return e
                 };
                 return l.d(t, "a", t), t
-            }, l.o = function(e, t) {
+            }, l.o = function (e, t) {
                 return Object.prototype.hasOwnProperty.call(e, t)
             }, l.p = "";
             var c = window.webpackJsonp = window.webpackJsonp || [],
@@ -373,7 +418,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             for (var d = 0; d < c.length; d++) i(c[d]);
             var p = h;
             r.push([118, 1]), a()
-        }([, function(e, t, i) {
+        }([, function (e, t, i) {
             let n = i(5),
                 {
                     writeUserData: o
@@ -416,6 +461,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     for (; e.length;) e.pop().destroy(t)
                 };
             document.body.oncontextmenu = e => e.target?.id === "email";
+
             class k {
                 constructor() {
                     this.running = !1, this.protocol, this.modeId, this.instanceSeed, this.replaying, this.nwDataMax, this.nwDataSent, this.nwDataTotal, this.nwData, this.playerId, this.dualboxPid, this.activePid, this.tagId, this.spectating, this.alive = !1, this.center = {
@@ -425,6 +471,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         constructor() {
                             this.socketCount = 0, this.opened = !1
                         }
+
                         onClosed(e) {
                             delete C.currentWsId, this.opened = !1, C.running && C.stop();
                             let t;
@@ -438,9 +485,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 this.opened || C.events.$emit("reconnect-server")
                             }, t), C.showMenu(!0)
                         }
+
                         onRejected() {
                             delete C.currentWsId, this.opened = !1, w("Connection rejected", !0)
                         }
+
                         open(e) {
                             C.dual.close(), C.running && C.stop(), this.close(), C.events.$emit("chat-clear"), this.opened = !0;
                             let t = C.ws = new WebSocket(e, "tFoL46WDlZuRja7W6qCl");
@@ -453,6 +502,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 C.nwData += t.byteLength, C.parseMessage(s.fromBuffer(t))
                             }
                         }
+
                         close() {
                             C.dual.close(), C.debugElement.innerHTML = "";
                             let {
@@ -460,6 +510,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             } = C;
                             e && (e.onmessage = null, e.onclose = null, e.onerror = null, e.close(), delete C.ws, delete C.state.connectionUrl, this.opened = !1)
                         }
+
                         send(e, t, i = !1) {
                             e instanceof s && (e = e.view), t = !!t;
                             let {
@@ -469,6 +520,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             let n = t ? a.ws : C.ws;
                             return console.assert(!!n, "Socket not defined?"), n.send(e), !0
                         }
+
                         sendMouse() {
                             let e = s.fromSize(5);
                             e.writeUInt8(16);
@@ -482,24 +534,29 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             } = C;
                             this.send(e, a.focused), a.connected && (C.isAlive(!1) && C.isAlive(!0) || this.send(e, C.isAlive(!1)))
                         }
+
                         sendOpcode(e, t) {
                             let i = s.fromSize(1);
                             i.writeUInt8(e), this.send(i, t)
                         }
+
                         ping() {
                             C.pingStamp = performance.now(), this.sendOpcode(3)
                         }
+
                         sendJoinData(e, t) {
                             let i = s.fromSize(2 + e.length + 7);
                             i.writeUInt8(5), i.writeUInt8(C.clientVersion), i.ensureCapacity(e.length), e.forEach(e => i.writeUInt8(e)), o(i, !!t);
                             let a = localStorage.vanisToken;
                             a && /^wss?:\/\/[a-zA-Z0-9_-]+\.vanis\.io/i.test(C.ws.url) && i.writeStringNT(a), this.send(i, t, !!t)
                         }
+
                         sendRecaptchaToken(e, t) {
                             e = unescape(encodeURIComponent(e));
                             let i = s.fromSize(1 + e.length + 1);
                             i.writeUInt8(11), i.writeStringNT(e), this.send(i, t)
                         }
+
                         sendChatMessage(e, t) {
                             if ((e = unescape(encodeURIComponent(e))).startsWith("/")) {
                                 window.client && window.client.chatted(e);
@@ -510,12 +567,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }, this.dual, this.pingStamp, this.timeStamp, this.serverTick, this.cells = new Map, this.destroyedCells = [], this.cellCount = 0, this.ownedCells = new Set, this.rawMouse, this.mouse, this.mouseZoom, this.mouseZoomMin, this.camera, this.massTextPool = [], this.crownPool = [], c.useGame(this), this.scene, this.playerManager, this.ticker, this.splitCount, this.moveWaitUntil, this.stopMovePackets, this.mouseFrozen, this.moveInterval, setInterval(() => this.events.$emit("every-second"), 1e3), setInterval(() => this.events.$emit("every-minute"), 6e4)
                 }
+
                 isAlive(e = !1) {
                     let {
                         dual: t
                     } = this;
                     return e ? t.opened && t.alive : this.connection.opened && this.alive
                 }
+
                 get allCells() {
                     let e = this.cells,
                         {
@@ -528,6 +587,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         e.has(s) || e.set(s, t)
                     }), e
                 }
+
                 updateStates(e) {
                     let t = !1,
                         s = !1,
@@ -538,6 +598,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         e.pid && (e.pid == this.playerId ? this.alive = t = !0 : i.opened && e.pid == i.pid && (i.alive = s = !0))
                     }), this.alive && !t && (this.alive = !1), i.alive && !s && (i.alive = !1), y.lifeState = (t ? 1 : 0) + (s ? 2 : 0), e ? s : t
                 }
+
                 start(e) {
                     if (!(e.protocol && e.instanceSeed && e.playerId && e.border)) throw Error("Lacking mandatory data");
                     this.running = !0, this.protocol = e.protocol, this.modeId = e.gamemodeId || 0, this.instanceSeed = e.instanceSeed, this.replaying = !!e.replayUpdates, this.nwDataMax = this.nwDataSent = this.nwDataTotal = this.nwData = 0, this.pingStamp = 0, this.timeStamp = 0, this.serverTick = 0, this.playerId = e.playerId, this.dualboxPid = 0, this.activePid = this.playerId, this.tagId = null, this.spectating = !1, this.alive = !1, y.spectators = 0, y.lifeState = 0, this.score = 0, this.highestScore = 0, this.cellCount = 0, this.rawMouse = {
@@ -585,6 +646,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, 40), this.events.$on("every-second", k.everySecond), y.allowed = !0;
                     this.ticker.start(), this.eventListeners(!0), this.events.$emit("game-started")
                 }
+
                 stop() {
                     let {
                         dual: e
@@ -599,6 +661,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         children: !0
                     }), delete this.scene), this.renderer.clear(), p.cells.destroyCache(), p.squares.destroyCache(), I(this.massTextPool, !0), I(this.crownPool), delete this.massTextPool, delete this.crownPool
                 }
+
                 showMenu(e) {
                     if (e ??= !this.app.showMenu, this.app.showDeathScreen) return !1;
                     if (this.app.showMenu = e, this.actions.stopMovement(e), e) this.events.$emit("menu-opened");
@@ -608,6 +671,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     return e
                 }
+
                 updateStats(e) {
                     this.events.$emit("stats-changed", {
                         ping: e,
@@ -619,6 +683,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         spectators: y.spectators
                     })
                 }
+
                 static everySecond() {
                     (C.isAlive(!1) || C.isAlive(!0)) && C.timeAlive++, C.nwData > C.nwDataMax && (C.nwDataMax = C.nwData), C.nwDataTotal += C.nwData;
                     let {
@@ -663,6 +728,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = C;
                     o.connected && (o.pingStamp = performance.now(), e.sendOpcode(3, !0))
                 }
+
                 clearCells() {
                     this.cells.forEach(e => e.destroy(1));
                     let {
@@ -670,6 +736,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = this;
                     for (; e.length;) e.pop().destroySprite()
                 }
+
                 onTick() {
                     let e = this.timeStamp = performance.now();
                     e >= this.moveWaitUntil && (this.updateMouse(), this.splitCount = 0);
@@ -698,11 +765,15 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } else this.isAlive(!0) || this.isAlive(!1) || (this.score = 0);
                     this.renderer.render(n.container)
                 }
+
                 updateCamera(e = !1) {
                     let {
-                        scene: t,
-                        camera: s
-                    } = this, i = this.timeStamp - s.time, a = m(i / r.cameraMoveDelay, 0, 1), n = m(i / r.cameraZoomDelay, 0, 1), o = t.container.pivot.x = 1 == a ? s.nx : A(s.ox, s.nx, a), l = t.container.pivot.y = 1 == a ? s.ny : A(s.oy, s.ny, a), c = 1 == n ? s.nz : A(s.oz, s.nz, n);
+                            scene: t,
+                            camera: s
+                        } = this, i = this.timeStamp - s.time, a = m(i / r.cameraMoveDelay, 0, 1),
+                        n = m(i / r.cameraZoomDelay, 0, 1), o = t.container.pivot.x = 1 == a ? s.nx : A(s.ox, s.nx, a),
+                        l = t.container.pivot.y = 1 == a ? s.ny : A(s.oy, s.ny, a),
+                        c = 1 == n ? s.nz : A(s.oz, s.nz, n);
                     t.container.scale.set(c);
                     let h = this.mouseZoom,
                         d = 0,
@@ -736,6 +807,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     return e ? (s.ox = o, s.oy = l, s.oz = c, s.nx = d, s.ny = p, s.nz = h, s.time = this.timeStamp, 0) : u
                 }
+
                 updateMouse(e = !1) {
                     let t = this.scene.container,
                         {
@@ -747,9 +819,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         y: i
                     }), (!this.mouseFrozen || e) && (this.mouse.x = m(t.pivot.x + (s - window.innerWidth / 2) / t.scale.x, -32768, 32767), this.mouse.y = m(t.pivot.y + (i - window.innerHeight / 2) / t.scale.y, -32768, 32767))
                 }
+
                 seededRandom(e) {
                     return (e = Math.sin(e) * (1e4 + this.instanceSeed)) - Math.floor(e)
                 }
+
                 createThumbnail(e = 240, t = 135) {
                     let s = this.scene.container,
                         i = new PIXI.Container;
@@ -766,15 +840,19 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let h = l.toDataURL();
                     return i.destroy(!0), h
                 }
+
                 setTagId(e) {
                     return e || (e = null), e !== this.tagId && (this.tagId = e, !0)
                 }
+
                 getMassText(e) {
                     return !r.shortMass || e < 1e3 ? e.toFixed(0) : (e / 1e3).toFixed(1) + "k"
                 }
+
                 shouldAutoRespawn(e) {
                     return !this.app.showMenu && (e ? r.dualAutorespawn : r.autoRespawn)
                 }
+
                 triggerDeathDelay(e) {
                     function getConvertedTimeToSeconds(str) {
                         if (typeof str !== 'string') return 0;
@@ -822,7 +900,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             <i class="fas fa-clock barIcon"></i>
                             <p class="statBarTime">${that.timeAlive.toString().toHHMMSS()}</p>
                             <i class="fas fa-trophy barIcon"></i>
-                            <p class="statBarScore">${that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}</p>
+                            <p class="statBarScore">${that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                         `;
 
                         document.querySelector('.statBar').innerHTML = statBarItem;
@@ -840,6 +918,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     updateStatData(this);
                     updateRespawn(e, this);
                 }
+
                 triggerAutoRespawn(e) {
                     if (e) {
                         let {
@@ -848,6 +927,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         t.autoRespawning = !1, t.spawn()
                     } else y.deathDelay = !1, y.autoRespawning = !1, this.actions.join()
                 }
+
                 handleDeath(e, t) {
                     e.readUInt16LE(), this.killCount += e.readUInt16LE(), e.readUInt32LE(), t || (y.deathDelay = !0);
                     let {
@@ -855,9 +935,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = this;
                     this.shouldAutoRespawn(t) ? t ? (s.autoRespawning = !0, s.ticksSinceDeath = 0) : (y.autoRespawning = !0, this.ticksSinceDeath = 0) : this.deathTimeout = setTimeout(this.triggerDeathDelay.bind(this, t), 900), s.updateOutlines()
                 }
+
                 parseLeaderboard(e) {
                     let t = [];
-                    for (;;) {
+                    for (; ;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("leaderboard-update", t);
@@ -876,9 +957,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         t.push(a)
                     }
                 }
+
                 parseScrimmageLeaderboard(e) {
                     let t = [];
-                    for (;;) {
+                    for (; ;) {
                         let s = e.readUInt8();
                         if (0 == s) break;
                         let i = {};
@@ -899,9 +981,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     this.events.$emit("leaderboard-update", t, n)
                 }
+
                 parseMinimap(e) {
                     let t = [];
-                    for (;;) {
+                    for (; ;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("minimap-positions", t);
@@ -917,6 +1000,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         })
                     }
                 }
+
                 parsePlayers(e) {
                     let t = JSON.parse(e.readEscapedString()),
                         s = t.find(e => e.pid === this.playerId),
@@ -936,6 +1020,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     i && (this.events.$emit("minimap-positions", []), a.invalidateVisibility(n))
                 }
+
                 parseMessage(e) {
                     let t = e.readUInt8();
                     switch (t) {
@@ -958,7 +1043,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             let {
                                 playerManager: r
                             } = this;
-                            for (;;) {
+                            for (; ;) {
                                 let l = e.readUInt16LE();
                                 if (0 == l) return;
                                 r.delayedRemovePlayer(l)
@@ -1067,7 +1152,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             let {
                                 playerManager: T
                             } = this;
-                            for (;;) {
+                            for (; ;) {
                                 let D = e.readUInt16LE();
                                 if (0 === D) return;
                                 let L = e.readString16(),
@@ -1136,8 +1221,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }
             }
+
             e.exports = C = window.GAME = new k
-        }, , , function(e) {
+        }, , , function (e) {
             var t = {
                 useWebGL: !0,
                 gameResolution: 1,
@@ -1263,14 +1349,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 return Math.ceil(s)
             }
+
             e.exports = window.settings = new class {
                 constructor() {
                     this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle();
                     showTimeMessageG = this.userDefinedSettings.showTimeMessage, rainbowColorTimeMessageG = this.userDefinedSettings.rainbowColorTimeMessage;
                 }
+
                 getInternalSettings() {
                     this.cellSize = 512
                 }
+
                 compileNameFontStyle() {
                     var e = {
                         fontFamily: this.cellNameFont,
@@ -1279,6 +1368,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     };
                     return this.cellNameOutline && (e.stroke = PIXI.utils.string2hex(this.cellNameOutlineColor), e.strokeThickness = i(this.cellNameOutline, e.fontSize), e.lineJoin = this.cellNameSmoothOutline ? "round" : "miter"), this.nameTextStyle = e
                 }
+
                 compileMassFontStyle() {
                     var e = {
                         fontFamily: this.cellMassFont,
@@ -1289,6 +1379,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     };
                     return this.cellMassOutline && (e.stroke = PIXI.utils.string2hex(this.cellMassOutlineColor), e.strokeThickness = i(this.cellMassOutline, e.fontSize), e.lineJoin = this.cellMassSmoothOutline ? "round" : "miter"), this.massTextStyle = e
                 }
+
                 loadUserDefinedSettings() {
                     if (!localStorage.settings) return {};
                     try {
@@ -1297,14 +1388,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         return {}
                     }
                 }
+
                 getDefault(e) {
                     return t[e]
                 }
+
                 set(e, t) {
                     return this[e] !== t && (this[e] = t, this.userDefinedSettings[e] = t, localStorage.settings = JSON.stringify(this.userDefinedSettings), !0)
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(270).default,
                 a = i.mixin({
                     toast: !0,
@@ -1314,13 +1407,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 });
             window.Swal = i, window.SwalAlerts = e.exports = {
                 toast: a,
-                alert: function(e) {
+                alert: function (e) {
                     i.fire({
                         text: e,
                         confirmButtonText: "OK"
                     })
                 },
-                confirm: function(e, t, s) {
+                confirm: function (e, t, s) {
                     i.fire({
                         text: e,
                         showCancelButton: !0,
@@ -1331,13 +1424,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 },
                 instance: i
             }
-        }, , , function(e, t, s) {
+        }, , , function (e, t, s) {
             let i = s(4),
                 a = !1;
             e.exports = {
                 lerp: (e, t, s) => e + (t - e) * s,
                 clampNumber: (e, t, s) => Math.min(s, Math.max(t, e)),
-                getTimeString: function(e, t, s) {
+                getTimeString: function (e, t, s) {
                     e instanceof Date && (e = e.getTime());
                     var i = t ? 1 : 1e3,
                         a = 60 * i,
@@ -1385,12 +1478,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     e.writeEscapedStringNT(s), e.writeEscapedStringNT(a), e.writeEscapedStringNT(n)
                 }
             }
-        }, , , , function(e, t, s) {
+        }, , , , function (e, t, s) {
             let i = s(4);
+
             class a {
                 constructor() {
                     this.cache = new Map, this.textureSize = i.cellSize, this.cellSize = this.textureSize / 2
                 }
+
                 destroyCache() {
                     let {
                         cache: e
@@ -1398,6 +1493,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     e.forEach(e => e.destroy(!0)), e.clear()
                 }
             }
+
             let n = s(24),
                 o = s(124);
             e.exports = {
@@ -1437,7 +1533,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 },
                 virus: o
             }
-        }, , function(e, t, s) {
+        }, , function (e, t, s) {
             let i = s(1),
                 a = s(4),
                 {
@@ -1446,6 +1542,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 {
                     clampNumber: o
                 } = s(8);
+
             class r {
                 constructor({
                                 id: e,
@@ -1460,6 +1557,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let l = this.sprite = new PIXI.Sprite(this.texture = o);
                     l.anchor.set(.5), l.gameData = this, this.x = this.ox = l.position.x = t, this.y = this.oy = this.sprite.position.y = s, this.mainContext = r, this.activeContexts = 1
                 }
+
                 update() {
                     let e = i.timeStamp - this.updateStamp,
                         t = o(e / a.drawDelay, 0, 1);
@@ -1475,6 +1573,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = n;
                     return r.x = this.x = t * this.newPositionScale * (this.nx - this.ox) + this.ox, r.y = this.y = t * this.newPositionScale * (this.ny - this.oy) + this.oy, this.onUpdate && this.onUpdate(), !1
                 }
+
                 destroy(e, t = !1) {
                     if (this.destroyed) return !1;
                     let {
@@ -1497,12 +1596,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     return this.onDestroy && this.onDestroy(), this.pid && i.ownedCells.delete(this), this.destroyed = !0, t ? i.destroyedCells.push(this) : this.destroySprite(), !0
                 }
+
                 destroySprite() {
                     this.sprite && (this.sprite.destroy(), this.sprite = null)
                 }
             }
+
             r.prototype.type = 0, r.prototype.updateStamp = 0, r.prototype.newPositionScale = 1, e.exports = r
-        }, , , function(e, t, s) {
+        }, , , function (e, t, s) {
             var i = s(5);
 
             function a() {
@@ -1518,19 +1619,21 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 for (var t = "", s = 0; s < e.length; s++) t += String.fromCharCode(e.charCodeAt(s) - 2);
                 return t
             }
+
             var o = ["pkiigt", "p3iigt", "pkii5t", "pkiic", "p3iic", "p3ii6", "pkii", "p3ii", "p3i", "hciiqv", "h6iiqv", "hcii2v", "hci", "cpcn", "cuujqng", "ewpv", "rwuu{", "xcikpc", "xci3pc", "eqem", "e2em", "uewo", "ycpm", "yjqtg", "yj2tg", "unwv", "dkvej", "d3vej", "rqtp", "r2tp", "tcrg", "t6rg", "jkvngt", "j3vngt", "jkvn5t", "j3vn5t", "pc|k", "p6|k", "tgvctf", "ejkpm", "hwem", "ujkv"],
                 r = o.map(n),
                 l = o.map(n).sort((e, t) => t.length - e.length).map(e => RegExp("[^s]*" + e.split("").join("s*") + "[^s]*", "gi"));
             e.exports = {
-                noop: function() {},
-                checkBadWords: function(e) {
+                noop: function () {
+                },
+                checkBadWords: function (e) {
                     return e = e.toLowerCase(), r.some(t => e.includes(t))
                 },
-                replaceBadWordsChat: function(e) {
+                replaceBadWordsChat: function (e) {
                     for (var t = 0; t < l.length; t++) e = e.replace(l[t], e => Array(e.length).fill("*").join(""));
                     return e
                 },
-                notifyUnsupportedBrowser: async function() {
+                notifyUnsupportedBrowser: async function () {
                     window.safari || /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ? i.instance.fire({
                         type: "warning",
                         title: "Safari browser is not supported :(",
@@ -1548,7 +1651,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 },
                 isFirstVisit: !localStorage.visitedBefore && (localStorage.visitedBefore = !0, !0)
             }
-        }, , , , , , , function(e, t, s) {
+        }, , , , , , , function (e, t, s) {
             var i = s(4),
                 a = s(8);
             PIXI.utils.skipHello();
@@ -1567,26 +1670,28 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             function l() {
                 r.resize(window.innerWidth, window.innerHeight)
             }
+
             l(), a.destroyPixiPlugins(r), window.addEventListener("resize", l), r.clear(), e.exports = r
-        }, function(e) {
+        }, function (e) {
             function t() {
                 this.data = []
             }
-            e.exports = t, t.prototype.write = function() {
+
+            e.exports = t, t.prototype.write = function () {
                 return new Uint8Array(this.data)
-            }, t.prototype.uint8 = function(e) {
+            }, t.prototype.uint8 = function (e) {
                 this.data.push(e)
-            }, t.prototype.uint8Array = function(e) {
+            }, t.prototype.uint8Array = function (e) {
                 for (var t = 0; t < e.length; t++) this.data.push(e[t])
-            }, t.prototype.utf8 = function(e) {
+            }, t.prototype.utf8 = function (e) {
                 e = unescape(encodeURIComponent(e));
                 for (var t = 0; t < e.length; t++) this.data.push(e.charCodeAt(t));
                 this.data.push(0)
             }
-        }, , , , function(e, t, s) {
+        }, , , , function (e, t, s) {
             var i = s(2),
                 a = s(167);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1594,19 +1699,19 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(31),
                 a = s.n(i);
             t.default = a.a
-        }, function(e) {
+        }, function (e) {
             e.exports = {
                 data: () => ({})
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(169);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1614,10 +1719,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(171);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1625,10 +1730,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(173);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1636,10 +1741,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(175);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1647,10 +1752,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(177);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1658,10 +1763,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(179);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1669,12 +1774,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(39),
                 a = s.n(i);
             t.default = a.a
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(89),
                 a = s(1),
                 n = s(5),
@@ -1718,10 +1823,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(219);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1729,10 +1834,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(221);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1740,10 +1845,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(223);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1751,10 +1856,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(225);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1762,10 +1867,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(227);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1773,10 +1878,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(231);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1784,10 +1889,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(233);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1795,10 +1900,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(235);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1806,10 +1911,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(237);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1817,10 +1922,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(239);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1828,10 +1933,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(241);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1839,10 +1944,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(243);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1850,10 +1955,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(245);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1861,10 +1966,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(247);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1872,10 +1977,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(249);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1883,12 +1988,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(56),
                 a = s.n(i);
             t.default = a.a
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(1),
                 a = s(8),
                 n = s(4),
@@ -1909,6 +2014,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     i = Math.floor(s / 60);
                 return s < 1 ? t ? e + "s" : "<1min" : i < 1 ? s + "min" : s % 60 == 0 ? i + "hr" : i + "hr " + s % 60 + "min"
             }
+
             e.exports = {
                 data: () => ({
                     showMinimap: !1,
@@ -2053,10 +2159,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     this.initRenderer(this.$refs.minimap), this.startTime = Date.now()
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(251);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2064,10 +2170,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(253);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2075,10 +2181,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(255);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2086,10 +2192,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(257);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2097,10 +2203,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(259);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2108,10 +2214,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(261);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2119,10 +2225,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(263);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2130,10 +2236,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(266);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2141,7 +2247,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, , function(e, t, s) {
+        }, , function (e, t, s) {
             let i = s(1),
                 a = s(4),
                 n = s(5),
@@ -2258,10 +2364,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor() {
                     this.version = 2, this.pressHandlers = null, this.releaseHandlers = null, this.resetObsoleteHotkeys(), this.load()
                 }
-                resetObsoleteHotkeys() {}
+
+                resetObsoleteHotkeys() {
+                }
+
                 load() {
                     this.hotkeys = this.loadHotkeys(), this.loadHandlers(this.hotkeys)
                 }
+
                 loadHotkeys() {
                     let e = Object.assign({}, l),
                         t = localStorage.hotkeys;
@@ -2273,15 +2383,19 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         i && s.includes(i) && (e[t] = "")
                     }), Object.assign(e, t)
                 }
+
                 saveHotkeys(e) {
                     localStorage.hotkeys = JSON.stringify(e)
                 }
+
                 reset() {
                     return localStorage.removeItem("hotkeys"), this.load(), this.hotkeys
                 }
+
                 get() {
                     return this.hotkeys
                 }
+
                 set(e, t) {
                     if (!(e in r)) return !1;
                     if (this.hotkeys[e] === t) return !0;
@@ -2289,6 +2403,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         for (let s in this.hotkeys) this.hotkeys[s] === t && (this.hotkeys[s] = "");
                     return this.hotkeys[e] = t, this.saveHotkeys(this.hotkeys), this.loadHandlers(this.hotkeys), !0
                 }
+
                 loadHandlers(e) {
                     for (let t in this.pressHandlers = {}, e) {
                         if (!(t in r)) continue;
@@ -2298,21 +2413,24 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     this.releaseHandlers = {}, "feedMacro" in e && (this.releaseHandlers[e.feedMacro] = o.feed.bind(o, !1)), window.client && "m-feedMacro" in e && (this.releaseHandlers[e["m-feedMacro"]] = client.feed.bind(o, !1))
                 }
+
                 press(e) {
                     let t = this.pressHandlers[e];
                     return !!t && (t(), !0)
                 }
+
                 release(e) {
                     let t = this.releaseHandlers[e];
                     t?.()
                 }
+
                 convertKey(e) {
                     return e ? e.toString().toUpperCase().replace(/^(LEFT|RIGHT|NUMPAD|DIGIT|KEY)/, "") : "Unknown"
                 }
             }
-        }, , , , , , , function(e, t, s) {
+        }, , , , , , , function (e, t, s) {
             "use strict";
-            var i = function() {
+            var i = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", [t("div", {
@@ -2385,14 +2503,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })])])
                 },
                 a = [];
-            i._withStripped = !0, s.d(t, "a", function() {
+            i._withStripped = !0, s.d(t, "a", function () {
                 return i
-            }), s.d(t, "b", function() {
+            }), s.d(t, "b", function () {
                 return a
             })
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
-            var i = function() {
+            var i = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -2406,14 +2524,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("div", {
                         staticClass: "overlay",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.$emit("close")
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "fas fa-times-circle close-button",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.$emit("close")
                             }
                         }
@@ -2429,14 +2547,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._t("default", [e._v("Here should be something")])], 2)])], 1)])])
                 },
                 a = [];
-            i._withStripped = !0, s.d(t, "a", function() {
+            i._withStripped = !0, s.d(t, "a", function () {
                 return i
-            }), s.d(t, "b", function() {
+            }), s.d(t, "b", function () {
                 return a
             })
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
-            var i = function() {
+            var i = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -2446,14 +2564,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             backgroundImage: "url('" + e.replay.image + "')"
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.play(e.replay.data)
                             }
                         }
                     }, [s("div", {
                         staticClass: "replay-header",
                         on: {
-                            click: function(e) {
+                            click: function (e) {
                                 e.stopPropagation()
                             }
                         }
@@ -2462,37 +2580,38 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._v(e._s(e.replay.name))]), e._v(" "), s("div", [s("i", {
                         staticClass: "replay-button fas fa-cloud-download-alt",
                         on: {
-                            click: function(t) {
+                            click: function (t) {
                                 return t.stopPropagation(), e.downloadReplay(e.replay)
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "replay-button fas fa-trash-alt",
                         on: {
-                            click: function(t) {
+                            click: function (t) {
                                 return t.stopPropagation(), e.deleteReplay(e.replay.name)
                             }
                         }
                     })])])])
                 },
                 a = [];
-            i._withStripped = !0, s.d(t, "a", function() {
+            i._withStripped = !0, s.d(t, "a", function () {
                 return i
-            }), s.d(t, "b", function() {
+            }), s.d(t, "b", function () {
                 return a
             })
-        }, function(e, t) {
+        }, function (e, t) {
             t.neon = [16776960, 65280, 65535, 16711935], t.basic = [16711680, 16744448, 16776960, 8453888, 65280, 65408, 65535, 33023, 8388863, 16711935, 16711808], t.basicd = t.basic.map(e => {
                 var t = e >> 16 & 255,
                     s = e >> 8 & 255,
                     i = 255 & e;
                 return (t *= .5) << 16 | (s *= .5) << 8 | (i *= .5) >> 0
             })
-        }, function(e) {
+        }, function (e) {
             var t = new class {
                 constructor() {
                     this.ads = {}
                 }
+
                 addAd(e, t, s) {
                     this.ads[e] = {
                         elementId: t,
@@ -2500,14 +2619,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         waitInterval: s || 0
                     }
                 }
+
                 getAd(e) {
                     return this.ads[e] || null
                 }
+
                 pushAd(e) {
-                    aiptag.cmd.display.push(function() {
+                    aiptag.cmd.display.push(function () {
                         aipDisplayTag.display(e)
                     })
                 }
+
                 refreshAd(e) {
                     var t = this.getAd(e);
                     if (!t) return !1;
@@ -2524,7 +2646,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 },
                 refreshAd: e => t.refreshAd(e)
             }
-        }, function(e) {
+        }, function (e) {
             let t = e => {
                 let t = {
                     border: {},
@@ -2553,7 +2675,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 return t.border.x = (t.border.minx + t.border.maxx) / 2, t.border.y = (t.border.miny + t.border.maxy) / 2, t
             };
             e.exports = t
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(1),
                 a = s(4),
                 {
@@ -2568,11 +2690,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 {
                     clampNumber: p
                 } = s(8);
+
             class u extends d {
                 constructor(e) {
                     e.texture = PIXI.Texture.from("/img/coin.png"), super(e)
                 }
             }
+
             u.prototype.type = 9, u.prototype.isCoin = !0;
             let g = (e, t, s, a, d, p, g, A, m = 1) => {
                     let v = 15 & e;
@@ -2592,7 +2716,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = i, {
                         cells: I
                     } = 1 & m ? i : w, k;
-                    if (I.has(s))(k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
+                    if (I.has(s)) (k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
                     else {
                         let b = {
                                 type: e,
@@ -2729,7 +2853,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         }
                                         A(t, s, e)
                                     },
-                                    emscripten_notify_memory_growth(e) {}
+                                    emscripten_notify_memory_growth(e) {
+                                    }
                                 }
                             }),
                             {
@@ -2737,6 +2862,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             } = t.exports;
                         return this.HEAPU8 = new Uint8Array(s.buffer), this.HEAPU16 = new Uint8Array(s.buffer), this.HEAPF32 = new Uint8Array(s.buffer), this.HEAPU32 = new Uint8Array(s.buffer), delete this.initializing, !0
                     }
+
                     deserialize(e, t, s) {
                         if (!this.instance) return 0;
                         let {
@@ -2753,7 +2879,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 destroyCell: m,
                 eatCell: A
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(140);
 
             function a(e, t, s, a) {
@@ -2768,36 +2894,37 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 return i._free(o), s ? l : c
             }
+
             s(141), e.exports = {
                 skid: e => a(e, i._skid, !1),
                 skid3: (e, t) => a(e, i._skid3, !0, t),
                 skid4: (e, t) => a(e, i._skid4, !0, t)
             }
-        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function(e, t, s) {
+        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
             "use strict";
             var i = s(74),
                 a = s(30),
                 n = Object((s(168), s(0)).a)(a.default, i.a, i.b, !1, null, "0eaeaf66", null);
             n.options.__file = "src/components/modal.vue", t.default = n.exports
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(75),
                 a = s(38),
                 n = Object((s(218), s(0)).a)(a.default, i.a, i.b, !1, null, "1dbc6ed9", null);
             n.options.__file = "src/components/replay-item.vue", t.default = n.exports
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(73),
                 a = s(55),
                 n = Object((s(250), s(0)).a)(a.default, i.a, i.b, !1, null, "4c95bd45", null);
             n.options.__file = "src/components/minimap.vue", t.default = n.exports
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             s(17).notifyUnsupportedBrowser(), s(1), s(130), s(132), s(142), s(148), s(269), s(267), s(268)
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(2),
                 a = s(120);
-            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2805,7 +2932,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             let i, a = s(4),
                 n = s(12),
                 o = ({
@@ -2828,24 +2956,31 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor(e, t) {
                     this.backgroundLocationImage = null, this.border = e, this.container = new PIXI.Container, this.background = new PIXI.Container, this.borderSprite = o(e), this.background.addChild(this.borderSprite), this.foreground = new PIXI.Container, this.food = new PIXI.Container, this.food.visible = a.foodVisible, this.resetMassTextStyle(!1), this.container.addChild(this.background, this.food, this.foreground), this.setPosition(), t && this.setBackgroundImage(), this.background.position.x = e.x, this.background.position.y = e.y, this.initBackgroundLocationImage(), this.backgroundLocationImage.visible = a.showBackgroundLocationImage
                 }
+
                 static useGame(e) {
                     i = e
                 }
+
                 setPosition() {
                     this.container.position.x = window.innerWidth / 2, this.container.position.y = window.innerHeight / 2
                 }
+
                 sort() {
                     this.foreground.children.sort((e, t) => (e = e.gameData).size === (t = t.gameData).size ? e.id - t.id : e.size - t.size)
                 }
+
                 addCell(e) {
                     this.foreground.addChild(e)
                 }
+
                 addFood(e) {
                     this.food.addChild(e)
                 }
+
                 toggleBackgroundImage(e) {
                     e && !this.backgroundSprite ? this.setBackgroundImage() : e || this.destroyBackgroundImage(!0)
                 }
+
                 setBackgroundImage() {
                     let e = a.backgroundImageUrl;
                     if (!e) {
@@ -2863,28 +2998,36 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let n = r(this.border);
                     this.background.addChildAt(n, 1), this.backgroundSprite.mask = n
                 }
+
                 destroyBackgroundImage(e) {
                     this.backgroundSprite && (this.backgroundSprite.destroy(!!e), delete this.backgroundSprite)
                 }
+
                 resetBorder() {
                     this.borderSprite.destroy(), this.borderSprite = o(this.border), this.background.addChild(this.borderSprite)
                 }
+
                 reloadFoodTextures() {
                     i.allCells.forEach(e => {
                         e.isFood && e.reloadTexture()
                     })
                 }
+
                 reloadEjectedTextures() {
                     i.allCells.forEach(e => {
                         e.isEjected && e.reloadTexture()
                     })
                 }
+
                 reloadVirusTexture() {
-                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {})
+                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {
+                    })
                 }
+
                 resetPlayerLongNames() {
                     i.playerManager.players.forEach(e => e.applyNameToSprite())
                 }
+
                 resetNameTextStyle() {
                     [...i.allCells.values()].filter(e => !!e.isPlayerCell).forEach(e => {
                         e.nameSprite && (e.nameSprite.destroy(!1), e.nameSprite = null)
@@ -2897,6 +3040,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         s.style = e, s.style.fill = i, s.updateText()
                     })
                 }
+
                 resetMassTextStyle(e) {
                     e && this.uninstallMassTextFont();
                     let t = a.massTextStyle;
@@ -2907,6 +3051,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         e.massText && e.sprite && (e.sprite.removeChild(e.massText), e.massText.destroy(!1), e.massText = null)
                     })
                 }
+
                 uninstallMassTextFont() {
                     PIXI.BitmapFont.uninstall("mass")
                 }
@@ -2926,33 +3071,33 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     if (this.backgroundLocationImage) this.background.removeChild(this.backgroundLocationImage), this.backgroundLocationImage.destroy(), this.backgroundLocationImage = null;
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(4),
                 a = s(24),
                 n = {};
             e.exports = {
-                getTexture: function(e) {
+                getTexture: function (e) {
                     var t, s, o, r, l, c, h, d;
                     return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawCircle(0, 0, s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
                 },
-                destroyCache: function() {
+                destroyCache: function () {
                     for (var e in n) n[e].destroy(!0), delete n[e]
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(4),
                 a = s(24),
                 n = {};
             e.exports = {
-                getTexture: function(e) {
+                getTexture: function (e) {
                     var t, s, o, r, l, c, h, d;
                     return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawRect(-s, -s, 2 * s, 2 * s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
                 },
-                destroyCache: function() {
+                destroyCache: function () {
                     for (var e in n) n[e].destroy(!0), delete n[e]
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(24),
                 {
                     loadImage: a
@@ -2960,10 +3105,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 n = PIXI.RenderTexture.create(200, 200),
                 o = Promise.resolve();
             e.exports = {
-                getTexture: function() {
+                getTexture: function () {
                     return n
                 },
-                loadVirusFromUrl: async function(e) {
+                loadVirusFromUrl: async function (e) {
                     await o, o = new Promise(async t => {
                         var s = await a(e),
                             o = PIXI.Sprite.from(s, void 0, 18);
@@ -2971,21 +3116,25 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i, a = s(126);
             e.exports = class e {
                 constructor() {
                     this.playersRemoving = [], this.players = new Map, this.botCount = 0
                 }
+
                 static useGame(e) {
                     i = e, a.useGame(e)
                 }
+
                 get playerCount() {
                     return this.players.size - this.botCount
                 }
+
                 getPlayer(e) {
                     return this.players.has(e) ? this.players.get(e) : null
                 }
+
                 setPlayerData({
                                   pid: e,
                                   nickname: t,
@@ -3003,9 +3152,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         d = l.setTagId(o);
                     return (c || h || d) && l.invalidateVisibility(), l
                 }
+
                 invalidateVisibility(e = []) {
                     for (let t of this.players.values()) 0 > e.indexOf(t) && t.invalidateVisibility()
                 }
+
                 sweepRemovedPlayers() {
                     let {
                         replay: e
@@ -3020,20 +3171,23 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         s && o.lastUpdateTick && !(s > o.lastUpdateTick) ? a++ : (this.removePlayer(n), this.playersRemoving.splice(a, 1))
                     }
                 }
+
                 delayedRemovePlayer(e) {
                     this.playersRemoving.push(e)
                 }
+
                 removePlayer(e) {
                     if (!this.players.has(e)) return;
                     let t = this.players.get(e);
                     t.bot && this.botCount--, t.clearCachedData(), this.players.delete(e)
                 }
+
                 destroy() {
                     for (let e of this.players.keys()) this.removePlayer(e);
                     this.botCount = 0, this.playersRemoving.splice(0, this.playersRemoving.length)
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(4),
                 {
                     basic: a,
@@ -3052,18 +3206,22 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor(e, t) {
                     this.pid = e, this.bot = t || !1, this.skinUrl = null, (e === h.playerId || e === h.dualboxPid) && (this.isMe = !0), this.texture = PIXI.RenderTexture.create(o, o), this.cellContainer = this.createCellContainer(), this.renderCell()
                 }
+
                 static useGame(e) {
                     h = e
                 }
+
                 get visibility() {
                     return 1 + +(h.tagId !== this.tagId)
                 }
+
                 setOutline(e, t = settings.dualActiveCellBorderSize || 15, s = !1) {
                     if (this.outlineGraphic && (this.outlineGraphic.destroy(), delete this.outlineGraphic), s) return void this.renderCell();
                     e = e || 0;
                     let i = this.outlineGraphic = new PIXI.Graphics().lineStyle(t, e, 1).drawCircle(0, 0, r - (t - 1) / 2).endFill();
                     i.pivot.set(-r), h.renderer.render(i, this.texture, !1)
                 }
+
                 setCrown(e) {
                     this.hasCrown = e;
                     let t = this.pid;
@@ -3071,22 +3229,27 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         s.isPlayerCell && s.pid === t && (e ? s.addCrown() : s.removeCrown())
                     })
                 }
+
                 createCellContainer() {
                     let e = new PIXI.Container;
                     return e.pivot.set(-o / 2), e.addChild(c(this.getCellColor())), e
                 }
+
                 createSkinSprite(e) {
                     let t = new PIXI.BaseTexture(e),
                         s = new PIXI.Texture(t),
                         i = new PIXI.Sprite(s);
                     return i.width = i.height = o, i.anchor.set(.5), i
                 }
+
                 renderCell() {
                     h.renderer.render(this.cellContainer, this.texture, !0)
                 }
+
                 setTagId(e) {
                     return e || (e = null), this.tagId !== e && (this.tagId = e, this.bot || this.setTagSprite(), !0)
                 }
+
                 setNameColor(bot, pid, name) {
                     let color = 'ffffff';
                     if (bot === true) color = '848484';
@@ -3094,9 +3257,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     color = parseInt(color, 16);
                     return color, this.nameColorCss = color && PIXI.utils.hex2string(color), color;
                 }
+
                 setName(e, t) {
                     return e || (e = "Unnamed"), (this.nameFromServer !== e || this.nameColorFromServer !== t) && (this.nameFromServer = e, this.nameColorFromServer = t, this.applyNameToSprite(), !0)
                 }
+
                 applyNameToSprite() {
                     let e = "Unnamed" === this.nameFromServer,
                         t = "Long Name" === this.nameFromServer,
@@ -3105,16 +3270,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         n = this.nameColor,
                         o;
                     const isBot = !!this.bot;
-                    if (o = e || t ? this.setNameColor(null, null,null) : this.setNameColor(isBot, this.pid, this.nameFromServer), this.setNameSprite(s, o), e || t || !(this.nameSprite.texture.width > i.cellLongNameThreshold) || (t = !0, s = "Long Name", o = this.setNameColor(null, null), this.setNameSprite(s, o)), this.name = e ? "Unnamed" : s, a !== this.name || n !== this.nameColor) {
+                    if (o = e || t ? this.setNameColor(null, null, null) : this.setNameColor(isBot, this.pid, this.nameFromServer), this.setNameSprite(s, o), e || t || !(this.nameSprite.texture.width > i.cellLongNameThreshold) || (t = !0, s = "Long Name", o = this.setNameColor(null, null), this.setNameSprite(s, o)), this.name = e ? "Unnamed" : s, a !== this.name || n !== this.nameColor) {
                         let r = o || (this.isMe ? 16747520 : null);
                         h.events.$emit("minimap-create-node", this.pid, s, o, r)
                     }
                 }
+
                 setNameSprite(e, t) {
                     this.nameSprite ? this.nameSprite.text = e : this.nameSprite = new PIXI.Text(e, i.nameTextStyle), this.nameSprite.style.fill = t || 16777215, this.nameSprite.updateText()
                 }
+
                 setTagSprite() {
-                    let e = `Team ${null==this.tagId?0:this.tagId}`;
+                    let e = `Team ${null == this.tagId ? 0 : this.tagId}`;
                     if (this.tagSprite) this.tagSprite.text = e;
                     else {
                         let t = {
@@ -3124,6 +3291,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     this.tagSprite.style.fill = this.getTagColor(), this.tagSprite.updateText()
                 }
+
                 getTagColor() {
                     if (null != this.tagId) {
                         let e = [6946705, 6946800, 6908927, 16738803, 16768105, 16738665, 16776960, 65280, 65535, 16711935],
@@ -3132,37 +3300,44 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     return 16777215
                 }
+
                 setSkin(e) {
                     if ((e = e || null) === this.skinUrl) return !1;
                     this.abortSkinLoaderIfExist();
                     let t = this.destroySkin();
                     return t && this.renderCell(), this.skinUrl = e, this.skinShown && this.loadSkinAndRender(), !0
                 }
+
                 destroySkin() {
                     return !!this.skinSprite && (this.skinSprite.mask.destroy(!0), this.skinSprite.destroy(!0), this.skinSprite = null, !0)
                 }
+
                 loadSkinAndRender() {
                     this.abortSkinLoaderIfExist(), this.abortSkinLoader = h.skinLoader.loadSkin(this.skinUrl, e => {
                         this.skinSprite = this.createSkinSprite(e), this.skinSprite.mask = c(), this.cellContainer.addChild(this.skinSprite.mask, this.skinSprite), this.renderCell()
                     })
                 }
+
                 invalidateVisibility() {
                     let e, t, s;
                     this.isMe ? (e = i.showOwnName, t = i.showOwnSkin, s = i.showOwnMass) : (e = i.showNames >= this.visibility, t = i.showSkins >= this.visibility, s = i.showMass >= this.visibility), e = i.namesEnabled && e, t = i.skinsEnabled && t, s = i.massEnabled && s, t && !this.skinShown ? this.skinSprite ? (this.skinSprite.visible = !0, this.renderCell()) : this.skinUrl && this.loadSkinAndRender() : !t && this.skinShown && (this.abortSkinLoaderIfExist(), this.skinSprite && (this.skinSprite.visible = !1, this.renderCell())), this.nameShown = e, this.skinShown = t, this.massShown = s, this.nameColorShown = i.showNameColor
                 }
+
                 abortSkinLoaderIfExist() {
                     this.abortSkinLoader && (this.abortSkinLoader(), this.abortSkinLoader = null)
                 }
+
                 getCellColor() {
                     let e = h.seededRandom(this.pid),
                         t = Math.floor(e * a.length);
                     return (this.bot ? n : a)[t]
                 }
+
                 clearCachedData() {
                     this.abortSkinLoaderIfExist(), this.destroySkin(), this.cellContainer.destroy(!0), this.texture.clearedFromCache = !0, this.texture.destroy(!0), this.nameSprite && this.nameSprite.destroy(!0), this.tagSprite && this.tagSprite.destroy(!0), h.events.$emit("minimap-destroy-node", this.pid)
                 }
             }
-        }, , function(e, t, s) {
+        }, , function (e, t, s) {
             let i = s(129),
                 a = (e, t) => {
                     let s = e.callbacks.indexOf(t);
@@ -3172,6 +3347,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor() {
                     this.loaders = new Map, this.worker = new i, this.worker.addEventListener("message", this.onSkinLoaded.bind(this))
                 }
+
                 createLoader(e) {
                     return {
                         image: null,
@@ -3179,9 +3355,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         callbacks: [e]
                     }
                 }
+
                 clearCallbacks() {
                     this.loaders.clear()
                 }
+
                 loadSkin(e, t) {
                     if (!this.loaders.has(e)) {
                         let s = this.createLoader(t);
@@ -3192,6 +3370,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     else if (!i.errored) return i.callbacks.push(t), a.bind(null, i, t);
                     return null
                 }
+
                 onSkinLoaded(e) {
                     let {
                         url: t,
@@ -3208,14 +3387,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = atob("YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsZT0+e2xldCBzPWUuZGF0YTtmZXRjaChzLHttb2RlOiJjb3JzIn0pLnRoZW4oZT0+ZS5ibG9iKCkpLnRoZW4oZT0+Y3JlYXRlSW1hZ2VCaXRtYXAoZSkpLnRoZW4oZT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsaW1hZ2U6ZX0pKS5jYXRjaCgoKT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsZXJyb3JlZDohMH0pKX0pOw==");
-            e.exports = function() {
+            e.exports = function () {
                 return new Worker(URL.createObjectURL(new Blob([i], {
                     type: "text/javascript"
                 })))
             }
-        }, function(e, t, i) {
+        }, function (e, t, i) {
             let a = i(131),
                 n = i(1),
                 {
@@ -3277,10 +3456,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         []
                     ], this.database = h
                 }
+
                 recording() {
                     let e = this.packets[0];
                     return 0 != e.length
                 }
+
                 add(e, t) {
                     let s = this.cells[+t],
                         i = this.packets[+t],
@@ -3297,11 +3478,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let o = 25 * l.replayDuration;
                     i.length > o && (i.shift(), s.shift())
                 }
+
                 clear(e) {
                     let t = this.cells[+e],
                         s = this.packets[+e];
                     t.length = 0, s.length = 0
                 }
+
                 play(e) {
                     n.running && n.stop(), n.connection.close(), r.toast.close();
                     let t = 1,
@@ -3323,6 +3506,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } else l.push(a.shift());
                     o.replayUpdates = a, n.start(o), l.forEach(e => n.parseMessage(e)), n.playback.setStartingFrame(), n.showMenu(!1)
                 }
+
                 save(e) {
                     let t = this.cells[+e].slice(0),
                         i = this.packets[+e].slice(0);
@@ -3358,7 +3542,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 }
             }
-        }, , function(e, t, s) {
+        }, , function (e, t, s) {
             let i = s(1),
                 {
                     wasmModule: a,
@@ -3370,6 +3554,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor() {
                     this.updates = [], this.dry = !1, this.index = 0
                 }
+
                 destroyCell(e) {
                     let {
                         updates: t
@@ -3378,6 +3563,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let i = s[1];
                     i.push(e)
                 }
+
                 eatCell(e, t) {
                     let {
                         updates: s
@@ -3386,15 +3572,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let a = i[2];
                     a.push(e, t)
                 }
+
                 parse(e) {
                     a.deserialize(1, new Uint8Array(e.buffer, 1), 1)
                 }
+
                 reset() {
                     let {
                         updates: e
                     } = this;
                     e.splice(0, e.length), delete e.index
                 }
+
                 set(e) {
                     this.reset(), this.dry = !0;
                     let {
@@ -3406,6 +3595,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     ]), this.parse(e[i++]);
                     t.reverse(), delete this.dry, this.index = 0
                 }
+
                 setStartingFrame() {
                     let {
                         cells: e
@@ -3436,6 +3626,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         for (let A in h[0]) A in d[3] || A in d[0] || (d[0][A] = h[0][A])
                     }
                 }
+
                 seek(e, t) {
                     let {
                         cells: s
@@ -3455,6 +3646,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                     this.index = e, i.updateCamera(!0)
                 }
+
                 next() {
                     let {
                         updates: e
@@ -3482,7 +3674,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     i.events.$emit("replay-index-change", this.index)
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             e.exports = {
                 PlayerCell: s(134),
                 Food: s(135),
@@ -3491,7 +3683,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 DeadCell: s(138),
                 Crown: s(139)
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(1),
                 a = s(4),
                 o = s(14),
@@ -3503,14 +3695,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         s = e.strokeThickness || 0;
                     return t.position.set(-s / 2, -s / 2), t.anchor.set(.5, -.6), t
                 };
+
             class l extends PIXI.Graphics {
                 constructor(e) {
                     super(), this.alpha = .35, this.updatePoints(e)
                 }
+
                 updatePoints(e, t, s, i) {
                     e && t && s && i && (this.clear(), this.lineStyle(12, 16777215), this.moveTo(e, t), this.lineTo(s, i))
                 }
             }
+
             class c extends o {
                 constructor(e, t) {
                     super(e), this.player = t, this.pid = t.pid;
@@ -3520,6 +3715,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         } = i;
                     s && !a.has(this) && a.add(this), t.hasCrown && this.addCrown(), !i.replaying && s && (this.addArrow(), this.addLine())
                 }
+
                 updateLineVisibility() {
                     let {
                         line: e
@@ -3533,6 +3729,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         } else e.visible = !1
                     }
                 }
+
                 addLine() {
                     let {
                         x: e,
@@ -3540,6 +3737,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = i.mouse;
                     this.line = new l([this.x, this.y, e, t]), i.scene.container.addChild(this.line), this.updateLineVisibility()
                 }
+
                 addArrow() {
                     let {
                         dual: e
@@ -3555,12 +3753,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let t = this.arrowSprite = new PIXI.Sprite.from(e.arrowSprite.texture);
                     t.visible = a.dualActive >= 2 && this.pid === i.activePid, t.anchor.set(.5), t.width = t.height = 130, t.alpha = .95, t.y = -310, this.sprite.addChild(t)
                 }
+
                 addCrown() {
                     if (!this.sprite || this.crownSprite) return;
                     let e = i.crownPool,
                         t;
                     e.length ? t = e.pop() : ((t = PIXI.Sprite.from("/img/crown.png")).scale.set(.7), t.pivot.set(0, 643), t.anchor.x = .5, t.rotation = -.5, t.alpha = .7, t.zIndex = 2), this.crownSprite = t, this.sprite.addChild(t);
                 }
+
                 removeCrown() {
                     if (!this.sprite || !this.crownSprite) return;
                     var e = this.crownSprite;
@@ -3568,6 +3768,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     i.crownPool.push(e);
                     this.crownSprite = null;
                 }
+
                 onUpdate() {
                     if (a.showDir && !this.directionSprite) {
                         let e = this.directionSprite = new PIXI.Sprite.from("https://i.postimg.cc/vmZmWCRR/i.png");
@@ -3617,12 +3818,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         } else C.visible && (C.visible = !1)
                     }
                 }
+
                 onDestroy() {
                     this.arrowSprite && (this.sprite.removeChild(this.arrowSprite), this.arrowSprite.destroy(), delete this.arrowSprite), this.tagSprite && (this.sprite.removeChild(this.tagSprite), this.tagSprite.destroy(), delete this.tagSprite), this.directionSprite && (this.sprite.removeChild(this.directionSprite), this.directionSprite.destroy(), delete this.directionSprite), this.line && (i.scene.container.removeChild(this.line), this.line.destroy(), delete this.line), this.massText && (this.sprite.removeChild(this.massText), i.massTextPool.push(this.massText)), this.crownSprite && this.removeCrown()
                 }
             }
+
             c.prototype.type = 1, c.prototype.isPlayerCell = !0, e.exports = c
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(4),
                 {
                     cells: a
@@ -3632,30 +3835,36 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 } = s(76),
                 o = s(14),
                 r = e => a.getTexture(i.useFoodColor ? parseInt(i.foodColor, 16) : n[e % n.length]);
+
             class l extends o {
                 constructor(e) {
                     e.texture = r(e.id), super(e)
                 }
+
                 reloadTexture() {
                     this.sprite.texture = this.texture = r(this.id)
                 }
             }
+
             l.prototype.type = 4, l.prototype.isFood = !0, e.exports = l
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(14),
                 {
                     virus: a
                 } = s(12);
+
             class n extends i {
                 constructor(e) {
                     e.texture = a.getTexture(), super(e)
                 }
+
                 resetTexture() {
                     this.destroySprite(), this.texture = a.getTexture(), this.sprite = new PIXI.Sprite(this.texture), this.sprite.anchor.set(.5), this.sprite.gameData = this
                 }
             }
+
             n.prototype.type = 2, n.prototype.isVirus = !0, e.exports = n
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(1),
                 a = s(4),
                 {
@@ -3666,13 +3875,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 {
                     clampNumber: l
                 } = s(8);
+
             class c extends o {
                 constructor(e) {
                     e.texture = r(), super(e), this.sprite.alpha = 0
                 }
+
                 reloadTexture() {
                     this.sprite.texture = this.texture = r()
                 }
+
                 onUpdate() {
                     let {
                         sprite: e
@@ -3683,28 +3895,35 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     e.alpha = Math.min(e.alpha + s, 1)
                 }
             }
+
             c.prototype.type = 3, c.prototype.isEjected = !0, e.exports = c
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(14),
                 {
                     squares: a,
                     cells: n
                 } = s(12);
+
             class o extends i {
                 constructor(e, t, s) {
                     e.texture = (s ? a : n).getTexture(t || 4210752), super(e), this.sprite.alpha = .5
                 }
             }
+
             o.prototype.type = 5, o.prototype.isDead = !0, e.exports = o
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(14);
+
             class a extends i {
                 constructor(e) {
                     e.texture = PIXI.Texture.from("/img/crown.png"), super(e), this.sprite.alpha = .7
                 }
             }
+
             a.prototype.type = 6, a.prototype.isCrown = !0, e.exports = a
-        }, function(e, t, s) {}, function(e, t, s) {}, function(e, t, i) {
+        }, function (e, t, s) {
+        }, function (e, t, s) {
+        }, function (e, t, i) {
             let n = i(1),
                 {
                     state: o
@@ -3717,12 +3936,15 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor() {
                     this.ws = null, this.focused = !1, this.opened = !1, this.pid = null, this.pingStamp = 0, this.autoRespawning, this.alive, this.ticksSinceDeath = 0, this.cells = new Map, this.arrowSprite = null, this.reloadArrow()
                 }
+
                 log(e) {
                     n.events.$emit("chat-message", e)
                 }
+
                 get connected() {
                     return this.opened && !!this.ready
                 }
+
                 open() {
                     let {
                         connectionUrl: e
@@ -3738,23 +3960,28 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         n.nwData += t.byteLength, this.handleMessage(new DataView(t))
                     }, t.onclose = this.onRejected.bind(this)
                 }
+
                 close() {
                     let {
                         ws: e
                     } = this;
                     e && (e.onmessage = null, e.onclose = null, e.onerror = null, e.close(), this.ws = null), this.focused = !1, this.opened = !1, this.pid = n.dualboxPid = null, this.pingStamp = 0, delete this.alive, this.ticksSinceDeath = 0, delete this.ready, this.clearCells(), this.feedTimeout && (clearTimeout(this.feedTimeout), delete this.feedTimeout)
                 }
+
                 onRejected() {
                     let e = atob("RHVhbCBmYWlsZWQgdG8gY29ubmVjdA==");
                     this.log(e)
                 }
+
                 onClosed(e) {
                     let t = "Dual disconnected";
                     e.reason && (t += ` (${e.reason})`), this.log(t), this.close()
                 }
+
                 parseCells(e) {
                     l.deserialize(2, new Uint8Array(e.buffer, 1), this.ws.packetCount++)
                 }
+
                 handleMessage(e) {
                     let t = new s(e),
                         i = t.readUInt8();
@@ -3801,12 +4028,15 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             return
                     }
                 }
+
                 ping() {
                     this.pingStamp = performance.now(), n.connection.sendOpcode(3, !0)
                 }
+
                 spawn() {
                     this.connected && (n.actions.join(!0), this.updateOutlines())
                 }
+
                 updateOutlines() {
                     let e = n.playerId,
                         t = this.pid,
@@ -3840,6 +4070,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         e.line && e.updateLineVisibility()
                     })
                 }
+
                 reloadArrow() {
                     if (this.arrowSprite && this.arrowSprite.destroy(), settings.dualArrow.startsWith("data:image")) {
                         let e = document.createElement("img");
@@ -3849,6 +4080,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         this.arrowSprite = new PIXI.Sprite(s)
                     } else this.arrowSprite = new PIXI.Sprite.from(settings.dualArrow)
                 }
+
                 get position() {
                     let e = 0,
                         t = 0,
@@ -3863,6 +4095,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let i = s.length;
                     return [e / i, t / i]
                 }
+
                 get ownerPosition() {
                     let e = 0,
                         t = 0,
@@ -3877,12 +4110,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let i = s.length;
                     return [e / i, t / i]
                 }
+
                 getDistanceFromOwner() {
                     let [e, t] = this.position;
                     if (void 0 == e) return null;
                     let [s, i] = this.ownerPosition;
                     return null == s ? null : Math.hypot(s - e, i - t)
                 }
+
                 clearCells() {
                     this.cells.forEach(e => e.destroy(2));
                     let {
@@ -3893,7 +4128,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         s.destroySprite(), e.splice(t, 1)
                     }
                 }
-                switch () {
+
+                switch() {
                     if (n.spectating && (n.spectating = !1), !this.opened) return void this.open();
                     if (!this.ready) return;
                     let e = this.focused;
@@ -3905,8 +4141,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, 120)), e ? (n.isAlive(!1) || o.autoRespawning || n.actions.join(), n.activePid = n.playerId, this.focused = !1) : (n.isAlive(!0) || this.autoRespawning || this.spawn(), n.activePid = this.pid, this.focused = !0), this.updateOutlines()
                 }
             }
-        }, function(e, t, s) {}, function(e) {
-            e.exports = function(e) {
+        }, function (e, t, s) {
+        }, function (e) {
+            e.exports = function (e) {
                 var t = 1,
                     s = e.getInt16(t, !0);
                 t += 2;
@@ -3916,9 +4153,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     text: i
                 }
             }
-        }, function(e) {
-            e.exports = function(e) {
-                for (var t = 1, s = [];;) {
+        }, function (e) {
+            e.exports = function (e) {
+                for (var t = 1, s = []; ;) {
                     var i = e.getUint16(t, !0);
                     if (t += 3, !i) break;
                     var a = e.getUint8(t, !0) / 255;
@@ -3932,9 +4169,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 return s
             }
-        }, function(e) {
-            e.exports = function(e, t) {
-                for (var s = 1, i = [];;) {
+        }, function (e) {
+            e.exports = function (e, t) {
+                for (var s = 1, i = []; ;) {
                     var a = t.getUint16(s, !0);
                     if (s += 2, !a) break;
                     var n = e.playerManager.getPlayer(a);
@@ -3947,9 +4184,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
                 return i
             }
-        }, function(e) {
+        }, function (e) {
             e.exports = window.WebSocket
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             let i = s(1);
             s(149);
             let a = s(66),
@@ -4016,7 +4253,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     passive: !0
                 }), document.body.addEventListener("mousemove", d), n.addEventListener("mousedown", p), document.addEventListener("mouseup", u), document.body.addEventListener("keydown", g), document.body.addEventListener("keyup", A), window.onbeforeunload = () => "Are you sure you want to close the page?") : (n.removeEventListener("contextmenu", l), window.removeEventListener("resize", c), n.removeEventListener(r, h), document.body.removeEventListener("mousemove", d), n.removeEventListener("mousedown", p), document.removeEventListener("mouseup", u), document.body.removeEventListener("keydown", g), document.body.removeEventListener("keyup", A), window.onbeforeunload = null)
             }
-        }, function(e, t, i) {
+        }, function (e, t, i) {
             let a = i(1),
                 n = i(4),
                 {
@@ -4027,49 +4264,59 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 constructor() {
                     this.linesplitUnlock
                 }
+
                 spectate(e, t) {
                     a.spectating = !0;
                     let i = s.fromSize(e ? 3 : 1);
                     i.writeUInt8(2), e && i.writeInt16LE(e), a.connection.send(i, t)
                 }
+
                 join(e) {
                     a.events.$emit("reset-cautions");
                     let t = s.fromSize(8);
                     t.writeUInt8(1), o(t, e), a.connection.send(t, e)
                 }
+
                 spectateLockToggle() {
                     a.connection.sendOpcode(10)
                 }
+
                 feed(e) {
                     let t = 1 === arguments.length,
                         i = s.fromSize(t ? 2 : 1);
                     i.writeUInt8(21), t && i.writeUInt8(+e), a.connection.send(i, a.dual.focused)
                 }
+
                 freezeMouse(e) {
                     a.running && ((e ??= !a.mouseFrozen) && (this.stopMovement(!1), this.lockLinesplit(!1), a.updateMouse(!0), a.connection.sendMouse()), a.mouseFrozen = e, a.events.$emit("update-cautions", {
                         mouseFrozen: e
                     }))
                 }
+
                 stopMovement(e) {
                     a.running && ((e ??= !a.moveToCenterOfCells) && (this.freezeMouse(!1), this.lockLinesplit(!1), e = a.dual.focused ? 2 : 1), a.moveToCenterOfCells = e, a.events.$emit("update-cautions", {
                         moveToCenterOfCells: e
                     }))
                 }
+
                 lockLinesplit(e) {
                     a.running && ((e ??= !a.stopMovePackets) && (a.updateMouse(), a.connection.sendMouse(), a.connection.sendOpcode(15, a.dual.focused), e = a.dual.focused ? 2 : 1), a.stopMovePackets = e, a.events.$emit("update-cautions", {
                         lockLinesplit: e
                     }))
                 }
+
                 linesplit() {
                     this.freezeMouse(!0), this.split(3, !0), this.linesplitUnlock && clearTimeout(this.linesplitUnlock), this.linesplitUnlock = setTimeout(() => {
                         delete this.linesplitUnlock, this.freezeMouse(!1)
                     }, 1250)
                 }
+
                 split(e, t, i) {
                     if (a.stopMovePackets || (t || this.freezeMouse(!1), a.connection.sendMouse()), i) return void setTimeout(() => this.split(e), i);
                     let n = s.fromSize(2);
                     n.writeUInt8(17), n.writeUInt8(e), a.connection.send(n, a.dual.focused), a.splitCount += e, a.splitCount <= 2 ? a.moveWaitUntil = performance.now() + 300 : (a.moveWaitUntil = 0, a.splitCount = 0)
                 }
+
                 triggerbot() {
                     let e = a.targetPid;
                     if (e) {
@@ -4078,6 +4325,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         t && t.setOutline(0, 0, !0), a.setText("")
                     } else a.targetPid = null, a.setText("Click a player to lock triggerbot")
                 }
+
                 dualCombo(e) {
                     if (!a.isAlive(!1) || !a.isAlive(!0)) return;
                     let {
@@ -4097,6 +4345,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         t.focused = !t.focused
                     }, 45)
                 }
+
                 zoom(e) {
                     let t = 1 - n.cameraZoomSpeed / 100,
                         s = 0;
@@ -4104,9 +4353,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     let i = Math.pow(t, s);
                     a.mouseZoom = r(a.mouseZoom * i, a.mouseZoomMin, 1)
                 }
+
                 setZoomLevel(e) {
                     a.mouseZoom = .8 / Math.pow(2, e - 1)
                 }
+
                 targetPlayer(e) {
                     "string" == typeof e && (e = +e);
                     let t;
@@ -4124,11 +4375,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         </div>
                     ` : a.playerElement.innerHTML = ""
                 }
+
                 findPlayerUnderMouse() {
                     let {
-                        x: e,
-                        y: t
-                    } = a.mouse, s = 0, i = null, n = [...a.allCells.values()].filter(e => e.pid).sort((e, t) => e.size - t.size);
+                            x: e,
+                            y: t
+                        } = a.mouse, s = 0, i = null,
+                        n = [...a.allCells.values()].filter(e => e.pid).sort((e, t) => e.size - t.size);
                     return n.forEach(a => {
                         if (!a.isPlayerCell) return;
                         let n = a.x - e,
@@ -4138,31 +4391,38 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         else if (r <= 0) return a
                     }), i
                 }
+
                 toggleSkins(e) {
                     e ??= !n.skinsEnabled, n.set("skinsEnabled", e), a.playerManager.invalidateVisibility()
                 }
+
                 toggleNames(e) {
                     e ??= !n.namesEnabled, n.set("namesEnabled", e), a.playerManager.invalidateVisibility()
                 }
+
                 toggleMass() {
                     let e = !n.massEnabled;
                     n.set("massEnabled", e), a.playerManager.invalidateVisibility()
                 }
+
                 toggleFood(e) {
                     e ??= !n.foodVisible, n.set("foodVisible", e), a.scene.food.visible = e
                 }
+
                 toggleHud() {
                     let {
                         app: e
                     } = a, t = !e.showHud;
                     e.showHud = t, n.set("showHud", t)
                 }
+
                 toggleChat() {
                     let e = !n.showChat;
                     n.set("showChat", e), a.running && a.events.$emit("chat-visible", {
                         visible: e
                     })
                 }
+
                 toggleChatToast() {
                     let e = !n.showChatToast;
                     n.set("showChatToast", e), a.events.$emit("chat-visible", {
@@ -4170,65 +4430,82 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 }
             }
-        }, , , , , , , , , , , , , , , , , function(e, t, s) {
+        }, , , , , , , , , , , , , , , , , function (e, t, s) {
             "use strict";
             var i = s(29);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(32);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(33);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(34);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(35);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(36);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(37);
             s.n(i).a
-        }, function() {}, , , , , , function() {}, , function() {}, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function(e, t, s) {
+        }, function () {
+        }, , , , , , function () {
+        }, , function () {
+        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
             "use strict";
             var i = s(40);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(41);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(42);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(43);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(44);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             e.exports = new class e {
                 constructor(e, t) {
                     this.url = e, this.vanisToken = t
                 }
+
                 setToken(e) {
                     this.vanisToken = e, localStorage.vanisToken = e
                 }
+
                 clearToken() {
                     this.vanisToken = null, delete localStorage.vanisToken
                 }
+
                 async call(e, t) {
                     let s = {
                         method: e,
@@ -4251,118 +4528,143 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }
                 }
+
                 get(e) {
                     return this.call("GET", e)
                 }
             }("https://vanis.io/api", localStorage.vanisToken || null)
-        }, function(e) {
+        }, function (e) {
             e.exports = {
-                getXp: function(e) {
+                getXp: function (e) {
                     return Math.round(e * e / (.1 * .1))
                 },
-                getLevel: function(e) {
+                getLevel: function (e) {
                     return Math.floor(.1 * Math.sqrt(e))
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(45);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(46);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(47);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(48);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(49);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(50);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(51);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(52);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(53);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(54);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(57);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(58);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(59);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(60);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(61);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(62);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(63);
             s.n(i).a
-        }, function() {}, function(e) {
+        }, function () {
+        }, function (e) {
             var t = "seenNotifications";
             e.exports = new class {
                 constructor() {
                     this.seenList = this.parseSeen(localStorage[t])
                 }
+
                 parseSeen(e) {
                     if (!e) return [];
                     try {
                         var t = JSON.parse(e);
                         if (Array.isArray(t)) return t
-                    } catch (s) {}
+                    } catch (s) {
+                    }
                     return []
                 }
+
                 saveSeen() {
                     try {
                         localStorage[t] = JSON.stringify(this.seenList)
-                    } catch (e) {}
+                    } catch (e) {
+                    }
                 }
+
                 isSeen(e) {
                     return this.seenList.includes(e)
                 }
+
                 setSeen(e) {
                     this.isSeen(e) || (this.seenList.push(e), this.saveSeen())
                 }
             }
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             var i = s(64);
             s.n(i).a
-        }, function() {}, function(e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             var i, a, n, o, r = s(1),
                 l = document.createElement("canvas"),
                 c = l.getContext("2d");
@@ -4370,23 +4672,27 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             function h() {
                 i = l.width = window.innerWidth, a = l.height = window.innerHeight, n = i / 2, o = a / 2
             }
+
             window.addEventListener("resize", h), h();
+
             class d {
                 spawn(e) {
                     this.x = e.x, this.y = e.y, this.angle = Math.atan2(this.y, this.x), this.radius = .1, this.speed = .4 + 3.3 * Math.random()
                 }
+
                 update(e) {
                     var t = this.speed * e;
                     this.x += Math.cos(this.angle) * t, this.y += Math.sin(this.angle) * t, this.radius += .0035 * t
                 }
             }
+
             var p = Array(200).fill(null).map(() => new d),
                 u = !1,
                 g = 0,
                 A = 0;
 
             function m(e) {
-                if (r.running) return window.removeEventListener("resize", h), void(l.parentNode && l.parentNode.removeChild(l));
+                if (r.running) return window.removeEventListener("resize", h), void (l.parentNode && l.parentNode.removeChild(l));
                 var t, s = window.performance && window.performance.now ? window.performance.now() : Date.now();
                 g || (g = A = s), e = (s - A) / 6;
                 var d = s - g - 550;
@@ -4406,50 +4712,51 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             function v() {
                 u = !0, g = A = 0, c.clearRect(0, 0, i, a), document.getElementById("overlay").prepend(l), setTimeout(m, 2e3)
             }
+
             r.events.$on("game-stopped", v), v()
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             var i = s(1);
             i.events.$on("players-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("player-modal")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
             }), i.events.$on("chatbox-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("chatbox")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
-                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete[].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
+                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
             });
             var a = "me--"
-        }, function(e, t, s) {
+        }, function (e, t, s) {
             "use strict";
             s.r(t);
             var i = s(23),
                 a = s.n(i),
                 n = s(114),
                 o = s.n(n),
-                r = function() {
+                r = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("transition", {
@@ -4480,7 +4787,51 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })], 1)])
                 };
             r._withStripped = !0;
-            var l = function() {
+            function injectUser(user) {
+                const deltaBadge = getUserField(user.nickname, user.pid, 'badge');
+                const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges');
+
+                return `
+                    <div class="listItem playerItem">
+                        <img class="playerPhoto beautifulSkin" alt="" src="${user.skin === '' ? 'https://i.ibb.co/g9Sj8gK/transparent-skin.png' : 'https://skins.vanis.io/s/' + user.skin}" onerror="this.src = 'https://skins.vanis.io/s/Qkfih2'">
+                        <div class="listTextItem playerTextElem">
+                            <div class="playerNickLine">
+                                ${deltaBadge ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge}">` : ``}
+                                ${vanillaBadge ? `<img class="playerVanilla playerBadgeDiv" alt="" src="/img/badge/${getPerkBadgeImage(vanillaBadge)}.png?2">` : ``}
+                                <p class="playerNickname" style="color: ${getUserField(user.nickname, user.pid, 'color', '#ffffff')}">${user.nickname}</p>
+                            </div>
+                            <p class="playerPid">PID: ${user.pid}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            function showPlayerList(url, name, nb) {
+                let userList = "";
+
+                for (const pid in currentServerPlayerList) {
+                    const user = currentServerPlayerList[pid];
+                    const userHtml = injectUser(user);
+                    userList += userHtml;
+                }
+
+                const modal = `
+                    <div data-v-0eaeaf66="" data-v-1bcde71e="" class="modal modalCustom">
+                        <div data-v-0eaeaf66="" class="overlay"></div>
+                        <i data-v-0eaeaf66="" onclick="document.querySelector('.modalCustom').remove()" class="fas fa-times-circle close-button"></i>
+                        <div data-v-0eaeaf66="" class="wrapper">
+                            <div data-v-0eaeaf66="" class="content fade-box">
+                                <h2 data-v-0eaeaf66="" class="titleServer">${name} - ${nb} / ${slots}</h2>
+                                <p data-v-0eaeaf66="" class="urlServer">${url}</p>
+                                <div class="divDualSkins" data-v-7179a145="" data-v-1bcde71e="">
+                                    ${userList}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
+            }
+            var l = function () {
                 var e = this,
                     t = e.$createElement,
                     s = e._self._c || t;
@@ -4490,7 +4841,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }, [s("div", {
                     staticClass: "tabs"
-                }, e._l(e.regionCodes, function(t, i) {
+                }, e._l(e.regionCodes, function (t, i) {
                     return s("div", {
                         key: i,
                         staticClass: "tab",
@@ -4498,7 +4849,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             active: e.selectedRegion === t
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.selectRegion(t)
                             }
                         }
@@ -4508,25 +4859,49 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     class: {
                         "cursor-loading": e.connectWait
                     }
-                }, e._l(e.regionServers, function(t, i) {
+                }, e._l(e.regionServers, function (t, i) {
                     return s("div", {
                         key: i,
-                        staticClass: "server-list-item",
-                        class: {
-                            active: e.gameState.connectionUrl === t.url
-                        },
-                        on: {
-                            click: function() {
-                                return e.connect(t)
+                        staticClass: "server-list-wrapper",
+                    }, [
+                        s("div", {
+                            staticClass: "server-list-item",
+                            class: {
+                                active: e.gameState.connectionUrl === t.url
+                            },
+                            on: {
+                                click: function () {
+                                    return e.connect(t);
+                                }
                             }
-                        }
-                    }, [s("div", {
-                        staticClass: "server-name"
-                    }, [e._v(e._s(t.name))]), e._v(" "), null == t.liveMarker ? s("div", [e._v(e._s(t.players) + " / " + e._s(t.slots))]) : !0 === t.liveMarker ? s("div", {
-                        staticClass: "live-marker-wrapper"
-                    }, [s("span", {
-                        staticClass: "live-marker"
-                    }, [e._v("LIVE")])]) : e._e()])
+                        }, [
+                            s("div", {
+                                staticClass: "server-name"
+                            }, [e._v(e._s(t.name))]),
+                            s("div", {
+                                staticClass: "player-slots"
+                            }, [
+                                s("span", {}, [e._v(e._s(t.players))]),
+                                e._v(" / "),
+                                s("span", {}, [e._v(e._s(t.slots))])
+                            ])
+                        ]),
+                        s("div", {
+                            staticClass: "server-list-players",
+                            class: {
+                                "server-visible-list": e.gameState.connectionUrl === t.url
+                            },
+                            on: {
+                                click: function () {
+                                    showPlayerList(e.gameState.connectionUrl, t.name, t.players)
+                                }
+                            }
+                        }, [
+                            s("i", {
+                                staticClass: "fas fa-users"
+                            })
+                        ])
+                    ]);
                 }), 0)])
             };
             l._withStripped = !0;
@@ -4560,6 +4935,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 var t = e.url.toLowerCase().match(/game-([a-z]{2})/);
                 return t ? t[1].toUpperCase() : ""
             }
+
             var m, v = (s(166), s(0)),
                 f = Object(v.a)({
                     data: () => ({
@@ -4577,7 +4953,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         })
                     },
                     computed: {
-                        regionServers: function() {
+                        regionServers: function () {
                             var e = this.selectedRegion.toUpperCase();
                             return this.servers.filter(t => {
                                 var s = A(t);
@@ -4631,7 +5007,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, l, [], !1, null, "0647fbb0", null);
             f.options.__file = "src/components/servers.vue";
             var C = f.exports,
-                y = function() {
+                y = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -4644,28 +5020,28 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("i", {
                         staticClass: "tab fas fa-cog",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.openModal("settings")
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab fas fa-palette",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.openModal("theming")
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab far fa-keyboard",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.openModal("hotkeys")
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab fas fa-film",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.openModal("replays3")
                             }
                         }
@@ -4698,7 +5074,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         },
                         on: {
                             change: e.onNicknameChange,
-                            input: function(t) {
+                            input: function (t) {
                                 t.target.composing || (e.nickname = t.target.value)
                             }
                         }
@@ -4726,7 +5102,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         },
                         on: {
                             change: e.onTeamTagChange,
-                            input: function(t) {
+                            input: function (t) {
                                 t.target.composing || (e.teamtag = t.target.value)
                             }
                         }
@@ -4748,11 +5124,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.skinUrl
                         },
                         on: {
-                            focus: function(e) {
+                            focus: function (e) {
                                 return e.target.select()
                             },
                             change: e.onSkinUrlChange,
-                            input: function(t) {
+                            input: function (t) {
                                 t.target.composing || (e.skinUrl = t.target.value)
                             }
                         }
@@ -4782,19 +5158,19 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "fa fa-eye"
                     })])])]), e._v(" "), "settings" === e.activeModal ? s("modal", {
                         on: {
-                            close: function() {
+                            close: function () {
                                 return e.closeModal()
                             }
                         }
                     }, [s("settings")], 1) : e._e(), e._v(" "), "theming" === e.activeModal ? s("modal", {
                         on: {
-                            close: function() {
+                            close: function () {
                                 return e.closeModal()
                             }
                         }
                     }, [s("theming")], 1) : e._e(), e._v(" "), "hotkeys" === e.activeModal ? s("modal", {
                         on: {
-                            close: function() {
+                            close: function () {
                                 return e.closeModal()
                             }
                         }
@@ -4804,13 +5180,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             width: "962px"
                         },
                         on: {
-                            close: function() {
+                            close: function () {
                                 return e.closeModal()
                             }
                         }
                     }, [s("replays3")], 1) : e._e(), e._v(" "), "metaLeaderboard" === e.activeModal ? s("modal", {
                         on: {
-                            close: function() {
+                            close: function () {
                                 return e.closeModal()
                             }
                         }
@@ -4818,7 +5194,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 };
             y._withStripped = !0;
             var w = s(115),
-                I = function() {
+                I = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -4839,7 +5215,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.useWebGL
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 e.change("useWebGL", t), e.promptRestart()
                             }
                         }
@@ -4859,10 +5235,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.gameResolution
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("gameResolution", t)
                             },
-                            change: function() {
+                            change: function () {
                                 return e.promptRestart()
                             }
                         }
@@ -4882,7 +5258,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.smallTextThreshold
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("smallTextThreshold", t)
                             }
                         }
@@ -4909,7 +5285,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.dualActive
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("dualActive", t)
                             }
                         }
@@ -4929,7 +5305,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.dualActiveCellBorderSize
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("dualActiveCellBorderSize", t)
                             }
                         }
@@ -4939,7 +5315,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.dualAutorespawn
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("dualAutorespawn", t)
                             }
                         }
@@ -4949,7 +5325,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showCellLines
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showCellLines", t)
                             }
                         }
@@ -4959,7 +5335,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showDir
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showDir", t)
                             }
                         }
@@ -4969,7 +5345,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showTag
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showTag", t)
                             }
                         }
@@ -4979,7 +5355,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showTimeMessage
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showTimeMessage", t), showTimeMessageG = t
                             }
                         }
@@ -4989,7 +5365,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.rainbowColorTimeMessage
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageG = t
                             }
                         }
@@ -4999,7 +5375,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.chatColorOnlyPeople
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("chatColorOnlyPeople", t)
                             }
                         }
@@ -5009,7 +5385,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.playerStats
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("playerStats", t)
                             }
                         }
@@ -5019,7 +5395,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.debugStats
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("debugStats", t)
                             }
                         }
@@ -5029,7 +5405,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.clientStats
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("clientStats", t)
                             }
                         }
@@ -5047,7 +5423,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.autoZoom
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("autoZoom", t)
                             }
                         }
@@ -5057,7 +5433,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.rememeberEjecting
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("rememeberEjecting", t)
                             }
                         }
@@ -5069,7 +5445,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.autoRespawn
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("autoRespawn", t)
                             }
                         }
@@ -5089,7 +5465,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.drawDelay
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("drawDelay", t)
                             }
                         }
@@ -5109,7 +5485,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cameraMoveDelay
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cameraMoveDelay", t)
                             }
                         }
@@ -5129,7 +5505,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cameraZoomDelay
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cameraZoomDelay", t)
                             }
                         }
@@ -5149,7 +5525,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cameraZoomSpeed
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cameraZoomSpeed", t)
                             }
                         }
@@ -5169,7 +5545,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.gameAlpha
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("gameAlpha", t)
                             }
                         }
@@ -5189,7 +5565,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.replayDuration
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("replayDuration", t)
                             }
                         }
@@ -5210,7 +5586,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.showReplaySaved
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("showReplaySaved", t)
                             }
                         }
@@ -5237,7 +5613,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.showNames
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("showNames", t)
                             }
                         }
@@ -5258,7 +5634,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.showSkins
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("showSkins", t)
                             }
                         }
@@ -5279,7 +5655,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.showMass
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("showMass", t)
                             }
                         }
@@ -5289,7 +5665,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showOwnName
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showOwnName", t)
                             }
                         }
@@ -5299,7 +5675,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showOwnSkin
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showOwnSkin", t)
                             }
                         }
@@ -5309,7 +5685,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showOwnMass
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showOwnMass", t)
                             }
                         }
@@ -5319,7 +5695,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showCrown
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showCrown", t)
                             }
                         }
@@ -5329,7 +5705,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.foodVisible
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("foodVisible", t)
                             }
                         }
@@ -5339,7 +5715,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.eatAnimation
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("eatAnimation", t)
                             }
                         }
@@ -5353,7 +5729,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showHud
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showHud", t)
                             }
                         }
@@ -5366,7 +5742,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showLeaderboard
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showLeaderboard", t)
                             }
                         }
@@ -5377,7 +5753,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showServerName
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showServerName", t)
                             }
                         }
@@ -5388,7 +5764,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showChat
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showChat", t)
                             }
                         }
@@ -5399,7 +5775,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showChatToast
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showChatToast", t)
                             }
                         }
@@ -5410,7 +5786,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.minimapEnabled
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("minimapEnabled", t)
                             }
                         }
@@ -5421,7 +5797,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.minimapLocations
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("minimapLocations", t)
                             }
                         }
@@ -5432,7 +5808,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showFPS
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showFPS", t)
                             }
                         }
@@ -5443,7 +5819,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showPing
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showPing", t)
                             }
                         }
@@ -5454,7 +5830,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showPlayerMass
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showPlayerMass", t)
                             }
                         }
@@ -5465,7 +5841,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showPlayerScore
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showPlayerScore", t)
                             }
                         }
@@ -5476,7 +5852,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showCellCount
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showCellCount", t)
                             }
                         }
@@ -5487,7 +5863,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showClock
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showClock", t)
                             }
                         }
@@ -5498,7 +5874,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showSessionTime
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showSessionTime", t)
                             }
                         }
@@ -5509,7 +5885,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showPlayerCount
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showPlayerCount", t)
                             }
                         }
@@ -5520,7 +5896,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showSpectators
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showSpectators", t)
                             }
                         }
@@ -5531,7 +5907,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showRestartTiming
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showRestartTiming", t)
                             }
                         }
@@ -5549,7 +5925,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showBlockedMessageCount
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showBlockedMessageCount", t)
                             }
                         }
@@ -5559,7 +5935,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.filterChatMessages
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("filterChatMessages", t)
                             }
                         }
@@ -5569,7 +5945,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.clearChatMessages
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("clearChatMessages", t)
                             }
                         }
@@ -5578,7 +5954,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("span", {
                         staticClass: "reset-option",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.confirmReset()
                             }
                         }
@@ -5605,6 +5981,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         return "???"
                 }
             }
+
             var B = (s(170), Object(v.a)({
                 data: () => ({
                     clientHash: "",
@@ -5779,7 +6156,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }, I, [], !1, null, "3ddebeb3", null));
             B.options.__file = "src/components/settings.vue";
             var Q = B.exports,
-                M = function() {
+                M = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -5799,7 +6176,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.backgroundColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("backgroundColor", t)
                             }
                         }
@@ -5811,7 +6188,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.borderColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("borderColor", t)
                             }
                         }
@@ -5827,7 +6204,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.foodColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("foodColor", t)
                             }
                         }
@@ -5839,7 +6216,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.ejectedColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("ejectedColor", t)
                             }
                         }
@@ -5851,7 +6228,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.dualColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("dualColor", t)
                             }
                         }
@@ -5863,7 +6240,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellNameOutlineColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellNameOutlineColor", t)
                             }
                         }
@@ -5877,7 +6254,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cursorImageUrl
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cursorImageUrl", t)
                             }
                         }
@@ -5895,7 +6272,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.backgroundImageUrl
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("backgroundImageUrl", t)
                             }
                         }
@@ -5909,7 +6286,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.virusImageUrl
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("virusImageUrl", t)
                             }
                         }
@@ -5923,7 +6300,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.dualArrow
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("dualArrow", t)
                             }
                         }
@@ -5935,7 +6312,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellMassColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellMassColor", t)
                             }
                         }
@@ -5947,7 +6324,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellMassOutlineColor
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellMassOutlineColor", t)
                             }
                         }
@@ -5965,7 +6342,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.useFoodColor
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("useFoodColor", t)
                             }
                         }
@@ -5976,7 +6353,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showBackgroundLocationImage
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showBackgroundLocationImage", t)
                             }
                         }
@@ -6000,7 +6377,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.backgroundLocationImageOpacity
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("backgroundLocationImageOpacity", t)
                             }
                         }
@@ -6011,7 +6388,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.showBackgroundImage
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("showBackgroundImage", t)
                             }
                         }
@@ -6022,7 +6399,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.backgroundImageRepeat
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("backgroundImageRepeat", t)
                             }
                         }
@@ -6033,7 +6410,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.backgroundDefaultIfUnequal
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("backgroundDefaultIfUnequal", t)
                             }
                         }
@@ -6057,7 +6434,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.backgroundImageOpacity
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("backgroundImageOpacity", t)
                             }
                         }
@@ -6080,13 +6457,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellNameFont
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellNameFont", t)
                             },
-                            focus: function() {
+                            focus: function () {
                                 return e.fontWarning("name", !0)
                             },
-                            blur: function() {
+                            blur: function () {
                                 return e.fontWarning("name", !1)
                             }
                         }
@@ -6108,7 +6485,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellNameWeight
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellNameWeight", t)
                             }
                         }
@@ -6129,7 +6506,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellNameOutline
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellNameOutline", t)
                             }
                         }
@@ -6139,7 +6516,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.cellNameSmoothOutline
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("cellNameSmoothOutline", t)
                             }
                         }
@@ -6159,7 +6536,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellLongNameThreshold
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellLongNameThreshold", t)
                             }
                         }
@@ -6182,13 +6559,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellMassFont
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellMassFont", t)
                             },
-                            focus: function() {
+                            focus: function () {
                                 return e.fontWarning("mass", !0)
                             },
-                            blur: function() {
+                            blur: function () {
                                 return e.fontWarning("mass", !1)
                             }
                         }
@@ -6210,7 +6587,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellMassWeight
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellMassWeight", t)
                             }
                         }
@@ -6231,7 +6608,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellMassOutline
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellMassOutline", t)
                             }
                         }
@@ -6249,7 +6626,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.cellMassTextSize
                         },
                         on: {
-                            input: function(t) {
+                            input: function (t) {
                                 return e.change("cellMassTextSize", t)
                             }
                         }
@@ -6259,7 +6636,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.cellMassSmoothOutline
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("cellMassSmoothOutline", t)
                             }
                         }
@@ -6269,7 +6646,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: e.shortMass
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.change("shortMass", t)
                             }
                         }
@@ -6278,7 +6655,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("span", {
                         staticClass: "reset-option",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.confirmReset()
                             }
                         }
@@ -6287,7 +6664,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }), e._v(" Reset\n    ")])])])
                 };
             M._withStripped = !0;
-            var T = function() {
+            var T = function () {
                 var e = this,
                     t = e.$createElement,
                     s = e._self._c || t;
@@ -6300,20 +6677,20 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         backgroundColor: "#" + e.hex
                     },
                     on: {
-                        mousedown: function() {
+                        mousedown: function () {
                             e.disabled || e.showPicker(!0)
                         }
                     }
                 }, [e.pickerOpen ? s("div", {
                     staticClass: "color-picker-wrapper",
                     on: {
-                        mousedown: function(t) {
+                        mousedown: function (t) {
                             return e.startMovingPivot(t)
                         },
-                        mousemove: function(t) {
+                        mousemove: function (t) {
                             return e.movePivot(t)
                         },
-                        mouseup: function(t) {
+                        mouseup: function (t) {
                             return e.stopMovingPivot(t)
                         }
                     }
@@ -6339,10 +6716,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         value: e.hue
                     },
                     on: {
-                        change: function() {
+                        change: function () {
                             return e.triggerInput()
                         },
-                        __r: function(t) {
+                        __r: function (t) {
                             e.hue = t.target.value
                         }
                     }
@@ -6383,9 +6760,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         value: e.hex
                     },
                     on: {
-                        input: [function(t) {
+                        input: [function (t) {
                             t.target.composing || (e.hex = t.target.value)
-                        }, function() {
+                        }, function () {
                             return e.triggerInput()
                         }]
                     }
@@ -6404,7 +6781,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 computed: {
                     hex: {
                         get() {
-                            return function(e, t, s) {
+                            return function (e, t, s) {
                                 var i, a, n, o, r, l, c, h;
                                 switch (l = s * (1 - t), c = s * (1 - (r = 6 * e - (o = Math.floor(6 * e))) * t), h = s * (1 - (1 - r) * t), o % 6) {
                                     case 0:
@@ -6430,7 +6807,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         },
                         set(e) {
                             if (e = e.toLowerCase(), /^[0-9a-f]{6}$/.test(e)) {
-                                var t, s, i, a, n, o, r, l = (t = e, s = parseInt(t.slice(0, 2), 16) / 255, i = parseInt(t.slice(2, 4), 16) / 255, a = parseInt(t.slice(4, 6), 16) / 255, [60 * ((r = (o = (n = Math.max(s, i, a)) - Math.min(s, i, a)) && (n == s ? (i - a) / o : n == i ? 2 + (a - s) / o : 4 + (s - i) / o)) < 0 ? r + 6 : r), n && o / n, n]);
+                                var t, s, i, a, n, o, r,
+                                    l = (t = e, s = parseInt(t.slice(0, 2), 16) / 255, i = parseInt(t.slice(2, 4), 16) / 255, a = parseInt(t.slice(4, 6), 16) / 255, [60 * ((r = (o = (n = Math.max(s, i, a)) - Math.min(s, i, a)) && (n == s ? (i - a) / o : n == i ? 2 + (a - s) / o : 4 + (s - i) / o)) < 0 ? r + 6 : r), n && o / n, n]);
                                 this.hue = l[0], this.sat = l[1], this.val = l[2]
                             }
                         }
@@ -6447,7 +6825,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     },
                     movePivot(e) {
                         if (this.movingPivot) {
-                            var t = this.$el.querySelector(".color-picker-val").getBoundingClientRect(),
+                            var t = this.$el.querySelector('.color-picker-val').getBoundingClientRect(),
                                 s = e.clientX - t.x,
                                 i = e.clientY - t.y;
                             this.sat = s / 100, this.val = 1 - i / 100, this.sat = Math.min(Math.max(this.sat, 0), 1), this.val = Math.min(Math.max(this.val, 0), 1)
@@ -6466,7 +6844,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }, T, [], !1, null, "5b0666af", null));
             D.options.__file = "src/components/color-option.vue";
             var L = D.exports,
-                N = function() {
+                N = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -6479,7 +6857,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             backgroundColor: "#" + e.hex
                         },
                         on: {
-                            mousedown: function() {
+                            mousedown: function () {
                                 e.disabled || e.showPicker(!0)
                             }
                         }
@@ -6488,7 +6866,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._v("...")]), e._v(" "), e.pickerOpen ? s("div", {
                         staticClass: "image-picker-wrapper",
                         on: {
-                            click: function(t) {
+                            click: function (t) {
                                 return e.tryHidePicker(t)
                             }
                         }
@@ -6506,13 +6884,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             alt: "No image chosen or it is invalid"
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.openFileChooser()
                             },
-                            dragover: function(t) {
+                            dragover: function (t) {
                                 return e.allowDrop(t)
                             },
-                            drop: function(t) {
+                            drop: function (t) {
                                 return e.onImageDrop(t)
                             }
                         }
@@ -6521,7 +6899,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._v("\n            Click or drop onto image to change."), s("br"), e._v(" "), "defaults" in this ? s("span", {
                         staticClass: "image-picker-reset",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.triggerInput(e.defaults)
                             }
                         }
@@ -6532,7 +6910,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             accept: "image/png, image/jpeg, image/bmp, image/webp"
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.onImageSelect(t)
                             }
                         }
@@ -6556,7 +6934,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         this.$emit("input", e)
                     },
                     openFileChooser() {
-                        this.$el.querySelector(".image-picker-input").click()
+                        this.$el.querySelector('.image-picker-input').click()
                     },
                     allowDrop(e) {
                         e.preventDefault()
@@ -6583,7 +6961,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }, N, [], !1, null, "641581b7", null));
             U.options.__file = "src/components/image-option.vue";
             var R = U.exports,
-                P = function() {
+                P = function () {
                     var e = this.$createElement;
                     return (this._self._c || e)("div")
                 };
@@ -6642,6 +7020,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, a.onerror = i, a.src = e
                 }) : null
             }
+
             var Z = PIXI.utils.isWebGLSupported() && H.useWebGL,
                 j = (s(176), Object(v.a)({
                     components: {
@@ -6700,7 +7079,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             return z(this.cellMassOutline)
                         },
                         cellMassTextSizeMeaning() {
-                            return function(e) {
+                            return function (e) {
                                 switch (e) {
                                     case 0:
                                         return "Small";
@@ -6839,7 +7218,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, M, [], !1, null, "15c13b66", null));
             j.options.__file = "src/components/theming.vue";
             var J = j.exports,
-                K = function() {
+                K = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -6849,7 +7228,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }, [s("div", {
                         staticClass: "hotkeys"
-                    }, e._l(e.availableHotkeys, function(t, i) {
+                    }, e._l(e.availableHotkeys, function (t, i) {
                         return s("div", {
                             key: i,
                             staticClass: "row"
@@ -6861,10 +7240,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 tabindex: "0"
                             },
                             on: {
-                                mousedown: function(s) {
+                                mousedown: function (s) {
                                     return e.onMouseDown(s, t)
                                 },
-                                keydown: function(s) {
+                                keydown: function (s) {
                                     return s.preventDefault(), e.onKeyDown(s, t)
                                 }
                             }
@@ -6925,18 +7304,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         hotkeys: V.get()
                     }),
                     methods: {
-                        onResetClick: function() {
+                        onResetClick: function () {
                             X.confirm("Are you sure you want to reset all hotkeys?", () => {
                                 this.hotkeys = V.reset()
                             })
                         },
-                        onMouseDown: function(e, t) {
+                        onMouseDown: function (e, t) {
                             if (e.target === document.activeElement) {
                                 var s = "MOUSE" + e.button;
                                 V.set(t, s) && (e.preventDefault(), this.hotkeys[t] = s, e.target.blur())
                             }
                         },
-                        onKeyDown: function(e, t) {
+                        onKeyDown: function (e, t) {
                             var s = V.convertKey(e.code);
                             "ESCAPE" !== s && "ENTER" !== s ? ("DELETE" == s && (s = ""), V.set(t, s) && (this.hotkeys[t] = s, e.target.blur())) : e.target.blur()
                         }
@@ -6944,7 +7323,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, K, [], !1, null, "2dbed53e", null));
             q.options.__file = "src/components/hotkeys.vue";
             var ee = q.exports,
-                et = function() {
+                et = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -6961,7 +7340,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             multiple: ""
                         },
                         on: {
-                            change: function(t) {
+                            change: function (t) {
                                 return e.onFile(t)
                             }
                         }
@@ -6985,14 +7364,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             disabled: !e.keysLoaded || 0 === e.pageIndex
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.updateReplayPage(-1)
                             }
                         }
                     }), e._v(" "), s("span", [e._v(e._s(e.pageCount))])]), e._v(" "), e.pageInputShown ? e._e() : s("div", {
                         staticClass: "real",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.togglePageInput(!0)
                             }
                         }
@@ -7001,7 +7380,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("div", {
                         staticClass: "overlay",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.togglePageInput(!1)
                             }
                         }
@@ -7011,7 +7390,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             disabled: !e.keysLoaded || 0 === e.pageIndex
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.updateReplayPage(-1)
                             }
                         }
@@ -7023,10 +7402,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: 1 + e.pageIndex
                         },
                         on: {
-                            focus: function(e) {
+                            focus: function (e) {
                                 return e.target.select()
                             },
-                            change: function(t) {
+                            change: function (t) {
                                 return e.updateReplayPage(t)
                             }
                         }
@@ -7038,7 +7417,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             disabled: !e.keysLoaded || e.pageIndex === e.pageCount - 1
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.updateReplayPage(1)
                             }
                         }
@@ -7052,7 +7431,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: "Import"
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.$refs.file.click()
                             }
                         }
@@ -7064,7 +7443,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: "Download all"
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.downloadAllReplays()
                             }
                         }
@@ -7076,7 +7455,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: "Delete all"
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.deleteAllReplays()
                             }
                         }
@@ -7091,7 +7470,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }, [e._v("Replays are saved in browser memory!")]), e._v(" "), s("div", [e._v("They get permanently erased if browser data gets cleared.")])])] : e._e(), e._v(" "), e.keysLoadedFirst && !e.keysEmpty ? [s("div", {
                         staticClass: "replay-page"
-                    }, e._l(e.pageData, function(e, t) {
+                    }, e._l(e.pageData, function (e, t) {
                         return s("replay-item", {
                             key: t,
                             attrs: {
@@ -7245,7 +7624,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 ep = (s(220), Object(v.a)(ed, et, [], !1, null, "4a996e52", null));
             ep.options.__file = "src/components/replays3.vue";
             var eu = ep.exports,
-                eg = function() {
+                eg = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -7264,7 +7643,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         attrs: {
                             href: "https://vanis.io/discord"
                         }
-                    }, [e._v("Discord")]), e._v(" for more information."), s("br"), e._v("\n        Season ends in "), s("b", [e._v(e._s(e.seasonEndTime))])]), e._v(" "), e._l(e.playerList, function(t, i) {
+                    }, [e._v("Discord")]), e._v(" for more information."), s("br"), e._v("\n        Season ends in "), s("b", [e._v(e._s(e.seasonEndTime))])]), e._v(" "), e._l(e.playerList, function (t, i) {
                         return s("div", {
                             key: i,
                             staticClass: "player-row",
@@ -7308,7 +7687,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     },
                     methods: {
                         setSeasonEndTime() {
-                            this.seasonEndTime = function(e) {
+                            this.seasonEndTime = function (e) {
                                 if (e < 0) return "now";
                                 var t = Math.floor(e / 1e3),
                                     s = t % 60,
@@ -7359,7 +7738,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         teamtag: localStorage.teamtag || "",
                         skinUrl: "string" == typeof localStorage.skinUrl ? localStorage.skinUrl : "https://skins.vanis.io/s/Qkfih2"
                     }),
-                    created: function() {
+                    created: function () {
                         ew.events.$on("skin-click", e => {
                             const skin = document.getElementById("skinDisplay1");
                             this.skinUrl = localStorage.skinUrl = e;
@@ -7367,10 +7746,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         })
                     },
                     methods: {
-                        openModal: function(e) {
+                        openModal: function (e) {
                             this.activeModal = e, this.$emit("modal-open", !0)
                         },
-                        closeModal: function() {
+                        closeModal: function () {
                             this.activeModal = "", this.$emit("modal-open", !1)
                         },
                         play() {
@@ -7405,7 +7784,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }
                 }),
-                e$ = (s(224), Object(v.a)(eI, y, [function() {
+                e$ = (s(224), Object(v.a)(eI, y, [function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", {
@@ -7421,22 +7800,30 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }], !1, null, "1bcde71e", null));
             e$.options.__file = "src/components/player.vue";
             var ek = e$.exports,
-                eb = function() {
+                eb = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
+
                     function getPerkName() {
                         if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_name_picked"]) return e["_data"]["account"]["perk_name_picked"];
                         return e.name;
                     }
+
                     function getPerkBadge() {
-                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_badge_set"]) return {badge: "/img/badge/" + getPerkBadgeImage(e["_data"]["account"]["perk_badge_set"]) + ".png?2", width: "25px", margin: "3px"};
+                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_badge_set"]) return {
+                            badge: "/img/badge/" + getPerkBadgeImage(e["_data"]["account"]["perk_badge_set"]) + ".png?2",
+                            width: "25px",
+                            margin: "3px"
+                        };
                         return {badge: null, width: "0", margin: "0"};
                     }
+
                     function getPerkNameColor() {
                         if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_color_picked"]) return "#" + e["_data"]["account"]["perk_color_picked"];
                         return "#ffffff";
                     }
+
                     const user = {
                         name: getPerkName(),
                         badge: getPerkBadge(),
@@ -7454,7 +7841,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._v("Login with Discord to save your progress and gain perks!")]), e._v(" "), s("div", {
                         staticClass: "discord",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.openDiscordLogin()
                             }
                         }
@@ -7522,7 +7909,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [e._v(e._s(e.xpAtNextLevel))])])], 1), e._v(" "), s("div", {
                         staticClass: "logout",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.logout()
                             }
                         }
@@ -7531,7 +7918,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }), e._v(" \n    ")])]) : e._e()])
                 };
             eb._withStripped = !0;
-            var e_ = function() {
+            var e_ = function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
                 return t("div", {
@@ -7617,7 +8004,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         updateProgress(e, t) {
                             this.xpAtCurrentLevel = e0.getXp(t), this.xpAtNextLevel = e0.getXp(t + 1), this.progress = (e - this.xpAtCurrentLevel) / (this.xpAtNextLevel - this.xpAtCurrentLevel)
                         },
-                        openDiscordLogin: function() {
+                        openDiscordLogin: function () {
                             window.open(ex.url + "/login/discord", "", "width=500, height=750")
                         },
                         onLoggedIn(e) {
@@ -7627,7 +8014,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, eb, [], !1, null, "661435cd", null));
             eQ.options.__file = "src/components/account.vue";
             var eM = eQ.exports,
-                eT = function() {
+                eT = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -7639,7 +8026,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         attrs: {
                             id: "skins"
                         }
-                    }, [e._l(e.skins, function(t, i) {
+                    }, [e._l(e.skins, function (t, i) {
                         return s("span", {
                             key: i,
                             staticClass: "skin-container"
@@ -7653,10 +8040,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 alt: ""
                             },
                             on: {
-                                click: function() {
+                                click: function () {
                                     return e.selectSkin(i)
                                 },
-                                contextmenu: function() {
+                                contextmenu: function () {
                                     getModule(4).set("dualSkin", GAME.skinPanel.skins[i]), document.getElementById("skinDisplay2").src = GAME.skinPanel.skins[i], window.SwalAlerts.toast.fire({
                                         type: "info",
                                         title: "Updated dualbox skin",
@@ -7667,7 +8054,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }), e._v(" "), s("i", {
                             staticClass: "fas fa-times skin-remove-button",
                             on: {
-                                click: function() {
+                                click: function () {
                                     return e.removeSkin(i)
                                 }
                             }
@@ -7679,7 +8066,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             alt: ""
                         },
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.addSkin()
                             }
                         }
@@ -7750,7 +8137,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         cursorStyleElem: null
                     }),
                     methods: {
-                        onModalChange: function(e) {
+                        onModalChange: function (e) {
                             this.isModalOpen = e
                         },
                         setCursorUrl(e) {
@@ -7773,20 +8160,22 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, r, [], !1, null, "ebed1606", null));
             eR.options.__file = "src/components/main-container.vue";
             var eP = eR.exports,
-                eF = function() {
+                eF = function () {
                     this.$createElement, this._self._c
                 };
             eF._withStripped = !0, s(236);
-            var e1 = Object(v.a)({}, eF, [function() {}], !1, null, "4d0670e9", null);
+            var e1 = Object(v.a)({}, eF, [function () {
+            }], !1, null, "4d0670e9", null);
             e1.options.__file = "src/components/social-links.vue";
             var e4 = e1.exports,
-                eG = function() {
+                eG = function () {
                     return this.$createElement, this._self._c, this._m(0)
                 };
             eG._withStripped = !0;
             var eH = (s(238), Object(v.a)({
-                data() {}
-            }, eG, [function() {
+                data() {
+                }
+            }, eG, [function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
                 return t("div", {
@@ -7810,7 +8199,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }], !1, null, "6843da33", null));
             eH.options.__file = "src/components/privacy-tos.vue";
             var e3 = eH.exports,
-                e2 = function() {
+                e2 = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return this.show ? t("div", {
@@ -7840,25 +8229,26 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     y: 55
                 }),
                 methods: {
-                    open: function(e, t) {
+                    open: function (e, t) {
                         this.player = t, this.playerName = t.name, this.x = e.clientX, this.y = e.clientY, this.show = !0, document.addEventListener("click", () => {
                             this.show = !1
                         }, {
                             once: !0
                         })
                     },
-                    hideName: function() {
+                    hideName: function () {
                         this.player.setName(""), this.player.invalidateVisibility()
                     },
-                    hideSkin: function() {
+                    hideSkin: function () {
                         this.player.setSkin(""), this.player.invalidateVisibility()
                     }
                 },
-                created() {}
+                created() {
+                }
             }, e2, [], !1, null, "4dbee04d", null));
             e9.options.__file = "src/components/context-menu.vue";
             var eO = e9.exports,
-                eY = function() {
+                eY = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", {
@@ -7868,7 +8258,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [t("stats"), this._v(" "), t("chatbox"), this._v(" "), t("leaderboard"), this._v(" "), t("minimap"), this._v(" "), t("cautions")], 1)
                 };
             eY._withStripped = !0;
-            var e6 = function() {
+            var e6 = function () {
                 let e = this._self._c || this.$createElement,
                     t = this._s,
                     s = this._v,
@@ -7901,7 +8291,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, e6, [], !1, null, "b7599310", null));
             eW.options.__file = "src/components/cautions.vue";
             var eZ = eW.exports,
-                e7 = function() {
+                e7 = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", {
@@ -7976,7 +8366,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, e7, [], !1, null, "0875ad82", null));
             eJ.options.__file = "src/components/stats.vue";
             var eK = eJ.exports,
-                eV = function() {
+                eV = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -7991,10 +8381,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             id: "chat-container"
                         },
                         on: {
-                            click: function(t) {
+                            click: function (t) {
                                 return e.onChatClick(t)
                             },
-                            contextmenu: function(t) {
+                            contextmenu: function (t) {
                                 return e.onChatRightClick(t)
                             }
                         }
@@ -8004,7 +8394,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             tag: "div",
                             id: "toast-list"
                         }
-                    }, e._l(e.toastMessages, function(t) {
+                    }, e._l(e.toastMessages, function (t) {
                         return s("span", {
                             key: t.id
                         }, [
@@ -8092,7 +8482,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             id: "message-list"
                         }
                     }, e._l(e.messages,
-                        function(t, i) {
+                        function (t, i) {
                             return s("div", {
                                 key: i,
                                 staticClass: "message-row"
@@ -8185,11 +8575,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             value: e.inputText
                         },
                         on: {
-                            keydown: function(t) {
+                            keydown: function (t) {
                                 if (!t.type.indexOf("key") && e._k(t.keyCode, "enter", 13, t.key, "Enter")) return null;
                                 e.sendChatMessage()
                             },
-                            input: function(t) {
+                            input: function (t) {
                                 t.target.composing || (e.inputText = t.target.value)
                             }
                         }
@@ -8301,7 +8691,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, eV, [], !1, null, "4900a413", null));
             ti.options.__file = "src/components/chatbox.vue";
             var ta = ti.exports,
-                tn = function() {
+                tn = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8324,7 +8714,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }],
                         staticClass: "leaderboard-title"
                     }, [e._v(e._s(e.headerText))]), e._v(" "), s("div", e._l(e.leaderboard,
-                        function(t, i) {
+                        function (t, i) {
                             return s("div", {
                                 key: i,
                                 staticClass: "leaderboard-label"
@@ -8342,7 +8732,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         "data-pid": t.pid
                                     },
                                     on: {
-                                        click: function(t) {
+                                        click: function (t) {
                                             return e.leftClickLabel(t)
                                         }
                                     }
@@ -8419,7 +8809,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 td = (s(252), Object(v.a)(th, eY, [], !1, null, "339660d2", null));
             td.options.__file = "src/components/hud.vue";
             var tp = td.exports,
-                tu = function() {
+                tu = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8456,7 +8846,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("div", [e._v("Time Alive: " + e._s(e.timeAlive))]), e._v(" "), s("div", [e._v("Highscore: " + e._s(e.highscore))]), e._v(" "), s("div", [e._v("Players Eaten: " + e._s(e.stats.killCount))]), e._v(" "), s("btn", {
                         staticClass: "continue",
                         nativeOn: {
-                            click: function(t) {
+                            click: function (t) {
                                 return e.onContinueClick(t)
                             }
                         }
@@ -8493,7 +8883,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, tu, [], !1, null, "3249d726", null));
             tm.options.__file = "src/components/death-stats.vue";
             var tv = tm.exports,
-                tf = function() {
+                tf = function () {
                     var e = this.$createElement;
                     return (this._self._c || e)("button", {
                         staticClass: "btn"
@@ -8503,7 +8893,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             var tC = (s(256), Object(v.a)({}, tf, [], !1, null, "b0b10308", null));
             tC.options.__file = "src/components/btn.vue";
             var ty = tC.exports,
-                tw = function() {
+                tw = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8541,7 +8931,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         },
                         on: {
                             input: e.onCellOpacitySlide,
-                            __r: function(t) {
+                            __r: function (t) {
                                 e.cellOpacity = t.target.value
                             }
                         }
@@ -8573,7 +8963,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             checked: Array.isArray(e.autoHideReplayControls) ? e._i(e.autoHideReplayControls, null) > -1 : e.autoHideReplayControls
                         },
                         on: {
-                            change: [function(t) {
+                            change: [function (t) {
                                 var s = e.autoHideReplayControls,
                                     i = t.target,
                                     a = !!i.checked;
@@ -8606,7 +8996,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         on: {
                             input: e.onSlide,
                             change: e.onSlideEnd,
-                            __r: function(t) {
+                            __r: function (t) {
                                 e.rangeIndex = t.target.value
                             }
                         }
@@ -8626,7 +9016,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         replaySecond: 0,
                         packetCount: 0
                     }),
-                    created: function() {
+                    created: function () {
                         tI.events.$on("show-replay-controls", this.onShow), tI.events.$on("replay-index-change", this.onReplayIndexChange)
                     },
                     methods: {
@@ -8655,7 +9045,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }, tw, [], !1, null, "c2c2ac08", null));
             t$.options.__file = "src/components/replay-controls.vue";
             var tk = t$.exports,
-                tb = function() {
+                tb = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return this.show ? t("div", {
@@ -8671,8 +9061,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 data: () => ({
                     show: !1
                 }),
-                created() {}
-            }, tb, [function() {
+                created() {
+                }
+            }, tb, [function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
                 return t("div", {
@@ -8705,7 +9096,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }], !1, null, "1611deb4", null));
             tS.options.__file = "src/components/ab-overlay.vue";
             var tE = tS.exports,
-                tx = function() {
+                tx = function () {
                     var e = this.$createElement;
                     return (this._self._c || e)("div", {
                         directives: [{
@@ -8775,7 +9166,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }
                 },
-                t0 = (s(262), Object(v.a)(t8, tx, [function() {
+                t0 = (s(262), Object(v.a)(t8, tx, [function () {
                     let e = this._self._c || this.$createElement,
                         t = this._v,
                         s = window.client || Object.seal({
@@ -8797,7 +9188,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }], !1, null, "76d60428", null));
             t0.options.__file = "src/components/image-captcha.vue";
             var tQ = t0.exports,
-                tM = function() {
+                tM = function () {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8814,7 +9205,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }), e._v(" "), s("i", {
                         staticClass: "fas fa-times close-button",
                         on: {
-                            click: function() {
+                            click: function () {
                                 return e.hide()
                             }
                         }
@@ -8868,12 +9259,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         GAME.events.$emit("update-cautions", {
             custom: e
         })
-    }, GAME.aimbotnodes = () => {}, window.pings = {
+    }, GAME.aimbotnodes = () => {
+    }, window.pings = {
         sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/i.png")
     }, window.setDualData = (e, t) => {
         switch (e) {
             case 1:
-                getModule(4).set("dualSkin", t), document.querySelector(".configSkin").src = t, document.getElementById("skinDisplay2").src = t;
+                getModule(4).set("dualSkin", t), document.querySelector('.configSkin').src = t, document.getElementById("skinDisplay2").src = t;
                 break;
             case 2:
                 getModule(4).set("dualNickname", document.getElementById("dualNickname").value);
@@ -8883,7 +9275,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         }
     };
     var r = document.createElement("div");
-    r.id = "debugStats", r.style.position = "fixed", r.style.right = "250px", r.style.top = "20px", r.style.textAlign = "right", r.style.fontWeight = "100", r.style.opacity = "1", r.style.display = "block", document.querySelector("#hud").appendChild(r), GAME.debugElement = r, (r = document.createElement("div")).id = "playerStats", document.querySelector("#app").appendChild(r), GAME.playerElement = r, (r = document.createElement("div")).id = "playerList", document.querySelector("#app").appendChild(r), window.yoinkSkinDual = e => {
+    r.id = "debugStats", r.style.position = "fixed", r.style.right = "250px", r.style.top = "20px", r.style.textAlign = "right", r.style.fontWeight = "100", r.style.opacity = "1", r.style.display = "block", document.querySelector('#hud').appendChild(r), GAME.debugElement = r, (r = document.createElement("div")).id = "playerStats", document.querySelector('#app').appendChild(r), GAME.playerElement = r, (r = document.createElement("div")).id = "playerList", document.querySelector('#app').appendChild(r), window.yoinkSkinDual = e => {
         window.SwalAlerts.toast.fire({
             type: "info",
             title: "Skin yoinked",
@@ -8950,9 +9342,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "Who's Miracle..?",
         ];
         return titles[Math.floor(Math.random() * titles.length)];
-    }, document.querySelector("#player-data").getElementsByTagName("div")[0].innerHTML += `
+    }, document.querySelector('#player-data').getElementsByTagName("div")[0].innerHTML += `
         <div id="openSkins">
-           <p class="gameConfigurationButton" data-v-1bcde71e="" class="tab fas"><i class="fas fa-user gameConfigurationButtonIcon"></i>Dualbox configuration</p>
+           <p class="gameConfigurationButton" data-v-1bcde71e="" class="tab fas">
+            <i class="fas fa-user gameConfigurationButtonIcon"></i>
+            Dualbox configuration</p>
         </div>
         <div class="dualProfile">
             <img id="skinDisplay1" src="${localStorage.skinUrl}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
@@ -8965,11 +9359,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 <label>Low performance mode</label>
             </div>
         </div>
-    `), document.querySelector("#main-container").insertAdjacentHTML('beforeend', window.getSwitch()), document.querySelector(".bar").innerHTML += `
+    `), document.querySelector('#main-container').insertAdjacentHTML('beforeend', window.getSwitch()), document.querySelector('.bar').innerHTML += `
         <div class="statBar"></div>
         <titlemod>(Dual mod)</titlemod>
         <titleextension>${window.getTitleExtension()}</titleextension>
-    `, document.querySelector("#openSkins").addEventListener("click", () => {
+    `, document.querySelector('#openSkins').addEventListener("click", () => {
         const modal = `
             <div data-v-0eaeaf66="" data-v-1bcde71e="" class="modal modalCustom">
                 <div data-v-0eaeaf66="" class="overlay"></div>
@@ -9000,9 +9394,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             </div>
         `;
         document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
-        var skinItems = ``;
+        let skinItems = ``;
         JSON.parse(localStorage.skins).forEach(e => {
-            skinItems += `<img class="skinItemGalery" onclick="window.setDualData(1, '${e}')" src="${"" == e ? "https://skins.vanis.io/s/Qkfih2" : e}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">`
+            skinItems += `<img class="skinItemGalery" onclick="window.setDualData(1, '${e}')" src="${e && e === '' || !e ? "https://skins.vanis.io/s/Qkfih2" : e}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">`
         });
         document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
     })
