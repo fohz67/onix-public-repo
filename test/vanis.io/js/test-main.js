@@ -1,4 +1,4 @@
-const VERSION = '4.4.4.1';
+const VERSION = '4.4.4.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 !function e() {
@@ -1319,7 +1319,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 playerStats: !0,
                 showCellLines: !1,
                 showTag: !1,
-                showTimeMessage: !0,
+                showTimeMessage: !1,
                 rainbowColorTimeMessage: !1,
                 showDir: !1,
                 chatColorOnlyPeople: !1
@@ -1354,7 +1354,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             e.exports = window.settings = new class {
                 constructor() {
                     this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle();
-                    showTimeMessageG = this.userDefinedSettings.showTimeMessage, rainbowColorTimeMessageG = this.userDefinedSettings.rainbowColorTimeMessage;
+                    showTimeMessageG = this.userDefinedSettings.showTimeMessage || false, rainbowColorTimeMessageG = this.userDefinedSettings.rainbowColorTimeMessage || false;
                 }
 
                 getInternalSettings() {
