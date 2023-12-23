@@ -4822,7 +4822,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             <div data-v-0eaeaf66="" class="content fade-box">
                                 <h2 data-v-0eaeaf66="" class="titleServer">${name} - ${nb} / ${slots}</h2>
                                 <p data-v-0eaeaf66="" class="urlServer">${url}</p>
-                                <div class="divDualSkins" data-v-7179a145="" data-v-1bcde71e="">
+                                <div class="divPlayerList" data-v-7179a145="" data-v-1bcde71e="">
                                     ${userList}
                                 </div>
                             </div>
