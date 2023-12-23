@@ -1,4 +1,4 @@
-const VERSION = '4.4.1';
+const VERSION = '4.4.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 !function e() {

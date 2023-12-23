@@ -3586,10 +3586,7 @@ canvas[data-v-4c95bd45] {
 }
 
 .divDualSkins {
-    padding:15px;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    grid-gap:12px
+    padding:15px
 }
 
 .stat-span,.stat-p {
@@ -3801,6 +3798,12 @@ titleExtension {
     font-size:16px;
     margin:5px 0 0 25px !important;
     text-shadow:0 0 20px #00000075
+}
+
+.divPlayerList {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap:12px
 }
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
