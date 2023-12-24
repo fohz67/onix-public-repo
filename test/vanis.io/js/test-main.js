@@ -1,4 +1,4 @@
-const VERSION = '4.4.4.2';
+const VERSION = '4.4.5';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 !function e() {
@@ -8,6 +8,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     let userColorsJson = userColors ? JSON.parse(userColors) : null;
     let rainbowColorTimeMessageG = undefined;
     let showTimeMessageG = undefined;
+    let settingsClicked = undefined;
     let currentServerPlayerList = {};
 
     function getLocalStorageItem(key, defaultValue) {
@@ -711,7 +712,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 } = C.mouse;
                                 i += `
                                     <b>Mouse x:</b> ${a.toFixed(0)} y: ${n.toFixed(0)} <br>
-                                    ${s ? `<b>(DUAL PID)</b> ${C.dualboxPid} <br>` : ""}
+                                    ${s ? `<b>Dual PID:</b> ${C.dualboxPid} <br>` : ""}
                                     <b>PID:</b> ${C.playerId} <br>
                                     <b>Cells in server:</b> ${C.allCells.size} <br>
                                 `;
@@ -5022,6 +5023,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "tab fas fa-cog",
                         on: {
                             click: function () {
+                                settingsClicked = 'settings';
                                 return e.openModal("settings")
                             }
                         }
@@ -5030,6 +5032,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         on: {
                             click: function () {
                                 return e.openModal("theming")
+                            }
+                        }
+                    }), e._v(" "), s("i", {
+                        staticClass: "tab fas fa-wrench",
+                        on: {
+                            click: function () {
+                                settingsClicked = 'delta';
+                                return e.openModal("delta")
                             }
                         }
                     }), e._v(" "), s("i", {
@@ -5169,7 +5179,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.closeModal()
                             }
                         }
-                    }, [s("theming")], 1) : e._e(), e._v(" "), "hotkeys" === e.activeModal ? s("modal", {
+                    }, [s("theming")], 1) : e._e(), e._v(" "), "delta" === e.activeModal ? s("modal", {
+                        on: {
+                            close: function () {
+                                return e.closeModal()
+                            }
+                        }
+                    }, [s("delta")], 1) : e._e(), e._v(" "), "hotkeys" === e.activeModal ? s("modal", {
                         on: {
                             close: function () {
                                 return e.closeModal()
@@ -5185,13 +5201,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.closeModal()
                             }
                         }
-                    }, [s("replays3")], 1) : e._e(), e._v(" "), "metaLeaderboard" === e.activeModal ? s("modal", {
-                        on: {
-                            close: function () {
-                                return e.closeModal()
-                            }
-                        }
-                    }, [s("meta-leaderboard")], 1) : e._e()], 1)
+                    }, [s("replays3")], 1) : e._e()], 1)
                 };
             y._withStripped = !0;
             var w = s(115),
@@ -5202,7 +5212,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     return s("div", {
                         staticClass: "container"
                     }, [s("div", {
-                        staticClass: "section row"
+                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n            Renderer\n            "), e.isWebGLSupported ? s("span", {
@@ -5264,7 +5274,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     })])], 1)]), e._v(" "), s("div", {
-                        staticClass: "section row"
+                        staticClass: `section row ${settingsClicked === 'delta' ? '' : 'hidden'}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        Delta settings\n    ")]), e._v(" "), s("div", {
@@ -5411,7 +5421,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Client info")])], 1)]), e._v(" "), s("div", {
-                        staticClass: "section row"
+                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        Game\n        "), s("span", {
@@ -5592,7 +5602,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }), e._v('\n            "Replay saved" ' + e._s(e.showReplaySavedMeaning) + "\n        ")])], 1)]), e._v(" "), s("div", {
-                        staticClass: "section row"
+                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n            Cells\n        ")]), e._v(" "), s("div", {
@@ -5721,7 +5731,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Show eat animation")])], 1)]), e._v(" "), s("div", {
-                        staticClass: "section row"
+                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [s("p-check", {
@@ -5913,7 +5923,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Minimap stats: Server restart time")])], 1)]), e._v(" "), s("div", {
-                        staticClass: "section row"
+                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        Chat\n    ")]), e._v(" "), s("div", {
@@ -5993,7 +6003,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     autoZoom: b.autoZoom,
                     rememeberEjecting: b.rememeberEjecting,
                     autoRespawn: b.autoRespawn,
-                    dualAutorespawn: b.dualAutorespawn,
                     mouseFreezeSoft: b.mouseFreezeSoft,
                     drawDelay: b.drawDelay,
                     cameraMoveDelay: b.cameraMoveDelay,
@@ -6027,19 +6036,20 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     showPlayerCount: b.showPlayerCount,
                     showSpectators: b.showSpectators,
                     showRestartTiming: b.showRestartTiming,
+                    showBlockedMessageCount: b.showBlockedMessageCount,
+                    filterChatMessages: b.filterChatMessages,
+                    clearChatMessages: b.clearChatMessages,
+                    showTag: b.showTag,
+                    showDir: b.showDir,
+                    gameAlpha: b.gameAlpha,
+                    dualAutorespawn: b.dualAutorespawn,
                     debugStats: b.debugStats,
                     clientStats: b.clientStats,
                     playerStats: b.playerStats,
                     chatColorOnlyPeople: b.chatColorOnlyPeople,
-                    showBlockedMessageCount: b.showBlockedMessageCount,
-                    filterChatMessages: b.filterChatMessages,
-                    clearChatMessages: b.clearChatMessages,
                     showCellLines: b.showCellLines,
-                    showTag: b.showTag,
                     showTimeMessage: b.showTimeMessage,
                     rainbowColorTimeMessage: b.rainbowColorTimeMessage,
-                    showDir: b.showDir,
-                    gameAlpha: b.gameAlpha,
                     dualActiveCellBorderSize: b.dualActiveCellBorderSize,
                     dualActive: b.dualActive
                 }),
@@ -6147,11 +6157,30 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     },
                     confirmReset() {
-                        _.confirm("Are you sure you want to reset all setting options?", () => this.reset())
+                        _.confirm(`Are you sure you want to reset all ${settingsClicked === 'delta' ? 'Delta' : ''} settings ?`, () => this.reset())
                     },
                     reset() {
-                        var e = ["clientHash", "isWebGLSupported"];
-                        for (var t in this.$data) e.includes(t) || this.change(t, b.getDefault(t))
+                        const e = ["clientHash", "isWebGLSupported"];
+                        const deltaProperties = [
+                            "dualAutorespawn",
+                            "debugStats",
+                            "clientStats",
+                            "playerStats",
+                            "chatColorOnlyPeople",
+                            "showCellLines",
+                            "showTimeMessage",
+                            "rainbowColorTimeMessage",
+                            "dualActiveCellBorderSize",
+                            "dualActive"
+                        ];
+
+                        for (var t in this.$data) {
+                            if (settingsClicked === 'delta') {
+                                if (!e.includes(t) && deltaProperties.includes(t)) this.change(t, b.getDefault(t));
+                            } else {
+                                if (!e.includes(t) && !deltaProperties.includes(t)) this.change(t, b.getDefault(t));
+                            }
+                        }
                     }
                 }
             }, I, [], !1, null, "3ddebeb3", null));
@@ -7625,101 +7654,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 ep = (s(220), Object(v.a)(ed, et, [], !1, null, "4a996e52", null));
             ep.options.__file = "src/components/replays3.vue";
             var eu = ep.exports,
-                eg = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        staticStyle: {
-                            padding: "15px"
-                        }
-                    }, [s("h2", {
-                        staticStyle: {
-                            margin: "0",
-                            "margin-bottom": "14px"
-                        }
-                    }, [e._v(e._s(e.seasonLeaderboardText))]), e._v(" "), e.errorMessage ? s("div", [e._v("\n    Failed loading season leaderboard data:\n    " + e._s(e.errorMessage) + "\n")]) : e._e(), e._v(" "), e.playerList.length ? s("div", [s("div", {
-                        staticClass: "info"
-                    }, [e._v("\n        Season XP counts for this season only."), s("br"), e._v("\n            Top few players earn colored names."), s("br"), e._v("\n        Check our "), s("a", {
-                        attrs: {
-                            href: "https://vanis.io/discord"
-                        }
-                    }, [e._v("Discord")]), e._v(" for more information."), s("br"), e._v("\n        Season ends in "), s("b", [e._v(e._s(e.seasonEndTime))])]), e._v(" "), e._l(e.playerList, function (t, i) {
-                        return s("div", {
-                            key: i,
-                            staticClass: "player-row",
-                            class: {
-                                me: !!e.isMe
-                            }
-                        }, [s("span", {
-                            staticClass: "player-nr"
-                        }, [e._v(e._s(i + 1) + ".")]), e._v(" "), s("span", {
-                            staticClass: "player-name",
-                            style: {
-                                color: t.name_color
-                            }
-                        }, [e._v(e._s(t.name))]), e._v(" "), s("span", {
-                            staticClass: "player-xp"
-                        }, [e._v(e._s(t.xp) + " XP")])])
-                    })], 2) : e._e()])
-                };
-            eg._withStripped = !0;
-            var eA = s(1),
-                em = s(228),
-                {
-                    checkBadWords: ev
-                } = s(17),
-                ef = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                eC = (s(222), Object(v.a)({
-                    data: () => ({
-                        playerList: [],
-                        errorMessage: "",
-                        ownUid: null,
-                        date: new Date,
-                        nextStartDate: Date.UTC((new Date).getUTCFullYear(), (new Date).getUTCMonth() + 1),
-                        seasonEndTime: null,
-                        seasonEndTimeInterval: null,
-                        selected: "sxp"
-                    }),
-                    computed: {
-                        seasonLeaderboardText() {
-                            return ef[this.date.getUTCMonth()] + " " + this.date.getUTCFullYear() + " season"
-                        }
-                    },
-                    methods: {
-                        setSeasonEndTime() {
-                            this.seasonEndTime = function (e) {
-                                if (e < 0) return "now";
-                                var t = Math.floor(e / 1e3),
-                                    s = t % 60,
-                                    i = Math.floor(t / 60),
-                                    a = i % 60,
-                                    n = Math.floor(i / 60),
-                                    o = n % 24,
-                                    r = Math.floor(n / 24),
-                                    l = [];
-                                return r > 0 && l.push(r + " day" + (1 !== r ? "s" : "")), o % 24 > 0 && l.push(o + " hour" + (1 !== o ? "s" : "")), 0 === r && a % 60 > 0 && l.push(a + " minute" + (1 !== a ? "s" : "")), 0 === n && s % 60 > 0 && l.push(s + " second" + (1 !== s ? "s" : "")), l.join(" ")
-                            }(this.nextStartDate - Date.now())
-                        }
-                    },
-                    async created() {
-                        let e = await em.get("/leaderboard/season_xp/100");
-                        if (!e.ok) return;
-                        let t = await e.json();
-                        this.playerList = t.map(e => ({
-                            name: e.perk_name || e.discord_name,
-                            name_color: "#" + (e.perk_color || "ffffff"),
-                            badge: e.perk_badges || 0,
-                            xp: e.season_xp,
-                            isMe: e.me
-                        })), eA.events.$on("every-second", this.setSeasonEndTime), this.setSeasonEndTime()
-                    },
-                    destroyed() {
-                        eA.events.$off("every-second", this.setSeasonEndTime)
-                    }
-                }, eg, [], !1, null, "7179a145", null));
-            eC.options.__file = "src/components/meta-leaderboard.vue";
-            var ey = eC.exports,
                 ew = (s(19), s(1)),
                 eI = (s(5), {
                     components: {
@@ -7727,8 +7661,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         settings: Q,
                         theming: J,
                         hotkeys: ee,
+                        delta: Q,
                         replays3: eu,
-                        metaLeaderboard: ey
                     },
                     data: () => ({
                         activeModal: "",
