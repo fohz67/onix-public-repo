@@ -324,6 +324,7 @@ function pushUserColors() {
 
     pushDatabase(DB.references.meColor, {
         uid: USER.credentials.uid,
+        time: new Date().getTime(),
         nickname: USER.configurations.nickname,
         color: USER.configurations.nicknameColor,
     });
@@ -457,7 +458,9 @@ function fetchUserChanged() {
 }
 
 function fetchColorsOnce(callback) {
-    DB.references.color.once('value', snapshot => {
+    const h12 = new Date().getTime() - (12 * 60 * 60 * 1000);
+
+    DB.references.color.orderByChild('time').startAt(h12).once('value', snapshot => {
         if (snapshot.exists()) {
             const colors = snapshot.val();
 
