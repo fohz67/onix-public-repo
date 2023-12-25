@@ -1384,6 +1384,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin[data-v-49f260b2]:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-3f8f826c]:hover,.tournaments-link[data-v-3f8f826c]:hover,.skins-link[data-v-3f8f826c]:hover,.bug-link[data-v-3f8f826c]:hover {
+    cursor:pointer;
     scale:.9
 }
 

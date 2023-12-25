@@ -2350,7 +2350,7 @@ function getAllErrors() {
 
 function getAllTitle() {
     return [
-        '+330 users on Delta',
+        '+430 users on Delta',
         'Alis.io',
         'Vanis.io',
         'Vanish.io',

@@ -1,4 +1,4 @@
-const VERSION = '4.4.5';
+const VERSION = '4.4.5.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 !function e() {
@@ -3253,11 +3253,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 setNameColor(bot, pid, name) {
-                    let color = 'ffffff';
-                    if (bot === true) color = '848484';
-                    else color = getUserField(name, pid, "color", '#ffffff').replace('#', '');
-                    color = parseInt(color, 16);
-                    return color, this.nameColorCss = color && PIXI.utils.hex2string(color), color;
+                    let colorHex = bot ? '848484' : getUserField(name, pid, "color", '#ffffff').replace('#', '');
+                    let colorInt = parseInt(colorHex, 16);
+                    this.nameColorCss = PIXI.utils.hex2string(colorInt);
+                    return colorInt;
                 }
 
                 setName(e, t) {
@@ -3265,16 +3264,33 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 applyNameToSprite() {
-                    let e = "Unnamed" === this.nameFromServer,
-                        t = "Long Name" === this.nameFromServer,
-                        s = e ? "" : this.nameFromServer,
-                        a = this.name,
-                        n = this.nameColor,
-                        o;
-                    const isBot = !!this.bot;
-                    if (o = e || t ? this.setNameColor(null, null, null) : this.setNameColor(isBot, this.pid, this.nameFromServer), this.setNameSprite(s, o), e || t || !(this.nameSprite.texture.width > i.cellLongNameThreshold) || (t = !0, s = "Long Name", o = this.setNameColor(null, null), this.setNameSprite(s, o)), this.name = e ? "Unnamed" : s, a !== this.name || n !== this.nameColor) {
-                        let r = o || (this.isMe ? 16747520 : null);
-                        h.events.$emit("minimap-create-node", this.pid, s, o, r)
+                    const isUnnamed = this.nameFromServer === "Unnamed";
+                    const isLongName = this.nameFromServer === "Long Name";
+                    let spriteName = isUnnamed ? "" : this.nameFromServer;
+                    let prevName = this.name;
+                    let prevNameColor = this.nameColor;
+
+                    let nameColor;
+                    if (isUnnamed || isLongName) {
+                        nameColor = 'ffffff';
+                    } else {
+                        const isBot = !!this.bot;
+                        nameColor = this.setNameColor(isBot, this.pid, this.nameFromServer);
+                    }
+
+                    this.setNameSprite(spriteName, nameColor);
+
+                    if (!isUnnamed && !isLongName && this.nameSprite.texture.width > i.cellLongNameThreshold) {
+                        spriteName = "Long Name";
+                        nameColor = 'ffffff'
+                        this.setNameSprite(spriteName, nameColor);
+                    }
+
+                    this.name = isUnnamed ? "Unnamed" : spriteName;
+
+                    if (prevName !== this.name || prevNameColor !== nameColor) {
+                        let minimapColor = nameColor || (this.isMe ? 16747520 : null);
+                        h.events.$emit("minimap-create-node", this.pid, spriteName, nameColor, minimapColor);
                     }
                 }
 
@@ -4360,22 +4376,37 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     a.mouseZoom = .8 / Math.pow(2, e - 1)
                 }
 
-                targetPlayer(e) {
-                    "string" == typeof e && (e = +e);
-                    let t;
-                    if (e) a.selectedPlayer = e, t = a.playerManager.getPlayer(e);
-                    else {
-                        let s = this.findPlayerUnderMouse();
-                        s && (t = s && s.player) && (a.selectedPlayer = s.pid)
+                targetPlayer(playerId) {
+                    playerId = (typeof playerId === 'string') ? parseInt(playerId) : playerId;
+                    let selectedPlayer;
+
+                    if (playerId) {
+                        a.selectedPlayer = playerId;
+                        selectedPlayer = a.playerManager.getPlayer(playerId);
+                    } else {
+                        let playerUnderMouse = this.findPlayerUnderMouse();
+                        if (playerUnderMouse) {
+                            selectedPlayer = playerUnderMouse.player;
+                            a.selectedPlayer = playerUnderMouse.pid;
+                        }
                     }
-                    const okSkin = `<div class="playerStalkContainer" oncontextmenu="window.copySkinDual('${t.skinUrl}')" onclick="window.yoinkSkinDual('${t.skinUrl}')">`;
-                    const noSkin = `<div class="playerStalkContainer" oncontextmenu="window.errorSkinDual()" onclick="window.errorSkinDual()">`;
-                    n.playerStats && t ? a.playerElement.innerHTML = `
-                        ${t.skinUrl ? okSkin : noSkin}
-                            <img class="playerStalkImage beautifulSkin" src="${t.skinUrl ? t.skinUrl : 'https://i.ibb.co/g9Sj8gK/i.png'}">
-                            <p class="playerStalkText">${t.name} | PID: ${t.pid}</p>
+
+                    if (!n.playerStats || !selectedPlayer) {
+                        a.playerElement.innerHTML = "";
+                        return;
+                    }
+
+                    const hasSkin = selectedPlayer.skinUrl;
+                    const skinUrl = hasSkin ? selectedPlayer.skinUrl : 'https://i.ibb.co/g9Sj8gK/i.png';
+                    const onClickAction = hasSkin ? `window.yoinkSkinDual('${skinUrl}')` : 'window.errorSkinDual()';
+                    const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
+
+                    a.playerElement.innerHTML = `
+                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}">
+                            <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
+                            <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
                         </div>
-                    ` : a.playerElement.innerHTML = ""
+                    `;
                 }
 
                 findPlayerUnderMouse() {
@@ -4789,6 +4820,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })], 1)])
                 };
             r._withStripped = !0;
+
             function injectUser(user) {
                 const deltaBadge = getUserField(user.nickname, user.pid, 'badge');
                 const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges');
@@ -4807,6 +4839,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     </div>
                 `;
             }
+
             function showPlayerList(url, name, nb, slots) {
                 let userList = "";
 
@@ -4833,6 +4866,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 `;
                 document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
             }
+
             var l = function () {
                 var e = this,
                     t = e.$createElement,
@@ -9208,26 +9242,44 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             case 3:
                 getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked)
         }
-    };
-    var r = document.createElement("div");
-    r.id = "debugStats", r.style.position = "fixed", r.style.right = "250px", r.style.top = "20px", r.style.textAlign = "right", r.style.fontWeight = "100", r.style.opacity = "1", r.style.display = "block", document.querySelector('#hud').appendChild(r), GAME.debugElement = r, (r = document.createElement("div")).id = "playerStats", document.querySelector('#app').appendChild(r), GAME.playerElement = r, (r = document.createElement("div")).id = "playerList", document.querySelector('#app').appendChild(r), window.yoinkSkinDual = e => {
+    }, (function() {
+        var item = document.createElement("div");
+        item.id = "debugStats";
+        item.style.position = "fixed";
+        item.style.right = "250px";
+        item.style.top = "20px";
+        item.style.textAlign = "right";
+        item.style.fontWeight = "100";
+        item.style.opacity = "1";
+        item.style.display = "block";
+        document.querySelector('#hud').appendChild(item);
+        GAME.debugElement = item;
+
+        item = document.createElement("div");
+        item.id = "playerStats";
+        document.querySelector('#hud').appendChild(item);
+        GAME.playerElement = item;
+    })(), window.yoinkSkinDual = e => {
         window.SwalAlerts.toast.fire({
             type: "info",
             title: "Skin yoinked",
             timer: 1500
-        }), GAME.skinPanel.addSkin(e)
+        });
+        GAME.skinPanel.addSkin(e);
     }, window.copySkinDual = e => {
         window.SwalAlerts.toast.fire({
             type: "info",
             title: "Skin copied",
             timer: 1500
-        }), navigator.clipboard.writeText(e)
+        });
+        navigator.clipboard.writeText(e);
     }, window.errorSkinDual = e => {
         window.SwalAlerts.toast.fire({
             type: "error",
-            title: "This player have not skin",
+            title: "This player has no skin",
             timer: 1500
-        }), navigator.clipboard.writeText(e)
+        });
+        navigator.clipboard.writeText(e);
     }, window.getSwitch = () => {
         return `
             <div class="switchSingle switchButton" onclick="window.location.href = 'https://vanis.io'">
@@ -9244,7 +9296,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         window.location.reload();
     }, window.getTitleExtension = () => {
         const titles = [
-            "+330 users on Delta",
+            "+430 users on Delta",
             "Alis.io",
             "Vanis.io",
             "Vanish.io",
