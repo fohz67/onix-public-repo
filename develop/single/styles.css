@@ -86,10 +86,6 @@ h4 {
     padding:6px!important
 }
 
-#chatbox-container {
-    box-shadow:none!important
-}
-
 .chatbox>input::placeholder {
     color:#ffffff6b!important
 }
@@ -133,11 +129,11 @@ h4 {
 }
 
 input[type=number],input[type=text],select {
-    background:#54379f4d!important;
-    border:solid 1px #956dff6e!important;
-    border-radius:12px!important;
-    color:#dadada!important;
-    padding:8px!important
+    background:#54379f4d;
+    border:solid 1px #956dff6e;
+    border-radius:12px;
+    color:#dadada;
+    padding:8px
 }
 
 #colorPickerInput::placeholder,input[type=number]::placeholder,input[type=text]::placeholder,select::placeholder {
@@ -159,7 +155,7 @@ input[type=number],input[type=text],select {
     text-shadow:none!important
 }
 
-#player-container #game-buttons #play-button:hover,#player-container #game-buttons #spec-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row>.button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,#submit-account:hover {
+#player-container #game-buttons #play-button:hover,#player-container #game-buttons #spec-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row>.button:hover,.server-button:hover,#submit-account:hover {
     background:#b69cff!important;
     box-shadow:none!important;
     text-shadow:none!important
@@ -355,19 +351,6 @@ i.tab.fas {
     position:relative
 }
 
-#leaderboard {
-    background:#00000047!important;
-    border:solid 1px #ffffff0f!important;
-    border-radius:20px!important;
-    box-shadow:0 0 30px 0 #00000061!important;
-    height:280px!important;
-    padding:20px 20px 10px!important;
-    right:10px!important;
-    text-align:center!important;
-    top:10px!important;
-    width:180px!important
-}
-
 .leaderboard-title {
     font-size:20px!important
 }
@@ -385,23 +368,6 @@ i.tab.fas {
 .stats {
     color:#fff!important;
     padding:20px!important
-}
-
-.chatbox {
-    background:#00000047!important;
-    border:solid 1px #ffffff0f!important;
-    border-radius:20px!important;
-    box-shadow:0 0 30px 0 #00000061!important;
-    font-size:14px!important;
-    margin-bottom:10px!important;
-    margin-left:10px!important;
-    padding:15px 15px 5px!important;
-    width:250px!important
-}
-
-.minimap-wrapper {
-    bottom:10px!important;
-    right:10px!important
 }
 
 .player-list {
@@ -490,8 +456,8 @@ i.tab.fas {
     justify-content:center!important
 }
 
-.silent {
-    color:#ffffff57!important
+span.right.silent {
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .open-lobbies {
@@ -1354,9 +1320,48 @@ input[type="color"]::-webkit-color-swatch {
     padding:0 0 10px
 }
 
+.section.row:first-child {
+    margin-top: 10px!important;
+}
+
+#leaderboard[data-v-7e7860a8] {
+    background:#00000047!important;
+    border:solid 1px #ffffff0f!important;
+    border-radius:20px!important;
+    box-shadow:0 0 30px 0 #00000061!important;
+    height:280px!important;
+    padding:20px 20px 10px!important;
+    right:10px!important;
+    text-align:center!important;
+    top:10px!important;
+    width:180px!important
+}
+
+.container[data-v-769dba30] {
+    background:#00000047!important;
+    border:solid 1px #ffffff0f!important;
+    border-radius:20px!important;
+    bottom:10px!important;
+    box-shadow:0 0 30px 0 #00000061!important;
+    position:fixed!important;
+    right:10px!important
+}
+
+.chatbox[data-v-1664b5c5] {
+    background:#00000047!important;
+    border:solid 1px #ffffff0f!important;
+    border-radius:20px!important;
+    box-shadow:0 0 30px 0 #00000061!important;
+    font-size:14px!important;
+    margin-bottom:10px!important;
+    margin-left:10px!important;
+    padding:15px 15px 5px!important;
+    width:250px!important
+}
+
 .image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button:hover,#player-container #game-buttons #play-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active:hover,.tab:hover,.tab-menu .tab:hover,.discord:hover,.server-list-item:hover,#hotkey-container .reset-button2:hover,#hotkey-container .bind:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover,#submit-account:hover,.discord-link:hover,.tournaments-link:hover,.skins-link:hover,.bug-link:hover {
     cursor:pointer!important;
-    scale:.9!important
+    scale:92%!important
 }
 
 .image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item,.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button,#player-container #game-buttons #play-button,.confirm-button,.btn,.perk-color-update,.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button,.skin,.vanis-button,.discord-btn,.server-list-item.active,.tab,.tab-menu .tab,.discord,.server-list-item,#hotkey-container .reset-button2,#hotkey-container .bind,.reset-button2,.reset-option,.arrow,#submit-account,.discord-link,.tournaments-link,.skins-link,.bug-link {
