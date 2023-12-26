@@ -174,14 +174,13 @@ input[type=number],input[type=text],select {
 #player-container #player-data {
     box-sizing:border-box!important;
     height:100%!important;
-    margin-top:15px!important;
     padding:0 15px 15px!important
 }
 
 #nickname,#teamtag,#colorPickerInput,#skinurl,#player-container #player-data>div {
     border-radius:12px!important;
     font-size:17px!important;
-    height:42px!important;
+    height:42px;
     text-align-last:center!important
 }
 
@@ -457,7 +456,7 @@ i.tab.fas {
 }
 
 span.right.silent {
-    color: rgba(255, 255, 255, 0.55);
+    color:#ffffff8c
 }
 
 .open-lobbies {
@@ -663,6 +662,7 @@ titlemod {
     display:block;
     margin-left:22.5%;
     margin-top:25px;
+    margin-bottom:15px;
     width:55%
 }
 
@@ -1321,7 +1321,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .section.row:first-child {
-    margin-top: 10px!important;
+    margin-top:10px!important
 }
 
 #leaderboard[data-v-7e7860a8] {
