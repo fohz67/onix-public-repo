@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.1.7.2',
+    version: '4.1.7.3',
     mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -524,7 +524,12 @@ function fetchItem(elements, functionExec) {
 function pageConfiguration() {
     let link = document.querySelector(ATTRS.selectors.link) || document.createElement('link');
 
-    $('.far.fa-keyboard').removeClass('far').addClass('fas');
+    let iconElement = document.querySelector('.far.fa-keyboard');
+
+    if (iconElement) {
+        iconElement.classList.remove('far');
+        iconElement.classList.add('fas');
+    }
 
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
