@@ -1872,7 +1872,7 @@ a {
 }
 
 input[type=text] {
-    background:#00ffdc12;
+    background-color:#54379f4d;
     border:solid 1px #956dff6e;
     border-radius:11px!important;
     box-sizing:border-box;
@@ -2375,7 +2375,7 @@ input::placeholder {
 .image-button-text[data-v-641581b7] {
     font-size:23px;
     height:35px;
-    margin-top:-5px;
+    margin-top:-1px;
     width:35px
 }
 
@@ -3361,7 +3361,7 @@ canvas[data-v-4c95bd45] {
 
 #hud[data-v-339660d2] {
     color:#fff;
-    pointer-events: unset!important;
+    pointer-events:unset!important;
     position:fixed
 }
 
@@ -3813,7 +3813,7 @@ titleExtension {
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
     cursor:pointer;
-    scale:.9
+    scale:92%
 }
 
 .server-visible-list,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.replay-item,.skinItemGalery,.playerStalkContainer,#tab-menu .tab[data-v-0647fbb0],#openSkins,.logout[data-v-661435cd],.image-button-text[data-v-641581b7],.vanis-button,#hotkey-container .bind[data-v-2dbed53e],.server-list-item,.skin-container[data-v-1c614894],.discord[data-v-661435cd],.tab[data-v-1bcde71e],#player-container #game-buttons #play-button[data-v-1bcde71e],#player-container #game-buttons #spec-button[data-v-1bcde71e],.reset-option[data-v-15c13b66],.reset-option[data-v-3ddebeb3],.reset-option[data-v-2c5139e0] {

@@ -669,11 +669,12 @@ titlemod {
 .nicknameProfile {
     display:block;
     font-family:'Ubuntu',sans-serif;
-    font-size:28px;
+    font-size:31px;
     font-weight:900;
     left:50%;
+    margin-top:-5px;
     position:absolute;
-    text-align:-webkit-center;
+    text-align:center;
     text-shadow:0 0 15px #000;
     top:56%;
     transform:translate(-50%,-50%);
@@ -1324,6 +1325,12 @@ input[type="color"]::-webkit-color-swatch {
     margin-top:10px!important
 }
 
+img.skin {
+    animation:svelte-1k2e827-background-gradient 7s linear infinite;
+    background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
+    background-size:200% 200%
+}
+
 #leaderboard[data-v-7e7860a8] {
     background:#00000047!important;
     border:solid 1px #ffffff0f!important;
@@ -1356,7 +1363,7 @@ input[type="color"]::-webkit-color-swatch {
     margin-bottom:10px!important;
     margin-left:10px!important;
     padding:15px 15px 5px!important;
-    width:250px!important
+    width:250px
 }
 
 .image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button:hover,#player-container #game-buttons #play-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active:hover,.tab:hover,.tab-menu .tab:hover,.discord:hover,.server-list-item:hover,#hotkey-container .reset-button2:hover,#hotkey-container .bind:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover,#submit-account:hover,.discord-link:hover,.tournaments-link:hover,.skins-link:hover,.bug-link:hover {
