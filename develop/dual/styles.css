@@ -2040,8 +2040,13 @@ input::placeholder {
     border-right:none
 }
 
-#hotkey-container .bind[data-v-2dbed53e]:focus,.overlay[data-v-0eaeaf66],.overlay[data-v-73ccaaca] {
-    background:#00000080
+.overlay[data-v-0eaeaf66],.overlay[data-v-73ccaaca] {
+    backdrop-filter:blur(5px);
+    background:#0009
+}
+
+#hotkey-container .bind[data-v-2dbed53e]:focus {
+    background:#150b31!important
 }
 
 .cursor-loading[data-v-0647fbb0] {
