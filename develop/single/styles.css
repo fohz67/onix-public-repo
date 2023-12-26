@@ -262,13 +262,13 @@ input[type=number],input[type=text],select {
     padding:7px
 }
 
-.tab-menu .tab.active,.tab-menu .tab.active[data-v-1f0baf2d] {
-    background:#b69cff;
-    color:#241931
+.tab-menu .tab.active {
+    background:#b69cff!important;
+    color:#241931!important
 }
 
-.tab[data-v-5190ae12] {
-    font-size:23px
+i.tab.fas {
+    font-size:23px!important
 }
 
 .tab:not(:last-child) {
@@ -283,11 +283,11 @@ input[type=number],input[type=text],select {
     font-size:14px
 }
 
-.avatar[data-v-2f9932e6] {
-    border-radius:20%;
-    box-shadow:none;
-    margin-right:7px;
-    width:70px
+.avatar {
+    border-radius:20%!important;
+    box-shadow:none!important;
+    margin-right:7px!important;
+    width:70px!important
 }
 
 .discord-link[data-v-3f8f826c],.tournaments-link[data-v-3f8f826c],.skins-link[data-v-3f8f826c],.bug-link[data-v-3f8f826c] {
@@ -322,26 +322,26 @@ input[type=number],input[type=text],select {
     padding:5px
 }
 
-.player-info[data-v-2f9932e6] {
-    font-size:15px;
-    margin-top:2px
+.player-info {
+    font-size:15px!important;
+    margin-top:2px!important
 }
 
-.account-wrapper[data-v-2f9932e6] {
-    padding:15px 16px
+.account-wrapper {
+    padding:15px 16px!important
 }
 
-.account-name[data-v-2f9932e6] {
-    font-size:18px
+.account-name {
+    font-size:18px!important
 }
 
-.progress[data-v-5f2d6d72] {
-    background:#b69cff69;
-    border-radius:7px;
-    box-shadow:none;
-    height:30px;
-    margin-top:10px;
-    padding:0
+.progress {
+    background:#b69cff69!important;
+    border-radius:7px!important;
+    box-shadow:none!important;
+    height:30px!important;
+    margin-top:10px!important;
+    padding:0!important
 }
 
 .progress-striped .progress-bar[data-v-5f2d6d72] {
@@ -353,14 +353,6 @@ input[type=number],input[type=text],select {
 .profile-image {
     display:inline-block;
     position:relative
-}
-
-.arrow {
-    color:#ffffff7d;
-    font-size:20px;
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%)
 }
 
 #leaderboard[data-v-7e7860a8] {
@@ -554,91 +546,87 @@ input[type=number],input[type=text],select {
     text-shadow:none
 }
 
-.skin[data-v-49f260b2] {
-    animation:svelte-1k2e827-background-gradient 7s linear infinite;
-    background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
-    background-size:200% 200%;
-    border:none;
-    border-radius:50%;
-    box-shadow:0 0 15px 1px #b69cff2e
+.skin {
+    animation:svelte-1k2e827-background-gradient 7s linear infinite!important;
+    background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%)!important;
+    background-size:200% 200%!important;
+    border:none!important;
+    border-radius:50%!important;
+    box-shadow:0 0 15px 1px #b69cff2e!important
 }
 
-.selected[data-v-49f260b2] {
-    box-shadow:0 0 20px 0 #b69cff99
+.selected {
+    box-shadow:0 0 20px 0 #b69cff99!important
 }
 
-.bar[data-v-5208baf4] {
-    align-items:center;
-    display:inline-grid;
-    grid-column:1/4;
-    margin:auto
+.bar {
+    align-items:center!important;
+    display:inline-grid!important;
+    grid-column:1/4!important;
+    margin:auto!important
 }
 
-.perk-badges-scroll[data-v-2c5139e0] {
-    margin-bottom:0;
-    margin-top:0
+.perk-color-wrapper {
+    align-items:center!important;
+    display:grid!important;
+    grid-template-columns:1fr 50px 50px!important;
+    grid-template-rows:1fr 50px!important;
+    width:100%!important
 }
 
-.perk-color-wrapper[data-v-2c5139e0] {
-    align-items:center;
-    display:grid;
-    grid-template-columns:1fr 50px 50px;
-    grid-template-rows:1fr 50px;
-    width:100%
+.perk-badges-scroll {
+    margin-bottom:0!important;
+    margin-top:10px!important;
+    overflow-x:auto!important;
+    width:100%!important
 }
 
-.perk-badges-scroll[data-v-2c5139e0] {
-    margin-top:10px;
-    overflow-x:auto;
-    width:100%
+.perk-name,.perk-color-update {
+    font-size:16px!important;
+    height:40px!important;
+    margin-top:10px!important;
+    text-align:center!important
 }
 
-.perk-name[data-v-2c5139e0],.perk-color-update[data-v-2c5139e0] {
-    font-size:16px;
-    height:40px;
-    margin-top:10px;
-    text-align:center
+.color-button,.image-button {
+    border:1px solid #956dff6e!important;
+    border-radius:10px!important;
+    height:37px!important;
+    width:37px!important
 }
 
-.color-button[data-v-e11a74f8],.image-button[data-v-180f29a6] {
-    border:1px solid #956dff6e;
-    border-radius:10px;
-    height:37px;
-    width:37px
-}
-
-.xp-data[data-v-2f9932e6] {
-    color:#302442;
+.xp-data {
+    color:#302442!important;
     text-shadow:none!important
 }
 
-.image-button[data-v-180f29a6] {
-    border-color:#0000006e;
-    border-radius:0
+.image-button {
+    border-color:#0000006e!important;
+    border-radius:0!important
 }
 
-.color-input > .right[data-v-c41b640a] {
-    border:1px solid #6945c5;
-    border-radius:12px;
-    box-shadow:0 0 16px 1px #00000054;
-    height:35px;
-    width:35px
+.color-input > .right {
+    border:1px solid #6945c5!important;
+    border-radius:12px!important;
+    box-shadow:0 0 16px 1px #00000054!important;
+    height:35px!important;
+    width:35px!important
 }
 
-.replay-list-header[data-v-11810f3c] {
-    align-items:center;
-    background:#0000;
-    border-bottom:none;
-    box-shadow:none;
-    display:flex;
-    justify-content:space-between;
-    padding:15px 15px 5px;
-    position:relative
+.replay-list-header {
+    align-items:center!important;
+    background:#0000!important;
+    border-bottom:none!important;
+    box-shadow:none!important;
+    display:flex!important;
+    justify-content:space-between!important;
+    padding:15px 15px 5px!important;
+    position:relative!important
 }
 
-#hotkey-container .action[data-v-6754dc1c] {
-    align-self:center;
-    flex:4
+#hotkey-container .action {
+    align-self:center!important;
+    flex:4!important
 }
 
 .vanis-button:disabled {
@@ -654,40 +642,40 @@ input[type=number],input[type=text],select {
     text-shadow:0 0 0 #000
 }
 
-.replay-item[data-v-1dc3fbb4] {
-    border:solid 1px #956dff6e;
-    border-radius:11px;
-    box-shadow:0 1px 20px 0 #00000040
+.replay-item {
+    border:solid 1px #956dff6e!important;
+    border-radius:11px!important;
+    box-shadow:0 1px 20px 0 #00000040!important
 }
 
-.replay-header[data-v-1dc3fbb4] {
+.replay-header {
     border-bottom:none!important;
-    padding:8px
+    padding:8px!important
 }
 
-.lobby-list[data-v-4aaf8f72] {
+.lobby-list {
     border-right:1px solid #956dff6e!important;
     margin-right:0!important
 }
 
-.lobby-list[data-v-4aaf8f72] > .row {
+.lobby-list > .row {
     border-bottom:none!important
 }
 
 .button-row {
     border-bottom:none!important;
-    padding:12px
+    padding:12px!important
 }
 
-.section > .options[data-v-22117250],.section > .options[data-v-2c5139e0],.section > .options[data-v-c41b640a],.section > .options[data-v-24d5bfb4],.section > .options[data-v-0a751125] {
-    padding:17px
+.section > .options {
+    padding:17px!important
 }
 
-.section[data-v-22117250],.section[data-v-2c5139e0],.section[data-v-c41b640a],.section[data-v-24d5bfb4],.section[data-v-0a751125] {
-    border:1px solid #956dff6e;
-    border-radius:16px;
-    box-shadow:0 0 30px 0 #0000003b;
-    margin:5px 5px 13px
+.section {
+    border:1px solid #956dff6e!important;
+    border-radius:16px!important;
+    box-shadow:0 0 30px 0 #0000003b!important;
+    margin:5px 5px 13px!important
 }
 
 .section > .header[data-v-22117250],.section > .header[data-v-2c5139e0],.section > .header[data-v-c41b640a],.section > .header[data-v-24d5bfb4],.section > .header[data-v-0a751125] {
@@ -1383,11 +1371,11 @@ input[type="color"]::-webkit-color-swatch {
     padding:0 0 10px
 }
 
-.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin[data-v-49f260b2]:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-3f8f826c]:hover,.tournaments-link[data-v-3f8f826c]:hover,.skins-link[data-v-3f8f826c]:hover,.bug-link[data-v-3f8f826c]:hover {
+.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-3f8f826c]:hover,.tournaments-link[data-v-3f8f826c]:hover,.skins-link[data-v-3f8f826c]:hover,.bug-link[data-v-3f8f826c]:hover {
     cursor:pointer;
     scale:.9
 }
 
-.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin[data-v-49f260b2],.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-3f8f826c],.tournaments-link[data-v-3f8f826c],.skins-link[data-v-3f8f826c],.bug-link[data-v-3f8f826c] {
+.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin,.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-3f8f826c],.tournaments-link[data-v-3f8f826c],.skins-link[data-v-3f8f826c],.bug-link[data-v-3f8f826c] {
     transition:all .3s
 }
