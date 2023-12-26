@@ -38,25 +38,25 @@ h4 {
     display:none!important
 }
 
-.box-1[data-v-0b6441fe] {
+.box-1 {
     display:none!important
 }
 
 .fade-box {
     background:linear-gradient(45deg,#2c1170,#0a021d);
-    border:solid 1px #956dff6e;
-    border-radius:20px;
+    border:solid 1px #956dff6e!important;
+    border-radius:20px!important;
     box-shadow:1px 0 20px 0 #0006!important
 }
 
-.tooltip[data-v-7968cda5] {
-    background:linear-gradient(45deg,#2c1170,#0a021d);
-    border:solid 1px #956dff6e;
-    border-radius:7px;
+.tooltip {
+    background:linear-gradient(45deg,#2c1170,#0a021d)!important;
+    border:solid 1px #956dff6e!important;
+    border-radius:7px!important;
     box-shadow:1px 0 30px 0 #5228c252!important;
-    font-size:14px;
-    max-width:240px;
-    padding:9px
+    font-size:14px!important;
+    max-width:240px!important;
+    padding:9px!important
 }
 
 #overlay {
@@ -64,13 +64,13 @@ h4 {
     background:#0009
 }
 
-.scroll[data-v-0b6441fe] {
-    animation-duration:2.5s;
-    animation-name:scroll-06e9bb4c;
-    animation-timing-function:ease;
-    font-size:18px;
-    overflow:hidden;
-    text-align-last:center
+.scroll {
+    animation-duration:2.5s!important;
+    animation-name:scroll-06e9bb4c!important;
+    animation-timing-function:ease!important;
+    font-size:18px!important;
+    overflow:hidden!important;
+    text-align-last:center!important
 }
 
 .chatbox.toasts.visible {
@@ -79,42 +79,42 @@ h4 {
     padding:6px 15px
 }
 
-.message-row.toast[data-v-084a7fd8] {
-    border:solid 1px #ffffff0f;
-    border-radius:8px;
+.message-row.toast {
+    border:solid 1px #ffffff0f!important;
+    border-radius:8px!important;
     box-shadow:0 0 30px 0 #00000061!important;
-    padding:6px
+    padding:6px!important
 }
 
 #chatbox-container {
     box-shadow:none!important
 }
 
-.chatbox > input[data-v-1664b5c5]::placeholder {
-    color:#ffffff6b
+.chatbox>input::placeholder {
+    color:#ffffff6b!important
 }
 
-.wrapper[data-v-73ccaaca],.content[data-v-73ccaaca] {
-    border-radius:20px
+.wrapper,.content {
+    border-radius:20px!important
 }
 
-#main-container[data-v-5208baf4] {
-    display:grid;
-    grid-gap:10px;
-    grid-template-columns:280px 350px 280px;
-    grid-template-rows:110px 146px 300px;
-    left:50%;
-    margin-left:-461px;
-    margin-top:-252px;
-    position:absolute;
-    top:40%
+#main-container {
+    display:grid!important;
+    grid-gap:10px!important;
+    grid-template-columns:280px 350px 280px!important;
+    grid-template-rows:110px 146px 300px!important;
+    left:50%!important;
+    margin-left:-461px!important;
+    margin-top:-252px!important;
+    position:absolute!important;
+    top:40%!important
 }
 
-.social-container[data-v-3f8f826c] {
+.social-container {
     max-width:none!important;
-    opacity:.1;
-    transition:opacity .5s;
-    width:60%
+    opacity:.1!important;
+    transition:opacity .5s!important;
+    width:60%!important
 }
 
 .swal2-popup {
@@ -133,84 +133,84 @@ h4 {
 }
 
 input[type=number],input[type=text],select {
-    background:#54379f4d;
-    border:solid 1px #956dff6e;
+    background:#54379f4d!important;
+    border:solid 1px #956dff6e!important;
     border-radius:12px!important;
-    color:#dadada;
-    padding:8px
+    color:#dadada!important;
+    padding:8px!important
 }
 
 #colorPickerInput::placeholder,input[type=number]::placeholder,input[type=text]::placeholder,select::placeholder {
     color:#956dff6e
 }
 
-#player-container #game-buttons #spec-button[data-v-5190ae12] {
-    flex:3
+#player-container #game-buttons #spec-button {
+    flex:3!important
 }
 
-#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],#submit-account {
-    background:#b69cff;
-    border-radius:12px;
-    box-shadow:none;
-    color:#241931;
-    font-size:16px;
-    margin-right:7px;
-    padding:8px;
-    text-shadow:none
+#player-container #game-buttons #spec-button,#player-container #game-buttons #play-button,.confirm-button,.btn,.perk-color-update,.button-row>.button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button,#submit-account {
+    background:#b69cff!important;
+    border-radius:12px!important;
+    box-shadow:none!important;
+    color:#241931!important;
+    font-size:16px!important;
+    margin-right:7px!important;
+    padding:8px!important;
+    text-shadow:none!important
 }
 
-#player-container #game-buttons #play-button[data-v-5190ae12]:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,#submit-account:hover {
-    background:#b69cff;
-    box-shadow:none;
-    text-shadow:none
+#player-container #game-buttons #play-button:hover,#player-container #game-buttons #spec-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row>.button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,#submit-account:hover {
+    background:#b69cff!important;
+    box-shadow:none!important;
+    text-shadow:none!important
 }
 
-#player-container #game-buttons #play-button[data-v-5190ae12]:active,#player-container #game-buttons #spec-button[data-v-5190ae12]:active,.confirm-button[data-v-2c5139e0]:active,.btn[data-v-73f7fbfc]:active,.perk-color-update[data-v-2c5139e0]:active,.button-row > .button:active,.swal2-styled.swal2-confirm:active,.swal2-styled.swal2-cancel:active,.server-button[data-v-4aaf8f72]:active,#submit-account:active {
-    background:#b69cff
+#player-container #game-buttons #play-button:active,#player-container #game-buttons #spec-button:active,.confirm-button:active,.btn:active,.perk-color-update:active,.button-row>.button:active,.swal2-styled.swal2-confirm:active,.swal2-styled.swal2-cancel:active,.server-button:active,#submit-account:active {
+    background:#b69cff!important
 }
 
-#player-container #game-buttons #play-button[data-v-5190ae12]:disabled,#player-container #game-buttons #spec-button[data-v-5190ae12]:disabled,.confirm-button[data-v-2c5139e0]:disabled,.btn[data-v-73f7fbfc]:disabled,.perk-color-update[data-v-2c5139e0]:disabled,.button-row > .button:disabled,.swal2-styled.swal2-confirm:disabled,.swal2-styled.swal2-cancel:disabled,.server-button[data-v-4aaf8f72]:disabled,#submit-account:disabled {
-    background:#956dff6e;
-    color:#c8b4ff;
-    transition:all .3s
+#player-container #game-buttons #play-button:disabled,#player-container #game-buttons #spec-button:disabled,.confirm-button:disabled,.btn:disabled,.perk-color-update:disabled,.button-row>.button:disabled,.swal2-styled.swal2-confirm:disabled,.swal2-styled.swal2-cancel:disabled,.server-button:disabled,#submit-account:disabled {
+    background:#956dff6e!important;
+    color:#c8b4ff!important;
+    transition:all .3s!important
 }
 
-#player-container #player-data[data-v-5190ae12] {
-    box-sizing:border-box;
-    height:100%;
-    margin-top:15px;
-    padding:0 15px 15px
+#player-container #player-data {
+    box-sizing:border-box!important;
+    height:100%!important;
+    margin-top:15px!important;
+    padding:0 15px 15px!important
 }
 
-#nickname[data-v-5190ae12],#teamtag[data-v-5190ae12],#colorPickerInput,#player-container #player-data > [data-v-5190ae12] {
-    border-radius:12px;
-    font-size:17px;
-    height:42px;
-    text-align-last:center
+#nickname,#teamtag,#colorPickerInput,#skinurl,#player-container #player-data>div {
+    border-radius:12px!important;
+    font-size:17px!important;
+    height:42px!important;
+    text-align-last:center!important
 }
 
-.discord[data-v-2f9932e6],.discord-btn {
-    background:#4350ff;
-    border:solid 1px #956dff6e;
-    border-radius:12px;
-    color:#e1e1e1;
-    cursor:pointer;
-    display:block;
-    margin:auto;
-    padding:12px 10px 10px;
-    text-align:-webkit-center
+.discord,.discord-btn {
+    background:#4350ff!important;
+    border:solid 1px #956dff6e!important;
+    border-radius:12px!important;
+    color:#e1e1e1!important;
+    cursor:pointer!important;
+    display:block!important;
+    margin:auto!important;
+    padding:12px 10px 10px!important;
+    text-align:-webkit-center!important
 }
 
 .discord-btn {
     margin-top:12px
 }
 
-.live-marker[data-v-f3632da6],.live-marker[data-v-1f0baf2d] {
-    background:#b69cff;
-    border-radius:6px;
-    color:#241931;
-    font-size:13px;
-    padding:2px 4px
+.live-marker {
+    background:#b69cff!important;
+    border-radius:6px!important;
+    color:#241931!important;
+    font-size:13px!important;
+    padding:2px 4px!important
 }
 
 .swal2-styled.swal2-cancel,.swal2-styled.swal2-cancel:active {
@@ -222,22 +222,22 @@ input[type=number],input[type=text],select {
     width:150px!important
 }
 
-.button-row > .button,.server-button[data-v-4aaf8f72],.perk-color-update[data-v-2c5139e0] {
+.button-row>.button,.server-button,.perk-color-update {
     font-size:14px!important;
     margin:0!important
 }
 
-.server-button[data-v-4aaf8f72],#player-container #game-buttons #spec-button[data-v-5190ae12],.perk-color-update[data-v-2c5139e0] {
+.server-button,#player-container #game-buttons #spec-button,.perk-color-update {
     margin-right:0!important
 }
 
-.btn[data-v-73f7fbfc] {
-    margin-top:10px
+.btn {
+    margin-top:10px!important
 }
 
 .tabs {
     border-bottom:none!important;
-    margin:5px
+    margin:5px!important
 }
 
 .tab {
@@ -275,12 +275,12 @@ i.tab.fas {
     border-right:none!important
 }
 
-.container[data-v-ba56a55e],.tag[data-v-3f8f826c] {
-    display:none
+.container[data-v-ba56a55e],.tag {
+    display:none!important
 }
 
-.container > .section > .options.two-columns[data-v-c41b640a] {
-    font-size:14px
+.container>.section>.options.two-columns {
+    font-size:14px!important
 }
 
 .avatar {
@@ -290,36 +290,36 @@ i.tab.fas {
     width:70px!important
 }
 
-.discord-link[data-v-3f8f826c],.tournaments-link[data-v-3f8f826c],.skins-link[data-v-3f8f826c],.bug-link[data-v-3f8f826c] {
-    background:transparent;
-    border-radius:8px;
+.discord-link,.tournaments-link,.skins-link,.bug-link {
+    background:transparent!important;
+    border-radius:8px!important;
     box-shadow:none!important;
-    text-shadow:0 0 14px #000
+    text-shadow:0 0 14px #000!important
 }
 
-.discord-link[data-v-3f8f826c]:hover {
-    background:#4350ff
+.discord-link:hover {
+    background:#4350ff!important
 }
 
-.tournaments-link[data-v-3f8f826c]:hover {
-    background:#ff6e0f
+.tournaments-link:hover {
+    background:#ff6e0f!important
 }
 
-.skins-link[data-v-3f8f826c]:hover {
-    background:#30e6ff
+.skins-link:hover {
+    background:#30e6ff!important
 }
 
-.bug-link[data-v-3f8f826c]:hover {
-    background:#8d2aff
+.bug-link:hover {
+    background:#8d2aff!important
 }
 
-.bug-link[data-v-3f8f826c] {
-    border:0;
-    color:#dadada;
-    cursor:pointer;
-    font-size:16px;
-    outline:none;
-    padding:5px
+.bug-link {
+    border:0!important;
+    color:#dadada!important;
+    cursor:pointer!important;
+    font-size:16px!important;
+    outline:none!important;
+    padding:5px!important
 }
 
 .player-info {
@@ -344,10 +344,10 @@ i.tab.fas {
     padding:0!important
 }
 
-.progress-striped .progress-bar[data-v-5f2d6d72] {
-    background:#b69cff;
-    border-radius:7px;
-    height:30px
+.progress-striped .progress-bar {
+    background:#b69cff!important;
+    border-radius:7px!important;
+    height:30px!important
 }
 
 .profile-image {
@@ -355,83 +355,76 @@ i.tab.fas {
     position:relative
 }
 
-#leaderboard[data-v-7e7860a8] {
-    background:#00000047;
-    border:solid 1px #ffffff0f;
-    border-radius:20px;
+#leaderboard {
+    background:#00000047!important;
+    border:solid 1px #ffffff0f!important;
+    border-radius:20px!important;
     box-shadow:0 0 30px 0 #00000061!important;
-    height:280px;
-    padding:20px 20px 10px;
-    right:10px;
-    text-align:center;
-    top:10px;
-    width:180px
+    height:280px!important;
+    padding:20px 20px 10px!important;
+    right:10px!important;
+    text-align:center!important;
+    top:10px!important;
+    width:180px!important
 }
 
-.leaderboard-title[data-v-7e7860a8] {
-    font-size:20px
+.leaderboard-title {
+    font-size:20px!important
 }
 
-.leaderboard-label[data-v-7e7860a8] {
-    align-items:center;
-    font-size:17px;
-    place-content:center
+.leaderboard-label {
+    align-items:center!important;
+    font-size:17px!important;
+    place-content:center!important
 }
 
-.leaderboard-text[data-v-7e7860a8] {
-    width:fit-content
+.leaderboard-text {
+    width:fit-content!important
 }
 
-.stats[data-v-0b74fc8f] {
-    color:#fff;
-    padding:20px
+.stats {
+    color:#fff!important;
+    padding:20px!important
 }
 
-.chatbox[data-v-1664b5c5] {
-    background:#00000047;
-    border:solid 1px #ffffff0f;
-    border-radius:20px;
+.chatbox {
+    background:#00000047!important;
+    border:solid 1px #ffffff0f!important;
+    border-radius:20px!important;
     box-shadow:0 0 30px 0 #00000061!important;
-    font-size:14px;
-    margin-bottom:10px;
-    margin-left:10px;
-    padding:15px 15px 5px;
-    width:250px
+    font-size:14px!important;
+    margin-bottom:10px!important;
+    margin-left:10px!important;
+    padding:15px 15px 5px!important;
+    width:250px!important
 }
 
-.minimap-wrapper[data-v-769dba30] {
-    bottom:10px;
-    right:10px
+.minimap-wrapper {
+    bottom:10px!important;
+    right:10px!important
 }
 
-.container[data-v-769dba30] {
-    background:#00000047;
-    border:solid 1px #ffffff0f;
-    border-radius:20px;
-    box-shadow:0 0 30px 0 #00000061!important
+.player-list {
+    font-size:15px!important;
+    margin-top:14px!important
 }
 
-.player-list[data-v-f0eb8534] {
-    font-size:15px;
-    margin-top:14px
+.player-list-tab {
+    padding:25px!important
 }
 
-.player-list-tab[data-v-f0eb8534] {
-    padding:25px
-}
-
-.slider[data-v-22117250],.slider[data-v-c41b640a],.slider[data-v-24d5bfb4] {
-    background:#121212;
+.slider {
+    background:#121212!important;
     border:1px solid #b69cff!important;
-    border-radius:60px
+    border-radius:60px!important
 }
 
-.slider[data-v-22117250]::-webkit-slider-thumb,.slider[data-v-c41b640a]::-webkit-slider-thumb,.slider[data-v-24d5bfb4]::-webkit-slider-thumb {
-    background:#b69cff
+.slider::-webkit-slider-thumb {
+    background:#b69cff!important
 }
 
-.color-input[data-v-c41b640a]:not(:last-child) {
-    margin-bottom:10px
+.color-input:not(:last-child) {
+    margin-bottom:10px!important
 }
 
 .pretty.p-switch input:checked ~ .state:before {
@@ -442,114 +435,111 @@ i.tab.fas {
     background-color:#b69cff!important
 }
 
-#hotkey-container .hotkeys[data-v-6754dc1c],.reset-option-wrapper[data-v-22117250],.reset-option-wrapper[data-v-c41b640a] {
-    padding:10px;
-    width:auto
+#hotkey-container .hotkeys,.reset-option-wrapper,.reset-option-wrapper {
+    padding:10px!important;
+    width:auto!important
 }
 
-#hotkey-container .row[data-v-6754dc1c]:not(:last-child) {
-    border-bottom:0 solid #0000;
-    padding:13px
+#hotkey-container .row:not(:last-child) {
+    border-bottom:0 solid #0000!important;
+    padding:13px!important
 }
 
-#hotkey-container .row[data-v-6754dc1c] {
-    display:flex;
-    padding:10px
+#hotkey-container .row {
+    display:flex!important;
+    padding:10px!important
 }
 
-#hotkey-container .action[data-v-6754dc1c] {
-    flex:4
+#hotkey-container .action {
+    flex:4!important
 }
 
-#hotkey-container .bind[data-v-6754dc1c] {
-    background:#54379f4d;
-    border:solid 1px #956dff6e;
+#hotkey-container .bind {
+    background:#54379f4d!important;
+    border:solid 1px #956dff6e!important;
     border-radius:12px!important;
-    color:#dadada;
-    flex:3;
-    min-height:21px;
-    padding:6px;
-    text-align:center
+    color:#dadada!important;
+    flex:3!important;
+    min-height:21px!important;
+    padding:6px!important;
+    text-align:center!important
 }
 
-#hotkey-container .footer[data-v-6754dc1c] {
-    border-top:0 solid #000;
-    color:#b69cff;
-    display:flex;
-    justify-content:center;
-    padding:10px 20px 20px
+#hotkey-container .footer {
+    border-top:0 solid #000!important;
+    color:#b69cff!important;
+    display:flex!important;
+    justify-content:center!important;
+    padding:10px 20px 20px!important
 }
 
-.image-button-text[data-v-180f29a6] {
-    font-size:20px;
-    height:auto;
-    left:auto;
-    position:relative;
-    text-align:center;
-    top:auto;
-    width:auto
+.image-button-text {
+    font-size:20px!important;
+    height:auto!important;
+    left:auto!important;
+    position:relative!important;
+    text-align:center!important;
+    top:auto!important;
+    width:auto!important
 }
 
-.reset-option[data-v-22117250],.reset-option[data-v-c41b640a],.reset-option[data-v-22117250] {
-    color:#b69cff;
-    cursor:pointer;
-    display:inline-flex;
-    justify-content:center
+.reset-option {
+    color:#b69cff!important;
+    cursor:pointer!important;
+    display:inline-flex!important;
+    justify-content:center!important
 }
 
-.silent[data-v-22117250] {
-    color:#ffffff57
+.silent {
+    color:#ffffff57!important
 }
 
-.open-lobbies[data-v-1f0baf2d] {
-    background:transparent
+.open-lobbies {
+    background:transparent!important
 }
 
-.open-lobbies[data-v-1f0baf2d]:hover {
+.open-lobbies:hover {
     background:#0003!important;
-    border-radius:11px;
-    padding:13px
+    border-radius:11px!important;
+    padding:13px!important
 }
 
-.server-list[data-v-1f0baf2d] {
-    padding:5px
+.server-list {
+    padding:5px!important
 }
 
-.server-list-item[data-v-1f0baf2d] {
+.server-list-item {
     border-bottom:none!important;
-    border-radius:11px;
-    padding:13px
+    border-radius:11px!important;
+    padding:13px!important
 }
 
-.server-list-item.active[data-v-1f0baf2d],.server-list-item.active[data-v-1f0baf2d]:hover {
-    background:#b69cff;
-    border-radius:11px;
-    color:#241931;
-    margin:8px
+.server-list-item.active,.server-list-item.active:hover {
+    background:#b69cff!important;
+    border-radius:11px!important;
+    color:#241931!important;
+    margin:8px!important
 }
 
-.stuck-mention[data-v-0b6441fe] {
-    color:transparent;
-    height:22px;
-    margin-bottom:6px;
-    margin-top:35%;
-    text-align:center
+.stuck-mention {
+    color:transparent!important;
+    height:22px!important;
+    margin-bottom:6px!important;
+    margin-top:35%!important;
+    text-align:center!important
 }
 
-.confirm-button[data-v-2c5139e0] {
-    background:#b69cff;
-    border-radius:12px;
-    box-shadow:none;
-    color:#fff;
-    font-size:16px;
-    padding:7px 10px;
-    text-shadow:none
+.confirm-button {
+    background:#b69cff!important;
+    border-radius:12px!important;
+    box-shadow:none!important;
+    color:#fff!important;
+    font-size:16px!important;
+    padding:7px 10px!important;
+    text-shadow:none!important
 }
 
 .skin {
-    animation:svelte-1k2e827-background-gradient 7s linear infinite!important;
-    background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%)!important;
-    background-size:200% 200%!important;
     border:none!important;
     border-radius:50%!important;
     box-shadow:0 0 15px 1px #b69cff2e!important
@@ -605,7 +595,7 @@ i.tab.fas {
     border-radius:0!important
 }
 
-.color-input > .right {
+.color-input>.right {
     border:1px solid #6945c5!important;
     border-radius:12px!important;
     box-shadow:0 0 16px 1px #00000054!important;
@@ -658,7 +648,7 @@ i.tab.fas {
     margin-right:0!important
 }
 
-.lobby-list > .row {
+.lobby-list>.row {
     border-bottom:none!important
 }
 
@@ -667,7 +657,7 @@ i.tab.fas {
     padding:12px!important
 }
 
-.section > .options {
+.section>.options {
     padding:17px!important
 }
 
@@ -678,24 +668,17 @@ i.tab.fas {
     margin:5px 5px 13px!important
 }
 
-.section > .header[data-v-22117250],.section > .header[data-v-2c5139e0],.section > .header[data-v-c41b640a],.section > .header[data-v-24d5bfb4],.section > .header[data-v-0a751125] {
-    background:linear-gradient(281deg,#8159ef,#512eaa);
-    border-bottom:none;
-    color:#fff;
-    padding:14px;
-    text-shadow:0 0 15px #00000054
+.section>.header {
+    background:linear-gradient(281deg,#8159ef,#512eaa)!important;
+    border-bottom:none!important;
+    color:#fff!important;
+    padding:14px!important;
+    text-shadow:0 0 15px #00000054!important
 }
 
-.inline-range > input[data-v-24d5bfb4] {
-    align-self:center;
-    height:20px
-}
-
-imageExtension {
-    color:#f8f8ff;
-    height:50px;
-    margin-left:10px;
-    width:50px
+.inline-range>input {
+    align-self:center!important;
+    height:20px!important
 }
 
 titleExtension {
@@ -926,12 +909,12 @@ titlemod {
     margin-left:7px
 }
 
-.message-from-name[data-v-084a7fd8] {
-    display:inline-block
+.message-from-name {
+    display:inline-block!important
 }
 
-.message-list[data-v-1664b5c5] {
-    padding:5px
+.message-list {
+    padding:5px!important
 }
 
 .switchButton {
@@ -959,14 +942,14 @@ titlemod {
     background-size:200% 200%
 }
 
-.bottom-margin > input {
+.bottom-margin>input {
     font-size:16px;
     margin:7px 0 10px;
     text-align:center
 }
 
-.content.fade-box > .wrapper > .container[data-v-4aaf8f72] {
-    padding:20px
+.content.fade-box>.wrapper>.container {
+    padding:20px!important
 }
 
 .container.chat-wrapper.lobby-chat {
@@ -1072,7 +1055,7 @@ input.swal2-input {
     padding:10px
 }
 
-.player-row.me > .player-name {
+.player-row.me>.player-name {
     color:#241931!important
 }
 
@@ -1105,7 +1088,7 @@ input.swal2-input {
     background:#00000045;
     border:1px solid #956dff6e;
     border-radius:9px;
-    font-size:14.8px;
+    font-size:15px;
     margin-top:10px;
     padding:5px;
     width:fit-content
@@ -1150,7 +1133,7 @@ input.swal2-input {
     white-space:nowrap
 }
 
-.chat-input > input {
+.chat-input>input {
     height:43px
 }
 
@@ -1284,12 +1267,12 @@ input.swal2-input {
     top:0
 }
 
-.container.circle[data-v-769dba30] {
+.container.circle {
     border-radius:50%!important
 }
 
-#locations[data-v-769dba30] {
-    border-radius:50%
+#locations {
+    border-radius:50%!important
 }
 
 .silentCustomTop {
@@ -1371,11 +1354,11 @@ input[type="color"]::-webkit-color-swatch {
     padding:0 0 10px
 }
 
-.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item[data-v-1dc3fbb4]:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button[data-v-5190ae12]:hover,#player-container #game-buttons #play-button[data-v-5190ae12]:hover,.confirm-button[data-v-2c5139e0]:hover,.btn[data-v-73f7fbfc]:hover,.perk-color-update[data-v-2c5139e0]:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button[data-v-4aaf8f72]:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active[data-v-1f0baf2d]:hover,.tab[data-v-5190ae12]:hover,.tab-menu .tab:hover,.tab-menu .tab[data-v-1f0baf2d]:hover,.discord[data-v-2f9932e6]:hover,.server-list-item[data-v-1f0baf2d]:hover,#hotkey-container .reset-button2[data-v-6754dc1c]:hover,#hotkey-container .bind[data-v-6754dc1c]:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover:hover,#submit-account:hover,.discord-link[data-v-3f8f826c]:hover,.tournaments-link[data-v-3f8f826c]:hover,.skins-link[data-v-3f8f826c]:hover,.bug-link[data-v-3f8f826c]:hover {
-    cursor:pointer;
-    scale:.9
+.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button:hover,#player-container #game-buttons #play-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active:hover,.tab:hover,.tab-menu .tab:hover,.discord:hover,.server-list-item:hover,#hotkey-container .reset-button2:hover,#hotkey-container .bind:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover,#submit-account:hover,.discord-link:hover,.tournaments-link:hover,.skins-link:hover,.bug-link:hover {
+    cursor:pointer!important;
+    scale:.9!important
 }
 
-.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item[data-v-1dc3fbb4],.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button[data-v-5190ae12],#player-container #game-buttons #play-button[data-v-5190ae12],.confirm-button[data-v-2c5139e0],.btn[data-v-73f7fbfc],.perk-color-update[data-v-2c5139e0],.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button[data-v-4aaf8f72],.skin,.vanis-button,.discord-btn,.server-list-item.active[data-v-1f0baf2d],.tab[data-v-5190ae12],.tab-menu .tab,.tab-menu .tab[data-v-1f0baf2d],.discord[data-v-2f9932e6],.server-list-item[data-v-1f0baf2d],#hotkey-container .reset-button2[data-v-6754dc1c],#hotkey-container .bind[data-v-6754dc1c],.reset-button2,.reset-option,.arrow,#submit-account,.discord-link[data-v-3f8f826c],.tournaments-link[data-v-3f8f826c],.skins-link[data-v-3f8f826c],.bug-link[data-v-3f8f826c] {
-    transition:all .3s
+.image-button,.badgeItem,.hatItem,.color-button,.buttonTab,#skinsIcon,.closeSkinItemModal,.skinItemNav,.skinItemLibrary,.resetAllStatistics,.configGet,.configSkinItem,.configDelete,.replay-item,.divLogout,#userIcon,.switchButton,#statIcon,#toolIcon,#leaderboardIcon,#player-container #game-buttons #spec-button,#player-container #game-buttons #play-button,.confirm-button,.btn,.perk-color-update,.button-row > .button,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.server-button,.skin,.vanis-button,.discord-btn,.server-list-item.active,.tab,.tab-menu .tab,.discord,.server-list-item,#hotkey-container .reset-button2,#hotkey-container .bind,.reset-button2,.reset-option,.arrow,#submit-account,.discord-link,.tournaments-link,.skins-link,.bug-link {
+    transition:all .3s!important
 }
