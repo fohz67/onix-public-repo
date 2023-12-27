@@ -1,14 +1,14 @@
-const VERSION = '4.4.5.1';
+const VERSION = '4.5';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
-!function e() {
+! function e() {
     document.title = "Delta - Dual";
 
-    const userColors = getLocalStorageItem('userColors', undefined);
+    const userColors = localStorage.getItem('userColors');
     let userColorsJson = userColors ? JSON.parse(userColors) : null;
-    let rainbowColorTimeMessageG = undefined;
-    let showTimeMessageG = undefined;
-    let settingsClicked = undefined;
+    let rainbowColorTimeMessageG;
+    let showTimeMessageG;
+    let settingsClicked;
     let currentServerPlayerList = {};
 
     function getLocalStorageItem(key, defaultValue) {
@@ -19,92 +19,70 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         const imageRegex = /deltaimage:(\S+)/;
         const match = message.match(imageRegex);
 
-        if (match && match.length > 1) {
-            let imageUrl = "https://" + match[1];
-
-            imageUrl = imageUrl
-                .replace(/\.deltacom/g, '.com')
-                .replace(/\.deltafr/g, '.fr')
-                .replace(/\.deltaeu/g, '.eu')
-                .replace(/\.deltapro/g, '.pro')
-                .replace(/\.deltaio/g, '.io')
-                .replace(/\.deltaus/g, '.us')
-                .replace(/\.deltaen/g, '.en')
-                .replace(/\.deltaas/g, '.as')
-                .replace(/\.deltaco/g, '.co')
-                .replace(/\.deltapw/g, '.pw');
-
-            if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) return {
-                newURL: imageUrl,
-                baseURL: match[0]
-            };
+        if (match && match[1]) {
+            let imageUrl = "https://" + match[1].replace(/\.(deltacom|deltafr|deltaeu|deltapro|deltaio|deltaus|deltaen|deltaas|deltaco|deltapw)/g, '.$1');
+            if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) {
+                return {
+                    newURL: imageUrl,
+                    baseURL: match[0]
+                };
+            }
         }
         return null;
     }
 
     function generateRandomHexColor() {
-        const r = Math.floor(Math.random() * 256);
-        const g = Math.floor(Math.random() * 256);
-        const b = Math.floor(Math.random() * 256);
-        return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
+        return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
     }
 
     function getUserField(nickname, pid, field, def = null) {
-        if (!nickname || !pid) return def;
-        const userData = userColorsJson[nickname.trim()];
-        return (userData && userData[field]) ? userData[field] : def;
+        return nickname && pid && userColorsJson && userColorsJson[nickname.trim()] && userColorsJson[nickname.trim()][field] || def;
     }
 
     function getUserFieldVanilla(nickname, pid, field, def = null) {
-        if (!nickname || !pid) return def;
-        const userData = currentServerPlayerList[pid];
-        return (userData && userData[field]) ? userData[field] : def;
+        return nickname && pid && currentServerPlayerList && currentServerPlayerList[pid] && currentServerPlayerList[pid][field] || def;
     }
 
     function sendTimedSwal(title, text, timer, confirm) {
         Swal.fire({
-            title: title,
-            text: text,
-            timer: timer,
-            showConfirmButton: confirm,
+            title,
+            text,
+            timer,
+            showConfirmButton: confirm
         });
     }
 
     function getCurrentDate() {
         const currentDate = new Date();
-        const hours = currentDate.getHours().toString().padStart(2, '0');
-        const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-        const seconds = currentDate.getSeconds().toString().padStart(2, '0');
-        return `[${hours}:${minutes}:${seconds}] `;
+        return `[${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}] `;
     }
 
     function getPerkBadgeImage(n) {
         const badge = {
-            1: ["admin", "Administrator"],
-            2: ["mod", "Moderator"],
-            4: ["skin_mod", "Skin moderator"],
-            8: ["contributor", "Contributor"],
-            16: ["organizer", "Official tournament organizer"],
-            32: ["referee", "Official tournament referee"],
-            256: ["youtuber", "YouTuber"],
-            1024: ["editor", "Editor"],
-            4096: ["level_100", "Level 100 reached"],
-            8192: ["level_200", "Level 200 reached"],
-            16384: ["level_300", "Level 300 reached"],
-            65536: ["ffa_winner", "FFA tournament winner"],
-            131072: ["instant_winner", "Instant tournament winner"],
-            262144: ["gigasplit_winner", "Gigasplit tournament winner"],
-            524288: ["megasplit_winner", "Megasplit tournament winner"],
-            1048576: ["crazy_winner", "Crazy tournament winner"],
-            2097152: ["self-feed_winner", "Self-feed tournament winner"],
-            33554432: ["server_booster", "Discord server booster"],
-            67108864: ["place_contributor_2023", "r/place contributor (2023)"],
-            16777216: ["place_contributor_2022", "r/place contributor (2022)"],
-            268435456: ["slb_winner", "Topped season leaderboard"],
-            2147483648: ["official", "Official message", true]
+            1: "admin",
+            2: "mod",
+            4: "skin_mod",
+            8: "contributor",
+            16: "organizer",
+            32: "referee",
+            256: "youtuber",
+            1024: "editor",
+            4096: "level_100",
+            8192: "level_200",
+            16384: "level_300",
+            65536: "ffa_winner",
+            131072: "instant_winner",
+            262144: "gigasplit_winner",
+            524288: "megasplit_winner",
+            1048576: "crazy_winner",
+            2097152: "self-feed_winner",
+            33554432: "server_booster",
+            67108864: "place_contributor_2023",
+            16777216: "place_contributor_2022",
+            268435456: "slb_winner",
+            2147483648: "official"
         };
-
-        return badge[n][0];
+        return badge[n];
     }
 
     class s {
@@ -201,7 +179,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
         readString16() {
             let e = "";
-            for (; ;) {
+            for (;;) {
                 let t = this.eof ? 0 : this.readUInt16LE();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
@@ -211,7 +189,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
         readString() {
             let e = "";
-            for (; ;) {
+            for (;;) {
                 let t = this.eof ? 0 : this.readUInt8();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
@@ -338,8 +316,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         var t = s.apply(e, arguments);
                         return s = null, t
                     }
-                } : function () {
-                };
+                } : function () {};
                 return t = !1, i
             });
 
@@ -939,7 +916,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 parseLeaderboard(e) {
                     let t = [];
-                    for (; ;) {
+                    for (;;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("leaderboard-update", t);
@@ -961,7 +938,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 parseScrimmageLeaderboard(e) {
                     let t = [];
-                    for (; ;) {
+                    for (;;) {
                         let s = e.readUInt8();
                         if (0 == s) break;
                         let i = {};
@@ -985,7 +962,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 parseMinimap(e) {
                     let t = [];
-                    for (; ;) {
+                    for (;;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("minimap-positions", t);
@@ -1002,224 +979,289 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }
 
-                parsePlayers(e) {
-                    let t = JSON.parse(e.readEscapedString()),
-                        s = t.find(e => e.pid === this.playerId),
-                        i = s && this.setTagId(s.tagId),
-                        {
-                            playerManager: a
-                        } = this,
-                        n = [];
+                parsePlayers(data) {
+                    let playersData = JSON.parse(data.readEscapedString());
+                    let currentPlayer = playersData.find(player => player.pid === this.playerId);
+                    let tagUpdated = currentPlayer && this.setTagId(currentPlayer.tagId);
+                    let {
+                        playerManager
+                    } = this;
+                    let updatedPlayers = [];
 
+                    for (let player of playersData) {
+                        let updatedPlayer = playerManager.setPlayerData(player);
+                        updatedPlayers.push(updatedPlayer);
+                        if (player.pid) {
+                            currentServerPlayerList[player.pid] = player;
+                        }
+                    }
 
-                    if (Array.isArray(t)) {
-                        if (t.length > 1) currentServerPlayerList = {};
-                        for (const player of t) currentServerPlayerList[player.pid] = player;
+                    if (tagUpdated) {
+                        this.events.$emit("minimap-positions", []);
+                        playerManager.invalidateVisibility(updatedPlayers);
                     }
-                    for (let o of t) {
-                        let r = a.setPlayerData(o);
-                        n.push(r)
-                    }
-                    i && (this.events.$emit("minimap-positions", []), a.invalidateVisibility(n))
                 }
 
-                parseMessage(e) {
-                    let t = e.readUInt8();
-                    switch (t) {
+                parseMessage(buffer) {
+                    let messageType = buffer.readUInt8();
+
+                    switch (messageType) {
                         case 1: {
-                            let s = d(e);
-                            this.initialDataPacket = e.view, this.start(s);
-                            return
+                            let data = d(buffer);
+                            this.initialDataPacket = buffer.view;
+                            this.start(data);
+                            return;
                         }
                         case 2: {
-                            let i = new Uint8Array(e.buffer, 1);
-                            this.connection.sendJoinData(new a(i).build(), !1);
-                            return
+                            let joinDataArray = new Uint8Array(buffer.buffer, 1);
+                            this.connection.sendJoinData(new a(joinDataArray).build(), false);
+                            return;
                         }
                         case 3: {
-                            let o = performance.now() - this.pingStamp;
-                            this.updateStats(Math.round(o));
-                            return
+                            let pingTime = performance.now() - this.pingStamp;
+                            this.updateStats(Math.round(pingTime));
+                            return;
                         }
                         case 4: {
                             let {
-                                playerManager: r
+                                playerManager
                             } = this;
-                            for (; ;) {
-                                let l = e.readUInt16LE();
-                                if (0 == l) return;
-                                r.delayedRemovePlayer(l)
+                            while (true) {
+                                let playerId = buffer.readUInt16LE();
+                                if (playerId === 0) return;
+                                playerManager.delayedRemovePlayer(playerId);
                             }
                         }
                         case 6:
                             this.connection.sendOpcode(6);
                             return;
                         case 7: {
-                            let c = e.readUInt8(),
-                                h, p;
-                            if (1 & c) {
-                                let u = e.readUInt16LE();
-                                p = this.playerManager.getPlayer(u)
+                            let crownFlags = buffer.readUInt8();
+                            let playerToUncrown, playerToCrown;
+
+                            if (crownFlags & 1) {
+                                let player1Id = buffer.readUInt16LE();
+                                playerToCrown = this.playerManager.getPlayer(player1Id);
                             }
-                            if (2 & c) {
-                                let g = e.readUInt16LE();
-                                h = this.playerManager.getPlayer(g)
+                            if (crownFlags & 2) {
+                                let player2Id = buffer.readUInt16LE();
+                                playerToUncrown = this.playerManager.getPlayer(player2Id);
                             }
-                            h && h.setCrown(!1), p && p.setCrown(!0);
-                            return
+
+                            if (playerToUncrown) playerToUncrown.setCrown(false);
+                            if (playerToCrown) playerToCrown.setCrown(true);
+                            return;
                         }
                         case 8:
                             if (this.dualboxPid) return;
-                            this.dualboxPid = e.readUInt16LE();
+                            this.dualboxPid = buffer.readUInt16LE();
                             return;
                         case 9: {
                             let {
-                                playerManager: A
-                            } = this, m = this.activePid;
-                            m && A.getPlayer(m).setOutline(16777215), m = this.activePid = e.readUInt16LE(), A.getPlayer(m).setOutline(16711935);
-                            return
+                                playerManager
+                            } = this;
+                            let currentActivePid = this.activePid;
+
+                            if (currentActivePid) {
+                                playerManager.getPlayer(currentActivePid).setOutline(16777215);
+                            }
+                            currentActivePid = this.activePid = buffer.readUInt16LE();
+                            playerManager.getPlayer(currentActivePid).setOutline(16711935);
+                            return;
                         }
                         case 10: {
                             this.timeStamp = performance.now();
-                            let v = e.packetId || (e.packetId = this.ws.packetCount++);
-                            this.parseCells(e, v), this.updateStates(!0);
-                            let w = this.alive;
-                            w && (this.spectating = !1);
+                            let packetId = buffer.packetId || (buffer.packetId = this.ws.packetCount++);
+                            this.parseCells(buffer, packetId);
+                            this.updateStates(true);
+
+                            let isAlive = this.alive;
+                            if (isAlive) {
+                                this.spectating = false;
+                            }
+
                             let {
-                                dual: I
-                            } = this, {
-                                replay: k
+                                dual,
+                                replay
                             } = this;
-                            w && !this.replaying ? k.add(e.view, !1) : I.alive || k.clear(!1), !w && y.autoRespawning && 37 == ++this.ticksSinceDeath && this.triggerAutoRespawn(!1), this.serverTick++, this.playerManager.sweepRemovedPlayers(), I.focused || this.updateCamera(!0);
-                            return
+
+                            if (isAlive && !this.replaying) {
+                                replay.add(buffer.view, false);
+                            } else if (!dual.alive) {
+                                replay.clear(false);
+                            }
+
+                            if (!isAlive && y.autoRespawning && ++this.ticksSinceDeath === 37) {
+                                this.triggerAutoRespawn(false);
+                            }
+
+                            this.serverTick++;
+                            this.playerManager.sweepRemovedPlayers();
+
+                            if (!dual.focused) {
+                                this.updateCamera(true);
+                            }
+                            return;
                         }
                         case 11:
-                            this.parseLeaderboard(e);
+                            this.parseLeaderboard(buffer);
                             return;
                         case 12:
-                            this.parseMinimap(e);
+                            this.parseMinimap(buffer);
                             return;
                         case 13: {
-                            let b = {
-                                pid: e.readUInt16LE(),
-                                text: e.readEscapedString()
+                            let chat = {
+                                pid: buffer.readUInt16LE(),
+                                text: buffer.readEscapedString()
                             };
-                            if (0 == b.pid) {
+
+                            if (chat.pid === 0) {
                                 let {
-                                    selectedServer: _
+                                    selectedServer
                                 } = y;
-                                _ && /Welcome to Delta,.+\!/.test(b.text) && (b.text = `Connected to ${_.region} ${_.name}`), this.events.$emit("chat-message", b.text);
-                                return
+                                if (selectedServer && /Welcome to Delta,.+\!/.test(chat.text)) {
+                                    chat.text = `Connected to ${selectedServer.region} ${selectedServer.name}`;
+                                }
+                                this.events.$emit("chat-message", chat.text);
+                                return;
                             }
-                            let S = this.playerManager.getPlayer(b.pid);
-                            if (!S) return;
 
-                            const image = getImageUrlFromMessage(b.text);
-                            const color = getUserField(S.name, b.pid, "color", '#ffffff');
+                            let chatPlayer = this.playerManager.getPlayer(chat.pid);
+                            if (!chatPlayer) return;
 
-                            b.from = S.name;
-                            b.date = showTimeMessageG ? getCurrentDate() : '';
-                            b.dateColor = rainbowColorTimeMessageG ? generateRandomHexColor() : 'white';
-                            b.badge = getUserField(b.from, b.pid, "badge", null);
-                            b.badgeVanilla = getUserFieldVanilla(b.from, b.pid, "perk_badges", null);
-                            b.nicknameColor = color ? color : '#ffffff';
-                            b.imageUrl = image ? image.newURL : null;
-                            b.text = image ? b.text.replace(image.baseURL, '[Delta image]') : b.text;
+                            const imageUrlData = getImageUrlFromMessage(chat.text);
+                            const playerColor = getUserField(chatPlayer.name, chat.pid, "color", '#ffffff');
+
+                            chat.from = chatPlayer.name;
+                            chat.date = showTimeMessageG ? getCurrentDate() : '';
+                            chat.dateColor = rainbowColorTimeMessageG ? generateRandomHexColor() : 'white';
+                            chat.badge = getUserField(chat.from, chat.pid, "badge", null);
+                            chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, "perk_badges", null);
+                            chat.nicknameColor = playerColor || '#ffffff';
+                            chat.imageUrl = imageUrlData ? imageUrlData.newURL : null;
+                            chat.text = imageUrlData ? chat.text.replace(imageUrlData.baseURL, '[Delta image]') : chat.text;
 
                             let {
-                                nameColorCss: E
-                            } = S;
-                            E && (b.fromColor = E), this.events.$emit("chat-message", b);
+                                nameColorCss
+                            } = chatPlayer;
+                            if (nameColorCss) {
+                                chat.fromColor = nameColorCss;
+                            }
+                            this.events.$emit("chat-message", chat);
 
                             return;
                         }
                         case 14: {
-                            let x = e.readUInt8(),
-                                B = {};
-                            if (2 & x) {
-                                let Q = e.readUInt8();
-                                typeId > 0 && typeId < 4 && (B.type = ({
-                                    1: "success",
-                                    2: "error",
-                                    3: "warning",
-                                    4: "info"
-                                })[Q])
+                            let notificationFlags = buffer.readUInt8();
+                            let notificationData = {};
+
+                            if (notificationFlags & 2) {
+                                let typeId = buffer.readUInt8();
+                                if (typeId > 0 && typeId < 4) {
+                                    notificationData.type = {
+                                        1: "success",
+                                        2: "error",
+                                        3: "warning",
+                                        4: "info"
+                                    } [typeId];
+                                }
                             }
-                            4 & x && (B.timer = e.readUInt16LE());
-                            let M = e.readEscapedString();
-                            B.title = f(M), n.toast.fire(B);
-                            return
+
+                            if (notificationFlags & 4) {
+                                notificationData.timer = buffer.readUInt16LE();
+                            }
+
+                            let notificationTitle = buffer.readEscapedString();
+                            notificationData.title = f(notificationTitle);
+                            n.toast.fire(notificationData);
+
+                            return;
                         }
                         case 15: {
                             let {
-                                playerManager: T
+                                playerManager
                             } = this;
-                            for (; ;) {
-                                let D = e.readUInt16LE();
-                                if (0 === D) return;
-                                let L = e.readString16(),
-                                    N = e.readEscapedString(),
-                                    U = {
-                                        pid: D,
-                                        nickname: L,
-                                        skinUrl: N
-                                    };
-                                T.setPlayerData(U)
+
+                            while (true) {
+                                let playerId = buffer.readUInt16LE();
+                                if (playerId === 0) return;
+
+                                let playerName = buffer.readString16();
+                                let playerSkinUrl = buffer.readEscapedString();
+                                let playerData = {
+                                    pid: playerId,
+                                    nickname: playerName,
+                                    skinUrl: playerSkinUrl
+                                };
+
+                                playerManager.setPlayerData(playerData);
                             }
                         }
                         case 16:
-                            this.parsePlayers(e);
+                            this.parsePlayers(buffer);
                             return;
                         case 17:
-                            C.camera.sx = e.readInt16LE(), C.camera.sy = e.readInt16LE();
+                            C.camera.sx = buffer.readInt16LE();
+                            C.camera.sy = buffer.readInt16LE();
                             return;
                         case 18: {
                             let {
-                                replay: R
+                                replay
                             } = this;
-                            R.clear(!1), this.clearCells();
-                            return
+                            replay.clear(false);
+                            this.clearCells();
+                            return;
                         }
                         case 19: {
-                            let P = 0 !== e.readUInt8();
-                            if (this.events.$emit("xp-update", e.readUInt32LE()), !P) return;
-                            let F = e.readUInt16LE(),
-                                G = atob("WW91IGhhdmUgcmVhY2hlZCBsZXZlbA==");
-                            n.toast.fire({
-                                background: "#b58b00",
-                                title: `${G} ${F}!`,
-                                type: "success",
-                                timer: 4e3
-                            });
-                            return
+                            let hasLevelUp = buffer.readUInt8() !== 0;
+                            this.events.$emit("xp-update", buffer.readUInt32LE());
+
+                            if (hasLevelUp) {
+                                let level = buffer.readUInt16LE();
+                                let levelUpMessage = atob("WW91IGhhdmUgcmVhY2hlZCBsZXZlbA==");
+                                n.toast.fire({
+                                    background: "#b58b00",
+                                    title: `${levelUpMessage} ${level}!`,
+                                    type: "success",
+                                    timer: 4000
+                                });
+                            }
+                            return;
                         }
                         case 20:
-                            this.handleDeath(e, !1);
+                            this.handleDeath(buffer, false);
                             return;
                         case 21:
                         case 27:
                             return;
                         case 22:
-                            if (!window.grecaptcha) return void alert("Captcha library is not loaded");
+                            if (!window.grecaptcha) {
+                                alert("Captcha library is not loaded");
+                                return;
+                            }
                             this.events.$emit("show-image-captcha");
                             return;
                         case 23:
-                            y.spectators = e.readUInt16LE();
+                            y.spectators = buffer.readUInt16LE();
                             return;
                         case 24:
-                            this.serverTick = e.readUInt32LE(), this.events.$emit("restart-timing-changed", e.readUInt32LE());
+                            this.serverTick = buffer.readUInt32LE();
+                            this.events.$emit("restart-timing-changed", buffer.readUInt32LE());
                             return;
                         case 25:
                             this.events.$emit("update-cautions", {
-                                custom: e.readEscapedString()
+                                custom: buffer.readEscapedString()
                             });
                             return;
                         case 26:
-                            y.playButtonDisabled = !!e.readUInt8(), e.length > e.offset + 1 && (y.playButtonText = e.readEscapedString() || "Play");
+                            y.playButtonDisabled = !!buffer.readUInt8();
+                            if (buffer.length > buffer.offset + 1) {
+                                y.playButtonText = buffer.readEscapedString() || "Play";
+                            }
                             return;
                         case 28:
-                            C.parseScrimmageLeaderboard(e);
-                            return
+                            C.parseScrimmageLeaderboard(buffer);
+                            return;
                     }
                 }
             }
@@ -1504,8 +1546,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         let {
                             cache: t
                         } = this;
-                        if (t.has(e)) return t.get(e);
-                        {
+                        if (t.has(e)) return t.get(e); {
                             let {
                                 cellSize: s,
                                 textureSize: i
@@ -1521,8 +1562,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         let {
                             cache: t
                         } = this;
-                        if (t.has(e)) return t.get(e);
-                        {
+                        if (t.has(e)) return t.get(e); {
                             let {
                                 cellSize: s,
                                 textureSize: i
@@ -1626,8 +1666,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 r = o.map(n),
                 l = o.map(n).sort((e, t) => t.length - e.length).map(e => RegExp("[^s]*" + e.split("").join("s*") + "[^s]*", "gi"));
             e.exports = {
-                noop: function () {
-                },
+                noop: function () {},
                 checkBadWords: function (e) {
                     return e = e.toLowerCase(), r.some(t => e.includes(t))
                 },
@@ -2367,8 +2406,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     this.version = 2, this.pressHandlers = null, this.releaseHandlers = null, this.resetObsoleteHotkeys(), this.load()
                 }
 
-                resetObsoleteHotkeys() {
-                }
+                resetObsoleteHotkeys() {}
 
                 load() {
                     this.hotkeys = this.loadHotkeys(), this.loadHandlers(this.hotkeys)
@@ -2718,7 +2756,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = i, {
                         cells: I
                     } = 1 & m ? i : w, k;
-                    if (I.has(s)) (k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
+                    if (I.has(s))(k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
                     else {
                         let b = {
                                 type: e,
@@ -2855,8 +2893,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         }
                                         A(t, s, e)
                                     },
-                                    emscripten_notify_memory_growth(e) {
-                                    }
+                                    emscripten_notify_memory_growth(e) {}
                                 }
                             }),
                             {
@@ -2934,8 +2971,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             let i, a = s(4),
                 n = s(12),
                 o = ({
@@ -3022,8 +3058,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 reloadVirusTexture() {
-                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {
-                    })
+                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {})
                 }
 
                 resetPlayerLongNames() {
@@ -3065,7 +3100,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 initBackgroundLocationImage(alphaChange = false) {
                     if (alphaChange) return this.backgroundLocationImage.alpha = a.backgroundLocationImageOpacity;
-                    let imageUrl = 'https://i.ibb.co/B6gfmrr/map.png', sprite = new PIXI.Sprite.from(imageUrl, {});
+                    let imageUrl = 'https://i.ibb.co/B6gfmrr/map.png',
+                        sprite = new PIXI.Sprite.from(imageUrl, {});
                     sprite.width = this.border.width, sprite.height = this.border.height, sprite.alpha = a.backgroundLocationImageOpacity, sprite.anchor.set(.5), this.backgroundLocationImage = sprite, this.background.addChild(sprite);
                 }
 
@@ -3119,74 +3155,113 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
             }
         }, function (e, t, s) {
-            let i, a = s(126);
-            e.exports = class e {
+            let game, gameHelper = s(126);
+
+            e.exports = class {
                 constructor() {
-                    this.playersRemoving = [], this.players = new Map, this.botCount = 0
+                    this.playersRemoving = [];
+                    this.players = new Map();
+                    this.botCount = 0;
                 }
 
-                static useGame(e) {
-                    i = e, a.useGame(e)
+                static useGame(gameInstance) {
+                    game = gameInstance;
+                    gameHelper.useGame(gameInstance);
                 }
 
                 get playerCount() {
-                    return this.players.size - this.botCount
+                    return this.players.size - this.botCount;
                 }
 
-                getPlayer(e) {
-                    return this.players.has(e) ? this.players.get(e) : null
+                getPlayer(playerId) {
+                    return this.players.get(playerId) || null;
                 }
 
                 setPlayerData({
-                                  pid: e,
-                                  nickname: t,
-                                  skin: s,
-                                  skinUrl: i,
-                                  nameColor: n,
-                                  tagId: o,
-                                  bot: r
+                                  pid,
+                                  nickname,
+                                  skin,
+                                  skinUrl,
+                                  nameColor,
+                                  tagId,
+                                  bot
                               }) {
-                    !this.players.has(e) && (this.players.set(e, new a(e, r)), r && this.botCount++);
-                    let l = this.players.get(e);
-                    s && (i = `https://skins.vanis.io/s/${s}`);
-                    let c = l.setName(t, n),
-                        h = l.setSkin(i),
-                        d = l.setTagId(o);
-                    return (c || h || d) && l.invalidateVisibility(), l
+                    if (!this.players.has(pid)) {
+                        this.players.set(pid, new gameHelper(pid, bot));
+
+                        if (bot) {
+                            this.botCount++;
+                        }
+                    }
+
+                    const player = this.players.get(pid);
+                    if (skin) {
+                        skinUrl = `https://skins.vanis.io/s/${skin}`;
+                    }
+
+                    const nameChanged = player.setName(nickname, nameColor),
+                        skinChanged = player.setSkin(skinUrl),
+                        tagChanged = player.setTagId(tagId);
+
+                    if (nameChanged || skinChanged || tagChanged) {
+                        player.invalidateVisibility();
+                    }
+
+                    return player;
                 }
 
-                invalidateVisibility(e = []) {
-                    for (let t of this.players.values()) 0 > e.indexOf(t) && t.invalidateVisibility()
+                invalidateVisibility(excludedPlayers = []) {
+                    this.players.forEach((player, playerId) => {
+                        if (!excludedPlayers.includes(playerId)) {
+                            player.invalidateVisibility();
+                        }
+                    });
                 }
 
                 sweepRemovedPlayers() {
-                    let {
-                        replay: e
-                    } = i, t = e.packets[0], s = t[0]?.packetId, a = 0;
-                    for (; a < this.playersRemoving.length;) {
-                        let n = this.playersRemoving[a];
-                        if (!this.players.has(n)) {
-                            this.playersRemoving.splice(a, 1);
-                            continue
+                    const {
+                        replay
+                    } = game;
+                    const firstPacket = replay.packets[0];
+                    const firstPacketId = firstPacket[0]?.packetId;
+
+                    this.playersRemoving = this.playersRemoving.filter(playerId => {
+                        if (!this.players.has(playerId)) {
+                            return false;
                         }
-                        let o = this.players.get(n);
-                        s && o.lastUpdateTick && !(s > o.lastUpdateTick) ? a++ : (this.removePlayer(n), this.playersRemoving.splice(a, 1))
+
+                        const player = this.players.get(playerId);
+
+                        if (firstPacketId && player.lastUpdateTick && !(firstPacketId > player.lastUpdateTick)) {
+                            return true;
+                        } else {
+                            if (playerId) {
+                                currentServerPlayerList[playerId] = {};
+                            }
+                            this.removePlayer(playerId);
+                            return false;
+                        }
+                    });
+                }
+
+                delayedRemovePlayer(playerId) {
+                    this.playersRemoving.push(playerId);
+                }
+
+                removePlayer(playerId) {
+                    if (!this.players.has(playerId)) return;
+                    const player = this.players.get(playerId);
+                    if (player.bot) {
+                        this.botCount--;
                     }
-                }
-
-                delayedRemovePlayer(e) {
-                    this.playersRemoving.push(e)
-                }
-
-                removePlayer(e) {
-                    if (!this.players.has(e)) return;
-                    let t = this.players.get(e);
-                    t.bot && this.botCount--, t.clearCachedData(), this.players.delete(e)
+                    player.clearCachedData();
+                    this.players.delete(playerId);
                 }
 
                 destroy() {
-                    for (let e of this.players.keys()) this.removePlayer(e);
-                    this.botCount = 0, this.playersRemoving.splice(0, this.playersRemoving.length)
+                    this.players.forEach((_, playerId) => this.removePlayer(playerId));
+                    this.botCount = 0;
+                    this.playersRemoving = [];
                 }
             }
         }, function (e, t, s) {
@@ -3939,9 +4014,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
 
             a.prototype.type = 6, a.prototype.isCrown = !0, e.exports = a
-        }, function (e, t, s) {
-        }, function (e, t, s) {
-        }, function (e, t, i) {
+        }, function (e, t, s) {}, function (e, t, s) {}, function (e, t, i) {
             let n = i(1),
                 {
                     state: o
@@ -4147,7 +4220,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }
 
-                switch() {
+                switch () {
                     if (n.spectating && (n.spectating = !1), !this.opened) return void this.open();
                     if (!this.ready) return;
                     let e = this.focused;
@@ -4159,8 +4232,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, 120)), e ? (n.isAlive(!1) || o.autoRespawning || n.actions.join(), n.activePid = n.playerId, this.focused = !1) : (n.isAlive(!0) || this.autoRespawning || this.spawn(), n.activePid = this.pid, this.focused = !0), this.updateOutlines()
                 }
             }
-        }, function (e, t, s) {
-        }, function (e) {
+        }, function (e, t, s) {}, function (e) {
             e.exports = function (e) {
                 var t = 1,
                     s = e.getInt16(t, !0);
@@ -4173,7 +4245,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
         }, function (e) {
             e.exports = function (e) {
-                for (var t = 1, s = []; ;) {
+                for (var t = 1, s = [];;) {
                     var i = e.getUint16(t, !0);
                     if (t += 3, !i) break;
                     var a = e.getUint8(t, !0) / 255;
@@ -4189,7 +4261,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
         }, function (e) {
             e.exports = function (e, t) {
-                for (var s = 1, i = []; ;) {
+                for (var s = 1, i = [];;) {
                     var a = t.getUint16(s, !0);
                     if (s += 2, !a) break;
                     var n = e.playerManager.getPlayer(a);
@@ -4467,65 +4539,51 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "use strict";
             var i = s(29);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(32);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(33);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(34);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(35);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(36);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(37);
             s.n(i).a
-        }, function () {
-        }, , , , , , function () {
-        }, , function () {
-        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
+        }, function () {}, , , , , , function () {}, , function () {}, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
             "use strict";
             var i = s(40);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(41);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(42);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(43);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(44);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             e.exports = new class e {
                 constructor(e, t) {
                     this.url = e, this.vanisToken = t
@@ -4579,88 +4637,71 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "use strict";
             var i = s(45);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(46);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(47);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(48);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(49);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(50);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(51);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(52);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(53);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(54);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(57);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(58);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(59);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(60);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(61);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(62);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             "use strict";
             var i = s(63);
             s.n(i).a
-        }, function () {
-        }, function (e) {
+        }, function () {}, function (e) {
             var t = "seenNotifications";
             e.exports = new class {
                 constructor() {
@@ -4672,16 +4713,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     try {
                         var t = JSON.parse(e);
                         if (Array.isArray(t)) return t
-                    } catch (s) {
-                    }
+                    } catch (s) {}
                     return []
                 }
 
                 saveSeen() {
                     try {
                         localStorage[t] = JSON.stringify(this.seenList)
-                    } catch (e) {
-                    }
+                    } catch (e) {}
                 }
 
                 isSeen(e) {
@@ -4696,8 +4735,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "use strict";
             var i = s(64);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function () {}, function (e, t, s) {
             var i, a, n, o, r = s(1),
                 l = document.createElement("canvas"),
                 c = l.getContext("2d");
@@ -4725,7 +4763,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 A = 0;
 
             function m(e) {
-                if (r.running) return window.removeEventListener("resize", h), void (l.parentNode && l.parentNode.removeChild(l));
+                if (r.running) return window.removeEventListener("resize", h), void(l.parentNode && l.parentNode.removeChild(l));
                 var t, s = window.performance && window.performance.now ? window.performance.now() : Date.now();
                 g || (g = A = s), e = (s - A) / 6;
                 var d = s - g - 550;
@@ -4752,34 +4790,34 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             i.events.$on("players-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("player-modal")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
             }), i.events.$on("chatbox-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("chatbox")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
-                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
+                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete[].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
             });
             var a = "me--"
         }, function (e, t, s) {
@@ -4844,9 +4882,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 let userList = "";
 
                 for (const pid in currentServerPlayerList) {
-                    const user = currentServerPlayerList[pid];
-                    const userHtml = injectUser(user);
-                    userList += userHtml;
+                    if (pid) {
+                        const user = currentServerPlayerList[pid];
+                        const userHtml = injectUser(user);
+                        userList += userHtml;
+                    }
                 }
 
                 const modal = `
@@ -7785,7 +7825,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             width: "25px",
                             margin: "3px"
                         };
-                        return {badge: null, width: "0", margin: "0"};
+                        return {
+                            badge: null,
+                            width: "0",
+                            margin: "0"
+                        };
                     }
 
                     function getPerkNameColor() {
@@ -8133,8 +8177,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     this.$createElement, this._self._c
                 };
             eF._withStripped = !0, s(236);
-            var e1 = Object(v.a)({}, eF, [function () {
-            }], !1, null, "4d0670e9", null);
+            var e1 = Object(v.a)({}, eF, [function () {}], !1, null, "4d0670e9", null);
             e1.options.__file = "src/components/social-links.vue";
             var e4 = e1.exports,
                 eG = function () {
@@ -8142,8 +8185,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 };
             eG._withStripped = !0;
             var eH = (s(238), Object(v.a)({
-                data() {
-                }
+                data() {}
             }, eG, [function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
@@ -8212,8 +8254,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         this.player.setSkin(""), this.player.invalidateVisibility()
                     }
                 },
-                created() {
-                }
+                created() {}
             }, e2, [], !1, null, "4dbee04d", null));
             e9.options.__file = "src/components/context-menu.vue";
             var eO = e9.exports,
@@ -9030,8 +9071,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 data: () => ({
                     show: !1
                 }),
-                created() {
-                }
+                created() {}
             }, tb, [function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
@@ -9228,8 +9268,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         GAME.events.$emit("update-cautions", {
             custom: e
         })
-    }, GAME.aimbotnodes = () => {
-    }, window.pings = {
+    }, GAME.aimbotnodes = () => {}, window.pings = {
         sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/i.png")
     }, window.setDualData = (e, t) => {
         switch (e) {
@@ -9242,7 +9281,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             case 3:
                 getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked)
         }
-    }, (function() {
+    }, (function () {
         var item = document.createElement("div");
         item.id = "debugStats";
         item.style.position = "fixed";
