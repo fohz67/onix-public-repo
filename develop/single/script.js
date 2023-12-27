@@ -995,6 +995,9 @@ function updateUserLists(users, me) {
 function injectUser(user, status) {
     getUsersAnonymous(user);
 
+    const id = user.skin !== ATTRS.images.anonymousSkin ? getSkinIdByUrl(user.skin) : null;
+    const clicker = id && user.skin && user.skin !== ATTRS.images.anonymousSkin ? `onclick="openSkin('${user.skin}', '${id}')"` : ``;
+
     if (user.nickname.trim() === '') {
         user.color = 'white';
         user.nickname = 'Unnamed';
@@ -1002,7 +1005,7 @@ function injectUser(user, status) {
 
     return `
         <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.server, status)}">
-            <img class="userPhoto beautifulSkin" alt="" src="${user.skin === '' ? ATTRS.images.transparentSkin : user.skin}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
+            <img class="userPhoto beautifulSkin" alt="" src="${user.skin === '' ? ATTRS.images.transparentSkin : user.skin}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
             <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
             <div class="listTextItem userTextElem">
                 <div class="userNickLine">
@@ -1728,6 +1731,13 @@ function openSkin(skinUrl, skinId) {
     `);
 }
 
+function getSkinIdByUrl(url) {
+    if (!url) return null;
+    const separator = url.split('/');
+    const id = separator[separator.length - 1];
+    return separator[separator.length - 1];
+}
+
 function copySkin(skinUrl) {
     navigator.clipboard.writeText(skinUrl).then(() => {
         sendTimedSwal('Skin copied', 'The skin has been copied to the clipboard', 1500, false)
@@ -1795,7 +1805,11 @@ function injectSkin(skins) {
     if (!skins) return {list: '', count: 0};
     const skinUrls = JSONSafeParser(skins);
     if (Object.keys(skinUrls).length > 0) {
-        const skinElements = skinUrls.map(url => `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'">`);
+        const skinElements = skinUrls.map(url => {
+            const id = getSkinIdByUrl(url);
+            const clicker = id && url ? `onclick="openSkin('${url}', '${id}')"` : ``;
+            return `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>`;
+        });
         return {list: `<div class="listSkins">${skinElements.join('')}</div>`, count: Object.keys(skinUrls).length};
     }
     return {list: '', count: 0};
