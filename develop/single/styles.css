@@ -95,7 +95,6 @@ h4 {
 }
 
 #main-container {
-    display:grid!important;
     grid-gap:10px!important;
     grid-template-columns:280px 350px 280px!important;
     grid-template-rows:110px 146px 300px!important;
@@ -268,6 +267,10 @@ i.tab.fas {
 
 .tab:not(:last-child) {
     border-right:none!important
+}
+
+.container[data-v-ba56a55e],.tag {
+    display:none!important
 }
 
 .container>.section>.options.two-columns {
