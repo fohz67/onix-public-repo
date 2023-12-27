@@ -1,4 +1,4 @@
-const VERSION = '4.5';
+const VERSION = '4.5.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 ! function e() {
@@ -4860,6 +4860,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             r._withStripped = !0;
 
             function injectUser(user) {
+                if (!user || !user.pid) return ``;
                 const deltaBadge = getUserField(user.nickname, user.pid, 'badge');
                 const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges');
 
