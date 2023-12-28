@@ -1,19 +1,22 @@
-const VERSION = '4.5.1';
+const VERSION = '4.6';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
-! function e() {
-    document.title = "Delta - Dual";
-
-    const userColors = localStorage.getItem('userColors');
-    let userColorsJson = userColors ? JSON.parse(userColors) : null;
-    let rainbowColorTimeMessageG;
-    let showTimeMessageG;
-    let settingsClicked;
+(() => {
+    let rainbowColorTimeMessageSettings;
+    let showTimeMessageSettings;
+    let showDeltaSettings;
+    let userColorsJson = {};
     let currentServerPlayerList = {};
 
     function getLocalStorageItem(key, defaultValue) {
         return localStorage.getItem(key) || defaultValue;
     }
+
+    function updateColors() {
+        const userColors = getLocalStorageItem('userColors', null);
+        userColorsJson = userColors ? JSON.parse(userColors) : null;
+    }
+    updateColors();
 
     function getImageUrlFromMessage(message) {
         const imageRegex = /deltaimage:(\S+)/;
@@ -866,11 +869,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         that.timeAlive = 0;
                     }
 
-                    function updateColors() {
-                        const userColors = localStorage.getItem('userColors');
-                        userColorsJson = userColors ? JSON.parse(userColors) : null;
-                    }
-
                     function updateStatBar(that) {
                         const statBarItem = `
                             <i class="fas fa-skull barIcon"></i>
@@ -891,7 +889,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         localStorage.setItem('sG', (parseInt(getLocalStorageItem('sG', '1')) + 1).toString());
                     }
 
-                    updateColors();
                     updateStatBar(this);
                     updateStatData(this);
                     updateRespawn(e, this);
@@ -1133,8 +1130,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             const playerColor = getUserField(chatPlayer.name, chat.pid, "color", '#ffffff');
 
                             chat.from = chatPlayer.name;
-                            chat.date = showTimeMessageG ? getCurrentDate() : '';
-                            chat.dateColor = rainbowColorTimeMessageG ? generateRandomHexColor() : 'white';
+                            chat.date = showTimeMessageSettings ? getCurrentDate() : '';
+                            chat.dateColor = rainbowColorTimeMessageSettings ? generateRandomHexColor() : 'white';
                             chat.badge = getUserField(chat.from, chat.pid, "badge", null);
                             chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, "perk_badges", null);
                             chat.nicknameColor = playerColor || '#ffffff';
@@ -1397,7 +1394,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             e.exports = window.settings = new class {
                 constructor() {
                     this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle();
-                    showTimeMessageG = this.userDefinedSettings.showTimeMessage || false, rainbowColorTimeMessageG = this.userDefinedSettings.rainbowColorTimeMessage || false;
+                    showTimeMessageSettings = this.userDefinedSettings.showTimeMessage || false, rainbowColorTimeMessageSettings = this.userDefinedSettings.rainbowColorTimeMessage || false;
                 }
 
                 getInternalSettings() {
@@ -5098,7 +5095,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "tab fas fa-cog",
                         on: {
                             click: function () {
-                                settingsClicked = 'settings';
+                                showDeltaSettings = 'settings';
                                 return e.openModal("settings")
                             }
                         }
@@ -5113,7 +5110,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "tab fas fa-wrench",
                         on: {
                             click: function () {
-                                settingsClicked = 'delta';
+                                showDeltaSettings = 'delta';
                                 return e.openModal("delta")
                             }
                         }
@@ -5287,7 +5284,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     return s("div", {
                         staticClass: "container"
                     }, [s("div", {
-                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n            Renderer\n            "), e.isWebGLSupported ? s("span", {
@@ -5349,7 +5346,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     })])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${settingsClicked === 'delta' ? '' : 'hidden'}`
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        Delta settings\n    ")]), e._v(" "), s("div", {
@@ -5442,7 +5439,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         },
                         on: {
                             change: function (t) {
-                                return e.change("showTimeMessage", t), showTimeMessageG = t
+                                return e.change("showTimeMessage", t), showTimeMessageSettings = t
                             }
                         }
                     }, [e._v("Show message time")]), e._v(" "), s("p-check", {
@@ -5452,7 +5449,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         },
                         on: {
                             change: function (t) {
-                                return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageG = t
+                                return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageSettings = t
                             }
                         }
                     }, [e._v("Rainbow color message time")]), e._v(" "), s("p-check", {
@@ -5496,7 +5493,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Client info")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        Game\n        "), s("span", {
@@ -5677,7 +5674,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }), e._v('\n            "Replay saved" ' + e._s(e.showReplaySavedMeaning) + "\n        ")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n            Cells\n        ")]), e._v(" "), s("div", {
@@ -5806,7 +5803,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Show eat animation")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [s("p-check", {
@@ -5998,7 +5995,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Minimap stats: Server restart time")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${settingsClicked === 'delta' ? 'hidden' : ''}`
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        Chat\n    ")]), e._v(" "), s("div", {
@@ -6232,7 +6229,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     },
                     confirmReset() {
-                        _.confirm(`Are you sure you want to reset all ${settingsClicked === 'delta' ? 'Delta' : ''} settings ?`, () => this.reset())
+                        _.confirm(`Are you sure you want to reset all ${showDeltaSettings === 'delta' ? 'Delta' : ''} settings ?`, () => this.reset())
                     },
                     reset() {
                         const e = ["clientHash", "isWebGLSupported"];
@@ -6250,7 +6247,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         ];
 
                         for (var t in this.$data) {
-                            if (settingsClicked === 'delta') {
+                            if (showDeltaSettings === 'delta') {
                                 if (!e.includes(t) && deltaProperties.includes(t)) this.change(t, b.getDefault(t));
                             } else {
                                 if (!e.includes(t) && !deltaProperties.includes(t)) this.change(t, b.getDefault(t));
@@ -7763,9 +7760,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             this.activeModal = "", this.$emit("modal-open", !1)
                         },
                         play() {
-                            const userColors = localStorage.getItem('userColors');
-                            userColorsJson = userColors ? JSON.parse(userColors) : null;
-
                             let {
                                 lifeState: e
                             } = this.gameState;
@@ -9282,7 +9276,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             case 3:
                 getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked)
         }
-    }, (function () {
+    }, (() => {
         var item = document.createElement("div");
         item.id = "debugStats";
         item.style.position = "fixed";
@@ -9426,8 +9420,58 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             skinItems += `<img class="skinItemGalery" onclick="window.setDualData(1, '${e}')" src="${e && e === '' || !e ? "https://skins.vanis.io/s/Qkfih2" : e}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">`
         });
         document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
-    })
-}();
+    }), (() => {
+        const floatingDiv = document.createElement('div');
+        floatingDiv.id = 'tooltip';
+        floatingDiv.style.position = 'absolute';
+        floatingDiv.style.display = 'none';
+        document.body.appendChild(floatingDiv);
+
+        document.body.addEventListener('mouseover', function(event) {
+            const tipsElem = event.target.closest('[tip]');
+            if (tipsElem) {
+                const deltaToastValue = tipsElem.getAttribute('tip');
+                floatingDiv.textContent = deltaToastValue;
+                floatingDiv.style.display = 'block';
+                updateTooltipPosition(event.pageX, event.pageY);
+            }
+        });
+
+        document.body.addEventListener('mousemove', function(event) {
+            const tipsElem = event.target.closest('[tip]');
+            if (tipsElem && floatingDiv.style.display === 'block') {
+                updateTooltipPosition(event.pageX, event.pageY);
+            }
+        });
+
+        document.body.addEventListener('mouseout', function(event) {
+            if (event.target.closest('[tip]')) {
+                floatingDiv.style.display = 'none';
+            }
+        });
+
+        function updateTooltipPosition(x, y) {
+            const tooltipWidth = floatingDiv.offsetWidth;
+            const tooltipHeight = floatingDiv.offsetHeight;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            let tooltipX = x + 10;
+            let tooltipY = y + 10;
+
+            if (x + tooltipWidth + 10 > windowWidth) {
+                tooltipX = x - tooltipWidth - 10;
+            }
+
+            if (y + tooltipHeight + 10 > windowHeight) {
+                tooltipY = y - tooltipHeight - 10;
+            }
+
+            floatingDiv.style.left = tooltipX + 'px';
+            floatingDiv.style.top = tooltipY + 'px';
+        }
+    })();
+})();
 
 if (lowPerformanceMode === 'unchecked') {
     fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
