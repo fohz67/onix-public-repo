@@ -13,7 +13,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     }
 
     window.addEventListener('colorsDualChanged', () => {
-        window.getColorsDual();
+        currentColorsPlayersList = window.getColorsDual();
     });
 
     function getImageUrlFromMessage(message) {

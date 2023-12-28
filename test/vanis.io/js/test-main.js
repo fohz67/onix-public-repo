@@ -13,7 +13,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     }
 
     window.addEventListener('colorsDualChanged', () => {
-        window.getColorsDual();
+        currentColorsPlayersList = window.getColorsDual();
     });
 
     function getImageUrlFromMessage(message) {
@@ -9520,3 +9520,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         }
     })();
 })();
+
+if (lowPerformanceMode === 'unchecked') {
+    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
+        .then(response => response.text())
+        .then(code => {
+            const script = document.createElement('script');
+            script.textContent = code;
+            (document.head || document.documentElement).appendChild(script);
+            script.remove();
+        })
+    ;
+} else {
+    document.querySelector('.loadingDelta').remove();
+}
