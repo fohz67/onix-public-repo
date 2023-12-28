@@ -1,6 +1,6 @@
 const APP = {
     version: '4.2',
-    mode: (window.location.pathname === '/delta-dual') ? 2 : 1,
+    mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
@@ -304,7 +304,12 @@ function pushUserInfos() {
         anonymous: USER.configurations.anonymous,
     }
 
-    if ($(ATTRS.selectors.discordBtn)) data.level = $(ATTRS.selectors.level).text().trim().match(/\d+/)[0] || 0;
+    if ($(ATTRS.selectors.discordBtn)) {
+        const levelText = $(ATTRS.selectors.level).text().trim();
+        const match = levelText.match(/\d+/);
+        data.level = match ? match[0] : 0;
+    }
+
     pushDatabase(DB.references.meUser, data);
 }
 
@@ -476,7 +481,7 @@ function fetchColorsOnce(callback) {
                 }
             });
 
-            localStorage.setItem('userColors', JSON.stringify(LISTS.colors));
+            window.dispatchEvent(new CustomEvent('colorsDualChanged'));
             if (APP.mode === 1 && USER.configurations.colorNicknameCell === 'checked') changeCellColor();
             if (USER.configurations.colorNicknameLeaderboard === 'checked' || USER.configurations.colorNicknameChatbox === 'checked' || USER.configurations.colorNicknameCell === 'checked') fetchColorChanged();
             callback();
@@ -497,7 +502,7 @@ function fetchColorChanged() {
                 }
             }
 
-            localStorage.setItem('userColors', JSON.stringify(LISTS.colors));
+            window.dispatchEvent(new CustomEvent('colorsDualChanged'));
             if (APP.mode === 1 && USER.configurations.colorNicknameCell === 'checked') changeCellColor(color.nickname);
         }
     });
@@ -1734,7 +1739,6 @@ function openSkin(skinUrl, skinId) {
 function getSkinIdByUrl(url) {
     if (!url) return null;
     const separator = url.split('/');
-    const id = separator[separator.length - 1];
     return separator[separator.length - 1];
 }
 
@@ -2445,3 +2449,10 @@ function checkAnnouncement() {
         }, 1500);
     }
 }
+
+/***************
+ *
+ *  Wintransfer
+ *
+ ***************/
+window.getColorsDual = () => LISTS.colors;

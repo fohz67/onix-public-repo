@@ -1,30 +1,20 @@
-const VERSION = '4.6.1';
+const VERSION = '4.6.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
     let rainbowColorTimeMessageSettings;
     let showTimeMessageSettings;
     let showDeltaSettings;
-    let userColorsJson = {};
-    let currentServerPlayerList = {};
+    let currentColorsPlayersList = {};
+    let currentServerPlayersList = {};
 
     function getLocalStorageItem(key, defaultValue) {
         return localStorage.getItem(key) || defaultValue;
     }
 
-    function updateColors() {
-        const userColors = getLocalStorageItem('userColors', null);
-        userColorsJson = userColors ? JSON.parse(userColors) : null;
-    }
-    updateColors();
-
-    (() => {
-        window.addEventListener('storage', (event) => {
-            if (event.key === 'userColors') {
-                updateColors();
-            }
-        });
-    })();
+    window.addEventListener('colorsDualChanged', () => {
+        window.getColorsDual();
+    });
 
     function getImageUrlFromMessage(message) {
         const imageRegex = /deltaimage:(\S+)/;
@@ -47,11 +37,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     }
 
     function getUserField(nickname, pid, field, def = null) {
-        return nickname && pid && userColorsJson && userColorsJson[nickname.trim()] && userColorsJson[nickname.trim()][field] || def;
+        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()][field] || def;
     }
 
     function getUserFieldVanilla(nickname, pid, field, def = null) {
-        return nickname && pid && currentServerPlayerList && currentServerPlayerList[pid] && currentServerPlayerList[pid][field] || def;
+        return nickname && pid && currentServerPlayersList && currentServerPlayersList[pid] && currentServerPlayersList[pid][field] || def;
     }
 
     function sendTimedSwal(title, text, timer, confirm) {
@@ -190,7 +180,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
         readString16() {
             let e = "";
-            for (;;) {
+            for (; ;) {
                 let t = this.eof ? 0 : this.readUInt16LE();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
@@ -200,7 +190,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
         readString() {
             let e = "";
-            for (;;) {
+            for (; ;) {
                 let t = this.eof ? 0 : this.readUInt8();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
@@ -327,7 +317,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         var t = s.apply(e, arguments);
                         return s = null, t
                     }
-                } : function () {};
+                } : function () {
+                };
                 return t = !1, i
             });
 
@@ -921,7 +912,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 parseLeaderboard(e) {
                     let t = [];
-                    for (;;) {
+                    for (; ;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("leaderboard-update", t);
@@ -943,7 +934,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 parseScrimmageLeaderboard(e) {
                     let t = [];
-                    for (;;) {
+                    for (; ;) {
                         let s = e.readUInt8();
                         if (0 == s) break;
                         let i = {};
@@ -967,7 +958,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
                 parseMinimap(e) {
                     let t = [];
-                    for (;;) {
+                    for (; ;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("minimap-positions", t);
@@ -993,13 +984,11 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = this;
                     let updatedPlayers = [];
 
-                    updateColors();
-
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
                         updatedPlayers.push(updatedPlayer);
                         if (player.pid) {
-                            currentServerPlayerList[player.pid] = player;
+                            currentServerPlayersList[player.pid] = player;
                         }
                     }
 
@@ -1553,7 +1542,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         let {
                             cache: t
                         } = this;
-                        if (t.has(e)) return t.get(e); {
+                        if (t.has(e)) return t.get(e);
+                        {
                             let {
                                 cellSize: s,
                                 textureSize: i
@@ -1569,7 +1559,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         let {
                             cache: t
                         } = this;
-                        if (t.has(e)) return t.get(e); {
+                        if (t.has(e)) return t.get(e);
+                        {
                             let {
                                 cellSize: s,
                                 textureSize: i
@@ -1673,7 +1664,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 r = o.map(n),
                 l = o.map(n).sort((e, t) => t.length - e.length).map(e => RegExp("[^s]*" + e.split("").join("s*") + "[^s]*", "gi"));
             e.exports = {
-                noop: function () {},
+                noop: function () {
+                },
                 checkBadWords: function (e) {
                     return e = e.toLowerCase(), r.some(t => e.includes(t))
                 },
@@ -2413,7 +2405,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     this.version = 2, this.pressHandlers = null, this.releaseHandlers = null, this.resetObsoleteHotkeys(), this.load()
                 }
 
-                resetObsoleteHotkeys() {}
+                resetObsoleteHotkeys() {
+                }
 
                 load() {
                     this.hotkeys = this.loadHotkeys(), this.loadHandlers(this.hotkeys)
@@ -2763,7 +2756,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     } = i, {
                         cells: I
                     } = 1 & m ? i : w, k;
-                    if (I.has(s))(k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
+                    if (I.has(s)) (k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
                     else {
                         let b = {
                                 type: e,
@@ -2900,7 +2893,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         }
                                         A(t, s, e)
                                     },
-                                    emscripten_notify_memory_growth(e) {}
+                                    emscripten_notify_memory_growth(e) {
+                                    }
                                 }
                             }),
                             {
@@ -2978,7 +2972,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             let i, a = s(4),
                 n = s(12),
                 o = ({
@@ -3065,7 +3060,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 reloadVirusTexture() {
-                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {})
+                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {
+                    })
                 }
 
                 resetPlayerLongNames() {
@@ -3243,7 +3239,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             return true;
                         } else {
                             if (playerId) {
-                                currentServerPlayerList[playerId] = {};
+                                currentServerPlayersList[playerId] = {};
                             }
                             this.removePlayer(playerId);
                             return false;
@@ -4021,7 +4017,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
 
             a.prototype.type = 6, a.prototype.isCrown = !0, e.exports = a
-        }, function (e, t, s) {}, function (e, t, s) {}, function (e, t, i) {
+        }, function (e, t, s) {
+        }, function (e, t, s) {
+        }, function (e, t, i) {
             let n = i(1),
                 {
                     state: o
@@ -4227,7 +4225,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
                 }
 
-                switch () {
+                switch() {
                     if (n.spectating && (n.spectating = !1), !this.opened) return void this.open();
                     if (!this.ready) return;
                     let e = this.focused;
@@ -4239,7 +4237,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, 120)), e ? (n.isAlive(!1) || o.autoRespawning || n.actions.join(), n.activePid = n.playerId, this.focused = !1) : (n.isAlive(!0) || this.autoRespawning || this.spawn(), n.activePid = this.pid, this.focused = !0), this.updateOutlines()
                 }
             }
-        }, function (e, t, s) {}, function (e) {
+        }, function (e, t, s) {
+        }, function (e) {
             e.exports = function (e) {
                 var t = 1,
                     s = e.getInt16(t, !0);
@@ -4252,7 +4251,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
         }, function (e) {
             e.exports = function (e) {
-                for (var t = 1, s = [];;) {
+                for (var t = 1, s = []; ;) {
                     var i = e.getUint16(t, !0);
                     if (t += 3, !i) break;
                     var a = e.getUint8(t, !0) / 255;
@@ -4268,7 +4267,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
         }, function (e) {
             e.exports = function (e, t) {
-                for (var s = 1, i = [];;) {
+                for (var s = 1, i = []; ;) {
                     var a = t.getUint16(s, !0);
                     if (s += 2, !a) break;
                     var n = e.playerManager.getPlayer(a);
@@ -4546,51 +4545,65 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "use strict";
             var i = s(29);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(32);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(33);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(34);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(35);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(36);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(37);
             s.n(i).a
-        }, function () {}, , , , , , function () {}, , function () {}, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
+        }, function () {
+        }, , , , , , function () {
+        }, , function () {
+        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
             "use strict";
             var i = s(40);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(41);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(42);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(43);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(44);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             e.exports = new class e {
                 constructor(e, t) {
                     this.url = e, this.vanisToken = t
@@ -4644,71 +4657,88 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "use strict";
             var i = s(45);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(46);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(47);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(48);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(49);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(50);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(51);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(52);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(53);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(54);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(57);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(58);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(59);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(60);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(61);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(62);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             "use strict";
             var i = s(63);
             s.n(i).a
-        }, function () {}, function (e) {
+        }, function () {
+        }, function (e) {
             var t = "seenNotifications";
             e.exports = new class {
                 constructor() {
@@ -4720,14 +4750,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     try {
                         var t = JSON.parse(e);
                         if (Array.isArray(t)) return t
-                    } catch (s) {}
+                    } catch (s) {
+                    }
                     return []
                 }
 
                 saveSeen() {
                     try {
                         localStorage[t] = JSON.stringify(this.seenList)
-                    } catch (e) {}
+                    } catch (e) {
+                    }
                 }
 
                 isSeen(e) {
@@ -4742,7 +4774,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             "use strict";
             var i = s(64);
             s.n(i).a
-        }, function () {}, function (e, t, s) {
+        }, function () {
+        }, function (e, t, s) {
             var i, a, n, o, r = s(1),
                 l = document.createElement("canvas"),
                 c = l.getContext("2d");
@@ -4770,7 +4803,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 A = 0;
 
             function m(e) {
-                if (r.running) return window.removeEventListener("resize", h), void(l.parentNode && l.parentNode.removeChild(l));
+                if (r.running) return window.removeEventListener("resize", h), void (l.parentNode && l.parentNode.removeChild(l));
                 var t, s = window.performance && window.performance.now ? window.performance.now() : Date.now();
                 g || (g = A = s), e = (s - A) / 6;
                 var d = s - g - 550;
@@ -4797,34 +4830,34 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             i.events.$on("players-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("player-modal")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
             }), i.events.$on("chatbox-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("chatbox")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
-                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete[].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
+                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
             });
             var a = "me--"
         }, function (e, t, s) {
@@ -4889,9 +4922,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             function showPlayerList(url, name, nb, slots) {
                 let userList = "";
 
-                for (const pid in currentServerPlayerList) {
+                for (const pid in currentServerPlayersList) {
                     if (pid) {
-                        const user = currentServerPlayerList[pid];
+                        const user = currentServerPlayersList[pid];
                         const userHtml = injectUser(user);
                         userList += userHtml;
                     }
@@ -8182,7 +8215,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     this.$createElement, this._self._c
                 };
             eF._withStripped = !0, s(236);
-            var e1 = Object(v.a)({}, eF, [function () {}], !1, null, "4d0670e9", null);
+            var e1 = Object(v.a)({}, eF, [function () {
+            }], !1, null, "4d0670e9", null);
             e1.options.__file = "src/components/social-links.vue";
             var e4 = e1.exports,
                 eG = function () {
@@ -8190,7 +8224,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 };
             eG._withStripped = !0;
             var eH = (s(238), Object(v.a)({
-                data() {}
+                data() {
+                }
             }, eG, [function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
@@ -8259,7 +8294,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         this.player.setSkin(""), this.player.invalidateVisibility()
                     }
                 },
-                created() {}
+                created() {
+                }
             }, e2, [], !1, null, "4dbee04d", null));
             e9.options.__file = "src/components/context-menu.vue";
             var eO = e9.exports,
@@ -9076,7 +9112,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 data: () => ({
                     show: !1
                 }),
-                created() {}
+                created() {
+                }
             }, tb, [function () {
                 var e = this.$createElement,
                     t = this._self._c || e;
@@ -9273,7 +9310,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         GAME.events.$emit("update-cautions", {
             custom: e
         })
-    }, GAME.aimbotnodes = () => {}, window.pings = {
+    }, GAME.aimbotnodes = () => {
+    }, window.pings = {
         sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/i.png")
     }, window.setDualData = (e, t) => {
         switch (e) {
@@ -9437,7 +9475,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         floatingDiv.style.display = 'none';
         document.body.appendChild(floatingDiv);
 
-        document.body.addEventListener('mouseover', function(event) {
+        document.body.addEventListener('mouseover', function (event) {
             const tipsElem = event.target.closest('[tip]');
             if (tipsElem) {
                 const deltaToastValue = tipsElem.getAttribute('tip');
@@ -9447,14 +9485,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             }
         });
 
-        document.body.addEventListener('mousemove', function(event) {
+        document.body.addEventListener('mousemove', function (event) {
             const tipsElem = event.target.closest('[tip]');
             if (tipsElem && floatingDiv.style.display === 'block') {
                 updateTooltipPosition(event.pageX, event.pageY);
             }
         });
 
-        document.body.addEventListener('mouseout', function(event) {
+        document.body.addEventListener('mouseout', function (event) {
             if (event.target.closest('[tip]')) {
                 floatingDiv.style.display = 'none';
             }
