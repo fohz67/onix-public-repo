@@ -1,4 +1,4 @@
-const VERSION = '4.6';
+const VERSION = '4.6.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -17,6 +17,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         userColorsJson = userColors ? JSON.parse(userColors) : null;
     }
     updateColors();
+
+    (() => {
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'userColors') {
+                updateColors();
+            }
+        });
+    })();
 
     function getImageUrlFromMessage(message) {
         const imageRegex = /deltaimage:(\S+)/;
@@ -984,6 +992,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         playerManager
                     } = this;
                     let updatedPlayers = [];
+
+                    updateColors();
 
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
