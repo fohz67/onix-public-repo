@@ -621,8 +621,8 @@ span.right.silent {
     padding:12px!important
 }
 
-.section>.options {
-    padding:17px
+.section>.options:not(.dualSkinGalery) {
+    padding:17px!important;
 }
 
 .section {

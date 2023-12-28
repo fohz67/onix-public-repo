@@ -3697,10 +3697,13 @@ titleExtension {
     background:#6255b33b;
     border:solid 1px #956dff6e;
     border-radius:13px;
-    text-align:center;
     box-shadow:0 0 20px 0 #0003;
     color:#fff;
     padding:9px
+}
+
+.playerItem {
+    text-align:center
 }
 
 .server-list-players {
