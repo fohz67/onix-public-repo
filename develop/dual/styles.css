@@ -3609,16 +3609,6 @@ canvas[data-v-4c95bd45] {
     color:#ff5064
 }
 
-.tooltip {
-    background:linear-gradient(45deg,#2c1170,#0a021d);
-    border:solid 1px #956dff6e;
-    border-radius:7px;
-    box-shadow:1px 0 30px 0 #5228c252!important;
-    font-size:14px;
-    max-width:240px;
-    padding:9px
-}
-
 .barIcon {
     margin-left:10px;
     margin-right:5px
@@ -3813,6 +3803,17 @@ titleExtension {
 
 .hidden {
     display:none!important
+}
+
+#tooltip {
+    background:linear-gradient(45deg,#2c1170,#0a021d);
+    border:solid 1px #956dff6e;
+    border-radius:7px;
+    box-shadow:1px 0 30px 0 #5228c252;
+    font-size:14px;
+    position:absolute;
+    max-width:240px;
+    padding:9px
 }
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
