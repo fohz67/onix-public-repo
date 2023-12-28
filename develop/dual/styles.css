@@ -2041,7 +2041,6 @@ input::placeholder {
 }
 
 .overlay[data-v-0eaeaf66],.overlay[data-v-73ccaaca] {
-    backdrop-filter:blur(5px);
     background:#0009
 }
 
