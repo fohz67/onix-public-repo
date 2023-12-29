@@ -1,4 +1,4 @@
-const VERSION = '4.6.2';
+const VERSION = '4.6.3';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -42,6 +42,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
     function getUserFieldVanilla(nickname, pid, field, def = null) {
         return nickname && pid && currentServerPlayersList && currentServerPlayersList[pid] && currentServerPlayersList[pid][field] || def;
+    }
+
+    function getUserColor(bot, nickname, pid, hash, forceColor) {
+        if (bot) return hash + '838383';
+        let deltaColor = getUserField(nickname, pid, 'color', null);
+        if (deltaColor) return hash + deltaColor.replaceAll('#', '');
+        if (forceColor) return forceColor;
+        let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
+        if (vanillaColor) return hash + vanillaColor.replaceAll('#', '');
+        return hash + 'ffffff';
     }
 
     function sendTimedSwal(title, text, timer, confirm) {
@@ -924,6 +934,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             pid: s,
                             position: t.length + 1,
                             text: i.name,
+                            color: getUserColor(i.bot, i.name, s, '#'),
                             badge: getUserField(i.name, s, "badge", null),
                             badgeVanilla: getUserFieldVanilla(i.name, s, "perk_badges", null),
                             bold: !!i.nameColor
@@ -1126,23 +1137,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             if (!chatPlayer) return;
 
                             const imageUrlData = getImageUrlFromMessage(chat.text);
-                            const playerColor = getUserField(chatPlayer.name, chat.pid, "color", '#ffffff');
 
                             chat.from = chatPlayer.name;
                             chat.date = showTimeMessageSettings ? getCurrentDate() : '';
                             chat.dateColor = rainbowColorTimeMessageSettings ? generateRandomHexColor() : 'white';
-                            chat.badge = getUserField(chat.from, chat.pid, "badge", null);
-                            chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, "perk_badges", null);
-                            chat.nicknameColor = playerColor || '#ffffff';
+                            chat.badge = getUserField(chat.from, chat.pid, 'badge', null);
+                            chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, 'perk_badges', null);
+                            chat.nicknameColor = getUserColor(chat.bot, chat.from, chat.pid, '#');
                             chat.imageUrl = imageUrlData ? imageUrlData.newURL : null;
                             chat.text = imageUrlData ? chat.text.replace(imageUrlData.baseURL, '[Delta image]') : chat.text;
 
-                            let {
-                                nameColorCss
-                            } = chatPlayer;
-                            if (nameColorCss) {
-                                chat.fromColor = nameColorCss;
-                            }
                             this.events.$emit("chat-message", chat);
 
                             return;
@@ -3180,36 +3184,20 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     return this.players.get(playerId) || null;
                 }
 
-                setPlayerData({
-                                  pid,
-                                  nickname,
-                                  skin,
-                                  skinUrl,
-                                  nameColor,
-                                  tagId,
-                                  bot
-                              }) {
+                setPlayerData({pid, nickname, skin, skinUrl, perk_color, tagId, bot}) {
                     if (!this.players.has(pid)) {
                         this.players.set(pid, new gameHelper(pid, bot));
-
-                        if (bot) {
-                            this.botCount++;
-                        }
+                        this.botCount += bot ? 1 : 0;
                     }
 
                     const player = this.players.get(pid);
-                    if (skin) {
-                        skinUrl = `https://skins.vanis.io/s/${skin}`;
-                    }
+                    skinUrl = skin ? `https://skins.vanis.io/s/${skin}` : skinUrl;
 
-                    const nameChanged = player.setName(nickname, nameColor),
+                    const nameChanged = player.setName(nickname, perk_color, 16),
                         skinChanged = player.setSkin(skinUrl),
                         tagChanged = player.setTagId(tagId);
 
-                    if (nameChanged || skinChanged || tagChanged) {
-                        player.invalidateVisibility();
-                    }
-
+                    if (nameChanged || skinChanged || tagChanged) player.invalidateVisibility();
                     return player;
                 }
 
@@ -3331,14 +3319,17 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 setNameColor(bot, pid, name) {
-                    let colorHex = bot ? '848484' : getUserField(name, pid, "color", '#ffffff').replace('#', '');
-                    let colorInt = parseInt(colorHex, 16);
-                    this.nameColorCss = PIXI.utils.hex2string(colorInt);
-                    return colorInt;
+                    this.perk_color = parseInt(getUserColor(bot, name, pid, '', this.perk_color), 16);
+                    return this.perk_color;
                 }
 
                 setName(e, t) {
-                    return e || (e = "Unnamed"), (this.nameFromServer !== e || this.nameColorFromServer !== t) && (this.nameFromServer = e, this.nameColorFromServer = t, this.applyNameToSprite(), !0)
+                    if (!e) e = "Unnamed";
+                    if (this.nameFromServer === e && this.perk_color === t) return false;
+                    this.nameFromServer = e;
+                    this.perk_color = t;
+                    this.applyNameToSprite();
+                    return true;
                 }
 
                 applyNameToSprite() {
@@ -3346,28 +3337,27 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     const isLongName = this.nameFromServer === "Long Name";
                     let spriteName = isUnnamed ? "" : this.nameFromServer;
                     let prevName = this.name;
-                    let prevNameColor = this.nameColor;
+                    let prevNameColor = this.perk_color;
 
                     let nameColor;
                     if (isUnnamed || isLongName) {
-                        nameColor = 'ffffff';
+                        nameColor = 16777215;
                     } else {
-                        const isBot = !!this.bot;
-                        nameColor = this.setNameColor(isBot, this.pid, this.nameFromServer);
+                        nameColor = this.setNameColor(this.bot, this.pid, this.nameFromServer);
                     }
 
                     this.setNameSprite(spriteName, nameColor);
 
                     if (!isUnnamed && !isLongName && this.nameSprite.texture.width > i.cellLongNameThreshold) {
                         spriteName = "Long Name";
-                        nameColor = 'ffffff'
+                        nameColor = 16777215;
                         this.setNameSprite(spriteName, nameColor);
                     }
 
                     this.name = isUnnamed ? "Unnamed" : spriteName;
 
                     if (prevName !== this.name || prevNameColor !== nameColor) {
-                        let minimapColor = nameColor || (this.isMe ? 16747520 : null);
+                        let minimapColor = nameColor || (this.isMe ? 16777215 : null);
                         h.events.$emit("minimap-create-node", this.pid, spriteName, nameColor, minimapColor);
                     }
                 }
@@ -4901,8 +4891,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
             function injectUser(user) {
                 if (!user || !user.pid) return ``;
-                const deltaBadge = getUserField(user.nickname, user.pid, 'badge');
-                const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges');
+                const deltaBadge = getUserField(user.nickname, user.pid, 'badge', null);
+                const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges', null);
+                const deltaColor = getUserField(user.nickname, user.pid, 'color', null);
+                const colorNickname = getUserColor(user.bot, user.nickname, user.pid, '#');
 
                 return `
                     <div class="listItem playerItem">
@@ -4911,9 +4903,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             <div class="playerNickLine">
                                 ${deltaBadge ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge}">` : ``}
                                 ${vanillaBadge ? `<img class="playerVanilla playerBadgeDiv" alt="" src="/img/badge/${getPerkBadgeImage(vanillaBadge)}.png?2">` : ``}
-                                <p class="playerNickname" style="color: ${getUserField(user.nickname, user.pid, 'color', '#ffffff')}">${user.nickname}</p>
+                                <p class="playerNickname" style="color: ${colorNickname}">${user.nickname}</p>
                             </div>
-                            <p class="playerPid">PID: ${user.pid}</p>
+                            <p class="playerPid">${user.bot ? 'BOT: ' : deltaColor ? 'Delta PID: ' : 'PID: '}${user.pid}</p>
                         </div>
                     </div>
                 `;
@@ -8486,7 +8478,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 t.from ? s("span", {
                                     staticClass: "message-from",
                                     style: {
-                                        color: t.nicknameColor
+                                        color: t.nicknameColor || '#ffffff'
                                     },
                                     attrs: {
                                         "data-pid": t.pid
@@ -8497,7 +8489,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 s("span", {
                                     staticClass: "message-text",
                                     style: {
-                                        color: t.textColor
+                                        color: t.textColor || '#ffffff'
                                     }
                                 }, [e._v(e._s(t.text))]),
 
@@ -8541,7 +8533,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 s("span", {
                                     staticClass: "message-date",
                                     style: {
-                                        color: t.dateColor
+                                        color: t.dateColor || '#ffffff'
                                     }
                                 }, [e._v(e._s(t.date ? t.date : ''))]),
 
@@ -8575,7 +8567,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                     s("span", {
                                         staticClass: "message-from",
                                         style: {
-                                            color: t.nicknameColor
+                                            color: t.nicknameColor || '#ffffff'
                                         },
                                         attrs: {
                                             "data-pid": t.pid
@@ -8586,7 +8578,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 s("span", {
                                     staticClass: "message-text",
                                     style: {
-                                        color: t.textColor
+                                        color: t.textColor || '#ffffff'
                                     }
                                 }, [e._v(e._s(t.text))]),
 
@@ -8776,7 +8768,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                         spectating: 0 == e.gameState.lifeState
                                     },
                                     style: {
-                                        color: getUserField(t.text, t.pid, "color", '#ffffff'),
+                                        color: t.color,
                                         fontWeight: t.bold ? "bold" : "normal"
                                     },
                                     attrs: {
