@@ -1352,6 +1352,7 @@ button.confirm-button.right {
 
 .badgeNotOwner {
     cursor:not-allowed!important;
+    opacity:0.5;
     filter:brightness(25%) grayscale(100%)!important
 }
 
@@ -1360,7 +1361,7 @@ button.confirm-button.right {
 }
 
 .badgeNotSelected {
-    filter:brightness(50%)
+    filter:brightness(40%)
 }
 
 #leaderboard[data-v-7e7860a8] {
