@@ -1,4 +1,4 @@
-const VERSION = '4.6.4';
+const VERSION = '5.0';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -46,7 +46,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
     function getUserColor(bot, nickname, pid, hash, forceColor) {
         if (bot) return hash + '838383';
-        let deltaColor = getUserField(nickname, pid, 'color', null);
+        let deltaColor = getUserField(nickname, pid, 'c', null);
         if (deltaColor) return hash + deltaColor.replaceAll('#', '');
         if (forceColor) return forceColor;
         let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
@@ -935,7 +935,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             position: t.length + 1,
                             text: i.name,
                             color: getUserColor(i.bot, i.name, s, '#'),
-                            badge: getUserField(i.name, s, "badge", null),
+                            badge: getUserField(i.name, s, 'ba', null),
                             badgeVanilla: getUserFieldVanilla(i.name, s, "perk_badges", null),
                             bold: !!i.nameColor
                         };
@@ -1141,7 +1141,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             chat.from = chatPlayer.name;
                             chat.date = showTimeMessageSettings ? getCurrentDate() : '';
                             chat.dateColor = rainbowColorTimeMessageSettings ? generateRandomHexColor() : 'white';
-                            chat.badge = getUserField(chat.from, chat.pid, 'badge', null);
+                            chat.badge = getUserField(chat.from, chat.pid, 'ba', null);
                             chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, 'perk_badges', null);
                             chat.nicknameColor = getUserColor(chat.bot, chat.from, chat.pid, '#');
                             chat.imageUrl = imageUrlData ? imageUrlData.newURL : null;
@@ -4891,9 +4891,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
             function injectUser(user) {
                 if (!user || !user.pid) return ``;
-                const deltaBadge = getUserField(user.nickname, user.pid, 'badge', null);
+                const deltaBadge = getUserField(user.nickname, user.pid, 'ba', null);
                 const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges', null);
-                const deltaColor = getUserField(user.nickname, user.pid, 'color', null);
+                const deltaColor = getUserField(user.nickname, user.pid, 'c', null);
                 const colorNickname = getUserColor(user.bot, user.nickname, user.pid, '#');
 
                 return `

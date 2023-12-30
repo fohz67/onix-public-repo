@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.2.1',
+    version: '5.0',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -293,21 +293,21 @@ function initAnimationsPage() {
  *********************/
 function pushUserInfos() {
     let data = {
-        uid: USER.credentials.uid,
-        nickname: USER.configurations.nickname,
-        skin: $(ATTRS.selectors.skinUrl).val(),
-        color: APP.reserved.value ? APP.reserved.color : USER.configurations.nicknameColor,
-        server: USER.server,
-        status: new Date().getTime(),
-        mode: USER.mode,
-        level: 0,
-        anonymous: USER.configurations.anonymous,
+        u: USER.credentials.uid,
+        n: USER.configurations.n,
+        s: getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '',
+        c: APP.reserved.value ? APP.reserved.color : USER.configurations.c,
+        se: USER.server,
+        st: new Date().getTime(),
+        m: USER.mode,
+        l: 0,
+        a: USER.configurations.a,
     }
 
     if ($(ATTRS.selectors.discordBtn)) {
         const levelText = $(ATTRS.selectors.level).text().trim();
         const match = levelText.match(/\d+/);
-        data.level = match ? match[0] : 0;
+        data.l = match ? match[0] : 0;
     }
 
     pushDatabase(DB.references.meUser, data);
@@ -315,12 +315,12 @@ function pushUserInfos() {
 
 function pushUserOnline() {
     pushDatabase(DB.references.meUser, {
-        uid: USER.credentials.uid,
-        nickname: USER.configurations.nickname,
-        skin: $(ATTRS.selectors.skinUrl).val(),
-        color: APP.reserved.value ? APP.reserved.color : USER.configurations.nicknameColor,
-        server: USER.server,
-        status: new Date().getTime(),
+        u: USER.credentials.uid,
+        n: USER.configurations.n,
+        s: getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '',
+        c: APP.reserved.value ? APP.reserved.color : USER.configurations.c,
+        se: USER.server,
+        st: new Date().getTime(),
     });
 }
 
@@ -328,28 +328,28 @@ function pushUserColors() {
     if (APP.reserved.value) return;
 
     pushDatabase(DB.references.meColor, {
-        uid: USER.credentials.uid,
-        time: new Date().getTime(),
-        nickname: USER.configurations.nickname,
-        color: USER.configurations.nicknameColor,
+        u: USER.credentials.uid,
+        t: new Date().getTime(),
+        n: USER.configurations.n,
+        c: USER.configurations.c,
     });
 }
 
 function pushUserConfigurations() {
-    if (USER.configurations.autoSynchronization === 'checked') {
+    if (USER.configurations.as === 'checked') {
         pushDatabase(DB.references.meConfigItem, {
             skins: USER.configurations.skins,
             hotkeys: USER.configurations.hotkeys,
-            blurredHUD: USER.configurations.blurredHUD,
-            resizableChatbox: USER.configurations.resizableChatbox,
-            colorNicknameCell: USER.configurations.colorNicknameCell,
-            colorNicknameChatbox: USER.configurations.colorNicknameChatbox,
-            colorNicknameLeaderboard: USER.configurations.colorNicknameLeaderboard,
-            nicknameColor: USER.configurations.nicknameColor,
-            nickname: USER.configurations.nickname,
-            teamtag: $(ATTRS.selectors.teamTag).val(),
-            machineId: USER.configurations.machineId,
-            date: USER.configurations.date,
+            b: USER.configurations.b,
+            r: USER.configurations.r,
+            cnc: USER.configurations.cnc,
+            cnch: USER.configurations.cnch,
+            cnl: USER.configurations.cnl,
+            c: USER.configurations.c,
+            n: USER.configurations.n,
+            t: $(ATTRS.selectors.teamTag).val(),
+            m: USER.configurations.m,
+            d: USER.configurations.d,
         });
     }
 }
@@ -360,22 +360,22 @@ function pushUserStatisticsDb() {
     localStorage.setItem('sT', '0');
     localStorage.setItem('sM', '0');
     localStorage.setItem('sK', '0');
-    localStorage.setItem('sG', '1');
+    localStorage.setItem('sG', '0');
 }
 
 function pushUserStatisticsLocally() {
     const time = parseInt(getLocalStorageItem('sT', '0')) + ($(ATTRS.selectors.statTime).length ? getConvertedTimeToSeconds($(ATTRS.selectors.statTime).text().split(": ")[1]) : 0);
     const mass = parseInt(getLocalStorageItem('sM', '0')) + ($(ATTRS.selectors.statScore).length ? getConvertedStringToNumber($(ATTRS.selectors.statScore).text().split(": ")[1]) : 0);
     const kill = parseInt(getLocalStorageItem('sK', '0')) + ($(ATTRS.selectors.statKills).length ? parseInt($(ATTRS.selectors.statKills).text().split(": ")[1], 10) : 0);
-    const game = parseInt(getLocalStorageItem('sG', '1')) + 1;
+    const game = parseInt(getLocalStorageItem('sG', '0')) + 1;
 
-    USER.statistics.timeTotal += time;
-    USER.statistics.massTotal += mass;
-    USER.statistics.killTotal += kill;
-    USER.statistics.gameTotal += 1;
-    USER.statistics.timeAvg = USER.statistics.timeTotal / USER.statistics.gameTotal;
-    USER.statistics.massAvg = USER.statistics.massTotal / USER.statistics.gameTotal;
-    USER.statistics.kda = USER.statistics.killTotal / USER.statistics.gameTotal;
+    USER.statistics.sT += time;
+    USER.statistics.sM += mass;
+    USER.statistics.sK += kill;
+    USER.statistics.sG += 1;
+    USER.statistics.aT = USER.statistics.sT / USER.statistics.sG;
+    USER.statistics.aM = USER.statistics.sM / USER.statistics.sG;
+    USER.statistics.k = USER.statistics.sK / USER.statistics.sG;
 
     localStorage.setItem('sT', time.toString());
     localStorage.setItem('sM', mass.toString());
@@ -387,20 +387,20 @@ function pushUserBadge(item) {
     const badge = JSONSafeParser(decodeURIComponent(item));
 
     if (Object.keys(badge).length > 0) {
-        if (badge.owners) delete badge.owners;
-        if (badge.earn) delete badge.earn;
-        if (APP.selected === badge.id) badge.url = null;
+        if (badge.o) delete badge.o;
+        if (badge.e) delete badge.e;
+        if (APP.selected === badge.i) badge.u = null;
 
         Object.values(LISTS.badges).forEach(badgeEach => {
-            $(`.badge${badgeEach.id}`).css('opacity', 0.3);
+            $(`.badge${badgeEach.i}`).css('opacity', 0.3);
         });
-        $(`.badge${badge.id}`).css('opacity', APP.selected === badge.id ? 0.3 : 1);
+        $(`.badge${badge.i}`).css('opacity', APP.selected === badge.i ? 0.3 : 1);
 
         pushDatabase(DB.references.meColorBadge, badge);
         pushDatabase(DB.references.meUserBadge, badge);
 
-        if (APP.selected === badge.id) APP.selected = false;
-        else APP.selected = badge.id;
+        if (APP.selected === badge.i) APP.selected = false;
+        else APP.selected = badge.i;
     }
 }
 
@@ -415,25 +415,25 @@ function fetchUserStatisticsDb() {
             const data = snapshot.val();
 
             USER.statistics = {
-                timeTotal: (data.timeTotal || 0) + parseInt(getLocalStorageItem('sT', '0')),
-                massTotal: (data.massTotal || 0) + parseInt(getLocalStorageItem('sM', '0')),
-                killTotal: (data.killTotal || 0) + parseInt(getLocalStorageItem('sK', '0')),
-                gameTotal: (data.gameTotal || 0) + parseInt(getLocalStorageItem('sG', '1')),
-                uid: USER.credentials.uid,
+                sT: (data.sT || 0) + parseInt(getLocalStorageItem('sT', '0')),
+                sM: (data.sM || 0) + parseInt(getLocalStorageItem('sM', '0')),
+                sK: (data.sK || 0) + parseInt(getLocalStorageItem('sK', '0')),
+                sG: (data.sG || 0) + parseInt(getLocalStorageItem('sG', '0')),
+                u: USER.credentials.uid,
             }
         } else {
             USER.statistics = {
-                timeTotal: 0,
-                massTotal: 0,
-                killTotal: 0,
-                gameTotal: 1,
-                uid: USER.credentials.uid
+                sT: 0,
+                sM: 0,
+                sK: 0,
+                sG: 1,
+                u: USER.credentials.uid
             };
         }
 
-        USER.statistics.kda = USER.statistics.killTotal / USER.statistics.gameTotal;
-        USER.statistics.massAvg = USER.statistics.massTotal / USER.statistics.gameTotal;
-        USER.statistics.timeAvg = USER.statistics.timeTotal / USER.statistics.gameTotal;
+        USER.statistics.k = USER.statistics.sK / USER.statistics.sG;
+        USER.statistics.aM = USER.statistics.sT / USER.statistics.sG;
+        USER.statistics.aT = USER.statistics.sT / USER.statistics.sG;
 
         pushUserStatisticsDb();
     });
@@ -455,8 +455,8 @@ function fetchUserChanged() {
         if (snapshot.exists()) {
             const user = snapshot.val();
 
-            if (user.uid) {
-                LISTS.users[user.uid] = user;
+            if (user.u) {
+                LISTS.users[user.u] = user;
             }
         }
     });
@@ -465,25 +465,25 @@ function fetchUserChanged() {
 function fetchColorsOnce(callback) {
     const h12 = new Date().getTime() - (12 * 60 * 60 * 1000);
 
-    DB.references.color.orderByChild('time').startAt(h12).once('value', snapshot => {
+    DB.references.color.orderByChild('t').startAt(h12).once('value', snapshot => {
         if (snapshot.exists()) {
-            const colors = snapshot.val();
+            const users = snapshot.val();
 
-            Object.keys(colors).forEach(uid => {
-                const color = colors[uid];
+            Object.keys(users).forEach(uid => {
+                const user = users[uid];
 
-                if (color.nickname && color.color) {
-                    LISTS.colors[color.nickname.trim()] = {
-                        color: color.color,
-                        badge: color.badge && color.badge.url ? color.badge.url : null,
-                        uid: color.uid,
+                if (user.n && user.c) {
+                    LISTS.colors[user.n.trim()] = {
+                        c: user.c,
+                        ba: user.ba && user.ba.u ? user.ba.u : null,
+                        u: user.u,
                     }
                 }
             });
 
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-            if (APP.mode === 1 && USER.configurations.colorNicknameCell === 'checked') changeCellColor();
-            if (USER.configurations.colorNicknameLeaderboard === 'checked' || USER.configurations.colorNicknameChatbox === 'checked' || USER.configurations.colorNicknameCell === 'checked') fetchColorChanged();
+            if (APP.mode === 1 && USER.configurations.cnc === 'checked') changeCellColor();
+            if (USER.configurations.cnl === 'checked' || USER.configurations.cnch === 'checked' || USER.configurations.cnc === 'checked') fetchColorChanged();
             callback();
         }
     });
@@ -492,25 +492,25 @@ function fetchColorsOnce(callback) {
 function fetchColorChanged() {
     DB.references.color.on('child_changed', snapshot => {
         if (snapshot.exists()) {
-            const color = snapshot.val();
+            const user = snapshot.val();
 
-            if (color.nickname && color.color) {
-                LISTS.colors[color.nickname.trim()] = {
-                    color: color.color,
-                    badge: color.badge && color.badge.url ? color.badge.url : null,
-                    uid: color.uid,
+            if (user.n && user.c) {
+                LISTS.colors[user.n.trim()] = {
+                    c: user.c,
+                    ba: user.ba && color.ba.u ? color.ba.u : null,
+                    u: user.uid,
                 }
             }
 
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-            if (APP.mode === 1 && USER.configurations.colorNicknameCell === 'checked') changeCellColor(color.nickname);
+            if (APP.mode === 1 && USER.configurations.cnc === 'checked') changeCellColor(color.n);
         }
     });
 }
 
 function fetchBanned() {
     const me = LISTS.users[USER.credentials.uid];
-    const message = me ? me.banned : undefined;
+    const message = me ? me.b : null;
     if (message) displayError(`You've been banned from Delta by Fohz. Reason: ${message}`);
 }
 
@@ -587,7 +587,7 @@ function removeCookie() {
 function onActionPressed() {
     pushUserOnline();
 
-    if (USER.configurations.resizableChatbox === 'checked' && APP.resize === 0) {
+    if (USER.configurations.r === 'checked' && APP.resize === 0) {
         APP.resize = 1;
         createChatboxResizable();
     }
@@ -637,7 +637,7 @@ function listenerComponents() {
 
     $(ATTRS.selectors.nickname).on('input', function () {
         if (APP.mode === 1) $(ATTRS.selectors.nicknameProfile).text($(this).val());
-        USER.configurations.nickname = $(this).val();
+        USER.configurations.n = $(this).val();
     }).on('change', function () {
         getReservedName();
         pushUserColors();
@@ -645,13 +645,13 @@ function listenerComponents() {
     });
 
     $(ATTRS.selectors.serverListItem).on('click', function () {
-        USER.server = $(this).find(ATTRS.selectors.serverName).text();
+        USER.se = $(this).find(ATTRS.selectors.serverName).text();
         APP.resize = 0;
         pushUserOnline();
     });
 
     $(ATTRS.selectors.playButton).on('click', () => {
-        if (USER.server !== ' Lobbies') pushUserStatisticsLocally();
+        if (USER.se !== ' Lobbies') pushUserStatisticsLocally();
         onActionPressed();
     });
 
@@ -672,8 +672,8 @@ function createComponents() {
     createBoxes();
     createSortable();
 
-    if (APP.mode === 1 && USER.configurations.colorNicknameChatbox === 'checked') createColorObserver(ATTRS.selectors.messageList, ATTRS.selectors.messageName);
-    if (APP.mode === 1 && USER.configurations.colorNicknameLeaderboard === 'checked') createColorObserver(ATTRS.selectors.leaderboard, ATTRS.selectors.leaderboardText);
+    if (APP.mode === 1 && USER.configurations.cnch === 'checked') createColorObserver(ATTRS.selectors.messageList, ATTRS.selectors.messageName);
+    if (APP.mode === 1 && USER.configurations.cnl === 'checked') createColorObserver(ATTRS.selectors.leaderboard, ATTRS.selectors.leaderboardText);
 }
 
 /********
@@ -739,13 +739,13 @@ function displaySwitch() {
  *****************/
 function createSkinProfile() {
     const skin = $(ATTRS.selectors.skinUrl);
-    const skinURL = skin ? skin.val() : undefined;
+    const skinURL = skin ? skin.val() : null;
     if (!skinURL) return;
 
     $(ATTRS.selectors.playerData).before(`
         <div class="profile-image">
             <img class="skinProfile beautifulSkin" alt="" src="${skinURL}">
-            <span class="nicknameProfile" style="color: ${USER.configurations.nicknameColor}">${USER.configurations.nickname}</span>
+            <span class="nicknameProfile" style="color: ${USER.configurations.c}">${USER.configurations.n}</span>
         </div>
     `);
 
@@ -783,28 +783,28 @@ function skinChecker(url) {
  *
  ******************/
 function getReservedName() {
-    const colorUser = LISTS.colors[USER.configurations.nickname.trim()];
+    const colorUser = LISTS.colors[USER.configurations.n.trim()];
 
-    if (colorUser && colorUser.uid !== USER.credentials.uid) {
+    if (colorUser && colorUser.u !== USER.credentials.uid) {
         sendTimedSwal('Reserved nickname', 'Your actual nickname is reserved by another Delta player, if you want to play with your color, change your nickname', 10000, 'OK');
         $(ATTRS.selectors.nicknameProfile).css({
-            'color': colorUser.color,
+            'color': colorUser.c,
             'font-style': 'italic'
         });
         $(ATTRS.selectors.nickname).css('font-style', 'italic');
         APP.reserved = {
             value: true,
-            color: colorUser.color
+            color: colorUser.c
         };
     } else {
         $(ATTRS.selectors.nicknameProfile).css({
-            'color': USER.configurations.nicknameColor,
+            'color': USER.configurations.c,
             'font-style': 'normal'
         });
         $(ATTRS.selectors.nickname).css('font-style', 'normal');
         APP.reserved = {
             value: false,
-            color: USER.configurations.nicknameColor
+            color: USER.configurations.c
         };
     }
 }
@@ -853,8 +853,8 @@ function createBoxes() {
     createNewIcon(true, 'fas fa-images', 'Skins galery', 'skinsIcon', drawSkinsModal);
 }
 
-function createNewIcon(isChild, iconImg, iconId, functionClick) {
-    let icon = $('<i>').addClass(iconImg).attr('id', iconId).on('click', functionClick ? functionClick : '');
+function createNewIcon(isChild, iconImg, tip, iconId, functionClick) {
+    let icon = $('<i>').addClass(iconImg).attr({'id': iconId, 'tip': tip}).on('click', functionClick ? functionClick : '');
     (isChild ? $(ATTRS.selectors.mainContainer) : $(ATTRS.selectors.menuContainer)).append(icon);
 }
 
@@ -901,7 +901,7 @@ function createColorObserver(selectorGlobal, selectorText) {
             }
 
             element.classList.add('custom');
-            element.style.color = data.color ? data.color : 'white';
+            element.style.color = data.c ? data.c : 'white';
         } else {
             element.style.color = 'white';
         }
@@ -959,7 +959,7 @@ function usersModal(users) {
         meHeader: `<h3 class="titleSubBox">My profile</h3>`,
         onlineHeader: `<h3 class="titleSubBox">${userCount.online} Online players</h3>`,
         offlineHeader: `<h3 class="titleSubBox">${userCount.offline} Offline players</h3>`,
-        profileHeader: injectUser(me, getUsersTime(me.status)),
+        profileHeader: injectUser(me, getUsersTime(me.st)),
         onlineList: listOnline,
         offlineList: listOffline,
         counts: userCount,
@@ -977,7 +977,7 @@ function updateUserLists(users, me) {
 
     Object.values(users).forEach(user => {
         if (user === me) return;
-        const status = getUsersTime(user.status);
+        const status = getUsersTime(user.st);
         const userHTML = injectUser(user, status);
 
         if (status === 'Online') {
@@ -1000,27 +1000,27 @@ function updateUserLists(users, me) {
 function injectUser(user, status) {
     getUsersAnonymous(user);
 
-    const id = user.skin !== ATTRS.images.anonymousSkin ? getSkinIdByUrl(user.skin) : null;
-    const clicker = id && user.skin && user.skin !== ATTRS.images.anonymousSkin ? `onclick="openSkin('${user.skin}', '${id}')"` : ``;
+    const id = user.s !== ATTRS.images.anonymousSkin ? user.s : null;
+    const clicker = id && user.s && user.s !== ATTRS.images.anonymousSkin ? `onclick="openSkin('${user.s}', '${id}')"` : ``;
 
-    if (user.nickname.trim() === '') {
-        user.color = 'white';
-        user.nickname = 'Unnamed';
+    if (user.n.trim() === '') {
+        user.c = 'white';
+        user.n = 'Unnamed';
     }
 
     return `
-        <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.server, status)}">
-            <img class="userPhoto beautifulSkin" alt="" src="${user.skin === '' ? ATTRS.images.transparentSkin : user.skin}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
+        <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.se, status)}">
+            <img class="userPhoto beautifulSkin" alt="" src="${user.s === '' ? ATTRS.images.transparentSkin : 'https://skins.vanis.io/s/' + user.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
             <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
             <div class="listTextItem userTextElem">
                 <div class="userNickLine">
-                    ${user.badge && user.badge.url ? `<img class="userBadgeDiv" alt="" src="${user.badge.url}" tip="${user.badge.tip}">` : ``}
-                    <p class="userNickname" style="color: ${user.color}">${user.nickname}
-                        <span class="userLevel">${user.level === 0 ? '' : ' - Lvl ' + user.level}</span>
+                    ${user.ba && user.ba.u ? `<img class="userBadgeDiv" alt="" src="${user.ba.u}" tip="${user.ba.t}">` : ``}
+                    <p class="userNickname" style="color: ${user.c}">${user.n}
+                        <span class="userLevel">${user.l === 0 ? '' : ' - Lvl ' + user.l}</span>
                     </p>
                 </div>
-                <p class="userOnlineText">${status} on ${user.server}
-                    <img class="userModeImg" alt="" src="${getUsersMode(user.mode)}" tip="${user.mode + ' mode'}">
+                <p class="userOnlineText">${status} on ${user.se}
+                    <img class="userModeImg" alt="" src="${getUsersMode(user.m)}" tip="${user.m + ' mode'}">
                 </p>
             </div>
         </div>
@@ -1030,7 +1030,7 @@ function injectUser(user, status) {
 function injectAnonymousSwitch() {
     return `
         <div data-v-3ddebeb3="" class="p-switch pretty switchAnonymous" p-checkbox="">
-            <input type="checkbox" id="anonymousSwitch" ${USER.configurations.anonymous}="" onchange="USER.configurations.anonymous = switchManager(USER.configurations.anonymous, 'anonymous')" tip="When this mode is activated, the only information visible to other players is your online status and the server you are on. The rest is hidden."> 
+            <input type="checkbox" id="anonymousSwitch" ${USER.configurations.a}="" onchange="USER.configurations.a = switchManager(USER.configurations.a, 'a')" tip="Hides all your profile informations"> 
             <div class="state">
                 <label>Anonymous</label>
             </div>
@@ -1059,7 +1059,7 @@ function injectConnectionsStats() {
 
     for (let uid in LISTS.users) {
         if (LISTS.users.hasOwnProperty(uid)) {
-            let time = LISTS.users[uid].status;
+            let time = LISTS.users[uid].st;
             if (times.now - time <= times.online) values.online++;
             if (times.now - time <= times.daily) values.daily++;
             if (times.now - time <= times.last2days) values.last2days++;
@@ -1099,18 +1099,18 @@ function getUsersTime(time) {
 }
 
 function getUsersAnonymous(user) {
-    if (user.anonymous === 'checked') {
-        user.skin = ATTRS.images.anonymousSkin;
-        user.nickname = 'Anonymous #' + Math.floor(Math.random() * 1000);
-        user.level = 0;
-        user.color = ATTRS.colors.white;
-        user.mode = 'Anonymous';
-        user.badge = null;
+    if (user.a === 'checked') {
+        user.s = ATTRS.images.anonymousSkin;
+        user.n = 'Anonymous #' + Math.floor(Math.random() * 1000);
+        user.l = 0;
+        user.c = ATTRS.colors.white;
+        user.m = 'Anonymous';
+        user.ba = null;
     }
 }
 
 function getUsersTip(user, userServer, status) {
-    return `Nickname : ${user.nickname}\nLevel : ${user.level}\nLast connection : ${status === 'Online' ? 'Now' : status}\nServer : ${userServer}\nColor used : ${user.color}\nMode: ${user.mode ? user.mode : 'Unknown'}`;
+    return `Nickname : ${user.n}\n${user.l === 0 ? '' : 'Level : ' + user.l + '\n'}Last connection : ${status === 'Online' ? 'Now' : status}\nServer : ${userServer}\nColor used : ${user.c}\nMode: ${user.m ? user.m : 'Unknown'}`;
 }
 
 function getUsersMode(userMode) {
@@ -1186,13 +1186,13 @@ function generateStatisticsSection(statistics) {
                 <i class="fas fa-chart-bar headerIcon"></i>
             </div>
             <div data-v-2c5139e0="" class="options">
-                ${generateStatisticItem('Kills', statistics.killTotal)}
-                ${generateStatisticItem('Deaths', statistics.gameTotal)}
-                ${generateStatisticItem('K/D', statistics.kda.toFixed(2), 'The KDA represents the number of kills in relation to the number of deaths.')}
-                ${generateStatisticItem('Mass eaten', getFormatedMass(statistics.massTotal))}
-                ${generateStatisticItem('Mass eaten / game', getFormatedMass(statistics.massAvg))}
-                ${generateStatisticItem('Time played', getElapsedTime(statistics.timeTotal))}
-                ${generateStatisticItem('Time played / game', getElapsedTime(statistics.timeAvg))}
+                ${generateStatisticItem('Kills', statistics.sK)}
+                ${generateStatisticItem('Deaths', statistics.sG)}
+                ${generateStatisticItem('K/D', statistics.k.toFixed(2), 'The KDA represents the number of kills in relation to the number of deaths.')}
+                ${generateStatisticItem('Mass eaten', getFormatedMass(statistics.sM))}
+                ${generateStatisticItem('Mass eaten / game', getFormatedMass(statistics.aM))}
+                ${generateStatisticItem('Time played', getElapsedTime(statistics.sT))}
+                ${generateStatisticItem('Time played / game', getElapsedTime(statistics.aT))}
             </div>
         </div>
     `;
@@ -1377,12 +1377,12 @@ function handleButtonClick(id, filter) {
 
 function injectCustomLeaderboard(filter) {
     const sortingFunctions = {
-        'kda': (a, b) => b.kda - a.kda,
-        'killTotal': (a, b) => b.killTotal - a.killTotal,
-        'gameTotal': (a, b) => b.gameTotal - a.gameTotal,
-        'massTotal': (a, b) => b.massTotal - a.massTotal,
-        'timeTotal': (a, b) => b.timeTotal - a.timeTotal,
-        'massAvg': (a, b) => b.massAvg - a.massAvg
+        'kda': (a, b) => b.k - a.k,
+        'killTotal': (a, b) => b.sK - a.sK,
+        'gameTotal': (a, b) => b.sG - a.sG,
+        'massTotal': (a, b) => b.sM - a.sM,
+        'timeTotal': (a, b) => b.sT - a.sT,
+        'massAvg': (a, b) => b.aM - a.aM
     };
 
     const sortedLeaderboard = Object.values(LISTS.leaderboard)
@@ -1397,44 +1397,44 @@ function injectCustomLeaderboard(filter) {
 }
 
 function injectLeaderboard(item, itemId, position, filter) {
-    const itemUser = LISTS.users[item.uid];
+    const itemUser = LISTS.users[item.u];
     if (!itemUser) return ``;
     let statisticValue;
 
     switch (filter) {
         case 'killTotal':
-            statisticValue = item.killTotal;
+            statisticValue = item.sK;
             break;
         case 'gameTotal':
-            statisticValue = item.gameTotal;
+            statisticValue = item.sG;
             break;
         case 'kda':
-            statisticValue = item.kda.toFixed(2) + ' K/D';
+            statisticValue = item.k.toFixed(2) + ' K/D';
             break;
         case 'massTotal':
-            statisticValue = getFormatedMass(item.massTotal);
+            statisticValue = getFormatedMass(item.sM);
             break;
         case 'massAvg':
-            statisticValue = getFormatedMass(item.massAvg);
+            statisticValue = getFormatedMass(item.aM);
             break;
         case 'timeTotal':
-            statisticValue = getElapsedTime(item.timeTotal, false, false, false, true, true, false);
+            statisticValue = getElapsedTime(item.sT, false, false, false, true, true, false);
             break;
         default:
-            statisticValue = item.kda.toFixed(2) + ' K/D';
+            statisticValue = item.k.toFixed(2) + ' K/D';
     }
 
-    if (itemUser.nickname.trim() === '') {
-        itemUser.color = 'white';
-        itemUser.nickname = 'Unnamed';
+    if (itemUser.n.trim() === '') {
+        itemUser.c = 'white';
+        itemUser.n = 'Unnamed';
     }
 
     return `
-        <div class="leaderboardItem ${itemUser.uid === USER.credentials.uid ? 'leaderboardItemMe' : ''}">
+        <div class="leaderboardItem ${itemUser.u === USER.credentials.uid ? 'leaderboardItemMe' : ''}">
             <p class="leaderboardPosition">${position}. </p>
-            ${itemUser.badge && itemUser.badge.url ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.badge.url}" tip="${itemUser.badge.tip}">` : ``}
-            <p class="leaderboardNickname ${itemUser.uid === USER.credentials.uid ? 'leaderboardNicknameMe' : ''}" style="color: ${itemUser.color}">${itemUser.nickname}</p>
-            <p class="leaderboardStatisticValue ${itemUser.uid === USER.credentials.uid ? 'leaderboardStatisticValueMe' : ''}">${statisticValue}</p>
+            ${itemUser.ba && itemUser.ba.u ? `<img class="leaderboardBadgeDiv" alt="" src="${itemUser.ba.u}" tip="${itemUser.ba.t}">` : ``}
+            <p class="leaderboardNickname ${itemUser.u === USER.credentials.uid ? 'leaderboardNicknameMe' : ''}" style="color: ${itemUser.c}">${itemUser.n}</p>
+            <p class="leaderboardStatisticValue ${itemUser.u === USER.credentials.uid ? 'leaderboardStatisticValueMe' : ''}">${statisticValue}</p>
         </div>
     `;
 }
@@ -1454,10 +1454,11 @@ function drawToolsModal() {
                 DB.references.meConfig.once('value', snapshot => {
                     if (snapshot.exists()) {
                         LISTS.configurations = snapshot.val();
-                        addToolsModal();
                     }
+                    addToolsModal();
                 });
             }
+            addToolsModal();
         });
     } else {
         addToolsModal();
@@ -1466,7 +1467,7 @@ function drawToolsModal() {
 
 function addToolsModal() {
     const configurations = fetchItem(LISTS.configurations, injectConfiguration);
-    const nbCofigurations = Object.keys(LISTS.configurations).length || 0;
+    const nbCofigurations = LISTS.configurations ? Object.keys(LISTS.configurations).length : 0;
     const badges = fetchItem(LISTS.badges, injectBadge);
     const modal = toolsModal(configurations, nbCofigurations, badges);
 
@@ -1476,19 +1477,19 @@ function addToolsModal() {
 function toolsModal(tools, total, badges) {
     const colorParam = `
         <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
-            <input type="checkbox" id="colorSwitchNickChatbox" ${USER.configurations.colorNicknameChatbox}="" onchange="USER.configurations.colorNicknameChatbox = switchManager(USER.configurations.colorNicknameChatbox, 'colorNicknameChatbox')"> 
+            <input type="checkbox" id="colorSwitchNickChatbox" ${USER.configurations.cnch}="" onchange="USER.configurations.cnch = switchManager(USER.configurations.cnch, 'cnch')"> 
             <div class="state">
                 <label>Show colors in the chat</label>
             </div>
         </div>
         <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
-            <input type="checkbox" id="colorSwitchNickLeaderboard" ${USER.configurations.colorNicknameLeaderboard}="" onchange="USER.configurations.colorNicknameLeaderboard = switchManager(USER.configurations.colorNicknameLeaderboard, 'colorNicknameLeaderboard')"> 
+            <input type="checkbox" id="colorSwitchNickLeaderboard" ${USER.configurations.cnl}="" onchange="USER.configurations.cnl = switchManager(USER.configurations.cnl, 'cnl')"> 
             <div class="state">
                 <label>Show colors in the leaderboard</label>
             </div>
         </div>
         <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-            <input type="checkbox" id="colorSwitchNickCell" ${USER.configurations.colorNicknameCell}="" onchange="USER.configurations.colorNicknameCell = switchManager(USER.configurations.colorNicknameCell, 'colorNicknameCell')"> 
+            <input type="checkbox" id="colorSwitchNickCell" ${USER.configurations.cnc}="" onchange="USER.configurations.cnc = switchManager(USER.configurations.cnc, 'cnc')"> 
             <div class="state">
                 <label>Show colors in the cells</label>
             </div>
@@ -1515,9 +1516,9 @@ function toolsModal(tools, total, badges) {
                         <div data-v-2c5139e0="" class="header">Colored name<i class="fas fa-paint-brush headerIcon"></i></div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="colorPickerContainer">
-                                <input type="text" id="colorPickerInput" value="${USER.configurations.nicknameColor}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
+                                <input type="text" id="colorPickerInput" value="${USER.configurations.c}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
                                 <div class="colorPickerGui">
-                                    <input type="color" id="colorPickerSelector" value="${USER.configurations.nicknameColor}" onchange="onColorChanged(this)">
+                                    <input type="color" id="colorPickerSelector" value="${USER.configurations.c}" onchange="onColorChanged(this)">
                                 </div>
                             </div>
                         <div data-v-22117250="" class="silent silentCustomTop">After change, re-join the server</div>
@@ -1547,19 +1548,19 @@ function toolsModal(tools, total, badges) {
                         <div data-v-2c5139e0="" class="options">
                             ${APP.mode === 1 ? colorParam : ``}
                             <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                <input type="checkbox" id="blurredHUD" ${USER.configurations.blurredHUD}="" onchange="USER.configurations.blurredHUD = switchManager(USER.configurations.blurredHUD, 'blurredHUD')" tip=""> 
+                                <input type="checkbox" id="blurredHUD" ${USER.configurations.b}="" onchange="USER.configurations.b = switchManager(USER.configurations.b, 'b')" tip=""> 
                                 <div class="state">
                                     <label>Blurred in-game HUD</label>
                                 </div>
                             </div>
                             <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                <input type="checkbox" id="resizableChatbox" ${USER.configurations.resizableChatbox}="" onchange="USER.configurations.resizableChatbox = switchManager(USER.configurations.resizableChatbox, 'resizableChatbox')" tip=""> 
+                                <input type="checkbox" id="resizableChatbox" ${USER.configurations.r}="" onchange="USER.configurations.r = switchManager(USER.configurations.r, 'r')" tip=""> 
                                 <div class="state">
                                     <label>Resizable chatbox</label>
                                 </div>
                             </div>
                             <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                <input type="checkbox" id="autoSynchronization" ${USER.configurations.autoSynchronization}="" onchange="USER.configurations.autoSynchronization = switchManager(USER.configurations.autoSynchronization, 'autoSynchronization')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
+                                <input type="checkbox" id="autoSynchronization" ${USER.configurations.as}="" onchange="USER.configurations.as = switchManager(USER.configurations.as, 'as')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
                                 <div class="state">
                                     <label>Auto save my configurations</label>
                                 </div>
@@ -1781,13 +1782,13 @@ function injectConfiguration(item, itemId) {
         <div class="listItem configItem" id="${itemId}">
             <div class="configContent">
                 <div class="configInformations">
-                    <p class="configName">${item.machineId}</p>
-                    <p class="configDate">${item.date}</p>
+                    <p class="configName">${item.m}</p>
+                    <p class="configDate">${item.d}</p>
                 </div>
                 <div class="configContentList">
-                    ${APP.machineId === item.machineId ? `<p class="configActual configCard">Actual backup</p>` : ``}
-                    ${item.nickname && item.nickname !== '' ? `<p class="configNickname configCard" style="color: ${item.nicknameColor ? item.nicknameColor : `#ffffff`}">Name: ${item.nickname}</p>` : ``}
-                    ${item.teamtag ? `<p class="configTeamTag configCard">Tag: ${item.teamtag}</p>` : ``}
+                    ${APP.m === item.m ? `<p class="configActual configCard">Actual backup</p>` : ``}
+                    ${item.n && item.n !== '' ? `<p class="configNickname configCard" style="color: ${item.c ? item.c : `#ffffff`}">Name: ${item.n}</p>` : ``}
+                    ${item.t ? `<p class="configTeamTag configCard">Tag: ${item.t}</p>` : ``}
                     <p class="configHotkeys configCard">${getHotkeysCount(item.hotkeys)} hotkeys</p>
                     <p class="configSkins configCard">${skins.count} skins</p>
                 </div>
@@ -1820,22 +1821,22 @@ function injectSkin(skins) {
 }
 
 function injectBadge(item) {
-    const badge = LISTS.users[USER.credentials.uid].badge;
+    const badge = LISTS.users[USER.credentials.uid].ba;
     let isOwner = false;
-    APP.selected = (badge && badge.id === item.id && badge.url) ? badge.id : false;
+    APP.selected = (badge && badge.i === item.i && badge.u) ? badge.i : false;
 
-    if (item.owners && item.owners[USER.credentials.uid]) {
+    if (item.o && item.o[USER.credentials.uid]) {
         isOwner = true;
     } else if (item.earn) {
-        if (item.earn.type === 'kill' && item.earn.value <= USER.statistics.killTotal) {
+        if (item.earn.t === 'kill' && item.earn.v <= USER.statistics.sK) {
             isOwner = true;
-        } else if (item.earn.type === 'time' && item.earn.value <= USER.statistics.timeTotal) {
+        } else if (item.earn.t === 'time' && item.earn.v <= USER.statistics.sT) {
             isOwner = true;
         }
     }
 
     return `
-        <img class="badgeItem badge${item.id}" src="${item.url}" tip="${item.tip}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} style="opacity: ${APP.selected ? 1 : 0.3}; cursor: ${isOwner ? 'pointer' : 'not-allowed'};" alt=""/>
+        <img class="badgeItem badge${item.i}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} style="opacity: ${APP.selected ? 1 : 0.3}; cursor: ${isOwner ? 'pointer' : 'not-allowed'};" alt=""/>
     `;
 }
 
@@ -1881,7 +1882,7 @@ function deleteConfiguration(configId) {
 function updateSuccess(configId) {
     const config = LISTS.configurations[configId];
 
-    ['skins', 'hotkeys', 'blurredHUD', 'resizableChatbox', 'colorNicknameCell', 'colorNicknameChatbox', 'colorNicknameLeaderboard', 'nicknameColor', 'nickname', 'teamtag'].forEach(key => {
+    ['skins', 'hotkeys', 'b', 'c', 'cnc', 'cnch', 'cnl', 'c', 'n', 't'].forEach(key => {
         if (config[key] && config[key] !== '' && config[key] !== '{}') {
             localStorage.setItem(key, config[key]);
         }
@@ -1977,8 +1978,8 @@ function createChatboxResizable() {
  *
  ***********************/
 function changeUserColor(color) {
-    USER.configurations.nicknameColor = color;
-    localStorage.setItem('nicknameColor', color);
+    USER.configurations.c = color;
+    localStorage.setItem('c', color);
 
     $(ATTRS.selectors.nicknameProfile).css('color', APP.reserved.value ? APP.reserved.color : color);
     $(ATTRS.selectors.colorPickerInput).val(color);
@@ -1998,9 +1999,9 @@ function changeCellColor(nicknameToUpdate) {
 
     CanvasRenderingContext2D.prototype.fillText = function (text, x, y) {
         if (!APP.blacklist.includes(text)) {
-            if (text === USER.configurations.nickname) this.fillStyle = USER.configurations.nicknameColor;
-            else if (text === nicknameToUpdate && LISTS.colors[nicknameToUpdate] && LISTS.colors[nicknameToUpdate].color) this.fillStyle = LISTS.colors[nicknameToUpdate].color;
-            else if (LISTS.colors[text] && LISTS.colors[text].color) this.fillStyle = LISTS.colors[text].color;
+            if (text === USER.configurations.n) this.fillStyle = USER.configurations.c;
+            else if (text === nicknameToUpdate && LISTS.colors[nicknameToUpdate] && LISTS.colors[nicknameToUpdate].c) this.fillStyle = LISTS.colors[nicknameToUpdate].c;
+            else if (LISTS.colors[text] && LISTS.colors[text].c) this.fillStyle = LISTS.colors[text].c;
         }
 
         originalFillText.apply(this, arguments);
@@ -2050,7 +2051,7 @@ function getLocalValues(user) {
     USER.server = 'Lobby';
     USER.mode = APP.mode === 1 ? 'Single' : 'Dual';
 
-    switchManagerSpecificChange(USER.configurations.blurredHUD, 'blurredHUD');
+    switchManagerSpecificChange(USER.configurations.b, 'blurredHUD');
 }
 
 /*********************
@@ -2094,9 +2095,9 @@ function switchManager(userSettings, userSettingsLabel) {
 }
 
 function switchManagerSpecificChange(userSettings, userSettingsLabel) {
-    if (userSettingsLabel === 'anonymous') {
+    if (userSettingsLabel === 'a') {
         pushDatabase(DB.references.meUser, {
-            anonymous: userSettings,
+            a: userSettings,
         });
     } else if (userSettingsLabel === 'blurredHUD') {
         let style = (userSettings === 'checked') ? 'blur(7px)' : '';
@@ -2169,19 +2170,19 @@ function getMachineId() {
  ***********************/
 function getAllConfigurations() {
     return {
-        machineId: APP.machineId,
-        date: new Date().toLocaleDateString('fr-FR'),
+        m: APP.machineId,
+        d: new Date().toLocaleDateString('fr-FR'),
         skins: getLocalStorageItem('skins', '{}'),
         hotkeys: getLocalStorageItem('hotkeys', '{}'),
-        nicknameColor: getLocalStorageItem('nicknameColor', ATTRS.colors.defaultColor),
-        nickname: getLocalStorageItem('nickname', ''),
-        anonymous: getLocalStorageItem('anonymous', 'unchecked'),
-        colorNicknameLeaderboard: getLocalStorageItem('colorNicknameLeaderboard', 'unchecked'),
-        colorNicknameChatbox: getLocalStorageItem('colorNicknameChatbox', 'unchecked'),
-        colorNicknameCell: getLocalStorageItem('colorNicknameCell', 'checked'),
-        autoSynchronization: getLocalStorageItem('autoSynchronization', 'checked'),
-        blurredHUD: getLocalStorageItem('blurredHUD', 'checked'),
-        resizableChatbox: getLocalStorageItem('resizableChatbox', 'unchecked'),
+        c: getLocalStorageItem('c', ATTRS.colors.defaultColor),
+        n: getLocalStorageItem('nickname', ''),
+        a: getLocalStorageItem('a', 'unchecked'),
+        cnl: getLocalStorageItem('cnl', 'unchecked'),
+        cnch: getLocalStorageItem('cnch', 'unchecked'),
+        cnc: getLocalStorageItem('cnc', 'checked'),
+        as: getLocalStorageItem('as', 'checked'),
+        b: getLocalStorageItem('b', 'checked'),
+        r: getLocalStorageItem('r', 'unchecked'),
     }
 }
 
@@ -2190,17 +2191,17 @@ function getAllReferences() {
     const db = DB.database;
 
     return {
-        color: db.ref('Colors'),
-        user: db.ref(`Users`),
-        statistics: db.ref(`Statistics`),
-        badges: db.ref(`Badges`),
-        meUser: db.ref(`Users/${uid}`),
-        meUserBadge: db.ref(`Users/${uid}/badge`),
-        meColorBadge: db.ref(`Colors/${uid}/badge`),
-        meColor: db.ref(`Colors/${uid}`),
-        meStat: db.ref(`Statistics/${uid}`),
-        meConfig: db.ref(`Configurations/${uid}`),
-        meConfigItem: db.ref(`Configurations/${uid}/${APP.machineId}`),
+        color: db.ref('C'),
+        user: db.ref(`U`),
+        statistics: db.ref(`S`),
+        badges: db.ref(`B`),
+        meUser: db.ref(`U/${uid}`),
+        meUserBadge: db.ref(`U/${uid}/ba`),
+        meColorBadge: db.ref(`C/${uid}/ba`),
+        meColor: db.ref(`C/${uid}`),
+        meStat: db.ref(`S/${uid}`),
+        meConfig: db.ref(`Ba/${uid}`),
+        meConfigItem: db.ref(`Ba/${uid}/${APP.machineId}`),
     }
 }
 

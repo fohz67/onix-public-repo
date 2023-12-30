@@ -3814,6 +3814,7 @@ titleExtension {
     font-size:14px;
     position:absolute;
     max-width:240px;
+    white-space: pre-wrap;
     padding:9px
 }
 
