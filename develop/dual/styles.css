@@ -2167,7 +2167,8 @@ input::placeholder {
 
 .continue[data-v-3249d726],.slider-option[data-v-15c13b66],.slider-option[data-v-3ddebeb3],.slider-option[data-v-2c5139e0] {
     font-size:16px;
-    margin-top:5px
+    margin-top:5px;
+    margin-bottom:10px
 }
 
 .bottom-margin[data-v-15c13b66],.bottom-margin[data-v-3ddebeb3],.bottom-margin[data-v-2c5139e0] {
@@ -3697,13 +3698,10 @@ titleExtension {
     background:#6255b33b;
     border:solid 1px #956dff6e;
     border-radius:13px;
+    text-align:center;
     box-shadow:0 0 20px 0 #0003;
     color:#fff;
     padding:9px
-}
-
-.playerItem {
-    text-align:center
 }
 
 .server-list-players {
@@ -3817,6 +3815,10 @@ titleExtension {
     position:absolute;
     max-width:240px;
     padding:9px
+}
+
+span.right.silent {
+    margin-top:0
 }
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {

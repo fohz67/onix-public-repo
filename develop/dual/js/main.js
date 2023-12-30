@@ -1,4 +1,4 @@
-const VERSION = '4.6.3';
+const VERSION = '4.6.4';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -4954,6 +4954,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     return s("div", {
                         key: i,
                         staticClass: "tab",
+                        attrs: {
+                            tip: e.tipsRegions[i]
+                        },
                         class: {
                             active: e.selectedRegion === t
                         },
@@ -5050,6 +5053,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     data: () => ({
                         lastServerListReloadTime: 0,
                         regionCodes: ["EU", "NA", "AS"],
+                        tipsRegions: ["Falkenstein, Saxony, Germany", "Dallas, Texas, United States", "Osaka Prefecture, Japan"],
                         connectWait: 0,
                         gameState: h.state,
                         selectedRegion: "",
@@ -5128,6 +5132,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: "tabs"
                     }, [s("i", {
                         staticClass: "tab fas fa-cog",
+                        attrs: {
+                            tip: "Settings"
+                        },
                         on: {
                             click: function () {
                                 showDeltaSettings = 'settings';
@@ -5136,6 +5143,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab fas fa-palette",
+                        attrs: {
+                            tip: "Theming"
+                        },
                         on: {
                             click: function () {
                                 return e.openModal("theming")
@@ -5143,6 +5153,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab fas fa-wrench",
+                        attrs: {
+                            tip: "Delta settings"
+                        },
                         on: {
                             click: function () {
                                 showDeltaSettings = 'delta';
@@ -5151,6 +5164,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab far fa-keyboard",
+                        attrs: {
+                            tip: "Hotkeys"
+                        },
                         on: {
                             click: function () {
                                 return e.openModal("hotkeys")
@@ -5158,6 +5174,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "tab fas fa-film",
+                        attrs: {
+                            tip: "Replays"
+                        },
                         on: {
                             click: function () {
                                 return e.openModal("replays3")
@@ -5338,7 +5357,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("\n            Use GPU rendering")]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
+                        staticClass: "slider-option",
+                        attrs: {
+                            tip: "Lower for performance, higher for sharpness"
+                        },
                     }, [e._v("\n            Renderer resolution "), s("span", {
                         staticClass: "right"
                     }, [e._v(e._s((100 * e.gameResolution).toFixed(0)) + "%")]), e._v(" "), s("input", {
@@ -5361,7 +5383,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     })]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
+                        staticClass: "slider-option",
+                        attrs: {
+                            tip: "Small text is hidden for performance"
+                        },
                     }, [e._v("\n            Text hiding threshold "), s("span", {
                         staticClass: "right"
                     }, [e._v(e._s(e.smallTextThreshold) + "px")]), e._v(" "), s("input", {
@@ -5384,7 +5409,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
                     }, [s("div", {
                         staticClass: "header"
-                    }, [e._v("\n        Delta settings\n    ")]), e._v(" "), s("div", {
+                    }, [e._v("\n        Dual options\n    ")]), e._v(" "), s("div", {
                         staticClass: "options"
                     }, [s("div", {
                         staticClass: "inline-range",
@@ -5437,7 +5462,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("dualAutorespawn", t)
                             }
                         }
-                    }, [e._v("Dual auto respawn")]), e._v(" "), s("p-check", {
+                    }, [e._v("Dual auto respawn")])], 1)]), e._v(" "), s("div", {
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Cell options\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.showCellLines
@@ -5467,7 +5498,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("showTag", t)
                             }
                         }
-                    }, [e._v("Show teams")]), e._v(" "), s("p-check", {
+                    }, [e._v("Show teams")])], 1)]), e._v(" "), s("div", {
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Chat\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.showTimeMessage
@@ -5487,27 +5524,13 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageSettings = t
                             }
                         }
-                    }, [e._v("Rainbow color message time")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.chatColorOnlyPeople
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("chatColorOnlyPeople", t)
-                            }
-                        }
-                    }, [e._v("Only colored name in chat")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.playerStats
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("playerStats", t)
-                            }
-                        }
-                    }, [e._v("Player tracker")]), e._v(" "), s("p-check", {
+                    }, [e._v("Rainbow color message time")])], 1)]), e._v(" "), s("div", {
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        HUD\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.debugStats
@@ -5528,6 +5551,22 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Client info")])], 1)]), e._v(" "), s("div", {
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Special\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.playerStats
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("playerStats", t)
+                            }
+                        }
+                    }, [e._v("Player tracker")])], 1)]), e._v(" "), s("div", {
                         staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
@@ -5538,7 +5577,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
-                            checked: e.autoZoom
+                            checked: e.autoZoom,
+                            tip: "Zooms out automatically with more mass you have"
                         },
                         on: {
                             change: function (t) {
@@ -5560,7 +5600,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, e.rememeberEjecting ? [e._v("After changing tab, you "), s("b", [e._v("keep")]), e._v(" ejecting")] : [e._v("After changing tab, you "), s("b", [e._v("stop")]), e._v(" ejecting")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
-                            checked: e.autoRespawn
+                            checked: e.autoRespawn,
+                            tip: "To prevent AFK, you must respawn manually after 1 minute"
                         },
                         on: {
                             change: function (t) {
@@ -5568,7 +5609,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }, [e._v("Auto respawn")]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
+                        staticClass: "slider-option",
+                        attrs: {
+                            tip: "Lower responsive, higher is smooth"
+                        }
                     }, [e._v("\n                Draw delay "), s("span", {
                         staticClass: "right"
                     }, [e._v(e._s(e.drawDelay) + "ms")]), e._v(" "), s("input", {
@@ -5588,7 +5632,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     })]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
+                        staticClass: "slider-option",
+                        attrs: {
+                            tip: "How fast camera follows you moving"
+                        }
                     }, [e._v("\n            Camera panning delay "), s("span", {
                         staticClass: "right"
                     }, [e._v(e._s(e.cameraMoveDelay) + "ms")]), e._v(" "), s("input", {
@@ -6102,7 +6149,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
 
             var B = (s(170), Object(v.a)({
                 data: () => ({
-                    clientHash: "",
+                    clientHash: "Delta " + VERSION,
                     isWebGLSupported: S,
                     useWebGL: E,
                     gameResolution: b.gameResolution,
@@ -9405,7 +9452,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         return titles[Math.floor(Math.random() * titles.length)];
     }, document.querySelector('#player-data').getElementsByTagName("div")[0].innerHTML += `
         <div id="openSkins">
-           <p class="gameConfigurationButton" data-v-1bcde71e="" class="tab fas">
+           <p class="gameConfigurationButton" tip="Displays the Dual configuration page : nickname, skin, active or not" data-v-1bcde71e="" class="tab fas">
             <i class="fas fa-user gameConfigurationButtonIcon"></i>
             Dualbox configuration</p>
         </div>

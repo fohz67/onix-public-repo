@@ -1,5 +1,5 @@
 const APP = {
-    version: '4.2',
+    version: '4.2.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -846,11 +846,11 @@ function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec) {
  *
  *******************/
 function createBoxes() {
-    createNewIcon(true, 'fas fa-users', 'userIcon', drawUsersModal);
-    createNewIcon(true, 'fas fa-user', 'statIcon', drawStatisticsModal);
-    createNewIcon(true, 'fas fa-trophy', 'leaderboardIcon', drawLeaderboardModal);
-    createNewIcon(true, 'fas fa-wrench', 'toolIcon', drawToolsModal);
-    createNewIcon(true, 'fas fa-images', 'skinsIcon', drawSkinsModal);
+    createNewIcon(true, 'fas fa-users', 'Delta users', 'userIcon', drawUsersModal);
+    createNewIcon(true, 'fas fa-user', 'Account', 'statIcon', drawStatisticsModal);
+    createNewIcon(true, 'fas fa-trophy', 'Deltaboard', 'leaderboardIcon', drawLeaderboardModal);
+    createNewIcon(true, 'fas fa-wrench', 'Tools and backup', 'toolIcon', drawToolsModal);
+    createNewIcon(true, 'fas fa-images', 'Skins galery', 'skinsIcon', drawSkinsModal);
 }
 
 function createNewIcon(isChild, iconImg, iconId, functionClick) {
