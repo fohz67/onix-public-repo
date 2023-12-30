@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0',
+    version: '5.0.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -497,7 +497,7 @@ function fetchColorChanged() {
             if (user.n && user.c) {
                 LISTS.colors[user.n.trim()] = {
                     c: user.c,
-                    ba: user.ba && color.ba.u ? color.ba.u : null,
+                    ba: user.ba && user.ba.u ? user.ba.u : null,
                     u: user.uid,
                 }
             }
