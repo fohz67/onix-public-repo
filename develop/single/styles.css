@@ -458,6 +458,10 @@ span.right.silent {
     color:#ffffff8c
 }
 
+input.perk-name {
+    margin:0
+}
+
 .open-lobbies {
     background:transparent!important
 }
@@ -538,7 +542,6 @@ span.right.silent {
 .perk-name,.perk-color-update {
     font-size:16px!important;
     height:40px!important;
-    margin-top:10px!important;
     text-align:center!important
 }
 
@@ -622,7 +625,7 @@ span.right.silent {
 }
 
 .section>.options:not(.dualSkinGalery) {
-    padding:17px!important;
+    padding:17px!important
 }
 
 .section {
@@ -1305,13 +1308,13 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .badgeItem,.hatItem {
-    height:40px;
-    width:40px
+    height:35px;
+    width:35px
 }
 
 .badgeListPerks,.hatListPerks {
     display:flex;
-    gap:10px;
+    gap:5px;
     overflow-x:auto;
     white-space:nowrap
 }
@@ -1328,6 +1331,31 @@ img.skin {
     animation:svelte-1k2e827-background-gradient 7s linear infinite;
     background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
     background-size:200% 200%
+}
+
+button.confirm-button.right {
+    border-radius:9px!important;
+    font-size:14px!important;
+    color:#302442!important;
+    margin-right:0!important
+}
+
+.badgeOwner {
+    cursor:pointer!important;
+    filter:none
+}
+
+.badgeNotOwner {
+    cursor:not-allowed!important;
+    filter:brightness(25%) grayscale(100%)!important
+}
+
+.badgeSelected {
+    filter:none
+}
+
+.badgeNotSelected {
+    filter:brightness(50%)
 }
 
 #leaderboard[data-v-7e7860a8] {

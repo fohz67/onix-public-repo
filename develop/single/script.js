@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.4',
+    version: '5.0.5',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -392,9 +392,11 @@ function pushUserBadge(item) {
         if (APP.selected === badge.i) badge.u = null;
 
         Object.values(LISTS.badges).forEach(badgeEach => {
-            $(`.badge${badgeEach.i}`).css('opacity', 0.3);
+            $(`.badge${badgeEach.i}`).removeClass('badgeSelected').addClass('badgeNotSelected');
         });
-        $(`.badge${badge.i}`).css('opacity', APP.selected === badge.i ? 0.3 : 1);
+        const not = APP.selected === badge.i ? '' : 'Not';
+        const inverseNot = APP.selected === badge.i ? 'Not' : '';
+        $(`.badge${badge.i}`).removeClass(`badge${not}Selected`).addClass(`badge${inverseNot}Selected`);
 
         pushDatabase(DB.references.meColorBadge, badge);
         pushDatabase(DB.references.meUserBadge, badge);
@@ -854,7 +856,10 @@ function createBoxes() {
 }
 
 function createNewIcon(isChild, iconImg, tip, iconId, functionClick) {
-    let icon = $('<i>').addClass(iconImg).attr({'id': iconId, 'tip': tip}).on('click', functionClick ? functionClick : '');
+    let icon = $('<i>').addClass(iconImg).attr({
+        'id': iconId,
+        'tip': tip
+    }).on('click', functionClick ? functionClick : '');
     (isChild ? $(ATTRS.selectors.mainContainer) : $(ATTRS.selectors.menuContainer)).append(icon);
 }
 
@@ -998,9 +1003,9 @@ function updateUserLists(users, me) {
 }
 
 function injectUser(user, status) {
-    getUserAnonymous(user);
-
-    const clicker = user.i ? `onclick="openSkin('${user.s}', '${user.i}')"` : ``;
+    const isAnonymous = getUserAnonymous(user);
+    const skin = isAnonymous ? user.s : 'https://skins.vanis.io/s/' + user.s;
+    const clicker = skin ? `onclick="openSkin('${skin}', '${user.s}')"` : ``;
 
     if (user.n.trim() === '') {
         user.c = 'white';
@@ -1009,7 +1014,7 @@ function injectUser(user, status) {
 
     return `
         <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.se, status)}">
-            <img class="userPhoto beautifulSkin" alt="" src="${user.s === '' ? ATTRS.images.transparentSkin : user.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
+            <img class="userPhoto beautifulSkin" alt="" src="${skin === '' ? ATTRS.images.transparentSkin : skin}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
             <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
             <div class="listTextItem userTextElem">
                 <div class="userNickLine">
@@ -1105,10 +1110,11 @@ function getUserAnonymous(user) {
         user.c = ATTRS.colors.white;
         user.m = 'Anonymous';
         user.ba = null;
-    } else {
-        user.i = user.s;
-        user.s = 'https://skins.vanis.io/s/' + user.s;
+
+        return true;
     }
+
+    return false;
 }
 
 function getUsersTip(user, userServer, status) {
@@ -1827,18 +1833,14 @@ function injectBadge(item) {
     let isOwner = false;
     APP.selected = (badge && badge.i === item.i && badge.u) ? badge.i : false;
 
-    if (item.o && item.o[USER.credentials.uid]) {
-        isOwner = true;
-    } else if (item.earn) {
-        if (item.earn.t === 'kill' && item.earn.v <= USER.statistics.sK) {
-            isOwner = true;
-        } else if (item.earn.t === 'time' && item.earn.v <= USER.statistics.sT) {
-            isOwner = true;
-        }
+    if (item.o && item.o[USER.credentials.uid]) isOwner = true;
+    else if (item.earn) {
+        if (item.earn.t === 'kill' && item.earn.v <= USER.statistics.sK) isOwner = true;
+        else if (item.earn.t === 'time' && item.earn.v <= USER.statistics.sT) isOwner = true;
     }
 
     return `
-        <img class="badgeItem badge${item.i}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} style="opacity: ${APP.selected ? 1 : 0.3}; cursor: ${isOwner ? 'pointer' : 'not-allowed'};" alt=""/>
+        <img class="badgeItem badge${item.i} ${isOwner ? 'badgeOwner' : 'badgeNotOwner'} ${APP.selected ? 'badgeSelected' : 'badgeNotSelected'}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} alt=""/>
     `;
 }
 
@@ -2101,7 +2103,7 @@ function switchManagerSpecificChange(userSettings, userSettingsLabel) {
         pushDatabase(DB.references.meUser, {
             a: userSettings,
         });
-    } else if (userSettingsLabel === 'blurredHUD') {
+    } else if (userSettingsLabel === 'b') {
         let style = (userSettings === 'checked') ? 'blur(7px)' : '';
 
         $(ATTRS.selectors.leaderboard).css('backdrop-filter', style);
