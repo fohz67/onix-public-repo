@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.5',
+    version: '5.0.6',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1834,9 +1834,9 @@ function injectBadge(item) {
     APP.selected = (badge && badge.i === item.i && badge.u) ? badge.i : false;
 
     if (item.o && item.o[USER.credentials.uid]) isOwner = true;
-    else if (item.earn) {
-        if (item.earn.t === 'kill' && item.earn.v <= USER.statistics.sK) isOwner = true;
-        else if (item.earn.t === 'time' && item.earn.v <= USER.statistics.sT) isOwner = true;
+    else if (item.e) {
+        if (item.e.t === 'kill' && item.e.v <= USER.statistics.sK) isOwner = true;
+        else if (item.e.t === 'time' && item.e.v <= USER.statistics.sT) isOwner = true;
     }
 
     return `
