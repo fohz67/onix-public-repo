@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.2',
+    version: '5.0.3',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1001,7 +1001,7 @@ function injectUser(user, status) {
     getUsersAnonymous(user);
 
     const id = user.s !== ATTRS.images.anonymousSkin ? user.s : null;
-    const clicker = id && user.s && user.s !== ATTRS.images.anonymousSkin ? `onclick="openSkin('${user.s}', '${id}')"` : ``;
+    const clicker = id && user.s && user.s !== ATTRS.images.anonymousSkin ? `onclick="openSkin('${'https://skins.vanis.io/s/' + user.s}', '${id}')"` : ``;
 
     if (user.n.trim() === '') {
         user.c = 'white';
