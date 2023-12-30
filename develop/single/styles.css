@@ -1312,9 +1312,14 @@ input[type="color"]::-webkit-color-swatch {
     width:35px
 }
 
+.badgeItem:hover {
+    scale:92%!important
+}
+
 .badgeListPerks,.hatListPerks {
     display:flex;
     gap:5px;
+    margin-top:-5px;
     overflow-x:auto;
     white-space:nowrap
 }
@@ -1393,7 +1398,7 @@ button.confirm-button.right {
     width:250px
 }
 
-.userPhoto:hover,.image-button:hover,.badgeItem:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button:hover,#player-container #game-buttons #play-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active:hover,.tab:hover,.tab-menu .tab:hover,.discord:hover,.server-list-item:hover,#hotkey-container .reset-button2:hover,#hotkey-container .bind:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover,#submit-account:hover,.discord-link:hover,.tournaments-link:hover,.skins-link:hover,.bug-link:hover {
+.userPhoto:hover,.image-button:hover,.hatItem:hover,.color-button:hover,.buttonTab:hover,#skinsIcon:hover,.closeSkinItemModal:hover,.skinItemNav:hover,.skinItemLibrary:hover,.resetAllStatistics:hover,.configGet:hover,.configSkinItem:hover,.divLogout:hover,.configDelete:hover,.replay-item:hover,#userIcon:hover,.switchButton:hover,#statIcon:hover,#toolIcon:hover,#leaderboardIcon:hover,#player-container #game-buttons #spec-button:hover,#player-container #game-buttons #play-button:hover,.confirm-button:hover,.btn:hover,.perk-color-update:hover,.button-row > .button:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.server-button:hover,.skin:hover,.vanis-button:hover,.discord-btn:hover,.server-list-item.active:hover,.tab:hover,.tab-menu .tab:hover,.discord:hover,.server-list-item:hover,#hotkey-container .reset-button2:hover,#hotkey-container .bind:hover,.reset-button2:hover,.reset-option:hover,.arrow:hover,#submit-account:hover,.discord-link:hover,.tournaments-link:hover,.skins-link:hover,.bug-link:hover {
     cursor:pointer!important;
     scale:92%!important
 }
