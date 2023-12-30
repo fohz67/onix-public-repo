@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.1',
+    version: '5.0.2',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -503,7 +503,7 @@ function fetchColorChanged() {
             }
 
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-            if (APP.mode === 1 && USER.configurations.cnc === 'checked') changeCellColor(color.n);
+            if (APP.mode === 1 && USER.configurations.cnc === 'checked') changeCellColor(user.n);
         }
     });
 }
