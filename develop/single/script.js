@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.3',
+    version: '5.0.4',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -645,13 +645,13 @@ function listenerComponents() {
     });
 
     $(ATTRS.selectors.serverListItem).on('click', function () {
-        USER.se = $(this).find(ATTRS.selectors.serverName).text();
+        USER.server = $(this).find(ATTRS.selectors.serverName).text();
         APP.resize = 0;
         pushUserOnline();
     });
 
     $(ATTRS.selectors.playButton).on('click', () => {
-        if (USER.se !== ' Lobbies') pushUserStatisticsLocally();
+        if (USER.server !== ' Lobbies') pushUserStatisticsLocally();
         onActionPressed();
     });
 
@@ -998,10 +998,9 @@ function updateUserLists(users, me) {
 }
 
 function injectUser(user, status) {
-    getUsersAnonymous(user);
+    getUserAnonymous(user);
 
-    const id = user.s !== ATTRS.images.anonymousSkin ? user.s : null;
-    const clicker = id && user.s && user.s !== ATTRS.images.anonymousSkin ? `onclick="openSkin('${'https://skins.vanis.io/s/' + user.s}', '${id}')"` : ``;
+    const clicker = user.i ? `onclick="openSkin('${user.s}', '${user.i}')"` : ``;
 
     if (user.n.trim() === '') {
         user.c = 'white';
@@ -1010,7 +1009,7 @@ function injectUser(user, status) {
 
     return `
         <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.se, status)}">
-            <img class="userPhoto beautifulSkin" alt="" src="${user.s === '' ? ATTRS.images.transparentSkin : 'https://skins.vanis.io/s/' + user.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
+            <img class="userPhoto beautifulSkin" alt="" src="${user.s === '' ? ATTRS.images.transparentSkin : user.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
             <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
             <div class="listTextItem userTextElem">
                 <div class="userNickLine">
@@ -1098,7 +1097,7 @@ function getUsersTime(time) {
     return getTimeAgo(days, hours % 24, minutes);
 }
 
-function getUsersAnonymous(user) {
+function getUserAnonymous(user) {
     if (user.a === 'checked') {
         user.s = ATTRS.images.anonymousSkin;
         user.n = 'Anonymous #' + Math.floor(Math.random() * 1000);
@@ -1106,6 +1105,9 @@ function getUsersAnonymous(user) {
         user.c = ATTRS.colors.white;
         user.m = 'Anonymous';
         user.ba = null;
+    } else {
+        user.i = user.s;
+        user.s = 'https://skins.vanis.io/s/' + user.s;
     }
 }
 
@@ -2051,7 +2053,7 @@ function getLocalValues(user) {
     USER.server = 'Lobby';
     USER.mode = APP.mode === 1 ? 'Single' : 'Dual';
 
-    switchManagerSpecificChange(USER.configurations.b, 'blurredHUD');
+    switchManagerSpecificChange(USER.configurations.b, 'b');
 }
 
 /*********************
