@@ -775,6 +775,7 @@ titlemod {
 }
 
 .listTextItem {
+    text-align:left;
     align-self:center
 }
 
