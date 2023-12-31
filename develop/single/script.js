@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.6',
+    version: '5.0.7',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -434,7 +434,7 @@ function fetchUserStatisticsDb() {
         }
 
         USER.statistics.k = USER.statistics.sK / USER.statistics.sG;
-        USER.statistics.aM = USER.statistics.sT / USER.statistics.sG;
+        USER.statistics.aM = USER.statistics.sM / USER.statistics.sG;
         USER.statistics.aT = USER.statistics.sT / USER.statistics.sG;
 
         pushUserStatisticsDb();
@@ -785,31 +785,28 @@ function skinChecker(url) {
  *
  ******************/
 function getReservedName() {
-    const colorUser = LISTS.colors[USER.configurations.n.trim()];
+    const nickname = USER.configurations.n.trim();
+    const colorUser = LISTS.colors[nickname];
 
-    if (colorUser && colorUser.u !== USER.credentials.uid) {
+    const setStyle = (color, fontStyle) => {
+        $(ATTRS.selectors.nicknameProfile).css({'color': color, 'font-style': fontStyle});
+        $(ATTRS.selectors.nickname).css('font-style', fontStyle);
+    };
+
+    if (nickname !== '' && APP.blacklist.includes(nickname)) {
+        sendTimedSwal('Blacklisted nickname', 'Your actual nickname is blacklisted, your color is now white', 10000, 'OK');
+        setStyle('#ffffff', 'italic');
+        APP.reserved = {value: true, color: '#ffffff'};
+    } else if (nickname !== '' && colorUser && colorUser.u !== USER.credentials.uid) {
         sendTimedSwal('Reserved nickname', 'Your actual nickname is reserved by another Delta player, if you want to play with your color, change your nickname', 10000, 'OK');
-        $(ATTRS.selectors.nicknameProfile).css({
-            'color': colorUser.c,
-            'font-style': 'italic'
-        });
-        $(ATTRS.selectors.nickname).css('font-style', 'italic');
-        APP.reserved = {
-            value: true,
-            color: colorUser.c
-        };
+        setStyle(colorUser.c, 'italic');
+        APP.reserved = {value: true, color: colorUser.c};
     } else {
-        $(ATTRS.selectors.nicknameProfile).css({
-            'color': USER.configurations.c,
-            'font-style': 'normal'
-        });
-        $(ATTRS.selectors.nickname).css('font-style', 'normal');
-        APP.reserved = {
-            value: false,
-            color: USER.configurations.c
-        };
+        setStyle(USER.configurations.c, 'normal');
+        APP.reserved = {value: false, color: USER.configurations.c};
     }
 }
+
 
 /*****************
  *
@@ -1794,7 +1791,7 @@ function injectConfiguration(item, itemId) {
                     <p class="configDate">${item.d}</p>
                 </div>
                 <div class="configContentList">
-                    ${APP.m === item.m ? `<p class="configActual configCard">Actual backup</p>` : ``}
+                    ${APP.machineId === item.m ? `<p class="configActual configCard">Actual backup</p>` : ``}
                     ${item.n && item.n !== '' ? `<p class="configNickname configCard" style="color: ${item.c ? item.c : `#ffffff`}">Name: ${item.n}</p>` : ``}
                     ${item.t ? `<p class="configTeamTag configCard">Tag: ${item.t}</p>` : ``}
                     <p class="configHotkeys configCard">${getHotkeysCount(item.hotkeys)} hotkeys</p>
