@@ -679,7 +679,7 @@ titlemod {
     text-align:center;
     text-shadow:0 0 15px #000;
     top:56%;
-    transform:translate(-50%,-50%);
+    transform:translate(-50%,-65%);
     width:max-content
 }
 
@@ -1319,7 +1319,7 @@ input[type="color"]::-webkit-color-swatch {
 .badgeListPerks,.hatListPerks {
     display:flex;
     gap:5px;
-    margin-top:-5px;
+    margin-top:10px;
     overflow-x:auto;
     white-space:nowrap
 }
@@ -1345,6 +1345,10 @@ button.confirm-button.right {
     margin-right:0!important
 }
 
+.badgeText {
+    font-size:16px
+}
+
 .badgeOwner {
     cursor:pointer!important;
     filter:none
@@ -1353,7 +1357,7 @@ button.confirm-button.right {
 .badgeNotOwner {
     cursor:not-allowed!important;
     opacity:0.5;
-    filter:brightness(25%) grayscale(100%)!important
+    filter:brightness(50%) grayscale(100%)!important
 }
 
 .badgeSelected {
@@ -1361,7 +1365,7 @@ button.confirm-button.right {
 }
 
 .badgeNotSelected {
-    filter:brightness(40%)
+    filter:brightness(55%)
 }
 
 #leaderboard[data-v-7e7860a8] {

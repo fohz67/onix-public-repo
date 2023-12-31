@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.7',
+    version: '5.0.8',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1518,7 +1518,7 @@ function toolsModal(tools, total, badges) {
                 </div>
                 <div class="toolsPagePerks">
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Colored name<i class="fas fa-paint-brush headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="header">Colored name</div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="colorPickerContainer">
                                 <input type="text" id="colorPickerInput" value="${USER.configurations.c}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
@@ -1530,15 +1530,16 @@ function toolsModal(tools, total, badges) {
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Badges<i class="fas fa-certificate headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="header">Badges</div>
                         <div data-v-2c5139e0="" class="options">
+                            <p class="badgeText">Click to toggle. <b>Combined</b> with the Vanis badge</p>
                             <div class="badgeListPerks">
                                 ${badges}
                             </div>
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Hats<i class="fas fa-hat-cowboy-side headerIcon"></i></div>
+                        <div data-v-2c5139e0="" class="header">Hats</i></div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="hatListPerks">
                                 Soon
@@ -1548,7 +1549,7 @@ function toolsModal(tools, total, badges) {
                 </div>
                 <div class="toolsPageSettings hidden">
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Configuration<i class="fas fa-cog headerIcon"></i>
+                        <div data-v-2c5139e0="" class="header">Configuration</i>
                         </div>
                         <div data-v-2c5139e0="" class="options">
                             ${APP.mode === 1 ? colorParam : ``}
