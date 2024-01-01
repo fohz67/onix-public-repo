@@ -1,4 +1,4 @@
-const VERSION = '5.2.1';
+const VERSION = '5.2.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {

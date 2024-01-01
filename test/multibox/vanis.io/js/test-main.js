@@ -1,4 +1,4 @@
-const VERSION = '5.2.1';
+const VERSION = '5.2.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -21,7 +21,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         const match = message.match(imageRegex);
 
         if (match && match[1]) {
-            let imageUrl = "https://" + match[1].replace(/\.(deltacom|deltafr|deltaeu|deltapro|deltaio|deltaus|deltaen|deltaas|deltaco|deltapw)/g, '.$1');
+            let imageUrl = "https://" + match[1].replace(/\.(delta)(com|fr|eu|pro|io|us|en|as|co|pw)/g, '.$2');
             if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) {
                 return {
                     newURL: imageUrl,
