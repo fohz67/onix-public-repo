@@ -1,4 +1,4 @@
-const VERSION = '5.2';
+const VERSION = '5.2.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -2124,7 +2124,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     onMinimapShow() {
                         if (!this.interval) {
                             this.showMinimap = true;
-                            this.minimapStatsBottom = o + 10;
+                            this.minimapStatsBottom = o + 25;
                             i.events.$on("minimap-positions", this.updatePositions);
                             this.interval = setInterval(this.render, 1000 / r);
                         }
@@ -4514,7 +4514,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
 
                     a.playerElement.innerHTML = `
-                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}">
+                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && lowPerformanceMode === 'unckecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
                             <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
                             <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
                         </div>

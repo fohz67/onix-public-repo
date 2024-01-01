@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.1.1',
+    version: '5.1.2',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1975,6 +1975,9 @@ function createChatboxResizable() {
 
             chatContainer.css('width', `${newWidth}px`);
             chatContainer.css('height', `${newHeight}px`);
+
+            const playerStalkContainer = $(ATTRS.selectors.playerStalkContainer);
+            APP.mode === 2 && playerStalkContainer ? playerStalkContainer.css('bottom', `${newHeight + 40}px`) : {};
         }
 
         function stopResize() {
