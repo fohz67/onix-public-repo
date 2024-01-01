@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.0.8',
+    version: '5.1.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -789,8 +789,18 @@ function getReservedName() {
     const colorUser = LISTS.colors[nickname];
 
     const setStyle = (color, fontStyle) => {
-        $(ATTRS.selectors.nicknameProfile).css({'color': color, 'font-style': fontStyle});
+        const nicknameProfile = $(ATTRS.selectors.nicknameProfile);
+
+        nicknameProfile.css({'color': color, 'font-style': fontStyle});
         $(ATTRS.selectors.nickname).css('font-style', fontStyle);
+
+        if (APP.mode === 2) {
+            const nicknameProfile2 = $(ATTRS.selectors.nicknameProfile2);
+
+            if (nicknameProfile.text() === nicknameProfile2.text()) {
+                nicknameProfile2.css({'color': color, 'font-style': fontStyle});
+            }
+        }
     };
 
     if (nickname !== '' && APP.blacklist.includes(nickname)) {
@@ -1983,9 +1993,16 @@ function changeUserColor(color) {
     USER.configurations.c = color;
     localStorage.setItem('c', color);
 
-    $(ATTRS.selectors.nicknameProfile).css('color', APP.reserved.value ? APP.reserved.color : color);
+    const commonColor = APP.reserved.value ? APP.reserved.color : color;
+
+    $(ATTRS.selectors.nicknameProfile).css('color', commonColor);
     $(ATTRS.selectors.colorPickerInput).val(color);
     $(ATTRS.selectors.colorPickerSelector).val(color);
+
+    if (APP.mode === 2) {
+        const isSameNickname = $(ATTRS.selectors.nicknameProfile).text() === $(ATTRS.selectors.nicknameProfile2).text();
+        $(ATTRS.selectors.nicknameProfile2).css('color', isSameNickname ? commonColor : 'white');
+    }
 
     pushUserColors();
     pushUserOnline();
@@ -2270,7 +2287,8 @@ function getAllSelectors() {
 
         // Nickname Elements
         nickname: '#nickname',
-        nicknameProfile: '.nicknameProfile',
+        nicknameProfile: APP.mode === 1 ? '.nicknameProfile' : '.sdn1',
+        nicknameProfile2: '.sdn2',
 
         // Player Data and Control
         playButton: '#play-button',
@@ -2381,7 +2399,7 @@ function getAllErrors() {
 
 function getAllTitle() {
     return [
-        '+430 users on Delta',
+        '+490 users on Delta',
         'Alis.io',
         'Vanis.io',
         'Vanish.io',

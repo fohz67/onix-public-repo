@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css?family=Hind+Madurai:500|Nunito|Ubuntu:700|Fira+Code:600";
+@import "https://fonts.googleapis.com/css?family=Hind+Madurai:500|Nunito|Ubuntu:700|Fira+Code:600|Montserrat:700";
 
 * {
     -moz-user-select:none;
@@ -2789,7 +2789,7 @@ a[data-v-7cb607ba] {
     background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
     background-size:200% 200%;
     border-radius:50%;
-    box-shadow:0 0 50px 0 #b69cff2e;
+    box-shadow:0 0 50px 0 #00000020;
     display:block;
     width:46%
 }
@@ -2917,7 +2917,7 @@ a[data-v-7cb607ba] {
     background-size:200% 200%;
     border:none;
     border-radius:50%;
-    box-shadow:0 0 15px 1px #b69cff2e!important;
+    box-shadow:0 0 15px 1px #00000026!important;
     box-sizing:border-box;
     cursor:pointer;
     width:100%
@@ -2959,7 +2959,7 @@ input[type=color]::-webkit-color-swatch {
 }
 
 .selected[data-v-1c614894] {
-    box-shadow:0 0 20px 0 #b69cff
+    box-shadow:0 0 20px 0 #6d39ff!important
 }
 
 .bar[data-v-ebed1606] {
@@ -3547,7 +3547,7 @@ canvas[data-v-4c95bd45] {
     background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
     background-size:200% 200%;
     border-radius:50%;
-    box-shadow:0 0 50px 0 #b69cff2e;
+    box-shadow:0 0 50px 0 #00000020;
     margin:28px 38px 0;
     width:70%
 }
@@ -3562,7 +3562,7 @@ canvas[data-v-4c95bd45] {
     background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
     background-size:200% 200%;
     border-radius:50%;
-    box-shadow:0 0 50px 0 #b69cff2e;
+    box-shadow:0 0 50px 0 #00000020;
     cursor:pointer;
     height:80px;
     margin:5px;
@@ -3821,6 +3821,25 @@ titleExtension {
 
 span.right.silent {
     margin-top:0
+}
+
+.skinDisplayNickname {
+    position:absolute;
+    font-family:'Montserrat',sans-serif;
+    font-size:25px;
+    font-weight:900;
+    text-shadow:0 0 15px #000;
+    top:135px
+}
+
+.sdn1 {
+    left:27%;
+    transform:translate(-50%,-57%)
+}
+
+.sdn2 {
+    right:27%;
+    transform:translate(50%,-57%)
 }
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {

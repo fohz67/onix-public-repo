@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css?family=Montserrat:700";
+
 * {
     font-family:'Nunito',sans-serif
 }
@@ -506,11 +508,11 @@ span.right.silent {
 .skin {
     border:none!important;
     border-radius:50%!important;
-    box-shadow:0 0 15px 1px #b69cff2e!important
+    box-shadow:0 0 15px 1px #00000026!important
 }
 
 .selected {
-    box-shadow:0 0 20px 0 #b69cff99!important
+    box-shadow:0 0 20px 0 #6d39ff!important
 }
 
 .bar {
@@ -666,9 +668,8 @@ titlemod {
 
 .nicknameProfile {
     display:block;
-    font-family:'Ubuntu',sans-serif;
+    font-family:'Montserrat',sans-serif;
     font-size:31px;
-    font-weight:900;
     left:50%;
     margin-top:-5px;
     position:absolute;
@@ -795,6 +796,7 @@ titlemod {
 .userPhoto {
     border-radius:50%;
     height:50px;
+    box-shadow:0 0 50px 0 #00000020;
     width:50px
 }
 
@@ -1158,7 +1160,7 @@ input.swal2-input {
 
 .skinItemLibrary {
     border-radius:50%;
-    box-shadow:0 0 15px 1px #b69cff40;
+    box-shadow:0 0 50px 0 #00000020;
     margin:5px;
     width:135px
 }
@@ -1353,7 +1355,7 @@ button.confirm-button.right {
 
 .badgeNotOwner {
     cursor:not-allowed!important;
-    opacity:0.5;
+    opacity:.5;
     filter:brightness(50%) grayscale(100%)!important
 }
 

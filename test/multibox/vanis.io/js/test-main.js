@@ -1,4 +1,4 @@
-const VERSION = '5.0';
+const VERSION = '5.2';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -1321,12 +1321,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 virusImageUrl: "https://i.ibb.co/V9tdfcY/i.png",
                 cellMassColor: "ffffff",
                 cellMassOutlineColor: "000000",
-                cellNameFont: "Ubuntu",
+                cellNameFont: "Montserrat",
                 cellNameWeight: 1,
                 cellNameOutline: 2,
                 cellNameSmoothOutline: !0,
                 cellLongNameThreshold: 750,
-                cellMassFont: "Ubuntu",
+                cellMassFont: "Montserrat",
                 cellMassWeight: 2,
                 cellMassOutline: 2,
                 cellMassTextSize: 0,
@@ -1516,8 +1516,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 },
                 writeUserData(e, t) {
-                    let s = t && i.dualUseNickname ? i.dualNickname || "Dual" : document.getElementById("nickname").value,
-                        a = t ? i.dualSkin || "vanis1" : document.getElementById("skinurl").value,
+                    let s = t && i.dualUseNickname ? i.dualNickname || "Delta Dual" : document.getElementById("nickname").value,
+                        a = t ? i.dualSkin || "https://skins.vanis.io/s/Qkfih2" : document.getElementById("skinurl").value,
                         n = document.getElementById("teamtag").value;
                     e.writeEscapedStringNT(s), e.writeEscapedStringNT(a), e.writeEscapedStringNT(n)
                 }
@@ -2083,72 +2083,116 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }),
                 computed: {
                     playerCountDisplayed() {
-                        if (this.gameState.selectedServer) {
-                            var e = this.gameState.selectedServer.slots;
-                            return Math.min(this.playerCount, e) + " / " + e + " players"
+                        if (this.gameState?.selectedServer) {
+                            var slots = this.gameState.selectedServer.slots;
+                            return `${Math.min(this.playerCount, slots)} / ${slots} players`;
                         }
-                        return this.playerCount + " player" + (1 === this.playerCount ? "" : "s")
+                        return `${this.playerCount} player${this.playerCount === 1 ? "" : "s"}`;
                     }
                 },
                 methods: {
                     initRenderer(e) {
-                        var t = PIXI.autoDetectRenderer({
-                            resolution: 1,
-                            view: e,
-                            width: o,
-                            height: o,
-                            forceCanvas: !n.useWebGL,
-                            antialias: !1,
-                            powerPreference: "high-performance",
-                            transparent: !0
-                        });
-                        a.destroyPixiPlugins(t), t.clear(), this.renderer = t
+                        if (!e) {
+                            console.error('Renderer initialization failed: element is undefined');
+                            return;
+                        }
+                        try {
+                            var t = PIXI.autoDetectRenderer({
+                                resolution: 1,
+                                view: e,
+                                width: o,
+                                height: o,
+                                forceCanvas: !n?.useWebGL,
+                                antialias: false,
+                                powerPreference: "high-performance",
+                                transparent: true
+                            });
+                            a?.destroyPixiPlugins?.(t);
+                            t.clear();
+                            this.renderer = t;
+                        } catch (error) {
+                            console.error('Error initializing renderer:', error);
+                        }
                     },
                     destroyMinimap() {
-                        c.destroy(!0), c = new PIXI.Container, this.renderer.clear()
+                        if (c && typeof c.destroy === 'function') {
+                            c.destroy(true);
+                            c = new PIXI.Container();
+                            this.renderer?.clear?.();
+                        }
                     },
                     onMinimapShow() {
-                        this.interval || (this.showMinimap = !0, this.minimapStatsBottom = o + 10, i.events.$on("minimap-positions", this.updatePositions), this.interval = setInterval(this.render, 1e3 / r))
+                        if (!this.interval) {
+                            this.showMinimap = true;
+                            this.minimapStatsBottom = o + 10;
+                            i.events.$on("minimap-positions", this.updatePositions);
+                            this.interval = setInterval(this.render, 1000 / r);
+                        }
                     },
                     onMinimapHide() {
-                        this.interval && (this.showMinimap = !1, this.minimapStatsBottom = 10, i.events.$off("minimap-positions", this.updatePositions), clearInterval(this.interval), this.interval = null, this.spectators = 0, this.playerCount = 0)
+                        if (this.interval) {
+                            this.showMinimap = false;
+                            this.minimapStatsBottom = 10;
+                            i.events.$off("minimap-positions", this.updatePositions);
+                            clearInterval(this.interval);
+                            this.interval = null;
+                            this.spectators = 0;
+                            this.playerCount = 0;
+                        }
                     },
                     createNode(e, t, s, i) {
-                        e in h && h[e].destroy(!0), s = s || 16777215, i = i || 16777215;
-                        let a = new PIXI.Container;
+                        if (h && e in h) {
+                            h[e]?.destroy?.(true);
+                        }
+                        let fillColor = s || 16777215;
+                        let textColor = i || 16777215;
+                        let a = new PIXI.Container();
                         a.newPosition = {};
-                        let n = new PIXI.Graphics().beginFill(i).drawCircle(0, 0, 5).endFill();
-                        if (a.addChild(n), t) {
+                        let n = new PIXI.Graphics().beginFill(textColor).drawCircle(0, 0, 5).endFill();
+                        a.addChild(n);
+                        if (t) {
                             let o = new PIXI.Text(t, {
                                 strokeThickness: 4,
                                 lineJoin: "round",
-                                fontFamily: "Nunito",
-                                fill: s,
+                                fontFamily: "Montserrat",
+                                fill: fillColor,
                                 fontSize: 12
                             });
-                            o.anchor.set(.5), o.pivot.y = 15, a.addChild(o)
+                            o.anchor.set(0.5);
+                            o.pivot.y = 15;
+                            a.addChild(o);
                         }
-                        h[e] = a
+                        h[e] = a;
                     },
                     destroyNode(e) {
-                        var t = h[e];
-                        t && (t.destroy(!0), delete h[e])
+                        if (h && e in h) {
+                            h[e]?.destroy?.(true);
+                            delete h[e];
+                        }
                     },
                     updatePositions(e) {
-                        c.removeChildren();
-                        for (var t = 0; t < e.length; t++) {
-                            var s = e[t],
-                                i = h[s.pid];
-                            i && (i.newPosition.x = s.x * o, i.newPosition.y = s.y * o, c.addChild(i))
+                        if (c) {
+                            c.removeChildren();
+                            e.forEach(s => {
+                                let i = h[s.pid];
+                                if (i) {
+                                    i.newPosition.x = s.x * o;
+                                    i.newPosition.y = s.y * o;
+                                    c.addChild(i);
+                                }
+                            });
+                            this.render();
                         }
-                        this.render()
                     },
                     render() {
-                        for (var e = c.children, t = l * (30 / r), s = 0; s < e.length; s++) {
-                            var i = e[s];
-                            i.position.x = a.lerp(i.position.x, i.newPosition.x, t), i.position.y = a.lerp(i.position.y, i.newPosition.y, t)
+                        if (c && Array.isArray(c.children)) {
+                            c.children.forEach(child => {
+                                let lerpFactor = l * (30 / r);
+                                child.position.x = a.lerp(child.position.x, child.newPosition.x, lerpFactor);
+                                child.position.y = a.lerp(child.position.y, child.newPosition.y, lerpFactor);
+                            });
+                            this.renderer?.render?.(c);
                         }
-                        this.renderer.render(c)
                     },
                     drawLocationGrid(e, t) {
                         var s = o / t;
@@ -2162,7 +2206,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     drawLocationCodes(e, t) {
                         var s = o / t,
                             i = s / 2;
-                        e.globalAlpha = .1, e.font = "14px Nunito", e.textAlign = "center", e.textBaseline = "middle", e.fillStyle = "#ffffff";
+                        e.globalAlpha = .1, e.font = "14px Montserrat", e.textAlign = "center", e.textBaseline = "middle", e.fillStyle = "#ffffff";
                         for (var a = 0; a < t; a++)
                             for (var n = a * s + i, r = 0; r < t; r++) {
                                 var l = String.fromCharCode(97 + r).toUpperCase() + (a + 1),
@@ -5212,7 +5256,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         on: {
                             change: e.onNicknameChange,
                             input: function (t) {
-                                t.target.composing || (e.nickname = t.target.value)
+                                const n = document.querySelector(".sdn1");
+                                const d = document.querySelector(".sdn2");
+                                n.textContent = t.target.value;
+                                d.style.color = n.textContent === d.textContent ? n.style.color : 'white';
+                                d.style.fontStyle = n.textContent === d.textContent ? n.style.fontStyle : 'normal';
+                                t.target.composing || (e.nickname = t.target.value);
                             }
                         }
                     }), e._v(" "), s("input", {
@@ -6634,7 +6683,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         attrs: {
                             type: "text",
                             spellcheck: "false",
-                            placeholder: "Hind Madurai",
+                            placeholder: "Montserrat",
                             maxlength: "30"
                         },
                         domProps: {
@@ -6736,7 +6785,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         attrs: {
                             type: "text",
                             spellcheck: "false",
-                            placeholder: "Ubuntu",
+                            placeholder: "Montserrat",
                             maxlength: "30"
                         },
                         domProps: {
@@ -9349,22 +9398,31 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         GAME.events.$emit("update-cautions", {
             custom: e
         })
-    }, GAME.aimbotnodes = () => {
-    }, window.pings = {
-        sprite: new PIXI.Sprite.from("https://i.postimg.cc/CdTpN3dt/i.png")
     }, window.setDualData = (e, t) => {
         switch (e) {
             case 1:
-                getModule(4).set("dualSkin", t), document.querySelector('.configSkin').src = t, document.getElementById("skinDisplay2").src = t;
+                getModule(4).set("dualSkin", t);
+                document.querySelector('.configSkin').src = t;
+                document.getElementById("skinDisplay2").src = t;
                 break;
             case 2:
-                getModule(4).set("dualNickname", document.getElementById("dualNickname").value);
+                const nicknameInput = document.getElementById("dualNickname");
+                const nicknameDisplay = document.querySelector(".sdn2");
+                const defaultNicknameStyle = document.querySelector(".sdn1");
+
+                if (nicknameInput && nicknameDisplay && defaultNicknameStyle) {
+                    const n = nicknameInput.value;
+                    nicknameDisplay.textContent = n;
+                    nicknameDisplay.style.color = n === localStorage.nickname ? defaultNicknameStyle.style.color : 'white';
+                    nicknameDisplay.style.fontStyle = n === localStorage.nickname ? defaultNicknameStyle.style.fontStyle : 'normal';
+                    getModule(4).set("dualNickname", n);
+                }
                 break;
             case 3:
-                getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked)
+                getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked);
         }
     }, (() => {
-        var item = document.createElement("div");
+        let item = document.createElement("div");
         item.id = "debugStats";
         item.style.position = "fixed";
         item.style.right = "250px";
@@ -9375,7 +9433,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         item.style.display = "block";
         document.querySelector('#hud').appendChild(item);
         GAME.debugElement = item;
-
         item = document.createElement("div");
         item.id = "playerStats";
         document.querySelector('#hud').appendChild(item);
@@ -9417,7 +9474,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         window.location.reload();
     }, window.getTitleExtension = () => {
         const titles = [
-            "+430 users on Delta",
+            "+490 users on Delta",
             "Alis.io",
             "Vanis.io",
             "Vanish.io",
@@ -9458,7 +9515,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         </div>
         <div class="dualProfile">
             <img id="skinDisplay1" src="${localStorage.skinUrl}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
+            <span class="skinDisplayNickname sdn1" style="color:${localStorage.c}">${localStorage.nickname}</span>
             <img id="skinDisplay2" src="${settings.dualSkin}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
+            <span class="skinDisplayNickname sdn2" style="color:${localStorage.nickname === window.settings.dualNickname ? localStorage.c : 'white'}">${window.settings.dualNickname}</span>
         </div>
     `, document.querySelector('#overlay').insertAdjacentHTML('beforeend', `
         <div data-v-3ddebeb3="" class="p-switch pretty performanceSwitch" p-checkbox="">
