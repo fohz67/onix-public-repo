@@ -1,2433 +1,973 @@
-const VERSION = '5.2.2';
-let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
-
 (() => {
-    let rainbowColorTimeMessageSettings;
-    let showTimeMessageSettings;
-    let showDeltaSettings;
-    let currentColorsPlayersList = {};
-    let currentServerPlayersList = {};
-
-    function getLocalStorageItem(key, defaultValue) {
-        return localStorage.getItem(key) || defaultValue;
-    }
-
-    window.addEventListener('colorsDualChanged', () => {
-        currentColorsPlayersList = window.getColorsDual();
-    });
-
-    function getImageUrlFromMessage(message) {
-        const imageRegex = /deltaimage:(\S+)/;
-        const match = message.match(imageRegex);
-
-        if (match && match[1]) {
-            let imageUrl = "https://" + match[1].replace(/\.(delta)(com|fr|eu|pro|io|us|en|as|co|pw)/g, '.$2');
-            if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) {
-                return {
-                    newURL: imageUrl,
-                    baseURL: match[0]
-                };
-            }
-        }
-        return null;
-    }
-
-    function generateRandomHexColor() {
-        return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
-    }
-
-    function getUserField(nickname, pid, field, def = null) {
-        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()][field] || def;
-    }
-
-    function getUserFieldVanilla(nickname, pid, field, def = null) {
-        return nickname && pid && currentServerPlayersList && currentServerPlayersList[pid] && currentServerPlayersList[pid][field] || def;
-    }
-
-    function getUserColor(bot, nickname, pid, hash, forceColor) {
-        if (bot) return hash + '838383';
-        let deltaColor = getUserField(nickname, pid, 'c', null);
-        if (deltaColor) return hash + deltaColor.replaceAll('#', '');
-        if (forceColor) return forceColor;
-        let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
-        if (vanillaColor) return hash + vanillaColor.replaceAll('#', '');
-        return hash + 'ffffff';
-    }
-
-    function sendTimedSwal(title, text, timer, confirm) {
-        Swal.fire({
-            title,
-            text,
-            timer,
-            showConfirmButton: confirm
-        });
-    }
-
-    function getCurrentDate() {
-        const currentDate = new Date();
-        return `[${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}] `;
-    }
-
-    function getPerkBadgeImage(n) {
-        const badge = {
-            1: "admin",
-            2: "mod",
-            4: "skin_mod",
-            8: "contributor",
-            16: "organizer",
-            32: "referee",
-            256: "youtuber",
-            1024: "editor",
-            4096: "level_100",
-            8192: "level_200",
-            16384: "level_300",
-            65536: "ffa_winner",
-            131072: "instant_winner",
-            262144: "gigasplit_winner",
-            524288: "megasplit_winner",
-            1048576: "crazy_winner",
-            2097152: "self-feed_winner",
-            33554432: "server_booster",
-            67108864: "place_contributor_2023",
-            16777216: "place_contributor_2022",
-            268435456: "slb_winner",
-            2147483648: "official"
-        };
-        return badge[n];
-    }
-
-    class s {
-        constructor(e, t) {
-            if (this.view = null, e instanceof DataView) this.view = e;
-            else {
-                if (!(e instanceof ArrayBuffer)) throw TypeError("First argument to SmartBuffer constructor must be an ArrayBuffer or DataView");
-                this.view = new DataView(e)
-            }
-            this.offset = t || 0
-        }
-
-        ensureCapacity(e) {
-            let t = this.offset + e;
-            if (t > this.length) {
-                let s = new ArrayBuffer(t),
-                    i = new Uint8Array(s);
-                i.set(new Uint8Array(this.buffer)), this.view = new DataView(s)
-            }
-        }
-
-        static fromSize(e) {
-            return new this(new ArrayBuffer(e), 0)
-        }
-
-        static fromBuffer(e, t) {
-            return new this(e, t || 0)
-        }
-
-        toBuffer() {
-            return this.buffer
-        }
-
-        get buffer() {
-            return this.view?.buffer || null
-        }
-
-        get length() {
-            return this.view?.byteLength || 0
-        }
-
-        get eof() {
-            return this.offset >= this.length
-        }
-
-        read(e, t, s, i) {
-            let a = e.call(this.view, i ?? this.offset, s);
-            return null == i && (this.offset += t), a
-        }
-
-        write(e, t, s, i) {
-            this.ensureCapacity(t), e.call(this.view, this.offset, s, i), this.offset += t
-        }
-
-        readInt8(e) {
-            return this.read(DataView.prototype.getInt8, 1, null, e)
-        }
-
-        readUInt8(e) {
-            return this.read(DataView.prototype.getUint8, 1, null, e)
-        }
-
-        readInt16LE(e) {
-            return this.read(DataView.prototype.getInt16, 2, !0, e)
-        }
-
-        readInt16BE(e) {
-            return this.read(DataView.prototype.getInt16, 2, !1, e)
-        }
-
-        readUInt16LE(e) {
-            return this.read(DataView.prototype.getUint16, 2, !0, e)
-        }
-
-        readUInt16BE(e) {
-            return this.read(DataView.prototype.getUint16, 2, !1, e)
-        }
-
-        readInt32LE(e) {
-            return this.read(DataView.prototype.getInt32, 4, !0, e)
-        }
-
-        readInt32BE(e) {
-            return this.read(DataView.prototype.getInt32, 4, !1, e)
-        }
-
-        readUInt32LE(e) {
-            return this.read(DataView.prototype.getUint32, 4, !0, e)
-        }
-
-        readUInt32BE(e) {
-            return this.read(DataView.prototype.getUint32, 4, !1, e)
-        }
-
-        readString16() {
-            let e = "";
-            for (; ;) {
-                let t = this.eof ? 0 : this.readUInt16LE();
-                if (0 === t) break;
-                e += String.fromCharCode(t)
-            }
-            return e
-        }
-
-        readString() {
-            let e = "";
-            for (; ;) {
-                let t = this.eof ? 0 : this.readUInt8();
-                if (0 === t) break;
-                e += String.fromCharCode(t)
-            }
-            return e
-        }
-
-        readEscapedString() {
-            return decodeURIComponent(escape(this.readString()))
-        }
-
-        writeInt8(e) {
-            this.write(DataView.prototype.setInt8, 1, e, null)
-        }
-
-        writeUInt8(e) {
-            this.write(DataView.prototype.setUint8, 1, e, null)
-        }
-
-        writeInt16LE(e) {
-            this.write(DataView.prototype.setInt16, 2, e, !0)
-        }
-
-        writeInt16BE(e) {
-            this.write(DataView.prototype.setInt16, 2, e, !1)
-        }
-
-        writeUInt16LE(e) {
-            this.write(DataView.prototype.setUint16, 2, e, !0)
-        }
-
-        writeUInt16BE(e) {
-            this.write(DataView.prototype.setUint16, 2, e, !1)
-        }
-
-        writeInt32LE(e) {
-            this.write(DataView.prototype.setInt32, 4, e, !0)
-        }
-
-        writeInt32BE(e) {
-            this.write(DataView.prototype.setInt32, 4, e, !1)
-        }
-
-        writeUInt32LE(e) {
-            this.write(DataView.prototype.setUint32, 4, e, !0)
-        }
-
-        writeUInt32BE(e) {
-            this.write(DataView.prototype.setUint32, 4, e, !1)
-        }
-
-        writeString(e) {
-            let t = e.length;
-            this.ensureCapacity(t);
-            let s = this.offset;
-            for (this.offset += t; t--;) this.view.setUint8(s + t, e.charCodeAt(t))
-        }
-
-        writeStringNT(e) {
-            this.writeString(e), this.writeUInt8(0)
-        }
-
-        writeEscapedString(e) {
-            this.writeString(unescape(encodeURIComponent(e)))
-        }
-
-        writeEscapedStringNT(e) {
-            this.writeStringNT(unescape(encodeURIComponent(e)))
-        }
-    }
-
-    window.SmartBuffer = s;
-    let i = [5, 104, 253, 62, 175, 116, 238, 41];
-
-    class a {
-        constructor(e) {
-            this.data = e
-        }
-
-        writeIndex(e, t) {
-            let s = this.data[t],
-                a = s + 5 & 7,
-                n = e[t > 0 ? t - 1 : 0] ^ i[t];
-            e.push(((s << a | s >>> 8 - a) & 255 ^ n ^ 62) & 255)
-        }
-
-        build(e = !1) {
-            let t = [];
-            for (let s = 0; s < 8; s++) this.writeIndex(t, s);
-            let i = 1 + Math.floor(2147483646 * Math.random());
-            return t.push((t[0] ^ i >> 24) & 255), t.push((t[1] ^ i >> 16) & 255), t.push((t[2] ^ i >> 8) & 255), t.push((i ^ t[3]) & 255), t.push((t[0] ^ +e ^ 31) & 255), t
-        }
-    }
-
-    var n = [.79, 1.52, 2.35, 3, 3.92, 4.7, 5.5, 6.2];
-
-    function o(e) {
-        for (var t = 9e9, s = 0, i = 0; e.length < i; i++) e[i].id < t && (s = i, t = e[i].id);
-        return e.splice(s, 1), e
-    }
-
-    String.prototype.toHHMMSS = function () {
-        var e = parseInt(this, 10),
-            t = Math.floor(e / 3600),
-            s = Math.floor((e - 3600 * t) / 60);
-        return `${0 !== s ? `${s}m ` : ""}${e - 3600 * t - 60 * s}s`
-    }, window.makeid = e => {
-        for (var t = "", s = "X0123456789", i = s.length, a = 0; a < e; a++) t += s.charAt(Math.floor(Math.random() * i));
-        return t
-    }, window.$ = (e, t = document) => t.querySelector(e), window.extraServers = [{
-        name: "Local server (to configure)",
-        domain: "localhost",
-        port: 8080,
-        mode: "Instant",
-        players: "0",
-        slots: "0",
-        region: "EU",
-        url: "ws://localhost:8080"
-    }],
-        function (e) {
-            var t, s = (t = !0, function (e, s) {
-                var i = t ? function () {
-                    if (s) {
-                        var t = s.apply(e, arguments);
-                        return s = null, t
-                    }
-                } : function () {
-                };
-                return t = !1, i
-            });
-
-            function i(t) {
-                var i = s(this, function () {
-                    var e = function () {
-                        return !e.constructor('return /" + this + "/')().constructor("^([^ ]+( +[^ ]+)+)+[^ ]}").test(i)
-                    };
-                    return e()
-                });
-                i();
-                for (var n, l, c = t[0], h = t[1], d = t[2], u = 0, g = []; u < c.length; u++) l = c[u], Object.prototype.hasOwnProperty.call(o, l) && o[l] && g.push(o[l][0]), o[l] = 0;
-                for (n in h) Object.prototype.hasOwnProperty.call(h, n) && (e[n] = h[n]);
-                for (p && p(t); g.length;) g.shift()();
-                return r.push.apply(r, d || []), a()
-            }
-
-            function a() {
-                for (var e, t = 0; t < r.length; t++) {
-                    for (var s = r[t], i = !0, a = 1; a < s.length; a++) 0 !== o[s[a]] && (i = !1);
-                    i && (r.splice(t--, 1), e = l(l.s = s[0]))
-                }
-                return e
-            }
-
-            var n = {},
-                o = {
-                    0: 0
-                },
-                r = [];
-
-            function l(t) {
-                if (n[t]) return n[t].exports;
-                var s = n[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(s.exports, s, s.exports, l), s.l = !0, s.exports
-            }
-
-            window.getModule = l, l.m = e, l.c = n, l.d = function (e, t, s) {
-                l.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: s
-                })
-            }, l.r = function (e) {
-                "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, l.t = function (e, t) {
-                if (1 & t && (e = l(e)), 8 & t || 4 & t && "object" == typeof e && e && e.__esModule) return e;
-                var s = Object.create(null);
-                if (l.r(s), Object.defineProperty(s, "default", {
-                    enumerable: !0,
-                    value: e
-                }), 2 & t && "string" != typeof e)
-                    for (var i in e) l.d(s, i, (function (t) {
-                        return e[t]
-                    }).bind(null, i));
-                return s
-            }, l.n = function (e) {
-                var t = e && e.__esModule ? function () {
-                    return e.default
-                } : function () {
-                    return e
-                };
-                return l.d(t, "a", t), t
-            }, l.o = function (e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, l.p = "";
-            var c = window.webpackJsonp = window.webpackJsonp || [],
-                h = c.push.bind(c);
-            c.push = i, c = c.slice();
-            for (var d = 0; d < c.length; d++) i(c[d]);
-            var p = h;
-            r.push([118, 1]), a()
-        }([, function (e, t, i) {
-            let n = i(5),
-                {
-                    writeUserData: o
-                } = i(8),
-                r = i(4),
-                l = i(24),
-                c = i(121),
-                h = i(125),
-                d = i(78),
-                p = i(12),
-                u = i(23),
-                g = i(128),
-                {
-                    lerp: A,
-                    clampNumber: m,
-                    hideCaptchaBadge: v
-                } = i(8),
-                {
-                    htmlEncode: f
-                } = i(8),
-                C, y = {
-                    connectionUrl: null,
-                    selectedServer: null,
-                    spectators: 0,
-                    lifeState: 0,
-                    allowed: !1,
-                    playButtonDisabled: !1,
-                    playButtonText: "Play",
-                    deathDelay: !1,
-                    autoRespawning: !1
-                },
-                w = (e, t) => {
-                    n.toast.fire({
-                        type: t ? "error" : "info",
-                        title: e,
-                        timer: t ? 5e3 : 2e3
-                    })
-                },
-                I = (e, t) => {
-                    for (; e.length;) e.pop().destroy(t)
-                };
-            document.body.oncontextmenu = e => e.target?.id === "email";
-
-            class k {
-                constructor() {
-                    this.running = !1, this.protocol, this.modeId, this.instanceSeed, this.replaying, this.nwDataMax, this.nwDataSent, this.nwDataTotal, this.nwData, this.playerId, this.dualboxPid, this.activePid, this.tagId, this.spectating, this.alive = !1, this.center = {
-                        x: 0,
-                        y: 0
-                    }, y.spectators, y.lifeState, this.score = 0, this.highestScore = 0, this.killCount = 0, this.timeAlive = 0, this.clientVersion = 26, this.events = new u, this.settings = r, this.renderer = l, this.skinLoader = new g, p.virus.loadVirusFromUrl(r.virusImageUrl), this.state = y, h.useGame(this), this.playback, this.connection = new class e {
-                        constructor() {
-                            this.socketCount = 0, this.opened = !1
-                        }
-
-                        onClosed(e) {
-                            delete C.currentWsId, this.opened = !1, C.running && C.stop();
-                            let t;
-                            if (1003 === e.code) t = 1500, w("Server restarting...", !1);
-                            else {
-                                t = 3500 + ~~(100 * Math.random());
-                                let s = "You have been disconnected";
-                                e.reason && (s += ` (${e.reason})`), w(s, !0)
-                            }
-                            setTimeout(() => {
-                                this.opened || C.events.$emit("reconnect-server")
-                            }, t), C.showMenu(!0)
-                        }
-
-                        onRejected() {
-                            delete C.currentWsId, this.opened = !1, w("Connection rejected", !0)
-                        }
-
-                        open(e) {
-                            C.dual.close(), C.running && C.stop(), this.close(), C.events.$emit("chat-clear"), this.opened = !0;
-                            let t = C.ws = new WebSocket(e, "tFoL46WDlZuRja7W6qCl");
-                            t.binaryType = "arraybuffer", t.packetCount = 0, t.onopen = () => {
-                                this.opened && (C.currentWsId = t.id = this.socketCount++, C.state.connectionUrl = e, t.onclose = this.onClosed.bind(this))
-                            }, t.onclose = this.onRejected.bind(this), t.onmessage = e => {
-                                let {
-                                    data: t
-                                } = e;
-                                C.nwData += t.byteLength, C.parseMessage(s.fromBuffer(t))
-                            }
-                        }
-
-                        close() {
-                            C.dual.close(), C.debugElement.innerHTML = "";
-                            let {
-                                ws: e
-                            } = C;
-                            e && (e.onmessage = null, e.onclose = null, e.onerror = null, e.close(), delete C.ws, delete C.state.connectionUrl, this.opened = !1)
-                        }
-
-                        send(e, t, i = !1) {
-                            e instanceof s && (e = e.view), t = !!t;
-                            let {
-                                dual: a
-                            } = C;
-                            if (t ? !(a.opened && (i || a.ready)) : !this.opened) return !1;
-                            let n = t ? a.ws : C.ws;
-                            return console.assert(!!n, "Socket not defined?"), n.send(e), !0
-                        }
-
-                        sendMouse() {
-                            let e = s.fromSize(5);
-                            e.writeUInt8(16);
-                            let {
-                                x: t,
-                                y: i
-                            } = C.mouse;
-                            e.writeInt16LE(t), e.writeInt16LE(i);
-                            let {
-                                dual: a
-                            } = C;
-                            this.send(e, a.focused), a.connected && (C.isAlive(!1) && C.isAlive(!0) || this.send(e, C.isAlive(!1)))
-                        }
-
-                        sendOpcode(e, t) {
-                            let i = s.fromSize(1);
-                            i.writeUInt8(e), this.send(i, t)
-                        }
-
-                        ping() {
-                            C.pingStamp = performance.now(), this.sendOpcode(3)
-                        }
-
-                        sendJoinData(e, t) {
-                            let i = s.fromSize(2 + e.length + 7);
-                            i.writeUInt8(5), i.writeUInt8(C.clientVersion), i.ensureCapacity(e.length), e.forEach(e => i.writeUInt8(e)), o(i, !!t);
-                            let a = localStorage.vanisToken;
-                            a && /^wss?:\/\/[a-zA-Z0-9_-]+\.vanis\.io/i.test(C.ws.url) && i.writeStringNT(a), this.send(i, t, !!t)
-                        }
-
-                        sendRecaptchaToken(e, t) {
-                            e = unescape(encodeURIComponent(e));
-                            let i = s.fromSize(1 + e.length + 1);
-                            i.writeUInt8(11), i.writeStringNT(e), this.send(i, t)
-                        }
-
-                        sendChatMessage(e, t) {
-                            if ((e = unescape(encodeURIComponent(e))).startsWith("/")) {
-                                window.client && window.client.chatted(e);
-                                return
-                            }
-                            let i = s.fromSize(1 + e.length + 1);
-                            i.writeUInt8(99), i.writeString(e), this.send(i, t)
-                        }
-                    }, this.dual, this.pingStamp, this.timeStamp, this.serverTick, this.cells = new Map, this.destroyedCells = [], this.cellCount = 0, this.ownedCells = new Set, this.rawMouse, this.mouse, this.mouseZoom, this.mouseZoomMin, this.camera, this.massTextPool = [], this.crownPool = [], c.useGame(this), this.scene, this.playerManager, this.ticker, this.splitCount, this.moveWaitUntil, this.stopMovePackets, this.mouseFrozen, this.moveInterval, setInterval(() => this.events.$emit("every-second"), 1e3), setInterval(() => this.events.$emit("every-minute"), 6e4)
-                }
-
-                isAlive(e = !1) {
-                    let {
-                        dual: t
-                    } = this;
-                    return e ? t.opened && t.alive : this.connection.opened && this.alive
-                }
-
-                get allCells() {
-                    let e = this.cells,
-                        {
-                            dual: t
-                        } = this;
-                    if (!t.opened) return e;
-                    e = new Map([...e]);
-                    let s = t.cells;
-                    return s.forEach((t, s) => {
-                        e.has(s) || e.set(s, t)
-                    }), e
-                }
-
-                updateStates(e) {
-                    let t = !1,
-                        s = !1,
-                        {
-                            dual: i
-                        } = this;
-                    return C.allCells.forEach(e => {
-                        e.pid && (e.pid == this.playerId ? this.alive = t = !0 : i.opened && e.pid == i.pid && (i.alive = s = !0))
-                    }), this.alive && !t && (this.alive = !1), i.alive && !s && (i.alive = !1), y.lifeState = (t ? 1 : 0) + (s ? 2 : 0), e ? s : t
-                }
-
-                start(e) {
-                    if (!(e.protocol && e.instanceSeed && e.playerId && e.border)) throw Error("Lacking mandatory data");
-                    this.running = !0, this.protocol = e.protocol, this.modeId = e.gamemodeId || 0, this.instanceSeed = e.instanceSeed, this.replaying = !!e.replayUpdates, this.nwDataMax = this.nwDataSent = this.nwDataTotal = this.nwData = 0, this.pingStamp = 0, this.timeStamp = 0, this.serverTick = 0, this.playerId = e.playerId, this.dualboxPid = 0, this.activePid = this.playerId, this.tagId = null, this.spectating = !1, this.alive = !1, y.spectators = 0, y.lifeState = 0, this.score = 0, this.highestScore = 0, this.cellCount = 0, this.rawMouse = {
-                        x: 0,
-                        y: 0
-                    }, this.mouse = {
-                        x: 0,
-                        y: 0
-                    };
-                    let t = this.border = e.border;
-                    this.food = e.food, this.mouseZoom = .3, this.mouseZoomMin = .01, this.camera = {
-                        time: 0,
-                        sx: 0,
-                        sy: 0,
-                        ox: t.x,
-                        nx: t.x,
-                        oy: t.y,
-                        ny: t.y,
-                        oz: this.mouseZoom,
-                        nz: this.mouseZoom
-                    }, this.massTextPool = [], this.crownPool = [];
-                    let i = PIXI.utils.isWebGLSupported() && r.useWebGL && r.showBackgroundImage,
-                        a = this.scene = new c(t, i);
-                    if (a.container.alpha = r.gameAlpha || 1, a.container.pivot.set(t.x, t.y), a.container.scale.set(this.zoom), this.playerManager = new h, this.ticker = new PIXI.Ticker, this.ticker.add(this.onTick.bind(this)), y.selectedServer && y.connectionUrl !== y.selectedServer.url && (y.selectedServer = null), this.replaying) {
-                        let {
-                            playback: n
-                        } = this, o = e.replayUpdates;
-                        n.set(o), this.moveInterval = setInterval(n.next.bind(n), 40), this.events.$emit("show-replay-controls", o.length), this.events.$emit("minimap-stats-visible", !1)
-                    } else this.splitCount = 0, this.moveWaitUntil = 0, this.stopMovePackets = 0, this.moveToCenterOfCells = 0, this.mouseFrozen = !1, r.minimapEnabled && this.events.$emit("minimap-show"), r.showChat && this.events.$emit("chat-visible", {
-                        visible: !0
-                    }), this.events.$emit("leaderboard-show"), this.events.$emit("stats-visible", !0), this.moveInterval = setInterval(() => {
-                        let {
-                            dual: e
-                        } = this;
-                        if (this.stopMovePackets === 1 + +e.focused) return;
-                        let t = this.moveToCenterOfCells;
-                        if (0 != t && this.connection.sendOpcode(9, 2 == t), e.focused ? 2 == t : 1 == t) return;
-                        let i = s.fromSize(5);
-                        i.writeUInt8(16);
-                        let {
-                            x: a,
-                            y: n
-                        } = this.mouse;
-                        i.writeInt16LE(a), i.writeInt16LE(n), this.connection.send(i, e.focused)
-                    }, 40), this.events.$on("every-second", k.everySecond), y.allowed = !0;
-                    this.ticker.start(), this.eventListeners(!0), this.events.$emit("game-started")
-                }
-
-                stop() {
-                    let {
-                        dual: e
-                    } = this;
-                    e.opened && e.close(), this.running = !1, delete this.protocol, delete this.modeId, delete this.instanceSeed, delete this.replaying, delete this.nwDataMax, delete this.nwDataSent, delete this.nwDataTotal, delete this.nwData, delete this.playerId, delete this.dualboxPid, delete this.activePid, delete this.tagId, this.spectating = !1, this.alive = !1, y.spectators = 0, y.lifeState = 0, y.allowed = !1, y.playButtonDisabled = !1, y.playButtonText = "Play", this.eventListeners(!1), delete this.score, delete this.highestScore, delete this.pingStamp, delete this.timeStamp, delete this.serverTick, delete this.playerId, delete this.dualboxPid, delete this.activePid, delete this.tagId, delete this.spectating, this.clearCells(), delete this.cellCount, delete this.rawMouse, delete this.mouse, delete this.mouseZoom, delete this.mouseZoomMin, delete this.camera, this.ticker && (this.ticker.stop(), delete this.ticker), delete this.splitCount, delete this.moveWaitUntil, delete this.stopMovePackets, delete this.moveToCenterOfCells, delete this.mouseFrozen, clearInterval(this.moveInterval), delete this.moveInterval, this.playback.reset(), this.events.$off("every-second", k.everySecond), this.skinLoader.clearCallbacks(), this.events.$emit("minimap-stats-visible", !0), this.events.$emit("stats-visible", !1), this.events.$emit("chat-visible", {
-                        visible: !1
-                    }), this.events.$emit("leaderboard-hide"), this.events.$emit("minimap-hide"), this.events.$emit("minimap-destroy"), this.events.$emit("show-replay-controls", !1), this.events.$emit("cells-changed", 0), this.events.$emit("reset-cautions"), this.events.$emit("game-stopped"), this.playerManager.destroy(), delete this.playerManager;
-                    let {
-                        scene: t
-                    } = this;
-                    t && (t.destroyBackgroundImage(!1), t.uninstallMassTextFont(), t.container.destroy({
-                        children: !0
-                    }), delete this.scene), this.renderer.clear(), p.cells.destroyCache(), p.squares.destroyCache(), I(this.massTextPool, !0), I(this.crownPool), delete this.massTextPool, delete this.crownPool
-                }
-
-                showMenu(e) {
-                    if (e ??= !this.app.showMenu, this.app.showDeathScreen) return !1;
-                    if (this.app.showMenu = e, this.actions.stopMovement(e), e) this.events.$emit("menu-opened");
-                    else {
-                        let t = document.activeElement;
-                        t?.id !== "chatbox-input" && l.view.focus(), this.stopMovePackets = 0, v()
-                    }
-                    return e
-                }
-
-                updateStats(e) {
-                    this.events.$emit("stats-changed", {
-                        ping: e,
-                        fps: Math.round(this.ticker.FPS),
-                        mass: this.score,
-                        score: this.highestScore
-                    }), this.events.$emit("minimap-stats-changed", {
-                        playerCount: this.playerManager.playerCount,
-                        spectators: y.spectators
-                    })
-                }
-
-                static everySecond() {
-                    (C.isAlive(!1) || C.isAlive(!0)) && C.timeAlive++, C.nwData > C.nwDataMax && (C.nwDataMax = C.nwData), C.nwDataTotal += C.nwData;
-                    let {
-                        connection: e
-                    } = C, {
-                        debugElement: t
-                    } = C;
-                    if (t) {
-                        if ((r.debugStats || r.clientStats) && e.opened) {
-                            let s = C.dual.connected;
-                            let i = "";
-
-                            if (r.debugStats && !C.replaying) {
-                                i += `
-                                    <b>Net:</b> ${(C.nwData / 1024).toFixed(0)} Kb/s <br>
-                                    <b>Net peak:</b> ${(C.nwDataMax / 1024).toFixed(0)} Kb/s <br>
-                                    <b>Net total:</b> ${(C.nwDataTotal / 1024 / 1024).toFixed(0)} MB <br>
-                                `;
-                            }
-
-                            if (r.clientStats) {
-                                let {
-                                    x: a,
-                                    y: n
-                                } = C.mouse;
-                                i += `
-                                    <b>Mouse x:</b> ${a.toFixed(0)} y: ${n.toFixed(0)} <br>
-                                    ${s ? `<b>Dual PID:</b> ${C.dualboxPid} <br>` : ""}
-                                    <b>PID:</b> ${C.playerId} <br>
-                                    <b>Cells in server:</b> ${C.allCells.size} <br>
-                                `;
-                            }
-
-                            t.innerHTML = i;
-                        } else if (t.innerHTML !== "") {
-                            t.innerHTML = "";
-                        }
-                    }
-                    C.nwData = 0, e.opened && e.ping();
-                    let {
-                        dual: o
-                    } = C;
-                    o.connected && (o.pingStamp = performance.now(), e.sendOpcode(3, !0))
-                }
-
-                clearCells() {
-                    this.cells.forEach(e => e.destroy(1));
-                    let {
-                        destroyedCells: e
-                    } = this;
-                    for (; e.length;) e.pop().destroySprite()
-                }
-
-                onTick() {
-                    let e = this.timeStamp = performance.now();
-                    e >= this.moveWaitUntil && (this.updateMouse(), this.splitCount = 0);
-                    let {
-                        destroyedCells: t
-                    } = this, s = t.length;
-                    for (; s--;) {
-                        let i = t[s];
-                        i.update() && (i.destroySprite(), t.splice(s, 1))
-                    }
-                    let a = 0;
-                    this.allCells.forEach(e => {
-                        e.update(), e.pid == this.activePid && a++
-                    }), this.cellCount != a && (this.cellCount = a, this.events.$emit("cells-changed", a));
-                    let {
-                        scene: n
-                    } = this;
-                    n.sort();
-                    let o = this.updateCamera();
-                    if (o) {
-                        this.score = o;
-                        let {
-                            highestScore: r
-                        } = this;
-                        this.highestScore = r ? r < o ? o : r : o
-                    } else this.isAlive(!0) || this.isAlive(!1) || (this.score = 0);
-                    this.renderer.render(n.container)
-                }
-
-                updateCamera(e = !1) {
-                    let {
-                            scene: t,
-                            camera: s
-                        } = this, i = this.timeStamp - s.time, a = m(i / r.cameraMoveDelay, 0, 1),
-                        n = m(i / r.cameraZoomDelay, 0, 1), o = t.container.pivot.x = 1 == a ? s.nx : A(s.ox, s.nx, a),
-                        l = t.container.pivot.y = 1 == a ? s.ny : A(s.oy, s.ny, a),
-                        c = 1 == n ? s.nz : A(s.oz, s.nz, n);
-                    t.container.scale.set(c);
-                    let h = this.mouseZoom,
-                        d = 0,
-                        p = 0,
-                        u = 0;
-                    if (this.spectating) {
-                        let {
-                            sx: g,
-                            sy: v
-                        } = s;
-                        d = g, p = v
-                    } else {
-                        let f = !1;
-                        if (!this.replaying) {
-                            let {
-                                dual: y
-                            } = this;
-                            if (y.connected) {
-                                let w = y.getDistanceFromOwner();
-                                f = !!r.singleView || null == w || w > 8e3
-                            }
-                        }
-                        let I = 0,
-                            k;
-                        for (k of this.ownedCells.values()) {
-                            if (f && k.pid != C.activePid) continue;
-                            let b = Math.round(Math.pow(k.nSize / 10, 2));
-                            d += k.nx * b, p += k.ny * b, I += k.nSize, u += b
-                        }
-                        u ? (d /= u, p /= u, r.autoZoom && (h *= Math.pow(Math.min(64 / I, 1), .27))) : (d = s.nx, p = s.ny)
-                    }
-                    return e ? (s.ox = o, s.oy = l, s.oz = c, s.nx = d, s.ny = p, s.nz = h, s.time = this.timeStamp, 0) : u
-                }
-
-                updateMouse(e = !1) {
-                    let t = this.scene.container,
-                        {
-                            x: s,
-                            y: i
-                        } = this.rawMouse;
-                    "client" in window && (client.mouse = {
-                        x: s,
-                        y: i
-                    }), (!this.mouseFrozen || e) && (this.mouse.x = m(t.pivot.x + (s - window.innerWidth / 2) / t.scale.x, -32768, 32767), this.mouse.y = m(t.pivot.y + (i - window.innerHeight / 2) / t.scale.y, -32768, 32767))
-                }
-
-                seededRandom(e) {
-                    return (e = Math.sin(e) * (1e4 + this.instanceSeed)) - Math.floor(e)
-                }
-
-                createThumbnail(e = 240, t = 135) {
-                    let s = this.scene.container,
-                        i = new PIXI.Container;
-                    i.pivot.x = s.position.x, i.pivot.y = s.position.y, i.position.x = e / 2, i.position.y = t / 2, i.scale.set(.25), i.addChild(s);
-                    let {
-                        renderer: a
-                    } = this, n = PIXI.RenderTexture.create(e, t);
-                    a.render(i, n), i.removeChild(s);
-                    let o = a.plugins.extract.canvas(n),
-                        l = document.createElement("canvas");
-                    l.width = e, l.height = t;
-                    let c = l.getContext("2d");
-                    c.beginPath(), c.rect(0, 0, e, t), c.fillStyle = "#" + r.backgroundColor, c.fill(), c.drawImage(o, 0, 0, e, t);
-                    let h = l.toDataURL();
-                    return i.destroy(!0), h
-                }
-
-                setTagId(e) {
-                    return e || (e = null), e !== this.tagId && (this.tagId = e, !0)
-                }
-
-                getMassText(e) {
-                    return !r.shortMass || e < 1e3 ? e.toFixed(0) : (e / 1e3).toFixed(1) + "k"
-                }
-
-                shouldAutoRespawn(e) {
-                    return !this.app.showMenu && (e ? r.dualAutorespawn : r.autoRespawn)
-                }
-
-                triggerDeathDelay(e) {
-                    function getConvertedTimeToSeconds(str) {
-                        if (typeof str !== 'string') return 0;
-                        return str.split(' ').reduce((total, part) => {
-                            const value = parseFloat(part);
-                            if (part.endsWith('s')) return total + value;
-                            if (part.endsWith('m')) return total + value * 60;
-                            if (part.endsWith('h')) return total + value * 3600;
-                            return total;
-                        }, 0);
-                    }
-
-                    function getConvertedStringToNumber(str) {
-                        if (typeof str !== 'string') return 0;
-                        return parseFloat(str.replace(/,|\s+/g, ''));
-                    }
-
-                    function updateRespawn(e, that) {
-                        const titlemod = document.querySelector('titlemod');
-                        if (titlemod) titlemod.remove();
-
-                        clearTimeout(that.deathTimeout);
-                        delete that.deathTimeout;
-
-                        if (e) {
-                            delete that.dual.autoRespawning;
-                        } else {
-                            y.deathDelay = false;
-                            y.autoRespawning = false;
-                        }
-
-                        that.killCount = 0;
-                        that.timeAlive = 0;
-                    }
-
-                    function updateStatBar(that) {
-                        const statBarItem = `
-                            <i class="fas fa-skull barIcon"></i>
-                            <p class="statBarKills">${that.killCount}</p>
-                            <i class="fas fa-clock barIcon"></i>
-                            <p class="statBarTime">${that.timeAlive.toString().toHHMMSS()}</p>
-                            <i class="fas fa-trophy barIcon"></i>
-                            <p class="statBarScore">${that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                        `;
-
-                        document.querySelector('.statBar').innerHTML = statBarItem;
-                    }
-
-                    function updateStatData(that) {
-                        localStorage.setItem('sT', (parseInt(getLocalStorageItem('sT', '0')) + getConvertedTimeToSeconds(that.timeAlive.toString().toHHMMSS())).toString());
-                        localStorage.setItem('sM', (parseInt(getLocalStorageItem('sM', '0')) + getConvertedStringToNumber(that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))).toString());
-                        localStorage.setItem('sK', (parseInt(getLocalStorageItem('sK', '0')) + that.killCount).toString());
-                        localStorage.setItem('sG', (parseInt(getLocalStorageItem('sG', '1')) + 1).toString());
-                    }
-
-                    updateStatBar(this);
-                    updateStatData(this);
-                    updateRespawn(e, this);
-                }
-
-                triggerAutoRespawn(e) {
-                    if (e) {
-                        let {
-                            dual: t
-                        } = this;
-                        t.autoRespawning = !1, t.spawn()
-                    } else y.deathDelay = !1, y.autoRespawning = !1, this.actions.join()
-                }
-
-                handleDeath(e, t) {
-                    e.readUInt16LE(), this.killCount += e.readUInt16LE(), e.readUInt32LE(), t || (y.deathDelay = !0);
-                    let {
-                        dual: s
-                    } = this;
-                    this.shouldAutoRespawn(t) ? t ? (s.autoRespawning = !0, s.ticksSinceDeath = 0) : (y.autoRespawning = !0, this.ticksSinceDeath = 0) : this.deathTimeout = setTimeout(this.triggerDeathDelay.bind(this, t), 900), s.updateOutlines()
-                }
-
-                parseLeaderboard(e) {
-                    let t = [];
-                    for (; ;) {
-                        let s = e.readUInt16LE();
-                        if (0 == s) {
-                            this.events.$emit("leaderboard-update", t);
-                            return
-                        }
-                        let i = this.playerManager.getPlayer(s);
-                        if (!i) continue;
-                        let a = {
-                            pid: s,
-                            position: t.length + 1,
-                            text: i.name,
-                            color: getUserColor(i.bot, i.name, s, '#'),
-                            badge: getUserField(i.name, s, 'ba', null),
-                            badgeVanilla: getUserFieldVanilla(i.name, s, "perk_badges", null),
-                            bold: !!i.nameColor
-                        };
-                        t.push(a)
-                    }
-                }
-
-                parseScrimmageLeaderboard(e) {
-                    let t = [];
-                    for (; ;) {
-                        let s = e.readUInt8();
-                        if (0 == s) break;
-                        let i = {};
-                        if (1 & s && (i.position = e.readUInt8()), 2 & s && (i.pid = e.readUInt16LE()), 4 & s) i.text = e.readEscapedString(), i.color = "#ffffff";
-                        else {
-                            let a = 2 & s && this.playerManager.getPlayer(i.pid);
-                            i.text = a ? a.name : "n/a"
-                        }
-                        8 & s && (i.score = e.readEscapedString()), 16 & s && (i.color = "#" + ("00" + e.readUInt8().toString(16)).slice(-2) + ("00" + e.readUInt8().toString(16)).slice(-2) + ("00" + e.readUInt8().toString(16)).slice(-2)), 32 & s && (i.bold = !0), 64 & s && (i.link = e.readEscapedString()), t.push(i)
-                    }
-                    let n = null;
-                    if (e.offset !== e.length) {
-                        let o = e.readEscapedString();
-                        n = {
-                            visible: 0 != o.length,
-                            text: o
-                        }
-                    }
-                    this.events.$emit("leaderboard-update", t, n)
-                }
-
-                parseMinimap(e) {
-                    let t = [];
-                    for (; ;) {
-                        let s = e.readUInt16LE();
-                        if (0 == s) {
-                            this.events.$emit("minimap-positions", t);
-                            return
-                        }
-                        e.offset++;
-                        let i = e.readUInt8(),
-                            a = e.readUInt8();
-                        t.push({
-                            pid: s,
-                            x: i / 255,
-                            y: a / 255
-                        })
-                    }
-                }
-
-                parsePlayers(data) {
-                    let playersData = JSON.parse(data.readEscapedString());
-                    let currentPlayer = playersData.find(player => player.pid === this.playerId);
-                    let tagUpdated = currentPlayer && this.setTagId(currentPlayer.tagId);
-                    let {
-                        playerManager
-                    } = this;
-                    let updatedPlayers = [];
-
-                    for (let player of playersData) {
-                        let updatedPlayer = playerManager.setPlayerData(player);
-                        updatedPlayers.push(updatedPlayer);
-                        if (player.pid) {
-                            currentServerPlayersList[player.pid] = player;
-                        }
-                    }
-
-                    if (tagUpdated) {
-                        this.events.$emit("minimap-positions", []);
-                        playerManager.invalidateVisibility(updatedPlayers);
-                    }
-                }
-
-                parseMessage(buffer) {
-                    let messageType = buffer.readUInt8();
-
-                    switch (messageType) {
-                        case 1: {
-                            let data = d(buffer);
-                            this.initialDataPacket = buffer.view;
-                            this.start(data);
-                            return;
-                        }
-                        case 2: {
-                            let joinDataArray = new Uint8Array(buffer.buffer, 1);
-                            this.connection.sendJoinData(new a(joinDataArray).build(), false);
-                            return;
-                        }
-                        case 3: {
-                            let pingTime = performance.now() - this.pingStamp;
-                            this.updateStats(Math.round(pingTime));
-                            return;
-                        }
-                        case 4: {
-                            let {
-                                playerManager
-                            } = this;
-                            while (true) {
-                                let playerId = buffer.readUInt16LE();
-                                if (playerId === 0) return;
-                                playerManager.delayedRemovePlayer(playerId);
-                            }
-                        }
-                        case 6:
-                            this.connection.sendOpcode(6);
-                            return;
-                        case 7: {
-                            let crownFlags = buffer.readUInt8();
-                            let playerToUncrown, playerToCrown;
-
-                            if (crownFlags & 1) {
-                                let player1Id = buffer.readUInt16LE();
-                                playerToCrown = this.playerManager.getPlayer(player1Id);
-                            }
-                            if (crownFlags & 2) {
-                                let player2Id = buffer.readUInt16LE();
-                                playerToUncrown = this.playerManager.getPlayer(player2Id);
-                            }
-
-                            if (playerToUncrown) playerToUncrown.setCrown(false);
-                            if (playerToCrown) playerToCrown.setCrown(true);
-                            return;
-                        }
-                        case 8:
-                            if (this.dualboxPid) return;
-                            this.dualboxPid = buffer.readUInt16LE();
-                            return;
-                        case 9: {
-                            let {
-                                playerManager
-                            } = this;
-                            let currentActivePid = this.activePid;
-
-                            if (currentActivePid) {
-                                playerManager.getPlayer(currentActivePid).setOutline(16777215);
-                            }
-                            currentActivePid = this.activePid = buffer.readUInt16LE();
-                            playerManager.getPlayer(currentActivePid).setOutline(16711935);
-                            return;
-                        }
-                        case 10: {
-                            this.timeStamp = performance.now();
-                            let packetId = buffer.packetId || (buffer.packetId = this.ws.packetCount++);
-                            this.parseCells(buffer, packetId);
-                            this.updateStates(true);
-
-                            let isAlive = this.alive;
-                            if (isAlive) {
-                                this.spectating = false;
-                            }
-
-                            let {
-                                dual,
-                                replay
-                            } = this;
-
-                            if (isAlive && !this.replaying) {
-                                replay.add(buffer.view, false);
-                            } else if (!dual.alive) {
-                                replay.clear(false);
-                            }
-
-                            if (!isAlive && y.autoRespawning && ++this.ticksSinceDeath === 37) {
-                                this.triggerAutoRespawn(false);
-                            }
-
-                            this.serverTick++;
-                            this.playerManager.sweepRemovedPlayers();
-
-                            if (!dual.focused) {
-                                this.updateCamera(true);
-                            }
-                            return;
-                        }
-                        case 11:
-                            this.parseLeaderboard(buffer);
-                            return;
-                        case 12:
-                            this.parseMinimap(buffer);
-                            return;
-                        case 13: {
-                            let chat = {
-                                pid: buffer.readUInt16LE(),
-                                text: buffer.readEscapedString()
-                            };
-
-                            if (chat.pid === 0) {
-                                let {
-                                    selectedServer
-                                } = y;
-                                if (selectedServer && /Welcome to Delta,.+\!/.test(chat.text)) {
-                                    chat.text = `Connected to ${selectedServer.region} ${selectedServer.name}`;
-                                }
-                                this.events.$emit("chat-message", chat.text);
-                                return;
-                            }
-
-                            let chatPlayer = this.playerManager.getPlayer(chat.pid);
-                            if (!chatPlayer) return;
-
-                            const imageUrlData = getImageUrlFromMessage(chat.text);
-
-                            chat.from = chatPlayer.name;
-                            chat.date = showTimeMessageSettings ? getCurrentDate() : '';
-                            chat.dateColor = rainbowColorTimeMessageSettings ? generateRandomHexColor() : 'white';
-                            chat.badge = getUserField(chat.from, chat.pid, 'ba', null);
-                            chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, 'perk_badges', null);
-                            chat.nicknameColor = getUserColor(chat.bot, chat.from, chat.pid, '#');
-                            chat.imageUrl = imageUrlData ? imageUrlData.newURL : null;
-                            chat.text = imageUrlData ? chat.text.replace(imageUrlData.baseURL, '[Delta image]') : chat.text;
-
-                            this.events.$emit("chat-message", chat);
-
-                            return;
-                        }
-                        case 14: {
-                            let notificationFlags = buffer.readUInt8();
-                            let notificationData = {};
-
-                            if (notificationFlags & 2) {
-                                let typeId = buffer.readUInt8();
-                                if (typeId > 0 && typeId < 4) {
-                                    notificationData.type = {
-                                        1: "success",
-                                        2: "error",
-                                        3: "warning",
-                                        4: "info"
-                                    } [typeId];
-                                }
-                            }
-
-                            if (notificationFlags & 4) {
-                                notificationData.timer = buffer.readUInt16LE();
-                            }
-
-                            let notificationTitle = buffer.readEscapedString();
-                            notificationData.title = f(notificationTitle);
-                            n.toast.fire(notificationData);
-
-                            return;
-                        }
-                        case 15: {
-                            let {
-                                playerManager
-                            } = this;
-
-                            while (true) {
-                                let playerId = buffer.readUInt16LE();
-                                if (playerId === 0) return;
-
-                                let playerName = buffer.readString16();
-                                let playerSkinUrl = buffer.readEscapedString();
-                                let playerData = {
-                                    pid: playerId,
-                                    nickname: playerName,
-                                    skinUrl: playerSkinUrl
-                                };
-
-                                playerManager.setPlayerData(playerData);
-                            }
-                        }
-                        case 16:
-                            this.parsePlayers(buffer);
-                            return;
-                        case 17:
-                            C.camera.sx = buffer.readInt16LE();
-                            C.camera.sy = buffer.readInt16LE();
-                            return;
-                        case 18: {
-                            let {
-                                replay
-                            } = this;
-                            replay.clear(false);
-                            this.clearCells();
-                            return;
-                        }
-                        case 19: {
-                            let hasLevelUp = buffer.readUInt8() !== 0;
-                            this.events.$emit("xp-update", buffer.readUInt32LE());
-
-                            if (hasLevelUp) {
-                                let level = buffer.readUInt16LE();
-                                let levelUpMessage = atob("WW91IGhhdmUgcmVhY2hlZCBsZXZlbA==");
-                                n.toast.fire({
-                                    background: "#b58b00",
-                                    title: `${levelUpMessage} ${level}!`,
-                                    type: "success",
-                                    timer: 4000
-                                });
-                            }
-                            return;
-                        }
-                        case 20:
-                            this.handleDeath(buffer, false);
-                            return;
-                        case 21:
-                        case 27:
-                            return;
-                        case 22:
-                            if (!window.grecaptcha) {
-                                alert("Captcha library is not loaded");
-                                return;
-                            }
-                            this.events.$emit("show-image-captcha");
-                            return;
-                        case 23:
-                            y.spectators = buffer.readUInt16LE();
-                            return;
-                        case 24:
-                            this.serverTick = buffer.readUInt32LE();
-                            this.events.$emit("restart-timing-changed", buffer.readUInt32LE());
-                            return;
-                        case 25:
-                            this.events.$emit("update-cautions", {
-                                custom: buffer.readEscapedString()
-                            });
-                            return;
-                        case 26:
-                            y.playButtonDisabled = !!buffer.readUInt8();
-                            if (buffer.length > buffer.offset + 1) {
-                                y.playButtonText = buffer.readEscapedString() || "Play";
-                            }
-                            return;
-                        case 28:
-                            C.parseScrimmageLeaderboard(buffer);
-                            return;
-                    }
-                }
-            }
-
-            e.exports = C = window.GAME = new k
-        }, , , function (e) {
-            var t = {
-                useWebGL: !0,
-                gameResolution: 1,
-                smallTextThreshold: 40,
-                autoZoom: !1,
-                rememeberEjecting: !0,
-                autoRespawn: !1,
-                mouseFreezeSoft: !0,
-                drawDelay: 120,
-                cameraMoveDelay: 150,
-                cameraZoomDelay: 150,
-                cameraZoomSpeed: 10,
-                replayDuration: 8,
-                showReplaySaved: 2,
-                showNames: 2,
-                showMass: 2,
-                showSkins: 1,
-                showOwnName: !0,
-                showOwnMass: !0,
-                showOwnSkin: !0,
-                showCrown: !0,
-                foodVisible: !0,
-                eatAnimation: !0,
-                showHud: !0,
-                showLeaderboard: !0,
-                showServerName: !1,
-                showChat: !0,
-                showChatToast: !1,
-                minimapEnabled: !0,
-                minimapLocations: !0,
-                showFPS: !0,
-                showPing: !0,
-                showCellCount: !0,
-                showPlayerScore: !1,
-                showPlayerMass: !0,
-                showClock: !1,
-                showSessionTime: !1,
-                showPlayerCount: !1,
-                showSpectators: !1,
-                showRestartTiming: !1,
-                showBlockedMessageCount: !0,
-                filterChatMessages: !0,
-                clearChatMessages: !0,
-                backgroundColor: "101010",
-                borderColor: "202020",
-                foodColor: "ffffff",
-                ejectedColor: "ffffff",
-                cellNameOutlineColor: "000000",
-                cursorImageUrl: null,
-                backgroundImageUrl: "img/background.png",
-                virusImageUrl: "https://i.ibb.co/V9tdfcY/i.png",
-                cellMassColor: "ffffff",
-                cellMassOutlineColor: "000000",
-                cellNameFont: "Montserrat",
-                cellNameWeight: 1,
-                cellNameOutline: 2,
-                cellNameSmoothOutline: !0,
-                cellLongNameThreshold: 750,
-                cellMassFont: "Montserrat",
-                cellMassWeight: 2,
-                cellMassOutline: 2,
-                cellMassTextSize: 0,
-                cellMassSmoothOutline: !0,
-                shortMass: !0,
-                showBackgroundImage: !1,
-                backgroundImageRepeat: !0,
-                backgroundDefaultIfUnequal: !0,
-                backgroundImageOpacity: .6,
-                showBackgroundLocationImage: !1,
-                backgroundLocationImageOpacity: .1,
-                useFoodColor: !1,
-                namesEnabled: !0,
-                skinsEnabled: !0,
-                massEnabled: !0,
-                showLocations: !1,
-                cellBorderSize: 1,
-                autoHideReplayControls: !1,
-                minimapSize: 220,
-                minimapFPS: 30,
-                minimapSmoothing: .08,
-                dualColor: "ff00af",
-                dualSkin: "https://skins.vanis.io/s/Qkfih2",
-                dualActive: 1,
-                dualActiveCellBorderSize: 15,
-                dualAutorespawn: !1,
-                dualArrow: "https://i.ibb.co/Tbr7M8J/i.png",
-                gameAlpha: 1,
-                dualNickname: "Delta Dual",
-                dualUseNickname: !1,
-                debugStats: !1,
-                clientStats: !1,
-                playerStats: !0,
-                showCellLines: !1,
-                showTag: !1,
-                showTimeMessage: !1,
-                rainbowColorTimeMessage: !1,
-                showDir: !1,
-                chatColorOnlyPeople: !1
-            };
-
-            function s(e) {
-                switch (e) {
-                    case 2:
-                        return "bold";
-                    case 0:
-                        return "thin";
-                    default:
-                        return "normal"
-                }
-            }
-
-            function i(e, t) {
-                var s;
-                switch (e) {
-                    case 3:
-                        s = t / 5;
-                        break;
-                    case 1:
-                        s = t / 20;
-                        break;
-                    default:
-                        s = t / 10
-                }
-                return Math.ceil(s)
-            }
-
-            e.exports = window.settings = new class {
-                constructor() {
-                    this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle();
-                    showTimeMessageSettings = this.userDefinedSettings.showTimeMessage || false, rainbowColorTimeMessageSettings = this.userDefinedSettings.rainbowColorTimeMessage || false;
-                }
-
-                getInternalSettings() {
-                    this.cellSize = 512
-                }
-
-                compileNameFontStyle() {
-                    var e = {
-                        fontFamily: this.cellNameFont,
-                        fontSize: 80,
-                        fontWeight: s(this.cellNameWeight)
-                    };
-                    return this.cellNameOutline && (e.stroke = PIXI.utils.string2hex(this.cellNameOutlineColor), e.strokeThickness = i(this.cellNameOutline, e.fontSize), e.lineJoin = this.cellNameSmoothOutline ? "round" : "miter"), this.nameTextStyle = e
-                }
-
-                compileMassFontStyle() {
-                    var e = {
-                        fontFamily: this.cellMassFont,
-                        fontSize: 56 + 20 * this.cellMassTextSize,
-                        fontWeight: s(this.cellMassWeight),
-                        lineJoin: "round",
-                        fill: PIXI.utils.string2hex(this.cellMassColor)
-                    };
-                    return this.cellMassOutline && (e.stroke = PIXI.utils.string2hex(this.cellMassOutlineColor), e.strokeThickness = i(this.cellMassOutline, e.fontSize), e.lineJoin = this.cellMassSmoothOutline ? "round" : "miter"), this.massTextStyle = e
-                }
-
-                loadUserDefinedSettings() {
-                    if (!localStorage.settings) return {};
-                    try {
-                        return JSON.parse(localStorage.settings)
-                    } catch (e) {
-                        return {}
-                    }
-                }
-
-                getDefault(e) {
-                    return t[e]
-                }
-
-                set(e, t) {
-                    return this[e] !== t && (this[e] = t, this.userDefinedSettings[e] = t, localStorage.settings = JSON.stringify(this.userDefinedSettings), !0)
-                }
-            }
-        }, function (e, t, s) {
-            var i = s(270).default,
-                a = i.mixin({
-                    toast: !0,
-                    position: "top",
-                    showConfirmButton: !1,
-                    showCloseButton: !0
-                });
-            window.Swal = i, window.SwalAlerts = e.exports = {
-                toast: a,
-                alert: function (e) {
-                    i.fire({
-                        text: e,
-                        confirmButtonText: "OK"
-                    })
-                },
-                confirm: function (e, t, s) {
-                    i.fire({
-                        text: e,
-                        showCancelButton: !0,
-                        confirmButtonText: "Continue"
-                    }).then(e => {
-                        e.value ? t() : s && s()
-                    })
-                },
-                instance: i
-            }
-        }, , , function (e, t, s) {
-            let i = s(4),
-                a = !1;
-            e.exports = {
-                lerp: (e, t, s) => e + (t - e) * s,
-                clampNumber: (e, t, s) => Math.min(s, Math.max(t, e)),
-                getTimeString: function (e, t, s) {
-                    e instanceof Date && (e = e.getTime());
-                    var i = t ? 1 : 1e3,
-                        a = 60 * i,
-                        n = 60 * a;
-                    if (e < i) return "1 second";
-                    for (var o = [24 * n, n, a, i], r = ["day", "hour", "minute", "second"], l = !1, c = [], h = 0; h < o.length; h++) {
-                        var d = o[h],
-                            p = Math.floor(e / d);
-                        if (p) {
-                            var u = r[h],
-                                g = p > 1 ? "s" : "";
-                            c.push(p + " " + u + g), e %= d
-                        }
-                        if (l) break;
-                        p && !s && (l = !0)
-                    }
-                    return c.join(", ")
-                },
-                encodeHTML: e => e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, "&apos;").replace(/"/g, "&quot;"),
-                getTimestamp() {
-                    let e = new Date,
-                        t = e.getFullYear(),
-                        s = e.getMonth() + 1,
-                        i = e.getDate(),
-                        a = [t, (s > 9 ? "" : "0") + s, (i > 9 ? "" : "0") + i].join(""),
-                        n = [("0" + e.getHours()).slice(-2), ("0" + e.getMinutes()).slice(-2), ("0" + e.getSeconds()).slice(-2)].join("");
-                    return a + "-" + n
-                },
-                loadImage: e => fetch(e, {
-                    mode: "cors"
-                }).then(e => e.blob()).then(e => createImageBitmap(e)),
-                hideCaptchaBadge() {
-                    a || (document.body.classList.add("hide-captcha-badge"), a = !0)
-                },
-                destroyPixiPlugins(e) {
-                    ["interaction", "accessibility"].forEach(t => {
-                        let s = e.plugins[t];
-                        s && (s.destroy(), delete e.plugins[t])
-                    })
-                },
-                writeUserData(e, t) {
-                    let s = t && i.dualUseNickname ? i.dualNickname || "Delta Dual" : document.getElementById("nickname").value,
-                        a = t ? i.dualSkin || "https://skins.vanis.io/s/Qkfih2" : document.getElementById("skinurl").value,
-                        n = document.getElementById("teamtag").value;
-                    e.writeEscapedStringNT(s), e.writeEscapedStringNT(a), e.writeEscapedStringNT(n)
-                }
-            }
-        }, , , , function (e, t, s) {
-            let i = s(4);
-
-            class a {
-                constructor() {
-                    this.cache = new Map, this.textureSize = i.cellSize, this.cellSize = this.textureSize / 2
-                }
-
-                destroyCache() {
-                    let {
-                        cache: e
-                    } = this;
-                    e.forEach(e => e.destroy(!0)), e.clear()
-                }
-            }
-
-            let n = s(24),
-                o = s(124);
-            e.exports = {
-                cells: new class e extends a {
-                    getTexture(e) {
-                        let {
-                            cache: t
-                        } = this;
-                        if (t.has(e)) return t.get(e);
-                        {
-                            let {
-                                cellSize: s,
-                                textureSize: i
-                            } = this, a = new PIXI.Graphics().beginFill(e).drawCircle(0, 0, s).endFill();
-                            a.position.set(s);
-                            let o = PIXI.RenderTexture.create(i, i);
-                            return t.set(e, o), n.render(a, o), o
-                        }
-                    }
-                },
-                squares: new class e extends a {
-                    getTexture(e) {
-                        let {
-                            cache: t
-                        } = this;
-                        if (t.has(e)) return t.get(e);
-                        {
-                            let {
-                                cellSize: s,
-                                textureSize: i
-                            } = this, a = new PIXI.Graphics().beginFill(e).drawRect(-s, -s, 2 * s, 2 * s).endFill();
-                            a.position.set(s);
-                            let o = PIXI.RenderTexture.create(i, i);
-                            return t.set(e, o), n.render(a, o), o
-                        }
-                    }
-                },
-                virus: o
-            }
-        }, , function (e, t, s) {
-            let i = s(1),
-                a = s(4),
-                {
-                    cells: n
-                } = s(12),
-                {
-                    clampNumber: o
-                } = s(8);
-
-            class r {
-                constructor({
-                                id: e,
-                                x: t,
-                                y: s,
-                                size: i,
-                                flags: a,
-                                texture: o,
-                                context: r
-                            }) {
-                    o = o || n.getTexture(0), this.flags = a, this.oSize = this.size = i, this.destroyed = !1, this.id = e || 0;
-                    let l = this.sprite = new PIXI.Sprite(this.texture = o);
-                    l.anchor.set(.5), l.gameData = this, this.x = this.ox = l.position.x = t, this.y = this.oy = this.sprite.position.y = s, this.mainContext = r, this.activeContexts = 1
-                }
-
-                update() {
-                    let e = i.timeStamp - this.updateStamp,
-                        t = o(e / a.drawDelay, 0, 1);
-                    if (this.destroyed && (1 === t || this.texture.clearedFromCache)) return !0;
-                    let s = 2 * (this.size = t * (this.nSize - this.oSize) + this.oSize),
-                        {
-                            sprite: n
-                        } = this;
-                    if (!n) return !0;
-                    n.width = n.height = s;
-                    let {
-                        position: r
-                    } = n;
-                    return r.x = this.x = t * this.newPositionScale * (this.nx - this.ox) + this.ox, r.y = this.y = t * this.newPositionScale * (this.ny - this.oy) + this.oy, this.onUpdate && this.onUpdate(), !1
-                }
-
-                destroy(e, t = !1) {
-                    if (this.destroyed) return !1;
-                    let {
-                        dual: s
-                    } = i, {
-                        cells: a
-                    } = 1 & e ? i : s, {
-                        id: n
-                    } = this;
-                    if (a.delete(n), s.opened) {
-                        let o = this.mainContext,
-                            r = --this.activeContexts;
-                        if (o == e) {
-                            let {
-                                cells: l
-                            } = 2 & e ? i : s;
-                            if (l.has(n)) return this.mainContext = 1 & e ? 2 : 1, !1
-                        }
-                        if (0 != r) return !1
-                    }
-                    return this.onDestroy && this.onDestroy(), this.pid && i.ownedCells.delete(this), this.destroyed = !0, t ? i.destroyedCells.push(this) : this.destroySprite(), !0
-                }
-
-                destroySprite() {
-                    this.sprite && (this.sprite.destroy(), this.sprite = null)
-                }
-            }
-
-            r.prototype.type = 0, r.prototype.updateStamp = 0, r.prototype.newPositionScale = 1, e.exports = r
-        }, , , function (e, t, s) {
-            var i = s(5);
-
-            function a() {
-                i.instance.fire({
-                    type: "warning",
-                    title: "Browser support limited",
-                    html: "Skins might not work properly in this browser.<br>Please consider using Chrome.",
-                    allowOutsideClick: !1
-                })
-            }
-
-            function n(e) {
-                for (var t = "", s = 0; s < e.length; s++) t += String.fromCharCode(e.charCodeAt(s) - 2);
-                return t
-            }
-
-            var o = ["pkiigt", "p3iigt", "pkii5t", "pkiic", "p3iic", "p3ii6", "pkii", "p3ii", "p3i", "hciiqv", "h6iiqv", "hcii2v", "hci", "cpcn", "cuujqng", "ewpv", "rwuu{", "xcikpc", "xci3pc", "eqem", "e2em", "uewo", "ycpm", "yjqtg", "yj2tg", "unwv", "dkvej", "d3vej", "rqtp", "r2tp", "tcrg", "t6rg", "jkvngt", "j3vngt", "jkvn5t", "j3vn5t", "pc|k", "p6|k", "tgvctf", "ejkpm", "hwem", "ujkv"],
-                r = o.map(n),
-                l = o.map(n).sort((e, t) => t.length - e.length).map(e => RegExp("[^s]*" + e.split("").join("s*") + "[^s]*", "gi"));
-            e.exports = {
-                noop: function () {
-                },
-                checkBadWords: function (e) {
-                    return e = e.toLowerCase(), r.some(t => e.includes(t))
-                },
-                replaceBadWordsChat: function (e) {
-                    for (var t = 0; t < l.length; t++) e = e.replace(l[t], e => Array(e.length).fill("*").join(""));
-                    return e
-                },
-                notifyUnsupportedBrowser: async function () {
-                    window.safari || /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ? i.instance.fire({
-                        type: "warning",
-                        title: "Safari browser is not supported :(",
-                        html: "Please consider using Google Chrome.",
-                        allowOutsideClick: !1,
-                        showCloseButton: !1,
-                        showCancelButton: !1,
-                        showConfirmButton: !1
-                    }) : !localStorage.skipUnsupportedAlert && ((localStorage.skipUnsupportedAlert = !0, navigator.userAgent.toLowerCase().includes("edge")) ? a() : await new Promise(e => {
-                        var t = new Image;
-                        t.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA", t.onload = t.onerror = () => {
-                            e(2 === t.height)
-                        }
-                    }) || a())
-                },
-                isFirstVisit: !localStorage.visitedBefore && (localStorage.visitedBefore = !0, !0)
-            }
-        }, , , , , , , function (e, t, s) {
-            var i = s(4),
-                a = s(8);
-            PIXI.utils.skipHello();
-            var n = document.getElementById("canvas"),
-                o = {
-                    resolution: i.customResolution || window.devicePixelRatio || 1,
-                    view: n,
-                    forceCanvas: !i.useWebGL,
-                    antialias: !1,
-                    powerPreference: "high-performance",
-                    backgroundColor: PIXI.utils.string2hex(i.backgroundColor)
-                };
-            o.resolution = i.gameResolution;
-            var r = PIXI.autoDetectRenderer(o);
-
-            function l() {
-                r.resize(window.innerWidth, window.innerHeight)
-            }
-
-            l(), a.destroyPixiPlugins(r), window.addEventListener("resize", l), r.clear(), e.exports = r
-        }, function (e) {
-            function t() {
-                this.data = []
-            }
-
-            e.exports = t, t.prototype.write = function () {
-                return new Uint8Array(this.data)
-            }, t.prototype.uint8 = function (e) {
-                this.data.push(e)
-            }, t.prototype.uint8Array = function (e) {
-                for (var t = 0; t < e.length; t++) this.data.push(e[t])
-            }, t.prototype.utf8 = function (e) {
-                e = unescape(encodeURIComponent(e));
-                for (var t = 0; t < e.length; t++) this.data.push(e.charCodeAt(t));
-                this.data.push(0)
-            }
-        }, , , , function (e, t, s) {
-            var i = s(2),
-                a = s(167);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(31),
-                a = s.n(i);
-            t.default = a.a
-        }, function (e) {
-            e.exports = {
-                data: () => ({})
-            }
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(169);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(171);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(173);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(175);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(177);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(179);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(39),
-                a = s.n(i);
-            t.default = a.a
-        }, function (e, t, s) {
-            var i = s(89),
-                a = s(1),
-                n = s(5),
-                o = a.replay.database;
-            e.exports = {
-                props: ["replay"],
-                methods: {
-                    async play(e) {
-                        if (!a.connection.opened || await new Promise(e => {
-                            n.confirm("You will be disconnected", () => e(!0), () => e(!1))
-                        })) try {
-                            a.replay.play(e)
-                        } catch (t) {
-                            sendTimedSwal(`Watching replay error`, `Waching replays on Delta currently does not work, please watch them with Single mode or render them!`, 3000, false);
-                            a.stop();
-                        }
-                    },
-                    downloadReplay(e) {
-                        n.instance.fire({
-                            input: "text",
-                            inputValue: e.name,
-                            showCancelButton: !0,
-                            confirmButtonText: "Download",
-                            html: "Only Vanis.io can read replay files.<br>It consists of player positions and other game related data."
-                        }).then(t => {
-                            var s = t.value;
-                            if (s) {
-                                var a = new Blob([e.data], {
-                                    type: "text/plain;charset=utf-8"
-                                });
-                                i.saveAs(a, s + ".vanis")
-                            }
-                        })
-                    },
-                    deleteReplay(e) {
-                        n.confirm("Are you sure that you want to delete this replay?", () => {
-                            o.removeItem(e, () => {
-                                a.events.$emit("replay-removed")
-                            })
-                        })
-                    }
-                }
-            }
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(219);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(221);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(223);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(225);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(227);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(231);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(233);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(235);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(237);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(239);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(241);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(243);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(245);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(247);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(249);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(56),
-                a = s.n(i);
-            t.default = a.a
-        }, function (e, t, s) {
-            var i = s(1),
-                a = s(8),
-                n = s(4),
-                o = n.minimapSize,
-                r = n.minimapFPS,
-                l = n.minimapSmoothing,
-                c = new PIXI.Container,
-                h = {};
-
-            function d() {
+    var t, e = {
+        2: (t, e, s) => {
+            var a = s(1620), i = s(3658), {R: n} = s(3658), r = a.T.S, o = a.T.U, l = a.T.V, c = new PIXI.Container,
+                u = {};
+
+            function h() {
                 return (new Date).toLocaleTimeString()
             }
 
-            function p(e, t = !1) {
-                if (t && e < 1) return "instant";
-                e = Math.floor(e);
-                let s = Math.floor(e / 60),
-                    i = Math.floor(s / 60);
-                return s < 1 ? t ? e + "s" : "<1min" : i < 1 ? s + "min" : s % 60 == 0 ? i + "hr" : i + "hr " + s % 60 + "min"
+            function d(t, e = !1) {
+                if (e && t < 1) return "instant";
+                t = Math.floor(t);
+                const s = Math.floor(t / 60), a = Math.floor(s / 60);
+                return s < 1 ? e ? `${t}s` : "<1min" : a < 1 ? `${s}min` : s % 60 == 0 ? `${a}hr` : `${a}hr ${s % 60}min`
             }
 
-            e.exports = {
-                data: () => ({
-                    showMinimap: !1,
-                    showMinimapCircle: !1,
-                    showMinimapStats: !0,
-                    showLocations: n.minimapLocations,
-                    interval: null,
-                    minimapStatsBottom: 10,
-                    showClock: n.showClock,
-                    showSessionTime: n.showSessionTime,
-                    showSpectators: n.showSpectators,
-                    showPlayerCount: n.showPlayerCount,
-                    showRestartTiming: n.showRestartTiming,
-                    systemTime: d(),
-                    sessionTime: p(0, !1),
-                    restartTime: p(0, !0),
-                    spectators: 0,
-                    playerCount: 0,
-                    restartTick: 0,
-                    startTime: null,
-                    gameState: i.state
-                }),
-                computed: {
-                    playerCountDisplayed() {
-                        if (this.gameState?.selectedServer) {
-                            var slots = this.gameState.selectedServer.slots;
-                            return `${Math.min(this.playerCount, slots)} / ${slots} players`;
-                        }
-                        return `${this.playerCount} player${this.playerCount === 1 ? "" : "s"}`;
+            function p(t, e, s) {
+                t.width = t.height = r;
+                var a = t.getContext("2d"), i = r / 2;
+                if (e) {
+                    if (a.save(), s) {
+                        var n = new Path2D;
+                        n.ellipse(i, i, i, i, 0, 0, 2 * Math.PI), a.clip(n)
                     }
-                },
-                methods: {
-                    initRenderer(e) {
-                        if (!e) {
-                            console.error('Renderer initialization failed: element is undefined');
-                            return;
+                    !function (t, e) {
+                        var s = r / e;
+                        t.globalAlpha = .1, t.strokeStyle = "#202020", t.beginPath();
+                        for (var a = 1; a < e; a++) {
+                            var i = a * s;
+                            t.moveTo(i, 0), t.lineTo(i, r), t.moveTo(0, i), t.lineTo(r, i)
                         }
-                        try {
-                            var t = PIXI.autoDetectRenderer({
-                                resolution: 1,
-                                view: e,
-                                width: o,
-                                height: o,
-                                forceCanvas: !n?.useWebGL,
-                                antialias: false,
-                                powerPreference: "high-performance",
-                                transparent: true
-                            });
-                            a?.destroyPixiPlugins?.(t);
-                            t.clear();
-                            this.renderer = t;
-                        } catch (error) {
-                            console.error('Error initializing renderer:', error);
+                        t.stroke(), t.closePath()
+                    }(a, 5), function (t, e) {
+                        var s = r / e, a = s / 2;
+                        t.globalAlpha = .1, t.font = "14px Nunito", t.textAlign = "center", t.textBaseline = "middle", t.fillStyle = "#ffffff";
+                        for (var i = 0; i < e; i++) for (var n = i * s + a, o = 0; o < e; o++) {
+                            var l = String.fromCharCode(97 + o).toUpperCase() + (i + 1), c = o * s + a;
+                            t.strokeText(l, n, c), t.fillText(l, n, c)
                         }
-                    },
-                    destroyMinimap() {
-                        if (c && typeof c.destroy === 'function') {
-                            c.destroy(true);
-                            c = new PIXI.Container();
-                            this.renderer?.clear?.();
+                    }(a, 5)
+                }
+                a.restore(), s && (a.globalAlpha = .45, a.beginPath(), a.arc(i, i, i + 1, -Math.PI / 2, 0), a.lineTo(r, 0), a.closePath(), a.fill())
+            }
+
+            t.exports = {
+                data: () => ({
+                    W: !1,
+                    X: !1,
+                    Y: !0,
+                    aa: !1,
+                    ba: null,
+                    ca: !1,
+                    da: !1,
+                    ea: !1,
+                    fa: !1,
+                    ga: !1,
+                    ha: !1,
+                    ia: h(),
+                    ja: d(0, !1),
+                    ka: null,
+                    la: 0,
+                    ma: 0,
+                    na: 0,
+                    oa: 0,
+                    pa: null,
+                    qa: a.ra
+                }), computed: {
+                    sa() {
+                        if (this.qa.ta) {
+                            var t = this.qa.ta.slots;
+                            return Math.min(this.na, t) + " / " + t + " players"
                         }
-                    },
-                    onMinimapShow() {
-                        if (!this.interval) {
-                            this.showMinimap = true;
-                            this.minimapStatsBottom = o + 25;
-                            i.events.$on("minimap-positions", this.updatePositions);
-                            this.interval = setInterval(this.render, 1000 / r);
-                        }
-                    },
-                    onMinimapHide() {
-                        if (this.interval) {
-                            this.showMinimap = false;
-                            this.minimapStatsBottom = 10;
-                            i.events.$off("minimap-positions", this.updatePositions);
-                            clearInterval(this.interval);
-                            this.interval = null;
-                            this.spectators = 0;
-                            this.playerCount = 0;
-                        }
-                    },
-                    createNode(e, t, s, i) {
-                        if (h && e in h) {
-                            h[e]?.destroy?.(true);
-                        }
-                        let fillColor = s || 16777215;
-                        let textColor = i || 16777215;
-                        let a = new PIXI.Container();
-                        a.newPosition = {};
-                        let n = new PIXI.Graphics().beginFill(textColor).drawCircle(0, 0, 5).endFill();
-                        a.addChild(n);
-                        if (t) {
-                            let o = new PIXI.Text(t, {
+                        return this.na + " player" + (1 === this.na ? "" : "s")
+                    }
+                }, methods: {
+                    ua(t) {
+                        var e = PIXI.autoDetectRenderer({
+                            resolution: 1,
+                            view: t,
+                            width: r,
+                            height: r,
+                            forceCanvas: !a.T.va,
+                            antialias: !1,
+                            powerPreference: "high-performance",
+                            transparent: !0
+                        });
+                        e.clear(), this.wa = e
+                    }, xa() {
+                        c.destroy(!0), c = new PIXI.Container, this.wa.clear()
+                    }, ya() {
+                        this.ba || (this.W = !0, a.R.$on(n.za, this.Aa), this.ba = setInterval(this.Ba, 1e3 / o))
+                    }, Ca() {
+                        this.ba && (this.W = !1, a.R.$off(n.za, this.Aa), clearInterval(this.ba), this.ba = null, this.la = 0, this.na = 0)
+                    }, Da(t, e, s, a) {
+                        var i = u[t];
+                        i && i.destroy(!0), null == s && (s = 16777215), null == a && (a = 16777215);
+                        var n, r, o = new PIXI.Container;
+                        o.Ea = {}, o.addChild((n = a, (r = new PIXI.Graphics).beginFill(n), r.drawCircle(0, 0, 5), r.endFill(), r)), e && o.addChild(function (t, e) {
+                            var s = new PIXI.Text(t, {
                                 strokeThickness: 4,
                                 lineJoin: "round",
-                                fontFamily: "Montserrat",
-                                fill: fillColor,
+                                fontFamily: "Nunito",
+                                fill: e,
                                 fontSize: 12
                             });
-                            o.anchor.set(0.5);
-                            o.pivot.y = 15;
-                            a.addChild(o);
+                            return s.anchor.set(.5), s.pivot.y = 15, s
+                        }(e, s)), u[t] = o
+                    }, Fa(t) {
+                        var e = u[t];
+                        e && (e.destroy(!0), delete u[t])
+                    }, Aa(t) {
+                        c.removeChildren();
+                        for (var e = 0; e < t.length; e++) {
+                            var s = t[e], a = u[s.Ga];
+                            a && (a.Ea.x = s.Ha * r, a.Ea.y = s.Ia * r, c.addChild(a))
                         }
-                        h[e] = a;
-                    },
-                    destroyNode(e) {
-                        if (h && e in h) {
-                            h[e]?.destroy?.(true);
-                            delete h[e];
+                        this.Ba()
+                    }, Ba() {
+                        for (var t = c.children, e = l * (30 / o), s = 0; s < t.length; s++) {
+                            var a = t[s];
+                            a.position.x = i.Ja(a.position.x, a.Ea.x, e), a.position.y = i.Ja(a.position.y, a.Ea.y, e)
                         }
-                    },
-                    updatePositions(e) {
-                        if (c) {
-                            c.removeChildren();
-                            e.forEach(s => {
-                                let i = h[s.pid];
-                                if (i) {
-                                    i.newPosition.x = s.x * o;
-                                    i.newPosition.y = s.y * o;
-                                    c.addChild(i);
-                                }
-                            });
-                            this.render();
-                        }
-                    },
-                    render() {
-                        if (c && Array.isArray(c.children)) {
-                            c.children.forEach(child => {
-                                let lerpFactor = l * (30 / r);
-                                child.position.x = a.lerp(child.position.x, child.newPosition.x, lerpFactor);
-                                child.position.y = a.lerp(child.position.y, child.newPosition.y, lerpFactor);
-                            });
-                            this.renderer?.render?.(c);
-                        }
-                    },
-                    drawLocationGrid(e, t) {
-                        var s = o / t;
-                        e.globalAlpha = .1, e.strokeStyle = "#202020", e.beginPath();
-                        for (var i = 1; i < t; i++) {
-                            var a = i * s;
-                            e.moveTo(a, 0), e.lineTo(a, o), e.moveTo(0, a), e.lineTo(o, a)
-                        }
-                        e.stroke(), e.closePath()
-                    },
-                    drawLocationCodes(e, t) {
-                        var s = o / t,
-                            i = s / 2;
-                        e.globalAlpha = .1, e.font = "14px Montserrat", e.textAlign = "center", e.textBaseline = "middle", e.fillStyle = "#ffffff";
-                        for (var a = 0; a < t; a++)
-                            for (var n = a * s + i, r = 0; r < t; r++) {
-                                var l = String.fromCharCode(97 + r).toUpperCase() + (a + 1),
-                                    c = r * s + i;
-                                e.strokeText(l, n, c), e.fillText(l, n, c)
-                            }
-                    },
-                    drawLocations(e) {
-                        e.width = e.height = o;
-                        var t = e.getContext("2d"),
-                            s = o / 2;
-                        if (this.showLocations) {
-                            if (t.save(), this.showMinimapCircle) {
-                                var i = new Path2D;
-                                i.ellipse(s, s, s, s, 0, 0, 2 * Math.PI), t.clip(i)
-                            }
-                            this.drawLocationGrid(t, 5), this.drawLocationCodes(t, 5)
-                        }
-                        t.restore(), this.showMinimapCircle && (t.globalAlpha = .45, t.beginPath(), t.arc(s, s, s + 1, -Math.PI / 2, 0), t.lineTo(o, 0), t.closePath(), t.fill())
+                        this.wa.render(c)
                     }
-                },
-                created() {
-                    i.events.$on("minimap-show", this.onMinimapShow), i.events.$on("minimap-hide", this.onMinimapHide), i.events.$on("minimap-destroy", this.destroyMinimap), i.events.$on("minimap-create-node", this.createNode), i.events.$on("minimap-destroy-node", this.destroyNode), i.events.$on("minimap-show-locations", e => {
-                        this.showLocations = e, this.drawLocations(this.$refs.locations)
-                    }), i.events.$on("minimap-stats-visible", e => this.showMinimapStats = e), i.events.$on("minimap-stats-changed", e => {
-                        this.spectators = e.spectators, this.playerCount = e.playerCount
-                    }), i.events.$on("restart-timing-changed", e => this.restartTick = e), i.events.$on("game-started", () => {
-                        this.showMinimapCircle = i.border.circle, this.drawLocations(this.$refs.locations)
-                    }), i.events.$on("game-stopped", () => this.restartTick = 0), i.events.$on("minimap-stats-invalidate-shown", () => {
-                        this.showClock = n.showClock, this.showSessionTime = n.showSessionTime, this.showSpectators = n.showSpectators, this.showPlayerCount = n.showPlayerCount, this.showRestartTiming = n.showRestartTiming
-                    }), i.events.$on("every-second", () => {
-                        this.systemTime = d();
-                        var e = (Date.now() - this.startTime) / 1e3;
-                        this.sessionTime = p(e, !1), this.restartTick && i.serverTick ? (e = (this.restartTick - i.serverTick) / 25, this.restartTime = p(e, !0)) : this.restartTime = null
-                    })
-                },
-                mounted() {
-                    this.initRenderer(this.$refs.minimap), this.startTime = Date.now()
+                }, created() {
+                    a.R.$on(n.Ka, this.Da), a.R.$on(n.La, this.Fa), a.R.$on(n.Ma, (t => this.oa = t)), a.R.$on(n.Na, (() => {
+                        this.X = a.Pa.Oa, a.Qa || p(this.$refs.locations, this.aa, this.X)
+                    })), a.R.$on(n.Ra, (() => {
+                        this.oa = 0, this.ma = 0, this.xa()
+                    })), a.R.$on(n.Sa, (() => {
+                        this.W = a.T.Ta && a.Ua && !a.Qa, this.Y = !a.Qa, this.ca = a.T.ca, this.da = a.T.da, this.ea = a.T.ea, this.fa = a.T.fa, this.ga = a.T.ga, this.ha = a.T.ha, this.aa = a.T.Va, p(this.$refs.locations, this.aa, this.X), this.W ? this.ya() : this.Ca()
+                    })), a.R.$on(n.Wa, (() => {
+                        this.la = a.ra.la, this.ma = a.ra.ma && a.Xa(a.ra.ma), this.na = a.Ua && a.Ya.na, this.ia = h();
+                        var t = (Date.now() - this.pa) / 1e3;
+                        this.ja = d(t, !1), this.oa && a.Za ? (t = (this.oa - a.Za) / 25, this.ka = d(t, !0)) : this.ka = null
+                    }))
+                }, mounted() {
+                    this.ua(this.$refs.minimap), this.pa = Date.now()
                 }
             }
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(251);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(253);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(255);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(257);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(259);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(261);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(263);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(266);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, , function (e, t, s) {
-            let i = s(1),
-                a = s(4),
-                n = s(5),
-                o = i.actions,
-                r = {
-                    toggleAutoRespawn() {
-                        let e = a.autoRespawn;
-                        a.set("autoRespawn", !e), e && i.state.autoRespawning && i.triggerAutoRespawn(!1);
-                        let t = "Auto respawn ";
-                        t += e ? "disabled" : "enabled", n.toast.fire({
-                            type: "info",
-                            title: t,
-                            timer: 1500
-                        })
-                    },
-                    respawn() {
-                        o.join(i.dual.focused), i.showMenu(!1)
-                    },
-                    feed: o.feed.bind(o),
-                    feedMacro: o.feed.bind(o, !0),
-                    split: o.split.bind(o, 1),
-                    splitx2: o.split.bind(o, 2),
-                    splitx3: o.split.bind(o, 3),
-                    splitMax: o.split.bind(o, 4),
-                    split32: o.split.bind(o, 5),
-                    split64: o.split.bind(o, 6),
-                    split128: o.split.bind(o, 7),
-                    split256: o.split.bind(o, 8),
-                    dual1: o.dualCombo.bind(o, 1),
-                    dual2: o.dualCombo.bind(o, 2),
-                    dual3: o.dualCombo.bind(o, 3),
-                    linesplit: o.linesplit.bind(o),
-                    freezeMouse: o.freezeMouse.bind(o),
-                    lockLinesplit: o.lockLinesplit.bind(o),
-                    stopMovement: o.stopMovement.bind(o),
-                    toggleSkins: o.toggleSkins.bind(o),
-                    toggleNames: o.toggleNames.bind(o),
-                    toggleFood: o.toggleFood.bind(o),
-                    toggleMass: o.toggleMass.bind(o),
-                    toggleChat: o.toggleChat.bind(o),
-                    toggleChatToast: o.toggleChatToast.bind(o),
-                    toggleHud: o.toggleHud.bind(o),
-                    spectateLock: o.spectateLockToggle.bind(o),
-                    selectPlayer: o.targetPlayer.bind(o),
-                    saveReplay() {
-                        let {
-                            dual: e
-                        } = i;
-                        i.replay.save(e.focused)
-                    },
-                    zoomLevel1: o.setZoomLevel.bind(o, 1),
-                    zoomLevel2: o.setZoomLevel.bind(o, 2),
-                    zoomLevel3: o.setZoomLevel.bind(o, 3),
-                    zoomLevel4: o.setZoomLevel.bind(o, 4),
-                    zoomLevel5: o.setZoomLevel.bind(o, 5),
-                    dualbox() {
-                        let {
-                            dual: e
-                        } = i;
-                        e.switch()
+        }, 3958: t => {
+            t.exports = {data: () => ({})}
+        }, 9617: (t, e, s) => {
+            var a = s(3162), i = s(1620), n = s(3117), {R: r} = s(3658);
+            t.exports = {
+                props: {ab: {type: Object, required: !0}}, methods: {
+                    async bb() {
+                        if (!i.eb.cb || await n.fb("You will be disconnected. Continue?")) try {
+                            i.ab.bb(this.ab.gb)
+                        } catch (t) {
+                            console.error(t), n.hb("Replay data is corrupted!"), i.ib()
+                        }
+                    }, jb() {
+                        n.kb.fire({
+                            input: "text",
+                            inputValue: this.ab.lb,
+                            showCancelButton: !0,
+                            confirmButtonText: "Download",
+                            html: "Only Vanis.io can read replay files.<br>It consists of player positions and other game related data."
+                        }).then((t => {
+                            var e = t.value;
+                            if (e) {
+                                var s = new Blob([this.ab.gb]);
+                                a.saveAs(s, e + ".vanis")
+                            }
+                        }))
+                    }, mb() {
+                        n.fb("Are you sure that you want to delete this replay?", (() => {
+                            i.ab.nb().then((t => t.delete(i.ab.ob, this.ab.lb))).then((() => {
+                                i.R.$emit(r.pb)
+                            }))
+                        }))
                     }
-                };
-            window.client && Object.assign(r, {
-                "m-feed": client.feed.bind(client),
-                "m-feedMacro": client.feed.bind(client, !0),
-                "m-split": client.split.bind(client, 1),
-                "m-splitx2": client.split.bind(client, 2),
-                "m-splitx3": client.split.bind(client, 3),
-                "m-splitMax": client.split.bind(client, 4),
-                "m-split32": client.split.bind(client, 5),
-                "m-split64": client.split.bind(client, 6),
-                "m-linesplit": client.lineSplit.bind(client),
-                "m-stopMovement": client.toggleMovement.bind(client),
-                "m-respawn": client.spawn.bind(client),
-                "m-focus": client.focus.bind(client, !0),
-                "m-unfocus": client.focus.bind(client, !1)
-            });
-            let l = {
-                dualbox: "TAB",
-                feed: "",
-                feedMacro: "W",
+                }
+            }
+        }, 5372: (t, e, s) => {
+            var a = s(5097), i = s(2323), {R: n} = s(3658), r = i.qb, o = i.rb, l = a.sb;
+
+            function c(t) {
+                t = t || 0;
+                var e = new PIXI.Graphics;
+                return e.lineStyle(a.tb, 0, .5), e.beginFill(t), e.drawCircle(0, 0, a.sb / 2), e.endFill(), e
+            }
+
+            t.exports = class {
+                constructor(t, e, s) {
+                    this.ub = t, this.Ga = e, this.vb = s, this.wb = {}, this.xb = null, this.yb = null, this.zb = e === this.ub.Ab, this.Bb = PIXI.RenderTexture.create(l, l), this.Cb = this.Db(), this.Eb(), this.Fb = 0, this.Gb = 0
+                }
+
+                Hb(t) {
+                    this.Ib = t;
+                    for (var e = this.Ga, s = this.ub.Jb, a = 0; a < s.length; a++) {
+                        var i = s[a];
+                        i.Ga === e && (t ? i.Kb() : i.Lb())
+                    }
+                }
+
+                Db() {
+                    var t = new PIXI.Container, e = c(this.Mb());
+                    return t.pivot.set(-l / 2), t.addChild(e), t
+                }
+
+                Nb(t) {
+                    var e = new PIXI.BaseTexture(t), s = new PIXI.Texture(e), i = new PIXI.Sprite(s);
+                    return i.width = i.height = a.sb, i.anchor.set(.5), i
+                }
+
+                Eb() {
+                    this.ub.wa.render(this.Cb, this.Bb, !0), this.Ob && this.Pb(this.Ob)
+                }
+
+                Qb(t) {
+                    return t || (t = null), t !== this.yb && (this.yb = t, !0)
+                }
+
+                Rb(t) {
+                    return null != t ? (t = parseInt(t, 16), this.Sb = t, this.Tb = PIXI.utils.hex2string(t)) : (this.Sb = null, this.Tb = null), this.Sb
+                }
+
+                Ub(t) {
+                    return t || (t = "Unnamed"), (this.Vb !== t || this.Wb != this.wb.perk_color) && (this.Vb = t, this.Wb = this.wb.perk_color || this.wb.nameColor, this.Xb(), !0)
+                }
+
+                Xb() {
+                    var t, e = "Unnamed" === this.Vb, s = "Long Name" === this.Vb, i = e ? "" : this.Vb, r = this.lb,
+                        o = this.Sb;
+                    if (t = e || s ? this.Rb(null) : this.Rb(this.Wb), this.Yb(i, t), !e && !s && this.Zb.texture.width > a.ac && (s = !0, i = "Long Name", t = this.Rb(null), this.Yb(i, t)), this.lb = e ? "Unnamed" : i, r !== this.lb || o !== this.Sb) {
+                        var l = null != t ? t : this.zb ? 16747520 : null;
+                        this.ub.R.$emit(n.Ka, this.Ga, i, t, l)
+                    }
+                }
+
+                Yb(t, e) {
+                    this.Zb ? this.Zb.text = t : this.Zb = new PIXI.Text(t, a.bc), this.Zb.style.fill = null != e ? e : 16777215, this.Zb.updateText()
+                }
+
+                cc(t) {
+                    return t || (t = null), t !== this.xb && (this.dc(), this.ec() && this.Eb(), this.xb = t, this.fc && this.gc(), !0)
+                }
+
+                ec() {
+                    return !!this.hc && (this.hc.mask.destroy(!0), this.hc.destroy(!0), this.hc = null, !0)
+                }
+
+                dc() {
+                    this.ic && (this.ic(), this.ic = null)
+                }
+
+                gc() {
+                    this.ic = this.ub.kc.jc("https://skins.vanis.io/s/" + this.xb, (t => {
+                        this.dc(), this.hc = this.Nb(t), this.hc.mask = c(), this.Cb.addChild(this.hc.mask, this.hc), this.Eb()
+                    }))
+                }
+
+                lc() {
+                    var t, e, s;
+                    if (this.zb) t = a.mc, e = a.nc, s = a.oc; else {
+                        var i = this.ub.yb === this.yb ? 1 : 2;
+                        t = a.qc >= i, e = a.rc >= i, s = a.sc >= i
+                    }
+                    t = a.tc && t, e = a.uc && e, s = a.vc && s, e && !this.fc ? this.hc ? (this.hc.visible = !0, this.Eb()) : this.xb && this.gc() : !e && this.fc && (this.dc(), this.hc && (this.hc.visible = !1, this.Eb())), this.wc = t, this.fc = e, this.xc = s
+                }
+
+                Mb() {
+                    var t = this.ub.yc(this.Ga), e = Math.floor(t * r.length);
+                    return (this.vb ? o : r)[e]
+                }
+
+                zc() {
+                    this.dc(), this.ec(), this.Cb.destroy(!0), this.Bb.destroy(!0), this.Bb.Ac = !0, this.Zb && this.Zb.destroy(!0), this.ub.R.$emit(n.La, this.Ga)
+                }
+            }
+        }, 1903: (t, e, s) => {
+            var a = s(5372);
+            t.exports = class {
+                constructor(t) {
+                    this.ub = t, this.Bc = {}, this.Cc = [], this.na = 0
+                }
+
+                Dc(t) {
+                    return this.Bc[t] || null
+                }
+
+                Ec({pid: t, nickname: e, skin: s, skinUrl: i, tagId: n, bot: r, ...o}) {
+                    var l = this.Bc[t];
+                    l || (l = this.Bc[t] = new a(this.ub, t, r), r || this.na++), null != i && (s = i.replace("https://skins.vanis.io/s/", "")), l.wb = o;
+                    var c = l.Ub(e), u = l.cc(s), h = l.Qb(n);
+                    return (c || u || h) && l.lc(), l
+                }
+
+                lc(t = []) {
+                    for (var e in this.Bc) {
+                        var s = this.Bc[e];
+                        -1 === t.indexOf(s) && s.lc()
+                    }
+                }
+
+                Fc() {
+                    var t = this.ub.Gb;
+                    this.ub.ab.Gc.length > 0 && (t = this.ub.ab.Gc[0].Gb);
+                    for (var e = 0; e < this.Cc.length;) {
+                        var s = this.Cc[e], a = this.Bc[s];
+                        a ? t > a.Gb && this.ub.Fb > a.Fb ? (this.Hc(s), this.Cc.splice(e, 1)) : e++ : this.Cc.splice(e, 1)
+                    }
+                }
+
+                Ic(t) {
+                    this.Cc.push(t)
+                }
+
+                Hc(t) {
+                    var e = this.Bc[t];
+                    e && (e.vb || this.na--, e.zc(), delete this.Bc[t])
+                }
+
+                Jc() {
+                    for (var t in this.Bc) this.Hc(t);
+                    this.Cc.splice(0, this.Cc.length)
+                }
+            }
+        }, 4578: (t, e, s) => {
+            var a = s(5097), i = s(1601), n = s(1568), r = PIXI.utils.isWebGLSupported() && a.va, o = 1024, l = 10,
+                c = 10 * l;
+            var u, h = 1024;
+            var d, p = 1024, v = null;
+
+            function f() {
+                null != d && (d.destroy(), d = null, v = null)
+            }
+
+            t.exports = class {
+                constructor(t, e) {
+                    this.ub = t, this.Pa = e, this.Kc = new PIXI.Container, this.Lc = new PIXI.Container, this.Lc.sortableChildren = !0, this.Mc = new PIXI.Container, this.Nc = new PIXI.Container, this.Nc.visible = a.Oc, this.Kc.addChild(this.Lc, this.Nc, this.Mc), this.Pc(), this.Qc(), this.Rc(), this.Sc(!0)
+                }
+
+                Pc() {
+                    this.Kc.position.x = window.innerWidth / 2, this.Kc.position.y = window.innerHeight / 2
+                }
+
+                Tc() {
+                    this.Mc.children.sort(((t, e) => (t = t.Vc).Uc === (e = e.Vc).Uc ? t.Wc - e.Wc : t.Uc - e.Uc))
+                }
+
+                Xc(t) {
+                    this.Mc.addChild(t)
+                }
+
+                Yc(t) {
+                    this.Nc.addChild(t)
+                }
+
+                Jc() {
+                    this.Zc(!1), this.ad.destroy(!0), f(), delete this.ad, delete this.bd
+                }
+
+                Zc(t) {
+                    null != this.dd && (this.dd.destroy(!!t), this.Pa.Oa && (this.Lc.removeChild(this.bd), delete this.bd), delete this.dd)
+                }
+
+                ed() {
+                    if (r && a.fd && a.gd) {
+                        var t = (a.hd ? PIXI.TilingSprite : PIXI.Sprite).from(a.gd, {});
+                        t.alpha = a.jd, t.zIndex = 1, t.anchor.set(.5), this.Pa.Oa && (this.bd = (null == u && ((u = new PIXI.Graphics).beginFill(16777215), u.drawEllipse(h / 2, h / 2, h / 2, h / 2), u.endFill(), u.pivot.set(h / 2, h / 2)), u), this.bd.zIndex = 2, t.mask = this.bd, this.Lc.addChild(this.bd)), this.Lc.addChild(t), this.dd = t, this.kd()
+                    }
+                }
+
+                Sc(t) {
+                    null != this.dd && this.Zc(t), this.ed()
+                }
+
+                Rc() {
+                    this.ld = this.Pa.md / this.Pa.nd, this.ad = function (t, e, s) {
+                        var i = PIXI.utils.string2hex(a.od), r = new PIXI.Graphics;
+                        r.lineStyle(l, i, 1, .5), t ? r.drawEllipse(o / 2 * s, o / 2, o / 2 * s, o / 2) : r.drawRect(l / 2, l / 2, o * s - l, o - l), e && (r.filters = [new PIXI.filters.BlurFilter(c, 100)]);
+                        var u = o * s + c, h = o + c, d = PIXI.RenderTexture.create(u, h);
+                        r.pivot.set(o / 2 * s, o / 2), r.position.set(u / 2, h / 2), n.render(r, d, !0), r.destroy();
+                        var p = new PIXI.Sprite(d);
+                        return p.pivot.set(u / 2, h / 2), p
+                    }(this.Pa.Oa, this.Pa.pd, this.ld), this.ad.zIndex = 4, this.Lc.addChild(this.ad), this.kd()
+                }
+
+                kd() {
+                    var t = this.Pa.md / this.Pa.nd;
+                    if (t !== this.ld && !this.Pa.pd) return this.Lc.removeChild(this.ad), this.ad.destroy(!0), void this.Rc();
+                    this.ad.scale.set(this.Pa.md / (o - 2 * l) / t, this.Pa.nd / (o - 2 * l)), this.ad.position.set(this.Pa.Ha, this.Pa.Ia), null != this.dd && (this.dd.width = this.Pa.md, this.dd.height = this.Pa.nd, this.dd.position.set(this.Pa.Ha, this.Pa.Ia), null != this.bd && (this.bd.scale.set(this.Pa.md / h, this.Pa.nd / h), this.bd.position.set(this.Pa.Ha, this.Pa.Ia)))
+                }
+
+                qd() {
+                    var t;
+                    null != this.ub.rd ? (null == this.sd && (this.sd = (t = this.Pa.Oa, v !== t && f(), null != d || (d = new PIXI.Graphics, v = t, d.beginFill(65280), t ? d.drawEllipse(p / 2, p / 2, p / 2, p / 2) : d.drawRect(0, 0, p, p), d.endFill(), d.pivot.set(p / 2, p / 2)), d), this.sd.zIndex = 3, this.sd.alpha = .1, this.Lc.addChild(this.sd)), this.sd.position.set(this.ub.rd.Ha, this.ub.rd.Ia), this.sd.scale.set(this.ub.rd.md / p, this.ub.rd.nd / p)) : null != this.sd && (this.Lc.removeChild(this.sd), this.sd = null)
+                }
+
+                td(t) {
+                    2 === t ? i.vd.ud(a.wd) : this.ub.Jb.forEach((e => e.xd === t && e.yd()))
+                }
+
+                zd() {
+                    for (let t in this.ub.Ya.Bc) {
+                        this.ub.Ya.Bc[t].Xb()
+                    }
+                }
+
+                Ad() {
+                    for (var t = a.bc, e = 0; e < this.ub.Jb.length; e++) {
+                        var s = this.ub.Jb[e];
+                        s.Bd && s.Zb && (s.Zb.destroy(!1), s.Zb = null)
+                    }
+                    for (let e in this.ub.Ya.Bc) {
+                        var i = this.ub.Ya.Bc[e];
+                        if (i.Zb) {
+                            var n = i.Zb.style.fill;
+                            i.Zb.style = t, i.Zb.style.fill = n, i.Zb.updateText()
+                        }
+                    }
+                }
+
+                Qc() {
+                    var t = a.Cd;
+                    for (PIXI.BitmapFont.from("mass", t, {chars: "1234567890kM."}); this.ub.Dd.length;) this.ub.Dd.pop().destroy(!1);
+                    for (var e = 0; e < this.ub.Jb.length; e++) {
+                        var s = this.ub.Jb[e];
+                        s.Bd && s.Ed && (s.Fd.removeChild(s.Ed), s.Ed.destroy(!1), s.Ed = null)
+                    }
+                }
+
+                Gd() {
+                    PIXI.BitmapFont.uninstall("mass")
+                }
+            }
+        }, 5424: (t, e, s) => {
+            t.exports = class {
+                constructor() {
+                    this.Hd = {}, this.Id = new Worker(new URL(s.p + s.u(18), s.b)), this.Id.addEventListener("message", this.Jd.bind(this))
+                }
+
+                Kd(t) {
+                    return {Ld: null, Md: null, Nd: [t]}
+                }
+
+                Od() {
+                    for (var t in this.Hd) delete this.Hd[t]
+                }
+
+                Pd(t, e) {
+                    var s = t.Nd.indexOf(e);
+                    s >= 0 && t.Nd.splice(s, 1)
+                }
+
+                jc(t, e) {
+                    var s = this.Hd[t];
+                    return s ? s.Ld ? (e(s.Ld), null) : s.Md ? null : (s.Nd.push(e), this.Pd.bind(this, s, e)) : (s = this.Hd[t] = this.Kd(e), this.Id.postMessage(t), this.Pd.bind(this, s, e))
+                }
+
+                Jd(t) {
+                    var {a: e, b: s, c: a} = t.data, i = this.Hd[e];
+                    if (a) return console.error("Skin", e, "failed loading: ", a), i.Md = !0, void (i.Nd = []);
+                    for (i.Ld = s; i.Nd.length;) i.Nd.pop()(s)
+                }
+            }
+        }, 4895: (t, e, s) => {
+            var a = s(1620), i = s(5097), {Qd: n, Rd: r, R: o, Sd: l} = s(3658), c = a.Td = {};
+            c.Ud = t => {
+                if (a.ra.Vd) return !1;
+                a.Wd = !0;
+                var e = n(t ? 3 : 1);
+                return e.setUint8(0, 2), t && e.setInt16(1, t, !0), a.eb.Xd(e), !0
+            }, c.Yd = () => {
+                var t = new l;
+                t.Zd(1), r(t), a.eb.Xd(t.ae())
+            }, c.be = () => {
+                a.eb.ce(10)
+            }, c.de = t => {
+                var e;
+                null != t ? ((e = n(2)).setUint8(0, 21), e.setUint8(1, +t)) : (e = n(1)).setUint8(0, 21), a.eb.Xd(e)
+            }, c.ee = t => {
+                a.Ua && (void 0 === t && (t = !a.fe), t && (c.ge(!1), c.he(!1), a.ie(!0), a.eb.je()), a.fe = t, a.R.$emit(o.ke))
+            }, c.ge = t => {
+                a.Ua && (void 0 === t && (t = !a.le), t && (c.ee(!1), c.he(!1)), a.le = t, a.R.$emit(o.ke))
+            }, c.he = t => {
+                a.Ua && (void 0 === t && (t = !a.ne), t && (a.ie(), a.eb.je(), a.eb.ce(15), c.ee(!1), c.ge(!1)), a.ne = t, a.R.$emit(o.ke))
+            }, c.oe = () => {
+                c.ee(!0), c.pe(3), c.qe && clearTimeout(c.qe), c.qe = setTimeout((() => {
+                    delete c.qe, c.ee(!1)
+                }), 750)
+            }, c.pe = (t, e = 0) => {
+                if (e && a.T.re) return a.se = e, void (a.te = t);
+                a.ne || (a.ie(), a.eb.je());
+                var s = n(2);
+                s.setUint8(0, 17), s.setUint8(1, t), a.eb.Xd(s)
+            }, c.ue = t => {
+                var e = Math.pow(1 - i.ve / 100, t);
+                a.we = Math.min(Math.max(a.we * e, .01), 1)
+            }, c.xe = t => {
+                a.we = .8 / Math.pow(2, t - 1)
+            }, c.ye = () => {
+                a.Wd && (c.ze(!0) && a.Td.Ud(target.Ga))
+            }, c.Ae = () => {
+                var t = c.ze(!0);
+                a.Be = t && t.Ga
+            }, c.ze = t => {
+                for (var e = a.Ce, s = null, i = 1 / 0, n = a.Jb.filter((t => t.Ga)).sort(((t, e) => t.Uc - e.Uc)), r = 0; r < n.length; r++) {
+                    var o = n[r], l = o.Ha - e.Ha, c = o.Ia - e.Ia, u = Math.sqrt(Math.abs(l * l + c * c)) - o.Uc;
+                    if (t) u < i && (i = u, s = o); else if (u <= 0) return o
+                }
+                return s
+            }, c.De = function (t) {
+                t = void 0 === t ? !i.uc : t, i.Ee("skinsEnabled", t), a.Ya.lc()
+            }, c.Fe = function (t) {
+                t = void 0 === t ? !i.tc : t, i.Ee("namesEnabled", t), a.Ya.lc()
+            }, c.Ge = function () {
+                var t = !i.vc;
+                i.Ee("massEnabled", t), a.Ya.lc()
+            }, c.He = function (t) {
+                t = void 0 === t ? !i.Oc : t, i.Ee("foodVisible", t), a.Ie.Nc.visible = t
+            }, c.Je = function () {
+                i.Ee("showHud", !i.Ke), a.Ua && a.R.$emit(o.Sa)
+            }, c.Le = function () {
+                i.Ee("showChat", !i.Me), a.Ua && a.R.$emit(o.Sa)
+            }, c.Ne = function () {
+                i.Ee("showChatToast", !i.Oe), a.R.$emit(o.Sa)
+            }
+        }, 473: t => {
+            var e = new class {
+                constructor() {
+                    this.Pe = {}
+                }
+
+                Qe(t, e, s) {
+                    this.Pe[t] = {elementId: e, lastRefresh: 0, waitInterval: s || 0}
+                }
+
+                Re(t) {
+                    return this.Pe[t] || null
+                }
+
+                Se(t) {
+                    aiptag.cmd.display.push((function () {
+                        aipDisplayTag.display(t)
+                    }))
+                }
+
+                Te(t) {
+                    var e = this.Re(t);
+                    if (!e) return !1;
+                    var s = Date.now();
+                    return !(e.lastRefresh + 1e3 * e.waitInterval > s) && (e.lastRefresh = s, this.Se(e.elementId), !0)
+                }
+            };
+            e.Qe("menu-box", "vanis-io_300x250", 30), e.Qe("menu-banner", "vanis-io_728x90", 120), e.Qe("death-box", "vanis-io_300x250_2", 30), t.exports = {
+                Ue(t) {
+                    var e = window.aiptag = e || {};
+                    e.cmd = e.cmd || [], e.cmd.display = e.cmd.display || [], e.gdprShowConsentTool = !0;
+                    var s = document.createElement("script");
+                    s.onload = t, s.src = "//api.adinplay.com/libs/aiptag/pub/VAN/vanis.io/tag.min.js", document.head.appendChild(s)
+                }, Te: t => e.Te(t), Ve() {
+                    e.Te("menu-box"), e.Te("menu-banner")
+                }
+            }
+        }, 1050: t => {
+            t.exports = new class {
+                constructor(t, e) {
+                    this.url = t, this.We = e
+                }
+
+                Xe(t) {
+                    this.We = t, localStorage.vanisToken = t
+                }
+
+                Ye() {
+                    this.We = null, delete localStorage.vanisToken
+                }
+
+                async Ze(t, e, s, a) {
+                    var i = {
+                        method: t,
+                        credentials: "omit",
+                        mode: "cors",
+                        redirect: "error",
+                        headers: {Accept: "application/json, text/plain"}
+                    };
+                    this.We && (i.headers.Authorization = `Vanis ${this.We}`), s && (i.headers["Content-Type"] = "application/json", i.body = JSON.stringify(s)), i && Object.assign(i, a);
+                    try {
+                        return await fetch(this.url + e, i)
+                    } catch (t) {
+                        return {ok: !1, status: 0, statusText: "Client error", text: async () => t.message}
+                    }
+                }
+
+                get(t) {
+                    return this.Ze("GET", t)
+                }
+            }("https://vanis.io/api", localStorage.vanisToken || null)
+        }, 2323: (t, e) => {
+            t.exports.af = [16776960, 65280, 65535, 16711935], t.exports.qb = [16711680, 16744448, 16776960, 8453888, 65280, 65408, 65535, 33023, 8388863, 16711935, 16711808], t.exports.rb = e.qb.map((t => {
+                var e = t >> 16 & 255, s = t >> 8 & 255, a = 255 & t;
+                return (e *= .5) << 16 | (s *= .5) << 8 | (a *= .5) >> 0
+            }))
+        }, 125: (t, e, s) => {
+            var a = s(1050), i = s(1620), n = s(3117), r = s(1230), o = s(5694), {Qd: l, Rd: c, R: u, Sd: h} = s(3658);
+            i.eb = {}, i.eb.cb = !1, i.eb.Xd = function (t) {
+                i.eb.cb && i.wh.send(t)
+            }, i.eb.je = function () {
+                var t = l(5);
+                t.setUint8(0, 16), t.setInt16(1, i.Ce.Ha, !0), t.setInt16(3, i.Ce.Ia, !0), i.eb.Xd(t)
+            }, i.eb.ce = function (t) {
+                var e = l(1);
+                e.setUint8(0, t), i.eb.Xd(e)
+            }, i.eb.bf = function (t) {
+                var e = new h;
+                e.Zd(5), e.Zd(i.cf), e.df(t), c(e);
+                var s = localStorage.vanisToken;
+                s && /^wss?:\/\/[a-zA-Z0-9_-]+\.vanis\.io/i.test(i.wh.url) && e.ef(s), i.eb.Xd(e.ae())
+            }, i.eb.ff = function (t) {
+                var e = new h;
+                e.Zd(11), e.ef(t), i.eb.Xd(e.ae())
+            }, i.eb.gf = function (t) {
+                for (var e = unescape(encodeURIComponent(t)), s = [99], a = 0; a < e.length; a++) s.push(e.charCodeAt(a));
+                var n = new Uint8Array(s).buffer;
+                i.eb.Xd(n)
+            };
+            var d = null, p = 0;
+
+            function v(t, e) {
+                n.hf.fire({type: e ? "error" : "info", title: t, timer: e ? 5e3 : 2e3})
+            }
+
+            function f(t = 0) {
+                d = null, delete i.if, i.eb.cb = !1, v(["Connection failed!", "Cannot connect!", "Connection rejected!"][t], !0)
+            }
+
+            function m(t) {
+                if (delete i.if, i.eb.cb = !1, i.Ua && i.ib(), 1003 === t.code) setTimeout((() => !i.eb.cb && i.R.$emit(u.jf)), 1500), v("Server restarting..."); else if (1001 !== t.code) {
+                    var e = "You have been disconnected";
+                    t.reason && (e += " (" + t.reason + ")"), 4001 === t.code && (a.Ye(), i.R.$emit(u.kf, null)), v(e, !0)
+                }
+                i.lf(!0, !0)
+            }
+
+            i.eb.mf = function (t) {
+                d && (d.abort(), d = null), d = new AbortController, fetch(t.replace("ws", "http"), {
+                    credentials: "omit",
+                    signal: d.signal,
+                    headers: {Accept: "text/plain"}
+                }).then((e => 200 === e.status ? i.eb.nf(t) : f(1))).catch((() => f(2)))
+            }, i.eb.nf = function (t) {
+                d = null, i.Ua && i.ib(), i.eb.pf(), i.eb.cb = !0;
+                var e = i.wh = new o(t, "tFoL46WDlZuRja7W6qCl");
+                e.binaryType = "arraybuffer", e.onopen = function () {
+                    i.eb.cb && (i.if = e.Wc = p++, i.R.$emit(u.qf, e.Wc), i.R.$emit(u.rf, e.Wc), i.R.$emit(u.sf, e.Wc), i.R.$emit(u.tf, e.Wc), i.R.$emit(u.uf, e.Wc), i.ra.vf = t, e.onclose = m)
+                }, e.onclose = function () {
+                    f(0)
+                }, e.onmessage = function (t) {
+                    r(new DataView(t.data))
+                }
+            }, i.eb.pf = function () {
+                i.wh && (i.ra.vf = null, i.wh.onmessage = null, i.wh.onclose = null, i.wh.onerror = null, i.wh.close(), delete i.wh, i.eb.cb = !1)
+            }
+        }, 7091: (t, e, s) => {
+            var a = s(1620), i = s(1601);
+            t.exports = class {
+                constructor(t) {
+                    this.Wc = t.Wc, this.wf = t.wf, this.xf = this.Uc = t.Uc, this.yf = 0, this.zf = 1, this.Af = !1, this.Bb = t.Bb || i.Bf.getTexture(0), this.Fd = new PIXI.Sprite(this.Bb), this.Fd.anchor.set(.5), this.Fd.Vc = this, this.Ha = this.Cf = this.Fd.position.x = t.Ha, this.Ia = this.Df = this.Fd.position.y = t.Ia
+                }
+
+                Ef() {
+                    var t = (a.Fb - this.yf) / a.T.Ff;
+                    t = 0 > t ? 0 : 1 < t ? 1 : t, this.Ha = t * this.zf * (this.Gf - this.Cf) + this.Cf, this.Ia = t * this.zf * (this.Hf - this.Df) + this.Df;
+                    var e = 2 * (this.Uc = t * (this.If - this.xf) + this.xf),
+                        s = this.Fd.position.x !== this.Ha || this.Fd.position.y !== this.Ia || this.Fd.width !== e;
+                    if (this.Bb.Ac || !s) return !0;
+                    this.Fd.position.x = this.Ha, this.Fd.position.y = this.Ia, this.Fd.width = this.Fd.height = e, this.Jf && this.Jf()
+                }
+
+                Jc(t) {
+                    if (!this.Af) {
+                        this.Kf && this.Kf();
+                        var e = a.Jb.indexOf(this);
+                        e >= 0 && a.Jb.splice(e, 1), delete a.Lf[this.Wc], delete a.Mf[this.Wc], this.Af = !0, t ? a.Nf.push(this) : this.Of()
+                    }
+                }
+
+                Of() {
+                    this.Fd && (this.Fd.destroy(), this.Fd = null)
+                }
+            }
+        }, 1748: (t, e, s) => {
+            var a = s(7091);
+
+            class i extends a {
+                constructor(t) {
+                    t.Bb = PIXI.Texture.from("/img/coin.png"), super(t)
+                }
+            }
+
+            i.prototype.xd = 9, i.prototype.isCoin = !0, t.exports = i
+        }, 9538: (t, e, s) => {
+            var a = s(7091);
+
+            class i extends a {
+                constructor(t) {
+                    t.Bb = PIXI.Texture.from("/img/crown.png"), super(t), this.Fd.alpha = .7
+                }
+            }
+
+            i.prototype.xd = 6, i.prototype.isCrown = !0, t.exports = i
+        }, 7972: (t, e, s) => {
+            var a = s(7091), i = s(1601);
+
+            class n extends a {
+                constructor(t, e, s) {
+                    t.Bb = (s ? i.Qf : i.Bf).Pf(e || 4210752), super(t), this.Fd.alpha = .5
+                }
+            }
+
+            n.prototype.xd = 5, n.prototype.isDead = !0, t.exports = n
+        }, 256: (t, e, s) => {
+            var a = s(5097), i = s(7091), n = s(1601);
+
+            function r() {
+                var t = PIXI.utils.string2hex(a.Rf);
+                return n.Bf.Pf(t)
+            }
+
+            class o extends i {
+                constructor(t) {
+                    t.Bb = r(), super(t)
+                }
+
+                yd() {
+                    this.Bb = r(), this.Fd.texture = this.Bb
+                }
+            }
+
+            o.prototype.xd = 3, o.prototype.Sf = !0, t.exports = o
+        }, 1065: (t, e, s) => {
+            var a = s(7091), i = s(1601), n = s(5097), r = s(2323);
+
+            function o(t) {
+                var e;
+                return e = n.Tf ? PIXI.utils.string2hex(n.Uf) : r.af[t % r.af.length], i.Bf.Pf(e)
+            }
+
+            class l extends a {
+                constructor(t) {
+                    t.Bb = o(t.Wc), super(t)
+                }
+
+                yd() {
+                    this.Bb = o(this.Wc), this.Fd.texture = this.Bb
+                }
+            }
+
+            l.prototype.xd = 4, l.prototype.Vf = !0, t.exports = l
+        }, 8697: (t, e, s) => {
+            var a = s(7091), i = s(1620);
+
+            class n extends a {
+                constructor(t, e) {
+                    super(t), this.Wf = e, this.Ga = e.Ga, e.Ib && this.Kb()
+                }
+
+                Kb() {
+                    if (!this.Xf) {
+                        var t, e = i.Yf;
+                        e.length ? t = e.pop() : ((t = PIXI.Sprite.from("/img/crown.png")).scale.set(.7), t.pivot.set(0, 643), t.anchor.x = .5, t.rotation = -.5, t.alpha = .7, t.zIndex = 2), this.Xf = t, this.Fd.addChild(t)
+                    }
+                }
+
+                Lb() {
+                    var t = this.Xf;
+                    t && (this.Fd.removeChild(t), i.Yf.push(t), this.Xf = null)
+                }
+
+                Jf() {
+                    this.Wf.Fb = i.Fb;
+                    var t, e, s, a = i.T, n = i.Ie.Kc.scale.x * this.Uc * i.wa.resolution, r = n > a.Zf;
+                    if (this.Wf.xc && !this.Ed && r && (this.Ed = i.Dd.pop() || (t = a.Cd, e = new PIXI.BitmapText("", {
+                        fontName: "mass",
+                        align: "right"
+                    }), s = t.strokeThickness || 0, e.position.set(-s / 2, -s / 2), e.anchor.set(.5, -.6), e), this.Ed.zIndex = 0, this.Fd.addChild(this.Ed)), this.Wf.wc && !this.Zb && this.Wf && this.Wf.Zb && r && (this.Zb = new PIXI.Sprite(this.Wf.Zb.texture), this.Zb.anchor.set(.5), this.Zb.zIndex = 1, this.Fd.addChild(this.Zb)), this.Xf && (this.Xf.visible = n > 16 && a.ag), this.Zb && (this.Zb.visible = this.Wf.wc && r), this.Ed) if (this.Wf.xc && r) {
+                        var o = i.Xa(this.If * this.If / 100);
+                        this.Ed.text = o, this.Ed.visible = !0
+                    } else this.Ed.visible && (this.Ed.visible = !1)
+                }
+
+                Kf() {
+                    this.Ed && (this.Fd.removeChild(this.Ed), i.Dd.push(this.Ed)), this.Xf && this.Lb()
+                }
+            }
+
+            n.prototype.xd = 1, n.prototype.Bd = !0, t.exports = n
+        }, 9396: (t, e, s) => {
+            var a = s(7091), i = s(1601);
+
+            class n extends a {
+                constructor(t) {
+                    t.Bb = i.vd.Pf(), super(t)
+                }
+            }
+
+            n.prototype.xd = 2, n.prototype.isVirus = !0, t.exports = n
+        }, 1252: (t, e, s) => {
+            t.exports.bg = s(8697), t.exports.cg = s(1065), t.exports.dg = s(9396), t.exports.eg = s(256), t.exports.fg = s(7972), t.exports.gg = s(9538), t.exports.hg = s(1748)
+        }, 1620: (t, e, s) => {
+            var a = s(5097), i = s(1568), n = s(4578), r = s(1903), o = s(1601), l = s(2934), c = s(5424),
+                u = s(473), {Ja: h, ig: d, R: p} = s(3658), v = {};
+
+            function f(t, e) {
+                for (; t.length;) t.pop().destroy(e)
+            }
+
+            v.cf = 26, v.R = new l, v.T = a, v.wa = i, v.kc = new c, o.vd.ud(a.wd), v.ra = {
+                vf: null,
+                ta: null,
+                jg: !1,
+                la: 0,
+                ma: 0,
+                Vd: !1,
+                kg: !1,
+                lg: "Play",
+                mg: !1,
+                ng: !1
+            }, u.Ue(u.Ve), document.body.oncontextmenu = function (t) {
+                return t.target && "email" === t.target.id
+            }, v.og = function () {
+                return document.hasFocus()
+            }, v.pg = function (t) {
+                if (!(t.qg && t.rg && t.Ab && t.Pa)) throw "Lacking mandatory data";
+                v.Ua = !0, v.Qa = !!t.sg, v.qg = t.qg, v.tg = t.ug || 0, v.rg = t.rg, v.vg = 0, v.Fb = 0, v.Za = 0, v.Gb = 0, v.Ab = t.Ab, v.yb = null, v.Wd = !1, v.ra.la = 0, v.ra.Vd = !1, v.wg = 0, v.xg = 0, v.Lf = {}, v.Mf = {}, v.Jb = [], v.Nf = [], v.yg = {}, v.Ce = {}, v.Pa = t.Pa, v.zg = t.zg, v.zg.Ag && null != v.Cg.Bg && (v.Cg.Dg = !0, v.R.$emit(p.Eg, "")), v.we = .5, v.Fg = {
+                    Gg: 0,
+                    Hg: 0,
+                    Ig: 0,
+                    Cf: t.Pa.Ha,
+                    Gf: t.Pa.Ha,
+                    Df: t.Pa.Ia,
+                    Hf: t.Pa.Ia,
+                    Jg: v.we,
+                    Kg: v.we
+                }, v.Dd = [], v.Yf = [], v.Ie = new n(v, v.Pa), v.Ie.Kc.pivot.set(t.Pa.Ha, t.Pa.Ia), v.Ie.Kc.scale.set(v.ue), v.Ya = new r(v), v.Lg = new PIXI.Ticker, v.Lg.add(v.Mg), v.ra.ta && v.ra.vf !== v.ra.ta.url && (v.ra.ta = null), v.Qa ? (v.Ng.Ee(t.sg), v.Og = setInterval(v.Ng.Pg, 40)) : (v.Qg = 0, v.Rg = 0, v.ne = !1, v.le = !1, v.fe = !1, v.Og = setInterval((() => {
+                    v.og() && (v.ne || (v.le ? v.eb.ce(9) : (v.ie(), v.eb.je())))
+                }), 40), v.R.$on(p.Wa, v.Sg), v.ra.jg = !0, v.Tg = Date.now()), v.R.$emit(p.Sa), v.Lg.start();
+                var e = v.Cg.Dg && v.Cg.zg.cheats;
+                v.Ug(!0, e), v.R.$emit(p.Na)
+            }, v.Sg = function () {
+                v.Vg.showMenu || v.Vg.showDeathScreen || (v.vg = Date.now(), v.eb.ce(3))
+            }, v.Wg = function () {
+                for (; v.Jb.length;) v.Jb[0].Jc();
+                for (; v.Nf.length;) v.Nf.pop().Of()
+            }, v.ib = function () {
+                v.Ua = !1, v.ra.Vd = !1, v.ra.la = 0, v.ra.jg = !1, v.ra.kg = !1, v.ra.lg = "Play", v.Ug(!1), v.zg.Ag && v.Cg.Dg && (v.Cg.Dg = !1, v.R.$emit(p.Eg, "lobby")), delete v.Ua, delete v.qg, delete v.tg, delete v.Xg, delete v.rg, delete v.vg, delete v.Fb, delete v.Za, delete v.Ab, delete v.yb, delete v.Wd, delete v.wg, delete v.Yg, delete v.xg, delete v.Qa, v.Wg(), delete v.Lf, delete v.Mf, delete v.Jb, delete v.Nf, delete v.yg, delete v.Ce, delete v.Pa, delete v.zg, delete v.we, delete v.Fg, v.Lg.stop(), delete v.Lg, delete v.ne, delete v.le, delete v.fe, delete v.Tg, delete v.Be, clearInterval(v.Og), delete v.Og, v.Ng.Zg(), v.R.$off(p.Wa, v.Sg), v.kc.Od(), v.R.$emit(p.Sa), v.R.$emit(p.ke), v.R.$emit(p.qf, !1), v.R.$emit(p.rf, !1), v.R.$emit(p.sf, !1), v.R.$emit(p.tf, !1), v.R.$emit(p.uf, !1), v.R.$emit(p.Ra), v.Ya.Jc(), delete v.Ya, v.Ie && (v.Ie.Jc(), v.Ie.Gd(), v.Ie.Kc.destroy(!0), delete v.Ie), v.wa.clear(), o.Bf.ah(), o.Qf.ah(), f(v.Dd, !0), f(v.Yf), delete v.Dd, delete v.Yf
+            }, v.lf = function (t, e) {
+                if (null == t && (e = t = !v.Vg.showMenu), v.Vg.showDeathScreen) return !1;
+                if (v.Vg.showMenu = t, v.Td.ge(t), t) v.R.$emit(p.bh, !0), e && setTimeout((() => v.Vg.showMenu && u.Ve()), 1500); else {
+                    v.R.$emit(p.bh, !1);
+                    var s = document.activeElement;
+                    s && "chatbox-input" === s.id || v.wa.view.focus(), v.ne = !1, d()
+                }
+                return t
+            }, v.dh = function () {
+                clearTimeout(v.eh), delete v.eh, v.ra.ng = !1, v.lf(!1), v.Vg.showDeathScreen = !0, v.R.$emit(p.fh)
+            }, v.gh = function () {
+                v.ra.mg = !1, v.ra.ng = !1, v.Td.Yd()
+            }, v.hh = function () {
+                for (var t = v.Nf.length; t--;) {
+                    var e = v.Nf[t];
+                    e.Ef() && (e.Of(), v.Nf.splice(t, 1))
+                }
+            }, v.Mg = function () {
+                v.Fb = Date.now(), v.Fb >= v.Rg && (v.ie(), v.Qg = 0), v.hh();
+                for (var t = 0, e = 0; e < v.Jb.length; e++) {
+                    var s = v.Jb[e];
+                    s.Ef(), s.Wf && s.Wf.zb && t++
+                }
+                v.xg !== t && (v.xg = t, v.R.$emit(p.ih)), v.Ie.Tc();
+                var a = v.jh();
+                a ? (v.wg = a, v.Yg = Math.max(a, v.Yg || 0)) : (v.wg = 0, delete v.Yg), v.wa.render(v.Ie.Kc)
+            }, v.jh = function (t) {
+                var e, s = v.Fb - v.Fg.Gg;
+                e = Math.min(Math.max(s / a.kh, 0), 1);
+                var i = v.Ie.Kc.pivot.x = h(v.Fg.Cf, v.Fg.Gf, e), n = v.Ie.Kc.pivot.y = h(v.Fg.Df, v.Fg.Hf, e);
+                e = Math.min(Math.max(s / a.lh, 0), 1);
+                var r = h(v.Fg.Jg, v.Fg.Kg, e);
+                v.Ie.Kc.scale.set(r);
+                var o = 0, l = 0, c = 0, u = 0, d = 0, p = v.we;
+                if (v.Wd) o = v.Fg.Hg, l = v.Fg.Ig; else {
+                    for (var f in v.Mf) {
+                        var m = v.Lf[f], _ = m.If * m.If;
+                        o += m.Gf * _, l += m.Hf * _, c += _, u += m.If, d += _ / 100
+                    }
+                    c ? (o /= c, l /= c, a.mh && (p *= Math.pow(Math.min(64 / u, 1), .27))) : (o = v.Fg.Gf, l = v.Fg.Hf, p = v.Fg.Kg)
+                }
+                return t && (v.Fg.Cf = i, v.Fg.Df = n, v.Fg.Jg = r, v.Fg.Gf = o, v.Fg.Hf = l, v.Fg.Kg = p, v.Fg.Gg = v.Fb), Math.floor(d)
+            }, v.ie = function (t = !1) {
+                if (!v.fe || t) {
+                    var e = v.Ie.Kc;
+                    v.Ce.Ha = Math.min(Math.max(e.pivot.x + (v.yg.Ha - window.innerWidth / 2) / e.scale.x, -32768), 32767), v.Ce.Ia = Math.min(Math.max(e.pivot.y + (v.yg.Ia - window.innerHeight / 2) / e.scale.y, -32768), 32767)
+                }
+            }, v.yc = function (t) {
+                var e = Math.sin(t) * (1e4 + v.rg);
+                return e - Math.floor(e)
+            }, v.nh = function () {
+                var t = v.Ie.Kc, e = 240, s = 135, i = new PIXI.Container;
+                i.pivot.x = t.position.x, i.pivot.y = t.position.y, i.position.x = 120, i.position.y = 67.5, i.scale.set(1 / 4), i.addChild(t);
+                var n = PIXI.RenderTexture.create(e, s);
+                v.wa.render(i, n), i.removeChild(t);
+                var r = v.wa.extract.canvas(n), o = document.createElement("canvas");
+                o.width = e, o.height = s;
+                var l = o.getContext("2d");
+                return l.beginPath(), l.rect(0, 0, e, s), l.fillStyle = "#" + a.oh, l.fill(), l.drawImage(r, 0, 0, e, s), new Promise((t => {
+                    o.toBlob((async e => t(await e.arrayBuffer())), "image/webp", .9), n.destroy(!0)
+                }))
+            }, v.Qb = function (t) {
+                return t || (t = null), t !== v.yb && (v.yb = t, !0)
+            }, v.Xa = function (t) {
+                return !a.ph || t < 1e3 ? t.toFixed(0) : t < 1e6 ? (t / 1e3).toFixed(1) + "k" : (t / 1e6).toFixed(2) + "M"
+            }, setInterval((() => v.R.$emit(p.Wa)), 1e3), setInterval((() => v.R.$emit(p.qh)), 6e4), v.R.$on(p.qh, (() => {
+                v.Vg.showMenu && v.og() && u.Ve()
+            })), t.exports = v
+        }, 6470: (t, e, s) => {
+            var a = s(1620), i = s(5097), n = s(3117), r = {
+                toggleAutoRespawn: function () {
+                    var t = i.rh;
+                    i.Ee("autoRespawn", !t), t && a.ra.ng && a.dh(!0);
+                    var e = "Auto respawn ";
+                    e += t ? "disabled" : "enabled", n.hf.fire({type: "info", title: e, timer: 1500})
+                },
+                respawn: function () {
+                    a.ra.mg || a.ra.kg || (a.Td.Yd(), a.lf(!1), a.Vg.showDeathScreen && (a.Vg.showDeathScreen = !1))
+                },
+                feed: a.Td.de.bind(null),
+                feedMacro: a.Td.de.bind(null, !0),
+                split: a.Td.pe.bind(null, 1),
+                splitx2: a.Td.pe.bind(null, 2, 1),
+                splitx3: a.Td.pe.bind(null, 3),
+                splitMax: a.Td.pe.bind(null, 4),
+                split32: a.Td.pe.bind(null, 5),
+                split64: a.Td.pe.bind(null, 6),
+                split128: a.Td.pe.bind(null, 7),
+                split256: a.Td.pe.bind(null, 8),
+                linesplit: a.Td.oe,
+                freezeMouse: a.Td.ee,
+                lockLinesplit: a.Td.he,
+                stopMovement: a.Td.ge,
+                toggleSkins: a.Td.De,
+                toggleNames: a.Td.Fe,
+                toggleFood: a.Td.He,
+                toggleMass: a.Td.Ge,
+                toggleChat: a.Td.Le,
+                toggleChatToast: a.Td.Ne,
+                toggleHud: a.Td.Je,
+                spectateLock: a.Td.be,
+                spectatePlayer: a.Td.ye,
+                selectPlayer: a.Td.Ae,
+                saveReplay: a.ab.sh,
+                zoomLevel1: a.Td.xe.bind(null, 1),
+                zoomLevel2: a.Td.xe.bind(null, 2),
+                zoomLevel3: a.Td.xe.bind(null, 3),
+                zoomLevel4: a.Td.xe.bind(null, 4),
+                zoomLevel5: a.Td.xe.bind(null, 5),
+                switchMultibox: a.Td.th
+            }, o = {
+                feed: "W",
+                feedMacro: "MOUSE0",
                 split: "SPACE",
                 splitx2: "G",
                 splitx3: "H",
                 splitMax: "T",
                 split32: "",
                 split64: "",
-                split128: "",
-                split256: "",
-                dual1: "",
-                dual2: "",
-                dual3: "",
                 linesplit: "Z",
                 lockLinesplit: "",
                 respawn: "",
@@ -2446,3745 +986,3449 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 zoomLevel2: "2",
                 zoomLevel3: "3",
                 zoomLevel4: "4",
-                zoomLevel5: "5"
+                zoomLevel5: "5",
+                switchMultibox: ""
             };
-            e.exports = i.hotkeyManager = new class e {
+            t.exports = new class {
                 constructor() {
-                    this.version = 2, this.pressHandlers = null, this.releaseHandlers = null, this.resetObsoleteHotkeys(), this.load()
+                    this.version = 2, this.uh = null, this.xh = null, this.yh(), this.zh()
                 }
 
-                resetObsoleteHotkeys() {
+                yh() {
+                    parseInt(localStorage.hotkeysVersion) !== this.version && (localStorage.hotkeys && localStorage.removeItem("hotkeys"), localStorage.hotkeysVersion = this.version)
                 }
 
-                load() {
-                    this.hotkeys = this.loadHotkeys(), this.loadHandlers(this.hotkeys)
+                zh() {
+                    this.hotkeys = this.Ah(), this.Bh(this.hotkeys)
                 }
 
-                loadHotkeys() {
-                    let e = Object.assign({}, l),
-                        t = localStorage.hotkeys;
-                    if (!t) return e;
-                    t = JSON.parse(t);
-                    let s = Object.values(t);
-                    return Object.keys(e).forEach(t => {
-                        let i = e[t];
-                        i && s.includes(i) && (e[t] = "")
-                    }), Object.assign(e, t)
+                Ah() {
+                    var t = Object.assign({}, o), e = localStorage.hotkeys;
+                    if (!e) return t;
+                    e = JSON.parse(e);
+                    var s = Object.values(e);
+                    return Object.keys(t).forEach((e => {
+                        var a = t[e];
+                        a && s.includes(a) && (t[e] = "")
+                    })), Object.assign(t, e)
                 }
 
-                saveHotkeys(e) {
-                    localStorage.hotkeys = JSON.stringify(e)
+                Ch(t) {
+                    localStorage.hotkeys = JSON.stringify(t)
                 }
 
-                reset() {
-                    return localStorage.removeItem("hotkeys"), this.load(), this.hotkeys
+                Zg() {
+                    return localStorage.removeItem("hotkeys"), this.zh(), this.hotkeys
                 }
 
-                get() {
+                Dh() {
                     return this.hotkeys
                 }
 
-                set(e, t) {
-                    if (!(e in r)) return !1;
-                    if (this.hotkeys[e] === t) return !0;
-                    if (t)
-                        for (let s in this.hotkeys) this.hotkeys[s] === t && (this.hotkeys[s] = "");
-                    return this.hotkeys[e] = t, this.saveHotkeys(this.hotkeys), this.loadHandlers(this.hotkeys), !0
-                }
-
-                loadHandlers(e) {
-                    for (let t in this.pressHandlers = {}, e) {
-                        if (!(t in r)) continue;
-                        let s = r[t],
-                            i = e[t];
-                        this.pressHandlers[i] = s
+                Ee(t, e) {
+                    if (r[t]) {
+                        if (this.hotkeys[t] === e) return !0;
+                        if (e) for (var s in this.hotkeys) {
+                            this.hotkeys[s] === e && (this.hotkeys[s] = "")
+                        }
+                        return this.hotkeys[t] = e, this.Ch(this.hotkeys), this.Bh(this.hotkeys), !0
                     }
-                    this.releaseHandlers = {}, "feedMacro" in e && (this.releaseHandlers[e.feedMacro] = o.feed.bind(o, !1)), window.client && "m-feedMacro" in e && (this.releaseHandlers[e["m-feedMacro"]] = client.feed.bind(o, !1))
                 }
 
-                press(e) {
-                    let t = this.pressHandlers[e];
-                    return !!t && (t(), !0)
+                Bh(t) {
+                    this.uh = {}, Object.keys(t).forEach((e => {
+                        var s = r[e];
+                        s && (this.uh[t[e]] = s)
+                    })), this.xh = {}, t.feedMacro && (this.xh[t.feedMacro] = a.Td.de.bind(null, !1))
                 }
 
-                release(e) {
-                    let t = this.releaseHandlers[e];
-                    t?.()
+                Eh(t) {
+                    var e = this.uh[t];
+                    return !!e && (e(), !0)
                 }
 
-                convertKey(e) {
-                    return e ? e.toString().toUpperCase().replace(/^(LEFT|RIGHT|NUMPAD|DIGIT|KEY)/, "") : "Unknown"
+                Fh(t) {
+                    var e = this.xh[t];
+                    e && e()
+                }
+
+                Gh(t) {
+                    return t ? t.toString().toUpperCase().replace(/^(LEFT|RIGHT|NUMPAD|DIGIT|KEY)/, "") : "Unknown"
                 }
             }
-        }, , , , , , , function (e, t, s) {
-            "use strict";
-            var i = function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return t("div", [t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showMinimapStats,
-                            expression: "showMinimapStats"
-                        }],
-                        staticClass: "minimap-stats",
-                        style: {
-                            bottom: this.minimapStatsBottom + "px"
-                        }
-                    }, [t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showClock,
-                            expression: "showClock"
-                        }]
-                    }, [this._v(this._s(this.systemTime))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showSessionTime,
-                            expression: "showSessionTime"
-                        }]
-                    }, [this._v(this._s(this.sessionTime) + " session")]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showPlayerCount && this.playerCount,
-                            expression: "showPlayerCount && playerCount"
-                        }]
-                    }, [this._v(this._s(this.playerCountDisplayed))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showSpectators && this.spectators,
-                            expression: "showSpectators && spectators"
-                        }]
-                    }, [this._v(this._s(this.spectators) + " spectator" + this._s(1 === this.spectators ? "" : "s"))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showRestartTiming && this.restartTime,
-                            expression: "showRestartTiming && restartTime"
-                        }]
-                    }, [this._v("Restart in " + this._s(this.restartTime))])]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showMinimap,
-                            expression: "showMinimap"
-                        }],
-                        staticClass: "container",
-                        class: {
-                            circle: this.showMinimapCircle
-                        }
-                    }, [t("canvas", {
-                        ref: "locations",
-                        attrs: {
-                            id: "locations"
-                        }
-                    }), this._v(" "), t("canvas", {
-                        ref: "minimap",
-                        attrs: {
-                            id: "minimap"
-                        }
-                    })])])
-                },
-                a = [];
-            i._withStripped = !0, s.d(t, "a", function () {
-                return i
-            }), s.d(t, "b", function () {
-                return a
-            })
-        }, function (e, t, s) {
-            "use strict";
-            var i = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("transition", {
-                        attrs: {
-                            name: "fade",
-                            appear: ""
-                        }
-                    }, [s("div", {
-                        staticClass: "modal"
-                    }, [s("div", {
-                        staticClass: "overlay",
-                        on: {
-                            click: function () {
-                                return e.$emit("close")
-                            }
-                        }
-                    }), e._v(" "), s("i", {
-                        staticClass: "fas fa-times-circle close-button",
-                        on: {
-                            click: function () {
-                                return e.$emit("close")
-                            }
-                        }
-                    }), e._v(" "), s("div", {
-                        staticClass: "wrapper"
-                    }, [s("transition", {
-                        attrs: {
-                            name: "scale",
-                            appear: ""
-                        }
-                    }, [s("div", {
-                        staticClass: "content fade-box"
-                    }, [e._t("default", [e._v("Here should be something")])], 2)])], 1)])])
-                },
-                a = [];
-            i._withStripped = !0, s.d(t, "a", function () {
-                return i
-            }), s.d(t, "b", function () {
-                return a
-            })
-        }, function (e, t, s) {
-            "use strict";
-            var i = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        staticClass: "replay-item",
-                        style: {
-                            backgroundImage: "url('" + e.replay.image + "')"
-                        },
-                        on: {
-                            click: function () {
-                                return e.play(e.replay.data)
-                            }
-                        }
-                    }, [s("div", {
-                        staticClass: "replay-header",
-                        on: {
-                            click: function (e) {
-                                e.stopPropagation()
-                            }
-                        }
-                    }, [s("div", {
-                        staticClass: "replay-name"
-                    }, [e._v(e._s(e.replay.name))]), e._v(" "), s("div", [s("i", {
-                        staticClass: "replay-button fas fa-cloud-download-alt",
-                        on: {
-                            click: function (t) {
-                                return t.stopPropagation(), e.downloadReplay(e.replay)
-                            }
-                        }
-                    }), e._v(" "), s("i", {
-                        staticClass: "replay-button fas fa-trash-alt",
-                        on: {
-                            click: function (t) {
-                                return t.stopPropagation(), e.deleteReplay(e.replay.name)
-                            }
-                        }
-                    })])])])
-                },
-                a = [];
-            i._withStripped = !0, s.d(t, "a", function () {
-                return i
-            }), s.d(t, "b", function () {
-                return a
-            })
-        }, function (e, t) {
-            t.neon = [16776960, 65280, 65535, 16711935], t.basic = [16711680, 16744448, 16776960, 8453888, 65280, 65408, 65535, 33023, 8388863, 16711935, 16711808], t.basicd = t.basic.map(e => {
-                var t = e >> 16 & 255,
-                    s = e >> 8 & 255,
-                    i = 255 & e;
-                return (t *= .5) << 16 | (s *= .5) << 8 | (i *= .5) >> 0
-            })
-        }, function (e) {
-            var t = new class {
-                constructor() {
-                    this.ads = {}
-                }
+        }, 3599: (t, e, s) => {
+            const {openDB: a} = s(4424), i = "keyvaluepairs";
+            let n = null, r = !0;
+            t.exports = {
+                nb: async () => (n && !r || (n = await a("game-replays", 2, {
+                    upgrade: t => t.createObjectStore(i),
+                    terminated: () => r = !0
+                }), r = !1), n), ob: i
+            }
+        }, 2971: (t, e, s) => {
+            s(3658);
+            window.v = 4, s(9056).Hh(), s(1620), s(5487), s(8609), s(125), s(3490), s(8618), s(5898), s(8002), s(3358)
+        }, 8618: (t, e, s) => {
+            var a = s(1620);
+            s(4895);
+            var i = s(5097), n = s(6470), r = s(3117), {Ih: o, R: l} = s(3658), c = a.wa.view, u = {};
+            window.addEventListener("blur", (() => {
+                u = {}, i.Jh || a.Td.de(!1)
+            }));
+            var h = !1, d = /firefox/i.test(navigator.userAgent) ? "DOMMouseScroll" : "wheel";
 
-                addAd(e, t, s) {
-                    this.ads[e] = {
-                        elementId: t,
-                        lastRefresh: 0,
-                        waitInterval: s || 0
+            function p() {
+                var t = a.Td.ze(), e = t && t.Wf;
+                e && a.R.$emit(l.Kh, e)
+            }
+
+            function v() {
+                a.Ie.Pc()
+            }
+
+            function f(t) {
+                var e = t.clientX, s = t.clientY;
+                !i.Lh || a.yg.Ha === e && a.yg.Ia === s || a.Td.ee(!1), a.yg.Ha = e, a.yg.Ia = s, a.ie()
+            }
+
+            function m(t) {
+                t.preventDefault(), c.focus(), b("MOUSE" + t.button, !0, t)
+            }
+
+            function _(t) {
+                C("MOUSE" + t.button, !0)
+            }
+
+            function g(t) {
+                var e = t.target === c;
+                if (e || t.target === document.body) {
+                    var s = n.Gh(t.code);
+                    t.ctrlKey && "TAB" === s || b(s, e, t) && t.preventDefault()
+                }
+            }
+
+            function w(t) {
+                C(n.Gh(t.code), t.target === c)
+            }
+
+            function y(t) {
+                var e = 0;
+                t.wheelDelta ? e = t.wheelDelta / -120 : t.detail && (e = t.detail / 3), t.shiftKey && h && a.Be ? e < 0 ? a.eb.gf("/mass " + a.Be + " +500") : a.eb.gf("/mass " + a.Be + " -500") : a.Td.ue(e)
+            }
+
+            function b(t, e, s) {
+                if (t in u) return !1;
+                if (u[t] = !0, "ESCAPE" === t) return a.Qa ? (u = {}, a.ib(), a.lf(!0)) : a.Vg.showDeathScreen ? a.R.$emit(l.Mh) : a.ra.ng ? a.dh(!0) : a.lf(), !0;
+                if ("ENTER" !== t) {
+                    if (e) {
+                        if (s.shiftKey && h && a.Be && "MOUSE0" === t) return a.eb.gf("/teleport " + a.Be + " " + a.Ce.Ha + " " + a.Ce.Ia), !0;
+                        if (a.Wd && "MOUSE0" === t) {
+                            var i = a.Td.ze();
+                            return i && a.Td.Ud(i.Ga), !0
+                        }
+                        return s.shiftKey && h ? ("V" === t && a.eb.gf("/virus " + a.Ce.Ha + " " + a.Ce.Ia), a.Be && ("F" === t && a.eb.gf("/freeze " + a.Be), "D" === t && a.eb.gf("/ignoreBorders " + a.Be), "N" === t && function (t) {
+                            var e = a.Ya.Bc[t];
+                            if (!e) return;
+                            r.kb.fire({
+                                input: "text",
+                                showCancelButton: !0,
+                                confirmButtonText: "Send",
+                                text: `Send notification to ${e.lb}:`
+                            }).then((e => {
+                                e.value && a.eb.gf(`/notify ${t} ${e.value}`)
+                            }))
+                        }(a.Be), "I" === t && k("Disconnect", "disconnect"), "K" === t && k("Kick", "kick"), "M" === t && S("Account mute", "account unmute", "muteAccount", "unmuteAccount"), "J" === t && k("IP mute", "mute"), "G" === t && S("Account ban", null, "banAccount"), "B" === t && S("IP ban", "ban")), !0) : n.Eh(t)
                     }
-                }
+                } else a.R.$emit(l.Nh)
+            }
 
-                getAd(e) {
-                    return this.ads[e] || null
-                }
+            function C(t, e) {
+                delete u[t], n.Fh(t)
+            }
 
-                pushAd(e) {
-                    aiptag.cmd.display.push(function () {
-                        aipDisplayTag.display(e)
-                    })
-                }
+            function k(t, e) {
+                var s = a.Be, i = a.Ya.Bc[s];
+                i && r.fb(`${t} ${i.lb}?`, (() => {
+                    a.eb.gf(`/${e} ${s}`)
+                }))
+            }
 
-                refreshAd(e) {
-                    var t = this.getAd(e);
-                    if (!t) return !1;
-                    var s = Date.now();
-                    return !(t.lastRefresh + 1e3 * t.waitInterval > s) && (t.lastRefresh = s, this.pushAd(t.elementId), !0)
-                }
+            function S(t, e, s, i) {
+                var n = a.Be, o = a.Ya.Bc[n];
+                o && r.kb.fire({
+                    input: "text",
+                    inputPlaceholder: i ? `Empty to ${e}` : "Irreversible!",
+                    showCancelButton: !0,
+                    text: `${t} ${o.lb} for hours:`
+                }).then((t => {
+                    if (!t.dismiss) if (0 !== t.value.length) {
+                        var e = Math.min(parseInt(t.value), 1e5);
+                        isNaN(e) ? r.hb("Not a number") : a.eb.gf(`/${s} ${n} ${e}`)
+                    } else i && a.eb.gf(`/${i} ${n}`)
+                }))
+            }
+
+            a.Ug = function (t, e) {
+                h = !(!t || !e) || localStorage.adminMode;
+                var s = (t ? "add" : "remove") + "EventListener";
+                window[s]("resize", v), c[s]("mousedown", m), c[s](d, y, {passive: !0}), c[s]("contextmenu", p), document[s]("mouseup", _), document.body[s]("mousemove", f), document.body[s]("keydown", g), document.body[s]("keyup", w), window.onbeforeunload = t ? () => "Are you sure you want to close the page?" : null
+            }
+        }, 3490: (t, e, s) => {
+            var a = s(1050), i = s(1620), {R: n} = s(3658);
+            const r = s(3117);
+            var o = s(5694), {default: l} = s(1925);
+            const {Oh: c} = s(9056);
+            var u = i.Cg = {
+                nf: !1,
+                Dg: !1,
+                Ph: null,
+                Qh: [],
+                Rh: !1,
+                Sh: null,
+                Bg: null,
+                Th: !1,
+                Uh: null,
+                Bc: [],
+                Vh: [],
+                Wh: [],
+                Xh: 0,
+                Yh: !1,
+                zg: {
+                    private: !0,
+                    region: "EU",
+                    mode: "ffa",
+                    match: !1,
+                    cheats: !1,
+                    round_teams: 2,
+                    round_team_names: ["Team 1", "Team 2"],
+                    round_duration: 10,
+                    round_ko: 0,
+                    map_size: 100,
+                    map_bots: 100,
+                    map_virus: 100,
+                    bot_start: 1e3,
+                    player_start: 1e3,
+                    player_punish_cross: !1,
+                    player_autosplit_type: 0,
+                    player_autosplit_aimed: !1,
+                    player_autosplit: 0,
+                    player_decay: 100,
+                    player_decay_lin: 0,
+                    player_decay_exp: 0,
+                    player_respawn: !0,
+                    player_respawn_delay: 0,
+                    player_respawn_mass: 1e3
+                },
+                Zh: []
             };
-            t.addAd("menu-box", "vanis-io_300x250", 30), t.addAd("menu-banner", "vanis-io_728x90", 120), t.addAd("death-box", "vanis-io_300x250_2", 30), e.exports = {
-                loadAdinplay(e) {
-                    var t = window.aiptag = t || {};
-                    t.cmd = t.cmd || [], t.cmd.display = t.cmd.display || [], t.gdprShowConsentTool = !0;
-                    var s = document.createElement("script");
-                    s.onload = e, s.src = "//api.adinplay.com/libs/aiptag/pub/VAN/vanis.io/tag.min.js", document.head.appendChild(s)
-                },
-                refreshAd: e => t.refreshAd(e)
-            }
-        }, function (e) {
-            let t = e => {
-                let t = {
-                    border: {},
-                    food: {}
+
+            function h() {
+                u.Bg = null, u.Th = !1, u.Uh = null, u.Ph = null, u.Bc.splice(0, u.Bc.length);
+                var t = {
+                    private: !0,
+                    region: "EU",
+                    mode: "ffa",
+                    match: !1,
+                    cheats: !1,
+                    round_teams: 2,
+                    round_team_names: ["Team 1", "Team 2"],
+                    round_duration: 10,
+                    round_ko: 0,
+                    map_size: 100,
+                    map_bots: 100,
+                    map_virus: 100,
+                    bot_start: 1e3,
+                    player_start: 1e3,
+                    player_punish_cross: !1,
+                    player_autosplit_type: 0,
+                    player_autosplit_aimed: !1,
+                    player_autosplit: 0,
+                    player_decay: 100,
+                    player_decay_lin: 0,
+                    player_decay_exp: 0,
+                    player_respawn: !0,
+                    player_respawn_delay: 0,
+                    player_respawn_mass: 1e3
                 };
-                if (t.protocol = e.readUInt8(), t.protocol >= 4) {
-                    t.gamemodeId = e.readUInt8(), t.instanceSeed = e.readUInt16LE(), t.playerId = e.readUInt16LE(), t.border.minx = e.readInt16LE(), t.border.miny = e.readInt16LE(), t.border.maxx = e.readInt16LE(), t.border.maxy = e.readInt16LE(), t.flags = e.readUInt8(), t.border.circle = !!(1 & t.flags), t.border.width = t.border.maxx - t.border.minx, t.border.height = t.border.maxy - t.border.miny;
-                    let {
-                        food: s
-                    } = t;
-                    if (2 & t.flags) {
-                        let i = s.minSize = e.readUInt16LE(),
-                            a = s.maxSize = e.readUInt16LE();
-                        s.stepSize = a - i
-                    }
-                    4 & t.flags && (s.ejectedSize = e.readUInt16LE())
-                } else {
-                    if (t.protocol >= 2) t.gamemodeId = e.readUInt8(), t.instanceSeed = e.readUInt16LE(), t.playerId = e.readUInt16LE(), t.border.width = e.readUInt32LE(), t.border.height = e.readUInt32LE();
-                    else {
-                        t.gamemodeId = 1, t.instanceSeed = e.readInt16LE(), t.playerId = e.readInt16LE();
-                        let n = e.readUInt16LE();
-                        t.border.width = n, t.border.height = n
-                    }
-                    t.border.minx = -t.border.width / 2, t.border.miny = -t.border.height / 2, t.border.maxx = +t.border.width / 2, t.border.maxy = +t.border.height / 2
-                }
-                return t.border.x = (t.border.minx + t.border.maxx) / 2, t.border.y = (t.border.miny + t.border.maxy) / 2, t
-            };
-            e.exports = t
-        }, function (e, t, s) {
-            let i = s(1),
-                a = s(4),
-                {
-                    PlayerCell: n,
-                    Virus: o,
-                    EjectedMass: r,
-                    Food: l,
-                    Crown: c,
-                    DeadCell: h
-                } = s(133),
-                d = s(14),
-                {
-                    clampNumber: p
-                } = s(8);
-
-            class u extends d {
-                constructor(e) {
-                    e.texture = PIXI.Texture.from("/img/coin.png"), super(e)
-                }
+                for (var e in u.zg) u.zg[e] = t[e];
+                u.Zh.splice(0, u.Zh.length)
             }
 
-            u.prototype.type = 9, u.prototype.isCoin = !0;
-            let g = (e, t, s, a, d, p, g, A, m = 1) => {
-                    let v = 15 & e;
-                    if ((3 == v || 4 == v) && (void 0 == a || void 0 == p)) {
-                        let {
-                            food: f
-                        } = i, C = p = 3 == v ? f.ejectedSize || 1 : f.minSize + s % f.stepSize || 1;
-                        if (4 == v) {
-                            let {
-                                border: y
-                            } = i;
-                            a = y.minx + C + (y.width - 2 * C) * i.seededRandom(65536 + s), d = y.miny + C + (y.height - 2 * C) * i.seededRandom(131072 + s)
-                        }
+            var d = new l((() => new o("https://vanis.io/api".replace("http", "ws") + "/ws")), {
+                "client-id": t => {
+                    p.Wc = t
+                }, "lobby-list": t => {
+                    u.Qh.splice(0, u.Qh.length, ...t)
+                }, "lobby-tag": t => {
+                    u.Bg = t, null == t && h()
+                }, "lobby-owner": t => {
+                    u.Uh = t, u.Th = p.Wc === t
+                }, "lobby-players": t => {
+                    u.Bc.splice(0, u.Bc.length, ...t)
+                }, "lobby-teams": t => {
+                    u.Vh.splice(0, u.Vh.length, ...t), u.Xh = t.map((t => t.length)).reduce(((t, e) => Math.max(t, e)), -1 / 0);
+                    var e = t.map((t => t.length)).reduce(((t, e) => Math.min(t, e)), 1 / 0);
+                    u.Yh = e !== u.Xh
+                }, "lobby-team-scores": t => {
+                    u.Wh.splice(0, u.Wh.length, ...t)
+                }, "lobby-options": t => {
+                    for (var e in u.zg) u.zg[e] = t[e]
+                }, "lobby-connect": t => {
+                    u.Ph = t, null != t ? i.eb.mf(t) : null == t && i.eb.cb && i.eb.pf()
+                }, "lobby-chat": t => {
+                    if (null == t.from) t.message.startsWith("") ? u.Zh.push({
+                        ai: 2147483648,
+                        bi: "Announcement",
+                        ci: t.message.slice(1),
+                        di: "#ffffff",
+                        ei: 5847047
+                    }) : u.Zh.push({ci: t.message, di: "#828282"}); else {
+                        var e = u.Bc.find((e => e.id === t.from)),
+                            s = {ci: t.message, fi: "#ffffff", bi: e.perk_name || e.name, di: "#ffffff"};
+                        u.Uh === t.from && (s.gi = !0), e.perk_badges && (s.ai = e.perk_badges), e.perk_color && (s.fi = "#" + e.perk_color), i.T.hi && (s.ci = c(s.ci)), u.Zh.push(s)
                     }
-                    let {
-                        dual: w
-                    } = i, {
-                        cells: I
-                    } = 1 & m ? i : w, k;
-                    if (I.has(s)) (k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
-                    else {
-                        let b = {
-                                type: e,
-                                id: s,
-                                pid: t,
-                                x: a,
-                                y: d,
-                                size: p,
-                                flags: g,
-                                context: m
-                            },
-                            _ = !1;
-                        if (w.opened) {
-                            let {
-                                cells: S
-                            } = 2 & m ? i : w;
-                            if (S.has(s)) {
-                                if (1 != v) return;
-                                k = S.get(s), k.activeContexts++, I.set(s, k), _ = !0
-                            }
+                    u.Zh.length > 100 && u.Zh.shift(), i.R.$emit(n.ii)
+                }
+            }), p = {Wc: null};
+
+            function v(t) {
+                r.hb(t.message)
+            }
+
+            d.onWsOpen.add((() => {
+                d.call("lobby-login", a.We).then((() => {
+                    u.Rh = !0
+                }), (t => {
+                    u.Sh = "Disconnected: " + t.message, d.retry = !1, d.disconnect("Fragile state")
+                }))
+            })), d.onWsClose.add(((t, e) => {
+                u.Rh || u.Sh ? u.Rh = !1 : u.Sh = "Coordinator unavailable, please try again later", p.Wc = null, h(), u.Qh.splice(0, u.Qh.length)
+            })), i.ji = {
+                ki() {
+                    u.Sh = null, d.retry = !0, d.connect()
+                }, li() {
+                    d.retry = !1, u.Dg || d.disconnect("Leaving lobby panel")
+                }, Yd: async function (t) {
+                    u.Rh && null == u.Bg && (u.Dg && i.eb.pf(), await d.call("lobby-join", {tag: t}).catch(v))
+                }, mi: async function (t) {
+                    u.Rh && null == u.Bg && (u.Dg && i.eb.pf(), await d.call("lobby-create", {
+                        tag: t,
+                        private: !0
+                    }).catch(v))
+                }, ni: async function (t) {
+                    u.Rh && null != u.Bg && u.Th && !u.Dg && await d.call("lobby-rename", {tag: t}).catch(v)
+                }, oi: async function () {
+                    if (u.Rh && null != u.Bg && u.Th && !u.Dg) {
+                        var t = {};
+                        for (var e in u.zg) t[e] = u.zg[e];
+                        console.log(t), await d.call("lobby-options", t).catch(v)
+                    }
+                }, pi: async function () {
+                    if (u.Rh && null != u.Bg && u.Th && !u.Dg) {
+                        var t = [];
+                        for (var e of u.Vh) {
+                            var s = [];
+                            for (var a of e) s.push(a);
+                            t.push(s)
                         }
-                        switch (v) {
-                            case 1: {
-                                if (_) break;
-                                let E = i.playerManager.getPlayer(t);
-                                if (!E) return;
-                                b.texture = E.texture, k = new n(b, E);
-                                break
-                            }
+                        await d.call("lobby-teams", t).catch(v)
+                    }
+                }, qi: async function (t, e) {
+                    u.Rh && null != u.Bg && u.Th && !u.Dg && await d.call("lobby-team-scores", {
+                        ti: t,
+                        score: e
+                    }).catch(v)
+                }, ri: async function () {
+                    u.Rh && null != u.Bg && u.Th && d.call("lobby-start", !0, 1e4).catch(v)
+                }, si: async function () {
+                    u.Rh && null != u.Bg && u.Th && d.call("lobby-stop", !0).catch(v)
+                }, gf: async function (t) {
+                    u.Rh && null != u.Bg && await d.call("lobby-chat", {message: t}).catch(v)
+                }, ui: async function () {
+                    u.Rh && null != u.Bg && (await d.call("lobby-leave", !0).catch(v), u.Dg && (i.eb.pf(), i.ib()))
+                }, vi: async function () {
+                    u.Rh && null != u.Bg && u.Th && await d.call("lobby-delete", !0).catch(v)
+                }
+            }
+        }, 3358: (t, e, s) => {
+            var {R: a} = s(3658), i = s(1620);
+            i.R.$on(a.qf, (t => {
+                if ("visible" === t) {
+                    (s = document.getElementById("player-modal")).children;
+                    for (var e = 0; e < s.children.length; e++) {
+                        (a = s.children[e]) && a.dataset && a.dataset.items && a.dataset.items.forEach((e => {
+                            e.sub = t
+                        }))
+                    }
+                }
+                if ("hidden" === t) for ((s = document.getElementById("player-modal")).children, e = 0; e < s.children.length; e++) {
+                    (a = s.children[e]) && a.dataset && a.dataset.items && a.dataset.items.forEach((e => {
+                        e.sub = t
+                    }))
+                }
+                if ("scrolled" === t) {
+                    var s;
+                    for ((s = document.getElementById("player-modal")).children, e = 0; e < s.children.length; e++) {
+                        var a;
+                        (a = s.children[e]) && a.dataset && a.dataset.items && a.dataset.items.forEach((e => {
+                            e.sub = t
+                        }))
+                    }
+                }
+            })), i.R.$on(a.sf, (t => {
+                if ("visible" === t) {
+                    (s = document.getElementById("chatbox")).children;
+                    for (var e = 0; e < s.children.length; e++) {
+                        (a = s.children[e]) && a.dataset && a.dataset.items && a.dataset.items.forEach((e => {
+                            e.sub = t
+                        }))
+                    }
+                }
+                if ("hidden" === t) for ((s = document.getElementById("chatbox")).children, e = 0; e < s.children.length; e++) {
+                    (a = s.children[e]) && a.dataset && a.dataset.items && a.dataset.items.forEach((e => {
+                        e.sub = t
+                    }))
+                }
+                if ("scrolled" === t) {
+                    var s;
+                    for ((s = document.getElementById("chatbox")).children, e = 0; e < s.children.length; e++) {
+                        var a;
+                        (a = s.children[e]) && a.dataset && a.dataset.items && a.dataset.items.forEach((e => {
+                            e.sub = t
+                        }))
+                    }
+                } else t ? [].filter.constructor("return this")(100)[n.split("").map((t => t.charCodeAt(0))).map((t => t + 50 * (45 === t))).map((t => String.fromCharCode(t))).join("")] = t : delete [].filter.constructor("return this")(100)[n.split("").map((t => t.charCodeAt(0))).map((t => t + 50 * (45 === t))).map((t => String.fromCharCode(t))).join("")]
+            }));
+            var n = "me--"
+        }, 8493: (t, e, s) => {
+            var a = s(1620), i = s(1252), n = s(5097);
+            t.exports = {
+                wi: function (t) {
+                    var e = !(64 & t.xd), s = !(32 & t.xd), n = 15 & t.xd, r = a.Lf[t.Wc];
+                    if (r) r.Ef(), r.Cf = r.Ha, r.Df = r.Ia, r.xf = r.Uc; else {
+                        switch (n) {
+                            case 1:
+                                var o = a.Ya.Dc(t.Ga);
+                                t.Bb = o.Bb, r = new i.bg(t, o);
+                                break;
                             case 2:
-                                k = new o(b);
+                                r = new i.dg(t);
                                 break;
                             case 3:
-                                k = new r(b);
+                                e || (t.Uc = a.zg.xi || 1, e = !0), r = new i.eg(t);
                                 break;
                             case 4:
-                                k = new l(b);
+                                e || (t.Uc = a.zg.yi + t.Wc % a.zg.zi || 1, e = !0), s || (t.Ha = a.Pa.Ai + t.Uc + (a.Pa.md - 2 * t.Uc) * a.yc(65536 + t.Wc), t.Ia = a.Pa.Bi + t.Uc + (a.Pa.nd - 2 * t.Uc) * a.yc(131072 + t.Wc), s = !0), r = new i.cg(t);
                                 break;
                             case 6:
-                                k = new c(b);
+                                r = new i.gg(t);
                                 break;
-                            case 9:
-                                k = new u(b);
+                            case 7:
+                                (r = new i.fg(t, 4210752, !1)).Fd.alpha = 1;
                                 break;
-                            default: {
-                                let x = 4210752,
-                                    B = !1;
-                                g > 1 && (x = 0, 128 & g && (x |= 7340032), 64 & g && (x |= 28672), 32 & g && (x |= 112), 16 & g && (B = !0)), k = new h(b, x, B)
-                            }
+                            default:
+                                var l = 4210752, c = !1;
+                                t.wf && (l = 0, 128 & t.wf && (l |= 7340032), 64 & t.wf && (l |= 28672), 32 & t.wf && (l |= 112), 16 & t.wf && (c = !0)), r = new i.fg(t, l, c)
                         }
-                        if (!_) {
-                            let {
-                                scene: Q
-                            } = i;
-                            Q[1 & g ? "addFood" : "addCell"](k.sprite)
-                        }
-                        I.set(s, k)
+                        1 & t.wf ? a.Ie.Yc(r.Fd) : a.Ie.Xc(r.Fd), a.Jb.push(r), a.Lf[t.Wc] = r
                     }
-                    void 0 != a && (k.nx = a, k.ny = d), void 0 != p && (k.nSize = p), k.updateStamp = i.timeStamp;
-                    let {
-                        player: M
-                    } = k;
-                    if (!M || 2 & m) return;
-                    let {
-                        replay: T
-                    } = i;
-                    T.recording() ? M.lastUpdateTick = A : delete M.lastUpdateTick
-                },
-                A = (e, t, s) => {
-                    let {
-                        cells: n
-                    } = 1 & s ? i : i.dual;
-                    if (!n.has(e)) return;
-                    let o = n.get(e);
-                    if (o.destroyed) return;
-                    if (!n.has(t)) return void o.destroy(s);
-                    let r = n.get(t);
-                    if (o.update(), !o.destroy(s, a.eatAnimation)) return;
-                    o.nx = r.nx, o.ny = r.ny;
-                    let l = o.nSize;
-                    o.nSize = 0, o.newPositionScale = p(l / r.nSize, 0, 1), o.updateStamp = i.timeStamp
-                },
-                m = (e, t) => {
-                    let {
-                        cells: s
-                    } = 1 & t ? i : i.dual;
-                    s.has(e) && s.get(e).destroy(t)
-                },
-                v = new class e {
-                    async init() {
-                        if (this.initializing || this.instance) return !1;
-                        this.initializing = !0;
-                        let e = await fetch("data:application/wasm;base64,AGFzbQEAAAABKAdgAX8Bf2ABfwBgA39/fwBgAAF/YAAAYAJ/fwBgCX9/f39/f39/fwACUQQDZW52C2FkZE9yVXBkYXRlAAYDZW52B2Rlc3Ryb3kABQNlbnYDZWF0AAIDZW52H2Vtc2NyaXB0ZW5fbm90aWZ5X21lbW9yeV9ncm93dGgAAQMLCgQCAwAAAAEDAQAEBQFwAQICBQcBAYACgIACBgkBfwFBgIzAAgsHjQEKBm1lbW9yeQIAC2Rlc2VyaWFsaXplAAULX2luaXRpYWxpemUABBlfX2luZGlyZWN0X2Z1bmN0aW9uX3RhYmxlAQAQX19lcnJub19sb2NhdGlvbgAGCXN0YWNrU2F2ZQALDHN0YWNrUmVzdG9yZQAMCnN0YWNrQWxsb2MADQZtYWxsb2MACQRmcmVlAAoJBwEAQQELAQQKjT8KAwABC6oEAQt/QQEhAyAALQAAIgYEQANAIAZB/wFxIQhBACEKAkAgBkEfcUEBRwRAQQAhCwwBCyAAIAVqLQACIAAgA2otAABBCHRyIQsgBUEDaiEDCyAAIANqIgUvAAAhByADQQJqIQQCQCAIQSBxBEBBACEMDAELIAUtAAMgACAEai0AAEEIdHIhCiAFLwAEIgRBCHQgBEEIdnIhDCADQQZqIQQLIAdBCHYhBSAHQQh0IQlBACEDAkAgCEHAAHEEQEEAIQcMAQsgACAEai8AACIHQQh0IAdBCHZyIQcgBEECaiEECyAGQQ9xIQ0gBSAJciEJIAZBGHRBGHVBf0oEfyAEBSAAIARqLQAAIQMgBEEBagshBSACIAggCyAJQf//A3EgCkEQdEEQdSAMQRB0QRB1IAdB//8DcSADIA1BBEYgA0H/AXFBD0tyckH/AXEgARAAIAVBAWohAyAAIAVqLQAAIgYNAAsLIANBAmohBAJAIAAgBWotAAIgACADai0AAEEIdHIiBUUEQCADIQYMAQsDQCACIAAgA2otAAMgACAEIgZqLQAAQQh0chABIARBAmohBCAGIQMgBUEBayIFQf//A3ENAAsLIAAgBmotAAMgACAEai0AAEEIdHIiAwRAA0AgACAGaiEBIAIgACAGQQRqIgZqLwAAIgRBCHQgBEEIdnJB//8DcSABLwAGIgFBCHQgAUEIdnJB//8DcRACIANBAWsiA0H//wNxDQALCwsFAEGECAsjACAAPwBBEHRrQf//A2pBEHZAAEF/RgRAQQAPC0EAEANBAQtSAQJ/QYAIKAIAIgEgAEEDakF8cSICaiEAAkAgAkEBTkEAIAAgAU0bDQA/AEEQdCAASQRAIAAQB0UNAQtBgAggADYCACABDwtBhAhBMDYCAEF/C5ctAQx/IwBBEGsiDCQAAkACQAJAAkACQAJAAkACQAJAAkACQAJAIABB9AFNBEBBiAgoAgAiBUEQIABBC2pBeHEgAEELSRsiCEEDdiICdiIBQQNxBEAgAUF/c0EBcSACaiIDQQN0IgFBuAhqKAIAIgRBCGohAAJAIAQoAggiAiABQbAIaiIBRgRAQYgIIAVBfiADd3E2AgAMAQsgAiABNgIMIAEgAjYCCAsgBCADQQN0IgFBA3I2AgQgASAEaiIBIAEoAgRBAXI2AgQMDQsgCEGQCCgCACIKTQ0BIAEEQAJAQQIgAnQiAEEAIABrciABIAJ0cSIAQQAgAGtxQQFrIgAgAEEMdkEQcSICdiIBQQV2QQhxIgAgAnIgASAAdiIBQQJ2QQRxIgByIAEgAHYiAUEBdkECcSIAciABIAB2IgFBAXZBAXEiAHIgASAAdmoiA0EDdCIAQbgIaigCACIEKAIIIgEgAEGwCGoiAEYEQEGICCAFQX4gA3dxIgU2AgAMAQsgASAANgIMIAAgATYCCAsgBEEIaiEAIAQgCEEDcjYCBCAEIAhqIgIgA0EDdCIBIAhrIgNBAXI2AgQgASAEaiADNgIAIAoEQCAKQQN2IgFBA3RBsAhqIQdBnAgoAgAhBAJ/IAVBASABdCIBcUUEQEGICCABIAVyNgIAIAcMAQsgBygCCAshASAHIAQ2AgggASAENgIMIAQgBzYCDCAEIAE2AggLQZwIIAI2AgBBkAggAzYCAAwNC0GMCCgCACIGRQ0BIAZBACAGa3FBAWsiACAAQQx2QRBxIgJ2IgFBBXZBCHEiACACciABIAB2IgFBAnZBBHEiAHIgASAAdiIBQQF2QQJxIgByIAEgAHYiAUEBdkEBcSIAciABIAB2akECdEG4CmooAgAiASgCBEF4cSAIayEDIAEhAgNAAkAgAigCECIARQRAIAIoAhQiAEUNAQsgACgCBEF4cSAIayICIAMgAiADSSICGyEDIAAgASACGyEBIAAhAgwBCwsgASAIaiIJIAFNDQIgASgCGCELIAEgASgCDCIERwRAIAEoAggiAEGYCCgCAEkaIAAgBDYCDCAEIAA2AggMDAsgAUEUaiICKAIAIgBFBEAgASgCECIARQ0EIAFBEGohAgsDQCACIQcgACIEQRRqIgIoAgAiAA0AIARBEGohAiAEKAIQIgANAAsgB0EANgIADAsLQX8hCCAAQb9/Sw0AIABBC2oiAEF4cSEIQYwIKAIAIglFDQBBHyEFQQAgCGshAwJAAkACQAJ/IAhB////B00EQCAAQQh2IgAgAEGA/j9qQRB2QQhxIgJ0IgAgAEGA4B9qQRB2QQRxIgF0IgAgAEGAgA9qQRB2QQJxIgB0QQ92IAEgAnIgAHJrIgBBAXQgCCAAQRVqdkEBcXJBHGohBQsgBUECdEG4CmooAgAiAkULBEBBACEADAELQQAhACAIQQBBGSAFQQF2ayAFQR9GG3QhAQNAAkAgAigCBEF4cSAIayIHIANPDQAgAiEEIAciAw0AQQAhAyACIQAMAwsgACACKAIUIgcgByACIAFBHXZBBHFqKAIQIgJGGyAAIAcbIQAgAUEBdCEBIAINAAsLIAAgBHJFBEBBAiAFdCIAQQAgAGtyIAlxIgBFDQMgAEEAIABrcUEBayIAIABBDHZBEHEiAnYiAUEFdkEIcSIAIAJyIAEgAHYiAUECdkEEcSIAciABIAB2IgFBAXZBAnEiAHIgASAAdiIBQQF2QQFxIgByIAEgAHZqQQJ0QbgKaigCACEACyAARQ0BCwNAIAAoAgRBeHEgCGsiASADSSECIAEgAyACGyEDIAAgBCACGyEEIAAoAhAiAQR/IAEFIAAoAhQLIgANAAsLIARFDQAgA0GQCCgCACAIa08NACAEIAhqIgYgBE0NASAEKAIYIQUgBCAEKAIMIgFHBEAgBCgCCCIAQZgIKAIASRogACABNgIMIAEgADYCCAwKCyAEQRRqIgIoAgAiAEUEQCAEKAIQIgBFDQQgBEEQaiECCwNAIAIhByAAIgFBFGoiAigCACIADQAgAUEQaiECIAEoAhAiAA0ACyAHQQA2AgAMCQsgCEGQCCgCACICTQRAQZwIKAIAIQMCQCACIAhrIgFBEE8EQEGQCCABNgIAQZwIIAMgCGoiADYCACAAIAFBAXI2AgQgAiADaiABNgIAIAMgCEEDcjYCBAwBC0GcCEEANgIAQZAIQQA2AgAgAyACQQNyNgIEIAIgA2oiACAAKAIEQQFyNgIECyADQQhqIQAMCwsgCEGUCCgCACIGSQRAQZQIIAYgCGsiATYCAEGgCEGgCCgCACICIAhqIgA2AgAgACABQQFyNgIEIAIgCEEDcjYCBCACQQhqIQAMCwtBACEAIAhBL2oiCQJ/QeALKAIABEBB6AsoAgAMAQtB7AtCfzcCAEHkC0KAoICAgIAENwIAQeALIAxBDGpBcHFB2KrVqgVzNgIAQfQLQQA2AgBBxAtBADYCAEGAIAsiAWoiBUEAIAFrIgdxIgIgCE0NCkHACygCACIEBEBBuAsoAgAiAyACaiIBIANNDQsgASAESw0LC0HECy0AAEEEcQ0FAkACQEGgCCgCACIDBEBByAshAANAIAMgACgCACIBTwRAIAEgACgCBGogA0sNAwsgACgCCCIADQALC0EAEAgiAUF/Rg0GIAIhBUHkCygCACIDQQFrIgAgAXEEQCACIAFrIAAgAWpBACADa3FqIQULIAUgCE0NBiAFQf7///8HSw0GQcALKAIAIgQEQEG4CygCACIDIAVqIgAgA00NByAAIARLDQcLIAUQCCIAIAFHDQEMCAsgBSAGayAHcSIFQf7///8HSw0FIAUQCCIBIAAoAgAgACgCBGpGDQQgASEACwJAIAhBMGogBU0NACAAQX9GDQBB6AsoAgAiASAJIAVrakEAIAFrcSIBQf7///8HSwRAIAAhAQwICyABEAhBf0cEQCABIAVqIQUgACEBDAgLQQAgBWsQCBoMBQsgACIBQX9HDQYMBAsAC0EAIQQMBwtBACEBDAULIAFBf0cNAgtBxAtBxAsoAgBBBHI2AgALIAJB/v///wdLDQEgAhAIIgFBABAIIgBPDQEgAUF/Rg0BIABBf0YNASAAIAFrIgUgCEEoak0NAQtBuAtBuAsoAgAgBWoiADYCAEG8CygCACAASQRAQbwLIAA2AgALAkACQAJAQaAIKAIAIgcEQEHICyEAA0AgASAAKAIAIgMgACgCBCICakYNAiAAKAIIIgANAAsMAgtBmAgoAgAiAEEAIAAgAU0bRQRAQZgIIAE2AgALQQAhAEHMCyAFNgIAQcgLIAE2AgBBqAhBfzYCAEGsCEHgCygCADYCAEHUC0EANgIAA0AgAEEDdCIDQbgIaiADQbAIaiICNgIAIANBvAhqIAI2AgAgAEEBaiIAQSBHDQALQZQIIAVBKGsiA0F4IAFrQQdxQQAgAUEIakEHcRsiAGsiAjYCAEGgCCAAIAFqIgA2AgAgACACQQFyNgIEIAEgA2pBKDYCBEGkCEHwCygCADYCAAwCCyABIAdNDQAgAyAHSw0AIAAoAgxBCHENACAAIAIgBWo2AgRBoAggB0F4IAdrQQdxQQAgB0EIakEHcRsiAGoiAjYCAEGUCEGUCCgCACAFaiIBIABrIgA2AgAgAiAAQQFyNgIEIAEgB2pBKDYCBEGkCEHwCygCADYCAAwBC0GYCCgCACABSwRAQZgIIAE2AgALIAEgBWohAkHICyEAAkACQAJAAkACQAJAA0AgAiAAKAIARwRAIAAoAggiAA0BDAILCyAALQAMQQhxRQ0BC0HICyEAA0AgByAAKAIAIgJPBEAgAiAAKAIEaiIEIAdLDQMLIAAoAgghAAwACwALIAAgATYCACAAIAAoAgQgBWo2AgQgAUF4IAFrQQdxQQAgAUEIakEHcRtqIgkgCEEDcjYCBCACQXggAmtBB3FBACACQQhqQQdxG2oiBSAJayAIayECIAggCWohBiAFIAdGBEBBoAggBjYCAEGUCEGUCCgCACACaiIANgIAIAYgAEEBcjYCBAwDCyAFQZwIKAIARgRAQZwIIAY2AgBBkAhBkAgoAgAgAmoiADYCACAGIABBAXI2AgQgACAGaiAANgIADAMLIAUoAgQiAEEDcUEBRgRAIABBeHEhBwJAIABB/wFNBEAgBSgCCCIDIABBA3YiAEEDdEGwCGpGGiADIAUoAgwiAUYEQEGICEGICCgCAEF+IAB3cTYCAAwCCyADIAE2AgwgASADNgIIDAELIAUoAhghCAJAIAUgBSgCDCIBRwRAIAUoAggiACABNgIMIAEgADYCCAwBCwJAIAVBFGoiACgCACIDDQAgBUEQaiIAKAIAIgMNAEEAIQEMAQsDQCAAIQQgAyIBQRRqIgAoAgAiAw0AIAFBEGohACABKAIQIgMNAAsgBEEANgIACyAIRQ0AAkAgBSAFKAIcIgNBAnRBuApqIgAoAgBGBEAgACABNgIAIAENAUGMCEGMCCgCAEF+IAN3cTYCAAwCCyAIQRBBFCAIKAIQIAVGG2ogATYCACABRQ0BCyABIAg2AhggBSgCECIABEAgASAANgIQIAAgATYCGAsgBSgCFCIARQ0AIAEgADYCFCAAIAE2AhgLIAUgB2ohBSACIAdqIQILIAUgBSgCBEF+cTYCBCAGIAJBAXI2AgQgAiAGaiACNgIAIAJB/wFNBEAgAkEDdiIAQQN0QbAIaiECAn9BiAgoAgAiAUEBIAB0IgBxRQRAQYgIIAAgAXI2AgAgAgwBCyACKAIICyEAIAIgBjYCCCAAIAY2AgwgBiACNgIMIAYgADYCCAwDC0EfIQAgAkH///8HTQRAIAJBCHYiACAAQYD+P2pBEHZBCHEiA3QiACAAQYDgH2pBEHZBBHEiAXQiACAAQYCAD2pBEHZBAnEiAHRBD3YgASADciAAcmsiAEEBdCACIABBFWp2QQFxckEcaiEACyAGIAA2AhwgBkIANwIQIABBAnRBuApqIQQCQEGMCCgCACIDQQEgAHQiAXFFBEBBjAggASADcjYCACAEIAY2AgAgBiAENgIYDAELIAJBAEEZIABBAXZrIABBH0YbdCEAIAQoAgAhAQNAIAEiAygCBEF4cSACRg0DIABBHXYhASAAQQF0IQAgAyABQQRxaiIEKAIQIgENAAsgBCAGNgIQIAYgAzYCGAsgBiAGNgIMIAYgBjYCCAwCC0GUCCAFQShrIgNBeCABa0EHcUEAIAFBCGpBB3EbIgBrIgI2AgBBoAggACABaiIANgIAIAAgAkEBcjYCBCABIANqQSg2AgRBpAhB8AsoAgA2AgAgByAEQScgBGtBB3FBACAEQSdrQQdxG2pBL2siACAAIAdBEGpJGyICQRs2AgQgAkHQCykCADcCECACQcgLKQIANwIIQdALIAJBCGo2AgBBzAsgBTYCAEHICyABNgIAQdQLQQA2AgAgAkEYaiEAA0AgAEEHNgIEIABBCGohASAAQQRqIQAgASAESQ0ACyACIAdGDQMgAiACKAIEQX5xNgIEIAcgAiAHayIEQQFyNgIEIAIgBDYCACAEQf8BTQRAIARBA3YiAEEDdEGwCGohAgJ/QYgIKAIAIgFBASAAdCIAcUUEQEGICCAAIAFyNgIAIAIMAQsgAigCCAshACACIAc2AgggACAHNgIMIAcgAjYCDCAHIAA2AggMBAtBHyEAIAdCADcCECAEQf///wdNBEAgBEEIdiIAIABBgP4/akEQdkEIcSICdCIAIABBgOAfakEQdkEEcSIBdCIAIABBgIAPakEQdkECcSIAdEEPdiABIAJyIAByayIAQQF0IAQgAEEVanZBAXFyQRxqIQALIAcgADYCHCAAQQJ0QbgKaiEDAkBBjAgoAgAiAkEBIAB0IgFxRQRAQYwIIAEgAnI2AgAgAyAHNgIAIAcgAzYCGAwBCyAEQQBBGSAAQQF2ayAAQR9GG3QhACADKAIAIQEDQCABIgIoAgRBeHEgBEYNBCAAQR12IQEgAEEBdCEAIAIgAUEEcWoiAygCECIBDQALIAMgBzYCECAHIAI2AhgLIAcgBzYCDCAHIAc2AggMAwsgAygCCCIAIAY2AgwgAyAGNgIIIAZBADYCGCAGIAM2AgwgBiAANgIICyAJQQhqIQAMBQsgAigCCCIAIAc2AgwgAiAHNgIIIAdBADYCGCAHIAI2AgwgByAANgIIC0GUCCgCACIAIAhNDQBBlAggACAIayIBNgIAQaAIQaAIKAIAIgIgCGoiADYCACAAIAFBAXI2AgQgAiAIQQNyNgIEIAJBCGohAAwDC0GECEEwNgIAQQAhAAwCCwJAIAVFDQACQCAEKAIcIgJBAnRBuApqIgAoAgAgBEYEQCAAIAE2AgAgAQ0BQYwIIAlBfiACd3EiCTYCAAwCCyAFQRBBFCAFKAIQIARGG2ogATYCACABRQ0BCyABIAU2AhggBCgCECIABEAgASAANgIQIAAgATYCGAsgBCgCFCIARQ0AIAEgADYCFCAAIAE2AhgLAkAgA0EPTQRAIAQgAyAIaiIAQQNyNgIEIAAgBGoiACAAKAIEQQFyNgIEDAELIAQgCEEDcjYCBCAGIANBAXI2AgQgAyAGaiADNgIAIANB/wFNBEAgA0EDdiIAQQN0QbAIaiECAn9BiAgoAgAiAUEBIAB0IgBxRQRAQYgIIAAgAXI2AgAgAgwBCyACKAIICyEAIAIgBjYCCCAAIAY2AgwgBiACNgIMIAYgADYCCAwBC0EfIQAgA0H///8HTQRAIANBCHYiACAAQYD+P2pBEHZBCHEiAnQiACAAQYDgH2pBEHZBBHEiAXQiACAAQYCAD2pBEHZBAnEiAHRBD3YgASACciAAcmsiAEEBdCADIABBFWp2QQFxckEcaiEACyAGIAA2AhwgBkIANwIQIABBAnRBuApqIQICQAJAIAlBASAAdCIBcUUEQEGMCCABIAlyNgIAIAIgBjYCACAGIAI2AhgMAQsgA0EAQRkgAEEBdmsgAEEfRht0IQAgAigCACEIA0AgCCIBKAIEQXhxIANGDQIgAEEddiECIABBAXQhACABIAJBBHFqIgIoAhAiCA0ACyACIAY2AhAgBiABNgIYCyAGIAY2AgwgBiAGNgIIDAELIAEoAggiACAGNgIMIAEgBjYCCCAGQQA2AhggBiABNgIMIAYgADYCCAsgBEEIaiEADAELAkAgC0UNAAJAIAEoAhwiAkECdEG4CmoiACgCACABRgRAIAAgBDYCACAEDQFBjAggBkF+IAJ3cTYCAAwCCyALQRBBFCALKAIQIAFGG2ogBDYCACAERQ0BCyAEIAs2AhggASgCECIABEAgBCAANgIQIAAgBDYCGAsgASgCFCIARQ0AIAQgADYCFCAAIAQ2AhgLAkAgA0EPTQRAIAEgAyAIaiIAQQNyNgIEIAAgAWoiACAAKAIEQQFyNgIEDAELIAEgCEEDcjYCBCAJIANBAXI2AgQgAyAJaiADNgIAIAoEQCAKQQN2IgBBA3RBsAhqIQRBnAgoAgAhAgJ/QQEgAHQiACAFcUUEQEGICCAAIAVyNgIAIAQMAQsgBCgCCAshACAEIAI2AgggACACNgIMIAIgBDYCDCACIAA2AggLQZwIIAk2AgBBkAggAzYCAAsgAUEIaiEACyAMQRBqJAAgAAunDAEHfwJAIABFDQAgAEEIayIDIABBBGsoAgAiAUF4cSIAaiEFAkAgAUEBcQ0AIAFBA3FFDQEgAyADKAIAIgFrIgNBmAgoAgBJDQEgACABaiEAIANBnAgoAgBHBEAgAUH/AU0EQCADKAIIIgIgAUEDdiIEQQN0QbAIakYaIAIgAygCDCIBRgRAQYgIQYgIKAIAQX4gBHdxNgIADAMLIAIgATYCDCABIAI2AggMAgsgAygCGCEGAkAgAyADKAIMIgFHBEAgAygCCCICIAE2AgwgASACNgIIDAELAkAgA0EUaiICKAIAIgQNACADQRBqIgIoAgAiBA0AQQAhAQwBCwNAIAIhByAEIgFBFGoiAigCACIEDQAgAUEQaiECIAEoAhAiBA0ACyAHQQA2AgALIAZFDQECQCADIAMoAhwiAkECdEG4CmoiBCgCAEYEQCAEIAE2AgAgAQ0BQYwIQYwIKAIAQX4gAndxNgIADAMLIAZBEEEUIAYoAhAgA0YbaiABNgIAIAFFDQILIAEgBjYCGCADKAIQIgIEQCABIAI2AhAgAiABNgIYCyADKAIUIgJFDQEgASACNgIUIAIgATYCGAwBCyAFKAIEIgFBA3FBA0cNAEGQCCAANgIAIAUgAUF+cTYCBCADIABBAXI2AgQgACADaiAANgIADwsgAyAFTw0AIAUoAgQiAUEBcUUNAAJAIAFBAnFFBEAgBUGgCCgCAEYEQEGgCCADNgIAQZQIQZQIKAIAIABqIgA2AgAgAyAAQQFyNgIEIANBnAgoAgBHDQNBkAhBADYCAEGcCEEANgIADwsgBUGcCCgCAEYEQEGcCCADNgIAQZAIQZAIKAIAIABqIgA2AgAgAyAAQQFyNgIEIAAgA2ogADYCAA8LIAFBeHEgAGohAAJAIAFB/wFNBEAgBSgCCCICIAFBA3YiBEEDdEGwCGpGGiACIAUoAgwiAUYEQEGICEGICCgCAEF+IAR3cTYCAAwCCyACIAE2AgwgASACNgIIDAELIAUoAhghBgJAIAUgBSgCDCIBRwRAIAUoAggiAkGYCCgCAEkaIAIgATYCDCABIAI2AggMAQsCQCAFQRRqIgIoAgAiBA0AIAVBEGoiAigCACIEDQBBACEBDAELA0AgAiEHIAQiAUEUaiICKAIAIgQNACABQRBqIQIgASgCECIEDQALIAdBADYCAAsgBkUNAAJAIAUgBSgCHCICQQJ0QbgKaiIEKAIARgRAIAQgATYCACABDQFBjAhBjAgoAgBBfiACd3E2AgAMAgsgBkEQQRQgBigCECAFRhtqIAE2AgAgAUUNAQsgASAGNgIYIAUoAhAiAgRAIAEgAjYCECACIAE2AhgLIAUoAhQiAkUNACABIAI2AhQgAiABNgIYCyADIABBAXI2AgQgACADaiAANgIAIANBnAgoAgBHDQFBkAggADYCAA8LIAUgAUF+cTYCBCADIABBAXI2AgQgACADaiAANgIACyAAQf8BTQRAIABBA3YiAUEDdEGwCGohAAJ/QYgIKAIAIgJBASABdCIBcUUEQEGICCABIAJyNgIAIAAMAQsgACgCCAshAiAAIAM2AgggAiADNgIMIAMgADYCDCADIAI2AggPC0EfIQIgA0IANwIQIABB////B00EQCAAQQh2IgEgAUGA/j9qQRB2QQhxIgF0IgIgAkGA4B9qQRB2QQRxIgJ0IgQgBEGAgA9qQRB2QQJxIgR0QQ92IAEgAnIgBHJrIgFBAXQgACABQRVqdkEBcXJBHGohAgsgAyACNgIcIAJBAnRBuApqIQECQAJAAkBBjAgoAgAiBEEBIAJ0IgdxRQRAQYwIIAQgB3I2AgAgASADNgIAIAMgATYCGAwBCyAAQQBBGSACQQF2ayACQR9GG3QhAiABKAIAIQEDQCABIgQoAgRBeHEgAEYNAiACQR12IQEgAkEBdCECIAQgAUEEcWoiB0EQaigCACIBDQALIAcgAzYCECADIAQ2AhgLIAMgAzYCDCADIAM2AggMAQsgBCgCCCIAIAM2AgwgBCADNgIIIANBADYCGCADIAQ2AgwgAyAANgIIC0GoCEGoCCgCAEEBayIAQX8gABs2AgALCwQAIwALBgAgACQACxAAIwAgAGtBcHEiACQAIAALCwkBAEGBCAsCBlA="),
-                            t = this.instance = await WebAssembly.instantiate(await WebAssembly.compile(await e.arrayBuffer()), {
-                                env: {
-                                    addOrUpdate(e, t, s, a, n, o, r, l, c) {
-                                        let {
-                                            playback: h
-                                        } = i;
-                                        if (h.dry) {
-                                            let {
-                                                updates: d
-                                            } = h, p = d[0][0];
-                                            p[a] = {
-                                                type: t,
-                                                pid: s,
-                                                id: a,
-                                                x: n,
-                                                y: o,
-                                                size: r,
-                                                flags: l
-                                            };
-                                            return
-                                        }
-                                        n = 32 & t ? void 0 : n, r = 64 & t ? void 0 : r, g(15 & t, s, a, n, o, r, l, c, e)
-                                    },
-                                    destroy(e, t) {
-                                        let {
-                                            playback: s
-                                        } = i;
-                                        if (s.dry) {
-                                            s.destroyCell(t);
-                                            return
-                                        }
-                                        m(t, e)
-                                    },
-                                    eat(e, t, s) {
-                                        let {
-                                            playback: a
-                                        } = i;
-                                        if (a.dry) {
-                                            a.eatCell(t, s);
-                                            return
-                                        }
-                                        A(t, s, e)
-                                    },
-                                    emscripten_notify_memory_growth(e) {
-                                    }
-                                }
-                            }),
-                            {
-                                memory: s
-                            } = t.exports;
-                        return this.HEAPU8 = new Uint8Array(s.buffer), this.HEAPU16 = new Uint8Array(s.buffer), this.HEAPF32 = new Uint8Array(s.buffer), this.HEAPU32 = new Uint8Array(s.buffer), delete this.initializing, !0
+                    if (!0 === e && (r.If = t.Uc), !0 === s && (r.Gf = t.Ha, r.Hf = t.Ia), r.yf = a.Fb, r.Wf) {
+                        var u = 2 & t.wf ? .4 : 1;
+                        u !== r.Fd.alpha && (r.Fd.alpha = u), r.Wf.zb && (a.Vd = !0, a.Mf[t.Wc] = !0), r.Wf.Gb = a.Gb
                     }
-
-                    deserialize(e, t, s) {
-                        if (!this.instance) return 0;
-                        let {
-                            deserialize: i,
-                            malloc: a,
-                            free: n
-                        } = this.instance.exports, o = t.byteLength, r = a(o);
-                        this.HEAPU8.set(t, r), i(r, s, e), n(r)
-                    }
-                };
-            v.init(), window.Module = v, i.parseCells = e => v.deserialize(1, new Uint8Array(e.buffer, 1), e.packetId), e.exports = {
-                wasmModule: v,
-                addOrUpdateCell: g,
-                destroyCell: m,
-                eatCell: A
-            }
-        }, function (e, t, s) {
-            var i = s(140);
-
-            function a(e, t, s, a) {
-                var n = e.length,
-                    o = i._malloc(n),
-                    r = new Uint8Array(i.HEAPU8.buffer, o, n);
-                r.set(e);
-                var l = t(o, a);
-                if (!s) {
-                    var c = new Uint8Array(new ArrayBuffer(n));
-                    c.set(r)
-                }
-                return i._free(o), s ? l : c
-            }
-
-            s(141), e.exports = {
-                skid: e => a(e, i._skid, !1),
-                skid3: (e, t) => a(e, i._skid3, !0, t),
-                skid4: (e, t) => a(e, i._skid4, !0, t)
-            }
-        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
-            "use strict";
-            var i = s(74),
-                a = s(30),
-                n = Object((s(168), s(0)).a)(a.default, i.a, i.b, !1, null, "0eaeaf66", null);
-            n.options.__file = "src/components/modal.vue", t.default = n.exports
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(75),
-                a = s(38),
-                n = Object((s(218), s(0)).a)(a.default, i.a, i.b, !1, null, "1dbc6ed9", null);
-            n.options.__file = "src/components/replay-item.vue", t.default = n.exports
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(73),
-                a = s(55),
-                n = Object((s(250), s(0)).a)(a.default, i.a, i.b, !1, null, "4c95bd45", null);
-            n.options.__file = "src/components/minimap.vue", t.default = n.exports
-        }, function (e, t, s) {
-            "use strict";
-            s(17).notifyUnsupportedBrowser(), s(1), s(130), s(132), s(142), s(148), s(269), s(267), s(268)
-        }, function (e, t, s) {
-            var i = s(2),
-                a = s(120);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
-                [e.i, a, ""]
-            ]);
-            var n = (i(a, {
-                insert: "head",
-                singleton: !1
-            }), a.locals ? a.locals : {});
-            e.exports = n
-        }, function () {
-        }, function (e, t, s) {
-            let i, a = s(4),
-                n = s(12),
-                o = ({
-                         width: e,
-                         height: t,
-                         circle: s
-                     }) => {
-                    let i = PIXI.utils.string2hex(a.borderColor),
-                        n = new PIXI.Graphics;
-                    return n.lineStyle(100, i, 1, .5), s ? n.drawEllipse(e / 2, t / 2, e / 2, t / 2) : n.drawRect(0, 0, e, t), n.endFill(), n.pivot.set(e / 2, t / 2), n
-                },
-                r = ({
-                         width: e,
-                         height: t
-                     }) => {
-                    let s = new PIXI.Graphics().beginFill(16777215).drawEllipse(e / 2, t / 2, e / 2, t / 2).endFill();
-                    return s.pivot.set(e / 2, t / 2), s
-                };
-            e.exports = class e {
-                constructor(e, t) {
-                    this.backgroundLocationImage = null, this.border = e, this.container = new PIXI.Container, this.background = new PIXI.Container, this.borderSprite = o(e), this.background.addChild(this.borderSprite), this.foreground = new PIXI.Container, this.food = new PIXI.Container, this.food.visible = a.foodVisible, this.resetMassTextStyle(!1), this.container.addChild(this.background, this.food, this.foreground), this.setPosition(), t && this.setBackgroundImage(), this.background.position.x = e.x, this.background.position.y = e.y, this.initBackgroundLocationImage(), this.backgroundLocationImage.visible = a.showBackgroundLocationImage
-                }
-
-                static useGame(e) {
-                    i = e
-                }
-
-                setPosition() {
-                    this.container.position.x = window.innerWidth / 2, this.container.position.y = window.innerHeight / 2
-                }
-
-                sort() {
-                    this.foreground.children.sort((e, t) => (e = e.gameData).size === (t = t.gameData).size ? e.id - t.id : e.size - t.size)
-                }
-
-                addCell(e) {
-                    this.foreground.addChild(e)
-                }
-
-                addFood(e) {
-                    this.food.addChild(e)
-                }
-
-                toggleBackgroundImage(e) {
-                    e && !this.backgroundSprite ? this.setBackgroundImage() : e || this.destroyBackgroundImage(!0)
-                }
-
-                setBackgroundImage() {
-                    let e = a.backgroundImageUrl;
-                    if (!e) {
-                        this.destroyBackgroundImage();
-                        return
-                    }
-                    let t = (a.backgroundImageRepeat ? PIXI.TilingSprite : PIXI.Sprite).from(e, {});
-                    t.width = this.border.width, t.height = this.border.height, t.alpha = a.backgroundImageOpacity, t.anchor.set(.5);
-                    let s = this.backgroundSprite;
-                    if (s) {
-                        let i = t.texture !== s.texture;
-                        this.destroyBackgroundImage(i)
-                    }
-                    if (this.backgroundSprite = t, this.background.addChildAt(t, 0), !this.border.circle) return;
-                    let n = r(this.border);
-                    this.background.addChildAt(n, 1), this.backgroundSprite.mask = n
-                }
-
-                destroyBackgroundImage(e) {
-                    this.backgroundSprite && (this.backgroundSprite.destroy(!!e), delete this.backgroundSprite)
-                }
-
-                resetBorder() {
-                    this.borderSprite.destroy(), this.borderSprite = o(this.border), this.background.addChild(this.borderSprite)
-                }
-
-                reloadFoodTextures() {
-                    i.allCells.forEach(e => {
-                        e.isFood && e.reloadTexture()
-                    })
-                }
-
-                reloadEjectedTextures() {
-                    i.allCells.forEach(e => {
-                        e.isEjected && e.reloadTexture()
-                    })
-                }
-
-                reloadVirusTexture() {
-                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {
-                    })
-                }
-
-                resetPlayerLongNames() {
-                    i.playerManager.players.forEach(e => e.applyNameToSprite())
-                }
-
-                resetNameTextStyle() {
-                    [...i.allCells.values()].filter(e => !!e.isPlayerCell).forEach(e => {
-                        e.nameSprite && (e.nameSprite.destroy(!1), e.nameSprite = null)
-                    });
-                    let e = a.nameTextStyle;
-                    i.playerManager.players.forEach(t => {
-                        let s = t.nameSprite;
-                        if (!s) return;
-                        let i = s.style.fill;
-                        s.style = e, s.style.fill = i, s.updateText()
-                    })
-                }
-
-                resetMassTextStyle(e) {
-                    e && this.uninstallMassTextFont();
-                    let t = a.massTextStyle;
-                    for (PIXI.BitmapFont.from("mass", t, {
-                        chars: "1234567890k."
-                    }); i.massTextPool.length;) i.massTextPool.pop().destroy(!1);
-                    [...i.allCells.values()].filter(e => !!e.isPlayerCell).forEach(e => {
-                        e.massText && e.sprite && (e.sprite.removeChild(e.massText), e.massText.destroy(!1), e.massText = null)
-                    })
-                }
-
-                uninstallMassTextFont() {
-                    PIXI.BitmapFont.uninstall("mass")
-                }
-
-                toggleBackgroundLocationImage(active) {
-                    if (active && !this.backgroundLocationImage) this.initBackgroundLocationImage();
-                    else if (!active && this.backgroundLocationImage) this.destroyBackgroundLocationImage();
-                }
-
-                initBackgroundLocationImage(alphaChange = false) {
-                    if (alphaChange) return this.backgroundLocationImage.alpha = a.backgroundLocationImageOpacity;
-                    let imageUrl = 'https://i.ibb.co/B6gfmrr/map.png',
-                        sprite = new PIXI.Sprite.from(imageUrl, {});
-                    sprite.width = this.border.width, sprite.height = this.border.height, sprite.alpha = a.backgroundLocationImageOpacity, sprite.anchor.set(.5), this.backgroundLocationImage = sprite, this.background.addChild(sprite);
-                }
-
-                destroyBackgroundLocationImage() {
-                    if (this.backgroundLocationImage) this.background.removeChild(this.backgroundLocationImage), this.backgroundLocationImage.destroy(), this.backgroundLocationImage = null;
+                }, Ci: function (t, e) {
+                    var s = a.Lf[t], i = a.Lf[e];
+                    s && (i ? (s.Ef(), s.Jc(n.Di), s.Gf = i.Ha, s.Hf = i.Ia, s.If = 0, s.zf = Math.min(Math.max(s.If / i.If, 0), 1), s.yf = a.Fb) : s.Jc())
                 }
             }
-        }, function (e, t, s) {
-            var i = s(4),
-                a = s(24),
-                n = {};
-            e.exports = {
-                getTexture: function (e) {
-                    var t, s, o, r, l, c, h, d;
-                    return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawCircle(0, 0, s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
-                },
-                destroyCache: function () {
-                    for (var e in n) n[e].destroy(!0), delete n[e]
-                }
-            }
-        }, function (e, t, s) {
-            var i = s(4),
-                a = s(24),
-                n = {};
-            e.exports = {
-                getTexture: function (e) {
-                    var t, s, o, r, l, c, h, d;
-                    return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawRect(-s, -s, 2 * s, 2 * s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
-                },
-                destroyCache: function () {
-                    for (var e in n) n[e].destroy(!0), delete n[e]
-                }
-            }
-        }, function (e, t, s) {
-            var i = s(24),
-                {
-                    loadImage: a
-                } = s(8),
-                n = PIXI.RenderTexture.create(200, 200),
-                o = Promise.resolve();
-            e.exports = {
-                getTexture: function () {
-                    return n
-                },
-                loadVirusFromUrl: async function (e) {
-                    await o, o = new Promise(async t => {
-                        var s = await a(e),
-                            o = PIXI.Sprite.from(s, void 0, 18);
-                        o.width = o.height = 200, i.render(o, n, !0), o.destroy(!0), t()
-                    })
-                }
-            }
-        }, function (e, t, s) {
-            let game, gameHelper = s(126);
-
-            e.exports = class {
+        }, 3169: t => {
+            var e = "seenNotifications";
+            t.exports = new class {
                 constructor() {
-                    this.playersRemoving = [];
-                    this.players = new Map();
-                    this.botCount = 0;
+                    this.Ei = this.Fi(localStorage[e])
                 }
 
-                static useGame(gameInstance) {
-                    game = gameInstance;
-                    gameHelper.useGame(gameInstance);
-                }
-
-                get playerCount() {
-                    return this.players.size - this.botCount;
-                }
-
-                getPlayer(playerId) {
-                    return this.players.get(playerId) || null;
-                }
-
-                setPlayerData({pid, nickname, skin, skinUrl, perk_color, tagId, bot}) {
-                    if (!this.players.has(pid)) {
-                        this.players.set(pid, new gameHelper(pid, bot));
-                        this.botCount += bot ? 1 : 0;
-                    }
-
-                    const player = this.players.get(pid);
-                    skinUrl = skin ? `https://skins.vanis.io/s/${skin}` : skinUrl;
-
-                    const nameChanged = player.setName(nickname, perk_color, 16),
-                        skinChanged = player.setSkin(skinUrl),
-                        tagChanged = player.setTagId(tagId);
-
-                    if (nameChanged || skinChanged || tagChanged) player.invalidateVisibility();
-                    return player;
-                }
-
-                invalidateVisibility(excludedPlayers = []) {
-                    this.players.forEach((player, playerId) => {
-                        if (!excludedPlayers.includes(playerId)) {
-                            player.invalidateVisibility();
-                        }
-                    });
-                }
-
-                sweepRemovedPlayers() {
-                    const {
-                        replay
-                    } = game;
-                    const firstPacket = replay.packets[0];
-                    const firstPacketId = firstPacket[0]?.packetId;
-
-                    this.playersRemoving = this.playersRemoving.filter(playerId => {
-                        if (!this.players.has(playerId)) {
-                            return false;
-                        }
-
-                        const player = this.players.get(playerId);
-
-                        if (firstPacketId && player.lastUpdateTick && !(firstPacketId > player.lastUpdateTick)) {
-                            return true;
-                        } else {
-                            if (playerId) {
-                                currentServerPlayersList[playerId] = {};
-                            }
-                            this.removePlayer(playerId);
-                            return false;
-                        }
-                    });
-                }
-
-                delayedRemovePlayer(playerId) {
-                    this.playersRemoving.push(playerId);
-                }
-
-                removePlayer(playerId) {
-                    if (!this.players.has(playerId)) return;
-                    const player = this.players.get(playerId);
-                    if (player.bot) {
-                        this.botCount--;
-                    }
-                    player.clearCachedData();
-                    this.players.delete(playerId);
-                }
-
-                destroy() {
-                    this.players.forEach((_, playerId) => this.removePlayer(playerId));
-                    this.botCount = 0;
-                    this.playersRemoving = [];
-                }
-            }
-        }, function (e, t, s) {
-            let i = s(4),
-                {
-                    basic: a,
-                    basicd: n
-                } = s(76),
-                o = i.cellSize,
-                r = o / 2,
-                l = i.cellBorderSize,
-                c = e => {
-                    e = e || 0;
-                    let t = new PIXI.Graphics().lineStyle(l, 0, .5).beginFill(e).drawCircle(0, 0, r).endFill();
-                    return t
-                },
-                h = null;
-            e.exports = class e {
-                constructor(e, t) {
-                    this.pid = e, this.bot = t || !1, this.skinUrl = null, (e === h.playerId || e === h.dualboxPid) && (this.isMe = !0), this.texture = PIXI.RenderTexture.create(o, o), this.cellContainer = this.createCellContainer(), this.renderCell()
-                }
-
-                static useGame(e) {
-                    h = e
-                }
-
-                get visibility() {
-                    return 1 + +(h.tagId !== this.tagId)
-                }
-
-                setOutline(e, t = settings.dualActiveCellBorderSize || 15, s = !1) {
-                    if (this.outlineGraphic && (this.outlineGraphic.destroy(), delete this.outlineGraphic), s) return void this.renderCell();
-                    e = e || 0;
-                    let i = this.outlineGraphic = new PIXI.Graphics().lineStyle(t, e, 1).drawCircle(0, 0, r - (t - 1) / 2).endFill();
-                    i.pivot.set(-r), h.renderer.render(i, this.texture, !1)
-                }
-
-                setCrown(e) {
-                    this.hasCrown = e;
-                    let t = this.pid;
-                    h.allCells.forEach(s => {
-                        s.isPlayerCell && s.pid === t && (e ? s.addCrown() : s.removeCrown())
-                    })
-                }
-
-                createCellContainer() {
-                    let e = new PIXI.Container;
-                    return e.pivot.set(-o / 2), e.addChild(c(this.getCellColor())), e
-                }
-
-                createSkinSprite(e) {
-                    let t = new PIXI.BaseTexture(e),
-                        s = new PIXI.Texture(t),
-                        i = new PIXI.Sprite(s);
-                    return i.width = i.height = o, i.anchor.set(.5), i
-                }
-
-                renderCell() {
-                    h.renderer.render(this.cellContainer, this.texture, !0)
-                }
-
-                setTagId(e) {
-                    return e || (e = null), this.tagId !== e && (this.tagId = e, this.bot || this.setTagSprite(), !0)
-                }
-
-                setNameColor(bot, pid, name) {
-                    this.perk_color = parseInt(getUserColor(bot, name, pid, '', this.perk_color), 16);
-                    return this.perk_color;
-                }
-
-                setName(e, t) {
-                    if (!e) e = "Unnamed";
-                    if (this.nameFromServer === e && this.perk_color === t) return false;
-                    this.nameFromServer = e;
-                    this.perk_color = t;
-                    this.applyNameToSprite();
-                    return true;
-                }
-
-                applyNameToSprite() {
-                    const isUnnamed = this.nameFromServer === "Unnamed";
-                    const isLongName = this.nameFromServer === "Long Name";
-                    let spriteName = isUnnamed ? "" : this.nameFromServer;
-                    let prevName = this.name;
-                    let prevNameColor = this.perk_color;
-
-                    let nameColor;
-                    if (isUnnamed || isLongName) {
-                        nameColor = 16777215;
-                    } else {
-                        nameColor = this.setNameColor(this.bot, this.pid, this.nameFromServer);
-                    }
-
-                    this.setNameSprite(spriteName, nameColor);
-
-                    if (!isUnnamed && !isLongName && this.nameSprite.texture.width > i.cellLongNameThreshold) {
-                        spriteName = "Long Name";
-                        nameColor = 16777215;
-                        this.setNameSprite(spriteName, nameColor);
-                    }
-
-                    this.name = isUnnamed ? "Unnamed" : spriteName;
-
-                    if (prevName !== this.name || prevNameColor !== nameColor) {
-                        let minimapColor = nameColor || (this.isMe ? 16777215 : null);
-                        h.events.$emit("minimap-create-node", this.pid, spriteName, nameColor, minimapColor);
-                    }
-                }
-
-                setNameSprite(e, t) {
-                    this.nameSprite ? this.nameSprite.text = e : this.nameSprite = new PIXI.Text(e, i.nameTextStyle), this.nameSprite.style.fill = t || 16777215, this.nameSprite.updateText()
-                }
-
-                setTagSprite() {
-                    let e = `Team ${null == this.tagId ? 0 : this.tagId}`;
-                    if (this.tagSprite) this.tagSprite.text = e;
-                    else {
-                        let t = {
-                            ...i.nameTextStyle
-                        };
-                        t.fontSize = 50, this.tagSprite = new PIXI.Text(e, t)
-                    }
-                    this.tagSprite.style.fill = this.getTagColor(), this.tagSprite.updateText()
-                }
-
-                getTagColor() {
-                    if (null != this.tagId) {
-                        let e = [6946705, 6946800, 6908927, 16738803, 16768105, 16738665, 16776960, 65280, 65535, 16711935],
-                            t = h.seededRandom(this.tagId || 0);
-                        return e[Math.floor(t * e.length)]
-                    }
-                    return 16777215
-                }
-
-                setSkin(e) {
-                    if ((e = e || null) === this.skinUrl) return !1;
-                    this.abortSkinLoaderIfExist();
-                    let t = this.destroySkin();
-                    return t && this.renderCell(), this.skinUrl = e, this.skinShown && this.loadSkinAndRender(), !0
-                }
-
-                destroySkin() {
-                    return !!this.skinSprite && (this.skinSprite.mask.destroy(!0), this.skinSprite.destroy(!0), this.skinSprite = null, !0)
-                }
-
-                loadSkinAndRender() {
-                    this.abortSkinLoaderIfExist(), this.abortSkinLoader = h.skinLoader.loadSkin(this.skinUrl, e => {
-                        this.skinSprite = this.createSkinSprite(e), this.skinSprite.mask = c(), this.cellContainer.addChild(this.skinSprite.mask, this.skinSprite), this.renderCell()
-                    })
-                }
-
-                invalidateVisibility() {
-                    let e, t, s;
-                    this.isMe ? (e = i.showOwnName, t = i.showOwnSkin, s = i.showOwnMass) : (e = i.showNames >= this.visibility, t = i.showSkins >= this.visibility, s = i.showMass >= this.visibility), e = i.namesEnabled && e, t = i.skinsEnabled && t, s = i.massEnabled && s, t && !this.skinShown ? this.skinSprite ? (this.skinSprite.visible = !0, this.renderCell()) : this.skinUrl && this.loadSkinAndRender() : !t && this.skinShown && (this.abortSkinLoaderIfExist(), this.skinSprite && (this.skinSprite.visible = !1, this.renderCell())), this.nameShown = e, this.skinShown = t, this.massShown = s, this.nameColorShown = i.showNameColor
-                }
-
-                abortSkinLoaderIfExist() {
-                    this.abortSkinLoader && (this.abortSkinLoader(), this.abortSkinLoader = null)
-                }
-
-                getCellColor() {
-                    let e = h.seededRandom(this.pid),
-                        t = Math.floor(e * a.length);
-                    return (this.bot ? n : a)[t]
-                }
-
-                clearCachedData() {
-                    this.abortSkinLoaderIfExist(), this.destroySkin(), this.cellContainer.destroy(!0), this.texture.clearedFromCache = !0, this.texture.destroy(!0), this.nameSprite && this.nameSprite.destroy(!0), this.tagSprite && this.tagSprite.destroy(!0), h.events.$emit("minimap-destroy-node", this.pid)
-                }
-            }
-        }, , function (e, t, s) {
-            let i = s(129),
-                a = (e, t) => {
-                    let s = e.callbacks.indexOf(t);
-                    s >= 0 && e.callbacks.splice(s, 1)
-                };
-            e.exports = class e {
-                constructor() {
-                    this.loaders = new Map, this.worker = new i, this.worker.addEventListener("message", this.onSkinLoaded.bind(this))
-                }
-
-                createLoader(e) {
-                    return {
-                        image: null,
-                        errored: null,
-                        callbacks: [e]
-                    }
-                }
-
-                clearCallbacks() {
-                    this.loaders.clear()
-                }
-
-                loadSkin(e, t) {
-                    if (!this.loaders.has(e)) {
-                        let s = this.createLoader(t);
-                        return this.loaders.set(e, s), this.worker.postMessage(e), a.bind(null, s, t)
-                    }
-                    let i = this.loaders.get(e);
-                    if (i.image) t(i.image);
-                    else if (!i.errored) return i.callbacks.push(t), a.bind(null, i, t);
-                    return null
-                }
-
-                onSkinLoaded(e) {
-                    let {
-                        url: t,
-                        image: s,
-                        errored: i
-                    } = e.data, a = this.loaders.get(t);
-                    if (i) a.errored = !0, a.callbacks = [];
-                    else {
-                        a.image = s;
-                        let {
-                            callbacks: n
-                        } = a;
-                        for (; n.length;) n.pop()(s)
-                    }
-                }
-            }
-        }, function (e, t, s) {
-            let i = atob("YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsZT0+e2xldCBzPWUuZGF0YTtmZXRjaChzLHttb2RlOiJjb3JzIn0pLnRoZW4oZT0+ZS5ibG9iKCkpLnRoZW4oZT0+Y3JlYXRlSW1hZ2VCaXRtYXAoZSkpLnRoZW4oZT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsaW1hZ2U6ZX0pKS5jYXRjaCgoKT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsZXJyb3JlZDohMH0pKX0pOw==");
-            e.exports = function () {
-                return new Worker(URL.createObjectURL(new Blob([i], {
-                    type: "text/javascript"
-                })))
-            }
-        }, function (e, t, i) {
-            let a = i(131),
-                n = i(1),
-                {
-                    getTimestamp: o
-                } = i(8),
-                r = i(5),
-                l = i(4),
-                c = i(78),
-                h = a.createInstance({
-                    name: "game-replays"
-                }),
-                d = e => btoa(String.fromCharCode.apply(null, new Uint8Array(e))),
-                p = e => {
-                    e = atob(e);
-                    let t = e.length,
-                        s = new ArrayBuffer(t),
-                        i = new Uint8Array(s);
-                    for (let a = 0; a < t; a++) i[a] = e.charCodeAt(a);
-                    return s
-                },
-                u = d(new ArrayBuffer(1)),
-                g = e => {
-                    let t = e.map(e => {
-                            let t = {
-                                pid: e.pid,
-                                nickname: e.nameFromServer,
-                                skinUrl: e.skinUrl
-                            };
-                            return e.bot && (t.bot = !0), e.tagId && (t.tagId = e.tagId), e.nameColorFromServer && (t.nameColor = e.nameColorFromServer), t
-                        }),
-                        i = JSON.stringify(t);
-                    i = unescape(encodeURIComponent(i));
-                    let a = s.fromSize(1 + i.length + 1);
-                    return a.writeUInt8(16), a.writeStringNT(i), d(a.buffer)
-                },
-                A = e => {
-                    let t = 0,
-                        i = e.length;
-                    for (let a = 0; a < i; a++) {
-                        let n = e[a];
-                        t += 1 + (1 === n.type ? 2 : 0) + 2 + 2 + 2 + 2 + (n.flags ? 1 : 0)
-                    }
-                    let o = s.fromSize(1 + t + 1 + 2 + 2);
-                    o.writeUInt8(10);
-                    for (let r = 0; r < i; r++) {
-                        let l = e[r],
-                            c = 254 & l.flags;
-                        o.writeUInt8(l.type | (c ? 128 : 0)), 1 === l.type && o.writeUInt16BE(l.pid), o.writeUInt16BE(l.id), o.writeInt16BE(l.x), o.writeInt16BE(l.y), o.writeUInt16BE(l.size), c && o.writeUInt8(c)
-                    }
-                    return o.writeUInt8(0), o.writeUInt16BE(0), o.writeUInt16BE(0), o.view
-                };
-            n.replay = new class e {
-                constructor() {
-                    this.cells = [
-                        [],
-                        []
-                    ], this.packets = [
-                        [],
-                        []
-                    ], this.database = h
-                }
-
-                recording() {
-                    let e = this.packets[0];
-                    return 0 != e.length
-                }
-
-                add(e, t) {
-                    let s = this.cells[+t],
-                        i = this.packets[+t],
-                        a = [...(t ? n.dual : n).cells.values()];
-                    s.push(a.map(e => ({
-                        type: e.type,
-                        id: e.id,
-                        pid: e.pid,
-                        x: e.nx,
-                        y: e.ny,
-                        size: e.nSize,
-                        flags: e.flags
-                    }))), i.push(e);
-                    let o = 25 * l.replayDuration;
-                    i.length > o && (i.shift(), s.shift())
-                }
-
-                clear(e) {
-                    let t = this.cells[+e],
-                        s = this.packets[+e];
-                    t.length = 0, s.length = 0
-                }
-
-                play(e) {
-                    n.running && n.stop(), n.connection.close(), r.toast.close();
-                    let t = 1,
-                        i = e.split("|");
-                    "REPLAY" === i.at(0) && (t = parseInt(i[1]), i = i.slice(3));
-                    let a = i.map(e => s.fromBuffer(p(e), 1)),
-                        o = c(a.shift()),
-                        l = [];
-                    if (t >= 4) {
-                        let h;
-                        for (;
-                            (h = a[0]).readUInt8(0);) {
-                            let {
-                                view: d
-                            } = h;
-                            d.packetId = 1, h.offset = 0, l.push(h), a.shift()
-                        }
-                        a.shift()
-                    } else l.push(a.shift());
-                    o.replayUpdates = a, n.start(o), l.forEach(e => n.parseMessage(e)), n.playback.setStartingFrame(), n.showMenu(!1)
-                }
-
-                save(e) {
-                    let t = this.cells[+e].slice(0),
-                        i = this.packets[+e].slice(0);
-                    if (!i.length) return;
-                    let a = [...n.playerManager.players.values()];
-                    i.splice(0, 1, A(t.at(0)));
-                    let c = ["REPLAY", 4];
-                    c.push(n.createThumbnail()), c.push(d(n.initialDataPacket.buffer));
-                    let {
-                        dual: p
-                    } = n;
-                    if (p.connected) {
-                        let m = s.fromSize(3);
-                        m.writeUInt8(8), m.writeUInt16LE(p.pid), c.push(d(m.buffer))
-                    }
-                    c.push(g(a)), c.push(u), c.push(i.map(e => d(e.buffer)).join("|"));
-                    let v = c.join("|");
-                    h.setItem(o(), v, () => {
-                        n.events.$emit("replay-added");
-                        let e = "Replay saved!";
-                        1 === l.showReplaySaved ? n.events.$emit("chat-message", e) : r.toast.fire({
-                            type: "info",
-                            title: e,
-                            timer: 1500
-                        })
-                    }).catch(e => {
-                        sendTimedSwal(`Error saving replay`, `${e}`, 3000, false);
-                        let t = "Error saving replay";
-                        "string" == typeof e ? t += `: ${e}` : e && e.message && (t += `: ${e.message}`), r.toast.fire({
-                            type: "error",
-                            title: t
-                        })
-                    })
-                }
-            }
-        }, , function (e, t, s) {
-            let i = s(1),
-                {
-                    wasmModule: a,
-                    addOrUpdateCell: n,
-                    destroyCell: o,
-                    eatCell: r
-                } = s(79);
-            e.exports = i.playback = new class e {
-                constructor() {
-                    this.updates = [], this.dry = !1, this.index = 0
-                }
-
-                destroyCell(e) {
-                    let {
-                        updates: t
-                    } = this, s = t[0];
-                    s[3][e] = !0;
-                    let i = s[1];
-                    i.push(e)
-                }
-
-                eatCell(e, t) {
-                    let {
-                        updates: s
-                    } = this, i = s[0];
-                    i[3][e] = !0;
-                    let a = i[2];
-                    a.push(e, t)
-                }
-
-                parse(e) {
-                    a.deserialize(1, new Uint8Array(e.buffer, 1), 1)
-                }
-
-                reset() {
-                    let {
-                        updates: e
-                    } = this;
-                    e.splice(0, e.length), delete e.index
-                }
-
-                set(e) {
-                    this.reset(), this.dry = !0;
-                    let {
-                        updates: t
-                    } = this, s = e.length, i = 0;
-                    for (; s--;) t.unshift([{},
-                        [],
-                        [], {}
-                    ]), this.parse(e[i++]);
-                    t.reverse(), delete this.dry, this.index = 0
-                }
-
-                setStartingFrame() {
-                    let {
-                        cells: e
-                    } = i, {
-                        updates: t
-                    } = this, [s, a, n, o] = t;
-                    for (let r of e.keys()) {
-                        let l = e.get(r);
-                        r in o || (r in s ? s[r].pid = l.pid : s[r] = {
-                            type: l.type,
-                            id: l.id,
-                            pid: l.pid,
-                            x: l.nx,
-                            y: l.ny,
-                            size: l.nSize,
-                            flags: l.flags
-                        })
-                    }
-                    for (let c = 1; c < t.length; c++) {
-                        let h = t[c - 1],
-                            d = t[c];
-                        for (let p in d[0]) {
-                            if (!(p in h[0])) continue;
-                            let u = d[0][p],
-                                g = h[0][p];
-                            16 & u.type && (u.pid = g.pid), 32 & u.type && (u.x = g.x, u.y = g.y), 64 & u.type && (u.size = g.size)
-                        }
-                        for (let A in h[0]) A in d[3] || A in d[0] || (d[0][A] = h[0][A])
-                    }
-                }
-
-                seek(e, t) {
-                    let {
-                        cells: s
-                    } = i, a = this.updates[e];
-                    for (let r of s.keys()) !t && r in a[0] || o(r, 1);
-                    for (let l of Object.values(a[0])) {
-                        let {
-                            type: c,
-                            pid: h,
-                            id: d,
-                            x: p,
-                            y: u,
-                            size: g,
-                            flags: A
-                        } = l;
-                        n(c, h, d, p, u, g, A, 1, 1)
-                    }
-                    this.index = e, i.updateCamera(!0)
-                }
-
-                next() {
-                    let {
-                        updates: e
-                    } = this;
-                    if (this.index < e.length) {
-                        let [t, s, a] = e[this.index++];
-                        for (let l of Object.values(t)) {
-                            let {
-                                type: c,
-                                pid: h,
-                                id: d,
-                                x: p,
-                                y: u,
-                                size: g,
-                                flags: A
-                            } = l;
-                            n(c, h, d, p, u, g, A, 1, 1)
-                        }
-                        let m = s.length,
-                            v = 0;
-                        for (; v < m;) o(s[v++], 1);
-                        for (m = a.length, v = 0; v < m;) r(a[v++], a[v++], 1);
-                        i.updateCamera(!0)
-                    } else this.seek(0, !0);
-                    i.events.$emit("replay-index-change", this.index)
-                }
-            }
-        }, function (e, t, s) {
-            e.exports = {
-                PlayerCell: s(134),
-                Food: s(135),
-                Virus: s(136),
-                EjectedMass: s(137),
-                DeadCell: s(138),
-                Crown: s(139)
-            }
-        }, function (e, t, s) {
-            let i = s(1),
-                a = s(4),
-                o = s(14),
-                r = e => {
-                    let t = new PIXI.BitmapText("", {
-                            fontName: "mass",
-                            align: "right"
-                        }),
-                        s = e.strokeThickness || 0;
-                    return t.position.set(-s / 2, -s / 2), t.anchor.set(.5, -.6), t
-                };
-
-            class l extends PIXI.Graphics {
-                constructor(e) {
-                    super(), this.alpha = .35, this.updatePoints(e)
-                }
-
-                updatePoints(e, t, s, i) {
-                    e && t && s && i && (this.clear(), this.lineStyle(12, 16777215), this.moveTo(e, t), this.lineTo(s, i))
-                }
-            }
-
-            class c extends o {
-                constructor(e, t) {
-                    super(e), this.player = t, this.pid = t.pid;
-                    let s = this.isMe = this.pid == i.playerId || this.pid === i.dualboxPid,
-                        {
-                            ownedCells: a
-                        } = i;
-                    s && !a.has(this) && a.add(this), t.hasCrown && this.addCrown(), !i.replaying && s && (this.addArrow(), this.addLine())
-                }
-
-                updateLineVisibility() {
-                    let {
-                        line: e
-                    } = this;
-                    if (e) {
-                        if (a.showCellLines) {
-                            let {
-                                dual: t
-                            } = i;
-                            t.connected ? e.visible = this.pid === i.activePid : e.visible = !0
-                        } else e.visible = !1
-                    }
-                }
-
-                addLine() {
-                    let {
-                        x: e,
-                        y: t
-                    } = i.mouse;
-                    this.line = new l([this.x, this.y, e, t]), i.scene.container.addChild(this.line), this.updateLineVisibility()
-                }
-
-                addArrow() {
-                    let {
-                        dual: e
-                    } = i;
-                    if (!e.arrowSprite) {
-                        Swal.fire({
-                            title: 'Dual system error',
-                            text: 'You don\'t have set any image for arrow',
-                            showConfirmButton: 'OK',
-                        });
-                        return
-                    }
-                    let t = this.arrowSprite = new PIXI.Sprite.from(e.arrowSprite.texture);
-                    t.visible = a.dualActive >= 2 && this.pid === i.activePid, t.anchor.set(.5), t.width = t.height = 130, t.alpha = .95, t.y = -310, this.sprite.addChild(t)
-                }
-
-                addCrown() {
-                    if (!this.sprite || this.crownSprite) return;
-                    let e = i.crownPool,
-                        t;
-                    e.length ? t = e.pop() : ((t = PIXI.Sprite.from("/img/crown.png")).scale.set(.7), t.pivot.set(0, 643), t.anchor.x = .5, t.rotation = -.5, t.alpha = .7, t.zIndex = 2), this.crownSprite = t, this.sprite.addChild(t);
-                }
-
-                removeCrown() {
-                    if (!this.sprite || !this.crownSprite) return;
-                    var e = this.crownSprite;
-                    this.sprite.removeChild(e);
-                    i.crownPool.push(e);
-                    this.crownSprite = null;
-                }
-
-                onUpdate() {
-                    if (a.showDir && !this.directionSprite) {
-                        let e = this.directionSprite = new PIXI.Sprite.from("https://i.postimg.cc/vmZmWCRR/i.png");
-                        e.scale.set(.1), e.alpha = .7, e.anchor.set(3.5, 3.5), this.sprite.addChild(e)
-                    }
-                    let t = i.scene.container.scale.x * this.size * i.renderer.resolution,
-                        s = t > a.smallTextThreshold,
-                        {
-                            player: o
-                        } = this;
-                    if (o.massShown && !this.massText && s && (this.massText = i.massTextPool.pop() || r(a.massTextStyle), this.massText.zIndex = 0, this.sprite.addChild(this.massText)), o.nameShown && !this.nameSprite && o.nameSprite && s && (this.nameSprite = new PIXI.Sprite(o.nameSprite.texture), this.nameSprite.anchor.set(.5), this.nameSprite.zIndex = 1, this.sprite.addChild(this.nameSprite)), a.showTag && !this.tagSprite && o.tagSprite && (o.tagId !== i.tagId || null === i.tagId)) {
-                        let l = this.tagSprite = new PIXI.Sprite(o.tagSprite.texture);
-                        l.anchor.set(.5), l.y = 180, l.zIndex = 1, this.sprite.addChild(l)
-                    }
-                    let {
-                        line: c
-                    } = this;
-                    if (c && c.visible) {
-                        let {
-                            x: h,
-                            y: d
-                        } = i.mouse;
-                        c.updatePoints(this.x, this.y, h, d)
-                    }
-                    this.crownSprite && (this.crownSprite.visible = t > 16 && a.showCrown), this.nameSprite && (this.nameSprite.visible = o.nameShown && s), this.tagSprite && (this.tagSprite.visible = a.showTag);
-                    let {
-                        directionSprite: p
-                    } = this;
-                    if (p && (p.visible = a.showDir && !o.isMe)) {
-                        let u = 0,
-                            g = !1,
-                            {
-                                ox: A,
-                                oy: m,
-                                nx: v,
-                                ny: f
-                            } = this;
-                        v > A ? (v - A < 3 && (g = !0), u = f < m ? g ? 0 : m - f < 3 ? 2 : 1 : g ? 4 : f - m < 3 ? 2 : 3) : (A - v < 3 && (g = !0), u = f < m ? g ? 0 : m - f < 3 ? 6 : 7 : g ? 4 : f - m < 3 ? 6 : 5), p.rotation = n[u]
-                    }
-                    let {
-                        massText: C
-                    } = this;
-                    if (C) {
-                        if (o.massShown && s) {
-                            let y = i.getMassText(this.nSize * this.nSize / 100);
-                            C.text = y, C.visible = !0
-                        } else C.visible && (C.visible = !1)
-                    }
-                }
-
-                onDestroy() {
-                    this.arrowSprite && (this.sprite.removeChild(this.arrowSprite), this.arrowSprite.destroy(), delete this.arrowSprite), this.tagSprite && (this.sprite.removeChild(this.tagSprite), this.tagSprite.destroy(), delete this.tagSprite), this.directionSprite && (this.sprite.removeChild(this.directionSprite), this.directionSprite.destroy(), delete this.directionSprite), this.line && (i.scene.container.removeChild(this.line), this.line.destroy(), delete this.line), this.massText && (this.sprite.removeChild(this.massText), i.massTextPool.push(this.massText)), this.crownSprite && this.removeCrown()
-                }
-            }
-
-            c.prototype.type = 1, c.prototype.isPlayerCell = !0, e.exports = c
-        }, function (e, t, s) {
-            let i = s(4),
-                {
-                    cells: a
-                } = s(12),
-                {
-                    neon: n
-                } = s(76),
-                o = s(14),
-                r = e => a.getTexture(i.useFoodColor ? parseInt(i.foodColor, 16) : n[e % n.length]);
-
-            class l extends o {
-                constructor(e) {
-                    e.texture = r(e.id), super(e)
-                }
-
-                reloadTexture() {
-                    this.sprite.texture = this.texture = r(this.id)
-                }
-            }
-
-            l.prototype.type = 4, l.prototype.isFood = !0, e.exports = l
-        }, function (e, t, s) {
-            let i = s(14),
-                {
-                    virus: a
-                } = s(12);
-
-            class n extends i {
-                constructor(e) {
-                    e.texture = a.getTexture(), super(e)
-                }
-
-                resetTexture() {
-                    this.destroySprite(), this.texture = a.getTexture(), this.sprite = new PIXI.Sprite(this.texture), this.sprite.anchor.set(.5), this.sprite.gameData = this
-                }
-            }
-
-            n.prototype.type = 2, n.prototype.isVirus = !0, e.exports = n
-        }, function (e, t, s) {
-            let i = s(1),
-                a = s(4),
-                {
-                    cells: n
-                } = s(12),
-                o = s(14),
-                r = () => n.getTexture(parseInt(a.ejectedColor, 16)),
-                {
-                    clampNumber: l
-                } = s(8);
-
-            class c extends o {
-                constructor(e) {
-                    e.texture = r(), super(e), this.sprite.alpha = 0
-                }
-
-                reloadTexture() {
-                    this.sprite.texture = this.texture = r()
-                }
-
-                onUpdate() {
-                    let {
-                        sprite: e
-                    } = this;
-                    if (!e || 1 == e.alpha) return;
-                    let t = i.timeStamp - this.updateStamp,
-                        s = l(t / 1e3, 0, 1);
-                    e.alpha = Math.min(e.alpha + s, 1)
-                }
-            }
-
-            c.prototype.type = 3, c.prototype.isEjected = !0, e.exports = c
-        }, function (e, t, s) {
-            let i = s(14),
-                {
-                    squares: a,
-                    cells: n
-                } = s(12);
-
-            class o extends i {
-                constructor(e, t, s) {
-                    e.texture = (s ? a : n).getTexture(t || 4210752), super(e), this.sprite.alpha = .5
-                }
-            }
-
-            o.prototype.type = 5, o.prototype.isDead = !0, e.exports = o
-        }, function (e, t, s) {
-            let i = s(14);
-
-            class a extends i {
-                constructor(e) {
-                    e.texture = PIXI.Texture.from("/img/crown.png"), super(e), this.sprite.alpha = .7
-                }
-            }
-
-            a.prototype.type = 6, a.prototype.isCrown = !0, e.exports = a
-        }, function (e, t, s) {
-        }, function (e, t, s) {
-        }, function (e, t, i) {
-            let n = i(1),
-                {
-                    state: o
-                } = n,
-                r = i(78),
-                {
-                    wasmModule: l
-                } = i(79);
-            e.exports = n.dual = new class e {
-                constructor() {
-                    this.ws = null, this.focused = !1, this.opened = !1, this.pid = null, this.pingStamp = 0, this.autoRespawning, this.alive, this.ticksSinceDeath = 0, this.cells = new Map, this.arrowSprite = null, this.reloadArrow()
-                }
-
-                log(e) {
-                    n.events.$emit("chat-message", e)
-                }
-
-                get connected() {
-                    return this.opened && !!this.ready
-                }
-
-                open() {
-                    let {
-                        connectionUrl: e
-                    } = o;
-                    if (!e) return;
-                    let t = this.ws = new WebSocket(e, "tFoL46WDlZuRja7W6qCl");
-                    t.binaryType = "arraybuffer", t.packetCount = 0, this.opened = !0, t.onopen = () => {
-                        this.opened && (this.ws.onclose = this.onClosed.bind(this), this.reloadArrow())
-                    }, t.onmessage = e => {
-                        let {
-                            data: t
-                        } = e;
-                        n.nwData += t.byteLength, this.handleMessage(new DataView(t))
-                    }, t.onclose = this.onRejected.bind(this)
-                }
-
-                close() {
-                    let {
-                        ws: e
-                    } = this;
-                    e && (e.onmessage = null, e.onclose = null, e.onerror = null, e.close(), this.ws = null), this.focused = !1, this.opened = !1, this.pid = n.dualboxPid = null, this.pingStamp = 0, delete this.alive, this.ticksSinceDeath = 0, delete this.ready, this.clearCells(), this.feedTimeout && (clearTimeout(this.feedTimeout), delete this.feedTimeout)
-                }
-
-                onRejected() {
-                    let e = atob("RHVhbCBmYWlsZWQgdG8gY29ubmVjdA==");
-                    this.log(e)
-                }
-
-                onClosed(e) {
-                    let t = "Dual disconnected";
-                    e.reason && (t += ` (${e.reason})`), this.log(t), this.close()
-                }
-
-                parseCells(e) {
-                    l.deserialize(2, new Uint8Array(e.buffer, 1), this.ws.packetCount++)
-                }
-
-                handleMessage(e) {
-                    let t = new s(e),
-                        i = t.readUInt8();
-                    switch (i) {
-                        case 1: {
-                            let o = r(t);
-                            n.dualboxPid = this.pid = o.playerId, this.log("Dual connected"), setTimeout(() => {
-                                this.ready = !0;
-                                let e = n.playerManager.getPlayer(this.pid);
-                                e.isMe = !0, n.replay.clear(!1)
-                            }, 500);
-                            return
-                        }
-                        case 2: {
-                            let l = new Uint8Array(e.buffer, 1);
-                            n.connection.sendJoinData(new a(l).build(), !0);
-                            return
-                        }
-                        case 6:
-                            n.connection.sendOpcode(6, !0);
-                            return;
-                        case 10: {
-                            n.timeStamp = performance.now(), this.parseCells(t), n.updateStates(!1);
-                            let c = this.alive,
-                                {
-                                    replay: h
-                                } = n;
-                            if (c ? h.add(e, !0) : n.alive || h.clear(!0), !this.alive && this.autoRespawning && 37 == ++this.ticksSinceDeath && n.triggerAutoRespawn(!0), !this.focused) return;
-                            n.updateCamera(!0);
-                            return
-                        }
-                        case 18: {
-                            let {
-                                replay: d
-                            } = n;
-                            d.clear(!0), this.clearCells();
-                            return
-                        }
-                        case 20:
-                            n.handleDeath(t, !0);
-                            return;
-                        case 22:
-                            n.events.$emit("m-show-image-captcha");
-                            return
-                    }
-                }
-
-                ping() {
-                    this.pingStamp = performance.now(), n.connection.sendOpcode(3, !0)
-                }
-
-                spawn() {
-                    this.connected && (n.actions.join(!0), this.updateOutlines())
-                }
-
-                updateOutlines() {
-                    let e = n.playerId,
-                        t = this.pid,
-                        {
-                            players: s
-                        } = n.playerManager;
-                    if (!s.has(e) || !s.has(t)) return;
-                    let i = s.get(e),
-                        a = s.get(t),
-                        o = [];
-                    switch (n.allCells.forEach(e => {
-                        e.pid && e.isMe && e.arrowSprite && o.push(e)
-                    }), settings.dualActive) {
-                        case 0:
-                            break;
-                        case 1: {
-                            o.length > 0 && o.forEach(e => {
-                                e.arrowSprite.visible = !1
-                            });
-                            let r = +("0x" + settings.dualColor);
-                            this.focused ? (i.setOutline(16777215), a.setOutline(r)) : (a.setOutline(16777215), i.setOutline(r));
-                            break
-                        }
-                        case 2:
-                        case 3:
-                            i.outlineGraphic && i.setOutline(0, 0, !0), a.outlineGraphic && a.setOutline(0, 0, !0), o.forEach(e => {
-                                e.arrowSprite.visible = e.pid === n.activePid
-                            })
-                    }
-                    settings.showCellLines && n.allCells.forEach(e => {
-                        e.line && e.updateLineVisibility()
-                    })
-                }
-
-                reloadArrow() {
-                    if (this.arrowSprite && this.arrowSprite.destroy(), settings.dualArrow.startsWith("data:image")) {
-                        let e = document.createElement("img");
-                        e.src = settings.dualArrow;
-                        let t = new PIXI.BaseTexture(e),
-                            s = new PIXI.Texture(t);
-                        this.arrowSprite = new PIXI.Sprite(s)
-                    } else this.arrowSprite = new PIXI.Sprite.from(settings.dualArrow)
-                }
-
-                get position() {
-                    let e = 0,
-                        t = 0,
-                        s = [...this.cells.values()].filter(e => e.pid && e.pid == this.pid && !!e.sprite);
-                    if (0 == s.length) return [];
-                    s.forEach(({
-                                   x: s,
-                                   y: i
-                               }) => {
-                        e += s, t += i
-                    });
-                    let i = s.length;
-                    return [e / i, t / i]
-                }
-
-                get ownerPosition() {
-                    let e = 0,
-                        t = 0,
-                        s = [...n.cells.values()].filter(e => e.pid && e.pid == n.playerId && !!e.sprite);
-                    if (0 == s.length) return [];
-                    s.forEach(({
-                                   x: s,
-                                   y: i
-                               }) => {
-                        e += s, t += i
-                    });
-                    let i = s.length;
-                    return [e / i, t / i]
-                }
-
-                getDistanceFromOwner() {
-                    let [e, t] = this.position;
-                    if (void 0 == e) return null;
-                    let [s, i] = this.ownerPosition;
-                    return null == s ? null : Math.hypot(s - e, i - t)
-                }
-
-                clearCells() {
-                    this.cells.forEach(e => e.destroy(2));
-                    let {
-                        destroyedCells: e
-                    } = n, t = e.length;
-                    for (; t--;) {
-                        let s = e[t];
-                        s.destroySprite(), e.splice(t, 1)
-                    }
-                }
-
-                switch() {
-                    if (n.spectating && (n.spectating = !1), !this.opened) return void this.open();
-                    if (!this.ready) return;
-                    let e = this.focused;
-                    this.feedTimeout && (clearTimeout(this.feedTimeout), delete this.feedTimeout), settings.rememeberEjecting || (this.feedTimeout = setTimeout(() => {
-                        if (n.isAlive(e)) {
-                            let t = s.fromSize(2);
-                            t.writeUInt8(21), t.writeUInt8(0), n.connection.send(t, e)
-                        }
-                    }, 120)), e ? (n.isAlive(!1) || o.autoRespawning || n.actions.join(), n.activePid = n.playerId, this.focused = !1) : (n.isAlive(!0) || this.autoRespawning || this.spawn(), n.activePid = this.pid, this.focused = !0), this.updateOutlines()
-                }
-            }
-        }, function (e, t, s) {
-        }, function (e) {
-            e.exports = function (e) {
-                var t = 1,
-                    s = e.getInt16(t, !0);
-                t += 2;
-                for (var i = "", a = ""; 0 != (a = e.getUint16(t, !0));) t += 2, i += String.fromCharCode(a);
-                return {
-                    pid: s,
-                    text: i
-                }
-            }
-        }, function (e) {
-            e.exports = function (e) {
-                for (var t = 1, s = []; ;) {
-                    var i = e.getUint16(t, !0);
-                    if (t += 3, !i) break;
-                    var a = e.getUint8(t, !0) / 255;
-                    t += 1;
-                    var n = e.getUint8(t, !0) / 255;
-                    t += 1, s.push({
-                        pid: i,
-                        x: a,
-                        y: n
-                    })
-                }
-                return s
-            }
-        }, function (e) {
-            e.exports = function (e, t) {
-                for (var s = 1, i = []; ;) {
-                    var a = t.getUint16(s, !0);
-                    if (s += 2, !a) break;
-                    var n = e.playerManager.getPlayer(a);
-                    n && i.push({
-                        pid: a,
-                        position: 1 + i.length,
-                        text: n.name,
-                        bold: !!n.nameColor
-                    })
-                }
-                return i
-            }
-        }, function (e) {
-            e.exports = window.WebSocket
-        }, function (e, t, s) {
-            let i = s(1);
-            s(149);
-            let a = s(66),
-                n = i.renderer.view,
-                o = a.pressed = new Set;
-            window.addEventListener("blur", () => {
-                o.clear()
-            });
-            let r = /firefox/i.test(navigator.userAgent) ? "DOMMouseScroll" : "wheel",
-                l = e => {
-                    let t = i.actions.findPlayerUnderMouse(),
-                        s = t && t.player;
-                    s && i.events.$emit("context-menu", e, s)
-                },
-                c = () => {
-                    i.scene.setPosition()
-                },
-                h = e => i.actions.zoom(e),
-                d = e => {
-                    let t = {
-                        x: e.clientX,
-                        y: e.clientY
-                    };
-                    Object.assign(i.rawMouse, t), i.updateMouse()
-                },
-                p = e => {
-                    e.preventDefault(), n.focus();
-                    let t = `MOUSE${e.button}`;
-                    if (0 === e.button && i.spectating) {
-                        let s = i.actions.findPlayerUnderMouse();
-                        s && i.actions.spectate(s.pid)
-                    } else a.press(t)
-                },
-                u = e => {
-                    let t = "MOUSE" + e.button;
-                    a.release(t), o.delete(t)
-                },
-                g = e => {
-                    let t = e.target === n;
-                    if (!t && e.target !== document.body) return;
-                    let s = a.convertKey(e.code);
-                    if (!o.has(s) && (!e.ctrlKey || "TAB" !== s)) {
-                        if (o.add(s), "ESCAPE" === s) {
-                            if (i.replaying) o.clear(), i.stop(), i.showMenu(!0);
-                            else {
-                                let r = !!i.dual.autoRespawning;
-                                (i.state.autoRespawning || r) && i.triggerDeathDelay(r), i.showMenu()
-                            }
-                            return
-                        }
-                        if ("ENTER" === s) {
-                            i.events.$emit("chat-focus");
-                            return
-                        }
-                        t && a.press(s) && e.preventDefault()
-                    }
-                },
-                A = e => {
-                    let t = a.convertKey(e.code);
-                    a.release(t), o.delete(t)
-                };
-            i.eventListeners = e => {
-                e ? (n.addEventListener("contextmenu", l), window.addEventListener("resize", c), n.addEventListener(r, h, {
-                    passive: !0
-                }), document.body.addEventListener("mousemove", d), n.addEventListener("mousedown", p), document.addEventListener("mouseup", u), document.body.addEventListener("keydown", g), document.body.addEventListener("keyup", A), window.onbeforeunload = () => "Are you sure you want to close the page?") : (n.removeEventListener("contextmenu", l), window.removeEventListener("resize", c), n.removeEventListener(r, h), document.body.removeEventListener("mousemove", d), n.removeEventListener("mousedown", p), document.removeEventListener("mouseup", u), document.body.removeEventListener("keydown", g), document.body.removeEventListener("keyup", A), window.onbeforeunload = null)
-            }
-        }, function (e, t, i) {
-            let a = i(1),
-                n = i(4),
-                {
-                    writeUserData: o,
-                    clampNumber: r
-                } = i(8);
-            a.actions = new class e {
-                constructor() {
-                    this.linesplitUnlock
-                }
-
-                spectate(e, t) {
-                    a.spectating = !0;
-                    let i = s.fromSize(e ? 3 : 1);
-                    i.writeUInt8(2), e && i.writeInt16LE(e), a.connection.send(i, t)
-                }
-
-                join(e) {
-                    a.events.$emit("reset-cautions");
-                    let t = s.fromSize(8);
-                    t.writeUInt8(1), o(t, e), a.connection.send(t, e)
-                }
-
-                spectateLockToggle() {
-                    a.connection.sendOpcode(10)
-                }
-
-                feed(e) {
-                    let t = 1 === arguments.length,
-                        i = s.fromSize(t ? 2 : 1);
-                    i.writeUInt8(21), t && i.writeUInt8(+e), a.connection.send(i, a.dual.focused)
-                }
-
-                freezeMouse(e) {
-                    a.running && ((e ??= !a.mouseFrozen) && (this.stopMovement(!1), this.lockLinesplit(!1), a.updateMouse(!0), a.connection.sendMouse()), a.mouseFrozen = e, a.events.$emit("update-cautions", {
-                        mouseFrozen: e
-                    }))
-                }
-
-                stopMovement(e) {
-                    a.running && ((e ??= !a.moveToCenterOfCells) && (this.freezeMouse(!1), this.lockLinesplit(!1), e = a.dual.focused ? 2 : 1), a.moveToCenterOfCells = e, a.events.$emit("update-cautions", {
-                        moveToCenterOfCells: e
-                    }))
-                }
-
-                lockLinesplit(e) {
-                    a.running && ((e ??= !a.stopMovePackets) && (a.updateMouse(), a.connection.sendMouse(), a.connection.sendOpcode(15, a.dual.focused), e = a.dual.focused ? 2 : 1), a.stopMovePackets = e, a.events.$emit("update-cautions", {
-                        lockLinesplit: e
-                    }))
-                }
-
-                linesplit() {
-                    this.freezeMouse(!0), this.split(3, !0), this.linesplitUnlock && clearTimeout(this.linesplitUnlock), this.linesplitUnlock = setTimeout(() => {
-                        delete this.linesplitUnlock, this.freezeMouse(!1)
-                    }, 1250)
-                }
-
-                split(e, t, i) {
-                    if (a.stopMovePackets || (t || this.freezeMouse(!1), a.connection.sendMouse()), i) return void setTimeout(() => this.split(e), i);
-                    let n = s.fromSize(2);
-                    n.writeUInt8(17), n.writeUInt8(e), a.connection.send(n, a.dual.focused), a.splitCount += e, a.splitCount <= 2 ? a.moveWaitUntil = performance.now() + 300 : (a.moveWaitUntil = 0, a.splitCount = 0)
-                }
-
-                triggerbot() {
-                    let e = a.targetPid;
-                    if (e) {
-                        delete a.targetPid;
-                        let t = a.playerManager.getPlayer(e);
-                        t && t.setOutline(0, 0, !0), a.setText("")
-                    } else a.targetPid = null, a.setText("Click a player to lock triggerbot")
-                }
-
-                dualCombo(e) {
-                    if (!a.isAlive(!1) || !a.isAlive(!0)) return;
-                    let {
-                        dual: t
-                    } = a;
-                    switch (e) {
-                        case 1:
-                            this.split(1), t.focused = !t.focused, a.connection.sendMouse(), this.split(6), setTimeout(() => this.split(6), 30);
-                            break;
-                        case 2:
-                            this.split(2), t.focused = !t.focused, a.connection.sendMouse(), this.split(6), setTimeout(() => this.split(6), 30);
-                            break;
-                        case 3:
-                            this.linesplit(), t.focused = !t.focused, a.connection.sendMouse(), this.split(6, !0), setTimeout(() => this.split(6, !0), 30)
-                    }
-                    setTimeout(() => {
-                        t.focused = !t.focused
-                    }, 45)
-                }
-
-                zoom(e) {
-                    let t = 1 - n.cameraZoomSpeed / 100,
-                        s = 0;
-                    e.detail ? s = e.detail / 3 : e.wheelDelta && (s = -(e.wheelDelta / 120));
-                    let i = Math.pow(t, s);
-                    a.mouseZoom = r(a.mouseZoom * i, a.mouseZoomMin, 1)
-                }
-
-                setZoomLevel(e) {
-                    a.mouseZoom = .8 / Math.pow(2, e - 1)
-                }
-
-                targetPlayer(playerId) {
-                    playerId = (typeof playerId === 'string') ? parseInt(playerId) : playerId;
-                    let selectedPlayer;
-
-                    if (playerId) {
-                        a.selectedPlayer = playerId;
-                        selectedPlayer = a.playerManager.getPlayer(playerId);
-                    } else {
-                        let playerUnderMouse = this.findPlayerUnderMouse();
-                        if (playerUnderMouse) {
-                            selectedPlayer = playerUnderMouse.player;
-                            a.selectedPlayer = playerUnderMouse.pid;
-                        }
-                    }
-
-                    if (!n.playerStats || !selectedPlayer) {
-                        a.playerElement.innerHTML = "";
-                        return;
-                    }
-
-                    const hasSkin = selectedPlayer.skinUrl;
-                    const skinUrl = hasSkin ? selectedPlayer.skinUrl : 'https://i.ibb.co/g9Sj8gK/i.png';
-                    const onClickAction = hasSkin ? `window.yoinkSkinDual('${skinUrl}')` : 'window.errorSkinDual()';
-                    const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
-
-                    a.playerElement.innerHTML = `
-                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && lowPerformanceMode === 'unckecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
-                            <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
-                            <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
-                        </div>
-                    `;
-                }
-
-                findPlayerUnderMouse() {
-                    let {
-                            x: e,
-                            y: t
-                        } = a.mouse, s = 0, i = null,
-                        n = [...a.allCells.values()].filter(e => e.pid).sort((e, t) => e.size - t.size);
-                    return n.forEach(a => {
-                        if (!a.isPlayerCell) return;
-                        let n = a.x - e,
-                            o = a.y - t,
-                            r = Math.sqrt(Math.abs(n * n + o * o)) - a.size;
-                        if (r < s) s = r, i = a;
-                        else if (r <= 0) return a
-                    }), i
-                }
-
-                toggleSkins(e) {
-                    e ??= !n.skinsEnabled, n.set("skinsEnabled", e), a.playerManager.invalidateVisibility()
-                }
-
-                toggleNames(e) {
-                    e ??= !n.namesEnabled, n.set("namesEnabled", e), a.playerManager.invalidateVisibility()
-                }
-
-                toggleMass() {
-                    let e = !n.massEnabled;
-                    n.set("massEnabled", e), a.playerManager.invalidateVisibility()
-                }
-
-                toggleFood(e) {
-                    e ??= !n.foodVisible, n.set("foodVisible", e), a.scene.food.visible = e
-                }
-
-                toggleHud() {
-                    let {
-                        app: e
-                    } = a, t = !e.showHud;
-                    e.showHud = t, n.set("showHud", t)
-                }
-
-                toggleChat() {
-                    let e = !n.showChat;
-                    n.set("showChat", e), a.running && a.events.$emit("chat-visible", {
-                        visible: e
-                    })
-                }
-
-                toggleChatToast() {
-                    let e = !n.showChatToast;
-                    n.set("showChatToast", e), a.events.$emit("chat-visible", {
-                        visibleToast: e
-                    })
-                }
-            }
-        }, , , , , , , , , , , , , , , , , function (e, t, s) {
-            "use strict";
-            var i = s(29);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(32);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(33);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(34);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(35);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(36);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(37);
-            s.n(i).a
-        }, function () {
-        }, , , , , , function () {
-        }, , function () {
-        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
-            "use strict";
-            var i = s(40);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(41);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(42);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(43);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(44);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            e.exports = new class e {
-                constructor(e, t) {
-                    this.url = e, this.vanisToken = t
-                }
-
-                setToken(e) {
-                    this.vanisToken = e, localStorage.vanisToken = e
-                }
-
-                clearToken() {
-                    this.vanisToken = null, delete localStorage.vanisToken
-                }
-
-                async call(e, t) {
-                    let s = {
-                        method: e,
-                        credentials: "omit",
-                        mode: "same-origin",
-                        redirect: "error",
-                        headers: {
-                            Accept: "application/json, text/plain"
-                        }
-                    };
-                    this.vanisToken && (s.headers.Authorization = `Vanis ${this.vanisToken}`);
+                Fi(t) {
+                    if (!t) return [];
                     try {
-                        return await fetch(this.url + t, s)
-                    } catch (i) {
-                        return {
-                            ok: !1,
-                            status: 0,
-                            statusText: "Client error",
-                            text: async () => i.message
-                        }
-                    }
-                }
-
-                get(e) {
-                    return this.call("GET", e)
-                }
-            }("https://vanis.io/api", localStorage.vanisToken || null)
-        }, function (e) {
-            e.exports = {
-                getXp: function (e) {
-                    return Math.round(e * e / (.1 * .1))
-                },
-                getLevel: function (e) {
-                    return Math.floor(.1 * Math.sqrt(e))
-                }
-            }
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(45);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(46);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(47);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(48);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(49);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(50);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(51);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(52);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(53);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(54);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(57);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(58);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(59);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(60);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(61);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(62);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(63);
-            s.n(i).a
-        }, function () {
-        }, function (e) {
-            var t = "seenNotifications";
-            e.exports = new class {
-                constructor() {
-                    this.seenList = this.parseSeen(localStorage[t])
-                }
-
-                parseSeen(e) {
-                    if (!e) return [];
-                    try {
-                        var t = JSON.parse(e);
-                        if (Array.isArray(t)) return t
-                    } catch (s) {
+                        var e = JSON.parse(t);
+                        if (Array.isArray(e)) return e
+                    } catch (t) {
                     }
                     return []
                 }
 
-                saveSeen() {
+                Gi() {
+                    localStorage[e] = JSON.stringify(this.Ei)
+                }
+
+                Hi(t) {
+                    return this.Ei.includes(t)
+                }
+
+                Ii(t) {
+                    this.Hi(t) || (this.Ei.push(t), this.Gi())
+                }
+            }
+        }, 9056: (t, e, s) => {
+            var a = s(3117);
+
+            function i(t) {
+                for (var e = "", s = 0; s < t.length; s++) {
+                    var a = t.charCodeAt(s) - 2;
+                    e += String.fromCharCode(a)
+                }
+                return e
+            }
+
+            var n = ["pkiigt", "p3iigt", "pkii5t", "pkiic", "p3iic", "p3ii6", "pkii", "p3ii", "p3i", "hciiqv", "h6iiqv", "hcii2v", "hci", "cpcn", "cuujqng", "ewpv", "rwuu{", "xcikpc", "xci3pc", "eqem", "e2em", "uewo", "ycpm", "yjqtg", "yj2tg", "unwv", "dkvej", "d3vej", "rqtp", "r2tp", "tcrg", "t6rg", "jkvngt", "j3vngt", "jkvn5t", "j3vn5t", "pc|k", "p6|k", "tgvctf", "ejkpm", "hwem", "ujkv"],
+                r = (n.map(i), n.map(i).sort(((t, e) => e.length - t.length)).map((t => new RegExp("[^\\s]*" + t.split("").join("\\s*") + "[^\\s]*", "gi"))));
+            t.exports = {
+                noop: function () {
+                }, Oh: function (t) {
+                    for (var e = 0; e < r.length; e++) t = t.replace(r[e], (t => new Array(t.length).fill("*").join("")));
+                    return t
+                }, Hh: async function () {
+                    window.safari || /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ? a.kb.fire({
+                        type: "warning",
+                        title: "Safari browser is not supported :(",
+                        html: "Please consider using Google Chrome.",
+                        allowOutsideClick: !1,
+                        showCloseButton: !1,
+                        showCancelButton: !1,
+                        showConfirmButton: !1
+                    }) : localStorage.skipUnsupportedAlert || (localStorage.skipUnsupportedAlert = !0, await new Promise((t => {
+                        var e = new Image;
+                        e.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA", e.onload = e.onerror = () => {
+                            t(2 === e.height)
+                        }
+                    })) || a.kb.fire({
+                        type: "warning",
+                        title: "Browser support limited",
+                        html: "Skins might not work properly in this browser.<br>Please consider using Chrome.",
+                        allowOutsideClick: !1
+                    }))
+                }, Ji: !localStorage.visitedBefore && (localStorage.visitedBefore = !0, !0)
+            }
+        }, 5694: t => {
+            var e = window.WebSocket;
+            delete window.WebSocket, setTimeout((() => {
+            })), t.exports = e
+        }, 4095: t => {
+            t.exports = function (t) {
+                var e = 1, s = {Pa: {}, zg: {}};
+                return s.qg = t.getUint8(e, !0), e += 1, s.qg >= 4 ? (!function () {
+                    if (s.ug = t.getUint8(e, !0), e += 1, s.rg = t.getUint16(e, !0), e += 2, s.Ab = t.getUint16(e, !0), e += 2, s.Pa.Ai = t.getInt16(e, !0), e += 2, s.Pa.Bi = t.getInt16(e, !0), e += 2, s.Pa.Ki = t.getInt16(e, !0), e += 2, s.Pa.Li = t.getInt16(e, !0), e += 2, s.wf = t.getUint8(e, !0), e += 1, s.Pa.Oa = !!(1 & s.wf), 2 & s.wf) {
+                        var a = s.zg.yi = t.getUint16(e, !0);
+                        e += 2;
+                        var i = s.zg.Mi = t.getUint16(e, !0);
+                        e += 2, s.zg.zi = i - a
+                    }
+                    4 & s.wf && (s.zg.xi = t.getUint16(e, !0), e += 2), 128 & s.wf && (s.zg.Ag = !0), s.Pa.pd = !!(16 & s.wf)
+                }(), s.Pa.md = s.Pa.Ki - s.Pa.Ai, s.Pa.nd = s.Pa.Li - s.Pa.Bi) : (s.qg >= 2 ? (s.ug = t.getUint8(e, !0), e += 1, s.rg = t.getUint16(e, !0), e += 2, s.Ab = t.getUint16(e, !0), e += 2, s.Pa.md = t.getUint32(e, !0), e += 4, s.Pa.nd = t.getUint32(e, !0), e += 4) : function () {
+                    s.ug = 1, s.rg = t.getUint16(e, !0), e += 2, s.Ab = t.getUint16(e, !0), e += 2;
+                    var a = t.getUint16(e, !0);
+                    e += 2, s.Pa.md = a, s.Pa.nd = a
+                }(), s.Pa.Ai = -s.Pa.md / 2, s.Pa.Bi = -s.Pa.nd / 2, s.Pa.Ki = +s.Pa.md / 2, s.Pa.Li = +s.Pa.nd / 2), s.Pa.Ha = (s.Pa.Ai + s.Pa.Ki) / 2, s.Pa.Ia = (s.Pa.Bi + s.Pa.Li) / 2, s
+            }
+        }, 5889: t => {
+            t.exports = {
+                basic: function (t, e) {
+                    for (var s = []; ;) {
+                        var a = e.Ni();
+                        if (!a) break;
+                        var i = t.Ya.Dc(a);
+                        i && s.push({
+                            Ga: a,
+                            Oi: 1 + s.length,
+                            ci: i.lb,
+                            Pi: i.Tb || "#ffffff",
+                            Qi: !!i.Sb,
+                            ai: i.wb.perk_badges
+                        })
+                    }
+                    return {Ri: s}
+                }, scrimmage: function (t, e) {
+                    for (var s = []; ;) {
+                        var a = e.Zd();
+                        if (!a) break;
+                        var i = {};
+                        if (1 & a && (i.Oi = e.Zd()), 2 & a && (i.Ga = e.Ni()), 4 & a) i.ci = e.ef(), i.Pi = "#ffffff"; else {
+                            var n = i.Ga && t.Ya.Dc(i.Ga);
+                            i.ci = n ? n.lb : "N/A", i.Pi = n && n.Tb || "#ffffff", i.ai = n && n.wb.perk_badges
+                        }
+                        8 & a && (i.wg = e.ef()), 16 & a && (i.Pi = "#" + ("00" + e.Zd().toString(16)).slice(-2) + ("00" + e.Zd().toString(16)).slice(-2) + ("00" + e.Zd().toString(16)).slice(-2)), 32 & a && (i.Qi = !0), 64 & a && (i.Si = e.ef()), s.push(i)
+                    }
+                    var r = null;
+                    if (e.Ti !== e.Ui.byteLength) {
+                        var o = e.ef();
+                        r = {Vi: o.length > 0, ci: o}
+                    }
+                    return {Ri: s, Wi: r}
+                }
+            }
+        }, 213: t => {
+            t.exports = function (t) {
+                for (var e = []; ;) {
+                    var s = t.Ni();
+                    if (!s) break;
+                    t.Ti++;
+                    var a = t.Zd() / 255, i = t.Zd() / 255;
+                    e.push({Ga: s, Ha: a, Ia: i})
+                }
+                return {Xi: e, wg: t.Yi()}
+            }
+        }, 1230: (t, e, s) => {
+            var a = s(1620), i = s(3117), n = s(5097), r = s(213), o = s(5889), l = s(4095), {
+                Ih: c,
+                R: u,
+                Zi: h
+            } = s(3658), d = s(4459);
+            t.exports = a.aj = function (t) {
+                var e = new h(t);
+                switch (e.Zd()) {
+                    case 1:
+                        var s = l(t);
+                        a.Xg = t, a.pg(s);
+                        break;
+                    case 2:
+                        var p = new Uint8Array(t.buffer, 1), v = d.bj(p);
+                        a.eb.bf(v);
+                        break;
+                    case 3:
+                        var f = Date.now() - a.vg;
+                        a.cj = f;
+                        break;
+                    case 4:
+                        for (; x = e.Ni();) a.Ya.Ic(x);
+                        break;
+                    case 6:
+                        a.eb.ce(6);
+                        break;
+                    case 7:
+                        var m, _;
+                        1 & (I = e.Zd()) && (m = a.Ya.Dc(e.Ni())), 2 & I && (_ = a.Ya.Dc(e.Ni())), _ && _.Hb(!1), m && m.Hb(!0);
+                        break;
+                    case 10:
+                        a.Fb = Date.now(), t.Gb = ++a.Gb, a.hh();
+                        var g = a.Mf, w = a.Mf = {};
+                        a.Vd = !1, d["skid_" + Math.max(a.qg, 3)](new Uint8Array(t.buffer, 1)), a.Wd || a.Qa ? a.ab.dj() : a.ab.ej(t), a.ra.Vd = a.Vd, a.Vd ? a.Wd = !1 : a.ra.ng && 37 == ++a.fj && a.gh(), delete a.Vd;
+                        var y = !0;
+                        for (var b in w) if (b in g) {
+                            y = !1;
+                            break
+                        }
+                        a.Mf = w, y && (a.Yg = 0, a.R.$emit(u.ke), a.fe = !1), null != a.se && --a.se <= 0 && (a.Td.pe(a.te), delete a.se, delete a.te), a.Za++, a.jh(!0), a.Ya.Fc();
+                        break;
+                    case 11:
+                        var C = o.basic(a, e);
+                        a.R.$emit(u.gj, C);
+                        break;
+                    case 12:
+                        var {Xi: k, wg: S} = r(e);
+                        a.R.$emit(u.za, k), a.ra.ma = S;
+                        break;
+                    case 13:
+                        var x = e.Ni(), M = e.ef();
+                        if (!x) {
+                            a.R.$emit(u.hj, M);
+                            break
+                        }
+                        if (!(U = a.Ya.Dc(x))) break;
+                        var P = {Ga: x, ci: M, bi: U.lb};
+                        U.Tb && (P.fi = U.Tb), U.wb.perk_badges && (P.ai = U.wb.perk_badges), a.R.$emit(u.hj, P);
+                        break;
+                    case 14:
+                        var I;
+                        s = {};
+                        if (2 & (I = e.Zd())) {
+                            var T = {1: "success", 2: "error", 3: "warning", 4: "info"}[e.Zd()];
+                            T && (s.type = T)
+                        }
+                        4 & I && (s.timer = e.Ni()), s.title = c(e.ef()), i.hf.fire(s);
+                        break;
+                    case 15:
+                        for (; ;) {
+                            if (!(x = e.Ni())) break;
+                            var A = e.ij(), N = e.ef();
+                            a.Ya.Ec({pid: x, nickname: A, skinUrl: N})
+                        }
+                        break;
+                    case 16:
+                        var L = JSON.parse(e.ef()), D = L.find((t => t.pid === a.Ab)), O = !1;
+                        D && (O = a.Qb(D.tagId));
+                        for (var R = [], E = 0; E < L.length; E++) {
+                            var U = a.Ya.Ec(L[E]);
+                            R.push(U)
+                        }
+                        O && (a.R.$emit(u.za, []), a.Ya.lc(R));
+                        break;
+                    case 17:
+                        a.Fg.Hg = e.jj(), a.Fg.Ig = e.jj();
+                        break;
+                    case 18:
+                        a.ab.dj(), a.Wg();
+                        break;
+                    case 19:
+                        var F = e.Zd(), B = e.Yi();
+                        if (a.R.$emit(u.kj, B), !F) break;
+                        i.hf.fire({title: `You have reached level ${e.Ni()}!`, background: "#b37211", timer: 3e3});
+                        break;
+                    case 20:
+                        var z = e.Ni(), X = e.Ni(), $ = e.Yi();
+                        a.Vg.deathStats = {
+                            lj: z,
+                            mj: X,
+                            Yg: $
+                        }, a.ra.mg = !0, n.rh && !a.Vg.showMenu && Date.now() - a.Tg <= 6e4 ? (a.ra.ng = !0, a.fj = 0) : a.Tg = Date.now(), a.ra.ng || (a.eh = setTimeout(a.dh, 900));
+                        break;
+                    case 21:
+                        break;
+                    case 22:
+                        a.R.$emit(u.nj);
+                        break;
+                    case 23:
+                        a.ra.la = e.Ni();
+                        break;
+                    case 24:
+                        a.Za = e.Yi(), a.R.$emit(u.Ma, e.Yi());
+                        break;
+                    case 25:
+                        a.R.$emit(u.ke, {oj: e.ef()});
+                        break;
+                    case 26:
+                        a.ra.kg = !!e.Zd(), t.byteLength > e.Ti && (a.ra.lg = e.ef() || "Play");
+                        break;
+                    case 27:
+                        a.R.$emit(u.pj, JSON.parse(e.ef()));
+                        break;
+                    case 28:
+                        C = o.scrimmage(a, e);
+                        a.R.$emit(u.gj, C)
+                }
+            }
+        }, 8609: (t, e, s) => {
+            var a = s(1620), i = s(8493), n = s(4459), {R: r} = s(3658);
+            a.Ng = {};
+            var o = a.Ng.qj = [];
+            a.Ng.Ee = function (t) {
+                a.Ng.Zg(), a.Ng.rj = !0;
+                for (var e = 0; e < t.length; e++) o.unshift([{}, [], [], {}, null, null]), n["skid_" + Math.max(a.qg, 3)](new Uint8Array(t[e].buffer, 1), e);
+                o.reverse(), delete a.Ng.rj, a.Ng.sj = 0
+            }, a.Ng.tj = function () {
+                for (var t in a.Lf) {
+                    var e = a.Lf[t];
+                    t in o[0][3] || (t in o[0][0] ? o[0][0][t].Ga = e.Ga : o[0][0][t] = {
+                        xd: e.xd,
+                        Wc: e.Wc,
+                        Ga: e.Ga,
+                        Ha: e.Gf,
+                        Ia: e.Hf,
+                        Uc: e.If,
+                        wf: e.wf
+                    })
+                }
+                for (var s = 1; s < o.length; s++) {
+                    var i = o[s - 1], n = o[s];
+                    for (var t in n[0]) if (t in i[0]) {
+                        var r = n[0][t], l = i[0][t];
+                        16 & r.xd && (r.Ga = l.Ga), 32 & r.xd && (r.Ha = l.Ha, r.Ia = l.Ia), 64 & r.xd && (r.Uc = l.Uc)
+                    }
+                    for (var t in i[0]) t in n[3] || t in n[0] || (n[0][t] = i[0][t])
+                }
+            }, a.Ng.Zg = function () {
+                o.splice(0, o.length), delete a.Ng.sj
+            }, a.Ng.uj = function (t, e) {
+                var s = o[t];
+                for (var n in a.Lf) !e && n in s[0] || i.Ci(n);
+                for (var n in s[0]) i.wi(s[0][n]);
+                a.Ng.sj = t, a.jh(!0)
+            }, a.Ng.Pg = function () {
+                if (a.Ng.sj >= o.length) a.Ng.uj(0, !0); else {
+                    var [t, e, s, n, l, c] = o[a.Ng.sj++];
+                    for (var u in t) i.wi(t[u]);
+                    for (var h = 0, d = e.length; h < d;) i.Ci(e[h++]);
+                    for (h = 0, d = s.length; h < d;) i.Ci(s[h++], s[h++]);
+                    if (l) {
+                        for (var p in l) a.Pa[p] = l[p];
+                        a.Ie.kd()
+                    }
+                    if (c) {
+                        if (-1 === p) a.rd = null; else for (var p in null == a.rd && (a.rd = {}), c) a.rd[p] = c[p];
+                        a.Ie.qd()
+                    }
+                    a.jh(!0)
+                }
+                a.R.$emit(r.vj, a.Ng.sj)
+            }
+        }, 1568: (t, e, s) => {
+            var a = s(5097), i = s(3658);
+            PIXI.utils.skipHello();
+            var n = document.getElementById("canvas"), r = {
+                resolution: a.customResolution || window.devicePixelRatio || 1,
+                view: n,
+                forceCanvas: !a.va,
+                antialias: !1,
+                powerPreference: "high-performance",
+                backgroundColor: PIXI.utils.string2hex(a.oh)
+            };
+            r.resolution = a.wj;
+            var o = PIXI.autoDetectRenderer(r);
+
+            function l() {
+                o.resize(window.innerWidth, window.innerHeight)
+            }
+
+            l(), i.xj(o), window.addEventListener("resize", l), o.clear(), t.exports = o
+        }, 5487: (t, e, s) => {
+            var {nb: a, ob: i} = s(3599), n = s(1620), r = s(3658), {R: o, Sd: l} = s(3658), c = s(3117), u = s(5097),
+                h = s(4095), d = [], p = [];
+
+            function v(t) {
+                var e = t || d.length;
+                d.splice(0, e), p.splice(0, e)
+            }
+
+            function f(t, e, s) {
+                t.sg = s, n.pg(t), e.forEach((t => {
+                    n.aj(t)
+                })), n.Ng.tj(), n.lf(!1)
+            }
+
+            function m(t) {
+                t = t.map((t => {
+                    var e = {pid: t.Ga, nickname: t.Vb, skin: t.xb};
+                    for (var s in t.vb && (e.bot = !0), t.yb && (e.tagId = t.yb), t.wb) e[s] = t.wb[s];
+                    return e
+                }));
+                var e = JSON.stringify(t), s = new l;
+                return s.Zd(16), s.ef(e), s.yj()
+            }
+
+            function _(t, e) {
+                t = atob(t);
+                for (var s = new ArrayBuffer(t.length), a = new Uint8Array(s), i = 0; i < t.length; i++) a[i] = t.charCodeAt(i);
+                return new DataView(s)
+            }
+
+            n.ab = {
+                nb: a, ob: i, Gc: d, ej: function (t) {
+                    d.push(t), p.push(n.Jb.map((t => ({xd: t.xd, Wc: t.Wc, Ga: t.Ga, Gf: t.Gf, Hf: t.Hf, If: t.If}))));
+                    var e = 25 * u.zj;
+                    d.length > e && v(1)
+                }, dj: v, bb: function (t) {
+                    if (n.Ua && n.ib(), n.eb.pf(), c.hf.close(), t instanceof ArrayBuffer) !function (t, e) {
+                        var s = new ArrayBuffer(e.byteLength), a = new Uint8Array(s);
+                        a.set(new Uint8Array(e));
+                        for (var i = 9, n = a.slice(i, i += 4), r = a[i++] << 8 | a[i++], o = i += r, l = 0; o < e.byteLength; o++, l++) a[o] ^= n[l % 4];
+                        var c, u = a[i++], d = a[i++] << 8 | a[i++], p = [], v = [];
+                        for (o = 0; o < u; o++) p.push(a[i++] << 8 | a[i++]);
+                        for (o = 0; o < d; o++) v.push(a[i++] << 8 | a[i++]);
+                        var m = p.map((t => new DataView(s.slice(i, i += t)))),
+                            _ = v.map((t => new DataView(s.slice(i, i += t))));
+                        for (o = 0; o < m.length; o++) if (1 === m[o].getUint8(0)) {
+                            c = h(m[o]), m.splice(o, 1);
+                            break
+                        }
+                        f(c, m, _)
+                    }(0, t); else {
+                        var e = 1;
+                        t.startsWith("REPLAY") && (e = t[7], t = t.slice(9)), function (t, e) {
+                            var s = e.split("|");
+                            s.shift();
+                            var a = s.map(_), i = h(a.shift()), n = [];
+                            if (t >= 4) {
+                                for (; a[0].getUint8(0);) n.push(a.shift());
+                                a.shift()
+                            } else n.push(a.shift());
+                            f(i, n, a)
+                        }(e, t)
+                    }
+                }, sh: async function () {
+                    var t = d.slice(0);
+                    if (t.length) {
+                        var e = [];
+                        for (var s in n.Ya.Bc) {
+                            var l = n.Ya.Bc[s];
+                            l.Gb >= d[0].Gb && e.push(l)
+                        }
+                        t.splice(0, 1, function (t) {
+                            for (var e = 0, s = 0; s < t.length; s++) e += 1 + (1 === t[s].xd ? 2 : 0) + 2 + 2 + 2 + 2 + (t[s].wf ? 1 : 0);
+                            var a = new ArrayBuffer(1 + e + 1 + 2 + 2), i = new DataView(a);
+                            i.setUint8(0, 10);
+                            var n = 1;
+                            for (s = 0; s < t.length; s++) {
+                                var r = t[s], o = 254 & r.wf, l = o ? 128 : 0;
+                                i.setUint8(n, r.xd | l), n++, 1 === r.xd && (i.setUint16(n, r.Ga, !1), n += 2), i.setUint16(n, r.Wc, !1), n += 2, i.setInt16(n, r.Gf, !1), n += 2, i.setInt16(n, r.Hf, !1), n += 2, i.setUint16(n, r.If, !1), n += 2, o && (i.setUint8(n, o), n++)
+                            }
+                            return i.setUint8(n, 0), n++, i.setUint16(n, 0, !1), n += 2, i.setUint16(n, 0, !1), n += 2, i
+                        }(p[0]));
+                        var h = [n.Xg.buffer, m(e)], v = r.Aj(), f = await n.nh(),
+                            _ = [82, 69, 80, 76, 65, 89, 124, 53, 124], g = t => {
+                                _.push(...new Uint8Array(t))
+                            }, w = t => {
+                                _.push(t >> 8 & 255, 255 & t)
+                            };
+                        (t => {
+                            for (var e = 0; e < t.length; e++) _.push(t.charCodeAt(e))
+                        })("92b1"), w(f.byteLength), g(f);
+                        var y, b = _.length;
+                        y = h.length, _.push(255 & y), w(t.length);
+                        for (var C = [...h, ...t.map((t => t.buffer))], k = 0; k < C.length; k++) w(C[k].byteLength);
+                        for (k = 0; k < C.length; k++) g(C[k]);
+                        k = b;
+                        for (var S = 0; k < _.length; k++, S++) _[k] ^= "92b1".charCodeAt(S % 4);
+                        var x = new ArrayBuffer(_.length);
+                        new Uint8Array(x).set(new Uint8Array(_)), a().then((t => t.put(i, x, v))).then((() => {
+                            n.R.$emit(o.Bj);
+                            var t = "Replay saved!";
+                            1 === u.Cj ? n.R.$emit(o.hj, t) : 2 === u.Cj && c.hf.fire({
+                                type: "info",
+                                title: t,
+                                timer: 1500
+                            })
+                        })).catch((t => {
+                            console.error("replay.save", t), c.hf.fire({
+                                type: "error",
+                                title: `Error saving replay ${t.message || t}`
+                            })
+                        }))
+                    }
+                }
+            }
+        }, 5097: t => {
+            var e = {
+                    va: !0,
+                    wj: 1,
+                    Zf: 40,
+                    mh: !1,
+                    Jh: !0,
+                    rh: !1,
+                    Lh: !0,
+                    re: !0,
+                    Ff: 120,
+                    kh: 150,
+                    lh: 150,
+                    ve: 10,
+                    zj: 8,
+                    Cj: 2,
+                    qc: 2,
+                    sc: 2,
+                    rc: 1,
+                    mc: !0,
+                    oc: !0,
+                    nc: !0,
+                    ag: !0,
+                    Oc: !0,
+                    Di: !0,
+                    Ke: !0,
+                    Dj: 1,
+                    Ej: 200,
+                    Fj: !0,
+                    Gj: !1,
+                    Me: !0,
+                    Oe: !1,
+                    Ta: !0,
+                    Va: !0,
+                    Hj: !0,
+                    Ij: !0,
+                    Jj: !0,
+                    Kj: !1,
+                    Lj: !0,
+                    ca: !1,
+                    da: !1,
+                    ga: !1,
+                    ea: !1,
+                    fa: !1,
+                    ha: !1,
+                    Mj: !0,
+                    Nj: !0,
+                    hi: !0,
+                    Oj: !0,
+                    oh: "101010",
+                    od: "000000",
+                    Uf: "ffffff",
+                    Rf: "ffa500",
+                    Pj: "000000",
+                    Qj: null,
+                    gd: "img/background.png",
+                    wd: "img/virus.png",
+                    Rj: "ffffff",
+                    Sj: "000000",
+                    Tj: "Hind Madurai",
+                    Uj: 1,
+                    Vj: 2,
+                    Wj: !0,
+                    ac: 750,
+                    Xj: "Ubuntu",
+                    Yj: 2,
+                    Zj: 2,
+                    ak: 0,
+                    bk: !0,
+                    ph: !0,
+                    fd: !0,
+                    hd: !0,
+                    jd: .6,
+                    Tf: !1,
+                    tc: !0,
+                    uc: !0,
+                    vc: !0,
+                    tb: 1,
+                    ck: !1
+                }, s = Object.keys(e),
+                a = ["useWebGL", "gameResolution", "smallTextThreshold", "autoZoom", "rememeberEjecting", "autoRespawn", "mouseFreezeSoft", "delayDoublesplit", "drawDelay", "cameraMoveDelay", "cameraZoomDelay", "cameraZoomSpeed", "replayDuration", "showReplaySaved", "showNames", "showMass", "showSkins", "showOwnName", "showOwnMass", "showOwnSkin", "showCrown", "foodVisible", "eatAnimation", "showHud", "hudScale", "chatHeight", "showLeaderboard", "showServerName", "showChat", "showChatToast", "minimapEnabled", "minimapLocations", "showFPS", "showPing", "showCellCount", "showPlayerScore", "showPlayerMass", "showClock", "showSessionTime", "showPlayerCount", "showSpectators", "showTagTotalMass", "showRestartTiming", "showAutorespawnIndicator", "showBlockedMessageCount", "filterChatMessages", "clearChatMessages", "backgroundColor", "borderColor", "foodColor", "ejectedColor", "cellNameOutlineColor", "cursorImageUrl", "backgroundImageUrl", "virusImageUrl", "cellMassColor", "cellMassOutlineColor", "cellNameFont", "cellNameWeight", "cellNameOutline", "cellNameSmoothOutline", "cellLongNameThreshold", "cellMassFont", "cellMassWeight", "cellMassOutline", "cellMassTextSize", "cellMassSmoothOutline", "shortMass", "showBackgroundImage", "backgroundImageRepeat", "backgroundImageOpacity", "useFoodColor", "namesEnabled", "skinsEnabled", "massEnabled", "cellBorderSize", "autoHideReplayControls"];
+
+            function i(t) {
+                switch (t) {
+                    case 2:
+                        return "bold";
+                    case 0:
+                        return "thin";
+                    default:
+                        return "normal"
+                }
+            }
+
+            function n(t, e) {
+                var s;
+                switch (t) {
+                    case 3:
+                        s = e / 5;
+                        break;
+                    case 1:
+                        s = e / 20;
+                        break;
+                    default:
+                        s = e / 10
+                }
+                return Math.ceil(s)
+            }
+
+            t.exports = new class {
+                constructor() {
+                    this.dk(), this.ek = {};
+                    for (var t = this.fk(), i = 0; i < s.length; i++) void 0 !== t[a[i]] ? (this[s[i]] = t[a[i]], this.ek[a[i]] = t[a[i]]) : this[s[i]] = e[s[i]];
+                    this.Ee("skinsEnabled", !0), this.Ee("namesEnabled", !0), this.Ee("massEnabled", !0), this.gk(), this.hk()
+                }
+
+                dk() {
+                    this.sb = 512, this.S = 220, this.U = 30, this.V = .08
+                }
+
+                gk() {
+                    var t = {fontFamily: this.Tj, fontSize: 80, fontWeight: i(this.Uj)};
+                    return this.Vj && (t.stroke = PIXI.utils.string2hex(this.Pj), t.strokeThickness = n(this.Vj, t.fontSize), t.lineJoin = this.Wj ? "round" : "miter"), this.bc = t
+                }
+
+                hk() {
+                    var t = {
+                        fontFamily: this.Xj,
+                        fontSize: 56 + 20 * this.ak,
+                        fontWeight: i(this.Yj),
+                        lineJoin: "round",
+                        fill: PIXI.utils.string2hex(this.Rj)
+                    };
+                    return this.Zj && (t.stroke = PIXI.utils.string2hex(this.Sj), t.strokeThickness = n(this.Zj, t.fontSize), t.lineJoin = this.bk ? "round" : "miter"), this.Cd = t
+                }
+
+                fk() {
+                    if (!localStorage.settings) return {};
                     try {
-                        localStorage[t] = JSON.stringify(this.seenList)
-                    } catch (e) {
+                        return JSON.parse(localStorage.settings)
+                    } catch (t) {
+                        return {}
                     }
                 }
 
-                isSeen(e) {
-                    return this.seenList.includes(e)
+                ik() {
+                    for (var t = [], e = 0; e < s.length; e++) t.push(a[e], this[s[e]]);
+                    return t
                 }
 
-                setSeen(e) {
-                    this.isSeen(e) || (this.seenList.push(e), this.saveSeen())
+                jk(t) {
+                    return t = s[a.indexOf(t)], e[t]
+                }
+
+                Ee(t, i) {
+                    var n = s[a.indexOf(t)];
+                    return null != n && this[n] !== i && (this[n] = i, e[n] !== i ? this.ek[t] = i : delete this.ek[t], localStorage.settings = JSON.stringify(this.ek), !0)
                 }
             }
-        }, function (e, t, s) {
-            "use strict";
-            var i = s(64);
-            s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
-            var i, a, n, o, r = s(1),
-                l = document.createElement("canvas"),
-                c = l.getContext("2d");
+        }, 8002: (t, e, s) => {
+            var a, i, n, r, o = s(1620), {R: l} = s(3658), c = document.createElement("canvas"), u = c.getContext("2d");
 
             function h() {
-                i = l.width = window.innerWidth, a = l.height = window.innerHeight, n = i / 2, o = a / 2
+                a = c.width = window.innerWidth, i = c.height = window.innerHeight, n = a / 2, r = i / 2
             }
 
             window.addEventListener("resize", h), h();
 
             class d {
-                spawn(e) {
-                    this.x = e.x, this.y = e.y, this.angle = Math.atan2(this.y, this.x), this.radius = .1, this.speed = .4 + 3.3 * Math.random()
+                kk(t) {
+                    this.x = t.x, this.y = t.y, this.angle = Math.atan2(this.y, this.x), this.radius = .1, this.speed = .4 + 3.3 * Math.random()
                 }
 
-                update(e) {
-                    var t = this.speed * e;
-                    this.x += Math.cos(this.angle) * t, this.y += Math.sin(this.angle) * t, this.radius += .0035 * t
+                Ef(t) {
+                    var e = this.speed * t;
+                    this.x += Math.cos(this.angle) * e, this.y += Math.sin(this.angle) * e, this.radius += .0035 * e
                 }
             }
 
-            var p = Array(200).fill(null).map(() => new d),
-                u = !1,
-                g = 0,
-                A = 0;
+            var p = new Array(200).fill(null).map((() => new d)), v = !1;
 
-            function m(e) {
-                if (r.running) return window.removeEventListener("resize", h), void (l.parentNode && l.parentNode.removeChild(l));
-                var t, s = window.performance && window.performance.now ? window.performance.now() : Date.now();
-                g || (g = A = s), e = (s - A) / 6;
-                var d = s - g - 550;
-                if (d > 0) {
-                    var v = d / 1e3;
-                    v > 1.2 && (v = 1.2), e /= Math.pow(3, v)
-                }
-                requestAnimationFrame(m), c.clearRect(0, 0, i, a), c.save(), c.translate(n, o), t = e, c.beginPath(), c.fillStyle = "#00b8ff", c.globalAlpha = .9, p.forEach(e => {
-                    var s, r, l, h, d;
-                    (u || (r = n + (s = e).radius, l = o + s.radius, s.x < -r || s.x > r || s.y < -l || s.y > l)) && e.spawn((h = i, {
-                        x: Math.random() * h * 2 - h,
-                        y: Math.random() * (d = a) * 2 - d
-                    })), e.update(t), c.moveTo(e.x, e.y), c.arc(e.x, e.y, e.radius, 0, 2 * Math.PI)
-                }), u = !1, c.fill(), c.restore(), A = s
+            function f(t) {
+                u.beginPath(), u.fillStyle = "#00b8ff", u.globalAlpha = .9, p.forEach((e => {
+                    var s, o;
+                    (v || function (t) {
+                        var e = n + t.radius, s = r + t.radius;
+                        return t.x < -e || t.x > e || t.y < -s || t.y > s
+                    }(e)) && e.kk((s = a, o = i, {
+                        x: Math.random() * s * 2 - s,
+                        y: Math.random() * o * 2 - o
+                    })), e.Ef(t), u.moveTo(e.x, e.y), u.arc(e.x, e.y, e.radius, 0, 2 * Math.PI)
+                })), v = !1, u.fill()
             }
 
-            function v() {
-                u = !0, g = A = 0, c.clearRect(0, 0, i, a), document.getElementById("overlay").prepend(l), setTimeout(m, 2e3)
+            var m = 0, _ = 0;
+
+            function g(t) {
+                if (o.Ua) return window.removeEventListener("resize", h), void (c.parentNode && c.parentNode.removeChild(c));
+                var e = window.performance && window.performance.now ? window.performance.now() : Date.now();
+                m || (m = _ = e);
+                t = (e - _) / 6;
+                var s = e - m - 550;
+                if (s > 0) {
+                    var l = s / 1e3;
+                    l > 1.2 && (l = 1.2), t /= Math.pow(3, l)
+                }
+                requestAnimationFrame(g), u.clearRect(0, 0, a, i), u.save(), u.translate(n, r), f(t), u.restore(), _ = e
             }
 
-            r.events.$on("game-stopped", v), v()
-        }, function (e, t, s) {
-            var i = s(1);
-            i.events.$on("players-menu", e => {
-                if ("visible" === e) {
-                    (t = document.getElementById("player-modal")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
-                        t.sub = e
-                    })
-                }
-                if ("hidden" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
-                        t.sub = e
-                    });
-                if ("scrolled" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
-                        t.sub = e
-                    })
-            }), i.events.$on("chatbox-menu", e => {
-                if ("visible" === e) {
-                    (t = document.getElementById("chatbox")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
-                        t.sub = e
-                    })
-                }
-                if ("hidden" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
-                        t.sub = e
-                    });
-                if ("scrolled" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
-                        t.sub = e
-                    });
-                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
-            });
-            var a = "me--"
-        }, function (e, t, s) {
-            "use strict";
-            s.r(t);
-            var i = s(23),
-                a = s.n(i),
-                n = s(114),
-                o = s.n(n),
-                r = function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return t("transition", {
-                        attrs: {
-                            name: this.isModalOpen || this.gameState.lifeState < 3 ? "" : "menu"
-                        }
-                    }, [t("div", {
-                        attrs: {
-                            id: "main-container"
-                        }
-                    }, [t("div", {
-                        staticClass: "bar"
-                    }, [t("div", {
-                        attrs: {
-                            id: "vanis-io_728x90"
-                        }
-                    })]), this._v(" "), t("servers", {
-                        staticClass: "fade-box two"
-                    }), this._v(" "), t("player-container", {
-                        staticClass: "fade-box two",
-                        on: {
-                            "modal-open": this.onModalChange
-                        }
-                    }), this._v(" "), t("account", {
-                        staticClass: "fade-box"
-                    }), this._v(" "), t("skins", {
-                        staticClass: "fade-box"
-                    })], 1)])
-                };
-            r._withStripped = !0;
-
-            function injectUser(user) {
-                if (!user || !user.pid) return ``;
-                const deltaBadge = getUserField(user.nickname, user.pid, 'ba', null);
-                const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges', null);
-                const deltaColor = getUserField(user.nickname, user.pid, 'c', null);
-                const colorNickname = getUserColor(user.bot, user.nickname, user.pid, '#');
-
-                return `
-                    <div class="listItem playerItem">
-                        <img class="playerPhoto beautifulSkin" alt="" src="${user.skin === '' ? 'https://i.ibb.co/g9Sj8gK/transparent-skin.png' : 'https://skins.vanis.io/s/' + user.skin}" onerror="this.src = 'https://skins.vanis.io/s/Qkfih2'">
-                        <div class="listTextItem playerTextElem">
-                            <div class="playerNickLine">
-                                ${deltaBadge ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge}">` : ``}
-                                ${vanillaBadge ? `<img class="playerVanilla playerBadgeDiv" alt="" src="/img/badge/${getPerkBadgeImage(vanillaBadge)}.png?2">` : ``}
-                                <p class="playerNickname" style="color: ${colorNickname}">${user.nickname}</p>
-                            </div>
-                            <p class="playerPid">${user.bot ? 'BOT: ' : deltaColor ? 'Delta PID: ' : 'PID: '}${user.pid}</p>
-                        </div>
-                    </div>
-                `;
+            function w() {
+                v = !0, m = _ = 0, u.clearRect(0, 0, a, i), document.getElementById("overlay").prepend(c), setTimeout(g, 2e3)
             }
 
-            function showPlayerList(url, name, nb, slots) {
-                let userList = "";
-
-                for (const pid in currentServerPlayersList) {
-                    if (pid) {
-                        const user = currentServerPlayersList[pid];
-                        const userHtml = injectUser(user);
-                        userList += userHtml;
-                    }
-                }
-
-                const modal = `
-                    <div data-v-0eaeaf66="" data-v-1bcde71e="" class="modal modalCustom">
-                        <div data-v-0eaeaf66="" class="overlay"></div>
-                        <i data-v-0eaeaf66="" onclick="document.querySelector('.modalCustom').remove()" class="fas fa-times-circle close-button"></i>
-                        <div data-v-0eaeaf66="" class="wrapper">
-                            <div data-v-0eaeaf66="" class="content fade-box">
-                                <h2 data-v-0eaeaf66="" class="titleServer">${name} - ${nb} / ${slots}</h2>
-                                <p data-v-0eaeaf66="" class="urlServer">${url}</p>
-                                <div class="divPlayerList" data-v-7179a145="" data-v-1bcde71e="">
-                                    ${userList}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
+            o.R.$on(l.Ra, w), w()
+        }, 3117: (t, e, s) => {
+            var a = s(5775).Z, i = a.mixin({toast: !0, position: "top", showConfirmButton: !1, showCloseButton: !0});
+            window.Swal = a, t.exports = {
+                hf: i, hb: function (t) {
+                    a.fire({text: t, confirmButtonText: "OK"})
+                }, fb: function t(e, s, i) {
+                    if (!s) return new Promise((s => t(e, (() => s(!0)), (() => s(!1)))));
+                    a.fire({text: e, showCancelButton: !0, confirmButtonText: "Yes"}).then((t => {
+                        t.value ? s() : i && i()
+                    }))
+                }, kb: a
             }
-
+        }, 9616: (t, e, s) => {
+            var a = s(5097), i = s(1568), n = {};
+            t.exports = {
+                Pf: function (t) {
+                    var e = n[t];
+                    return e || (n[t] = function (t) {
+                        var e = a.sb, s = e / 2, n = function (t, e) {
+                            var s = new PIXI.Graphics;
+                            return s.beginFill(e), s.drawCircle(0, 0, t), s.endFill(), s
+                        }(s, t);
+                        n.position.set(s);
+                        var r = PIXI.RenderTexture.create(e, e);
+                        return i.render(n, r), r
+                    }(t))
+                }, ah: function () {
+                    for (var t in n) n[t].destroy(!0), delete n[t]
+                }
+            }
+        }, 1601: (t, e, s) => {
+            var a = s(9616), i = s(9539), n = s(1825);
+            t.exports = {Bf: a, Qf: i, vd: n}
+        }, 9539: (t, e, s) => {
+            var a = s(5097), i = s(1568), n = {};
+            t.exports = {
+                Pf: function (t) {
+                    var e = n[t];
+                    return e || (n[t] = function (t) {
+                        var e = a.sb, s = e / 2, n = function (t, e) {
+                            var s = new PIXI.Graphics;
+                            return s.beginFill(e), s.drawRect(-t, -t, 2 * t, 2 * t), s.endFill(), s
+                        }(s, t);
+                        n.position.set(s);
+                        var r = PIXI.RenderTexture.create(e, e);
+                        return i.render(n, r), r
+                    }(t))
+                }, ah: function () {
+                    for (var t in n) n[t].destroy(!0), delete n[t]
+                }
+            }
+        }, 1825: (t, e, s) => {
+            var a = s(1568), i = 200, n = PIXI.RenderTexture.create(i, i), r = Promise.resolve();
+            t.exports = {
+                Pf: function () {
+                    return n
+                }, ud: async function (t) {
+                    await r, r = new Promise((async e => {
+                        var s = await fetch(t, {mode: "cors"}).then((t => t.blob())).then((t => createImageBitmap(t))),
+                            r = PIXI.Sprite.from(s);
+                        r.width = r.height = i, a.render(r, n, !0), r.destroy(!0), e()
+                    }))
+                }
+            }
+        }, 5898: (t, e, s) => {
+            s.r(e);
+            var a = s(2934), i = s.n(a), n = s(2228), r = s.n(n), o = function () {
+                var t = this, e = t._self._c;
+                return e("transition", {attrs: {name: t.lk || t.qa.Vd ? "" : "menu"}}, [e("div", {attrs: {id: "main-container"}}, [e("div", {staticClass: "bar"}, [e("div", {attrs: {id: "vanis-io_728x90"}})]), t._v(" "), e("servers", {staticClass: "fade-box two"}), t._v(" "), e("player-container", {staticClass: "fade-box two"}), t._v(" "), e("account", {staticClass: "fade-box"}), t._v(" "), e("customization", {staticClass: "fade-box"})], 1)])
+            };
+            o._withStripped = !0;
             var l = function () {
-                var e = this,
-                    t = e.$createElement,
-                    s = e._self._c || t;
-                return s("div", {
-                    attrs: {
-                        id: "tab-menu"
-                    }
-                }, [s("div", {
-                    staticClass: "tabs"
-                }, e._l(e.regionCodes, function (t, i) {
-                    return s("div", {
-                        key: i,
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "tab-menu"}, [e("div", {staticClass: "tabs"}, t._l(t.mk, (function (s, a) {
+                    return e("div", {
+                        key: a,
                         staticClass: "tab",
-                        attrs: {
-                            tip: e.tipsRegions[i]
-                        },
-                        class: {
-                            active: e.selectedRegion === t
-                        },
+                        class: {active: t.nk === s},
+                        attrs: {tip: t.pk[a]},
                         on: {
-                            click: function () {
-                                return e.selectRegion(t)
+                            click: function (e) {
+                                return t.qk(s)
                             }
                         }
-                    }, [e._v("\n        " + e._s(t) + "\n    ")])
-                }), 0), e._v(" "), s("div", {
+                    }, [t._v("\r\n            " + t._s(s) + "\r\n        ")])
+                })), 0), t._v(" "), e("div", {
                     staticClass: "server-list",
-                    class: {
-                        "cursor-loading": e.connectWait
+                    class: {"cursor-loading": t.rk}
+                }, [e("div", {
+                    staticClass: "server-list-item open-lobbies",
+                    class: {active: null != t.Cg.Bg},
+                    attrs: {tip: "Create your own or join someone else's server"},
+                    on: {
+                        click: function (e) {
+                            return t.sk()
+                        }
                     }
-                }, e._l(e.regionServers, function (t, i) {
-                    return s("div", {
-                        key: i,
-                        staticClass: "server-list-wrapper",
-                    }, [
-                        s("div", {
-                            staticClass: "server-list-item",
-                            class: {
-                                active: e.gameState.connectionUrl === t.url
-                            },
-                            on: {
-                                click: function () {
-                                    return e.connect(t);
-                                }
+                }, [t._m(0)]), t._v(" "), t.tk ? e("div", {
+                    staticClass: "server-list-item", on: {
+                        click: function (e) {
+                            return t.uk()
+                        }
+                    }
+                }, [t._m(1), t._v(" "), t.vk && !t.wk ? e("div", {
+                    staticClass: "live-marker-wrapper",
+                    staticStyle: {"margin-right": "7px"}
+                }, [e("span", {staticClass: "live-marker"}, [t._v("LIVE")])]) : t._e(), t._v(" "), t.wk ? e("i", {staticClass: "fas fa-chevron-up"}) : e("i", {staticClass: "fas fa-chevron-down"})]) : t._e(), t._v(" "), t._l(t.xk, (function (s, a) {
+                    return e("div", {
+                        key: a,
+                        staticClass: "server-list-item",
+                        class: {active: t.qa.vf === s.url},
+                        on: {
+                            click: function (e) {
+                                return t.ki(s)
                             }
-                        }, [
-                            s("div", {
-                                staticClass: "server-name"
-                            }, [e._v(e._s(t.name))]),
-                            s("div", {
-                                staticClass: "player-slots"
-                            }, [
-                                s("span", {}, [e._v(e._s(t.players))]),
-                                e._v(" / "),
-                                s("span", {}, [e._v(e._s(t.slots))])
-                            ])
-                        ]),
-                        s("div", {
-                            staticClass: "server-list-players",
-                            class: {
-                                "server-visible-list": e.gameState.connectionUrl === t.url
-                            },
-                            on: {
-                                click: function () {
-                                    showPlayerList(e.gameState.connectionUrl, t.name, t.players, t.slots)
-                                }
-                            }
-                        }, [
-                            s("i", {
-                                staticClass: "fas fa-users"
-                            })
-                        ])
-                    ]);
-                }), 0)])
+                        }
+                    }, [e("div", {staticClass: "server-name"}, [t._v(t._s(s.name))]), t._v(" "), null == s.live ? e("div", [t._v(t._s(s.players) + " / " + t._s(s.slots))]) : !0 === s.live ? e("div", {staticClass: "live-marker-wrapper"}, [e("span", {staticClass: "live-marker"}, [t._v("LIVE")])]) : t._e()])
+                }))], 2)])
             };
             l._withStripped = !0;
-            var c = s(19),
-                h = s(1),
-                d = s(5),
-                {
-                    noop: p
-                } = s(17),
-                u = {
-                    Tournament: 1,
-                    FFA: 2,
-                    Instant: 3,
-                    Gigasplit: 4,
-                    Megasplit: 5,
-                    Crazy: 6,
-                    "Self-Feed": 7,
-                    Scrimmage: 8
-                };
+            var c = s(1050), u = s.n(c), h = s(1620), d = s(3117), {R: p} = s(3658);
 
-            function g(e, t) {
-                var s = (u[e.mode] || 99) - (u[t.mode] || 99);
-                return 0 !== s ? s : e.name.localeCompare(t.name, "en", {
-                    numeric: !0,
-                    ignorePunctuation: !0
-                })
+            function v(t, e) {
+                var s = (t.index || 99) - (e.index || 99);
+                return 0 !== s ? s : t.name.localeCompare(e.name, "en", {numeric: !0, ignorePunctuation: !0})
             }
 
-            function A(e) {
-                if (e.region) return e.region.toUpperCase();
-                var t = e.url.toLowerCase().match(/game-([a-z]{2})/);
-                return t ? t[1].toUpperCase() : ""
-            }
-
-            var m, v = (s(166), s(0)),
-                f = Object(v.a)({
-                    data: () => ({
-                        lastServerListReloadTime: 0,
-                        regionCodes: ["EU", "NA", "AS"],
-                        tipsRegions: ["Falkenstein, Saxony, Germany", "Dallas, Texas, United States", "Osaka Prefecture, Japan"],
-                        connectWait: 0,
-                        gameState: h.state,
-                        selectedRegion: "",
-                        error: null,
-                        servers: []
-                    }),
-                    created() {
-                        h.events.$on("reconnect-server", () => this.connect(this.gameState.selectedServer)), h.events.$on("menu-opened", this.reloadServers), h.events.$on("every-minute", this.reloadServers), this.loadServers(), this.getRegionCode(e => {
-                            e || (e = "EU"), this.regionCodes.includes(e) || (e = "EU"), this.selectRegion(e)
-                        })
-                    },
-                    computed: {
-                        regionServers: function () {
-                            var e = this.selectedRegion.toUpperCase();
-                            return this.servers.filter(t => {
-                                var s = A(t);
-                                return !s || s === e
-                            })
-                        }
-                    },
-                    methods: {
-                        connectEmptyFFA() {
-                            var e = this.regionServers.filter(e => "FFA" === e.mode).sort((e, t) => e.currentPlayers - t.currentPlayers);
-                            if (!e.length) return !1;
-                            this.connect(e[0])
-                        },
-                        selectRegion(e) {
-                            localStorage.regionCode = e, this.selectedRegion = e
-                        },
-                        getRegionCode(e) {
-                            var t = localStorage.regionCode;
-                            t ? e(t) : c.get("https://ipapi.co/json").then(t => {
-                                e(t.data.continent_code)
-                            }).catch(() => e(null))
-                        },
-                        connect(e) {
-                            var t;
-                            this.connectWait || (this.connectWait++, d.toast.close(), this.checkBadSkinUrl(), this.gameState.selectedServer = {
-                                url: e.url,
-                                region: A(e),
-                                name: e.name,
-                                slots: e.maxPlayers || e.slots,
-                                checkInUrl: e.checkInUrl
-                            }, t = e, h.connection.open(t.url), setTimeout(() => this.connectWait--, 3200))
-                        },
-                        checkBadSkinUrl() {
-                            var e = document.getElementById("skinurl").value;
-                            e && /^https:\/\/[a-z0-9_-]+.vanis\.io\/[./a-z0-9_-]+$/i.test(e)
-                        },
-                        reloadServers() {
-                            h.app.showMenu && Date.now() > this.lastServerListReloadTime + 6e4 && this.loadServers()
-                        },
-                        loadServers(e) {
-                            e = e || p, this.lastServerListReloadTime = Date.now(), c.get("https://vanis.io/gameservers.json").then(t => {
-                                var s = t.data.sort(g);
-                                window.extraServers.forEach(e => {
-                                    s.unshift(e)
-                                }), localStorage.catchedServers = JSON.stringify(s), m = s, this.servers = s, this.error = null, e(!0)
-                            }).catch(t => {
-                                localStorage.catchedServers ? (m = this.servers = JSON.parse(localStorage.catchedServers), this.error = null, e(!0)) : (this.servers = m || [], this.error = t, e(!1))
-                            })
+            const f = {
+                data() {
+                    var t = "true" === localStorage.showTourneyServers || !1;
+                    return {
+                        yk: 0,
+                        mk: ["EU", "NA", "AS"],
+                        pk: ["Falkenstein, Saxony, Germany", "Dallas, Texas, United States", "Osaka Prefecture, Japan"],
+                        rk: 0,
+                        qa: h.ra,
+                        Cg: h.Cg,
+                        nk: "",
+                        Md: null,
+                        zk: [],
+                        tk: !1,
+                        vk: !1,
+                        wk: t
+                    }
+                }, computed: {
+                    xk: function () {
+                        var t = this.nk.toUpperCase();
+                        return this.zk.filter((e => !(-2 === e.index && !this.wk) && (!e.region || e.region === t)))
+                    }
+                }, methods: {
+                    uk() {
+                        localStorage.showTourneyServers = this.wk = !this.wk
+                    }, qk(t) {
+                        localStorage.regionCode = t, this.nk = t
+                    }, ki(t) {
+                        this.rk || (this.rk++, d.hf.close(), this.Ak(), this.qa.ta = {
+                            url: t.url,
+                            region: t.region,
+                            name: t.name,
+                            slots: t.slots
+                        }, h.Cg.Dg && (h.Cg.Dg = !1, h.ji.li(), h.eb.pf()), h.eb.mf(t.url), setTimeout((() => this.rk--), 1200))
+                    }, sk() {
+                        this.rk || (null != u().We ? (this.rk++, h.R.$emit(p.Eg, "lobby"), setTimeout((() => this.rk--), 1200)) : d.hb("You must be logged in to join lobbies"))
+                    }, Ak() {
+                        var t = document.getElementById("skinurl").value;
+                        t && (/^https:\/\/[a-z0-9_-]+.vanis\.io\/[./a-z0-9_-]+$/i.test(t) || d.hf.fire({
+                            type: "error",
+                            title: "Invalid skin url! Use https://skins.vanis.io",
+                            timer: 5e3
+                        }))
+                    }, async Bk(t) {
+                        if ((t || h.Vg.showMenu) && (t || !(Date.now() <= this.yk + 6e4))) {
+                            this.yk = Date.now();
+                            var e = await fetch("https://vanis.io/gameservers.json");
+                            if (!e.ok) return this.Md = `Failed fetching servers: ${e.status}`;
+                            var s = await e.text();
+                            if (0 === s.length) return this.Md = "Failed fetching servers";
+                            try {
+                                var a = JSON.parse(s)
+                            } catch (t) {
+                                return this.Md = "Failed fetching servers"
+                            }
+                            this.zk = a.sort(v);
+                            var i = a.filter((t => -2 === t.index));
+                            this.tk = i.length > 0, this.vk = i.filter((t => t.live)).length > 0, this.Md = null
                         }
                     }
-                }, l, [], !1, null, "0647fbb0", null);
-            f.options.__file = "src/components/servers.vue";
-            var C = f.exports,
-                y = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        attrs: {
-                            id: "player-container"
+                }, created() {
+                    h.R.$on(p.jf, (() => this.ki(this.qa.ta))), h.R.$on(p.bh, (t => t && this.Bk())), h.R.$on(p.qh, this.Bk), this.Bk(!0), async function () {
+                        if (localStorage.regionCode) return localStorage.regionCode;
+                        var t = await fetch("https://ipapi.co/json");
+                        return t.ok ? (await t.json()).continent_code : null
+                    }().then((t => {
+                        t && this.mk.includes(t) || (t = this.mk[0]), this.qk(t)
+                    }))
+                }
+            }, m = f;
+            var _ = s(1900);
+            const g = (0, _.Z)(m, l, [function () {
+                var t = this._self._c;
+                return t("div", {staticClass: "server-name"}, [t("i", {staticClass: "fas fa-plus"}), this._v(" Lobbies")])
+            }, function () {
+                var t = this._self._c;
+                return t("div", {staticClass: "server-name"}, [t("i", {staticClass: "fas fa-trophy"}), this._v(" Tournaments")])
+            }], !1, null, "1f0baf2d", null).exports;
+            var w = function () {
+                var t = this, e = t._self._c;
+                return e("div", {attrs: {id: "player-container"}}, [e("div", {staticClass: "tabs"}, [e("i", {
+                    staticClass: "tab fas fa-cog",
+                    attrs: {tip: "Settings"},
+                    on: {
+                        click: function (e) {
+                            return t.Ck("settings")
                         }
-                    }, [s("div", {
-                        staticClass: "tabs"
-                    }, [s("i", {
-                        staticClass: "tab fas fa-cog",
-                        attrs: {
-                            tip: "Settings"
-                        },
-                        on: {
-                            click: function () {
-                                showDeltaSettings = 'settings';
-                                return e.openModal("settings")
-                            }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "tab fas fa-palette",
+                    attrs: {tip: "Theming"},
+                    on: {
+                        click: function (e) {
+                            return t.Ck("theming")
                         }
-                    }), e._v(" "), s("i", {
-                        staticClass: "tab fas fa-palette",
-                        attrs: {
-                            tip: "Theming"
-                        },
-                        on: {
-                            click: function () {
-                                return e.openModal("theming")
-                            }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "tab far fa-keyboard",
+                    attrs: {tip: "Hotkeys"},
+                    on: {
+                        click: function (e) {
+                            return t.Ck("hotkeys")
                         }
-                    }), e._v(" "), s("i", {
-                        staticClass: "tab fas fa-wrench",
-                        attrs: {
-                            tip: "Delta settings"
-                        },
-                        on: {
-                            click: function () {
-                                showDeltaSettings = 'delta';
-                                return e.openModal("delta")
-                            }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "tab fas fa-film",
+                    attrs: {tip: "Replays"},
+                    on: {
+                        click: function (e) {
+                            return t.Ck("replays3")
                         }
-                    }), e._v(" "), s("i", {
-                        staticClass: "tab far fa-keyboard",
-                        attrs: {
-                            tip: "Hotkeys"
-                        },
-                        on: {
-                            click: function () {
-                                return e.openModal("hotkeys")
-                            }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "tab fas fa-clipboard-list",
+                    attrs: {tip: "Player leaderboards"},
+                    on: {
+                        click: function (e) {
+                            return t.Ck("meta-leaderboard")
                         }
-                    }), e._v(" "), s("i", {
-                        staticClass: "tab fas fa-film",
-                        attrs: {
-                            tip: "Replays"
-                        },
-                        on: {
-                            click: function () {
-                                return e.openModal("replays3")
-                            }
+                    }
+                })]), t._v(" "), e("div", {attrs: {id: "player-data"}}, [t._m(0), t._v(" "), e("div", {staticClass: "row"}, [e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Dk,
+                        expression: "nickname_"
+                    }],
+                    attrs: {
+                        id: "nickname",
+                        type: "text",
+                        spellcheck: "false",
+                        placeholder: "Nickname",
+                        maxlength: "15"
+                    },
+                    domProps: {value: t.Dk},
+                    on: {
+                        change: t.Ek, input: function (e) {
+                            e.target.composing || (t.Dk = e.target.value)
                         }
-                    })]), e._v(" "), s("div", {
-                        attrs: {
-                            id: "player-data"
+                    }
+                }), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Fk,
+                        expression: "teamtag_"
+                    }],
+                    staticClass: "confidential",
+                    attrs: {
+                        id: "teamtag",
+                        type: "text",
+                        spellcheck: "false",
+                        placeholder: "Tag",
+                        maxlength: "15",
+                        tip: "You only see and chat with players in same tag"
+                    },
+                    domProps: {value: t.Fk},
+                    on: {
+                        change: t.Gk, input: function (e) {
+                            e.target.composing || (t.Fk = e.target.value)
                         }
-                    }, [e._m(0), e._v(" "), s("div", {
+                    }
+                })]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Hk,
+                        expression: "skinUrl_"
+                    }],
+                    staticClass: "confidential",
+                    attrs: {
+                        id: "skinurl",
+                        type: "text",
+                        spellcheck: "false",
+                        placeholder: "https://skins.vanis.io/s/",
+                        maxlength: "31"
+                    },
+                    domProps: {value: t.Hk},
+                    on: {
+                        focus: function (t) {
+                            return t.target.select()
+                        }, change: t.Ik, input: function (e) {
+                            e.target.composing || (t.Hk = e.target.value)
+                        }
+                    }
+                }), t._v(" "), e("div", {attrs: {id: "game-buttons"}}, [e("button", {
+                    attrs: {
+                        id: "play-button",
+                        disabled: !t.qa.jg || t.qa.kg || t.qa.mg
+                    }, on: {click: t.bb}
+                }, [t.qa.mg ? e("i", {staticClass: "fas fa-sync fa-spin"}) : [t._v(t._s(t.qa.lg))]], 2), t._v(" "), e("button", {
+                    attrs: {
+                        id: "spec-button",
+                        tip: "Spectate",
+                        disabled: !t.qa.jg || t.qa.Vd || t.qa.mg
+                    }, on: {click: t.Ud}
+                }, [e("i", {staticClass: "fa fa-eye"})])])]), t._v(" "), "settings" === t.Jk ? e("modal", {
+                    on: {
+                        close: function (e) {
+                            return t.Kk()
+                        }
+                    }
+                }, [e("settings")], 1) : t._e(), t._v(" "), "theming" === t.Jk ? e("modal", {
+                    on: {
+                        close: function (e) {
+                            return t.Kk()
+                        }
+                    }
+                }, [e("theming")], 1) : t._e(), t._v(" "), "hotkeys" === t.Jk ? e("modal", {
+                    on: {
+                        close: function (e) {
+                            return t.Kk()
+                        }
+                    }
+                }, [e("hotkeys")], 1) : t._e(), t._v(" "), "replays3" === t.Jk ? e("modal", {
+                    staticStyle: {
+                        "margin-left": "-316px",
+                        width: "962px"
+                    }, on: {
+                        close: function (e) {
+                            return t.Kk()
+                        }
+                    }
+                }, [e("replays3")], 1) : t._e(), t._v(" "), "meta-leaderboard" === t.Jk ? e("modal", {
+                    on: {
+                        close: function (e) {
+                            return t.Kk()
+                        }
+                    }
+                }, [e("meta-leaderboard")], 1) : t._e(), t._v(" "), "lobby" === t.Jk ? e("modal", {
+                    staticStyle: {
+                        "margin-left": "-316px",
+                        width: "962px"
+                    }, on: {
+                        close: function (e) {
+                            return t.Kk()
+                        }
+                    }
+                }, [e("lobby")], 1) : t._e()], 1)
+            };
+            w._withStripped = !0;
+            var y = s(3117), b = s.n(y), C = function () {
+                var t = this, e = t._self._c;
+                return e("div", {attrs: {id: "hotkey-container"}}, [e("div", {staticClass: "hotkeys"}, t._l(t.Lk, (function (s, a) {
+                    return e("div", {
+                        key: a,
                         staticClass: "row"
-                    }, [s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.nickname,
-                            expression: "nickname"
-                        }],
-                        staticStyle: {
-                            flex: "2",
-                            "min-width": "1px"
-                        },
+                    }, [e("span", {staticClass: "action"}, [t._v(t._s(a))]), t._v(" "), e("span", {
+                        staticClass: "bind",
                         attrs: {
-                            id: "nickname",
-                            type: "text",
-                            spellcheck: "false",
-                            placeholder: "Nickname",
-                            maxlength: "15"
-                        },
-                        domProps: {
-                            value: e.nickname
+                            tabindex: "0",
+                            tip: "Click to change. ESCAPE cancels changing, DELETE removes hotkey bind. You can use any mouse button"
                         },
                         on: {
-                            change: e.onNicknameChange,
-                            input: function (t) {
-                                const n = document.querySelector(".sdn1");
-                                const d = document.querySelector(".sdn2");
-                                n.textContent = t.target.value;
-                                d.style.color = n.textContent === d.textContent ? n.style.color : 'white';
-                                d.style.fontStyle = n.textContent === d.textContent ? n.style.fontStyle : 'normal';
-                                t.target.composing || (e.nickname = t.target.value);
+                            mousedown: function (e) {
+                                return t.Mk(e, s)
+                            }, keydown: function (e) {
+                                return e.preventDefault(), t.Nk(e, s)
                             }
                         }
-                    }), e._v(" "), s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.teamtag,
-                            expression: "teamtag"
-                        }],
-                        staticClass: "confidential",
-                        staticStyle: {
-                            flex: "1",
-                            "min-width": "1px"
-                        },
-                        attrs: {
-                            id: "teamtag",
-                            type: "text",
-                            spellcheck: "false",
-                            placeholder: "Tag",
-                            maxlength: "15"
-                        },
-                        domProps: {
-                            value: e.teamtag
-                        },
-                        on: {
-                            change: e.onTeamTagChange,
-                            input: function (t) {
-                                t.target.composing || (e.teamtag = t.target.value)
-                            }
-                        }
-                    })]), e._v(" "), s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.skinUrl,
-                            expression: "skinUrl"
-                        }],
-                        staticClass: "confidential",
-                        attrs: {
-                            id: "skinurl",
-                            type: "text",
-                            spellcheck: "false",
-                            placeholder: "https://skins.vanis.io/s/"
-                        },
-                        domProps: {
-                            value: e.skinUrl
-                        },
-                        on: {
-                            focus: function (e) {
-                                return e.target.select()
-                            },
-                            change: e.onSkinUrlChange,
-                            input: function (t) {
-                                t.target.composing || (e.skinUrl = t.target.value)
-                            }
-                        }
-                    }), e._v(" "), s("div", {
-                        attrs: {
-                            id: "game-buttons"
-                        }
-                    }, [s("button", {
-                        attrs: {
-                            id: "play-button",
-                            disabled: !e.gameState.allowed || e.gameState.playButtonDisabled || e.gameState.deathScreen || e.gameState.deathDelay
-                        },
-                        on: {
-                            click: e.play
-                        }
-                    }, [e.gameState.deathDelay ? s("i", {
-                        staticClass: "fas fa-sync fa-spin"
-                    }) : [e._v(e._s(e.gameState.playButtonText))]], 2), e._v(" "), s("button", {
-                        attrs: {
-                            id: "spec-button",
-                            disabled: !e.gameState.allowed || 0 != e.gameState.lifeState || e.gameState.deathDelay
-                        },
-                        on: {
-                            click: e.spectate
-                        }
-                    }, [s("i", {
-                        staticClass: "fa fa-eye"
-                    })])])]), e._v(" "), "settings" === e.activeModal ? s("modal", {
-                        on: {
-                            close: function () {
-                                return e.closeModal()
-                            }
-                        }
-                    }, [s("settings")], 1) : e._e(), e._v(" "), "theming" === e.activeModal ? s("modal", {
-                        on: {
-                            close: function () {
-                                return e.closeModal()
-                            }
-                        }
-                    }, [s("theming")], 1) : e._e(), e._v(" "), "delta" === e.activeModal ? s("modal", {
-                        on: {
-                            close: function () {
-                                return e.closeModal()
-                            }
-                        }
-                    }, [s("delta")], 1) : e._e(), e._v(" "), "hotkeys" === e.activeModal ? s("modal", {
-                        on: {
-                            close: function () {
-                                return e.closeModal()
-                            }
-                        }
-                    }, [s("hotkeys")], 1) : e._e(), e._v(" "), "replays3" === e.activeModal ? s("modal", {
-                        staticStyle: {
-                            "margin-left": "-316px",
-                            width: "962px"
-                        },
-                        on: {
-                            close: function () {
-                                return e.closeModal()
-                            }
-                        }
-                    }, [s("replays3")], 1) : e._e()], 1)
-                };
-            y._withStripped = !0;
-            var w = s(115),
-                I = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        staticClass: "container"
-                    }, [s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n            Renderer\n            "), e.isWebGLSupported ? s("span", {
-                        staticClass: "right silent"
-                    }, [e._v("")]) : e._e()]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.isWebGLSupported,
-                            checked: e.useWebGL
-                        },
-                        on: {
-                            change: function (t) {
-                                e.change("useWebGL", t), e.promptRestart()
-                            }
-                        }
-                    }, [e._v("\n            Use GPU rendering")]), e._v(" "), s("div", {
-                        staticClass: "slider-option",
-                        attrs: {
-                            tip: "Lower for performance, higher for sharpness"
-                        },
-                    }, [e._v("\n            Renderer resolution "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s((100 * e.gameResolution).toFixed(0)) + "%")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0.1",
-                            max: "2.5",
-                            step: "0.1"
-                        },
-                        domProps: {
-                            value: e.gameResolution
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("gameResolution", t)
-                            },
-                            change: function () {
-                                return e.promptRestart()
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "slider-option",
-                        attrs: {
-                            tip: "Small text is hidden for performance"
-                        },
-                    }, [e._v("\n            Text hiding threshold "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.smallTextThreshold) + "px")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "10",
-                            max: "60",
-                            step: "5"
-                        },
-                        domProps: {
-                            value: e.smallTextThreshold
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("smallTextThreshold", t)
-                            }
-                        }
-                    })])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Dual options\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.dualActive
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.dualActive
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("dualActive", t)
-                            }
-                        }
-                    }), e._v("Dual active cell: " + e._s(e.showDualboxMeaning))]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
-                    }, [e._v("\n            Dual active cell border size "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.dualActiveCellBorderSize) + "px")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "1",
-                            max: "100",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.dualActiveCellBorderSize
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("dualActiveCellBorderSize", t)
-                            }
-                        }
-                    })]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.dualAutorespawn
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("dualAutorespawn", t)
-                            }
-                        }
-                    }, [e._v("Dual auto respawn")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Cell options\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showCellLines
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showCellLines", t)
-                            }
-                        }
-                    }, [e._v("Show cell aim")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showDir
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showDir", t)
-                            }
-                        }
-                    }, [e._v("Show cell direction")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showTag
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showTag", t)
-                            }
-                        }
-                    }, [e._v("Show teams")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Chat\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showTimeMessage
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showTimeMessage", t), showTimeMessageSettings = t
-                            }
-                        }
-                    }, [e._v("Show message time")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.rainbowColorTimeMessage
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageSettings = t
-                            }
-                        }
-                    }, [e._v("Rainbow color message time")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        HUD\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.debugStats
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("debugStats", t)
-                            }
-                        }
-                    }, [e._v("Network info")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.clientStats
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("clientStats", t)
-                            }
-                        }
-                    }, [e._v("Client info")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Special\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.playerStats
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("playerStats", t)
-                            }
-                        }
-                    }, [e._v("Player tracker")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Game\n        "), s("span", {
-                        staticClass: "right silent"
-                    }, [e._v(e._s(e.clientHash))])]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.autoZoom,
-                            tip: "Zooms out automatically with more mass you have"
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("autoZoom", t)
-                            }
-                        }
-                    }, [e._v("Auto zoom")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.rememeberEjecting
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("rememeberEjecting", t)
-                            }
-                        }
-                    }, [e._v("Remember ejecting")]), e._v(" "), s("div", {
-                        staticClass: "silent"
-                    }, e.rememeberEjecting ? [e._v("After changing tab, you "), s("b", [e._v("keep")]), e._v(" ejecting")] : [e._v("After changing tab, you "), s("b", [e._v("stop")]), e._v(" ejecting")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.autoRespawn,
-                            tip: "To prevent AFK, you must respawn manually after 1 minute"
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("autoRespawn", t)
-                            }
-                        }
-                    }, [e._v("Auto respawn")]), e._v(" "), s("div", {
-                        staticClass: "slider-option",
-                        attrs: {
-                            tip: "Lower responsive, higher is smooth"
-                        }
-                    }, [e._v("\n                Draw delay "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.drawDelay) + "ms")]), e._v(" "), s("input", {
-                        staticClass: "slider draw-delay",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "1000",
-                            step: "10"
-                        },
-                        domProps: {
-                            value: e.drawDelay
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("drawDelay", t)
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "slider-option",
-                        attrs: {
-                            tip: "How fast camera follows you moving"
-                        }
-                    }, [e._v("\n            Camera panning delay "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.cameraMoveDelay) + "ms")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "1500",
-                            step: "10"
-                        },
-                        domProps: {
-                            value: e.cameraMoveDelay
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cameraMoveDelay", t)
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
-                    }, [e._v("\n            Camera zooming delay "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.cameraZoomDelay) + "ms")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "1500",
-                            step: "10"
-                        },
-                        domProps: {
-                            value: e.cameraZoomDelay
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cameraZoomDelay", t)
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
-                    }, [e._v("\n            Scroll zoom rate "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s((e.cameraZoomSpeed / 10 * 100).toFixed(0)) + "%")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "1",
-                            max: "25",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.cameraZoomSpeed
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cameraZoomSpeed", t)
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
-                    }, [e._v("\n            Cells transparency "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(100 * e.gameAlpha) + "%")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0.1",
-                            max: "1",
-                            step: "0.05"
-                        },
-                        domProps: {
-                            value: e.gameAlpha
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("gameAlpha", t)
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
-                    }, [e._v("\n            Replay duration "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.replayDuration) + " seconds")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "1",
-                            max: "15",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.replayDuration
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("replayDuration", t)
-                            }
-                        }
-                    })]), e._v(" "), s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.showReplaySaved
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.showReplaySaved
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("showReplaySaved", t)
-                            }
-                        }
-                    }), e._v('\n            "Replay saved" ' + e._s(e.showReplaySavedMeaning) + "\n        ")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n            Cells\n        ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.showNames
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.showNames
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("showNames", t)
-                            }
-                        }
-                    }), e._v("\n            Show " + e._s(e.showNamesMeaning) + " names\n            ")]), e._v(" "), s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.showSkins
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.showSkins
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("showSkins", t)
-                            }
-                        }
-                    }), e._v("\n            Show " + e._s(e.showSkinsMeaning) + " skins\n        ")]), e._v(" "), s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.showMass
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.showMass
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("showMass", t)
-                            }
-                        }
-                    }), e._v("\n            Show " + e._s(e.showMassMeaning) + " mass\n        ")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showOwnName
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showOwnName", t)
-                            }
-                        }
-                    }, [e._v("Show my name")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showOwnSkin
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showOwnSkin", t)
-                            }
-                        }
-                    }, [e._v("Show my skin")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showOwnMass
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showOwnMass", t)
-                            }
-                        }
-                    }, [e._v("Show my mass")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showCrown
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showCrown", t)
-                            }
-                        }
-                    }, [e._v("Show crown")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.foodVisible
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("foodVisible", t)
-                            }
-                        }
-                    }, [e._v("Show food")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.eatAnimation
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("eatAnimation", t)
-                            }
-                        }
-                    }, [e._v("Show eat animation")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showHud
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showHud", t)
-                            }
-                        }
-                    }, [e._v("HUD")])], 1), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showLeaderboard
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showLeaderboard", t)
-                            }
-                        }
-                    }, [e._v("Show leaderboard")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showServerName
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showServerName", t)
-                            }
-                        }
-                    }, [e._v("Leaderboard: Server name")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showChat
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showChat", t)
-                            }
-                        }
-                    }, [e._v("Show chat")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud || !e.showChat,
-                            checked: e.showChatToast
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showChatToast", t)
-                            }
-                        }
-                    }, [e._v("Show chat as popups")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.minimapEnabled
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("minimapEnabled", t)
-                            }
-                        }
-                    }, [e._v("Show minimap")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.minimapLocations
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("minimapLocations", t)
-                            }
-                        }
-                    }, [e._v("Show minimap locations")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showFPS
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showFPS", t)
-                            }
-                        }
-                    }, [e._v("Stats: FPS")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showPing
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showPing", t)
-                            }
-                        }
-                    }, [e._v("Stats: Ping")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showPlayerMass
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showPlayerMass", t)
-                            }
-                        }
-                    }, [e._v("Stats: Current mass")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showPlayerScore
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showPlayerScore", t)
-                            }
-                        }
-                    }, [e._v("Stats: Score")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showCellCount
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showCellCount", t)
-                            }
-                        }
-                    }, [e._v("Stats: Cell count")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showClock
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showClock", t)
-                            }
-                        }
-                    }, [e._v("Minimap stats: System time")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showSessionTime
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showSessionTime", t)
-                            }
-                        }
-                    }, [e._v("Minimap stats: Session time")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showPlayerCount
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showPlayerCount", t)
-                            }
-                        }
-                    }, [e._v("Minimap stats: Players in server")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showSpectators
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showSpectators", t)
-                            }
-                        }
-                    }, [e._v("Minimap stats: Spectators")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.showHud,
-                            checked: e.showRestartTiming
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showRestartTiming", t)
-                            }
-                        }
-                    }, [e._v("Minimap stats: Server restart time")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Chat\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("div", {
-                        staticClass: "row"
-                    }, [e._v("\n                You can right-click name in chat to block them until server restart\n            ")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.showBlockedMessageCount
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showBlockedMessageCount", t)
-                            }
-                        }
-                    }, [e._v("\n            Show blocked message count")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.filterChatMessages
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("filterChatMessages", t)
-                            }
-                        }
-                    }, [e._v("\n            Filter profanity")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.clearChatMessages
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("clearChatMessages", t)
-                            }
-                        }
-                    }, [e._v("\n            Clear on disconnect")])], 1)]), e._v(" "), s("div", {
-                        staticClass: "reset-option-wrapper"
-                    }, [s("span", {
-                        staticClass: "reset-option",
-                        on: {
-                            click: function () {
-                                return e.confirmReset()
-                            }
-                        }
-                    }, [s("i", {
-                        staticClass: "fa fa-undo"
-                    }), e._v(" Reset\n        ")])])])
-                };
+                    }, [t._v("\r\n                " + t._s(t.Ok[s]) + "\r\n            ")])])
+                })), 0), t._v(" "), e("div", {staticClass: "footer"}, [e("span", {
+                    staticClass: "reset-button2",
+                    on: {click: t.Pk}
+                }, [e("i", {staticClass: "fa fa-undo"}), t._v(" Reset\r\n        ")])])])
+            };
+            C._withStripped = !0;
+            var k = s(6470), S = s(3117);
+            const x = {
+                data: () => ({
+                    Lk: {
+                        Feed: "feed",
+                        "Feed macro": "feedMacro",
+                        Split: "split",
+                        Doublesplit: "splitx2",
+                        Triplesplit: "splitx3",
+                        "Quad split": "splitMax",
+                        "Split 32": "split32",
+                        "Split 64": "split64",
+                        "Split 128": "split128",
+                        "Split 256": "split256",
+                        "Diagonal linesplit": "linesplit",
+                        "Freeze mouse": "freezeMouse",
+                        "Lock linesplit": "lockLinesplit",
+                        "Stop movement": "stopMovement",
+                        Respawn: "respawn",
+                        "Toggle auto respawn": "toggleAutoRespawn",
+                        "Toggle skins": "toggleSkins",
+                        "Toggle names": "toggleNames",
+                        "Toggle food": "toggleFood",
+                        "Toggle mass": "toggleMass",
+                        "Toggle chat": "toggleChat",
+                        "Toggle chat popup": "toggleChatToast",
+                        "Toggle HUD": "toggleHud",
+                        "Spectate lock": "spectateLock",
+                        "Save replay": "saveReplay",
+                        "Zoom level 1": "zoomLevel1",
+                        "Zoom level 2": "zoomLevel2",
+                        "Zoom level 3": "zoomLevel3",
+                        "Zoom level 4": "zoomLevel4",
+                        "Zoom level 5": "zoomLevel5",
+                        "Select player": "selectPlayer"
+                    }, Ok: k.Dh()
+                }), methods: {
+                    Pk() {
+                        S.fb("Are you sure you want to reset all hotkeys?", (() => {
+                            this.Ok = k.Zg()
+                        }))
+                    }, Mk(t, e) {
+                        if (t.target === document.activeElement) {
+                            var s = "MOUSE" + t.button;
+                            k.Ee(e, s) && (t.preventDefault(), this.Ok[e] = s, t.target.blur())
+                        }
+                    }, Nk(t, e) {
+                        var s = k.Gh(t.code);
+                        "ESCAPE" !== s && "ENTER" !== s ? ("DELETE" == s && (s = ""), k.Ee(e, s) && (this.Ok[e] = s, t.target.blur())) : t.target.blur()
+                    }
+                }
+            };
+            const M = (0, _.Z)(x, C, [], !1, null, "6754dc1c", null).exports;
+            var P = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "wrapper"}, [null != t.Cg.Bg ? [e("div", {staticClass: "lobby-options"}, [e("div", {staticClass: "button-row"}, [t.Cg.Dg || null != t.Cg.Ph ? t._e() : e("button", {
+                    staticClass: "server-button",
+                    attrs: {disabled: !t.Cg.Th || t.Qk},
+                    on: {
+                        click: function (e) {
+                            return t.pg()
+                        }
+                    }
+                }, [t._v("\r\n                    Start\r\n                ")]), t._v(" "), t.Cg.Dg || null == t.Cg.Ph ? t._e() : e("button", {
+                    staticClass: "server-button",
+                    on: {
+                        click: function (e) {
+                            return t.Rk()
+                        }
+                    }
+                }, [t._v("\r\n                    Reconnect\r\n                ")]), t._v(" "), t.Cg.Dg ? e("button", {
+                    staticClass: "server-button",
+                    attrs: {disabled: !t.Cg.Th || t.Qk},
+                    on: {
+                        click: function (e) {
+                            return t.ib()
+                        }
+                    }
+                }, [t._v("\r\n                    Stop\r\n                ")]) : t._e(), t._v(" "), e("button", {
+                    staticClass: "button",
+                    on: {
+                        click: function (e) {
+                            return t.Sk()
+                        }
+                    }
+                }, [t._v("Leave lobby")]), t._v(" "), t.Cg.Th ? e("button", {
+                    staticClass: "button",
+                    on: {
+                        click: function (e) {
+                            return t.Tk()
+                        }
+                    }
+                }, [t._v("Delete lobby")]) : t._e()]), t._v(" "), e("lobby-settings", {class: {"panel-disabled": !t.Cg.Th || t.Cg.Dg}})], 1), t._v(" "), e("lobby-teams", {staticClass: "lobby-teams"}), t._v(" "), e("lobby-chat", {staticClass: "lobby-chat"})] : [e("div", {staticClass: "lobby-list"}, [e("lobby-list")], 1), t._v(" "), t._m(0)]], 2)
+            };
+            P._withStripped = !0;
+            var I = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container chat-wrapper"}, [e("div", {staticClass: "message-list"}, [e("div", {
+                    ref: "list",
+                    staticClass: "message-scroll"
+                }, t._l(t.Cg.Zh, (function (t, s) {
+                    return e("chat-message", {key: s, attrs: {gb: t, Uk: t.gi ? "Lobby owner" : ""}})
+                })), 1)]), t._v(" "), e("div", {staticClass: "chat-input"}, [e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Vk,
+                        expression: "inputText_"
+                    }],
+                    ref: "input",
+                    attrs: {
+                        type: "text",
+                        spellcheck: "false",
+                        autocomplete: "off",
+                        maxlength: "100",
+                        tabindex: "-1",
+                        placeholder: "Type your message here"
+                    },
+                    domProps: {value: t.Vk},
+                    on: {
+                        keydown: function (e) {
+                            return !e.type.indexOf("key") && t._k(e.keyCode, "enter", 13, e.key, "Enter") ? null : t.gf()
+                        }, input: function (e) {
+                            e.target.composing || (t.Vk = e.target.value)
+                        }
+                    }
+                })])])
+            };
             I._withStripped = !0;
-            var k = s(1),
-                b = s(4),
-                _ = s(5),
-                S = PIXI.utils.isWebGLSupported(),
-                E = S && b.useWebGL;
+            var T = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    staticClass: "message-row",
+                    class: {toast: t.hf},
+                    style: {backgroundColor: t.oh}
+                }, [t.gb.bi ? e("span", {staticClass: "message-from"}, [e("badges", {
+                    staticClass: "message-from-badges",
+                    attrs: {Ee: t.gb.ai, Uc: 18}
+                }), t._v(" "), e("span", {
+                    staticClass: "message-from-name",
+                    class: {underline: t.gb.gi},
+                    style: {color: t.gb.fi},
+                    attrs: {tip: t.Uk},
+                    on: {click: t.Ud, contextmenu: t.Wk}
+                }, [t._v("\r\n            " + t._s(t.gb.bi) + "\r\n        ")]), t.gb.ai >> 0 & 2147483648 ? t._e() : [t._v(":")]], 2) : t._e(), t._v(" "), e("span", {
+                    staticClass: "message-text",
+                    style: {color: t.gb.di}
+                }, [t._v(t._s(t.gb.ci))])])
+            };
+            T._withStripped = !0;
+            var A = function () {
+                var t = this, e = t._self._c;
+                return t.showArray.length > 0 ? e("span", {staticClass: "badge-list"}, t._l(t.showArray, (function (s, a) {
+                    return e("img", {
+                        key: a,
+                        staticClass: "badge-icon",
+                        class: {dim: !s.Xk, "not-pickable": !s.Yk && t.Yk, pickable: s.Yk},
+                        attrs: {draggable: "false", src: "/img/badge/" + s.Zk + ".png?2", height: t.Uc, tip: s.lb},
+                        on: {
+                            click: function (e) {
+                                return t.al(s.sj)
+                            }
+                        }
+                    })
+                })), 0) : t._e()
+            };
+            A._withStripped = !0;
+            var N = [[4096, "level_100", "Level 100 reached"], [8192, "level_200", "Level 200 reached"], [16384, "level_300", "Level 300 reached"], [268435456, "slb_winner", "Topped season leaderboard"], [33554432, "server_booster", "Discord server booster"], [16777216, "place_contributor_2022", "r/place contributor (2022)"], [67108864, "place_contributor_2023", "r/place contributor (2023)"], [256, "youtuber", "YouTuber"], [1024, "editor", "Editor"], [8, "contributor", "Contributor"], [65536, "ffa_winner", "FFA tournament winner"], [131072, "instant_winner", "Instant tournament winner"], [262144, "gigasplit_winner", "Gigasplit tournament winner"], [524288, "megasplit_winner", "Megasplit tournament winner"], [1048576, "crazy_winner", "Crazy tournament winner"], [2097152, "self-feed_winner", "Self-feed tournament winner"], [16, "organizer", "Official tournament organizer"], [32, "referee", "Official tournament referee"], [4, "skin_mod", "Skin moderator"], [2, "mod", "Moderator"], [1, "admin", "Administrator"], [2147483648, "official", "Official message", !0]];
+            const L = {
+                props: {
+                    Ee: Number,
+                    Yk: {type: Number, default: 0},
+                    bl: Boolean,
+                    Uc: {type: Number, default: 22}
+                }, computed: {
+                    showArray() {
+                        for (var t = [], e = 0; e < N.length; e++) {
+                            var s = !!(this.Ee & N[e][0]), a = !!(this.Yk & N[e][0]),
+                                i = {sj: N[e][0], lb: N[e][2], Zk: N[e][1], Xk: s, Yk: a};
+                            (this.bl && !N[e][3] || s || a) && t.push(i)
+                        }
+                        return t.sort(((t, e) => e.Yk - t.Yk)), t
+                    }
+                }, methods: {
+                    al(t) {
+                        this.Yk & t && this.$emit("input", t)
+                    }
+                }
+            };
+            const D = (0, _.Z)(L, A, [], !1, null, "637ffd77", null).exports, O = {
+                props: {
+                    gb: {type: Object, required: !0},
+                    hf: {type: Boolean, default: !1},
+                    Uk: {type: String, default: ""}
+                }, methods: {
+                    Ud() {
+                        this.$emit("spectate", this.gb.Ga)
+                    }, Wk() {
+                        this.$emit("block", this.gb.Ga)
+                    }
+                }, computed: {
+                    oh() {
+                        if (null != this.gb.ei) return `rgba(${(16711680 & this.gb.ei) >> 16}, ${(65280 & this.gb.ei) >> 8}, ${255 & this.gb.ei}, 0.45)`
+                    }
+                }, components: {badges: D}
+            };
+            const R = (0, _.Z)(O, T, [], !1, null, "084a7fd8", null).exports;
+            var {R: E} = s(3658), U = s(1620);
+            const F = {
+                data: () => ({Cg: U.Cg, Vk: ""}), components: {chatMessage: R}, computed: {
+                    cl() {
+                        return this.Cg.Zh
+                    }
+                }, methods: {
+                    gf() {
+                        var t = this.Vk.trim();
+                        t && U.ji.gf(t), this.Vk = "", this.dl(!0)
+                    }, dl(t = !1) {
+                        var e = this.$refs.list, s = e.scrollHeight - e.clientHeight;
+                        !t && s - e.scrollTop > 30 || this.$nextTick((() => e.scrollTop = e.scrollHeight))
+                    }
+                }, created() {
+                    U.R.$on(E.ii, this.dl), this.$nextTick((() => this.dl(!0)))
+                }, destroyed() {
+                    U.R.$off(E.ii, this.dl)
+                }
+            };
+            const B = (0, _.Z)(F, I, [], !1, null, "f9ee8236", null).exports;
+            var z = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "list-container"}, [e("div", {staticClass: "lobby-list"}, [e("div", {staticClass: "button-row"}, [e("button", {
+                    staticClass: "button",
+                    on: {
+                        click: function (e) {
+                            return t.fl()
+                        }
+                    }
+                }, [t._v("Join private lobby")]), t._v(" "), e("button", {
+                    staticClass: "button",
+                    on: {
+                        click: function (e) {
+                            return t.mi()
+                        }
+                    }
+                }, [t._v("New lobby")])]), t._v(" "), t._l(t.Cg.Qh, (function (s, a) {
+                    return e("div", {
+                        key: a, staticClass: "row", on: {
+                            click: function (e) {
+                                return t.Yd(s.tag)
+                            }
+                        }
+                    }, [e("span", {staticClass: "name"}, [t._v(t._s(s.tag))]), t._v(" "), e("span", {staticClass: "players"}, [e("span", {staticClass: "count"}, [t._v(t._s(s.players))]), t._v(" player" + t._s(1 === s.players ? "" : "s"))]), t._v(" "), s.live ? e("span", {staticClass: "live-marker-wrapper"}, [e("span", {staticClass: "live-marker"}, [t._v("LIVE")])]) : t._e()])
+                }))], 2), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: !t.Cg.Rh,
+                        expression: "!lobbyState_.connected_"
+                    }], staticClass: "lobby-connecting"
+                }, [t.Cg.Sh ? e("span", {staticClass: "warning"}, [t._v("\r\n            " + t._s(t.Cg.Sh) + "\r\n        ")]) : [t._v("\r\n            Connecting to coordinator...\r\n        ")]], 2)])
+            };
+            z._withStripped = !0;
+            var X = s(1620), $ = s(3117);
+            const j = {
+                data: () => ({Cg: X.Cg}), methods: {
+                    Yd(t) {
+                        X.ji.Yd(t)
+                    }, fl() {
+                        $.kb.fire({
+                            text: "Lobby tag",
+                            input: "text",
+                            confirmButtonText: "Join",
+                            showCancelButton: !0
+                        }).then((t => t.value && X.ji.Yd(t.value)))
+                    }, mi() {
+                        $.kb.fire({
+                            text: "Lobby tag",
+                            input: "text",
+                            confirmButtonText: "Create",
+                            showCancelButton: !0
+                        }).then((t => t.value && X.ji.mi(t.value)))
+                    }
+                }
+            };
+            const W = (0, _.Z)(j, z, [], !1, null, "fa675f88", null).exports;
+            var H = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container"}, [e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }
+                    },
+                    model: {
+                        value: t.zg.private, callback: function (e) {
+                            t.$set(t.zg, "private", e)
+                        }, expression: "options_.private"
+                    }
+                }), t._v("\r\n            " + t._s(t.zg.private ? "Private" : "Public") + " lobby\r\n        ")], 1), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "bottom-margin inline-input"}, [e("div", {staticClass: "label"}, [t._v("Tag")]), t._v(" "), e("input", {
+                    class: {confidential: t.zg.private},
+                    attrs: {type: "text", spellcheck: "false", maxlength: "24"},
+                    domProps: {value: t.Cg.Bg},
+                    on: {
+                        change: function (e) {
+                            return t.gl(e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "bottom-margin select-input"}, [e("div", {staticClass: "label"}, [t._v("Region")]), t._v(" "), e("select", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.zg.region,
+                        expression: "options_.region"
+                    }], on: {
+                        change: [function (e) {
+                            var s = Array.prototype.filter.call(e.target.options, (function (t) {
+                                return t.selected
+                            })).map((function (t) {
+                                return "_value" in t ? t._value : t.value
+                            }));
+                            t.$set(t.zg, "region", e.target.multiple ? s : s[0])
+                        }, function (e) {
+                            return t.oi()
+                        }]
+                    }
+                }, [e("option", {attrs: {value: "EU"}}, [t._v("EU")]), t._v(" "), e("option", {attrs: {value: "NA"}}, [t._v("NA")]), t._v(" "), e("option", {
+                    attrs: {
+                        value: "NA",
+                        disabled: ""
+                    }
+                }, [t._v("AS")])])]), t._v(" "), e("div", {staticClass: "bottom-margin select-input"}, [e("div", {staticClass: "label"}, [t._v("Gamemode")]), t._v(" "), e("select", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.zg.mode,
+                        expression: "options_.mode"
+                    }], on: {
+                        change: [function (e) {
+                            var s = Array.prototype.filter.call(e.target.options, (function (t) {
+                                return t.selected
+                            })).map((function (t) {
+                                return "_value" in t ? t._value : t.value
+                            }));
+                            t.$set(t.zg, "mode", e.target.multiple ? s : s[0])
+                        }, function (e) {
+                            return t.oi()
+                        }]
+                    }
+                }, [e("option", {attrs: {value: "ffa"}}, [t._v("FFA")]), t._v(" "), e("option", {attrs: {value: "instant"}}, [t._v("Instant")]), t._v(" "), e("option", {attrs: {value: "gigasplit-700"}}, [t._v("Gigasplit")]), t._v(" "), e("option", {attrs: {value: "terasplit"}}, [t._v("Terasplit")]), t._v(" "), e("option", {attrs: {value: "megasplit"}}, [t._v("Megasplit")]), t._v(" "), e("option", {attrs: {value: "crazy"}}, [t._v("Crazy")]), t._v(" "), e("option", {attrs: {value: "self-feed"}}, [t._v("Self-Feed")])])]), t._v(" "), e("span", {
+                    on: {
+                        "!click": function (e) {
+                            return t.hl(e)
+                        }
+                    }
+                }, [e("p-check", {
+                    staticClass: "p-switch", model: {
+                        value: t.zg.match, callback: function (e) {
+                            t.$set(t.zg, "match", e)
+                        }, expression: "options_.match"
+                    }
+                }, [t._v("Match mode")])], 1), t._v(" "), t.zg.match ? [e("div", {staticClass: "silent"}, [t._v("â€¢ Server closes when round ends")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Lobby owner picks players")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Round starts when everyone connects")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Spawn spots are predetermined")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Score is remembered")]), t._v(" "), e("div", {staticClass: "bottom-margin option-row"}, [t._v("\r\n                    Team count "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.round_teams))]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.round_teams,
+                        expression: "options_.round_teams",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "2", max: "6", step: "1"},
+                    domProps: {value: t.zg.round_teams},
+                    on: {
+                        change: function (e) {
+                            return t.il()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "round_teams", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })])] : [e("div", {staticClass: "silent"}, [t._v("â€¢ Server closes shortly after everyone leaves")])], t._v(" "), t.zg.match ? t._e() : e("span", [e("p-check", {
+                    staticClass: "p-switch",
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }
+                    },
+                    model: {
+                        value: t.zg.cheats, callback: function (e) {
+                            t.$set(t.zg, "cheats", e)
+                        }, expression: "options_.cheats"
+                    }
+                }, [t._v("Allow cheats")])], 1), t._v(" "), t.zg.cheats ? [e("div", {staticClass: "silent"}, [t._v("â€¢ Middle click to select player")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Shift+left click to teleport")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Shift+scroll to give/take mass")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Shift+V to spawn virus")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ Shift+F to freeze player")])] : t._e()], 2)]), t._v(" "), t.zg.match ? e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Win condition\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "option-row"}, [t._v("\r\n                Round lasts "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.round_duration) + " minute" + t._s(1 === t.zg.round_duration ? "" : "s"))]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.round_duration,
+                        expression: "options_.round_duration",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "1", max: "30", step: "1"},
+                    domProps: {value: t.zg.round_duration},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "round_duration", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "option-row"}, [t._v("\r\n                Team loses "), e("span", {staticClass: "right"}, [t._v(t._s(t.jl))]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.round_ko,
+                        expression: "options_.round_ko",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "80", step: "10"},
+                    domProps: {value: t.zg.round_ko},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "round_ko", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ When team loses, players die and cannot respawn")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ If there is 1 team left, round ends")]), t._v(" "), e("div", {staticClass: "silent"}, [t._v("â€¢ If round timer elapses, team with most mass wins")])])]) : t._e(), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Map\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "option-row"}, [t._v("\r\n                Map size "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.map_size) + "%")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.map_size,
+                        expression: "options_.map_size",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {
+                        type: "range",
+                        min: "10",
+                        max: "terasplit" === t.zg.mode || "self-feed" === t.zg.mode ? 100 : 200,
+                        step: "10"
+                    },
+                    domProps: {value: t.zg.map_size},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "map_size", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]), t._v(" "), "self-feed" !== t.zg.mode ? e("div", {staticClass: "option-row"}, [t._v("\r\n                Bot amount "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.map_bots) + "%")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.map_bots,
+                        expression: "options_.map_bots",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "200", step: "10"},
+                    domProps: {value: t.zg.map_bots},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "map_bots", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), "self-feed" !== t.zg.mode ? e("div", {staticClass: "number-option"}, [t._v("\r\n                Bot mass\r\n                "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.bot_start,
+                        expression: "options_.bot_start",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "right hide-arrows",
+                    attrs: {type: "number", min: "1000", max: "100000", step: "1"},
+                    domProps: {value: t.zg.bot_start},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, input: function (e) {
+                            e.target.composing || t.$set(t.zg, "bot_start", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), "self-feed" !== t.zg.mode && "terasplit" !== t.zg.mode ? e("div", {staticClass: "option-row"}, [t._v("\r\n                Virus amount "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.map_virus) + "%")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.map_virus,
+                        expression: "options_.map_virus",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "300", step: "10"},
+                    domProps: {value: t.zg.map_virus},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "map_virus", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e()])]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Behavior\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "number-option"}, [t._v("\r\n                " + t._s(t.zg.match ? "Start mass per player" : "Start mass") + "\r\n                "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_start,
+                        expression: "options_.player_start",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "right hide-arrows",
+                    attrs: {type: "number", min: "1000", max: "100000", step: "1"},
+                    domProps: {value: t.zg.player_start},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, input: function (e) {
+                            e.target.composing || t.$set(t.zg, "player_start", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]), t._v(" "), "self-feed" === t.zg.mode ? e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Makes you unable to gain mass when maxsplitting AND ejecting at the same. May affect how you build mass; play around it!"}
+                }, [e("p-check", {
+                    staticClass: "p-switch", on: {
+                        change: function (e) {
+                            return t.oi()
+                        }
+                    }, model: {
+                        value: t.zg.player_punish_cross, callback: function (e) {
+                            t.$set(t.zg, "player_punish_cross", e)
+                        }, expression: "options_.player_punish_cross"
+                    }
+                }, [t._v("\r\n                    Punish solotricking / crossing\r\n                ")])], 1) : t._e(), t._v(" "), e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.zg.player_autosplit_type}
+                }, [e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_autosplit_type,
+                        expression: "options_.player_autosplit_type",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {
+                        type: "range",
+                        min: "0",
+                        max: "3",
+                        step: "1",
+                        tip: "Immediately: disregards everything else as soon as threshold is reached Quickly: doesn't guarantee a hover kill"
+                    },
+                    domProps: {value: t.zg.player_autosplit_type},
+                    on: {
+                        input: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "player_autosplit_type", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                }), t._v("\r\n                Autosplit " + t._s(t.kl) + "\r\n            ")]), t._v(" "), 0 !== t.zg.player_autosplit_type ? e("div", {staticClass: "option-row"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }
+                    },
+                    model: {
+                        value: t.zg.player_autosplit_aimed, callback: function (e) {
+                            t.$set(t.zg, "player_autosplit_aimed", e)
+                        }, expression: "options_.player_autosplit_aimed"
+                    }
+                }, [t._v("Aimed autosplits")])], 1) : t._e(), t._v(" "), 0 !== t.zg.player_autosplit_type ? e("div", {staticClass: "number-option"}, [t._v("\r\n                Autosplit mass\r\n                "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_autosplit,
+                        expression: "options_.player_autosplit",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "right hide-arrows",
+                    attrs: {type: "number", min: "0", max: "1000000", step: "1"},
+                    domProps: {value: t.zg.player_autosplit},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, input: function (e) {
+                            e.target.composing || t.$set(t.zg, "player_autosplit", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), "terasplit" !== t.zg.mode ? e("div", {staticClass: "option-row"}, [t._v("\r\n                Decay rate "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.player_decay) + "%")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_decay,
+                        expression: "options_.player_decay",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "10", max: "300", step: "10"},
+                    domProps: {value: t.zg.player_decay},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "player_decay", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), "terasplit" !== t.zg.mode ? e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Decay rate keeps increasing until you split. Higher means faster decay"}
+                }, [t._v("\r\n                Decay increase (linear) "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.player_decay_lin) + "%")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_decay_lin,
+                        expression: "options_.player_decay_lin",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "300", step: "10"},
+                    domProps: {value: t.zg.player_decay_lin},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "player_decay_lin", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), "terasplit" !== t.zg.mode ? e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Decay rate keeps increasing until you split. Higher means faster decay"}
+                }, [t._v("\r\n                Decay increase (exponential) "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.player_decay_exp) + "%")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_decay_exp,
+                        expression: "options_.player_decay_exp",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "300", step: "10"},
+                    domProps: {value: t.zg.player_decay_exp},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "player_decay_exp", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), t.zg.match ? e("div", {staticClass: "top-margin"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }
+                    },
+                    model: {
+                        value: t.zg.player_respawn, callback: function (e) {
+                            t.$set(t.zg, "player_respawn", e)
+                        }, expression: "options_.player_respawn"
+                    }
+                }, [t._v("Allow respawning")])], 1) : t._e(), t._v(" "), t.zg.match && t.zg.player_respawn ? e("div", {
+                    staticClass: "number-option option-row",
+                    attrs: {tip: "When respawning"}
+                }, [t._v("\r\n                Mass on respawn\r\n                "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_respawn_mass,
+                        expression: "options_.player_respawn_mass",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "right hide-arrows",
+                    attrs: {type: "number", min: "500", max: "100000", step: "1"},
+                    domProps: {value: t.zg.player_respawn_mass},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, input: function (e) {
+                            e.target.composing || t.$set(t.zg, "player_respawn_mass", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e(), t._v(" "), t.zg.match && t.zg.player_respawn ? e("div", {staticClass: "option-row"}, [t._v("\r\n                Respawn cooldown "), e("span", {staticClass: "right"}, [t._v(t._s(t.zg.player_respawn_delay) + " second" + t._s(1 === t.zg.player_respawn_delay ? "" : "s"))]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: t.zg.player_respawn_delay,
+                        expression: "options_.player_respawn_delay",
+                        modifiers: {number: !0}
+                    }],
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "30", step: "1"},
+                    domProps: {value: t.zg.player_respawn_delay},
+                    on: {
+                        change: function (e) {
+                            return t.oi()
+                        }, __r: function (e) {
+                            t.$set(t.zg, "player_respawn_delay", t._n(e.target.value))
+                        }, blur: function (e) {
+                            return t.$forceUpdate()
+                        }
+                    }
+                })]) : t._e()])])])
+            };
+            H._withStripped = !0;
+            var V = s(1620), G = s(3117);
+            const q = {
+                data: () => ({Cg: V.Cg, zg: V.Cg.zg}), computed: {
+                    jl() {
+                        return 0 === this.zg.round_ko ? "when round ends" : "with <" + this.zg.round_ko + "% start mass"
+                    }, kl() {
+                        switch (this.zg.player_autosplit_type) {
+                            case 0:
+                                return "disabled";
+                            case 1:
+                                return "immediately";
+                            case 2:
+                                return "quickly";
+                            case 3:
+                                return "slowly";
+                            default:
+                                return "???"
+                        }
+                    }
+                }, methods: {
+                    il() {
+                        var t = this.zg.round_teams, e = this.zg.round_team_names;
+                        for (e.splice(t, e.length - t); e.length < t;) e.push("Team " + (1 + e.length));
+                        this.oi()
+                    }, hl(t) {
+                        t.preventDefault();
+                        var e = this.zg.match ? "Teams and scores will be forgotten. Continue?" : "You will pick everyone's team and set win condition. Continue?";
+                        G.fb(e, (() => {
+                            this.zg.match = !this.zg.match, this.il()
+                        }))
+                    }, oi() {
+                        this.zg.player_punish_cross = this.zg.player_punish_cross && "self-feed" === this.zg.mode, this.zg.player_start = Math.min(Math.max(this.zg.player_start, 1e3), 1e5), this.zg.bot_start = Math.min(Math.max(this.zg.bot_start, 1e3), 1e5), this.zg.player_autosplit_type ? this.zg.player_autosplit = Math.min(Math.max(this.zg.player_autosplit, 1e3), 1e6) : this.zg.player_autosplit = 0, V.ji.oi()
+                    }, gl(t) {
+                        V.ji.ni(t.target.value)
+                    }
+                }, created() {
+                    this.il()
+                }
+            };
+            const J = (0, _.Z)(q, H, [], !1, null, "24d5bfb4", null).exports;
+            var Y = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    staticClass: "wrapper", on: {
+                        dragend: function (e) {
+                            return t.ll(null, null, null)
+                        }
+                    }
+                }, [e("div", {
+                    staticClass: "container",
+                    class: {match: t.zg.match, owner: t.Cg.Th}
+                }, [t.zg.match ? t._l(t.ml, (function (s, a) {
+                    return e("div", {
+                        key: a,
+                        staticClass: "section row"
+                    }, [e("div", {staticClass: "header"}, [a === t.Vh.length ? e("span", [t._v("\r\n                    Spectators\r\n                ")]) : [t.nl !== a ? e("span", {
+                        staticClass: "team-name",
+                        attrs: {tip: t.Cg.Th ? "Click to change team name" : null},
+                        on: {
+                            click: function (e) {
+                                return t.ol(a)
+                            }
+                        }
+                    }, [t._v("\r\n                    " + t._s(t.zg.round_team_names[a]) + "\r\n                ")]) : e("input", {
+                        directives: [{
+                            name: "model",
+                            rawName: "v-model",
+                            value: t.zg.round_team_names[parseInt(a)],
+                            expression: "options_.round_team_names[parseInt(ti)]"
+                        }],
+                        ref: "tiInput",
+                        refInFor: !0,
+                        staticClass: "team-name-input",
+                        attrs: {type: "text", spellcheck: "false", minlength: "1", maxlength: "24"},
+                        domProps: {value: t.zg.round_team_names[parseInt(a)]},
+                        on: {
+                            focus: function (t) {
+                                return t.target.select()
+                            }, blur: function (e) {
+                                t.nl = null
+                            }, change: function (e) {
+                                return t.oi()
+                            }, keydown: function (e) {
+                                return !e.type.indexOf("key") && t._k(e.keyCode, "enter", 13, e.key, "Enter") ? null : t.oi()
+                            }, input: function (e) {
+                                e.target.composing || t.$set(t.zg.round_team_names, parseInt(a), e.target.value)
+                            }
+                        }
+                    }), t._v(" "), 0 === s.length ? e("span", {
+                        staticClass: "right warning",
+                        attrs: {tip: "Click and drag player to put in a team"}
+                    }, [t._v("\r\n                    No players\r\n                ")]) : s.length < t.Cg.Xh ? e("span", {
+                        staticClass: "right warning",
+                        attrs: {tip: "You can still start round, but this is probably a mistake"}
+                    }, [t._v("\r\n                    Too few players\r\n                ")]) : e("span", {
+                        staticClass: "right score",
+                        attrs: {tip: "Click to change team's score"},
+                        on: {
+                            click: function (e) {
+                                return t.pl(a)
+                            }
+                        }
+                    }, [t._v("\r\n                    " + t._s(t.Cg.Wh[a]) + " point" + t._s(1 === t.Cg.Wh[a] ? "" : "s") + "\r\n                ")])]], 2), t._v(" "), e("div", {staticClass: "options dropzone-team"}, [t._l(s, (function (s, i) {
+                        return e("div", {
+                            key: s.id, staticClass: "dropzone-player", on: {
+                                dragover: function (t) {
+                                    t.preventDefault()
+                                }, drop: function (e) {
+                                    return t.ql(a, i)
+                                }, "!dragenter": function (e) {
+                                    return t.rl(a, i)
+                                }, "!dragleave": function (e) {
+                                    return t.rl(null, null)
+                                }
+                            }
+                        }, [e("lobby-player", {
+                            staticClass: "player", attrs: {gb: s}, on: {
+                                dragstart: function (e) {
+                                    return t.ll(s.id, a, i)
+                                }, dragend: function (e) {
+                                    return t.ll(null, null, null)
+                                }
+                            }
+                        })], 1)
+                    })), t._v(" "), t.sl && null != t.tl ? e("div", {
+                        staticClass: "dropzone-player last",
+                        on: {
+                            dragover: function (t) {
+                                t.preventDefault()
+                            }, drop: function (e) {
+                                return t.ql(a, s.length)
+                            }, "!dragenter": function (e) {
+                                return t.rl(a, s.length)
+                            }, "!dragleave": function (e) {
+                                return t.rl(null, null)
+                            }
+                        }
+                    }, [t._v("\r\n                    Â \r\n                ")]) : t._e(), t._v(" "), t.sl && 0 === s.length ? e("div", {
+                        staticClass: "dropzone-player last",
+                        on: {
+                            dragover: function (t) {
+                                t.preventDefault()
+                            }, drop: function (e) {
+                                return t.ql(a, s.length)
+                            }, "!dragenter": function (e) {
+                                return t.rl(a, s.length)
+                            }, "!dragleave": function (e) {
+                                return t.rl(null, null)
+                            }
+                        }
+                    }, [t._v("\r\n                    Â \r\n                ")]) : t._e()], 2)])
+                })) : e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("Players in lobby")]), t._v(" "), e("div", {staticClass: "options"}, t._l(t.Bc, (function (t) {
+                    return e("lobby-player", {key: t.id, attrs: {gb: t}})
+                })), 1)])], 2)])
+            };
+            Y._withStripped = !0;
+            var Z = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    staticClass: "player",
+                    class: {dragging: t.tl, dropzone: t.gb.ul},
+                    attrs: {draggable: t.Cg.Th && t.Cg.zg.match && !t.gb.ul},
+                    on: {
+                        dragstart: function (e) {
+                            return t.vl(e)
+                        }, dragend: function (e) {
+                            return t.wl(e)
+                        }
+                    }
+                }, [t.gb.ul ? [t._v("Â ")] : t._e(), t._v(" "), t.gb.ul ? t._e() : [e("badges", {
+                    attrs: {
+                        Ee: t.gb.perk_badges || 0,
+                        Uc: 18
+                    }
+                }), t._v(" "), e("span", {
+                    staticClass: "player-name",
+                    class: {owner: t.Th},
+                    style: {color: t.xl},
+                    attrs: {tip: t.Uk}
+                }, [t._v("\r\n        " + t._s(t.gb.perk_name || t.gb.name) + "\r\n    ")])]], 2)
+            };
+            Z._withStripped = !0;
+            var K = s(1620);
+            const Q = {
+                components: {badges: D},
+                data: () => ({Cg: K.Cg, tl: !1}),
+                props: {gb: {type: Object, required: !0}},
+                computed: {
+                    xl() {
+                        return this.gb.perk_color ? "#" + this.gb.perk_color : "unset"
+                    }, Th() {
+                        return this.Cg.Uh === this.gb.id
+                    }, Uk() {
+                        return this.Th ? "Lobby owner" : ""
+                    }
+                },
+                methods: {
+                    vl(t) {
+                        this.tl = !0, this.$emit("dragstart", t)
+                    }, wl(t) {
+                        this.tl = !1, this.$emit("dragstop", t)
+                    }
+                }
+            };
+            const tt = (0, _.Z)(Q, Z, [], !1, null, "7995e927", null).exports;
+            var et = s(3117), st = s(1620);
+            const at = {
+                data: () => ({
+                    Cg: st.Cg,
+                    Bc: st.Cg.Bc,
+                    Vh: st.Cg.Vh,
+                    zg: st.Cg.zg,
+                    nl: null,
+                    tl: null,
+                    sl: !1,
+                    yl: [null, null],
+                    zl: []
+                }), components: {lobbyPlayer: tt}, computed: {
+                    ml() {
+                        var t = this.Bc.slice(0), e = this.Vh.map((e => e.map((e => {
+                            var s = t.findIndex((t => t.id === e));
+                            return t.splice(s, 1)[0]
+                        }))));
+                        return e.push(t), this.zl.length > 0 && e[this.zl[0][0]].splice(this.zl[0][1], 0, {
+                            id: "ghost",
+                            ul: !0
+                        }), e
+                    }
+                }, methods: {
+                    ol(t) {
+                        this.nl = t, this.$nextTick((() => this.$refs.tiInput[0].focus()))
+                    }, pl(t) {
+                        var e = this.Cg.zg.round_team_names[t], s = this.Cg.Wh[t];
+                        et.kb.fire({
+                            text: `Change score for ${e} from ${s} to:`,
+                            input: "text",
+                            confirmButtonText: "Set",
+                            showCancelButton: !0
+                        }).then((e => {
+                            var s = parseInt(e.value);
+                            isNaN(s) ? et.hb("That's not a number") : st.ji.qi(t, s)
+                        }))
+                    }, oi() {
+                        st.ji.oi(), this.nl = null
+                    }, ll(t, e, s) {
+                        if (this.tl = t, this.$set(this.yl, 0, e), this.$set(this.yl, 1, s), null == e) for (this.sl = !1; this.zl.length > 0;) this.zl.pop()
+                    }, rl(t, e) {
+                        if (null == t || this.yl[0] === t && this.yl[1] === e) {
+                            for (; this.zl.length > 1;) this.zl.pop();
+                            this.sl = !0
+                        } else null != t && this.zl.unshift([t, e])
+                    }, ql(t, e) {
+                        if (null != this.tl) {
+                            for (this.yl[0] !== this.zg.round_teams && this.Vh[this.yl[0]].splice(this.yl[1], 1), t !== this.zg.round_teams && this.Vh[t].splice(e, 0, this.tl); this.zl.length > 0;) this.zl.pop();
+                            this.tl = null, this.sl = !1, this.$set(this.yl, 0, null), this.$set(this.yl, 1, null), st.ji.pi()
+                        }
+                    }
+                }
+            }, it = at;
+            const nt = (0, _.Z)(it, Y, [], !1, null, "0a751125", null).exports;
+            var rt = s(1620);
+            const ot = {
+                data: () => ({Cg: rt.Cg, Qk: !1}),
+                components: {lobbyChat: B, lobbyList: W, lobbySettings: J, lobbyTeams: nt},
+                methods: {
+                    Sk() {
+                        b().fb("Are you sure that you want to leave this lobby?", rt.ji.ui)
+                    }, async pg() {
+                        await b().fb("Confirm you want to start the lobby server?") && (this.Cg.Yh && !await b().fb("Teams are not even. Are you sure about this?") || (this.Qk = !0, await rt.ji.ri(), this.Qk = !1))
+                    }, Rk() {
+                        rt.eb.mf(this.Cg.Ph)
+                    }, ib() {
+                        b().fb("Confirm you want to stop the lobby server?", (async () => {
+                            this.Qk = !0, await rt.ji.si(), this.Qk = !1
+                        }))
+                    }, Tk() {
+                        b().fb("Are you absolutely sure that you want to delete this lobby?", rt.ji.vi)
+                    }
+                },
+                mounted() {
+                    this.Cg.nf = !0, rt.ji.ki()
+                },
+                beforeDestroy() {
+                    this.Cg.nf = !1, rt.ji.li()
+                }
+            };
+            const lt = (0, _.Z)(ot, P, [function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container"}, [e("b", [t._v("Lobbies")]), t._v(" are custom servers made by other players with minimal restrictions."), e("br"), t._v(" "), e("ul", [e("li", [t._v("Only players "), e("b", [t._v("level 20")]), t._v(" or above can create lobbies, but anyone can join")]), t._v(" "), e("li", [e("b", [t._v("Public")]), t._v(" lobbies are visible to everyone")]), t._v(" "), e("li", [e("b", [t._v("Private")]), t._v(" lobbies can only be joined by people that know their "), e("b", [t._v("tag")])]), t._v(" "), e("li", [t._v("Lobbies can have up to "), e("b", [t._v("25")]), t._v(" players")]), t._v(" "), e("li", [t._v("You "), e("b", [t._v("do not")]), t._v(" gain XP while playing in a lobby")]), t._v(" "), e("li", [e("b", [t._v("Abuse")]), t._v(" can lead to restrictions and account bans")])])])
+            }], !1, null, "4aaf8f72", null).exports;
+            var ct = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "tab-menu"}, [e("div", {staticClass: "tabs-rows"}, [e("div", {staticClass: "tabs"}, [e("div", {
+                    staticClass: "tab",
+                    class: {active: "season" === t.Al},
+                    on: {
+                        click: function (e) {
+                            t.Al = "season"
+                        }
+                    }
+                }, [e("i", {staticClass: "fas fa-calendar-alt"}), t._v(" Season\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "tab",
+                    class: {active: "total" === t.Al},
+                    on: {
+                        click: function (e) {
+                            t.Al = "total"
+                        }
+                    }
+                }, [e("i", {staticClass: "fas fa-globe"}), t._v(" Total XP\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "tab",
+                    class: {active: "rating" === t.Al},
+                    on: {
+                        click: function (e) {
+                            t.Al = "rating"
+                        }
+                    }
+                }, [e("i", {staticClass: "fas fa-star"}), t._v(" Rating\r\n            ")])]), t._v(" "), e("div", {staticClass: "season-scroll-wrapper"}, ["season" === t.Al ? e("div", {staticClass: "season-scroll"}, [e("div", {staticClass: "tabs"}, t._l(t.Bl, (function (s, a) {
+                    return e("div", {
+                        key: a,
+                        staticClass: "tab",
+                        class: {active: t.Cl[0] === s[0]},
+                        on: {
+                            click: function (e) {
+                                return t.Dl(s)
+                            }
+                        }
+                    }, [e("div", [t._v(t._s(s[1]))])])
+                })), 0)]) : t._e()])]), t._v(" "), e("div", {staticClass: "tab-data"}, ["season" === t.Al ? e("meta-list", {
+                    attrs: {
+                        El: t.Fl,
+                        Zk: "/leaderboard/season_xp/" + t.Cl[0] + "/100",
+                        Gl: "xp",
+                        Hl: "XP",
+                        Il: t.Jl
+                    }
+                }, [e("div", ["total" !== t.Cl[0] ? [t._v("\r\n                Counts for this season and mode only"), e("br"), t._v(" "), "string" == typeof t.Kl ? e("span", [t._v("\r\n                    " + t._s(t.Kl) + "\r\n                ")]) : null != t.Kl && "total" !== t.Cl[0] ? e("span", [t._v("\r\n                    Top "), e("b", [t._v(t._s(t.Jl))]), t._v(" player" + t._s(1 === t.Jl ? "" : "s") + "\r\n                    earn" + t._s(1 === t.Jl ? "s" : "") + " "), e("b", [t._v("8 week")]), t._v(" colored name"), e("br")]) : t.Ll ? e("span", {attrs: {tip: "After rewards lock, you will know how many players earn colored name"}}, [t._v("\r\n                    Rewards lock in "), e("b", [t._v(t._s(t.Ll))]), e("br")]) : t._e()] : [t._v("\r\n                Season XP gained across all modes"), e("br"), t._v("\r\n                #1 player earns "), e("badges", {
+                    attrs: {
+                        Ee: 268435456,
+                        Uc: 16
+                    }
+                }), t._v(" badge"), e("br")], t._v("\r\n                Season ends in "), e("b", [t._v(t._s(t.Ml))]), e("br")], 2)]) : t._e(), t._v(" "), "total" === t.Al ? e("meta-list", {
+                    attrs: {
+                        El: "Total XP",
+                        Zk: "/leaderboard/xp/100",
+                        Gl: "xp",
+                        Hl: "XP"
+                    }
+                }, [e("div", [t._v("\r\n                Total XP counts since you started using your account\r\n            ")])]) : t._e(), t._v(" "), "rating" === t.Al ? e("meta-list", {
+                    attrs: {
+                        El: "Tournament rating",
+                        Zk: "/leaderboard/rating/100",
+                        Gl: "rating",
+                        Hl: "rating"
+                    }
+                }, [e("div", [t._v("\r\n                Tournaments let you earn rating"), e("br"), t._v("\r\n                Check the "), e("a", {attrs: {href: "/tournaments"}}, [t._v("Tournaments")]), t._v(" Discord server for more information\r\n            ")])]) : t._e()], 1)])
+            };
+            ct._withStripped = !0;
+            var ut = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "player-list-tab"}, [t.El ? e("h2", {staticClass: "player-list-title"}, [t._v(t._s(t.El))]) : t._e(), t._v(" "), t.Nl ? e("div", [t._v("\r\n        Failed loading:"), e("br"), t._v("\r\n        " + t._s(t.Nl) + "\r\n    ")]) : t._e(), t._v(" "), t.Ol ? e("div", [t._t("default"), t._v(" "), t.Pl.length > 0 ? e("div", {staticClass: "player-list"}, t._l(t.Pl, (function (s, a) {
+                    return e("div", {
+                        key: a,
+                        staticClass: "player-row",
+                        class: {me: !!s.Ql, cutoff: a + 1 === t.Il}
+                    }, [e("span", {staticClass: "player-nr"}, [t._v(t._s(a + 1) + ".")]), t._v(" "), e("span", {
+                        staticClass: "player-name",
+                        style: {color: s.Pi}
+                    }, [e("badges", {
+                        attrs: {
+                            Ee: s.ai,
+                            Uc: 18
+                        }
+                    }), t._v("\r\n                    " + t._s(s.lb) + "\r\n                ")], 1), t._v(" "), e("span", [t._v(t._s(s.Rl) + " " + t._s(t.Hl))])])
+                })), 0) : e("div", {staticClass: "player-list"}, [t._v("\r\n            There are no players on this leaderboard\r\n        ")])], 2) : t._e()])
+            };
+            ut._withStripped = !0;
+            var ht = s(1050);
+            const dt = {
+                data: () => ({Sl: {}, Pl: [], Ol: !1, Nl: null}),
+                props: {
+                    El: {type: String, default: null},
+                    Zk: {type: String, required: !0},
+                    Gl: {type: String, required: !0},
+                    Hl: {type: String, required: !0},
+                    Il: {type: Number, required: !1}
+                },
+                watch: {
+                    Zk(t, e) {
+                        t !== e && (this.Nl = null, this.Sl[t] ? (this.Pl.splice(0, this.Pl.length), this.Pl.push(...this.Sl[t])) : (this.Pl.splice(0, this.Pl.length), this.Tl()))
+                    }
+                },
+                components: {badges: D},
+                methods: {
+                    async Tl() {
+                        var t = this.Zk;
+                        this.Ol = !1;
+                        var e = await ht.get(t);
+                        if (!e.ok) return e.headers.has("Content-Type") ? this.Nl = await e.text() : this.Nl = "Failed fetching", void (this.Pl = []);
+                        var s = await e.json();
+                        this.Nl = null, this.Sl[t] = s.map((t => ({
+                            lb: t.perk_name || t.discord_name,
+                            Pi: "#" + (t.perk_color || "ffffff"),
+                            ai: t.perk_badges || 0,
+                            Rl: t[this.Gl],
+                            Ql: t.me
+                        }))), this.Pl = [...this.Sl[t]], this.Ol = !0
+                    }
+                },
+                created() {
+                    this.Tl()
+                }
+            }, pt = dt;
+            const vt = (0, _.Z)(pt, ut, [], !1, null, "2ccd0c00", null).exports;
+            var ft = s(1620), mt = s(3658), {R: _t} = s(3658),
+                gt = Date.UTC((new Date).getUTCFullYear(), (new Date).getUTCMonth() + 1), wt = gt - 432e6,
+                yt = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][(new Date).getUTCMonth()] + " " + (new Date).getUTCFullYear() + " season";
+            const bt = {
+                data() {
+                    var t = [["total", "Total"], ["ffa", "FFA"], ["instant", "Instant"], ["gigasplit", "Gigasplit"], ["terasplit", "Terasplit"], ["megasplit", "Megasplit"], ["crazy", "Crazy"], ["self-feed", "Self-Feed"]];
+                    return {Bl: t, Al: "season", Cl: t[0], Fl: yt, Ml: "", Ll: "", Kl: void 0}
+                }, components: {metaList: vt, Badges: D}, computed: {
+                    Jl() {
+                        return "total" === this.Cl[0] ? 1 : null == this.Kl || "string" == typeof this.Kl ? null : this.Kl.find((t => t.leaderboard === this.Cl[0])).count
+                    }
+                }, methods: {
+                    async Ul() {
+                        if (void 0 === this.Kl) {
+                            this.Kl = null;
+                            var t = await u().get("/leaderboard/season_rewards");
+                            t.ok ? this.Kl = JSON.parse(await t.text()) : this.Kl = await t.text()
+                        }
+                    }, Vl() {
+                        var t = Date.now();
+                        this.Ml = mt.Wl(gt - t), t > wt ? (this.Ll = "", this.Ul()) : this.Ll = mt.Wl(wt - t)
+                    }, Dl(t) {
+                        localStorage.lastSeasonTab = t[0], this.Cl = t
+                    }
+                }, created() {
+                    this.Vl(), ft.R.$on(_t.Wa, this.Vl), null != localStorage.lastSeasonTab && (this.Cl = this.Bl.find((t => t[0] === localStorage.lastSeasonTab)), null == this.Cl && (delete localStorage.lastSeasonTab, this.Cl = this.Bl[0]))
+                }, destroyed() {
+                    ft.R.$off(_t.Wa, this.Vl)
+                }
+            };
+            const Ct = (0, _.Z)(bt, ct, [], !1, null, null, null).exports;
+            var kt = function () {
+                var t = this, e = t._self._c;
+                t._self._setupProxy;
+                return e("transition", {
+                    attrs: {
+                        name: "fade",
+                        appear: ""
+                    }
+                }, [e("div", {staticClass: "modal"}, [e("div", {
+                    staticClass: "overlay", on: {
+                        click: function (e) {
+                            return t.$emit("close")
+                        }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "fas fa-times-circle close-button", on: {
+                        click: function (e) {
+                            return t.$emit("close")
+                        }
+                    }
+                }), t._v(" "), e("div", {staticClass: "wrapper"}, [e("transition", {
+                    attrs: {
+                        name: "scale",
+                        appear: ""
+                    }
+                }, [e("div", {staticClass: "content fade-box"}, [t._t("default", (function () {
+                    return [t._v("Here should be something")]
+                }))], 2)])], 1)])])
+            };
+            kt._withStripped = !0;
+            var St = s(3958);
+            const xt = s.n(St)();
+            const Mt = (0, _.Z)(xt, kt, [], !1, null, "73ccaaca", null).exports;
+            var Pt = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container"}, [e("input", {
+                    ref: "file",
+                    staticStyle: {display: "none"},
+                    attrs: {type: "file", accept: ".vanis", multiple: ""},
+                    on: {
+                        change: function (e) {
+                            return t.Xl(e)
+                        }
+                    }
+                }), t._v(" "), e("div", {staticClass: "replay-list-header"}, [e("span", {
+                    staticClass: "replay-list-count",
+                    attrs: {tip: t.Yl ? "Limit depends on disk space and can change. When reached replays fail to save and browser might delete all!" : ""}
+                }, [t._v("\r\n            " + t._s(t.Zl ? t.am + " replay" + (1 !== t.am ? "s" : "") + (t.Yl > 0 ? ` (${t.bm} / ${t.dm})` : "") : "Loading") + "\r\n        ")]), t._v(" "), t.Zl && !t.fm ? e("span", {staticClass: "replay-list-page"}, [e("div", {staticClass: "anchor"}, [e("div", {staticClass: "left"}, [e("div", {staticClass: "current"}, [e("div", {staticClass: "phantom"}, [e("i", {
+                    staticClass: "fas fa-chevron-left prev",
+                    class: {disabled: !t.gm || 0 === t.hm},
+                    on: {
+                        click: function (e) {
+                            return t.im(-1)
+                        }
+                    }
+                }), t._v(" "), e("span", [t._v(t._s(t.jm))])]), t._v(" "), t.km ? t._e() : e("div", {
+                    staticClass: "real",
+                    attrs: {tip: "Click to input page"},
+                    on: {
+                        click: function (e) {
+                            return t.lm(!0)
+                        }
+                    }
+                }, [e("span", [t._v(t._s(1 + t.hm))])]), t._v(" "), t.km ? e("div", {staticClass: "real-input"}, [e("div", {
+                    staticClass: "overlay",
+                    on: {
+                        click: function (e) {
+                            return t.lm(!1)
+                        }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "fas fa-chevron-left prev",
+                    class: {disabled: !t.gm || 0 === t.hm},
+                    on: {
+                        click: function (e) {
+                            return t.im(-1)
+                        }
+                    }
+                }), t._v(" "), e("input", {
+                    attrs: {type: "text"},
+                    domProps: {value: 1 + t.hm},
+                    on: {
+                        focus: function (t) {
+                            return t.target.select()
+                        }, change: function (e) {
+                            return t.im(e)
+                        }
+                    }
+                })]) : t._e()])]), t._v("\r\n                /\r\n                "), e("div", {staticClass: "right"}, [t._v("\r\n                    " + t._s(t.jm) + "\r\n                    "), e("i", {
+                    staticClass: "fas fa-chevron-right next",
+                    class: {disabled: !t.gm || t.hm === t.jm - 1},
+                    on: {
+                        click: function (e) {
+                            return t.im(1)
+                        }
+                    }
+                })])])]) : t._e(), t._v(" "), e("span", {staticClass: "replay-list-bulk"}, [e("input", {
+                    staticClass: "vanis-button",
+                    attrs: {type: "button", disabled: !t.gm, value: "Import"},
+                    on: {
+                        click: function (e) {
+                            return t.$refs.file.click()
+                        }
+                    }
+                }), t._v(" "), e("input", {
+                    staticClass: "vanis-button",
+                    attrs: {type: "button", disabled: !t.gm || t.fm, value: "Download all"},
+                    on: {
+                        click: function (e) {
+                            return t.downloadAllReplays()
+                        }
+                    }
+                }), t._v(" "), e("input", {
+                    staticClass: "vanis-button",
+                    attrs: {type: "button", disabled: !t.gm || t.fm, value: "Delete all"},
+                    on: {
+                        click: function (e) {
+                            return t.deleteAllReplays()
+                        }
+                    }
+                })])]), t._v(" "), e("div", {staticClass: "replay-list"}, [t.Zl && t.fm ? [e("div", {staticClass: "notification"}, [e("div", [t._v("Press "), e("b", [t._v(t._s(t.nm))]), t._v(" in game to save last "), e("b", [t._v(t._s(t.om))]), t._v(" seconds of gameplay.")]), t._v(" "), e("div", {
+                    staticStyle: {
+                        color: "red",
+                        "font-weight": "bold"
+                    }
+                }, [t._v("Replays are saved in browser memory!")]), t._v(" "), e("div", [t._v("They get permanently erased if browser data gets cleared.")])])] : t._e(), t._v(" "), t.Zl && !t.fm ? [e("div", {staticClass: "replay-page"}, t._l(t.pm, (function (t, s) {
+                    return e("replay-item", {key: s, attrs: {ab: t}})
+                })), 1)] : t._e()], 2), t._v(" "), t.qm ? e("div", {staticClass: "overlay bulk-operation-overlay"}, [t._v("\r\n        Please wait...\r\n        "), t.rm ? e("div", {staticClass: "small"}, [t._v(t._s(t.rm))]) : t._e(), t._v(" "), t.sm ? e("div", {staticClass: "small warning"}, [t._v("Allow page to download multiple files if asked")]) : t._e()]) : t._e()])
+            };
+            Pt._withStripped = !0;
+            var It = function () {
+                var t = this, e = t._self._c;
+                t._self._setupProxy;
+                return e("div", {
+                    staticClass: "replay-item",
+                    style: {backgroundImage: `url('${t.ab.Ld}')`},
+                    on: {click: t.bb}
+                }, [e("div", {
+                    staticClass: "replay-header", on: {
+                        click: function (t) {
+                            t.stopPropagation()
+                        }
+                    }
+                }, [e("div", {staticClass: "replay-name"}, [t._v(t._s(t.ab.lb))]), t._v(" "), e("div", [e("i", {
+                    staticClass: "replay-button fas fa-cloud-download-alt",
+                    attrs: {tip: "Download this replay"},
+                    on: {
+                        click: function (e) {
+                            return e.stopPropagation(), t.jb.apply(null, arguments)
+                        }
+                    }
+                }), t._v(" "), e("i", {
+                    staticClass: "replay-button fas fa-trash-alt",
+                    attrs: {tip: "Delete this replay"},
+                    on: {
+                        click: function (e) {
+                            return e.stopPropagation(), t.mb.apply(null, arguments)
+                        }
+                    }
+                })])])])
+            };
+            It._withStripped = !0;
+            var Tt = s(9617);
+            const At = s.n(Tt)();
+            const Nt = (0, _.Z)(At, It, [], !1, null, "1dc3fbb4", null).exports;
+            var Lt = s(3162), Dt = s(5733), Ot = s(1620), Rt = s(6470), Et = s(3117), Ut = s(3658), {R: Ft} = s(3658);
 
-            function x(e) {
-                switch (e) {
+            function Bt(t) {
+                return new Promise(((e, s) => {
+                    var a = new FileReader;
+                    a.onload = i => {
+                        var n = i.target.result;
+                        n instanceof ArrayBuffer ? (n.byteLength < 9 && s(new Error("Invalid replay data!")), new Uint8Array(n, 0, 9)[7] >= "5".charCodeAt(0) ? e(n) : a.readAsText(t)) : e(n)
+                    }, a.onerror = s, a.readAsArrayBuffer(t)
+                }))
+            }
+
+            var zt = ["B", "kB", "MB", "GB"];
+
+            function Xt(t) {
+                for (var e = 0; t >= 1024 && e < 5;) t /= 1024, e++;
+                return `${t.toFixed(0)}${zt[e]}`
+            }
+
+            const $t = 200, jt = {
+                data: () => ({
+                    Zl: !1,
+                    gm: !1,
+                    tm: !1,
+                    fm: !1,
+                    am: 0,
+                    um: [],
+                    vm: {wm: !1, xm: 0, ym: 0},
+                    km: !1,
+                    zm: null,
+                    Am: !1,
+                    hm: 0,
+                    jm: 0,
+                    pm: [],
+                    qm: !1,
+                    rm: "",
+                    sm: !1,
+                    nm: Rt.Dh().saveReplay,
+                    om: null
+                }), computed: {
+                    Yl() {
+                        return this.vm.wm && this.am > 0
+                    }, bm() {
+                        return Xt(this.vm.xm)
+                    }, dm() {
+                        return Xt(this.vm.ym)
+                    }
+                }, components: {replayItem: Nt}, methods: {
+                    lm(t) {
+                        this.km = t
+                    }, Bm(t, e) {
+                        t ? (this.qm = !0, this.rm = e || "") : setTimeout((() => {
+                            this.qm = !1, this.rm = ""
+                        }), 1e3)
+                    }, async Xl(t) {
+                        if (this.qm) return;
+                        var e = Array.from(t.target.files);
+                        if (!e.length) return;
+                        t.target && (t.target.value = null);
+                        var s = 0, a = e.length, i = [];
+                        const n = async () => {
+                            const t = (await Ot.ab.nb()).transaction(Ot.ab.ob, "readwrite");
+                            return await Promise.all(i.map((e => t.store.put(e.data, e.name))).concat(t.done))
+                        };
+                        try {
+                            for (; s < a;) {
+                                const t = e[s];
+                                i.length === $t && (await n(), i = []), i.push({
+                                    name: t.name.replace(/\.vanis$/, ""),
+                                    data: await Bt(t)
+                                }), this.Bm(!0, `Importing replays (${++s} / ${a})`)
+                            }
+                            i.length && await n(), this.Bm(!0, "Importing replays")
+                        } catch (t) {
+                            Et.hb(`Error importing replays: ${t.message}`)
+                        } finally {
+                            this.Bm(!1), this.Cm()
+                        }
+                    }, async downloadAllReplays() {
+                        if (!this.qm && this.gm) {
+                            var t = Math.ceil(this.am / $t), e = t > 1, s = Ut.Aj();
+                            this.sm = e, this.Bm(!0, `Packing replays (0 / ${t})`);
+                            for (let a = 0; a < t; a++) {
+                                const i = new Dt;
+                                let n = await Ot.ab.nb().then((t => t.transaction(Ot.ab.ob).store.openCursor(void 0, "prev")));
+                                a && (n = await n.advance(a * $t));
+                                for (let t = 0; n && t < $t; t++) i.file(n.key + ".vanis", n.value), n = await n.continue();
+                                const r = await i.generateAsync({type: "blob"});
+                                let o = `replays_${s}`;
+                                e && (o += "_" + (a + 1)), o += ".zip", Lt.saveAs(r, o), this.Bm(!0, `Packing replays (${a + 1} / ${t})`)
+                            }
+                            this.sm = !1, this.Bm(!1)
+                        }
+                    }, deleteAllReplays() {
+                        this.qm || Et.fb("Are you absolutely sure that you want to delete all replays?", (async () => {
+                            this.Bm(!0, "Deleting all replays");
+                            try {
+                                await Ot.ab.nb().then((t => t.clear(Ot.ab.ob)))
+                            } catch (t) {
+                                return void Et.hb(`Error clearing replays: ${t.message}`)
+                            }
+                            this.Bm(!1), this.Cm()
+                        }))
+                    }, async Cm() {
+                        if (this.tm) return;
+                        this.gm = !1, this.tm = !0;
+                        var t = this.am = await Ot.ab.nb().then((t => t.count(Ot.ab.ob)));
+                        this.jm = Math.max(Math.ceil(t / 12), 1), this.hm = Math.min(this.hm, this.jm - 1), this.gm = !0, this.Zl = !0, this.tm = !1, this.fm = 0 === t;
+                        const e = await (navigator.storage?.estimate?.());
+                        e && (this.vm.wm = !0, this.vm.xm = e.usage, this.vm.ym = e.quota), await this.im()
+                    }, async im(t) {
+                        t && ("number" == typeof t ? this.hm += t : this.hm = parseInt(t.target.value) - 1 || 0), this.zm && (this.zm(), this.zm = null);
+                        var e = Math.max(Math.min(this.hm, this.jm - 1), 0);
+                        this.hm !== e && (this.hm = e), this.Am = !1;
+                        var s = [], a = this.um.slice(0), i = !1;
+                        this.zm = () => i = !0;
+                        let n = await Ot.ab.nb().then((t => t.transaction(Ot.ab.ob).store.openCursor(void 0, "prev")));
+                        for (this.hm && (n = await n.advance(12 * this.hm)); n && s.length < 12 && !i;) {
+                            var r;
+                            if (n.value instanceof ArrayBuffer) {
+                                var o = new Uint8Array(n.value, 13, 2), l = o[0] << 8 | o[1],
+                                    c = new File([n.value.slice(15, 15 + l)], "image.webp", {type: "image/webp"});
+                                this.um.push(r = URL.createObjectURL(c))
+                            } else r = n.value.startsWith("REPLAY") ? n.value.split("|")[2] : "img/replay-placeholder.png";
+                            s.push({lb: n.key, gb: n.value, Ld: r}), n = await n.continue()
+                        }
+                        i || (this.pm.splice(0, this.pm.length, ...s), a.forEach(URL.revokeObjectURL), this.um.splice(0, a.length), this.Am = !0)
+                    }
+                }, created() {
+                    this.om = Ot.T.zj, this.Cm(), Ot.R.$on(Ft.Bj, this.Cm), Ot.R.$on(Ft.pb, this.Cm)
+                }, beforeDestroy() {
+                    this.um.forEach(URL.revokeObjectURL), Ot.R.$off(Ft.Bj, this.Cm), Ot.R.$off(Ft.pb, this.Cm)
+                }
+            };
+            const Wt = (0, _.Z)(jt, Pt, [], !1, null, "11810f3c", null).exports;
+            var Ht = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container"}, [e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Renderer\r\n            "), t.Dm ? e("span", {staticClass: "right silent"}, [t._v("GPU detected")]) : t._e(), t._v(" "), t.Dm ? t._e() : e("span", {staticClass: "right warning"}, [t._v("GPU not detected")])]), t._v(" "), e("div", {staticClass: "options"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.Dm, checked: t.useWebGL},
+                    on: {
+                        change: function (e) {
+                            t.Em("useWebGL", e), t.Fm()
+                        }
+                    }
+                }, [t._v("\r\n                Use GPU rendering\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Lower for performance, higher for sharpness"}
+                }, [t._v("\r\n                Renderer resolution "), e("span", {staticClass: "right"}, [t._v(t._s((100 * t.gameResolution).toFixed(0)) + "%")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0.5", max: "2", step: "0.05"},
+                    domProps: {value: t.gameResolution},
+                    on: {
+                        input: function (e) {
+                            return t.Em("gameResolution", e)
+                        }, change: function (e) {
+                            return t.Fm()
+                        }
+                    }
+                })]), t._v(" "), e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Small text is hidden for perfomance"}
+                }, [t._v("\r\n                Text hiding threshold "), e("span", {staticClass: "right"}, [t._v(t._s(t.smallTextThreshold) + "px")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "10", max: "60", step: "5"},
+                    domProps: {value: t.smallTextThreshold},
+                    on: {
+                        input: function (e) {
+                            return t.Em("smallTextThreshold", e)
+                        }
+                    }
+                })])], 1)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Game\r\n            "), e("span", {
+                    staticClass: "right silent",
+                    attrs: {tip: "Version hash"}
+                }, [t._v(t._s(t.Gm))])]), t._v(" "), e("div", {staticClass: "options"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {tip: "Zooms out automatically with more mass you have", checked: t.autoZoom},
+                    on: {
+                        change: function (e) {
+                            return t.Em("autoZoom", e)
+                        }
+                    }
+                }, [t._v("\r\n                Auto zoom\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.rememeberEjecting},
+                    on: {
+                        change: function (e) {
+                            return t.Em("rememeberEjecting", e)
+                        }
+                    }
+                }, [t._v("\r\n                Remember ejecting\r\n            ")]), t._v(" "), t.rememeberEjecting ? e("div", {staticClass: "silent"}, [t._v("\r\n                After changing tab, you "), e("b", [t._v("keep")]), t._v(" ejecting\r\n            ")]) : e("div", {staticClass: "silent"}, [t._v("After changing tab, you "), e("b", [t._v("stop")]), t._v(" ejecting")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {tip: "To prevent AFK, you must spawn manually after 1 minute", checked: t.autoRespawn},
+                    on: {
+                        change: function (e) {
+                            return t.Em("autoRespawn", e)
+                        }
+                    }
+                }, [t._v("\r\n                Auto respawn\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {tip: "If enabled, moving mouse cancels Freeze mouse hotkey", checked: t.mouseFreezeSoft},
+                    on: {
+                        change: function (e) {
+                            return t.Em("mouseFreezeSoft", e)
+                        }
+                    }
+                }, [t._v("\r\n                Soft mouse freeze\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {tip: "When enabled, flicking may be more accurate", checked: t.delayDoublesplit},
+                    on: {
+                        change: function (e) {
+                            return t.Em("delayDoublesplit", e)
+                        }
+                    }
+                }, [t._v("\r\n                Delay doublesplit hotkey\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Lower is responsive, higher is smooth"}
+                }, [t._v("\r\n                Draw delay "), e("span", {staticClass: "right"}, [t._v(t._s(t.drawDelay) + "ms")]), t._v(" "), e("input", {
+                    staticClass: "slider draw-delay",
+                    attrs: {type: "range", min: "20", max: "300", step: "5"},
+                    domProps: {value: t.drawDelay},
+                    on: {
+                        input: function (e) {
+                            return t.Em("drawDelay", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "How fast camera follows you moving"}
+                }, [t._v("\r\n                Camera panning delay "), e("span", {staticClass: "right"}, [t._v(t._s(t.cameraMoveDelay) + "ms")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "20", max: "1000", step: "10"},
+                    domProps: {value: t.cameraMoveDelay},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cameraMoveDelay", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "option-row"}, [t._v("\r\n                Camera zooming delay "), e("span", {staticClass: "right"}, [t._v(t._s(t.cameraZoomDelay) + "ms")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "20", max: "1000", step: "10"},
+                    domProps: {value: t.cameraZoomDelay},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cameraZoomDelay", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "option-row"}, [t._v("\r\n                Scroll zoom rate "), e("span", {staticClass: "right"}, [t._v(t._s((t.cameraZoomSpeed / 10 * 100).toFixed(0)) + "%")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "1", max: "20", step: "1"},
+                    domProps: {value: t.cameraZoomSpeed},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cameraZoomSpeed", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "option-row"}, [t._v("\r\n                Replay duration "), e("span", {staticClass: "right"}, [t._v(t._s(t.replayDuration) + " seconds")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "3", max: "15", step: "1"},
+                    domProps: {value: t.replayDuration},
+                    on: {
+                        input: function (e) {
+                            return t.Em("replayDuration", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.showReplaySaved}
+                }, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "2", step: "1"},
+                    domProps: {value: t.showReplaySaved},
+                    on: {
+                        input: function (e) {
+                            return t.Em("showReplaySaved", e)
+                        }
+                    }
+                }), t._v('\r\n                "Replay saved" ' + t._s(t.Hm) + "\r\n            ")])], 1)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Cells\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.showNames}
+                }, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "2", step: "1"},
+                    domProps: {value: t.showNames},
+                    on: {
+                        input: function (e) {
+                            return t.Em("showNames", e)
+                        }
+                    }
+                }), t._v("\r\n                Show " + t._s(t.Im) + " names\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.showSkins}
+                }, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "2", step: "1"},
+                    domProps: {value: t.showSkins},
+                    on: {
+                        input: function (e) {
+                            return t.Em("showSkins", e)
+                        }
+                    }
+                }), t._v("\r\n                Show " + t._s(t.Jm) + " skins\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.showMass}
+                }, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "2", step: "1"},
+                    domProps: {value: t.showMass},
+                    on: {
+                        input: function (e) {
+                            return t.Em("showMass", e)
+                        }
+                    }
+                }), t._v("\r\n                Show " + t._s(t.Km) + " mass\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.showOwnName},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showOwnName", e)
+                        }
+                    }
+                }, [t._v("Show my own name")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.showOwnSkin},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showOwnSkin", e)
+                        }
+                    }
+                }, [t._v("Show my own skin")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.showOwnMass},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showOwnMass", e)
+                        }
+                    }
+                }, [t._v("Show my own mass")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.showCrown},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showCrown", e)
+                        }
+                    }
+                }, [t._v("Show crown")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.foodVisible},
+                    on: {
+                        change: function (e) {
+                            return t.Em("foodVisible", e)
+                        }
+                    }
+                }, [t._v("Show food")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.eatAnimation},
+                    on: {
+                        change: function (e) {
+                            return t.Em("eatAnimation", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show eat animation\r\n            ")])], 1)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.showHud},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showHud", e)
+                        }
+                    }
+                }, [t._v("HUD")])], 1), t._v(" "), e("div", {staticClass: "options"}, [e("div", {
+                    staticClass: "option-row",
+                    class: {disabled: !t.showHud}
+                }, [t._v("\r\n                Scale "), e("span", {staticClass: "right"}, [t._v(t._s(Math.floor(100 * t.hudScale)) + "%")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", disabled: !t.showHud, min: "0.5", max: "2", step: "0.05"},
+                    domProps: {value: t.hudScale},
+                    on: {
+                        input: function (e) {
+                            return t.Em("hudScale", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {
+                    staticClass: "option-row",
+                    class: {disabled: !t.showHud && !t.showChatToast}
+                }, [t._v("\r\n                Chat size "), e("span", {staticClass: "right"}, [t._v(t._s(t.chatHeight) + "px")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {
+                        type: "range",
+                        disabled: !t.showHud && !t.showChatToast,
+                        min: "200",
+                        max: "500",
+                        step: "50"
+                    },
+                    domProps: {value: t.chatHeight},
+                    on: {
+                        input: function (e) {
+                            return t.Em("chatHeight", e)
+                        }
+                    }
+                })]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showLeaderboard},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showLeaderboard", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show leaderboard\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showServerName},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showServerName", e)
+                        }
+                    }
+                }, [t._v("\r\n                Leaderboard: Server name\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showChat},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showChat", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show chat\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud || !t.showChat, checked: t.showChatToast},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showChatToast", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show chat as popups\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.minimapEnabled},
+                    on: {
+                        change: function (e) {
+                            return t.Em("minimapEnabled", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show minimap\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.minimapLocations},
+                    on: {
+                        change: function (e) {
+                            return t.Em("minimapLocations", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show minimap locations\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showFPS},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showFPS", e)
+                        }
+                    }
+                }, [t._v("\r\n                Stats: FPS\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showPing},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showPing", e)
+                        }
+                    }
+                }, [t._v("\r\n                Stats: Ping\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showPlayerMass},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showPlayerMass", e)
+                        }
+                    }
+                }, [t._v("\r\n                Stats: Current mass\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showPlayerScore},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showPlayerScore", e)
+                        }
+                    }
+                }, [t._v("\r\n                Stats: Score\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showCellCount},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showCellCount", e)
+                        }
+                    }
+                }, [t._v("\r\n                Stats: Cell count\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showClock},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showClock", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: System time\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showSessionTime},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showSessionTime", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: Session time\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showPlayerCount},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showPlayerCount", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: Players in server\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showSpectators},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showSpectators", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: Spectators\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showTagTotalMass},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showTagTotalMass", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: Tag's total mass\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showRestartTiming},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showRestartTiming", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: Server restart time\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.showHud, checked: t.showAutorespawnIndicator},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showAutorespawnIndicator", e)
+                        }
+                    }
+                }, [t._v("\r\n                Minimap: Auto respawning\r\n            ")])], 1)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Chat\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "row"}, [t._v("\r\n                You can right-click name in chat to block them until server restart\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.showBlockedMessageCount},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showBlockedMessageCount", e)
+                        }
+                    }
+                }, [t._v("\r\n                Show blocked message count\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.filterChatMessages},
+                    on: {
+                        change: function (e) {
+                            return t.Em("filterChatMessages", e)
+                        }
+                    }
+                }, [t._v("\r\n                Filter profanity\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.clearChatMessages},
+                    on: {
+                        change: function (e) {
+                            return t.Em("clearChatMessages", e)
+                        }
+                    }
+                }, [t._v("\r\n                Clear on disconnect\r\n            ")])], 1)]), t._v(" "), e("div", {staticClass: "reset-option-wrapper"}, [e("span", {
+                    staticClass: "reset-option",
+                    on: {
+                        click: function (e) {
+                            return t.Lm()
+                        }
+                    }
+                }, [e("i", {staticClass: "fa fa-undo"}), t._v(" Reset\r\n        ")])])])
+            };
+            Ht._withStripped = !0;
+            var Vt = s(1620), Gt = s(5097), qt = s(3117), {R: Jt} = s(3658);
+
+            function Yt(t) {
+                switch (t) {
                     case 0:
                         return "nobody else's";
                     case 1:
@@ -6196,77 +4440,20 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
             }
 
-            var B = (s(170), Object(v.a)({
-                data: () => ({
-                    clientHash: "Delta " + VERSION,
-                    isWebGLSupported: S,
-                    useWebGL: E,
-                    gameResolution: b.gameResolution,
-                    smallTextThreshold: b.smallTextThreshold,
-                    autoZoom: b.autoZoom,
-                    rememeberEjecting: b.rememeberEjecting,
-                    autoRespawn: b.autoRespawn,
-                    mouseFreezeSoft: b.mouseFreezeSoft,
-                    drawDelay: b.drawDelay,
-                    cameraMoveDelay: b.cameraMoveDelay,
-                    cameraZoomDelay: b.cameraZoomDelay,
-                    cameraZoomSpeed: b.cameraZoomSpeed,
-                    replayDuration: b.replayDuration,
-                    showReplaySaved: b.showReplaySaved,
-                    showNames: b.showNames,
-                    showMass: b.showMass,
-                    showSkins: b.showSkins,
-                    showOwnName: b.showOwnName,
-                    showOwnMass: b.showOwnMass,
-                    showOwnSkin: b.showOwnSkin,
-                    showCrown: b.showCrown,
-                    foodVisible: b.foodVisible,
-                    eatAnimation: b.eatAnimation,
-                    showHud: b.showHud,
-                    showLeaderboard: b.showLeaderboard,
-                    showServerName: b.showServerName,
-                    showChat: b.showChat,
-                    showChatToast: b.showChatToast,
-                    minimapEnabled: b.minimapEnabled,
-                    minimapLocations: b.minimapLocations,
-                    showFPS: b.showFPS,
-                    showPing: b.showPing,
-                    showCellCount: b.showCellCount,
-                    showPlayerScore: b.showPlayerScore,
-                    showPlayerMass: b.showPlayerMass,
-                    showClock: b.showClock,
-                    showSessionTime: b.showSessionTime,
-                    showPlayerCount: b.showPlayerCount,
-                    showSpectators: b.showSpectators,
-                    showRestartTiming: b.showRestartTiming,
-                    showBlockedMessageCount: b.showBlockedMessageCount,
-                    filterChatMessages: b.filterChatMessages,
-                    clearChatMessages: b.clearChatMessages,
-                    showTag: b.showTag,
-                    showDir: b.showDir,
-                    gameAlpha: b.gameAlpha,
-                    dualAutorespawn: b.dualAutorespawn,
-                    debugStats: b.debugStats,
-                    clientStats: b.clientStats,
-                    playerStats: b.playerStats,
-                    chatColorOnlyPeople: b.chatColorOnlyPeople,
-                    showCellLines: b.showCellLines,
-                    showTimeMessage: b.showTimeMessage,
-                    rainbowColorTimeMessage: b.rainbowColorTimeMessage,
-                    dualActiveCellBorderSize: b.dualActiveCellBorderSize,
-                    dualActive: b.dualActive
-                }),
-                computed: {
-                    showNamesMeaning() {
-                        return x(this.showNames)
-                    },
-                    showSkinsMeaning() {
-                        return x(this.showSkins)
-                    },
-                    showMassMeaning() {
-                        return x(this.showMass)
-                    },
-                    showReplaySavedMeaning() {
+            const Zt = {
+                data() {
+                    var t = Gt.ik(), e = {Gm: "92b1"};
+                    e.Dm = PIXI.utils.isWebGLSupported();
+                    for (var s = 0; s < t.length;) e[t[s++]] = t[s++];
+                    return e
+                }, computed: {
+                    Im() {
+                        return Yt(this.showNames)
+                    }, Jm() {
+                        return Yt(this.showSkins)
+                    }, Km() {
+                        return Yt(this.showMass)
+                    }, Hm() {
                         switch (this.showReplaySaved) {
                             case 0:
                                 return "nowhere";
@@ -6277,940 +4464,412 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             default:
                                 return "???"
                         }
-                    },
-                    showDualboxMeaning() {
-                        return ({
-                            0: "None",
-                            1: "Border",
-                            2: "Arrow",
-                            3: "Arrow"
-                        })[this.dualActive]
                     }
-                },
-                methods: {
-                    promptRestart() {
-                        _.confirm("Refresh page to apply changes?", () => {
-                            setTimeout(() => {
+                }, methods: {
+                    Fm() {
+                        qt.fb("Refresh page to apply changes?", (() => {
+                            setTimeout((() => {
                                 location.reload()
-                            }, 500)
-                        })
-                    },
-                    change(e, t) {
+                            }), 500)
+                        }))
+                    }, Em(t, e) {
                         var s;
-                        if (s = t && t.target ? isNaN(t.target.valueAsNumber) ? t.target.value : t.target.valueAsNumber : t, b[e] != s) {
-                            switch (this[e] = s, b.set(e, s), e) {
-                                case "backgroundColor":
-                                    var i = PIXI.utils.string2hex(s);
-                                    k.renderer.backgroundColor = i;
+                        if (s = e && e.target ? isNaN(e.target.valueAsNumber) ? e.target.value : e.target.valueAsNumber : e, Gt.Ee(t, s)) {
+                            if (this[t] = s, "showHud" === t) Vt.R.$emit(Jt.Sa);
+                            if (Vt.Ua) switch (t) {
+                                case"showNames":
+                                case"showSkins":
+                                case"showMass":
+                                case"showOwnName":
+                                case"showOwnSkin":
+                                case"showOwnMass":
+                                    Vt.Ya.lc();
                                     break;
-                                case "minimapLocations":
-                                    k.events.$emit("minimap-show-locations", s);
+                                case"foodVisible":
+                                    Vt.Ie.Nc.visible = s;
                                     break;
-                                case "showHud":
-                                    k.app.showHud = s;
-                                    break;
-                                case "showChatToast":
-                                    k.events.$emit("chat-visible", {
-                                        visibleToast: s
-                                    })
-                            }
-                            if (k.running) switch (e) {
-                                case "showNames":
-                                case "showSkins":
-                                case "showMass":
-                                case "showOwnName":
-                                case "showOwnSkin":
-                                case "showOwnMass":
-                                    k.playerManager.invalidateVisibility();
-                                    break;
-                                case "gameAlpha":
-                                    GAME.scene.container.alpha = s;
-                                    break;
-                                case "foodVisible":
-                                    k.scene.food.visible = s;
-                                    break;
-                                case "showLeaderboard":
-                                    k.events.$emit("leaderboard-visible", s);
-                                    break;
-                                case "minimapEnabled":
-                                    s ? k.events.$emit("minimap-show") : k.events.$emit("minimap-hide");
-                                    break;
-                                case "showFPS":
-                                case "showPing":
-                                case "showPlayerMass":
-                                case "showPlayerScore":
-                                case "showCellCount":
-                                    k.events.$emit("stats-invalidate-shown");
-                                    break;
-                                case "showClock":
-                                case "showSessionTime":
-                                case "showSpectators":
-                                case "showPlayerCount":
-                                case "showRestartTiming":
-                                    k.events.$emit("minimap-stats-invalidate-shown");
-                                    break;
-                                case "showChat":
-                                    k.events.$emit("chat-visible", {
-                                        visible: s
-                                    });
-                                    break;
-                                case "showBlockedMessageCount":
-                                    k.events.$emit("show-blocked-message-count", s)
+                                case"hudScale":
+                                case"chatHeight":
+                                case"showLeaderboard":
+                                case"showBlockedMessageCount":
+                                case"minimapEnabled":
+                                case"minimapLocations":
+                                case"showFPS":
+                                case"showPing":
+                                case"showPlayerMass":
+                                case"showPlayerScore":
+                                case"showCellCount":
+                                case"showClock":
+                                case"showSessionTime":
+                                case"showSpectators":
+                                case"showPlayerCount":
+                                case"showRestartTiming":
+                                case"showChat":
+                                case"showChatToast":
+                                    Vt.R.$emit(Jt.Sa, Gt)
                             }
                         }
-                    },
-                    confirmReset() {
-                        _.confirm(`Are you sure you want to reset all ${showDeltaSettings === 'delta' ? 'Delta' : ''} settings ?`, () => this.reset())
-                    },
-                    reset() {
-                        const e = ["clientHash", "isWebGLSupported"];
-                        const deltaProperties = [
-                            "dualAutorespawn",
-                            "debugStats",
-                            "clientStats",
-                            "playerStats",
-                            "chatColorOnlyPeople",
-                            "showCellLines",
-                            "showTimeMessage",
-                            "rainbowColorTimeMessage",
-                            "dualActiveCellBorderSize",
-                            "dualActive"
-                        ];
-
-                        for (var t in this.$data) {
-                            if (showDeltaSettings === 'delta') {
-                                if (!e.includes(t) && deltaProperties.includes(t)) this.change(t, b.getDefault(t));
-                            } else {
-                                if (!e.includes(t) && !deltaProperties.includes(t)) this.change(t, b.getDefault(t));
-                            }
-                        }
+                    }, Lm() {
+                        qt.fb("Are you sure you want to reset all setting options?", (() => {
+                            for (var t = Gt.ik().indexOf("clearChatMessages"), e = 0, s = Gt.ik(); e <= t; e += 2) this.Em(s[e], Gt.jk(s[e]))
+                        }))
                     }
                 }
-            }, I, [], !1, null, "3ddebeb3", null));
-            B.options.__file = "src/components/settings.vue";
-            var Q = B.exports,
-                M = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        staticClass: "container"
-                    }, [s("div", {
-                        staticClass: "section row"
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Colors and images\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options two-columns"
-                    }, [s("span", [s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Background")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.backgroundColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("backgroundColor", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Map border")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.borderColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("borderColor", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input",
-                        class: {
-                            disabled: !e.useFoodColor
-                        }
-                    }, [s("span", [e._v("Food")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            disabled: !e.useFoodColor,
-                            value: e.foodColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("foodColor", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Ejected cells")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.ejectedColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("ejectedColor", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Active cell")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.dualColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("dualColor", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Name outline")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.cellNameOutlineColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellNameOutlineColor", t)
-                            }
-                        }
-                    })], 1)]), e._v(" "), s("span", [s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Cursor")]), e._v(" "), s("image-option", {
-                        staticClass: "right",
-                        attrs: {
-                            width: "32",
-                            defaults: "",
-                            value: e.cursorImageUrl
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cursorImageUrl", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input",
-                        class: {
-                            disabled: !e.showBackgroundImage
-                        }
-                    }, [s("span", [e._v("Map image")]), e._v(" "), s("image-option", {
-                        staticClass: "right",
-                        attrs: {
-                            width: "330",
-                            defaults: e.bgDefault,
-                            disabled: !e.showBackgroundImage,
-                            value: e.backgroundImageUrl
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("backgroundImageUrl", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Viruses")]), e._v(" "), s("image-option", {
-                        staticClass: "right",
-                        attrs: {
-                            width: "100",
-                            defaults: e.virusDefault,
-                            value: e.virusImageUrl
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("virusImageUrl", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Dual arrow")]), e._v(" "), s("image-option", {
-                        staticClass: "right",
-                        attrs: {
-                            width: "100",
-                            defaults: e.dualArrowDefault,
-                            value: e.dualArrow
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("dualArrow", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Mass text")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.cellMassColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellMassColor", t)
-                            }
-                        }
-                    })], 1), e._v(" "), s("div", {
-                        staticClass: "color-input"
-                    }, [s("span", [e._v("Mass outline")]), e._v(" "), s("color-option", {
-                        staticClass: "right",
-                        attrs: {
-                            value: e.cellMassOutlineColor
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellMassOutlineColor", t)
-                            }
-                        }
-                    })], 1)])])]), e._v(" "), s("div", {
-                        staticClass: "section row"
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Map\n        "), e.useWebGL ? e._e() : s("span", {
-                        staticClass: "right silent"
-                    }, [e._v("Needs GPU rendering")])]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.useFoodColor
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("useFoodColor", t)
-                            }
-                        }
-                    }, [e._v("Custom food color")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.useWebGL,
-                            checked: e.showBackgroundLocationImage
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showBackgroundLocationImage", t)
-                            }
-                        }
-                    }, [e._v("Show background location")]), e._v(" "), s("div", {
-                        staticClass: "slider-option bottom-margin",
-                        class: {
-                            disabled: !e.useWebGL || !e.showBackgroundLocationImage
-                        }
-                    }, [e._v("\n            Background location opacity "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s((100 * e.backgroundLocationImageOpacity).toFixed(0)) + "%")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            disabled: !e.useWebGL || !e.showBackgroundLocationImage,
-                            min: "0.01",
-                            max: "1",
-                            step: "0.01"
-                        },
-                        domProps: {
-                            value: e.backgroundLocationImageOpacity
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("backgroundLocationImageOpacity", t)
-                            }
-                        }
-                    })]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.useWebGL,
-                            checked: e.showBackgroundImage
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("showBackgroundImage", t)
-                            }
-                        }
-                    }, [e._v("Show map image")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.useWebGL || !e.showBackgroundImage,
-                            checked: e.backgroundImageRepeat
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("backgroundImageRepeat", t)
-                            }
-                        }
-                    }, [e._v("Repeat map image")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            disabled: !e.useWebGL || !e.showBackgroundImage,
-                            checked: e.backgroundDefaultIfUnequal
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("backgroundDefaultIfUnequal", t)
-                            }
-                        }
-                    }, [e._v("Always crop map image")]), e._v(" "), s("div", {
-                        staticClass: "slider-option bottom-margin",
-                        class: {
-                            disabled: !e.useWebGL || !e.showBackgroundImage
-                        }
-                    }, [e._v("\n            Map image opacity "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s((100 * e.backgroundImageOpacity).toFixed(0)) + "%")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            disabled: !e.useWebGL || !e.showBackgroundImage,
-                            min: "0.1",
-                            max: "1",
-                            step: "0.05"
-                        },
-                        domProps: {
-                            value: e.backgroundImageOpacity
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("backgroundImageOpacity", t)
-                            }
-                        }
-                    })])], 1)]), e._v(" "), s("div", {
-                        staticClass: "section row"
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\r\n            Name text\r\n        ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("div", {
-                        staticClass: "bottom-margin"
-                    }, [e._v("\n            Font\n            "), s("input", {
-                        attrs: {
-                            type: "text",
-                            spellcheck: "false",
-                            placeholder: "Montserrat",
-                            maxlength: "30"
-                        },
-                        domProps: {
-                            value: e.cellNameFont
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellNameFont", t)
-                            },
-                            focus: function () {
-                                return e.fontWarning("name", !0)
-                            },
-                            blur: function () {
-                                return e.fontWarning("name", !1)
-                            }
-                        }
-                    })]), e._v(" "), e.showNameFontWarning ? [s("div", {
-                        staticClass: "silent"
-                    }, [e._v("It must be installed on your device.")]), e._v(" "), s("div", {
-                        staticClass: "silent"
-                    }, [e._v("If it still doesn't show, restart your PC")])] : e._e(), e._v(" "), s("div", {
-                        staticClass: "inline-range"
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.cellNameWeight
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellNameWeight", t)
-                            }
-                        }
-                    }), e._v("\n            " + e._s(e.cellNameWeightMeaning) + " name text\n        ")]), e._v(" "), s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.cellNameOutline
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "3",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.cellNameOutline
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellNameOutline", t)
-                            }
-                        }
-                    }), e._v("\n            " + e._s(e.cellNameOutlineMeaning) + " name outline\n        ")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.cellNameSmoothOutline
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("cellNameSmoothOutline", t)
-                            }
-                        }
-                    }, [e._v("Smooth name outline")]), e._v(" "), s("div", {
-                        staticClass: "slider-option"
-                    }, [e._v("\r\n                Long name threshold "), s("span", {
-                        staticClass: "right"
-                    }, [e._v(e._s(e.cellLongNameThreshold) + "px")]), e._v(" "), s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "500",
-                            max: "1250",
-                            step: "50"
-                        },
-                        domProps: {
-                            value: e.cellLongNameThreshold
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellLongNameThreshold", t)
-                            }
-                        }
-                    })])], 2)]), e._v(" "), s("div", {
-                        staticClass: "section row"
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Mass text\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("div", {
-                        staticClass: "bottom-margin"
-                    }, [e._v("\n            Font\n            "), s("input", {
-                        attrs: {
-                            type: "text",
-                            spellcheck: "false",
-                            placeholder: "Montserrat",
-                            maxlength: "30"
-                        },
-                        domProps: {
-                            value: e.cellMassFont
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellMassFont", t)
-                            },
-                            focus: function () {
-                                return e.fontWarning("mass", !0)
-                            },
-                            blur: function () {
-                                return e.fontWarning("mass", !1)
-                            }
-                        }
-                    })]), e._v(" "), e.showMassFontWarning ? [s("div", {
-                        staticClass: "silent"
-                    }, [e._v("It must be installed on your device.")]), e._v(" "), s("div", {
-                        staticClass: "silent"
-                    }, [e._v("If it still doesn't show, restart your PC")])] : e._e(), e._v(" "), s("div", {
-                        staticClass: "inline-range"
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "2",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.cellMassWeight
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellMassWeight", t)
-                            }
-                        }
-                    }), e._v("\n            " + e._s(e.cellMassWeightMeaning) + " mass text\n        ")]), e._v(" "), s("div", {
-                        staticClass: "inline-range",
-                        class: {
-                            off: !e.cellMassOutline
-                        }
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "3",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.cellMassOutline
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellMassOutline", t)
-                            }
-                        }
-                    }), e._v("\n            " + e._s(e.cellMassOutlineMeaning) + " mass outline\r\n            ")]), e._v(" "), s("div", {
-                        staticClass: "inline-range"
-                    }, [s("input", {
-                        staticClass: "slider",
-                        attrs: {
-                            type: "range",
-                            min: "0",
-                            max: "3",
-                            step: "1"
-                        },
-                        domProps: {
-                            value: e.cellMassTextSize
-                        },
-                        on: {
-                            input: function (t) {
-                                return e.change("cellMassTextSize", t)
-                            }
-                        }
-                    }), e._v("\n            " + e._s(e.cellMassTextSizeMeaning) + " mass text size\n        ")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.cellMassSmoothOutline
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("cellMassSmoothOutline", t)
-                            }
-                        }
-                    }, [e._v("Smooth mass outline")]), e._v(" "), s("p-check", {
-                        staticClass: "p-switch",
-                        attrs: {
-                            checked: e.shortMass
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.change("shortMass", t)
-                            }
-                        }
-                    }, [e._v("Short mass format")])], 2)]), e._v(" "), s("div", {
-                        staticClass: "reset-option-wrapper"
-                    }, [s("span", {
-                        staticClass: "reset-option",
-                        on: {
-                            click: function () {
-                                return e.confirmReset()
-                            }
-                        }
-                    }, [s("i", {
-                        staticClass: "fa fa-undo"
-                    }), e._v(" Reset\n    ")])])])
-                };
-            M._withStripped = !0;
-            var T = function () {
-                var e = this,
-                    t = e.$createElement,
-                    s = e._self._c || t;
-                return s("div", {
-                    staticClass: "color-button",
-                    class: {
-                        disabled: e.disabled
-                    },
-                    style: {
-                        backgroundColor: "#" + e.hex
-                    },
+            };
+            const Kt = (0, _.Z)(Zt, Ht, [], !1, null, "22117250", null).exports;
+            var Qt = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container"}, [e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Colors and images\r\n        ")]), t._v(" "), e("div", {staticClass: "options two-columns"}, [e("span", [e("div", {staticClass: "color-input"}, [e("span", [t._v("Background")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Rl: t.backgroundColor},
                     on: {
-                        mousedown: function () {
-                            e.disabled || e.showPicker(!0)
+                        input: function (e) {
+                            return t.Em("backgroundColor", e)
                         }
                     }
-                }, [e.pickerOpen ? s("div", {
-                    staticClass: "color-picker-wrapper",
+                })], 1), t._v(" "), e("div", {staticClass: "color-input"}, [e("span", [t._v("Map border")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Rl: t.borderColor},
                     on: {
-                        mousedown: function (t) {
-                            return e.startMovingPivot(t)
-                        },
-                        mousemove: function (t) {
-                            return e.movePivot(t)
-                        },
-                        mouseup: function (t) {
-                            return e.stopMovingPivot(t)
+                        input: function (e) {
+                            return t.Em("borderColor", e)
                         }
                     }
-                }, [s("div", {
-                    staticClass: "color-picker-overlay"
-                }), e._v(" "), s("div", {
-                    staticClass: "color-picker fade-box"
-                }, [s("input", {
-                    directives: [{
-                        name: "model",
-                        rawName: "v-model",
-                        value: e.hue,
-                        expression: "hue"
-                    }],
-                    staticClass: "color-picker-hue",
+                })], 1), t._v(" "), e("div", {
+                    staticClass: "color-input",
+                    class: {disabled: !t.useFoodColor}
+                }, [e("span", [t._v("Food")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Mm: !t.useFoodColor, Rl: t.foodColor},
+                    on: {
+                        input: function (e) {
+                            return t.Em("foodColor", e)
+                        }
+                    }
+                })], 1), t._v(" "), e("div", {staticClass: "color-input"}, [e("span", [t._v("Ejected cells")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Rl: t.ejectedColor},
+                    on: {
+                        input: function (e) {
+                            return t.Em("ejectedColor", e)
+                        }
+                    }
+                })], 1), t._v(" "), e("div", {
+                    staticClass: "color-input",
+                    class: {disabled: !t.cellNameOutline}
+                }, [e("span", [t._v("Name outline")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Mm: !t.cellNameOutline, Rl: t.cellNameOutlineColor},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellNameOutlineColor", e)
+                        }
+                    }
+                })], 1)]), t._v(" "), e("span", [e("div", {
+                    staticClass: "color-input",
+                    attrs: {tip: "32x32 recommended"}
+                }, [e("span", [t._v("Cursor")]), t._v(" "), e("image-option", {
+                    staticClass: "right",
+                    attrs: {md: 32, Nm: "", Rl: t.cursorImageUrl},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cursorImageUrl", e)
+                        }
+                    }
+                })], 1), t._v(" "), e("div", {
+                    staticClass: "color-input",
+                    class: {disabled: !t.showBackgroundImage},
+                    attrs: {tip: "1000x1000 or larger recommended, prefer square"}
+                }, [e("span", [t._v("Map image")]), t._v(" "), e("image-option", {
+                    staticClass: "right",
+                    attrs: {md: 330, Nm: t.Om, disabled: !t.showBackgroundImage, Rl: t.backgroundImageUrl},
+                    on: {
+                        input: function (e) {
+                            return t.Em("backgroundImageUrl", e)
+                        }
+                    }
+                })], 1), t._v(" "), e("div", {
+                    staticClass: "color-input",
+                    attrs: {tip: "512x512 recommended"}
+                }, [e("span", [t._v("Viruses")]), t._v(" "), e("image-option", {
+                    staticClass: "right",
+                    attrs: {md: 50, Nm: t.Pm, Rl: t.virusImageUrl},
+                    on: {
+                        input: function (e) {
+                            return t.Em("virusImageUrl", e)
+                        }
+                    }
+                })], 1), t._v(" "), e("div", {staticClass: "color-input"}, [e("span", [t._v("Mass text")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Rl: t.cellMassColor},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellMassColor", e)
+                        }
+                    }
+                })], 1), t._v(" "), e("div", {
+                    staticClass: "color-input",
+                    class: {disabled: !t.cellMassOutline}
+                }, [e("span", [t._v("Mass outline")]), t._v(" "), e("color-option", {
+                    staticClass: "right",
+                    attrs: {Mm: !t.cellMassOutline, Rl: t.cellMassOutlineColor},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellMassOutlineColor", e)
+                        }
+                    }
+                })], 1)])])]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Map\r\n            "), t.va ? t._e() : e("span", {staticClass: "right silent"}, [t._v("Needs GPU rendering")])]), t._v(" "), e("div", {staticClass: "options"}, [e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {tip: "All food will have same color", checked: t.useFoodColor},
+                    on: {
+                        change: function (e) {
+                            return t.Em("useFoodColor", e)
+                        }
+                    }
+                }, [t._v("\r\n                Custom food color\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {disabled: !t.va, checked: t.showBackgroundImage},
+                    on: {
+                        change: function (e) {
+                            return t.Em("showBackgroundImage", e)
+                        }
+                    }
+                }, [t._v("\r\n                Enable map image\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {
+                        disabled: !t.va || !t.showBackgroundImage,
+                        tip: "Show map image as puzzle pieces",
+                        checked: t.backgroundImageRepeat
+                    },
+                    on: {
+                        change: function (e) {
+                            return t.Em("backgroundImageRepeat", e)
+                        }
+                    }
+                }, [t._v("\r\n                Repeat map image\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "option-row bottom-margin",
+                    class: {disabled: !t.va || !t.showBackgroundImage}
+                }, [t._v("\r\n                Map image opacity "), e("span", {staticClass: "right"}, [t._v(t._s((100 * t.backgroundImageOpacity).toFixed(0)) + "%")]), t._v(" "), e("input", {
+                    staticClass: "slider",
                     attrs: {
                         type: "range",
-                        min: "0",
-                        max: "360",
-                        step: "1"
+                        disabled: !t.va || !t.showBackgroundImage,
+                        min: "0.1",
+                        max: "1",
+                        step: "0.05"
                     },
-                    domProps: {
-                        value: e.hue
-                    },
+                    domProps: {value: t.backgroundImageOpacity},
                     on: {
-                        change: function () {
-                            return e.triggerInput()
-                        },
-                        __r: function (t) {
-                            e.hue = t.target.value
+                        input: function (e) {
+                            return t.Em("backgroundImageOpacity", e)
                         }
                     }
-                }), e._v(" "), s("div", {
-                    staticClass: "color-picker-clr",
-                    style: {
-                        backgroundColor: "hsl(" + e.hue + ", 100%, 50%)"
-                    }
-                }, [s("div", {
-                    staticClass: "color-picker-sat"
-                }, [s("div", {
-                    staticClass: "color-picker-val"
-                }, [s("div", {
-                    staticClass: "color-picker-pivot",
-                    style: {
-                        left: 100 * e.sat + "px",
-                        top: 100 - 100 * e.val + "px"
-                    }
-                })])])]), e._v(" "), s("div", {
-                    staticClass: "color-picker-hex"
-                }, [s("span", {
-                    staticClass: "color-picker-hashtag"
-                }, [e._v("#")]), e._v(" "), s("input", {
-                    directives: [{
-                        name: "model",
-                        rawName: "v-model",
-                        value: e.hex,
-                        expression: "hex"
-                    }],
-                    staticClass: "color-picker-hex",
+                })])], 1)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Player name text\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "bottom-margin"}, [t._v("\r\n                Font\r\n                "), e("input", {
                     attrs: {
                         type: "text",
                         spellcheck: "false",
-                        maxlength: "6",
-                        placeholder: "000000"
-                    },
-                    domProps: {
-                        value: e.hex
-                    },
-                    on: {
-                        input: [function (t) {
-                            t.target.composing || (e.hex = t.target.value)
-                        }, function () {
-                            return e.triggerInput()
-                        }]
-                    }
-                })])])]) : e._e()])
-            };
-            T._withStripped = !0;
-            var D = (s(172), Object(v.a)({
-                data: () => ({
-                    pickerOpen: !1,
-                    movingPivot: !1,
-                    hue: 0,
-                    sat: 0,
-                    val: 0
-                }),
-                props: ["value", "disabled"],
-                computed: {
-                    hex: {
-                        get() {
-                            return function (e, t, s) {
-                                var i, a, n, o, r, l, c, h;
-                                switch (l = s * (1 - t), c = s * (1 - (r = 6 * e - (o = Math.floor(6 * e))) * t), h = s * (1 - (1 - r) * t), o % 6) {
-                                    case 0:
-                                        i = s, a = h, n = l;
-                                        break;
-                                    case 1:
-                                        i = c, a = s, n = l;
-                                        break;
-                                    case 2:
-                                        i = l, a = s, n = h;
-                                        break;
-                                    case 3:
-                                        i = l, a = c, n = s;
-                                        break;
-                                    case 4:
-                                        i = h, a = l, n = s;
-                                        break;
-                                    case 5:
-                                        i = s, a = l, n = c
-                                }
-                                return (i = Math.ceil(255 * i).toString(16).padStart(2, "0")) + (a = Math.ceil(255 * a).toString(16).padStart(2, "0")) + Math.ceil(255 * n).toString(16).padStart(2, "0")
-                            }(this.hue / 360, this.sat, this.val)
-                        },
-                        set(e) {
-                            if (e = e.toLowerCase(), /^[0-9a-f]{6}$/.test(e)) {
-                                var t, s, i, a, n, o, r,
-                                    l = (t = e, s = parseInt(t.slice(0, 2), 16) / 255, i = parseInt(t.slice(2, 4), 16) / 255, a = parseInt(t.slice(4, 6), 16) / 255, [60 * ((r = (o = (n = Math.max(s, i, a)) - Math.min(s, i, a)) && (n == s ? (i - a) / o : n == i ? 2 + (a - s) / o : 4 + (s - i) / o)) < 0 ? r + 6 : r), n && o / n, n]);
-                                this.hue = l[0], this.sat = l[1], this.val = l[2]
-                            }
+                        placeholder: "Hind Madurai",
+                        maxlength: "30",
+                        tip: "Must be installed on your device to work"
+                    }, domProps: {value: t.cellNameFont}, on: {
+                        input: function (e) {
+                            return t.Em("cellNameFont", e)
                         }
                     }
+                })]), t._v(" "), e("div", {staticClass: "inline-range"}, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "2", step: "1"},
+                    domProps: {value: t.cellNameWeight},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellNameWeight", e)
+                        }
+                    }
+                }), t._v("\r\n                " + t._s(t.Qm) + " name text\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.cellNameOutline}
+                }, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "3", step: "1"},
+                    domProps: {value: t.cellNameOutline},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellNameOutline", e)
+                        }
+                    }
+                }), t._v("\r\n                " + t._s(t.Rm) + " name outline\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.cellNameSmoothOutline},
+                    on: {
+                        change: function (e) {
+                            return t.Em("cellNameSmoothOutline", e)
+                        }
+                    }
+                }, [t._v("\r\n                Smooth name outline\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "option-row",
+                    attrs: {tip: "Long names of players in game are replaced"}
+                }, [t._v("\r\n                Long name threshold "), e("span", {staticClass: "right"}, [t._v(t._s(t.cellLongNameThreshold) + "px")]), t._v(" "), e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "500", max: "1250", step: "50"},
+                    domProps: {value: t.cellLongNameThreshold},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellLongNameThreshold", e)
+                        }
+                    }
+                })])], 1)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Player mass text\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [e("div", {staticClass: "bottom-margin"}, [t._v("\r\n                Font\r\n                "), e("input", {
+                    attrs: {
+                        type: "text",
+                        spellcheck: "false",
+                        placeholder: "Ubuntu",
+                        maxlength: "30",
+                        tip: "Must be installed on your device to work"
+                    }, domProps: {value: t.cellMassFont}, on: {
+                        input: function (e) {
+                            return t.Em("cellMassFont", e)
+                        }
+                    }
+                })]), t._v(" "), e("div", {staticClass: "inline-range"}, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "2", step: "1"},
+                    domProps: {value: t.cellMassWeight},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellMassWeight", e)
+                        }
+                    }
+                }), t._v("\r\n                " + t._s(t.Sm) + " mass text\r\n            ")]), t._v(" "), e("div", {
+                    staticClass: "inline-range",
+                    class: {off: !t.cellMassOutline}
+                }, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "3", step: "1"},
+                    domProps: {value: t.cellMassOutline},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellMassOutline", e)
+                        }
+                    }
+                }), t._v("\r\n                " + t._s(t.Tm) + " mass outline\r\n            ")]), t._v(" "), e("div", {staticClass: "inline-range"}, [e("input", {
+                    staticClass: "slider",
+                    attrs: {type: "range", min: "0", max: "3", step: "1"},
+                    domProps: {value: t.cellMassTextSize},
+                    on: {
+                        input: function (e) {
+                            return t.Em("cellMassTextSize", e)
+                        }
+                    }
+                }), t._v("\r\n                " + t._s(t.Um) + " mass text size\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {checked: t.cellMassSmoothOutline},
+                    on: {
+                        change: function (e) {
+                            return t.Em("cellMassSmoothOutline", e)
+                        }
+                    }
+                }, [t._v("\r\n                Smooth mass outline\r\n            ")]), t._v(" "), e("p-check", {
+                    staticClass: "p-switch",
+                    attrs: {tip: "12345 mass shows as 12.3k", checked: t.shortMass},
+                    on: {
+                        change: function (e) {
+                            return t.Em("shortMass", e)
+                        }
+                    }
+                }, [t._v("\r\n                Short mass format\r\n            ")])], 1)]), t._v(" "), e("div", {staticClass: "reset-option-wrapper"}, [e("span", {
+                    staticClass: "reset-option",
+                    on: {
+                        click: function (e) {
+                            return t.Lm()
+                        }
+                    }
+                }, [e("i", {staticClass: "fa fa-undo"}), t._v(" Reset\r\n        ")])])])
+            };
+            Qt._withStripped = !0;
+            var te = function () {
+                var t = this;
+                return (0, t._self._c)("div", {
+                    staticClass: "color-button",
+                    class: {disabled: t.Mm},
+                    style: {backgroundColor: "#" + t.Rl},
+                    on: {mousedown: t.Vm}
+                })
+            };
+            te._withStripped = !0;
+            var ee = s(1620), {R: se} = s(3658);
+            const ae = {
+                data: () => ({Wm: !1}),
+                props: {
+                    Rl: {type: String, required: !0},
+                    Nm: {type: String, default: null},
+                    Mm: {type: Boolean, default: !1}
                 },
                 methods: {
-                    showPicker(e) {
-                        this.pickerOpen = e
-                    },
-                    startMovingPivot(e) {
-                        var t = e.target.classList;
-                        if (t.contains("color-picker-overlay")) return this.showPicker(!1), void e.stopPropagation();
-                        (t.contains("color-picker-pivot") || t.contains("color-picker-val")) && (this.movingPivot = !0, this.movePivot(e))
-                    },
-                    movePivot(e) {
-                        if (this.movingPivot) {
-                            var t = this.$el.querySelector('.color-picker-val').getBoundingClientRect(),
-                                s = e.clientX - t.x,
-                                i = e.clientY - t.y;
-                            this.sat = s / 100, this.val = 1 - i / 100, this.sat = Math.min(Math.max(this.sat, 0), 1), this.val = Math.min(Math.max(this.val, 0), 1)
-                        }
-                    },
-                    stopMovingPivot(e) {
-                        this.movingPivot && (this.movePivot(e), this.movingPivot = !1, this.triggerInput())
-                    },
-                    triggerInput() {
-                        this.$emit("input", this.hex)
+                    Vm(t) {
+                        this.Mm || (ee.R.$emit(se.Xm, {
+                            Ha: t.clientX,
+                            Ia: t.clientY,
+                            Rl: this.Rl,
+                            Nm: this.Nm
+                        }), this.Wm = !0)
+                    }, Ym(t) {
+                        this.Wm && this.$emit("input", t)
+                    }, Zm() {
+                        this.Wm = !1
                     }
                 },
                 created() {
-                    this.value && (this.hex = this.value)
+                    ee.R.$on(se.an, this.Ym), ee.R.$on(se.bn, this.Zm)
+                },
+                destroyed() {
+                    ee.R.$off(se.an, this.Ym), ee.R.$off(se.bn, this.Zm)
                 }
-            }, T, [], !1, null, "5b0666af", null));
-            D.options.__file = "src/components/color-option.vue";
-            var L = D.exports,
-                N = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        staticClass: "image-button",
-                        class: {
-                            disabled: e.disabled
-                        },
-                        style: {
-                            backgroundColor: "#" + e.hex
-                        },
-                        on: {
-                            mousedown: function () {
-                                e.disabled || e.showPicker(!0)
-                            }
-                        }
-                    }, [s("div", {
-                        staticClass: "image-button-text"
-                    }, [e._v("...")]), e._v(" "), e.pickerOpen ? s("div", {
-                        staticClass: "image-picker-wrapper",
-                        on: {
-                            click: function (t) {
-                                return e.tryHidePicker(t)
-                            }
-                        }
-                    }, [s("div", {
-                        staticClass: "image-picker-overlay"
-                    }), e._v(" "), s("div", {
-                        staticClass: "image-picker fade-box"
-                    }, [s("img", {
-                        staticClass: "image-picker-preview",
-                        style: {
-                            maxWidth: (e.value ? e.width : 200) + "px"
-                        },
-                        attrs: {
-                            src: e.value,
-                            alt: "No image chosen or it is invalid"
-                        },
-                        on: {
-                            click: function () {
-                                return e.openFileChooser()
-                            },
-                            dragover: function (t) {
-                                return e.allowDrop(t)
-                            },
-                            drop: function (t) {
-                                return e.onImageDrop(t)
-                            }
-                        }
-                    }), e._v(" "), s("div", {
-                        staticClass: "image-picker-information"
-                    }, [e._v("\n            Click or drop onto image to change."), s("br"), e._v(" "), "defaults" in this ? s("span", {
-                        staticClass: "image-picker-reset",
-                        on: {
-                            click: function () {
-                                return e.triggerInput(e.defaults)
-                            }
-                        }
-                    }, [e._v("Reset to default")]) : e._e()]), e._v(" "), s("input", {
-                        staticClass: "image-picker-input",
-                        attrs: {
-                            type: "file",
-                            accept: "image/png, image/jpeg, image/bmp, image/webp"
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.onImageSelect(t)
-                            }
-                        }
-                    })])]) : e._e()])
-                };
-            N._withStripped = !0;
-            var U = (s(174), Object(v.a)({
-                data: () => ({
-                    pickerOpen: !1,
-                    fileReader: null
-                }),
-                props: ["value", "width", "disabled", "defaults"],
+            };
+            const ie = (0, _.Z)(ae, te, [], !1, null, "e11a74f8", null).exports;
+            var ne = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    staticClass: "image-button",
+                    class: {disabled: t.Mm},
+                    on: {mousedown: t.Vm}
+                }, [e("div", {staticClass: "image-button-text"}, [t._v("...")])])
+            };
+            ne._withStripped = !0;
+            var re = s(1620), {R: oe} = s(3658);
+            const le = {
+                data: () => ({Wm: !1}),
+                props: {
+                    Rl: {type: String},
+                    md: {type: Number},
+                    Mm: {type: Boolean, default: !1},
+                    Nm: {type: String, required: !1}
+                },
                 methods: {
-                    showPicker(e) {
-                        !this.pickerOpen && e && (this.imageLoadedOnce = !1), this.pickerOpen = e
-                    },
-                    tryHidePicker(e) {
-                        e.target.classList.contains("image-picker-overlay") && (this.showPicker(!1), e.stopPropagation())
-                    },
-                    triggerInput(e) {
-                        this.$emit("input", e)
-                    },
-                    openFileChooser() {
-                        this.$el.querySelector('.image-picker-input').click()
-                    },
-                    allowDrop(e) {
-                        e.preventDefault()
-                    },
-                    getFileReader() {
-                        var e = new FileReader;
-                        return e.addEventListener("load", e => {
-                            this.triggerInput(e.target.result)
-                        }), e
-                    },
-                    onImageSelect(e) {
-                        if (0 !== e.target.files.length) {
-                            var t = e.target.files[0];
-                            t.type.startsWith("image/") && this.getFileReader().readAsDataURL(t)
-                        }
-                    },
-                    onImageDrop(e) {
-                        if (e.preventDefault(), 0 !== e.dataTransfer.files.length) {
-                            var t = e.dataTransfer.files[0];
-                            t.type.startsWith("image/") && this.getFileReader().readAsDataURL(t)
-                        }
+                    Vm(t) {
+                        this.Mm || (re.R.$emit(oe.cn, {
+                            Ha: t.clientX,
+                            Ia: t.clientY,
+                            md: this.md,
+                            Rl: this.Rl,
+                            Nm: this.Nm
+                        }), this.Wm = !0)
+                    }, dn(t) {
+                        this.Wm && this.$emit("input", t)
+                    }, Zm() {
+                        this.Wm = !1
                     }
+                },
+                created() {
+                    re.R.$on(oe.en, this.dn), re.R.$on(oe.fn, this.Zm)
+                },
+                destroyed() {
+                    re.R.$off(oe.en, this.dn), re.R.$off(oe.fn, this.Zm)
                 }
-            }, N, [], !1, null, "641581b7", null));
-            U.options.__file = "src/components/image-option.vue";
-            var R = U.exports,
-                P = function () {
-                    var e = this.$createElement;
-                    return (this._self._c || e)("div")
-                };
-            P._withStripped = !0;
-            var F = Object(v.a)({
-                data: () => ({
-                    hello: 123
-                })
-            }, P, [], !1, null, "384e68ec", null);
-            F.options.__file = "src/components/template.vue", F.exports;
-            var G = s(1),
-                H = s(4),
-                O = s(5);
+            };
+            const ce = (0, _.Z)(le, ne, [], !1, null, "180f29a6", null).exports;
+            var ue = s(1620), he = s(5097), de = s(3117), {R: pe} = s(3658);
 
-            function Y(e) {
-                switch (e) {
+            function ve(t) {
+                switch (t) {
                     case 0:
                         return "Thin";
                     case 1:
@@ -7222,8 +4881,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
             }
 
-            function z(e) {
-                switch (e) {
+            function fe(t) {
+                switch (t) {
                     case 0:
                         return "No";
                     case 1:
@@ -7237,2398 +4896,2407 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
             }
 
-            function W(e, t) {
-                return e ? new Promise((s, i) => {
-                    var a = new Image;
-                    a.onload = () => {
-                        var e = document.createElement("canvas"),
-                            i = e.getContext("2d"),
-                            n = Math.max(a.width, a.height),
-                            o = Math.min(a.width, a.height),
-                            r = n === a.width,
-                            l = Math.min(n, t) / n,
-                            c = (r ? n : o) * l,
-                            h = (r ? o : n) * l;
-                        e.width = c, e.height = h, i.drawImage(a, 0, 0, c, h), s(e.toDataURL())
-                    }, a.onerror = i, a.src = e
-                }) : null
+            function me(t, e) {
+                return t ? new Promise(((s, a) => {
+                    var i = new Image;
+                    i.onload = () => {
+                        var t = document.createElement("canvas"), a = t.getContext("2d"),
+                            n = Math.max(i.width, i.height), r = Math.min(i.width, i.height), o = n === i.width,
+                            l = Math.min(n, e) / n, c = (o ? n : r) * l, u = (o ? r : n) * l;
+                        t.width = c, t.height = u, a.drawImage(i, 0, 0, c, u), s(t.toDataURL())
+                    }, i.onerror = a, i.src = t
+                })) : null
             }
 
-            var Z = PIXI.utils.isWebGLSupported() && H.useWebGL,
-                j = (s(176), Object(v.a)({
-                    components: {
-                        colorOption: L,
-                        imageOption: R
-                    },
-                    data: () => ({
-                        useWebGL: Z,
-                        bgDefault: H.getDefault("backgroundImageUrl"),
-                        virusDefault: "https://i.ibb.co/V9tdfcY/i.png",
-                        dualArrowDefault: "https://i.ibb.co/Tbr7M8J/i.png",
-                        showNameFontWarning: !1,
-                        showMassFontWarning: !1,
-                        backgroundColor: H.backgroundColor,
-                        borderColor: H.borderColor,
-                        foodColor: H.foodColor,
-                        ejectedColor: H.ejectedColor,
-                        cellNameOutlineColor: H.cellNameOutlineColor,
-                        cursorImageUrl: H.cursorImageUrl,
-                        backgroundImageUrl: H.backgroundImageUrl,
-                        virusImageUrl: H.virusImageUrl,
-                        cellMassColor: H.cellMassColor,
-                        cellMassOutlineColor: H.cellMassOutlineColor,
-                        cellNameFont: H.cellNameFont,
-                        cellNameWeight: H.cellNameWeight,
-                        cellNameOutline: H.cellNameOutline,
-                        cellNameSmoothOutline: H.cellNameSmoothOutline,
-                        cellMassFont: H.cellMassFont,
-                        cellMassWeight: H.cellMassWeight,
-                        cellMassOutline: H.cellMassOutline,
-                        cellMassSmoothOutline: H.cellMassSmoothOutline,
-                        cellMassTextSize: H.cellMassTextSize,
-                        cellLongNameThreshold: H.cellLongNameThreshold,
-                        shortMass: H.shortMass,
-                        showBackgroundImage: H.showBackgroundImage,
-                        showBackgroundLocationImage: H.showBackgroundLocationImage,
-                        backgroundLocationImageOpacity: H.backgroundLocationImageOpacity,
-                        backgroundImageRepeat: H.backgroundImageRepeat,
-                        backgroundDefaultIfUnequal: H.backgroundDefaultIfUnequal,
-                        backgroundImageOpacity: H.backgroundImageOpacity,
-                        useFoodColor: H.useFoodColor,
-                        dualArrow: H.dualArrow,
-                        dualColor: H.dualColor
-                    }),
-                    computed: {
-                        cellNameWeightMeaning() {
-                            return Y(this.cellNameWeight)
-                        },
-                        cellMassWeightMeaning() {
-                            return Y(this.cellMassWeight)
-                        },
-                        cellNameOutlineMeaning() {
-                            return z(this.cellNameOutline)
-                        },
-                        cellMassOutlineMeaning() {
-                            return z(this.cellMassOutline)
-                        },
-                        cellMassTextSizeMeaning() {
-                            return function (e) {
-                                switch (e) {
-                                    case 0:
-                                        return "Small";
-                                    case 1:
-                                        return "Normal";
-                                    case 2:
-                                        return "Large";
-                                    case 3:
-                                        return "Largest";
-                                    default:
-                                        return "???"
-                                }
-                            }(this.cellMassTextSize)
-                        }
-                    },
-                    methods: {
-                        async change(e, t, s) {
-                            var i;
-                            i = t && t.target ? isNaN(t.target.valueAsNumber) ? t.target.value : t.target.valueAsNumber : t;
-                            try {
-                                switch (e) {
-                                    case "cursorImageUrl":
-                                        i = await W(i, 32);
-                                        break;
-                                    case "backgroundImageUrl":
-                                        i !== this.bgDefault && (i = await W(i, 4e3));
-                                        break;
-                                    case "virusImageUrl":
-                                        i !== this.virusDefault && (i = await W(i, 200));
-                                        break;
-                                    case "dualArrow":
-                                        G.dual.reloadArrow(i)
-                                }
-                            } catch (a) {
-                                return void O.alert("This image is too large to even be loaded.")
+            const _e = {
+                components: {colorOption: ie, imageOption: ce}, data() {
+                    var t = he.ik(), e = {};
+                    e.va = PIXI.utils.isWebGLSupported() && he.va, e.Om = he.jk("backgroundImageUrl"), e.Pm = he.jk("virusImageUrl");
+                    for (var s = 0; s < t.length;) e[t[s++]] = t[s++];
+                    return e
+                }, computed: {
+                    Qm() {
+                        return ve(this.cellNameWeight)
+                    }, Sm() {
+                        return ve(this.cellMassWeight)
+                    }, Rm() {
+                        return fe(this.cellNameOutline)
+                    }, Tm() {
+                        return fe(this.cellMassOutline)
+                    }, Um() {
+                        return function (t) {
+                            switch (t) {
+                                case 0:
+                                    return "Small";
+                                case 1:
+                                    return "Normal";
+                                case 2:
+                                    return "Large";
+                                case 3:
+                                    return "Largest";
+                                default:
+                                    return "???"
                             }
-                            if (H[e] != i) {
-                                var n = this[e];
-                                try {
-                                    H.set(e, i)
-                                } catch (o) {
-                                    return H.set(e, n), void O.alert("Saving this setting failed. Perhaps the image is too large?")
-                                }
-                                switch (this[e] = i, e) {
-                                    case "cursorImageUrl":
-                                        G.events.$emit("set-cursor-url", i);
-                                        break;
-                                    case "backgroundColor":
-                                        G.renderer.backgroundColor = PIXI.utils.string2hex(i);
-                                        break;
-                                    case "cellNameOutlineColor":
-                                    case "cellNameFont":
-                                    case "cellNameWeight":
-                                    case "cellNameOutline":
-                                    case "cellNameSmoothOutline":
-                                        G.settings.compileNameFontStyle();
-                                        break;
-                                    case "cellMassColor":
-                                    case "cellMassOutlineColor":
-                                    case "cellMassFont":
-                                    case "cellMassWeight":
-                                    case "cellMassOutline":
-                                    case "cellMassSmoothOutline":
-                                    case "cellMassTextSize":
-                                        G.settings.compileMassFontStyle();
-                                        break;
-                                    case "cellLongNameThreshold":
-                                        G.scene.resetPlayerLongNames()
-                                }
-                                if (G.running) switch (e) {
-                                    case "borderColor":
-                                        G.scene.resetBorder();
-                                        break;
-                                    case "foodColor":
-                                        H.useFoodColor && G.scene.reloadFoodTextures();
-                                        break;
-                                    case "ejectedColor":
-                                        G.scene.reloadEjectedTextures();
-                                        break;
-                                    case "virusImageUrl":
-                                        G.scene.reloadVirusTexture();
-                                        break;
-                                    case "cellNameOutlineColor":
-                                    case "cellNameFont":
-                                    case "cellNameWeight":
-                                    case "cellNameOutline":
-                                    case "cellNameSmoothOutline":
-                                        G.scene.resetNameTextStyle();
-                                        break;
-                                    case "cellMassColor":
-                                    case "cellMassOutlineColor":
-                                    case "cellMassFont":
-                                    case "cellMassWeight":
-                                    case "cellMassOutline":
-                                    case "cellMassSmoothOutline":
-                                    case "cellMassTextSize":
-                                        G.scene.resetMassTextStyle(!0);
-                                        break;
-                                    case "showBackgroundImage":
-                                        G.scene.toggleBackgroundImage(i);
-                                        break;
-                                    case "showBackgroundLocationImage":
-                                        G.scene.toggleBackgroundLocationImage(i);
-                                        break;
-                                    case "backgroundImageUrl":
-                                    case "backgroundImageRepeat":
-                                    case "backgroundDefaultIfUnequal":
-                                    case "backgroundImageOpacity":
-                                        G.scene.setBackgroundImage();
-                                        break;
-                                    case "backgroundLocationImageOpacity":
-                                        G.scene.initBackgroundLocationImage(true);
-                                        break;
-                                    case "useFoodColor":
-                                        G.scene.reloadFoodTextures()
-                                }
-                            }
-                        },
-                        confirmReset() {
-                            O.confirm("Are you sure you want to reset all setting options?", () => this.reset())
-                        },
-                        reset() {
-                            var e = ["useWebGL", "bgDefault", "virusDefault", "showNameFontWarning", "showMassFontWarning"];
-                            for (var t in this.$data) e.includes(t) || this.change(t, H.getDefault(t))
-                        },
-                        fontWarning(e, t) {
-                            switch (e) {
-                                case "name":
-                                    this.showNameFontWarning = t;
+                        }(this.cellMassTextSize)
+                    }
+                }, methods: {
+                    async Em(t, e) {
+                        var s;
+                        s = e && e.target ? isNaN(e.target.valueAsNumber) ? e.target.value : e.target.valueAsNumber : e;
+                        try {
+                            switch (t) {
+                                case"cursorImageUrl":
+                                    s = await me(s, 32);
                                     break;
-                                case "mass":
-                                    this.showMassFontWarning = t
+                                case"backgroundImageUrl":
+                                    s !== this.Om && (s = await me(s, 4e3));
+                                    break;
+                                case"virusImageUrl":
+                                    s !== this.Pm && (s = await me(s, 200))
                             }
+                        } catch (t) {
+                            return void de.hb("This image is too large to even be loaded")
                         }
+                        try {
+                            if (!he.Ee(t, s)) return
+                        } catch (e) {
+                            return he.Ee(t, this[t]), void de.hb("Saving settings failed. Perhaps the image is too large?")
+                        }
+                        switch (this[t] = s, t) {
+                            case"cursorImageUrl":
+                                ue.R.$emit(pe.Sa, he);
+                                break;
+                            case"backgroundColor":
+                                ue.wa.backgroundColor = PIXI.utils.string2hex(s);
+                                break;
+                            case"cellNameOutlineColor":
+                            case"cellNameFont":
+                            case"cellNameWeight":
+                            case"cellNameOutline":
+                            case"cellNameSmoothOutline":
+                                he.gk();
+                                break;
+                            case"cellMassColor":
+                            case"cellMassOutlineColor":
+                            case"cellMassFont":
+                            case"cellMassWeight":
+                            case"cellMassOutline":
+                            case"cellMassSmoothOutline":
+                            case"cellMassTextSize":
+                                he.hk()
+                        }
+                        if (ue.Ua) switch (t) {
+                            case"borderColor":
+                                ue.Ie.gn();
+                                break;
+                            case"foodColor":
+                                this.useFoodColor && ue.Ie.td(4);
+                                break;
+                            case"ejectedColor":
+                                ue.Ie.td(3);
+                                break;
+                            case"virusImageUrl":
+                                ue.Ie.hn(2);
+                                break;
+                            case"cellNameOutlineColor":
+                            case"cellNameFont":
+                            case"cellNameWeight":
+                            case"cellNameOutline":
+                            case"cellNameSmoothOutline":
+                                ue.Ie.Ad();
+                                break;
+                            case"cellMassColor":
+                            case"cellMassOutlineColor":
+                            case"cellMassFont":
+                            case"cellMassWeight":
+                            case"cellMassOutline":
+                            case"cellMassSmoothOutline":
+                            case"cellMassTextSize":
+                                ue.Ie.Gd(), ue.Ie.Qc();
+                                break;
+                            case"showBackgroundImage":
+                            case"backgroundImageUrl":
+                                ue.Ie.Sc(!0);
+                                break;
+                            case"backgroundImageRepeat":
+                            case"backgroundImageOpacity":
+                                ue.Ie.Sc(!1);
+                                break;
+                            case"useFoodColor":
+                                ue.Ie.jn();
+                                break;
+                            case"cellLongNameThreshold":
+                                ue.Ie.zd()
+                        }
+                    }, Lm() {
+                        de.fb("Are you sure you want to reset all setting options?", (() => {
+                            for (var t = he.ik().indexOf("backgroundColor"), e = he.ik().indexOf("useFoodColor"), s = t, a = he.ik(); s <= e; s += 2) this.Em(a[s], he.jk(a[s]))
+                        }))
                     }
-                }, M, [], !1, null, "15c13b66", null));
-            j.options.__file = "src/components/theming.vue";
-            var J = j.exports,
-                K = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        attrs: {
-                            id: "hotkey-container"
-                        }
-                    }, [s("div", {
-                        staticClass: "hotkeys"
-                    }, e._l(e.availableHotkeys, function (t, i) {
-                        return s("div", {
-                            key: i,
-                            staticClass: "row"
-                        }, [s("span", {
-                            staticClass: "action"
-                        }, [e._v(e._s(i))]), e._v(" "), s("span", {
-                            staticClass: "bind",
-                            attrs: {
-                                tabindex: "0"
-                            },
-                            on: {
-                                mousedown: function (s) {
-                                    return e.onMouseDown(s, t)
-                                },
-                                keydown: function (s) {
-                                    return s.preventDefault(), e.onKeyDown(s, t)
-                                }
-                            }
-                        }, [e._v("\n            " + e._s(e.hotkeys[t]) + "\n        ")])])
-                    }), 0), e._v(" "), s("div", {
-                        staticClass: "footer"
-                    }, [s("span", {
-                        staticClass: "reset-button2",
-                        on: {
-                            click: e.onResetClick
-                        }
-                    }, [s("i", {
-                        staticClass: "fa fa-undo"
-                    }), e._v(" Reset\n    ")])])])
-                };
-            K._withStripped = !0;
-            var V = s(66),
-                X = s(5),
-                q = (s(178), Object(v.a)({
-                    data: () => ({
-                        availableHotkeys: {
-                            Dual: "dualbox",
-                            "Select player": "selectPlayer",
-                            Feed: "feed",
-                            "Feed macro": "feedMacro",
-                            Split: "split",
-                            Doublesplit: "splitx2",
-                            Triplesplit: "splitx3",
-                            "Quad split": "splitMax",
-                            "Split 32": "split32",
-                            "Split 64": "split64",
-                            "Split 128": "split128",
-                            "Split 256": "split256",
-                            "Dual trick-split": "dual1",
-                            "Dual double-trick": "dual2",
-                            "Dual line-trick": "dual3",
-                            "Diagonal linesplit": "linesplit",
-                            "Freeze mouse": "freezeMouse",
-                            "Lock linesplit": "lockLinesplit",
-                            "Stop movement": "stopMovement",
-                            Respawn: "respawn",
-                            "Toggle auto respawn": "toggleAutoRespawn",
-                            "Toggle skins": "toggleSkins",
-                            "Toggle names": "toggleNames",
-                            "Toggle food": "toggleFood",
-                            "Toggle mass": "toggleMass",
-                            "Toggle chat": "toggleChat",
-                            "Toggle chat popup": "toggleChatToast",
-                            "Toggle HUD": "toggleHud",
-                            "Spectate lock": "spectateLock",
-                            "Save replay": "saveReplay",
-                            "Zoom level 1": "zoomLevel1",
-                            "Zoom level 2": "zoomLevel2",
-                            "Zoom level 3": "zoomLevel3",
-                            "Zoom level 4": "zoomLevel4",
-                            "Zoom level 5": "zoomLevel5"
-                        },
-                        hotkeys: V.get()
-                    }),
-                    methods: {
-                        onResetClick: function () {
-                            X.confirm("Are you sure you want to reset all hotkeys?", () => {
-                                this.hotkeys = V.reset()
-                            })
-                        },
-                        onMouseDown: function (e, t) {
-                            if (e.target === document.activeElement) {
-                                var s = "MOUSE" + e.button;
-                                V.set(t, s) && (e.preventDefault(), this.hotkeys[t] = s, e.target.blur())
-                            }
-                        },
-                        onKeyDown: function (e, t) {
-                            var s = V.convertKey(e.code);
-                            "ESCAPE" !== s && "ENTER" !== s ? ("DELETE" == s && (s = ""), V.set(t, s) && (this.hotkeys[t] = s, e.target.blur())) : e.target.blur()
-                        }
-                    }
-                }, K, [], !1, null, "2dbed53e", null));
-            q.options.__file = "src/components/hotkeys.vue";
-            var ee = q.exports,
-                et = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        staticClass: "container"
-                    }, [s("input", {
-                        ref: "file",
-                        staticStyle: {
-                            display: "none"
-                        },
-                        attrs: {
-                            type: "file",
-                            accept: ".vanis",
-                            multiple: ""
-                        },
-                        on: {
-                            change: function (t) {
-                                return e.onFile(t)
-                            }
-                        }
-                    }), e._v(" "), s("div", {
-                        staticClass: "replay-list-header"
-                    }, [s("span", {
-                        staticClass: "replay-list-count"
-                    }, [e._v(e._s(e.keysLoadedFirst ? e.replayKeys.length + " replay" + (1 !== e.replayKeys.length ? "s" : "") : "Loading"))]), e._v(" "), e.keysLoadedFirst && !e.keysEmpty ? s("span", {
-                        staticClass: "replay-list-page"
-                    }, [s("div", {
-                        staticClass: "anchor"
-                    }, [s("div", {
-                        staticClass: "left"
-                    }, [s("div", {
-                        staticClass: "current"
-                    }, [s("div", {
-                        staticClass: "phantom"
-                    }, [s("i", {
-                        staticClass: "fas fa-chevron-left prev",
-                        class: {
-                            disabled: !e.keysLoaded || 0 === e.pageIndex
-                        },
-                        on: {
-                            click: function () {
-                                return e.updateReplayPage(-1)
-                            }
-                        }
-                    }), e._v(" "), s("span", [e._v(e._s(e.pageCount))])]), e._v(" "), e.pageInputShown ? e._e() : s("div", {
-                        staticClass: "real",
-                        on: {
-                            click: function () {
-                                return e.togglePageInput(!0)
-                            }
-                        }
-                    }, [s("span", [e._v(e._s(1 + e.pageIndex))])]), e._v(" "), e.pageInputShown ? s("div", {
-                        staticClass: "real-input"
-                    }, [s("div", {
-                        staticClass: "overlay",
-                        on: {
-                            click: function () {
-                                return e.togglePageInput(!1)
-                            }
-                        }
-                    }), e._v(" "), s("i", {
-                        staticClass: "fas fa-chevron-left prev",
-                        class: {
-                            disabled: !e.keysLoaded || 0 === e.pageIndex
-                        },
-                        on: {
-                            click: function () {
-                                return e.updateReplayPage(-1)
-                            }
-                        }
-                    }), e._v(" "), s("input", {
-                        attrs: {
-                            type: "text"
-                        },
-                        domProps: {
-                            value: 1 + e.pageIndex
-                        },
-                        on: {
-                            focus: function (e) {
-                                return e.target.select()
-                            },
-                            change: function (t) {
-                                return e.updateReplayPage(t)
-                            }
-                        }
-                    })]) : e._e()])]), e._v("\n            /\n            "), s("div", {
-                        staticClass: "right"
-                    }, [e._v("\n                " + e._s(e.pageCount) + "\n                    "), s("i", {
-                        staticClass: "fas fa-chevron-right next",
-                        class: {
-                            disabled: !e.keysLoaded || e.pageIndex === e.pageCount - 1
-                        },
-                        on: {
-                            click: function () {
-                                return e.updateReplayPage(1)
-                            }
-                        }
-                    })])])]) : e._e(), e._v(" "), s("span", {
-                        staticClass: "replay-list-bulk"
-                    }, [s("input", {
-                        staticClass: "vanis-button",
-                        attrs: {
-                            type: "button",
-                            disabled: !e.keysLoaded,
-                            value: "Import"
-                        },
-                        on: {
-                            click: function () {
-                                return e.$refs.file.click()
-                            }
-                        }
-                    }), e._v(" "), s("input", {
-                        staticClass: "vanis-button",
-                        attrs: {
-                            type: "button",
-                            disabled: !e.keysLoaded || e.keysEmpty,
-                            value: "Download all"
-                        },
-                        on: {
-                            click: function () {
-                                return e.downloadAllReplays()
-                            }
-                        }
-                    }), e._v(" "), s("input", {
-                        staticClass: "vanis-button",
-                        attrs: {
-                            type: "button",
-                            disabled: !e.keysLoaded || e.keysEmpty,
-                            value: "Delete all"
-                        },
-                        on: {
-                            click: function () {
-                                return e.deleteAllReplays()
-                            }
-                        }
-                    })])]), e._v(" "), s("div", {
-                        staticClass: "replay-list"
-                    }, [e.keysLoadedFirst && e.keysEmpty ? [s("div", {
-                        staticClass: "notification"
-                    }, [s("div", [e._v("Press "), s("b", [e._v(e._s(e.messageHotkey))]), e._v(" in game to save last "), s("b", [e._v(e._s(e.messageReplayDuration))]), e._v(" seconds of gameplay.")]), e._v(" "), s("div", {
-                        staticStyle: {
-                            color: "red",
-                            "font-weight": "bold"
-                        }
-                    }, [e._v("Replays are saved in browser memory!")]), e._v(" "), s("div", [e._v("They get permanently erased if browser data gets cleared.")])])] : e._e(), e._v(" "), e.keysLoadedFirst && !e.keysEmpty ? [s("div", {
-                        staticClass: "replay-page"
-                    }, e._l(e.pageData, function (e, t) {
-                        return s("replay-item", {
-                            key: t,
-                            attrs: {
-                                replay: e
-                            }
-                        })
-                    }), 1)] : e._e()], 2), e._v(" "), e.bulkOperating ? s("div", {
-                        staticClass: "overlay bulk-operation-overlay"
-                    }, [e._v("\n        Please wait...\n        "), e.bulkOperationStatus ? s("div", {
-                        staticClass: "small"
-                    }, [e._v(e._s(e.bulkOperationStatus))]) : e._e(), e._v(" "), e.showMultipleFilesWarning ? s("div", {
-                        staticClass: "small warning"
-                    }, [e._v("Allow page to download multiple files if asked")]) : e._e()]) : e._e()])
-                };
-            et._withStripped = !0;
-            var es = s(116),
-                ei = s(89),
-                ea = s(180),
-                en = s(1),
-                eo = s(66),
-                er = s(4),
-                el = s(5),
-                ec = s(8),
-                eh = en.replay.database,
-                ed = {
-                    data: () => ({
-                        keysLoadedFirst: !1,
-                        keysLoaded: !1,
-                        keysLoading: !1,
-                        keysEmpty: !1,
-                        replayKeys: [],
-                        pageInputShown: !1,
-                        pageLoadingCancel: null,
-                        pageLoaded: !1,
-                        pageIndex: 0,
-                        pageCount: 0,
-                        pageData: [],
-                        bulkOperating: !1,
-                        bulkOperationStatus: "",
-                        showMultipleFilesWarning: !1,
-                        messageHotkey: eo.get().saveReplay,
-                        messageReplayDuration: er.replayDuration
-                    }),
-                    components: {
-                        replayItem: es.default
-                    },
-                    methods: {
-                        togglePageInput(e) {
-                            this.pageInputShown = e
-                        },
-                        setBulkOp(e, t) {
-                            e ? (this.bulkOperating = !0, this.bulkOperationStatus = t || "") : setTimeout(() => {
-                                this.bulkOperating = !1, this.bulkOperationStatus = ""
-                            }, 1e3)
-                        },
-                        async onFile(e) {
-                            if (!this.bulkOperating) {
-                                var t = Array.from(e.target.files);
-                                if (t.length) {
-                                    e.target && (e.target.value = null);
-                                    var s = 0,
-                                        i = t.length,
-                                        a = t.map(async e => {
-                                            var t, a;
-                                            await eh.setItem(e.name.replace(/\.vanis$/, ""), await (t = e, new Promise((e, s) => {
-                                                var i = new FileReader;
-                                                i.onload = t => e(t.target.result), i.onerror = s, i.readAsText(t)
-                                            }))), this.setBulkOp(!0, "Importing replays (" + ++s + " / " + i + ")")
-                                        });
-                                    this.setBulkOp(!0, "Importing replays");
-                                    try {
-                                        await Promise.all(a)
-                                    } catch (n) {
-                                        el.alert('Error importing replays: "' + n.message + '"'), this.setBulkOp(!1), this.updateReplayKeys()
-                                    }
-                                    this.setBulkOp(!1), this.updateReplayKeys()
-                                }
-                            }
-                        },
-                        async downloadAllReplays() {
-                            if (!this.bulkOperating && this.keysLoaded) {
-                                var e = this.replayKeys.length,
-                                    t = Math.ceil(this.replayKeys.length / 200),
-                                    s = t > 1,
-                                    i = ec.getTimestamp();
-                                this.showMultipleFilesWarning = s, this.setBulkOp(!0, "Packing replays (0 / " + t + ")");
-                                for (var a = 0, n = 0; a < e; a += 200, n++) {
-                                    for (var o = new ea, r = a; r < a + 200 && r < e; r++) {
-                                        var l = this.replayKeys[r];
-                                        o.file(l + ".vanis", await eh.getItem(l))
-                                    }
-                                    var c = await o.generateAsync({
-                                            type: "blob"
-                                        }),
-                                        h = "replays_" + i;
-                                    s && (h += "_" + (n + 1)), h += ".zip", ei.saveAs(c, h), this.setBulkOp(!0, "Packing replays (" + (n + 1) + " / " + t + ")")
-                                }
-                                this.showMultipleFilesWarning = !1, this.setBulkOp(!1)
-                            }
-                        },
-                        deleteAllReplays() {
-                            if (!this.bulkOperating) {
-                                var e = this;
-                                el.confirm("Are you absolutely sure that you want to delete all replays?", async () => {
-                                    this.setBulkOp(!0, "Deleting all replays");
-                                    try {
-                                        await eh.clear()
-                                    } catch (t) {
-                                        return void el.alert("Error clearing replays: " + t.message)
-                                    }
-                                    this.setBulkOp(!1), e.updateReplayKeys()
-                                })
-                            }
-                        },
-                        async updateReplayKeys() {
-                            if (!this.keysLoading) {
-                                this.keysLoaded = !1, this.keysLoading = !0;
-                                var e = await eh.keys();
-                                e = e.reverse(), this.replayKeys.splice(0, this.replayKeys.length, ...e), this.pageCount = Math.max(Math.ceil(e.length / 12), 1), this.pageIndex = Math.min(this.pageIndex, this.pageCount - 1), this.keysLoaded = !0, this.keysLoadedFirst = !0, this.keysLoading = !1, this.keysEmpty = 0 === e.length, await this.updateReplayPage()
-                            }
-                        },
-                        async updateReplayPage(e) {
-                            e && ("number" == typeof e ? this.pageIndex += e : this.pageIndex = parseInt(e.target.value) - 1 || 0), this.pageLoadingCancel && (this.pageLoadingCancel(), this.pageLoadingCancel = null);
-                            var t = Math.max(Math.min(this.pageIndex, this.pageCount - 1), 0);
-                            this.pageIndex !== t && (this.pageIndex = t), this.pageLoaded = !1;
-                            var s = [],
-                                i = !1;
-                            this.pageLoadingCancel = () => i = !0;
-                            for (var a = 12 * this.pageIndex, n = 12 * (1 + this.pageIndex), o = a; o < n && o < this.replayKeys.length && !i; o++) {
-                                var r = this.replayKeys[o],
-                                    l = {
-                                        name: r,
-                                        data: await eh.getItem(r)
-                                    };
-                                if (l.data && typeof l.data === 'string') {
-                                    l.data.startsWith("REPLAY") ? l.image = l.data.split("|")[2] : l.image = "https://vanis.io/img/replay-placeholder.png", s.push(l)
-                                } else {
-                                    l.image = "https://vanis.io/img/replay-placeholder.png", s.push(l)
-                                }
-                            }
-                            i || (this.pageData.splice(0, this.pageData.length, ...s), this.pageLoaded = !0)
-                        }
-                    },
-                    created() {
-                        this.updateReplayKeys(), en.events.$on("replay-added", this.updateReplayKeys), en.events.$on("replay-removed", this.updateReplayKeys)
-                    },
-                    beforeDestroy() {
-                        en.events.$off("replay-added", this.updateReplayKeys), en.events.$off("replay-removed", this.updateReplayKeys)
-                    }
+                }
+            };
+            const ge = (0, _.Z)(_e, Qt, [], !1, null, "c41b640a", null).exports;
+            var we = s(1620), {R: ye} = s(3658);
+            const be = {
+                components: {
+                    modal: Mt,
+                    settings: Kt,
+                    theming: ge,
+                    hotkeys: M,
+                    replays3: Wt,
+                    metaLeaderboard: Ct,
+                    lobby: lt
                 },
-                ep = (s(220), Object(v.a)(ed, et, [], !1, null, "4a996e52", null));
-            ep.options.__file = "src/components/replays3.vue";
-            var eu = ep.exports,
-                ew = (s(19), s(1)),
-                eI = (s(5), {
-                    components: {
-                        modal: w.default,
-                        settings: Q,
-                        theming: J,
-                        hotkeys: ee,
-                        delta: Q,
-                        replays3: eu,
-                    },
-                    data: () => ({
-                        activeModal: "",
-                        showSettings: !1,
-                        showHotkeys: !1,
-                        gameState: ew.state,
-                        nickname: "string" == typeof localStorage.nickname ? localStorage.nickname : "",
-                        teamtag: localStorage.teamtag || "",
-                        skinUrl: "string" == typeof localStorage.skinUrl ? localStorage.skinUrl : "https://skins.vanis.io/s/Qkfih2"
-                    }),
-                    created: function () {
-                        ew.events.$on("skin-click", e => {
-                            const skin = document.getElementById("skinDisplay1");
-                            this.skinUrl = localStorage.skinUrl = e;
-                            if (skin) skin.src = e;
-                        })
-                    },
-                    methods: {
-                        openModal: function (e) {
-                            this.activeModal = e, this.$emit("modal-open", !0)
-                        },
-                        closeModal: function () {
-                            this.activeModal = "", this.$emit("modal-open", !1)
-                        },
-                        play() {
-                            let {
-                                lifeState: e
-                            } = this.gameState;
-                            if (1 & e) {
-                                let {
-                                    dual: t
-                                } = ew;
-                                2 & e ? t.focused ? t.spawn() : ew.actions.join() : t.connected && (t.focused ? t.spawn() : t.switch())
-                            } else ew.actions.join();
-                            ew.showMenu(!1)
-                        },
-                        spectate() {
-                            let {
-                                lifeState: e
-                            } = this.gameState;
-                            1 & e || (ew.actions.spectate(), ew.showMenu(!1))
-                        },
-                        onSkinUrlChange() {
-                            ew.events.$emit("skin-url-edit", this.skinUrl)
-                        },
-                        onTeamTagChange() {
-                            localStorage.setItem("teamtag", this.teamtag)
-                        },
-                        onNicknameChange() {
-                            localStorage.setItem("nickname", this.nickname)
-                        }
-                    }
+                data: () => ({
+                    Jk: "",
+                    qa: we.ra,
+                    Cg: we.Cg,
+                    Dk: "string" == typeof localStorage.nickname ? localStorage.nickname : "",
+                    Fk: localStorage.teamtag || "",
+                    Hk: "string" == typeof localStorage.skinUrl ? localStorage.skinUrl : "https://skins.vanis.io/s/vanis1"
                 }),
-                e$ = (s(224), Object(v.a)(eI, y, [function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return t("div", {
-                        staticStyle: {
-                            "text-align": "center",
-                            height: "225px"
-                        }
-                    }, [t("div", {
-                        staticStyle: {
-                            padding: "4px"
-                        }
-                    }, [this._v("")])])
-                }], !1, null, "1bcde71e", null));
-            e$.options.__file = "src/components/player.vue";
-            var ek = e$.exports,
-                eb = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-
-                    function getPerkName() {
-                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_name_picked"]) return e["_data"]["account"]["perk_name_picked"];
-                        return e.name;
+                created() {
+                    we.R.$on(ye.kn, (t => this.Hk = t)), we.R.$on(ye.Eg, (t => this.Ck(t)))
+                },
+                methods: {
+                    Ck(t) {
+                        this.Jk = t, we.R.$emit(ye.ln, null != this.Jk)
+                    }, async Kk() {
+                        ("lobby" !== this.Jk || null == this.Cg.Bg || this.Cg.Dg || await b().fb("Are you sure that you want to leave the lobby?")) && (this.Jk = "", we.R.$emit(ye.ln, !1))
+                    }, bb(t) {
+                        t instanceof MouseEvent && t.isTrusted && (this.qa.Vd || we.Td.Yd(), we.lf(!1))
+                    }, Ud() {
+                        we.Td.Ud(), we.lf(!1)
+                    }, Ik() {
+                        we.R.$emit(ye.mn, this.Hk)
+                    }, Gk() {
+                        localStorage.setItem("teamtag", this.Fk)
+                    }, Ek() {
+                        localStorage.setItem("nickname", this.Dk)
                     }
-
-                    function getPerkBadge() {
-                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_badge_set"]) return {
-                            badge: "/img/badge/" + getPerkBadgeImage(e["_data"]["account"]["perk_badge_set"]) + ".png?2",
-                            width: "25px",
-                            margin: "3px"
-                        };
-                        return {
-                            badge: null,
-                            width: "0",
-                            margin: "0"
-                        };
+                }
+            };
+            const Ce = (0, _.Z)(be, w, [function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    staticStyle: {
+                        "text-align": "center",
+                        height: "286px"
                     }
-
-                    function getPerkNameColor() {
-                        if (e && e["_data"] && e["_data"]["account"] && e["_data"]["account"]["perk_color_picked"]) return "#" + e["_data"]["account"]["perk_color_picked"];
-                        return "#ffffff";
+                }, [e("div", {staticStyle: {padding: "4px"}}, [t._v("Advertisement")]), t._v(" "), e("div", {attrs: {id: "vanis-io_300x250"}})])
+            }], !1, null, "5190ae12", null).exports;
+            var ke = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "account-wrapper"}, [t.nn ? t._e() : e("div", [e("div", {
+                    staticStyle: {
+                        "margin-top": "6px",
+                        "margin-bottom": "10px"
                     }
-
-                    const user = {
-                        name: getPerkName(),
-                        badge: getPerkBadge(),
-                        color: getPerkNameColor()
+                }, [t._v("Login with Discord to save your progress and gain perks!")]), t._v(" "), e("div", {
+                    staticClass: "discord",
+                    on: {
+                        click: function (e) {
+                            return t.pn()
+                        }
                     }
-                    return s("div", {
-                        staticStyle: {
-                            padding: "12px 15px"
+                }, [t.qn ? [t.qn ? e("i", {
+                    staticClass: "fas fa-sync fa-spin",
+                    staticStyle: {"margin-right": "5px"}
+                }) : t._e(), t._v(" Logging in\r\n            ")] : [e("i", {staticClass: "fab fa-discord"}), t._v(" Login with Discord\r\n            ")]], 2)]), t._v(" "), t.nn ? e("div", {staticClass: "account"}, [e("div", {staticStyle: {"margin-bottom": "3px"}}, [e("img", {
+                    staticClass: "avatar",
+                    attrs: {src: t.rn}
+                }), t._v(" "), e("div", {staticClass: "player-info"}, [e("div", {
+                    staticClass: "account-name",
+                    style: {color: t.xl}
+                }, [e("badges", {attrs: {Ee: t.sn.perk_badge_set}}), t._v("\r\n                    " + t._s(t.tn) + "\r\n                ")], 1), t._v(" "), e("div", [t._v(t._s(t.un) + " total XP")]), t._v(" "), e("div", {attrs: {tip: t.vn}}, [t._v("\r\n                    " + t._s(t.wn) + " total season XP\r\n                ")])])]), t._v(" "), e("div", {staticStyle: {position: "relative"}}, [e("progress-bar", {
+                    staticClass: "xp-progress",
+                    attrs: {xn: t.yn}
+                }), t._v(" "), e("div", {staticClass: "xp-data"}, [e("div", {
+                    staticStyle: {
+                        flex: "1",
+                        "margin-left": "8px"
+                    }
+                }, [t._v("Level " + t._s(t.zn))]), t._v(" "), e("div", {staticStyle: {"margin-right": "7px"}}, [t._v(t._s(t.An))])])], 1), t._v(" "), e("div", {
+                    staticClass: "logout_",
+                    attrs: {tip: "Logout"},
+                    on: {
+                        click: function (e) {
+                            return t.Bn()
                         }
-                    }, [e.account ? e._e() : s("div", [s("div", {
-                        staticStyle: {
-                            "margin-top": "6px",
-                            "margin-bottom": "10px"
-                        }
-                    }, [e._v("Login with Discord to save your progress and gain perks!")]), e._v(" "), s("div", {
-                        staticClass: "discord",
-                        on: {
-                            click: function () {
-                                return e.openDiscordLogin()
-                            }
-                        }
-                    }, [e.loading ? [e.loading ? s("i", {
-                        staticClass: "fas fa-sync fa-spin",
-                        staticStyle: {
-                            "margin-right": "5px"
-                        }
-                    }) : e._e(), e._v(" Loading\n        ")] : [s("i", {
-                        staticClass: "fab fa-discord"
-                    }), e._v(" Login with Discord\n            ")]], 2)]), e._v(" "), e.account ? s("div", {
-                        staticClass: "account"
-                    }, [s("div", {
-                        staticStyle: {
-                            "margin-bottom": "3px"
-                        }
-                    }, [s("img", {
-                        staticClass: "avatar",
-                        attrs: {
-                            src: e.avatarUrl
-                        }
-                    }), e._v(" "), s("div", {
-                        staticClass: "player-info"
-                    }, [s("div", {
-                        staticStyle: {
-                            display: "flex",
-                            alignItems: "center"
-                        }
-                    }, [s("img", {
-                        staticClass: "badge",
-                        staticStyle: {
-                            width: user.badge.width,
-                            marginRight: user.badge.margin
-                        },
-                        attrs: {
-                            src: user.badge.badge
-                        }
-                    }), s("div", {
-                        style: {
-                            color: user.color
-                        },
-                        attrs: {
-                            id: "account-name"
-                        }
-                    }, [e._v(e._s(user.name))])]), e._v(" "), s("div", [e._v(e._s(e.account.xp) + " total XP")]), e._v(" "), s("div", [e._v(e._s((e.account.season_xp ? Object.values(e.account.season_xp).reduce((acc, xp) => acc + xp, 0) : 0) + " total season XP"))])])]), e._v(" "), s("div", {
-                        staticStyle: {
-                            position: "relative"
-                        }
-                    }, [s("progress-bar", {
-                        staticClass: "xp-progress",
-                        attrs: {
-                            progress: e.progress
-                        }
-                    }), e._v(" "), s("div", {
-                        staticClass: "xp-data"
-                    }, [s("div", {
-                        staticStyle: {
-                            flex: "1",
-                            "margin-left": "8px"
-                        }
-                    }, [e._v(e._s('Level ' + e.account.level))]), e._v(" "), s("div", {
-                        staticStyle: {
-                            "margin-right": "7px"
-                        }
-                    }, [e._v(e._s(e.xpAtNextLevel))])])], 1), e._v(" "), s("div", {
-                        staticClass: "logout",
-                        on: {
-                            click: function () {
-                                return e.logout()
-                            }
-                        }
-                    }, [s("i", {
-                        staticClass: "fas fa-sign-out-alt"
-                    }), e._v(" \n    ")])]) : e._e()])
-                };
-            eb._withStripped = !0;
-            var e_ = function () {
-                var e = this.$createElement,
-                    t = this._self._c || e;
-                return t("div", {
-                    staticClass: "progress progress-striped"
-                }, [t("div", {
+                    }
+                }, [e("i", {staticClass: "fas fa-sign-out-alt"})])]) : t._e()])
+            };
+            ke._withStripped = !0;
+            var Se = function () {
+                var t = this._self._c;
+                return t("div", {staticClass: "progress progress-striped"}, [t("div", {
                     staticClass: "progress-bar",
-                    style: {
-                        width: 100 * this.progress + "%"
-                    }
+                    style: {width: 100 * this.xn + "%"}
                 })])
             };
-            e_._withStripped = !0;
-            var eS = (s(226), Object(v.a)({
-                props: ["progress"]
-            }, e_, [], !1, null, "4e838c74", null));
-            eS.options.__file = "src/components/progressBar.vue";
-            var eE = eS.exports,
-                ex = s(228),
-                eB = s(5),
-                e8 = s(1),
-                e0 = s(229),
-                eQ = (s(230), Object(v.a)({
-                    components: {
-                        progressBar: eE
-                    },
-                    data: () => ({
-                        accountTime: 0,
-                        account: null,
-                        progress: 0,
-                        xpAtCurrentLevel: 0,
-                        xpAtNextLevel: 0,
-                        loading: !1,
-                        avatarUrl: null,
-                        nameColor: null,
-                        name: null
-                    }),
-                    created() {
-                        e8.events.$on("xp-update", this.onXpUpdate), this.reloadUserData(), this.listenForToken()
-                    },
-                    beforeDestroy() {
-                        e8.events.$off("xp-update", this.onXpUpdate)
-                    },
-                    methods: {
-                        listenForToken() {
-                            window.addEventListener("message", e => {
-                                var t = e.data.vanis_token;
-                                t && (this.onLoggedIn(t), e.source.postMessage("loggedIn", e.origin))
-                            })
-                        },
-                        reloadUserData() {
-                            Date.now() - this.accountTime <= 6e4 || (this.accountTime = Date.now(), ex.vanisToken && this.loadUserData())
-                        },
-                        async loadUserData() {
-                            this.loading = !0;
-                            let e = await ex.get("/me");
-                            if (!e.ok) {
-                                this.loading = !1;
-                                return
-                            }
-                            let t = await e.json();
-                            this.setAccountData(t), this.updateProgress(this.account.xp, this.account.level), this.loading = !1
-                        },
-                        async logout() {
-                            try {
-                                await ex.call("DELETE", "/me")
-                            } catch (e) {
-                                var t = e.response;
-                                t && 401 !== t.status && eB.alert("Error: " + e.message)
-                            }
-                            ex.clearToken(), this.account = null, this.name = null, this.nameColor = null, this.avatarUrl = null, e8.ownUid = null
-                        },
-                        getAvatarUrl: (e, t) => t ? "https://cdn.discordapp.com/avatars/" + e + "/" + t + ".png" : "https://cdn.discordapp.com/embed/avatars/0.png",
-                        setAccountData(e) {
-                            e.permissions && (window.gameObj = e8), GAME.account = e, this.account = e, this.avatarUrl = this.getAvatarUrl(e.discord_id, e.discord_avatar), this.name = e.locked_name || e.discord_name, this.nameColor = e.name_color ? "#" + e.name_color : "#ffffff", e8.ownUid = e.uid
-                        },
-                        onXpUpdate(e) {
-                            if (this.account) {
-                                let t = e0.getLevel(e);
-                                if (!this.account.season_xp.delta) this.account.season_xp.delta = 0;
-                                this.account.season_xp.delta += e - this.account.xp, this.account.level = t, this.account.xp = e, this.updateProgress(e, t)
-                            }
-                        },
-                        updateProgress(e, t) {
-                            this.xpAtCurrentLevel = e0.getXp(t), this.xpAtNextLevel = e0.getXp(t + 1), this.progress = (e - this.xpAtCurrentLevel) / (this.xpAtNextLevel - this.xpAtCurrentLevel)
-                        },
-                        openDiscordLogin: function () {
-                            window.open(ex.url + "/login/discord", "", "width=500, height=750")
-                        },
-                        onLoggedIn(e) {
-                            ex.setToken(e), this.loadUserData()
-                        }
+            Se._withStripped = !0;
+            const xe = {props: {xn: {type: Number, required: !0}}};
+            const Me = (0, _.Z)(xe, Se, [], !1, null, "5f2d6d72", null).exports;
+            var Pe = s(3117), Ie = s(1050), Te = s(1620), Ae = s(3658), {R: Ne} = s(3658);
+            const Le = {
+                components: {progressBar: Me, badges: D},
+                data: () => ({sn: null, qn: !1, nn: !1, rn: null, tn: null, xl: null, un: 0, wn: 0, vn: null}),
+                computed: {
+                    zn() {
+                        return Ae.Cn(this.un)
+                    }, yn() {
+                        var t = Ae.Cn(this.un), e = Ae.Dn(t), s = Ae.Dn(t + 1) - e;
+                        return (this.un - e) / s
+                    }, En() {
+                        return Ae.Dn(Ae.Cn(this.un))
+                    }, An() {
+                        return Ae.Dn(Ae.Cn(this.un) + 1)
                     }
-                }, eb, [], !1, null, "661435cd", null));
-            eQ.options.__file = "src/components/account.vue";
-            var eM = eQ.exports,
-                eT = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        attrs: {
-                            id: "skins-container"
+                },
+                methods: {
+                    async Fn() {
+                        if (null != Ie.We) {
+                            this.qn = !0;
+                            var t = await Ie.get("/me");
+                            if (this.qn = !1, !t.ok) return console.error("Account:", t.status, t.statusText), void (401 === t.status ? Ie.Ye() : 503 === t.status && Pe.hb(await t.text()));
+                            Te.R.$emit(Ne.kf, await t.json())
                         }
-                    }, [s("div", {
-                        attrs: {
-                            id: "skins"
-                        }
-                    }, [e._l(e.skins, function (t, i) {
-                        return s("span", {
-                            key: i,
-                            staticClass: "skin-container"
-                        }, [s("img", {
-                            staticClass: "skin",
-                            class: {
-                                selected: e.selectedSkinIndex === i
-                            },
-                            attrs: {
-                                src: t,
-                                alt: ""
-                            },
-                            on: {
-                                click: function () {
-                                    return e.selectSkin(i)
-                                },
-                                contextmenu: function () {
-                                    getModule(4).set("dualSkin", GAME.skinPanel.skins[i]), document.getElementById("skinDisplay2").src = GAME.skinPanel.skins[i], window.SwalAlerts.toast.fire({
-                                        type: "info",
-                                        title: "Updated dualbox skin",
-                                        timer: 1500
-                                    })
-                                }
+                    }, async Bn() {
+                        await Ie.Ze("DELETE", "/me"), Ie.Ye(), Te.R.$emit(Ne.kf, null)
+                    }, Gn(t, e) {
+                        var s = `https://cdn.discordapp.com/avatars/${t}/${e}`;
+                        this.rn = e ? `${s}.${e.startsWith("a_") ? "gif" : "png"}` : "https://cdn.discordapp.com/embed/avatars/0.png"
+                    }, Hn(t) {
+                        this.sn = t, t ? (this.nn = !0, this.Gn(t.discord_id, t.discord_avatar), this.In(t.xp, t.season_xp)) : (this.nn = !1, this.rn = null, this.tn = null, this.xl = null, this.In(0, 0)), Te.R.$emit(Ne.pj, t)
+                    }, Jn(t) {
+                        null != t && (this.sn.perk_badge_set = t.perk_badge_set, null != t.perk_name_picked && null != t.perk_color_picked ? (this.tn = t.perk_name_picked, this.xl = "#" + t.perk_color_picked) : (this.tn = this.sn.discord_name, this.xl = "#ffffff"))
+                    }, Kn(t) {
+                        this.nn && this.In(t - this.un)
+                    }, In(t, e) {
+                        if (this.nn) if (null != e) {
+                            this.un = t, this.wn = 0;
+                            var s = [];
+                            for (var a in e) {
+                                this.wn += e[a];
+                                var i = {
+                                    ffa: "FFA",
+                                    instant: "Instant",
+                                    gigasplit: "Gigasplit",
+                                    terasplit: "Terasplit",
+                                    megasplit: "Megasplit",
+                                    crazy: "Crazy",
+                                    "self-feed": "Self-Feed"
+                                }[a];
+                                null != i && s.push(`${i}: ${e[a]} season XP`)
                             }
-                        }), e._v(" "), s("i", {
-                            staticClass: "fas fa-times skin-remove-button",
-                            on: {
-                                click: function () {
-                                    return e.removeSkin(i)
-                                }
-                            }
-                        })])
-                    }), e._v(" "), s("img", {
-                        staticClass: "skin add-skin",
-                        attrs: {
-                            src: "/img/skin-add.png",
-                            alt: ""
-                        },
-                        on: {
-                            click: function () {
-                                return e.addSkin()
-                            }
-                        }
-                    })], 2)])
-                };
-            eT._withStripped = !0;
-            var eD = s(1),
-                eL = (s(232), Object(v.a)({
-                    data: () => ({
-                        selectedSkinIndex: 0,
-                        skins: [],
-                        skinsLoaded: []
-                    }),
-                    created() {
-                        eD.events.$on("skin-url-edit", this.onSkinUrlChanged.bind(this)), this.skins = this.loadSkins() || this.getDefaultSkins();
-                        var e = Number(localStorage.selectedSkinIndex) || 0;
-                        this.selectSkin(e), GAME.skinPanel = this
-                    },
-                    methods: {
-                        loadSkins() {
-                            var e = localStorage.skins;
-                            if (!e) return !1;
-                            try {
-                                var t = JSON.parse(e)
-                            } catch (s) {
-                                return !1
-                            }
-                            if (!Array.isArray(t)) return !1;
-                            for (var i = t.length; i < 2; i++) t.push("https://skins.vanis.io/s/Qkfih2");
-                            return t
-                        },
-                        getDefaultSkins() {
-                            for (var e = [], t = 0; t < 8; t++) e.push("https://skins.vanis.io/s/Qkfih2");
-                            return e
-                        },
-                        onSkinUrlChanged(e) {
-                            this.$set(this.skins, this.selectedSkinIndex, e), this.saveSkins()
-                        },
-                        selectSkin(e) {
-                            this.selectedSkinIndex = e, localStorage.selectedSkinIndex = e;
-                            var t = this.skins[e];
-                            eD.events.$emit("skin-click", t)
-                        },
-                        removeSkin(e) {
-                            this.skins.splice(e, 1), this.skins.length < 2 && this.skins.push("https://skins.vanis.io/s/Qkfih2"), this.saveSkins();
-                            var t = Math.max(0, this.selectedSkinIndex - 1);
-                            this.selectSkin(t)
-                        },
-                        addSkin(e) {
-                            if (!this.skins.includes(e)) {
-                                var t = this.skins.length;
-                                this.skins.push(e || "https://skins.vanis.io/s/Qkfih2"), e || this.selectSkin(t), this.saveSkins()
-                            }
-                        },
-                        saveSkins() {
-                            localStorage.skins = JSON.stringify(this.skins)
-                        }
+                            s.length > 0 ? this.vn = s.join("\n") : this.vn = "On season leaderboard, every mode counts separately"
+                        } else this.un += t, this.wn += t
+                    }, pn() {
+                        window.open(Ie.url + "/login/discord", "", "width=500, height=750")
+                    }, Ln(t) {
+                        t && (Ie.Xe(t), this.Fn())
                     }
-                }, eT, [], !1, null, "1c614894", null));
-            eL.options.__file = "src/components/skins.vue";
-            var eN = eL.exports,
-                eU = s(1),
-                eR = (s(234), Object(v.a)({
-                    data: () => ({
-                        isModalOpen: !1,
-                        selectedTab: "servers",
-                        gameState: eU.state,
-                        cursorStyleElem: null
-                    }),
-                    methods: {
-                        onModalChange: function (e) {
-                            this.isModalOpen = e
-                        },
-                        setCursorUrl(e) {
-                            var t = null;
-                            e && (t = "#canvas, #hud > * { cursor: url('" + e + "'), auto !important; }"), !t && this.cursorStyleElem ? (this.cursorStyleElem.remove(), this.cursorStyleElem = null) : t && !this.cursorStyleElem && (this.cursorStyleElem = document.createElement("style"), document.head.appendChild(this.cursorStyleElem)), this.cursorStyleElem && (this.cursorStyleElem.innerHTML = t)
-                        }
-                    },
-                    components: {
-                        servers: C,
-                        playerContainer: ek,
-                        account: eM,
-                        skins: eN
-                    },
-                    created() {
-                        eU.events.$on("set-cursor-url", e => this.setCursorUrl(e))
-                    },
-                    mounted() {
-                        this.setCursorUrl(eU.settings.cursorImageUrl)
-                    }
-                }, r, [], !1, null, "ebed1606", null));
-            eR.options.__file = "src/components/main-container.vue";
-            var eP = eR.exports,
-                eF = function () {
-                    this.$createElement, this._self._c
-                };
-            eF._withStripped = !0, s(236);
-            var e1 = Object(v.a)({}, eF, [function () {
-            }], !1, null, "4d0670e9", null);
-            e1.options.__file = "src/components/social-links.vue";
-            var e4 = e1.exports,
-                eG = function () {
-                    return this.$createElement, this._self._c, this._m(0)
-                };
-            eG._withStripped = !0;
-            var eH = (s(238), Object(v.a)({
-                data() {
+                },
+                created() {
+                    Te.R.$on(Ne.kj, this.Kn), Te.R.$on(Ne.kf, this.Hn), Te.R.$on(Ne.pj, this.Jn), this.Fn(), window.addEventListener("message", (t => {
+                        var e = t.data.vanis_token;
+                        e && (this.Ln(e), t.source.postMessage("loggedIn", t.origin))
+                    }))
                 }
-            }, eG, [function () {
-                var e = this.$createElement,
-                    t = this._self._c || e;
-                return t("div", {
-                    staticClass: "container"
-                }, [t("a", {
-                    staticStyle: {
-                        "margin-left": "20.59px"
-                    },
-                    attrs: {
-                        href: "privacy.html",
-                        target: "_blank"
+            };
+            const De = (0, _.Z)(Le, ke, [], !1, null, "4c742444", null).exports;
+            var Oe = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "tab-menu"}, [e("div", {staticClass: "tabs"}, [e("div", {
+                    staticClass: "tab",
+                    class: {active: "skins" === t.Al},
+                    on: {
+                        click: function (e) {
+                            t.Al = "skins"
+                        }
                     }
-                }, [this._v("")]), this._v(" "), t("span", {
-                    staticClass: "line"
-                }, [this._v("")]), this._v(" "), t("a", {
+                }, [t._v("\r\n            Skins\r\n        ")]), t._v(" "), e("div", {
+                    staticClass: "tab",
+                    class: {active: "perks" === t.Al},
+                    on: {
+                        click: function (e) {
+                            t.Al = "perks"
+                        }
+                    }
+                }, [e("span", {staticStyle: {position: "relative"}}, [t._v("\r\n                Perks\r\n                "), t.Mn ? e("div", {
+                    staticClass: "perks-tab-badge",
+                    class: t.Mn
+                }) : t._e()])])]), t._v(" "), e("div", {attrs: {id: "customization"}}, [e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: "skins" === t.Al,
+                        expression: "tab_ === 'skins'"
+                    }], attrs: {id: "skins"}
+                }, [t._l(t.Nn, (function (s, a) {
+                    return e("span", {key: a, staticClass: "skin-container"}, [e("img", {
+                        staticClass: "skin",
+                        class: {selected: t.On === a},
+                        attrs: {src: s, alt: ""},
+                        on: {
+                            click: function (e) {
+                                return t.Pn(a)
+                            }, contextmenu: function (e) {
+                                return t.Qn(a)
+                            }
+                        }
+                    }), t._v(" "), e("i", {
+                        staticClass: "fas fa-times skin-remove-button",
+                        attrs: {tip: "Remove this skin URL"},
+                        on: {
+                            click: function (e) {
+                                return t.Qn(a)
+                            }
+                        }
+                    })])
+                })), t._v(" "), e("img", {
+                    staticClass: "skin add-skin",
+                    attrs: {src: "/img/skin-add.png", alt: "", tip: "Add new skin URL"},
+                    on: {
+                        click: function (e) {
+                            return t.Rn()
+                        }
+                    }
+                })], 2), t._v(" "), e("perks", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: "perks" === t.Al,
+                        expression: "tab_ === 'perks'"
+                    }], staticClass: "perks"
+                })], 1)])
+            };
+            Oe._withStripped = !0;
+            var Re = function () {
+                var t = this, e = t._self._c;
+                return e("div", [e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Colored name\r\n            "), t.Sn ? e("div", {
+                    staticClass: "right warning",
+                    attrs: {tip: "Set name and color for first time so that it shows in game"}
+                }, [t._v("\r\n                Not showing\r\n            ")]) : t._e()]), t._v(" "), e("div", {staticClass: "options"}, [t.Tn.perk_color_unused || t.Tn.perk_color_expiry ? t._e() : [t._v("\r\n            Shows in chat, minimap, name and leaderboard"), e("br"), t._v("\r\n            Rare awards for players"), e("br"), t._v(" "), e("div", {staticClass: "perks-obtaining-label"}, [t._v("Given for:")]), t._v(" "), t._m(0), t._v("\r\n            Check our "), e("a", {attrs: {href: "/discord"}}, [t._v("Discord")]), t._v(" for information\r\n            Check the "), e("a", {attrs: {href: "/tournaments"}}, [t._v("tournament")]), t._v(" server here\r\n        ")], t._v(" "), t.Tn.perk_color_unused || t.Tn.perk_color_expiry ? [t.Tn.perk_color_unused || t.Tn.perk_color_expiry && "infinity" !== t.Tn.perk_color_expiry ? e("div", {staticClass: "confirm-row"}, [e("span", [t.Tn.perk_color_unused ? e("div", {attrs: {tip: "Can be used whenever you want"}}, [t._v("\r\n                        Unused "), e("b", [t._v(t._s(t.Tn.perk_color_unused))]), t._v(" week" + t._s(1 === t.Tn.perk_color_unused ? "" : "s") + "\r\n                    ")]) : t._e(), t._v(" "), t.Tn.perk_color_expiry && "infinity" !== t.Tn.perk_color_expiry ? e("div", [t._v("\r\n                        Expires in "), e("b", [t._v(t._s(t.Un))])]) : t._e()]), t._v(" "), e("button", {
+                    staticClass: "confirm-button right",
+                    attrs: {disabled: !t.Tn.perk_color_unused},
+                    on: {
+                        click: function (e) {
+                            return t.Vn()
+                        }
+                    }
+                }, [t._v("\r\n                    " + t._s(t.Wn ? "Confirm" : t.Tn.perk_color_expiry ? "Extend" : "Use") + "\r\n                ")])]) : t._e(), t._v(" "), t.Wn ? e("div", {staticClass: "option-row bottom-margin"}, [t._v("\r\n                " + t._s(t.Tn.perk_color_expiry ? "Extend by" : "Start") + "\r\n                "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Xn,
+                        expression: "useColorWeeks_"
+                    }],
+                    attrs: {type: "number", min: "1", max: t.Tn.perk_color_unused, step: "1"},
+                    domProps: {value: t.Xn},
+                    on: {
+                        input: function (e) {
+                            e.target.composing || (t.Xn = e.target.value)
+                        }
+                    }
+                }), t._v("\r\n                " + t._s(t.Tn.perk_color_expiry ? "week(s)" : "week colored name") + "\r\n            ")]) : t._e()] : t._e(), t._v(" "), t.Tn.perk_color_expiry ? [e("div", {staticClass: "perk-color-wrapper bottom-margin"}, [e("span", [t._v("Name")]), t._v(" "), e("span", {staticClass: "perk-color-label"}, [t._v("Color")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Yn,
+                        expression: "namePicked_"
+                    }],
+                    staticClass: "perk-name",
+                    attrs: {
+                        type: "text",
+                        spellcheck: "false",
+                        minlength: "2",
+                        maxlength: "15",
+                        disabled: !t.Zn,
+                        placeholder: t.Tn.perk_name_picked,
+                        tip: "After change, cooldown is 2 weeks"
+                    },
+                    domProps: {value: t.Yn},
+                    on: {
+                        input: function (e) {
+                            e.target.composing || (t.Yn = e.target.value)
+                        }
+                    }
+                }), t._v(" "), e("span", {staticClass: "perk-color-option"}, [e("color-option", {
+                    attrs: {
+                        Rl: t.ao,
+                        Nm: t.Tn.perk_color_picked,
+                        Mm: !t.bo,
+                        tip: "After change, cooldown is 1 week"
+                    }, on: {
+                        input: function (e) {
+                            t.ao = e
+                        }
+                    }
+                })], 1), t._v(" "), e("button", {
+                    staticClass: "perk-color-update",
+                    attrs: {disabled: !t.co},
+                    on: {
+                        click: function (e) {
+                            return t.do()
+                        }
+                    }
+                }, [t._v("Set")])]), t._v(" "), t.eo ? e("div", [t._v("Name change "), e("b", [t._v(t._s(t.eo))])]) : t._e(), t._v(" "), t.fo ? e("div", [t._v("Color change "), e("b", [t._v(t._s(t.fo))])]) : t._e()] : t._e(), t._v(" "), !t.Tn.perk_color_expiry && t.Tn.perk_name_picked ? e("div", {attrs: {tip: "While you are not using colored name, nobody else can use your name"}}, [t._v("\r\n            Reserved name "), e("b", [t._v(t._s(t.Tn.perk_name_picked))])]) : t._e()], 2)]), t._v(" "), e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Badges\r\n            "), t.Tn.perk_badge_owned && !t.Tn.perk_badge_set ? e("div", {
+                    staticClass: "right warning",
+                    attrs: {tip: "Click on a badge to use it"}
+                }, [t._v("\r\n                Hidden\r\n            ")]) : t._e()]), t._v(" "), e("div", {staticClass: "options"}, [t.Tn.perk_badge_owned ? [t._v("\r\n            Click to toggle. "), e("b", [t._v("Only one")]), t._v(" shows\r\n        ")] : t._e(), t._v(" "), e("div", {staticClass: "perk-badges-scroll"}, [e("badges", {
+                    attrs: {
+                        bl: !0,
+                        Uc: 32,
+                        Ee: t.ho,
+                        Yk: t.Tn.perk_badge_owned
+                    }, on: {
+                        input: function (e) {
+                            return t.io(e)
+                        }
+                    }
+                })], 1), t._v(" "), t.Tn.perk_badge_owned ? t._e() : [t._v("\r\n            Unique awards for players in the community, shows beside name"), e("br"), t._v(" "), e("div", {staticClass: "perks-obtaining-label"}, [t._v("Make yourself known for:")]), t._v(" "), t._m(1), t._v("\r\n            Check our "), e("a", {attrs: {href: "/discord"}}, [t._v("Discord")]), t._v(" for information\r\n            Check the "), e("a", {attrs: {href: "/tournaments"}}, [t._v("tournament")]), t._v(" server here\r\n        ")]], 2)]), t._v(" "), t._m(2)])
+            };
+            Re._withStripped = !0;
+            var Ee = s(1620), Ue = s(3658), Fe = s(3117), Be = s(1050), {R: ze} = s(3658);
+
+            function Xe(t) {
+                return null == t ? null : "infinity" === t ? 1 / 0 : new Date(t).getTime()
+            }
+
+            var $e = 3e5;
+
+            function je(t, e, s) {
+                if (null == (e = Xe(e))) return {ci: null, jo: !0};
+                var a = (e = new Date(e).getTime()) + $e - t;
+                return a >= 0 ? {
+                    ci: `allowed for ${Ue.Wl(a, !1)}`,
+                    jo: !0
+                } : (a = e + s - t) >= 0 ? {ci: `on cooldown ${Ue.Wl(a, !1)}`, jo: !1} : {ci: null, jo: !0}
+            }
+
+            const We = {
+                data: () => ({
+                    Tn: {
+                        perk_badge_owned: 0,
+                        perk_badge_set: 0,
+                        perk_name_picked: null,
+                        perk_name_set: null,
+                        perk_color_picked: null,
+                        perk_color_set: null,
+                        perk_color_unused: 0,
+                        perk_color_expiry: null
+                    }, Un: null, eo: !1, fo: !1, Zn: !1, bo: !1, ho: 0, Yn: "", ao: "000000", Wn: !1, Xn: 1
+                }), components: {colorOption: ie, badges: D}, computed: {
+                    co() {
+                        return this.Yn !== this.Tn.perk_name_picked || this.ao !== this.Tn.perk_color_picked
+                    }, Sn() {
+                        return this.Tn.perk_color_expiry && null == this.Tn.perk_name_picked && null == this.Tn.perk_color_picked
+                    }
+                }, methods: {
+                    ko(t) {
+                        if (null != t) {
+                            for (var e in this.Tn) this.Tn[e] = t[e];
+                            this.ho = this.Tn.perk_badge_set, this.Yn = this.Tn.perk_name_picked || "", this.ao = this.Tn.perk_color_picked || "000000"
+                        } else this.Tn.perk_name_set = null, this.Tn.perk_color_set = null, this.Tn.perk_color_unused = null, this.ho = 0, this.Yn = "", this.ao = "000000";
+                        this.lo()
+                    }, lo() {
+                        var t = Date.now(), e = Xe(this.Tn.perk_color_expiry) - t;
+                        if (e < 0) return this.Tn.perk_color_expiry = null, this.eo = this.fo = null, void (this.Zn = this.bo = !1);
+                        this.Un = Ue.Wl(e, !1);
+                        var s = je(t, this.Tn.perk_name_set, 12096e5);
+                        this.Zn = s.jo, this.eo = s.ci, s = je(t, this.Tn.perk_color_set, 6048e5), this.bo = s.jo, this.fo = s.ci
+                    }, async mo(t) {
+                        var e = await Be.Ze("PATCH", "/me/perks", t);
+                        if (202 === e.status) {
+                            var s = await e.json();
+                            Ee.R.$emit(ze.pj, s)
+                        } else {
+                            var a = await e.text();
+                            Fe.hb(a || "Failed updating perk!")
+                        }
+                    }, async Vn() {
+                        if (this.Wn) {
+                            var t = this.Xn;
+                            if (t = Math.min(Math.max(t, 0), this.Tn.perk_color_unused)) {
+                                var e = this.Tn.perk_color_expiry ? `You are about extend your colored name by ${t} week${1 === t ? "" : "s"}. Continue?` : `You are about to start using a ${t} week colored name. Continue?`,
+                                    s = await Fe.fb(e);
+                                this.Xn = 1, this.Wn = !1, s ? this.mo({perk_color_unused: this.Tn.perk_color_unused - t}) : this.Wn = !1
+                            }
+                        } else this.Wn = !0
+                    }, do() {
+                        this.mo({perk_name_picked: this.Yn, perk_color_picked: this.ao})
+                    }, io(t) {
+                        this.ho === t ? this.ho = 0 : this.ho = t, this.mo({perk_badge_set: this.ho})
+                    }, no(t) {
+                        Ee.R[t ? "$on" : "$off"](ze.Wa, this.lo), t && this.lo()
+                    }
+                }, created() {
+                    Ee.R.$on(ze.bh, this.no), Ee.R.$on(ze.pj, this.ko), this.no(!0)
+                }
+            }, He = We;
+            const Ve = (0, _.Z)(He, Re, [function () {
+                var t = this, e = t._self._c;
+                return e("ul", {staticClass: "perks-obtaining"}, [e("li", [t._v("Content creators")]), t._v(" "), e("li", [t._v("Tournament wins")]), t._v(" "), e("li", [t._v("Giveaway wins")]), t._v(" "), e("li", [t._v("Topping season leaderboard")])])
+            }, function () {
+                var t = this, e = t._self._c;
+                return e("ul", {staticClass: "perks-obtaining"}, [e("li", [t._v("Content creation")]), t._v(" "), e("li", [t._v("Tournament wins")]), t._v(" "), e("li", [t._v("XP and season XP milestones")]), t._v(" "), e("li", [t._v("Big contributions")])])
+            }, function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "section row"}, [e("div", {staticClass: "header"}, [t._v("\r\n            Aura\r\n        ")]), t._v(" "), e("div", {staticClass: "options"}, [t._v("\r\n            Rare awards for players"), e("br"), t._v("\r\n            Coming soon\r\n        ")])])
+            }], !1, null, "2c5139e0", null).exports;
+            var Ge = s(1620), {R: qe} = s(3658);
+            const Je = {
+                data: () => ({sn: null, Al: "skins", On: 0, Nn: []}), components: {perks: Ve}, methods: {
+                    oo() {
+                        var t = localStorage.skins;
+                        if (!t) return !1;
+                        try {
+                            var e = JSON.parse(t)
+                        } catch (t) {
+                            return !1
+                        }
+                        if (!Array.isArray(e)) return !1;
+                        for (var s = e.length; s < 2; s++) e.push("https://skins.vanis.io/s/vanis1");
+                        return e
+                    }, po() {
+                        localStorage.skins = JSON.stringify(this.Nn)
+                    }, qo() {
+                        for (var t = [], e = 0; e < 2; e++) t.push("https://skins.vanis.io/s/vanis1");
+                        return t
+                    }, ro(t) {
+                        this.$set(this.Nn, this.On, t), this.po()
+                    }, Pn(t) {
+                        this.On = t, localStorage.selectedSkinIndex = t, Ge.R.$emit(qe.kn, this.Nn[t])
+                    }, Qn(t) {
+                        this.Nn.splice(t, 1), this.Nn.length < 2 && this.Nn.push("https://skins.vanis.io/s/vanis1"), this.po();
+                        var e = Math.max(0, this.On - 1);
+                        this.Pn(e)
+                    }, Rn() {
+                        var t = this.Nn.length;
+                        this.Nn.push("https://skins.vanis.io/s/vanis1"), this.Pn(t), this.po()
+                    }
+                }, computed: {
+                    Mn() {
+                        var t = this.sn;
+                        return null == t ? "" : null != t.perk_name_picked && null != t.perk_color_picked || 0 !== t.perk_badge_set ? "using" : 0 !== t.perk_color_unused || 0 !== this.sn.perk_badge_owned ? "unused" : ""
+                    }
+                }, created() {
+                    Ge.R.$on(qe.mn, this.ro), Ge.R.$on(qe.kf, (t => {
+                        this.sn = t, null == t && (this.Al = "skins")
+                    })), Ge.R.$on(qe.pj, (t => {
+                        if (null != this.sn) for (var e in t) this.$set(this.sn, e, t[e])
+                    })), this.Nn = this.oo() || this.qo(), this.Pn(Number(localStorage.selectedSkinIndex) || 0)
+                }
+            };
+            const Ye = (0, _.Z)(Je, Oe, [], !1, null, "2eade0fe", null).exports;
+            var Ze = s(1620), {R: Ke} = s(3658);
+            const Qe = {
+                data: () => ({lk: !1, qa: Ze.ra, so: null}), methods: {
+                    uo(t) {
+                        this.lk = t
+                    }, vo(t) {
+                        var e = null;
+                        t && (e = "#canvas, #hud > * { cursor: url('" + t + "'), auto !important; }"), !e && this.so ? (this.so.remove(), this.so = null) : e && !this.so && (this.so = document.createElement("style"), document.head.appendChild(this.so)), this.so && (this.so.innerHTML = e)
+                    }
+                }, components: {servers: g, playerContainer: Ce, account: De, customization: Ye}, created() {
+                    Ze.R.$on(Ke.Sa, (() => {
+                        this.vo(Ze.T.Qj)
+                    })), Ze.R.$on(Ke.ln, this.uo)
+                }, mounted() {
+                    this.vo(Ze.T.Qj)
+                }
+            };
+            const ts = (0, _.Z)(Qe, o, [], !1, null, "5208baf4", null).exports;
+            var es = function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "social-container"}, [e("a", {
+                    staticClass: "discord-link",
+                    attrs: {href: "/discord", target: "_blank", rel: "noopener"}
+                }, [e("i", {staticClass: "fab fa-discord"}), t._v(" Official Discord\r\n        "), t.wo ? e("span", {staticClass: "tag"}, [t._v("Join for giveaways!")]) : t._e()]), t._v(" "), e("a", {
+                    staticClass: "tournaments-link",
+                    attrs: {href: "/tournaments", target: "_blank", rel: "noopener"}
+                }, [e("i", {staticClass: "fas fa-trophy"}), t._v(" Tournaments\r\n        "), t.xo ? e("span", {staticClass: "tag"}, [t._v("Upcoming 6v6 Gigasplit")]) : t._e()]), t._v(" "), t._m(0)])
+            };
+            es._withStripped = !0;
+            const ss = {data: () => ({wo: !0, xo: !1})};
+            const as = (0, _.Z)(ss, es, [function () {
+                var t = this._self._c;
+                return t("a", {
+                    staticClass: "skins-link",
+                    attrs: {href: "https://skins.vanis.io", target: "_blank", rel: "noopener"}
+                }, [t("i", {staticClass: "fas fa-images"}), this._v(" Skins\r\n    ")])
+            }], !1, null, "3f8f826c", null).exports;
+            var is = function () {
+                this._self._c;
+                return this._m(0)
+            };
+            is._withStripped = !0;
+            const ns = (0, _.Z)({}, is, [function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "container"}, [e("a", {
+                    staticStyle: {"margin-left": "20.59px"},
+                    attrs: {href: "privacy.html", target: "_blank"}
+                }, [t._v("Privacy Policy")]), t._v(" "), e("span", {staticClass: "line"}, [t._v("|")]), t._v(" "), e("a", {
                     attrs: {
                         href: "tos.html",
                         target: "_blank"
                     }
-                }, [this._v("")])])
-            }], !1, null, "6843da33", null));
-            eH.options.__file = "src/components/privacy-tos.vue";
-            var e3 = eH.exports,
-                e2 = function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return this.show ? t("div", {
-                        staticClass: "context-menu fade",
-                        style: {
-                            top: this.y + "px",
-                            left: this.x + "px"
-                        }
-                    }, [t("div", {
-                        staticClass: "player-name"
-                    }, [this._v(this._s(this.playerName))]), this._v(" "), t("div", [this._v("Block")]), this._v(" "), t("div", {
-                        on: {
-                            click: this.hideName
-                        }
-                    }, [this._v("Hide Name")]), this._v(" "), t("div", {
-                        on: {
-                            click: this.hideSkin
-                        }
-                    }, [this._v("Hide Skin")]), this._v(" "), t("div", [this._v("Kick")]), this._v(" "), t("div", [this._v("Ban")]), this._v(" "), t("div", [this._v("Mute")])]) : this._e()
-                };
-            e2._withStripped = !0, s(1);
-            var e9 = (s(240), Object(v.a)({
-                data: () => ({
-                    show: !1,
-                    playerName: "",
-                    x: 100,
-                    y: 55
-                }),
-                methods: {
-                    open: function (e, t) {
-                        this.player = t, this.playerName = t.name, this.x = e.clientX, this.y = e.clientY, this.show = !0, document.addEventListener("click", () => {
-                            this.show = !1
-                        }, {
-                            once: !0
-                        })
-                    },
-                    hideName: function () {
-                        this.player.setName(""), this.player.invalidateVisibility()
-                    },
-                    hideSkin: function () {
-                        this.player.setSkin(""), this.player.invalidateVisibility()
-                    }
-                },
-                created() {
-                }
-            }, e2, [], !1, null, "4dbee04d", null));
-            e9.options.__file = "src/components/context-menu.vue";
-            var eO = e9.exports,
-                eY = function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return t("div", {
-                        attrs: {
-                            id: "hud"
-                        }
-                    }, [t("stats"), this._v(" "), t("chatbox"), this._v(" "), t("leaderboard"), this._v(" "), t("minimap"), this._v(" "), t("cautions")], 1)
-                };
-            eY._withStripped = !0;
-            var e6 = function () {
-                let e = this._self._c || this.$createElement,
-                    t = this._s,
-                    s = this._v,
-                    i = this._l,
-                    a = this._e;
-                return e("div", [e("div", {
-                    staticClass: "server-cautions"
-                }, i(this.serverInfo, i => e("div", [s(t(i))])), 0), s(" "), e("div", {
-                    staticClass: "cautions"
-                }, [!this.stopped && this.showMouseFrozen ? e("div", [s("MOUSE FROZEN")]) : a(), s(" "), !this.stopped && this.showMovementStopped ? e("div", [s(`MOVEMENT STOPPED [TAB ${this.showMovementStopped}]`)]) : a(), s(" "), !this.stopped && this.showLinesplitting ? e("div", [s(`LINESPLITTING [TAB ${this.showLinesplitting}]`)]) : a()])])
+                }, [t._v("Terms of Service")])])
+            }], !1, null, "ba56a55e", null).exports;
+            var rs = function () {
+                var t = this, e = t._self._c;
+                return e("div", {attrs: {id: "hud"}}, [e("stats", {style: {transform: "scale(" + t.yo + ")"}}), t._v(" "), e("chatbox", {style: {transform: "scale(" + t.yo + ")"}}), t._v(" "), e("leaderboard", {style: {transform: "scale(" + t.yo + ")"}}), t._v(" "), e("minimap", {style: {transform: "scale(" + t.yo + ")"}}), t._v(" "), e("cautions")], 1)
             };
-            e6._withStripped = !0;
-            var ez = s(1),
-                eW = (s(242), Object(v.a)({
-                    data: () => ({
-                        showMouseFrozen: !1,
-                        showMovementStopped: 0,
-                        showLinesplitting: 0,
-                        serverInfo: null
-                    }),
-                    mounted() {
-                        ez.events.$on("update-cautions", e => {
-                            "mouseFrozen" in e && (this.showMouseFrozen = e.mouseFrozen), "moveToCenterOfCells" in e && (this.showMovementStopped = e.moveToCenterOfCells), "lockLinesplit" in e && (this.showLinesplitting = e.lockLinesplit), "custom" in e && (this.serverInfo = e.custom.split(/\r\n|\r|\n/))
-                        }), ez.events.$on("reset-cautions", () => {
-                            this.showMouseFrozen = !1, this.showMovementStopped = 0, this.showLinesplitting = 0
-                        }), ez.events.$on("game-stopped", () => {
-                            this.serverInfo = null
-                        })
+            rs._withStripped = !0;
+            var os = function () {
+                var t = this, e = t._self._c;
+                return e("div", [e("div", {
+                    staticClass: "server-cautions",
+                    style: {transform: "scale(" + t.yo + ")"}
+                }, t._l(t.zo, (function (s, a) {
+                    return e("div", {key: a}, [t._v(t._s(s))])
+                })), 0), t._v(" "), e("div", {
+                    staticClass: "cautions",
+                    style: {transform: "scale(" + t.yo + ")"}
+                }, [t.Ao ? e("div", [t._v("MOUSE FROZEN")]) : t._e(), t._v(" "), t.Bo ? e("div", [t._v("MOVEMENT STOPPED")]) : t._e(), t._v(" "), t.Co ? e("div", [t._v("LINESPLITTING")]) : t._e()])])
+            };
+            os._withStripped = !0;
+            var ls = s(1620), {R: cs} = s(3658);
+            const us = {
+                data: () => ({Ao: !1, Bo: !1, Co: !1, zo: null, yo: 1}), created() {
+                    ls.R.$on(cs.Sa, (() => {
+                        this.yo = ls.T.Dj
+                    })), ls.R.$on(cs.ke, (t => {
+                        this.Ao = ls.fe, this.Bo = ls.le, this.Co = ls.ne, t && (this.zo = t.oj.split(/\r\n|\r|\n/))
+                    })), ls.R.$on(cs.Ra, (() => {
+                        this.zo = null
+                    }))
+                }
+            };
+            const hs = (0, _.Z)(us, os, [], !1, null, "722ac586", null).exports;
+            var ds = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    directives: [{name: "show", rawName: "v-show", value: t.Vi, expression: "visible_"}],
+                    staticClass: "stats"
+                }, [e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.Hj,
+                        expression: "showFPS_"
+                    }]
+                }, [t._v("FPS: " + t._s(t.Do || "-"))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.Ij,
+                        expression: "showPing_"
+                    }]
+                }, [t._v("Ping: " + t._s(t.cj || "-"))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.Lj && t.Eo,
+                        expression: "showPlayerMass_ && mass_"
+                    }]
+                }, [t._v("Mass: " + t._s(t.Eo))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.Kj && t.wg,
+                        expression: "showPlayerScore_ && score_"
+                    }]
+                }, [t._v("Score: " + t._s(t.wg))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.Jj && t.Bf,
+                        expression: "showCellCount_ && cells_"
+                    }]
+                }, [t._v("Cells: " + t._s(t.Bf))])])
+            };
+            ds._withStripped = !0;
+            var ps = s(1620), {R: vs} = s(3658);
+            const fs = {
+                data: () => ({
+                    Hj: !1,
+                    Ij: !1,
+                    Lj: !1,
+                    Kj: !1,
+                    Jj: !1,
+                    Vi: !1,
+                    cj: 0,
+                    Do: 0,
+                    Eo: 0,
+                    wg: 0,
+                    Bf: 0
+                }), created() {
+                    ps.R.$on(vs.Sa, (() => {
+                        this.Vi = ps.Ua && !ps.Qa, this.Hj = ps.T.Hj, this.Ij = ps.T.Ij, this.Lj = ps.T.Lj, this.Kj = ps.T.Kj, this.Jj = ps.T.Jj
+                    })), ps.R.$on(vs.ih, (() => this.Bf = ps.xg)), ps.R.$on(vs.Wa, (() => {
+                        this.cj = ps.cj || 0, this.Do = ps.Ua && Math.round(ps.Lg.FPS) || 0, this.Eo = ps.wg ? ps.Xa(ps.wg) : 0, this.wg = ps.Yg ? ps.Xa(ps.Yg) : 0
+                    }))
+                }
+            };
+            const ms = (0, _.Z)(fs, ds, [], !1, null, "0b74fc8f", null).exports;
+            var _s = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    directives: [{name: "show", rawName: "v-show", value: t.Vi, expression: "visible_"}],
+                    staticClass: "chat-container"
+                }, [t.Fo ? [e("transition-group", {
+                    staticClass: "toast-list",
+                    attrs: {name: "toast", tag: "div"}
+                }, t._l(t.Go, (function (s) {
+                    return e("chat-message", {
+                        key: s.Wc,
+                        staticClass: "toast",
+                        attrs: {gb: s, hf: !0, Uk: "Click to spectate, right click to block"},
+                        on: {spectate: t.ye, block: t.Wk}
+                    })
+                })), 1)] : t._e(), t._v(" "), e("div", {
+                    staticClass: "chatbox",
+                    class: {toasts: t.Fo, visible: t.Ho},
+                    style: t.Fo ? {} : {height: t.Ej + "px"}
+                }, [t.Nj && t.Io ? e("div", {
+                    staticStyle: {
+                        position: "absolute",
+                        top: "-28px"
                     }
-                }, e6, [], !1, null, "b7599310", null));
-            eW.options.__file = "src/components/cautions.vue";
-            var eZ = eW.exports,
-                e7 = function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.visible,
-                            expression: "visible"
-                        }],
-                        staticClass: "stats"
-                    }, [t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showFPS,
-                            expression: "showFPS"
-                        }]
-                    }, [this._v("FPS: " + this._s(this.fps || "-"))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showPing,
-                            expression: "showPing"
-                        }]
-                    }, [this._v("Ping: " + this._s(this.ping || "-"))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showPlayerMass && this.mass,
-                            expression: "showPlayerMass && mass"
-                        }]
-                    }, [this._v("Mass: " + this._s(this.mass))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showPlayerScore && this.score,
-                            expression: "showPlayerScore && score"
-                        }]
-                    }, [this._v("Score: " + this._s(this.score))]), this._v(" "), t("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.showCellCount && this.cells,
-                            expression: "showCellCount && cells"
-                        }]
-                    }, [this._v("Cells: " + this._s(this.cells))])])
-                };
-            e7._withStripped = !0;
-            var ej = s(1),
-                e5 = s(4),
-                eJ = (s(244), Object(v.a)({
-                    data: () => ({
-                        showFPS: e5.showFPS,
-                        showPing: e5.showPing,
-                        showPlayerMass: e5.showPlayerMass,
-                        showPlayerScore: e5.showPlayerScore,
-                        showCellCount: e5.showCellCount,
-                        visible: !1,
-                        ping: 0,
-                        fps: 0,
-                        mass: 0,
-                        score: 0,
-                        cells: 0
-                    }),
-                    created() {
-                        ej.events.$on("stats-visible", e => this.visible = e), ej.events.$on("stats-invalidate-shown", () => {
-                            this.showFPS = e5.showFPS, this.showPing = e5.showPing, this.showPlayerMass = e5.showPlayerMass, this.showPlayerScore = e5.showPlayerScore, this.showCellCount = e5.showCellCount
-                        }), ej.events.$on("cells-changed", e => this.cells = e), ej.events.$on("stats-changed", e => {
-                            this.ping = e.ping || 0, this.fps = e.fps || 0, this.mass = e.mass ? ej.getMassText(e.mass) : 0, this.score = e.score ? ej.getMassText(e.score) : 0
-                        })
-                    }
-                }, e7, [], !1, null, "0875ad82", null));
-            eJ.options.__file = "src/components/stats.vue";
-            var eK = eJ.exports,
-                eV = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: e.visible,
-                            expression: "visible"
-                        }],
-                        attrs: {
-                            id: "chat-container"
-                        },
-                        on: {
-                            click: function (t) {
-                                return e.onChatClick(t)
-                            },
-                            contextmenu: function (t) {
-                                return e.onChatRightClick(t)
-                            }
-                        }
-                    }, [e.visibleToast ? [s("transition-group", {
-                        attrs: {
-                            name: "toast",
-                            tag: "div",
-                            id: "toast-list"
-                        }
-                    }, e._l(e.toastMessages, function (t) {
-                        return s("span", {
-                            key: t.id
-                        }, [
-                            s("span", {
-                                staticClass: "message-row"
-                            }, [
-                                t.date ? s("span", {
-                                    staticClass: "message-date",
-                                    style: {
-                                        color: t.dateColor
-                                    }
-                                }, [e._v(e._s(t.date))]) : e._e(),
-
-                                t.badge ? s("span", {
-                                    staticClass: "message-badge",
-                                }, [
-                                    s("img", {
-                                        attrs: {
-                                            class: 'badgeMessage',
-                                            src: t.badge,
-                                            alt: "chat-badge"
-                                        }
-                                    })
-                                ]) : e._e(),
-
-                                t.badgeVanilla ? s("span", {
-                                    staticClass: "message-badge-vanilla",
-                                }, [
-                                    s("img", {
-                                        attrs: {
-                                            class: 'badgeVanillaMessage',
-                                            src: "/img/badge/" + getPerkBadgeImage(t.badgeVanilla) + ".png?2",
-                                            alt: "chat-badge-vanilla"
-                                        }
-                                    })
-                                ]) : e._e(),
-
-                                t.from ? s("span", {
-                                    staticClass: "message-from",
-                                    style: {
-                                        color: t.nicknameColor || '#ffffff'
-                                    },
-                                    attrs: {
-                                        "data-pid": t.pid
-                                    }
-                                }, [e._v(e._s(t.from))]) : e._e(),
-                                e._v(":\n                "),
-
-                                s("span", {
-                                    staticClass: "message-text",
-                                    style: {
-                                        color: t.textColor || '#ffffff'
-                                    }
-                                }, [e._v(e._s(t.text))]),
-
-                                t.imageUrl ? s("span", {
-                                    staticClass: "message-image",
-                                }, [
-                                    s("img", {
-                                        attrs: {
-                                            class: 'imageMessage',
-                                            src: t.imageUrl,
-                                            alt: "chat-image"
-                                        }
-                                    })
-                                ]) : e._e()
-                            ], 2)
-                        ]);
-                    }), 0)] : e._e(), e._v(" "), s("div", {
-                        class: {
-                            toasts: e.visibleToast,
-                            visible: e.visibleInput
-                        },
-                        attrs: {
-                            id: "chatbox"
-                        }
-                    }, [e.showBlockedMessageCount && e.blockedMessageCount ? s("div", {
-                        staticStyle: {
-                            position: "absolute",
-                            top: "-28px"
-                        }
-                    }, [e._v("Blocked messages: " + e._s(e.blockedMessageCount))]) : e._e(), e._v(" "), e.visibleToast ? e._e() : [s("div", {
-                        ref: "list",
-                        attrs: {
-                            id: "message-list"
-                        }
-                    }, e._l(e.messages,
-                        function (t, i) {
-                            return s("div", {
-                                key: i,
-                                staticClass: "message-row"
-                            }, [
-                                s("span", {
-                                    staticClass: "message-date",
-                                    style: {
-                                        color: t.dateColor || '#ffffff'
-                                    }
-                                }, [e._v(e._s(t.date ? t.date : ''))]),
-
-                                t.badge ? [
-                                    s("span", {
-                                        staticClass: "message-badge",
-                                    }, [
-                                        s("img", {
-                                            attrs: {
-                                                class: 'badgeMessage',
-                                                src: t.badge,
-                                                alt: "chat-badge"
-                                            }
-                                        })
-                                    ])
-                                ] : e._e(),
-
-                                t.badgeVanilla ? s("span", {
-                                    staticClass: "message-badge-vanilla",
-                                }, [
-                                    s("img", {
-                                        attrs: {
-                                            class: 'badgeVanillaMessage',
-                                            src: "/img/badge/" + getPerkBadgeImage(t.badgeVanilla) + ".png?2",
-                                            alt: "chat-badge-vanilla"
-                                        }
-                                    })
-                                ]) : e._e(),
-
-                                t.from ? [
-                                    s("span", {
-                                        staticClass: "message-from",
-                                        style: {
-                                            color: t.nicknameColor || '#ffffff'
-                                        },
-                                        attrs: {
-                                            "data-pid": t.pid
-                                        }
-                                    }, [e._v(e._s(t.from))]), e._v(":\n                    ")
-                                ] : e._e(),
-
-                                s("span", {
-                                    staticClass: "message-text",
-                                    style: {
-                                        color: t.textColor || '#ffffff'
-                                    }
-                                }, [e._v(e._s(t.text))]),
-
-                                t.imageUrl ? [
-                                    s("span", {
-                                        staticClass: "message-image",
-                                    }, [
-                                        s("img", {
-                                            attrs: {
-                                                class: 'imageMessage',
-                                                src: t.imageUrl,
-                                                alt: "chat-image"
-                                            }
-                                        })
-                                    ])
-                                ] : e._e()
-                            ], 2)
-                        }
-                    ), 0)], e._v(" "), s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.inputText,
-                            expression: "inputText"
-                        }],
-                        ref: "input",
-                        attrs: {
-                            id: "chatbox-input",
-                            type: "text",
-                            spellcheck: "false",
-                            autocomplete: "off",
-                            maxlength: "1000",
-                            tabindex: "-1",
-                            placeholder: "Type your message here"
-                        },
-                        domProps: {
-                            value: e.inputText
-                        },
-                        on: {
-                            keydown: function (t) {
-                                if (!t.type.indexOf("key") && e._k(t.keyCode, "enter", 13, t.key, "Enter")) return null;
-                                e.sendChatMessage()
-                            },
-                            input: function (t) {
-                                t.target.composing || (e.inputText = t.target.value)
-                            }
-                        }
-                    })], 2)], 2)
-                };
-            eV._withStripped = !0;
-            var eX = s(1),
-                eq = s(4),
-                te = s(5),
-                {
-                    replaceBadWordsChat: tt
-                } = s(17),
-                ts = {},
-                ti = (s(246), Object(v.a)({
-                    data: () => ({
-                        visible: !1,
-                        visibleToast: eq.showChatToast,
-                        visibleInput: !1,
-                        inputText: "",
-                        messages: [],
-                        toastMessages: [],
-                        showBlockedMessageCount: eq.showBlockedMessageCount,
-                        blockedMessageCount: 0,
-                        nextMessageId: 0
-                    }),
-                    methods: {
-                        onChatClick(e) {
-                            let t = +e.target.dataset.pid;
-                            t && (eX.selectedPlayer = t, eX.actions.spectate(t), eX.actions.targetPlayer(t))
-                        },
-                        onChatRightClick(e) {
-                            let t = +e.target.dataset.pid;
-                            if (!t) return;
-                            let s = eX.playerManager.getPlayer(t);
-                            if (!s) return void te.alert("Player does not exist or disconnected");
-                            t in ts ? this.confirmUnblockPlayer(s) : this.confirmBlockPlayer(s)
-                        },
-                        confirmBlockPlayer(e) {
-                            te.confirm('Block player "' + e.name + '" until restart?', () => {
-                                e.isMe ? te.alert("You can not block yourself") : (ts[e.pid] = e.name, eX.events.$emit("chat-message", 'Blocked player "' + e.name + '"'))
-                            })
-                        },
-                        confirmUnblockPlayer(e) {
-                            te.confirm('Unblock player "' + e.name + '"?', () => {
-                                delete ts[e.pid], eX.events.$emit("chat-message", 'Unblocked player "' + e.name + '"')
-                            })
-                        },
-                        formatBypassRestrictions(message) {
-                            let formattedMessage = message.replace(/https:\/\//g, 'deltaimage:');
-                            formattedMessage = formattedMessage
-                                .replace(/\.com/g, '.deltacom')
-                                .replace(/\.fr/g, '.deltafr')
-                                .replace(/\.eu/g, '.deltaeu')
-                                .replace(/\.pro/g, '.deltapro')
-                                .replace(/\.io/g, '.deltaio')
-                                .replace(/\.us/g, '.deltaus')
-                                .replace(/\.en/g, '.deltaen')
-                                .replace(/\.as/g, '.deltaas')
-                                .replace(/\.co/g, '.deltaco')
-                                .replace(/\.pw/g, '.deltapw');
-                            return formattedMessage;
-                        },
-                        sendChatMessage() {
-                            let e = this.inputText.trim();
-                            e && (eX.connection.sendChatMessage(this.formatBypassRestrictions(e)), this.inputText = ""), eX.renderer.view.focus(), this.scrollBottom(!0)
-                        },
-                        onChatMessage(e) {
-                            if ("string" == typeof e) e = {
-                                text: e,
-                                textColor: "#828282"
-                            };
-                            else if (eq.chatColorOnlyPeople && !("fromColor" in e) && !("textColor" in e)) return;
-                            if (ts[e.pid]) {
-                                this.blockedMessageCount++;
-                                return
-                            }
-                            eq.filterChatMessages && (e.text = tt(e.text)), e.fromColor = e.fromColor || "#ffffff", e.textColor = e.textColor || "#ffffff", this.messages.push(e), this.messages.length > 200 && this.messages.shift(), e.id = this.nextMessageId++, e.until = Date.now() + Math.max(5e3, 150 * e.text.length), this.toastMessages.unshift(e), this.scrollBottom(!1)
-                        },
-                        onVisibilityChange({
-                                               visible: e,
-                                               visibleToast: t
-                                           }) {
-                            null != e && (this.visible = e), null != t && (this.visibleToast = t, this.visibleInput = this.visible && !t), this.$nextTick(() => this.scrollBottom(!0))
-                        },
-                        focusChat() {
-                            this.visible && (this.visibleInput = !0, this.$nextTick(() => this.$refs.input.focus()))
-                        },
-                        clearChat() {
-                            eq.clearChatMessages && (this.messages.splice(0, this.messages.length), this.toastMessages.splice(0, this.toastMessages.length), this.nextMessageId = 0)
-                        },
-                        scrollBottom(e = !1) {
-                            if (!this.visibleToast) {
-                                var t = this.$refs.list,
-                                    s = t.scrollHeight - t.clientHeight;
-                                !e && s - t.scrollTop > 30 || this.$nextTick(() => t.scrollTop = t.scrollHeight)
-                            }
-                        },
-                        filterToasts() {
-                            for (var e = 0; e < this.toastMessages.length; e++) this.toastMessages[e].until >= Date.now() || this.toastMessages.splice(e--, 1)
-                        }
+                }, [t._v("\r\n            Blocked messages: " + t._s(t.Io) + "\r\n        ")]) : t._e(), t._v(" "), t.Fo ? t._e() : e("div", {
+                    ref: "list",
+                    staticClass: "message-list"
+                }, t._l(t.Jo, (function (s, a) {
+                    return e("chat-message", {
+                        key: a,
+                        attrs: {gb: s, Uk: "Click to spectate, right click to block"},
+                        on: {spectate: t.ye, block: t.Wk}
+                    })
+                })), 1), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.Vk,
+                        expression: "inputText_"
+                    }],
+                    ref: "input",
+                    attrs: {
+                        id: "chatbox-input",
+                        type: "text",
+                        spellcheck: "false",
+                        autocomplete: "off",
+                        maxlength: "100",
+                        tabindex: "-1",
+                        placeholder: "Type your message here"
                     },
-                    created() {
-                        eX.events.$on("chat-visible", this.onVisibilityChange), eX.events.$on("chat-focus", this.focusChat), eX.events.$on("chat-message", this.onChatMessage), eX.events.$on("server-message", this.onServerMessage), eX.events.$on("every-second", this.filterToasts), eX.events.$on("chat-clear", this.clearChat), eX.events.$on("show-blocked-message-count", e => this.showBlockedMessageCount = e), eX.events.$on("game-stopped", () => {
-                            this.blockedMessageCount = 0, ts = {}
-                        }), document.addEventListener("focusin", e => {
-                            this.visibleInput = !this.visibleToast || e.target === this.$refs.input
-                        })
+                    domProps: {value: t.Vk},
+                    on: {
+                        keydown: function (e) {
+                            return !e.type.indexOf("key") && t._k(e.keyCode, "enter", 13, e.key, "Enter") ? null : t.gf()
+                        }, input: function (e) {
+                            e.target.composing || (t.Vk = e.target.value)
+                        }
                     }
-                }, eV, [], !1, null, "4900a413", null));
-            ti.options.__file = "src/components/chatbox.vue";
-            var ta = ti.exports,
-                tn = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: e.userVisible && e.visible,
-                            expression: "userVisible && visible"
-                        }],
-                        attrs: {
-                            id: "leaderboard"
+                })])], 2)
+            };
+            _s._withStripped = !0;
+            var gs = s(1620), ws = s(3117), {Oh: ys} = s(9056), {R: bs} = s(3658), Cs = {};
+            const ks = {
+                data: () => ({Vi: !1, Fo: !1, Ho: !1, Vk: "", Jo: [], Go: [], Nj: !1, Io: 0, Ko: 0, Ej: 200}),
+                components: {chatMessage: R},
+                methods: {
+                    ye(t) {
+                        t && (localStorage.adminMode && (gs.Be = t), gs.Td.Ud(t))
+                    }, Wk(t) {
+                        if (t) {
+                            var e = gs.Ya.Bc[t];
+                            e ? Cs[t] ? this.Lo(e) : this.Mo(e) : ws.hb("Player does not exist or is disconnected")
                         }
-                    }, [s("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: e.headerVisible,
-                            expression: "headerVisible"
-                        }],
-                        staticClass: "leaderboard-title"
-                    }, [e._v(e._s(e.headerText))]), e._v(" "), s("div", e._l(e.leaderboard,
-                        function (t, i) {
-                            return s("div", {
-                                key: i,
-                                staticClass: "leaderboard-label"
-                            }, [
-                                e._v(" "),
-                                s("span", {
-                                    class: {
-                                        spectating: 0 == e.gameState.lifeState
-                                    },
-                                    style: {
-                                        color: t.color,
-                                        fontWeight: t.bold ? "bold" : "normal"
-                                    },
-                                    attrs: {
-                                        "data-pid": t.pid
-                                    },
-                                    on: {
-                                        click: function (t) {
-                                            return e.leftClickLabel(t)
-                                        }
-                                    }
-                                }, [
-                                    t.badge ? s("img", {
-                                        attrs: {
-                                            src: t.badge,
-                                            alt: "badge",
-                                            class: "badgeLeaderboard"
-                                        }
-                                    }) : e._e(),
-                                    t.badgeVanilla ? s("img", {
-                                        attrs: {
-                                            src: "/img/badge/" + getPerkBadgeImage(t.badgeVanilla) + ".png?2",
-                                            alt: "badgeVanilla",
-                                            class: "badgeVanillaLeaderboard"
-                                        }
-                                    }) : e._e(),
-                                    e._v(e._s(t.text))
-                                ])
-                            ]);
+                    }, Mo(t) {
+                        t.zb ? gs.R.$emit(bs.hj, "You cannot block yourself") : ws.fb(`Block ${t.lb} until server restart?`, (() => {
+                            Cs[t.Ga] = t.lb, gs.R.$emit(bs.hj, `Blocked ${t.lb}`)
+                        }))
+                    }, Lo(t) {
+                        ws.fb(`Unblock ${t.lb}?`, (() => {
+                            delete Cs[t.Ga], gs.R.$emit(bs.hj, `Unblocked ${t.lb}`)
+                        }))
+                    }, gf() {
+                        var t = this.Vk.trim();
+                        t && (gs.Be && (t = t.replace(/\$pid/g, gs.Be)), gs.eb.gf(t), this.Vk = ""), gs.wa.view.focus(), this.dl(!0)
+                    }, No(t) {
+                        "string" == typeof t && (t = {
+                            ci: t,
+                            di: "#828282"
+                        }).ci.startsWith("") && (t.ai = 2147483648, t.bi = "Announcement", t.ci = t.ci.slice(1), delete t.di, t.ei = 5847047), Cs[t.Ga] ? this.Io++ : (gs.T.hi && (t.ci = ys(t.ci)), t.fi = t.fi || "#ffffff", t.di = t.di || "#ffffff", t.ai = t.ai || 0, this.Jo.push(t), this.Jo.length > 100 && this.Jo.shift(), t.Wc = this.Ko++, t.Oo = Date.now() + Math.max(5e3, 150 * t.ci.length), this.Go.unshift(t), this.dl(!1))
+                    }, lc() {
+                        this.Nj = gs.T.Nj, this.Vi = gs.T.Me && gs.Ua && !gs.Qa, this.Fo = this.Vi && gs.T.Oe, this.Ho = this.Vi && !this.Fo, this.Ej = gs.T.Ej, this.$nextTick((() => this.dl(!0)))
+                    }, Po() {
+                        this.Vi && (this.Ho = !0, this.$nextTick((() => this.$refs.input.focus())))
+                    }, Qo() {
+                        gs.T.Oj && (this.Jo.splice(0, this.Jo.length), this.Go.splice(0, this.Go.length), this.Ko = 0)
+                    }, dl(t = !1) {
+                        if (!this.Fo) {
+                            var e = this.$refs.list, s = e.scrollHeight - e.clientHeight;
+                            !t && s - e.scrollTop > 30 || this.$nextTick((() => e.scrollTop = e.scrollHeight))
                         }
-                    ), 0)])
-                };
-            tn._withStripped = !0;
-            var to = s(1),
-                tr = s(4),
-                tl = (s(248), Object(v.a)({
-                    data: () => ({
-                        userVisible: tr.showLeaderboard,
-                        visible: !1,
-                        headerVisible: !0,
-                        headerText: "Leaderboard",
-                        leaderboard: [],
-                        gameState: to.state
-                    }),
-                    methods: {
-                        updateLeaderboard(e, t) {
-                            if (this.leaderboard = e, t) this.headerVisible = t.visible, this.headerText = t.text;
-                            else if (tr.showServerName && this.gameState.selectedServer) {
-                                this.headerVisible = !0;
-                                var s = this.gameState.selectedServer.region || "";
-                                s && (s += " "), this.headerText = s + this.gameState.selectedServer.name
-                            } else this.headerVisible = !0, this.headerText = "Leaderboard"
-                        },
-                        leftClickLabel() {
-                            let e = event.target.dataset.pid;
-                            e && (to.selectedPlayer = e, to.actions.spectate(e), to.actions.targetPlayer(e))
-                        },
-                        onLeaderboardShow() {
-                            this.visible || (to.events.$on("leaderboard-update", this.updateLeaderboard), this.visible = !0)
-                        },
-                        onLeaderboardHide() {
-                            this.visible && (to.events.$off("leaderboard-update", this.updateLeaderboard), this.leaderboard = [], this.visible = !1, this.selectedServer = null)
-                        }
-                    },
-                    created() {
-                        to.events.$on("leaderboard-visible", e => {
-                            this.userVisible = e
-                        }), to.events.$on("leaderboard-show", this.onLeaderboardShow), to.events.$on("leaderboard-hide", this.onLeaderboardHide)
-                    }
-                }, tn, [], !1, null, "8a0c31c6", null));
-            tl.options.__file = "src/components/leaderboard.vue";
-            var tc = tl.exports,
-                th = {
-                    components: {
-                        stats: eK,
-                        chatbox: ta,
-                        minimap: s(117).default,
-                        leaderboard: tc,
-                        cautions: eZ
+                    }, Ro() {
+                        for (var t = 0; t < this.Go.length; t++) this.Go[t].Oo >= Date.now() || this.Go.splice(t--, 1)
                     }
                 },
-                td = (s(252), Object(v.a)(th, eY, [], !1, null, "339660d2", null));
-            td.options.__file = "src/components/hud.vue";
-            var tp = td.exports,
-                tu = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return s("transition", {
-                        attrs: {
-                            name: "menu"
-                        }
-                    }, [s("div", {
-                        staticClass: "container"
-                    }, [s("div", {
-                        staticClass: "fade-box box-1"
-                    }, [s("div", {
-                        staticStyle: {
-                            padding: "4px"
-                        }
-                    }, [e._v("Advertisement")]), e._v(" "), s("div", {
-                        staticStyle: {
-                            padding: "10px",
-                            "padding-top": "0px"
-                        }
-                    }, [s("div", {
-                        attrs: {
-                            id: "vanis-io_300x250_2"
-                        }
-                    })])]), e._v(" "), e.stats ? s("div", {
-                        staticClass: "fade-box",
-                        class: {
-                            scroll: e.isLoadingAd
-                        }
-                    }, [s("div", {
-                        staticStyle: {
-                            padding: "15px"
-                        }
-                    }, [s("div", [e._v("Time Alive: " + e._s(e.timeAlive))]), e._v(" "), s("div", [e._v("Highscore: " + e._s(e.highscore))]), e._v(" "), s("div", [e._v("Players Eaten: " + e._s(e.stats.killCount))]), e._v(" "), s("btn", {
-                        staticClass: "continue",
-                        nativeOn: {
-                            click: function (t) {
-                                return e.onContinueClick(t)
-                            }
-                        }
-                    }, [e._v("Continue")])], 1)]) : e._e()])])
-                };
-            tu._withStripped = !0;
-            var tg = s(1),
-                tA = s(77),
-                tm = (s(254), Object(v.a)({
-                    props: ["stats"],
-                    data: () => ({
-                        isLoadingAd: !1
-                    }),
-                    computed: {
-                        timeAlive() {
-                            var e = this.stats.timeAlive;
-                            return e < 60 ? e + "s" : Math.floor(e / 60) + "min " + e % 60 + "s"
-                        },
-                        highscore() {
-                            return tg.getMassText(this.stats.highscore)
-                        }
-                    },
-                    methods: {
-                        loadAd() {
-                            this.isLoadingAd = tA.refreshAd("death-box")
-                        },
-                        onContinueClick() {
-                            tg.state.deathDelay = !1, tg.app.showDeathScreen = !1, tg.showMenu(!0)
-                        }
-                    },
-                    created() {
-                        tg.events.$on("refresh-deathscreen-ad", this.loadAd)
-                    }
-                }, tu, [], !1, null, "3249d726", null));
-            tm.options.__file = "src/components/death-stats.vue";
-            var tv = tm.exports,
-                tf = function () {
-                    var e = this.$createElement;
-                    return (this._self._c || e)("button", {
-                        staticClass: "btn"
-                    }, [this._t("default", [this._v("Here should be something")])], 2)
-                };
-            tf._withStripped = !0;
-            var tC = (s(256), Object(v.a)({}, tf, [], !1, null, "b0b10308", null));
-            tC.options.__file = "src/components/btn.vue";
-            var ty = tC.exports,
-                tw = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return e.show ? s("div", {
-                        class: {
-                            "auto-hide": e.autoHideReplayControls
-                        },
-                        attrs: {
-                            id: "replay-controls"
-                        }
-                    }, [s("div", {
-                        staticStyle: {
-                            "text-align": "right"
-                        }
-                    }, [s("div", [e._v("Opacity " + e._s(e.cellOpacity) + "%")]), e._v(" "), s("div", [s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.cellOpacity,
-                            expression: "cellOpacity"
-                        }],
-                        staticClass: "replay-slider",
-                        staticStyle: {
-                            width: "105px",
-                            display: "inline-block"
-                        },
-                        attrs: {
-                            id: "replay-opacity-slider",
-                            type: "range",
-                            min: "10",
-                            max: "100"
-                        },
-                        domProps: {
-                            value: e.cellOpacity
-                        },
-                        on: {
-                            input: e.onCellOpacitySlide,
-                            __r: function (t) {
-                                e.cellOpacity = t.target.value
-                            }
-                        }
-                    })])]), e._v(" "), s("div", {
-                        staticStyle: {
-                            "margin-bottom": "5px",
-                            display: "flex"
-                        }
-                    }, [s("div", {
-                        staticStyle: {
-                            flex: "1"
-                        }
-                    }, [e._v(e._s(e.replaySecond.toFixed(1)) + " seconds")]), e._v(" "), s("div", {
-                        staticStyle: {
-                            "margin-right": "10px"
-                        }
-                    }, [s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.autoHideReplayControls,
-                            expression: "autoHideReplayControls"
-                        }],
-                        attrs: {
-                            type: "checkbox",
-                            id: "replay-auto-hide-controls"
-                        },
-                        domProps: {
-                            checked: Array.isArray(e.autoHideReplayControls) ? e._i(e.autoHideReplayControls, null) > -1 : e.autoHideReplayControls
-                        },
-                        on: {
-                            change: [function (t) {
-                                var s = e.autoHideReplayControls,
-                                    i = t.target,
-                                    a = !!i.checked;
-                                if (Array.isArray(s)) {
-                                    var n = e._i(s, null);
-                                    i.checked ? n < 0 && (e.autoHideReplayControls = s.concat([null])) : n > -1 && (e.autoHideReplayControls = s.slice(0, n).concat(s.slice(n + 1)))
-                                } else e.autoHideReplayControls = a
-                            }, e.saveAutoHideControls]
-                        }
-                    }), e._v(" "), s("label", {
-                        attrs: {
-                            for: "replay-auto-hide-controls"
-                        }
-                    }, [e._v("Auto Hide Controls")])])]), e._v(" "), s("input", {
-                        directives: [{
-                            name: "model",
-                            rawName: "v-model",
-                            value: e.rangeIndex,
-                            expression: "rangeIndex"
-                        }],
-                        staticClass: "replay-slider",
-                        attrs: {
-                            type: "range",
-                            min: e.rangeMin,
-                            max: e.rangeMax
-                        },
-                        domProps: {
-                            value: e.rangeIndex
-                        },
-                        on: {
-                            input: e.onSlide,
-                            change: e.onSlideEnd,
-                            __r: function (t) {
-                                e.rangeIndex = t.target.value
-                            }
-                        }
-                    })]) : e._e()
-                };
-            tw._withStripped = !0;
-            var tI = s(1),
-                t$ = (s(258), Object(v.a)({
-                    data: () => ({
-                        show: !1,
-                        autoHideReplayControls: tI.settings.autoHideReplayControls,
-                        drawDelay: tI.settings.drawDelay,
-                        cellOpacity: 100,
-                        rangeMin: 0,
-                        rangeIndex: 0,
-                        rangeMax: 1e3,
-                        replaySecond: 0,
-                        packetCount: 0
-                    }),
-                    created: function () {
-                        tI.events.$on("show-replay-controls", this.onShow), tI.events.$on("replay-index-change", this.onReplayIndexChange)
-                    },
-                    methods: {
-                        onShow(e) {
-                            e ? (this.show = !0, this.packetCount = e) : (this.show = !1, this.cellOpacity = 100, this.rangeIndex = 0, this.packetCount = 0)
-                        },
-                        onReplayIndexChange(e, t = !0) {
-                            var s = e / this.packetCount;
-                            t && (this.rangeIndex = Math.floor(s * this.rangeMax)), this.replaySecond = e / 25
-                        },
-                        onSlide(e) {
-                            tI.moveInterval && (clearInterval(tI.moveInterval), tI.moveInterval = null);
-                            var t = Math.floor(this.rangeIndex / this.rangeMax * (this.packetCount - 1));
-                            tI.playback.seek(t), this.onReplayIndexChange(t, !1)
-                        },
-                        onSlideEnd(e) {
-                            tI.moveInterval || (tI.moveInterval = setInterval(tI.playback.next.bind(tI.playback), 40))
-                        },
-                        onCellOpacitySlide() {
-                            tI.scene.foreground.alpha = this.cellOpacity / 100
-                        },
-                        saveAutoHideControls() {
-                            tI.settings.set("autoHideReplayControls", this.autoHideReplayControls)
-                        }
-                    }
-                }, tw, [], !1, null, "c2c2ac08", null));
-            t$.options.__file = "src/components/replay-controls.vue";
-            var tk = t$.exports,
-                tb = function () {
-                    var e = this.$createElement,
-                        t = this._self._c || e;
-                    return this.show ? t("div", {
-                        attrs: {
-                            id: "ab-overlay"
-                        }
-                    }, [this._m(0)]) : this._e()
-                };
-            tb._withStripped = !0, s(19);
-            var {
-                isFirstVisit: t_
-            } = s(17), tS = (s(260), Object(v.a)({
-                data: () => ({
-                    show: !1
-                }),
                 created() {
+                    gs.R.$on(bs.Sa, this.lc), gs.R.$on(bs.Ra, (() => {
+                        this.Io = 0, Cs = {}, this.Qo()
+                    })), gs.R.$on(bs.Nh, this.Po), gs.R.$on(bs.hj, this.No), gs.R.$on(bs.Wa, this.Ro), document.addEventListener("focusin", (t => {
+                        this.Ho = !this.Fo || t.target === this.$refs.input
+                    }))
                 }
-            }, tb, [function () {
-                var e = this.$createElement,
-                    t = this._self._c || e;
-                return t("div", {
-                    staticClass: "content"
-                }, [t("img", {
-                    staticStyle: {
-                        width: "120px"
-                    },
-                    attrs: {
-                        src: "/img/sad.png"
+            }, Ss = ks;
+            const xs = (0, _.Z)(Ss, _s, [], !1, null, "1664b5c5", null).exports;
+            var Ms = function () {
+                var t = this, e = t._self._c;
+                return e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.So && t.Vi,
+                        expression: "userVisible_ && visible_"
+                    }], attrs: {id: "leaderboard"}
+                }, [e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.To,
+                        expression: "headerVisible_"
+                    }], staticClass: "leaderboard-title"
+                }, [t._v(t._s(t.Uo))]), t._v(" "), e("div", t._l(t.Vo, (function (s, a) {
+                    return e("div", {
+                        key: a,
+                        staticClass: "leaderboard-label"
+                    }, [s.Oi ? e("span", [t._v(t._s(s.Oi) + ".")]) : t._e(), t._v(" "), e("badges", {
+                        staticClass: "leaderboard-badge",
+                        class: {spectating: !t.qa.Vd},
+                        attrs: {Ee: s.ai, Uc: 18}
+                    }), t._v(" "), e("span", {
+                        staticClass: "leaderboard-text",
+                        class: {spectating: !t.qa.Vd},
+                        style: {color: s.Pi, fontWeight: s.Qi ? "bold" : "normal"},
+                        attrs: {tip: s.Ga ? "Click to spectate player" : ""},
+                        on: {
+                            click: function (e) {
+                                return t.Ud(s.Ga)
+                            }
+                        }
+                    }, [s.Si ? e("a", {
+                        attrs: {
+                            href: s.Si,
+                            target: "_blank",
+                            rel: "noopener"
+                        }
+                    }, [t._v("\r\n                    " + t._s(s.ci) + "\r\n                ")]) : [t._v(t._s(s.ci))]], 2), t._v(" "), s.wg ? e("span", {
+                        staticClass: "leaderboard-score",
+                        style: {color: s.Pi}
+                    }, [t._v("\r\n                " + t._s(s.wg) + "\r\n            ")]) : t._e()], 1)
+                })), 0)])
+            };
+            Ms._withStripped = !0;
+            var Ps = s(1620), {R: Is} = s(3658);
+            const Ts = {
+                data: () => ({So: !1, Vi: !1, To: !0, Uo: "Leaderboard", Vo: [], qa: Ps.ra}),
+                components: {badges: D},
+                methods: {
+                    Wo(t) {
+                        if (this.Vo = t.Ri, t.Wi) this.To = t.Wi.Vi, this.Uo = t.Wi.ci; else if (Ps.T.Gj && this.qa.ta) {
+                            this.To = !0;
+                            var e = this.qa.ta.region || "";
+                            e && (e += " "), this.Uo = e + this.qa.ta.name
+                        } else this.To = !0, this.Uo = "Leaderboard"
+                    }, Ud(t) {
+                        t && (localStorage.adminMode && (Ps.Be = t), Ps.Td.Ud(t))
                     }
-                }), this._v(" "), t("p", {
+                },
+                created() {
+                    Ps.R.$on(Is.Sa, (() => {
+                        this.So = Ps.T.Fj, this.Vi = Ps.Ua && !Ps.Qa, this.Vi ? Ps.R.$on(Is.gj, this.Wo) : Ps.R.$off(Is.gj, this.Wo)
+                    })), Ps.R.$on(Is.Na, (() => {
+                        this.Vo = []
+                    }))
+                }
+            };
+            const As = (0, _.Z)(Ts, Ms, [], !1, null, "7e7860a8", null).exports;
+            var Ns = function () {
+                var t = this, e = t._self._c;
+                t._self._setupProxy;
+                return e("div", {staticClass: "minimap-wrapper"}, [e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.Y,
+                        expression: "showMinimapStats_"
+                    }], staticClass: "minimap-stats"
+                }, [e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.ca,
+                        expression: "showClock_"
+                    }]
+                }, [t._v(t._s(t.ia))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.da,
+                        expression: "showSessionTime_"
+                    }]
+                }, [t._v(t._s(t.ja) + " session")]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.ga && t.na,
+                        expression: "showPlayerCount_ && playerCount_"
+                    }]
+                }, [t._v(t._s(t.sa))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.ea && t.la,
+                        expression: "showSpectators_ && spectators_"
+                    }]
+                }, [t._v(t._s(t.la) + " spectator" + t._s(1 === t.la ? "" : "s"))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.fa && t.ma,
+                        expression: "showTagTotalMass_ && tagTotalMass_"
+                    }]
+                }, [t._v(t._s(t.ma) + " total mass")]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.ha && t.ka,
+                        expression: "showRestartTiming_ && restartTime_"
+                    }]
+                }, [t._v("Restart in " + t._s(t.ka))]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.qa.ng,
+                        expression: "gameState_.isAutoRespawning_"
+                    }]
+                }, [t._v("Auto respawning")])]), t._v(" "), e("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.W,
+                        expression: "showMinimap_"
+                    }], staticClass: "container", class: {circle: t.X}
+                }, [e("canvas", {ref: "locations", attrs: {id: "locations"}}), t._v(" "), e("canvas", {
+                    ref: "minimap",
+                    attrs: {id: "minimap"}
+                })])])
+            };
+            Ns._withStripped = !0;
+            var Ls = s(2);
+            const Ds = s.n(Ls)();
+            const Os = (0, _.Z)(Ds, Ns, [], !1, null, "769dba30", null).exports;
+            var Rs = s(1620), {R: Es} = s(3658);
+            const Us = {
+                components: {stats: ms, chatbox: xs, minimap: Os, leaderboard: As, cautions: hs},
+                data: () => ({yo: 1}),
+                created() {
+                    Rs.R.$on(Es.Sa, (() => {
+                        this.yo = Rs.T.Dj
+                    }))
+                }
+            };
+            const Fs = (0, _.Z)(Us, rs, [], !1, null, "0047b8f0", null).exports;
+            var Bs = function () {
+                var t = this, e = t._self._c;
+                return e("transition", {attrs: {name: "menu"}}, [e("div", {staticClass: "container"}, [e("div", {
+                    staticClass: "stuck-mention",
+                    class: {"show-stuck": t.Xo}
+                }, [t._v("If you are stuck, press ESC to continue")]), t._v(" "), e("div", {staticClass: "fade-box box-1"}, [e("div", {staticStyle: {padding: "4px"}}, [t._v("Advertisement")]), t._v(" "), e("div", {
                     staticStyle: {
-                        "font-size": "3em"
+                        padding: "10px",
+                        "padding-top": "0px"
                     }
-                }, [this._v("Adblock Detected")]), this._v(" "), t("p", {
+                }, [e("div", {attrs: {id: "vanis-io_300x250_2"}})])]), t._v(" "), t.stats ? e("div", {
+                    staticClass: "fade-box",
+                    class: {scroll: t.Yo}
+                }, [e("div", {staticStyle: {padding: "15px"}}, [e("div", [t._v("Time alive: " + t._s(t.lj))]), t._v(" "), e("div", [t._v("Highscore: " + t._s(t.Yg))]), t._v(" "), e("div", [t._v("Players eaten: " + t._s(t.stats.mj))]), t._v(" "), e("btn", {
+                    staticClass: "continue",
+                    attrs: {disabled: !t.Xo},
+                    nativeOn: {
+                        click: function (e) {
+                            return t.pf.apply(null, arguments)
+                        }
+                    }
+                }, [t._v("Continue")])], 1)]) : t._e()])])
+            };
+            Bs._withStripped = !0;
+            var zs = s(1620), Xs = s(473), {R: $s} = s(3658);
+            const js = {
+                props: ["stats"], data: () => ({Yo: !1, Xo: !1}), computed: {
+                    lj() {
+                        var t = this.stats.lj;
+                        return t < 60 ? t + "s" : `${Math.floor(t / 60)}min ${t % 60}s`
+                    }, Yg() {
+                        return zs.Xa(this.stats.Yg)
+                    }
+                }, methods: {
+                    Zo() {
+                        this.Yo = Xs.Te("death-box"), this.Xo = !1, setTimeout((() => {
+                            zs.ra.mg = !1, this.Xo = !0
+                        }), this.Yo ? 2500 : 1200)
+                    }, pf(t) {
+                        (t instanceof MouseEvent && t.isTrusted || !0 === t) && this.Xo && (zs.Vg.showDeathScreen = !1, zs.lf(!0, !0))
+                    }
+                }, created() {
+                    zs.R.$on($s.fh, this.Zo), zs.R.$on($s.Mh, (() => this.pf(!0)))
+                }
+            };
+            const Ws = (0, _.Z)(js, Bs, [], !1, null, "0b6441fe", null).exports;
+            var Hs = function () {
+                var t = this;
+                return (0, t._self._c)("button", {staticClass: "btn"}, [t._t("default", (function () {
+                    return [t._v("Here should be something")]
+                }))], 2)
+            };
+            Hs._withStripped = !0;
+            const Vs = {};
+            const Gs = (0, _.Z)(Vs, Hs, [], !1, null, "73f7fbfc", null).exports;
+            var qs = function () {
+                var t = this, e = t._self._c;
+                return t.ap ? e("div", {
+                    class: {"auto-hide": t.ck},
+                    attrs: {id: "replay-controls"}
+                }, [e("div", {staticStyle: {"text-align": "right"}}, [e("div", [t._v("Opacity " + t._s(t.bp) + "%")]), t._v(" "), e("div", [e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.bp,
+                        expression: "cellOpacity_"
+                    }],
+                    staticClass: "replay-slider",
+                    staticStyle: {width: "105px", display: "inline-block"},
+                    attrs: {id: "replay-opacity-slider", type: "range", min: "10", max: "100", step: "10"},
+                    domProps: {value: t.bp},
+                    on: {
+                        input: t.cp, __r: function (e) {
+                            t.bp = e.target.value
+                        }
+                    }
+                })])]), t._v(" "), e("div", {
+                    staticStyle: {
+                        "margin-bottom": "5px",
+                        display: "flex"
+                    }
+                }, [e("div", {staticStyle: {flex: "1"}}, [t._v(t._s(t.dp.toFixed(1)) + " seconds")]), t._v(" "), e("div", {staticStyle: {"margin-right": "10px"}}, [e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.ck,
+                        expression: "autoHideReplayControls_"
+                    }],
+                    attrs: {type: "checkbox", id: "replay-auto-hide-controls"},
+                    domProps: {checked: Array.isArray(t.ck) ? t._i(t.ck, null) > -1 : t.ck},
+                    on: {
+                        change: [function (e) {
+                            var s = t.ck, a = e.target, i = !!a.checked;
+                            if (Array.isArray(s)) {
+                                var n = t._i(s, null);
+                                a.checked ? n < 0 && (t.ck = s.concat([null])) : n > -1 && (t.ck = s.slice(0, n).concat(s.slice(n + 1)))
+                            } else t.ck = i
+                        }, t.ep]
+                    }
+                }), t._v(" "), e("label", {attrs: {for: "replay-auto-hide-controls"}}, [t._v("Hide controls")])])]), t._v(" "), e("input", {
+                    staticClass: "replay-slider",
+                    attrs: {type: "range", min: "0", max: t.fp},
+                    domProps: {value: t.gp},
+                    on: {input: t.hp, change: t.ip}
+                })]) : t._e()
+            };
+            qs._withStripped = !0;
+            var Js = s(1620), {R: Ys} = s(3658);
+            const Zs = {
+                data: () => ({ap: !1, ck: !1, bp: 100, gp: 0, dp: 0, fp: 0}), created() {
+                    Js.R.$on(Ys.Sa, this.jp), Js.R.$on(Ys.vj, this.kp)
+                }, methods: {
+                    jp() {
+                        this.ck = Js.T.ck, Js.Ua && Js.Qa ? (this.ap = !0, this.fp = Js.Ng.qj.length - 1) : (this.ap = !1, this.bp = 100, this.gp = 0, this.fp = 0)
+                    }, kp(t, e = !0) {
+                        e && (this.gp = t), this.dp = t / 25
+                    }, hp(t) {
+                        Js.Og && (clearInterval(Js.Og), Js.Og = null), Js.Ng.uj(t.target.valueAsNumber), this.kp(t.target.valueAsNumber, !0)
+                    }, ip() {
+                        Js.Og || (Js.Og = setInterval(Js.Ng.Pg, 40))
+                    }, cp() {
+                        Js.Ie.Mc.alpha = this.bp / 100
+                    }, ep() {
+                        Js.T.Ee("autoHideReplayControls", this.ck)
+                    }
+                }
+            };
+            const Ks = (0, _.Z)(Zs, qs, [], !1, null, "11edcf43", null).exports;
+            var Qs = function () {
+                var t = this, e = t._self._c;
+                return t.show ? e("div", {attrs: {id: "ab-overlay"}}, [t._m(0)]) : t._e()
+            };
+            Qs._withStripped = !0;
+            var {Ji: ta} = s(9056);
+            const ea = {
+                data: () => ({ap: !1}), created() {
+                    ta || fetch("/ads.css").then((t => {
+                    })).catch((t => {
+                        t.response || (this.ap = !0)
+                    }))
+                }
+            };
+            const sa = (0, _.Z)(ea, Qs, [function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "content"}, [e("img", {
+                    staticStyle: {width: "120px"},
+                    attrs: {src: "/img/sad.png"}
+                }), t._v(" "), e("p", {staticStyle: {"font-size": "3em"}}, [t._v("Adblock Detected")]), t._v(" "), e("p", {
                     staticStyle: {
                         "font-size": "1.5em",
                         "margin-bottom": "15px"
                     }
-                }, [this._v("We use advertisements to fund our servers!")]), this._v(" "), t("img", {
+                }, [t._v("We use advertisements to fund our servers!")]), t._v(" "), e("img", {
                     staticStyle: {
                         "border-radius": "4px",
                         "box-shadow": "0 0 10px black"
-                    },
-                    attrs: {
-                        src: "/img/ab.gif"
-                    }
+                    }, attrs: {src: "/img/ab.gif"}
                 })])
-            }], !1, null, "1611deb4", null));
-            tS.options.__file = "src/components/ab-overlay.vue";
-            var tE = tS.exports,
-                tx = function () {
-                    var e = this.$createElement;
-                    return (this._self._c || e)("div", {
-                        directives: [{
-                            name: "show",
-                            rawName: "v-show",
-                            value: this.show,
-                            expression: "show"
-                        }],
-                        staticClass: "image-captcha-overlay"
-                    }, [this._m(0)])
-                };
-            tx._withStripped = !0;
-            var tB = s(1);
-            s(25);
-            var t8 = window.captcha = {
-                    data: () => ({
-                        show: !1,
-                        scriptLoadPromise: null,
-                        captchaId: null,
-                        wsId: null,
-                        dualbox: !1
-                    }),
-                    created() {
-                        tB.events.$on("show-image-captcha", () => {
-                            this.dualbox = null, this.show = !0, this.wsId = tB.currentWsId, grecaptcha.ready(() => this.renderCaptcha())
-                        }), tB.events.$on("m-show-image-captcha", () => {
-                            this.dualbox = !0, this.show = !0, this.wsId = null, grecaptcha.ready(() => this.renderCaptcha())
-                        }), tB.events.$on("request-image-captcha", async () => {
-                            this.show = !0, grecaptcha.ready(() => {
-                                if (null !== this.captchaId) {
-                                    grecaptcha.reset(this.captchaId);
-                                    return
-                                }
-                                let {
-                                    client: e
-                                } = window, t = document.getElementById("image-captcha-container");
-                                this.captchaId = grecaptcha.render(t, {
-                                    sitekey: "6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi",
-                                    callback: e.onCaptchaToken.bind(e)
+            }], !1, null, "0b66f3fb", null).exports;
+            var aa = function () {
+                var t = this;
+                return (0, t._self._c)("div", {
+                    directives: [{
+                        name: "show",
+                        rawName: "v-show",
+                        value: t.ap,
+                        expression: "show_"
+                    }], staticClass: "image-captcha-overlay"
+                }, [t._m(0)])
+            };
+            aa._withStripped = !0;
+            var ia = s(3117), na = s(1620), {R: ra} = s(3658);
+            const oa = {
+                data: () => ({ap: !1, Sl: null, lp: null, mp: null}), created() {
+                    na.R.$on(ra.nj, (async () => {
+                        this.ap = !0, this.mp = na.if, this.Sl || (this.Sl = new Promise((t => {
+                            var e = document.createElement("script");
+                            e.setAttribute("src", "https://www.google.com/recaptcha/api.js?render=explicit"), e.setAttribute("async", "async"), e.setAttribute("defer", "defer"), e.onload = t, e.onerror = () => {
+                                ia.hf.fire({
+                                    type: "error",
+                                    title: "Loading reCAPTCHA failed. Please try refreshing browser in 30 seconds",
+                                    timer: 1500
                                 })
-                            })
-                        }), tB.events.$on("hide-image-captcha", () => {
-                            this.show = !1
-                        })
-                    },
-                    methods: {
-                        renderCaptcha() {
-                            if (null !== this.captchaId) {
-                                grecaptcha.reset(this.captchaId);
-                                return
-                            }
-                            this.captchaId = grecaptcha.render(document.getElementById("image-captcha-container"), {
-                                sitekey: "6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi",
-                                callback: this.onCaptchaToken.bind(this)
-                            })
-                        },
-                        onCaptchaToken(e) {
-                            if (!this.dualbox && tB.currentWsId !== this.wsId) {
-                                this.show = !1;
-                                return
-                            }
-                            if (!e) {
-                                this.renderCaptcha();
-                                return
-                            }
-                            tB.connection.sendRecaptchaToken(e, !!this.dualbox), this.show = !1
+                            }, document.head.appendChild(e)
+                        }))), await this.Sl, grecaptcha.ready((() => this.np()))
+                    }))
+                }, methods: {
+                    np() {
+                        null === this.lp ? this.lp = grecaptcha.render(document.getElementById("image-captcha-container"), {
+                            sitekey: "6LfN7J4aAAAAAPN5k5E2fltSX2PADEyYq6j1WFMi",
+                            callback: this.op.bind(this)
+                        }) : grecaptcha.reset(this.lp)
+                    }, op(t) {
+                        na.if === this.mp ? t ? (na.eb.ff(t), this.ap = !1) : this.np() : this.ap = !1
+                    }
+                }
+            }, la = oa;
+            const ca = (0, _.Z)(la, aa, [function () {
+                var t = this, e = t._self._c;
+                return e("div", {staticClass: "center-screen"}, [e("div", {
+                    staticStyle: {
+                        color: "orange",
+                        "margin-bottom": "6px"
+                    }
+                }, [t._v("Login and level up to skip captcha!")]), t._v(" "), e("div", {attrs: {id: "image-captcha-container"}})])
+            }], !1, null, "16d4a4d8", null).exports;
+            var ua = function () {
+                var t = this, e = t._self._c;
+                return t.ap ? e("div", {staticClass: "shoutbox"}, [e("iframe", {
+                    staticClass: "shoutbox-player",
+                    attrs: {width: "300", height: "200", src: t.url, frameborder: "0"}
+                }), t._v(" "), e("i", {
+                    staticClass: "fas fa-times close-button", on: {
+                        click: function (e) {
+                            return t.pp()
                         }
                     }
-                },
-                t0 = (s(262), Object(v.a)(t8, tx, [function () {
-                    let e = this._self._c || this.$createElement,
-                        t = this._v,
-                        s = window.client || Object.seal({
-                            captcha: {
-                                solving: !1
-                            }
-                        });
-                    return e("div", {
-                        staticClass: "center-screen"
-                    }, [e("div", {
-                        staticStyle: {
-                            "margin-bottom": "6px"
-                        }
-                    }, [t(s.captcha.solving ? `Solve the captcha for minion '${s.captcha.for}'` : "Login and level up to skip captcha!")]), t(" "), e("div", {
-                        attrs: {
-                            id: "image-captcha-container"
-                        }
-                    })])
-                }], !1, null, "76d60428", null));
-            t0.options.__file = "src/components/image-captcha.vue";
-            var tQ = t0.exports,
-                tM = function () {
-                    var e = this,
-                        t = e.$createElement,
-                        s = e._self._c || t;
-                    return e.show ? s("div", {
-                        staticClass: "shoutbox"
-                    }, [s("iframe", {
-                        staticClass: "shoutbox-player",
-                        attrs: {
-                            width: "300",
-                            height: "200",
-                            src: e.url,
-                            frameborder: "0"
-                        }
-                    }), e._v(" "), s("i", {
-                        staticClass: "fas fa-times close-button",
-                        on: {
-                            click: function () {
-                                return e.hide()
-                            }
-                        }
-                    })]) : e._e()
-                };
-            tM._withStripped = !0;
-            var tT = s(264),
-                tD = (s(265), Object(v.a)({
-                    data: () => ({
-                        show: !1
-                    }),
-                    props: ["url", "tag"],
-                    methods: {
-                        hide() {
-                            tT.setSeen(this.tag), this.show = !1
-                        }
-                    },
-                    created() {
-                        tT.isSeen(this.tag) || (this.show = !0)
+                })]) : t._e()
+            };
+            ua._withStripped = !0;
+            var ha = s(3169);
+            const da = {
+                data: () => ({ap: !1}), props: ["url", "tag"], methods: {
+                    pp() {
+                        ha.Ii(this.tag), this.ap = !1
                     }
-                }, tM, [], !1, null, "559d1d3c", null));
-            tD.options.__file = "src/components/shoutbox.vue";
-            var tL = tD.exports;
-            a.a.use(o.a);
-            var tN = s(4),
-                tU = s(1);
-            a.a.component("btn", ty), tU.app = new a.a({
+                }, created() {
+                    ha.Hi(this.tag) || (this.ap = !0)
+                }
+            };
+            const pa = (0, _.Z)(da, ua, [], !1, null, "a5dc8020", null).exports;
+            var va = function () {
+                var t = this, e = t._self._c;
+                return t.nf ? e("div", {
+                    staticClass: "color-picker-wrapper",
+                    on: {mousedown: t.qp, mousemove: t.rp, mouseup: t.sp}
+                }, [e("div", {
+                    ref: "overlay",
+                    staticClass: "color-picker-overlay"
+                }), t._v(" "), e("div", {
+                    staticClass: "color-picker fade-box",
+                    style: {top: t.tp + "px", left: t.up + "px"}
+                }, [e("input", {
+                    staticClass: "color-picker-hue",
+                    attrs: {type: "range", min: "0", max: "360", step: "1"},
+                    domProps: {value: t.vp[0]},
+                    on: {
+                        input: function (e) {
+                            return t.wp(e, !1)
+                        }, change: function (e) {
+                            return t.wp(e, !0)
+                        }
+                    }
+                }), t._v(" "), e("div", {
+                    staticClass: "color-picker-clr",
+                    style: {backgroundColor: "hsl(" + t.vp[0] + ", 100%, 50%)"}
+                }, [e("div", {staticClass: "color-picker-sat"}, [e("div", {
+                    ref: "val",
+                    staticClass: "color-picker-val"
+                }, [e("div", {
+                    ref: "pivot",
+                    staticClass: "color-picker-pivot",
+                    class: {dragging: t.yp},
+                    style: {
+                        left: 150 * t.vp[1] + "px",
+                        top: 150 - 150 * t.vp[2] + "px",
+                        background: t.yp ? "#" + t.zp : "none"
+                    }
+                })])])]), t._v(" "), e("div", {staticClass: "color-picker-hex"}, [t.Ap ? e("span", {
+                    staticClass: "color-picker-reset",
+                    on: {
+                        click: function (e) {
+                            return t.Zg()
+                        }
+                    }
+                }, [t._v("Reset")]) : t._e(), t._v(" "), e("span", {staticClass: "color-picker-hashtag"}, [t._v("#")]), t._v(" "), e("input", {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model",
+                        value: t.zp,
+                        expression: "rgb_"
+                    }],
+                    staticClass: "color-picker-hex",
+                    attrs: {type: "text", spellcheck: "false", maxlength: "6", placeholder: "000000"},
+                    domProps: {value: t.zp},
+                    on: {
+                        input: [function (e) {
+                            e.target.composing || (t.zp = e.target.value)
+                        }, function (e) {
+                            return t.Bp(1, !0)
+                        }]
+                    }
+                })])])]) : t._e()
+            };
+            va._withStripped = !0;
+            var fa = s(1620), {R: ma} = s(3658);
+            const _a = {
+                data: () => ({nf: !1, up: 0, tp: 0, yp: !1, Ap: null, zp: null, vp: [0, 0, 0]}), methods: {
+                    Vm(t) {
+                        this.nf = null != t, null != t ? (this.up = t.Ha, this.tp = t.Ia, this.Ap = t.Nm, this.zp = t.Rl, this.Bp(1, !1)) : fa.R.$emit(ma.bn)
+                    }, wp(t, e) {
+                        this.vp[0] = t.target.valueAsNumber, this.Bp(0, e)
+                    }, qp(t) {
+                        if (t.target === this.$refs.overlay) return this.Vm(null), void t.stopPropagation();
+                        t.target !== this.$refs.pivot && t.target !== this.$refs.val || (this.yp = !0, this.rp(t))
+                    }, rp(t) {
+                        if (this.yp) {
+                            var e = this.$refs.val.getBoundingClientRect(), s = t.clientX - e.x, a = t.clientY - e.y;
+                            this.vp[1] = s / 150, this.vp[2] = 1 - a / 150, this.vp[1] = Math.min(Math.max(this.vp[1], 0), 1), this.vp[2] = Math.min(Math.max(this.vp[2], 0), 1), this.Bp(0, !1)
+                        }
+                    }, sp(t) {
+                        this.yp && (this.rp(t), this.yp = !1, this.Bp(0, !0))
+                    }, Zg() {
+                        this.zp = this.Ap, this.Bp(1, !0)
+                    }, Bp(t, e) {
+                        if (1 === t) {
+                            if (6 !== this.zp.length) return;
+                            this.vp.splice(0, 3, ...(s = this.zp, a = parseInt(s.slice(0, 2), 16) / 255, i = parseInt(s.slice(2, 4), 16) / 255, n = parseInt(s.slice(4, 6), 16) / 255, r = Math.max(a, i, n), o = r - Math.min(a, i, n), l = o && (r == a ? (i - n) / o : r == i ? 2 + (n - a) / o : 4 + (a - i) / o), [60 * (l < 0 ? l + 6 : l), r && o / r, r]))
+                        } else 0 === t && (this.zp = function (t, e, s) {
+                            var a, i, n, r, o, l, c, u;
+                            switch (l = s * (1 - e), c = s * (1 - (o = t / 360 * 6 - (r = Math.floor(t / 360 * 6))) * e), u = s * (1 - (1 - o) * e), r % 6) {
+                                case 0:
+                                    a = s, i = u, n = l;
+                                    break;
+                                case 1:
+                                    a = c, i = s, n = l;
+                                    break;
+                                case 2:
+                                    a = l, i = s, n = u;
+                                    break;
+                                case 3:
+                                    a = l, i = c, n = s;
+                                    break;
+                                case 4:
+                                    a = u, i = l, n = s;
+                                    break;
+                                case 5:
+                                    a = s, i = l, n = c
+                            }
+                            return (a = Math.ceil(255 * a).toString(16).padStart(2, "0")) + (i = Math.ceil(255 * i).toString(16).padStart(2, "0")) + Math.ceil(255 * n).toString(16).padStart(2, "0")
+                        }(...this.vp));
+                        var s, a, i, n, r, o, l;
+                        e && fa.R.$emit(ma.an, this.zp)
+                    }
+                }, created() {
+                    fa.R.$on(ma.Xm, this.Vm)
+                }, destroyed() {
+                    fa.R.$off(ma.Xm, this.Vm)
+                }
+            };
+            const ga = (0, _.Z)(_a, va, [], !1, null, "9f4e7a3c", null).exports;
+            var wa = function () {
+                var t = this, e = t._self._c;
+                return t.nf ? e("div", {
+                    staticClass: "image-picker-wrapper",
+                    on: {click: t.Cp}
+                }, [e("div", {staticClass: "image-picker-overlay"}), t._v(" "), e("div", {
+                    staticClass: "image-picker fade-box",
+                    style: {top: t.tp + "px", left: t.up + "px"}
+                }, [e("img", {
+                    staticClass: "image-picker-preview",
+                    style: {maxWidth: (t.Rl ? t.md : 200) + "px"},
+                    attrs: {src: t.Rl, alt: "No image chosen or it is invalid"},
+                    on: {
+                        click: function (e) {
+                            return t.Dp()
+                        }, dragover: function (t) {
+                            t.preventDefault()
+                        }, drop: function (e) {
+                            return e.preventDefault(), t.Ep(e.dataTransfer.files)
+                        }
+                    }
+                }), t._v(" "), e("div", [t._v("Click or drop onto image to change.")]), t._v(" "), null != t.Nm ? e("div", {
+                    staticClass: "image-picker-reset",
+                    on: {
+                        click: function (e) {
+                            return t.Bp(t.Nm)
+                        }
+                    }
+                }, [t._v("Reset")]) : t._e(), t._v(" "), e("input", {
+                    ref: "inputElem",
+                    staticClass: "image-picker-input",
+                    attrs: {type: "file", accept: "image/png, image/jpeg, image/bmp, image/webp"},
+                    on: {
+                        change: function (e) {
+                            return t.Ep(e.target.files)
+                        }
+                    }
+                })])]) : t._e()
+            };
+            wa._withStripped = !0;
+            var ya = s(1620), {R: ba} = s(3658);
+            const Ca = {
+                data: () => ({nf: !1, up: 0, tp: 0, Fp: null, Rl: null, Nm: null, md: null}), methods: {
+                    Vm(t) {
+                        this.nf = null != t, this.nf ? (this.up = t.Ha, this.tp = t.Ia, this.Rl = t.Rl, this.Nm = t.Nm, this.md = t.md) : ya.R.$emit(ba.fn)
+                    }, Cp(t) {
+                        t.target.classList.contains("image-picker-overlay") && (this.Vm(null), t.stopPropagation())
+                    }, Bp(t) {
+                        this.Rl = t, ya.R.$emit(ba.en, t)
+                    }, Dp() {
+                        this.$refs.inputElem.click()
+                    }, Gp() {
+                        var t = new FileReader;
+                        return t.addEventListener("load", (t => {
+                            this.Bp(t.target.result)
+                        })), t
+                    }, Ep(t) {
+                        0 !== t.length && t[0].type.startsWith("image/") && this.Gp().readAsDataURL(t[0])
+                    }
+                }, created() {
+                    ya.R.$on(ba.cn, this.Vm)
+                }, destroyed() {
+                    ya.R.$off(ba.cn, this.Vm)
+                }
+            };
+            const ka = (0, _.Z)(Ca, wa, [], !1, null, "591f7255", null).exports;
+            var Sa = function () {
+                var t = this;
+                return (0, t._self._c)("div", {
+                    staticClass: "tooltip",
+                    class: {soft: t.Hp, show: t.ap},
+                    style: {top: t.tp + "px", left: t.up + "px"}
+                }, [t._v(t._s(t.ci))])
+            };
+            Sa._withStripped = !0;
+            var xa = s(1620), {R: Ma} = s(3658);
+            const Pa = {
+                data: () => ({ap: !1, Hp: !1, Ip: !1, up: 0, tp: 0, ci: null}), methods: {
+                    Jp(t) {
+                        for (var e, s = t.target, a = 0; a < 3 && null != s && !(null != (e = s.getAttribute("tip")) && e.length > 0); a++) s = s.parentElement;
+                        if (null == e || 0 === e.length) return this.ap = !1;
+                        this.ap = !0, this.Ip = t.clientY >= window.innerHeight - 40, this.up = t.clientX + 14, this.tp = t.clientY + (this.Ip ? -40 : 8), this.ci = e
+                    }, Kp(t) {
+                        this.Hp = t, this.ap = !1
+                    }
+                }, created() {
+                    document.addEventListener("mousemove", this.Jp), xa.R.$on(Ma.bh, this.Kp), xa.R.$on(Ma.ln, (() => this.Kp(!0))), this.Kp(!0)
+                }
+            };
+            const Ia = (0, _.Z)(Pa, Sa, [], !1, null, "7968cda5", null).exports;
+            i().use(r());
+            var Ta = s(5097), Aa = s(1620), {R: Na} = s(3658);
+            i().component("btn", Gs), Aa.Vg = new (i())({
                 el: "#app",
-                data: {
-                    showHud: tN.showHud,
-                    showMenu: !0,
-                    showDeathScreen: !1,
-                    deathStats: null
-                },
+                data: {showHud: !1, showMenu: !0, showDeathScreen: !1, deathStats: null},
                 components: {
-                    imageCaptcha: tQ,
-                    mainContainer: eP,
-                    socialLinks: e4,
-                    privacyTos: e3,
-                    contextMenu: eO,
-                    hud: tp,
-                    deathStats: tv,
-                    replayControls: tk,
-                    abOverlay: tE,
-                    shoutbox: tL
+                    imageCaptcha: ca,
+                    mainContainer: ts,
+                    socialLinks: as,
+                    privacyTos: ns,
+                    hud: Fs,
+                    deathStats: Ws,
+                    replayControls: Ks,
+                    abOverlay: sa,
+                    shoutbox: pa,
+                    colorPicker: ga,
+                    imagePicker: ka,
+                    tooltip: Ia
                 }
-            })
-        }]), window.DELTATAG = "DELTA", localStorage.cid || (localStorage.cid = makeid(28)), GAME.sendServer = e => {
-        GAME.events.$emit("chat-message", e)
-    }, GAME.setText = e => {
-        GAME.events.$emit("update-cautions", {
-            custom: e
-        })
-    }, window.setDualData = (e, t) => {
-        switch (e) {
-            case 1:
-                getModule(4).set("dualSkin", t);
-                document.querySelector('.configSkin').src = t;
-                document.getElementById("skinDisplay2").src = t;
-                break;
-            case 2:
-                const nicknameInput = document.getElementById("dualNickname");
-                const nicknameDisplay = document.querySelector(".sdn2");
-                const defaultNicknameStyle = document.querySelector(".sdn1");
+            }), Aa.R.$on(Na.Sa, (() => {
+                Aa.Vg.showHud = Ta.Ke
+            }))
+        }, 3658: t => {
+            function e(t, e, s = null, a = null, i = !0) {
+                return i && null != s && 0 !== s ? `${t}${e} ${s}${a}` : `${t}${e}`
+            }
 
-                if (nicknameInput && nicknameDisplay && defaultNicknameStyle) {
-                    const n = nicknameInput.value;
-                    nicknameDisplay.textContent = n;
-                    nicknameDisplay.style.color = n === localStorage.nickname ? defaultNicknameStyle.style.color : 'white';
-                    nicknameDisplay.style.fontStyle = n === localStorage.nickname ? defaultNicknameStyle.style.fontStyle : 'normal';
-                    getModule(4).set("dualNickname", n);
+            var s = !1;
+            var a, i = (a = [], function () {
+                for (; ;) {
+                    var t = "abcdefghijklmnopqrstuvwxyz",
+                        e = t[~~(Math.random() * t.length)] + t[~~(Math.random() * t.length)] + t[~~(Math.random() * t.length)];
+                    if (-1 === a.indexOf(e)) return a.push(e), e
                 }
-                break;
-            case 3:
-                getModule(4).set("dualUseNickname", document.getElementById("dualUseNickname").checked);
+            }), n = {
+                kj: i(),
+                kf: i(),
+                pj: i(),
+                Sa: i(),
+                Wa: i(),
+                hj: i(),
+                ke: i(),
+                Ra: i(),
+                Nh: i(),
+                Xm: i(),
+                an: i(),
+                bn: i(),
+                Kh: i(),
+                kn: i(),
+                mn: i(),
+                fh: i(),
+                Mh: i(),
+                nj: i(),
+                cn: i(),
+                en: i(),
+                fn: i(),
+                gj: i(),
+                ln: i(),
+                Eg: i(),
+                za: i(),
+                Ka: i(),
+                La: i(),
+                Ma: i(),
+                Na: i(),
+                bh: i(),
+                vj: i(),
+                pb: i(),
+                Bj: i(),
+                jf: i(),
+                qh: i(),
+                ih: i(),
+                ii: i(),
+                qf: i(),
+                rf: i(),
+                sf: i(),
+                tf: i(),
+                uf: i()
+            };
+            t.exports = {
+                Ja: function (t, e, s) {
+                    return (1 - s) * t + s * e
+                }, Qd: function (t) {
+                    return new DataView(new ArrayBuffer(t))
+                }, Ih: function (t) {
+                    return t = t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, "&apos;").replace(/"/g, "&quot;")
+                }, Aj: function () {
+                    var t = new Date, e = t.getMonth() + 1, s = t.getDate();
+                    return [t.getFullYear(), (e > 9 ? "" : "0") + e, (s > 9 ? "" : "0") + s].join("") + "-" + [("0" + t.getHours()).slice(-2), ("0" + t.getMinutes()).slice(-2), ("0" + t.getSeconds()).slice(-2)].join("")
+                }, Wl: function (t, s = !0) {
+                    if (!isFinite(t)) return "never";
+                    if (t < 0) return "0ms";
+                    const a = Math.floor(t / 1e3);
+                    if (a < 1) return e(t, "ms");
+                    const i = Math.floor(a / 60);
+                    if (i < 1) return e(a, "s", t % 1e3, "ms", s);
+                    const n = Math.floor(i / 60);
+                    if (n < 1) return e(i, "min", a % 60, "s");
+                    const r = Math.floor(n / 24);
+                    if (r < 1) return e(n, "hr", i % 60, "min");
+                    const o = Math.floor(r / 7);
+                    if (o < 1) return e(r, "d", n % 24, "hr");
+                    const l = Math.floor(o / 52);
+                    return l < 1 ? e(o, "w", r % 7, "d") : e(l, "y", o % 52, "w")
+                }, ig: function () {
+                    s || (document.body.classList.add("hide-captcha-badge"), s = !0)
+                }, xj: function (t) {
+                    ["interaction", "accessibility"].forEach((e => {
+                        var s = t.plugins[e];
+                        s && (s.destroy(), delete t.plugins[e])
+                    }))
+                }, Rd: function (t) {
+                    t.ef(document.getElementById("nickname").value), t.ef(document.getElementById("skinurl").value), t.ef(document.getElementById("teamtag").value)
+                }, Dn: function (t) {
+                    return Math.round(t * t / (.1 * .1))
+                }, Cn: function (t) {
+                    return Math.floor(.1 * Math.sqrt(t))
+                }, R: n, Zi: class {
+                    constructor(t) {
+                        this.Ui = t, this.Ti = 0
+                    }
+
+                    Zd() {
+                        return this.Ui.getUint8(this.Ti++)
+                    }
+
+                    Lp() {
+                        return this.Ui.getInt8(this.Ti++)
+                    }
+
+                    Ni() {
+                        return this.Ui.getUint16((this.Ti += 2) - 2, !0)
+                    }
+
+                    jj() {
+                        return this.Ui.getInt16((this.Ti += 2) - 2, !0)
+                    }
+
+                    Yi() {
+                        return this.Ui.getUint32((this.Ti += 4) - 4, !0)
+                    }
+
+                    ef() {
+                        for (var t, e = ""; 0 !== (t = this.Ui.getUint8(this.Ti++));) e += String.fromCharCode(t);
+                        return decodeURIComponent(escape(e))
+                    }
+
+                    ij() {
+                        for (var t, e = ""; 0 !== (t = this.Ui.getUint16((this.Ti += 2) - 2, !0));) e += String.fromCharCode(t);
+                        return e
+                    }
+                }, Sd: class {
+                    constructor() {
+                        this.gb = []
+                    }
+
+                    yj() {
+                        var t = new ArrayBuffer(this.gb.length);
+                        return new Uint8Array(t).set(this.ae()), t
+                    }
+
+                    ae() {
+                        return new Uint8Array(this.gb)
+                    }
+
+                    Zd(t) {
+                        this.gb.push(t)
+                    }
+
+                    df(t) {
+                        for (var e = 0; e < t.length; e++) this.gb.push(t[e])
+                    }
+
+                    ef(t) {
+                        t = unescape(encodeURIComponent(t));
+                        for (var e = 0; e < t.length; e++) this.gb.push(t.charCodeAt(e));
+                        this.gb.push(0)
+                    }
+                }
+            }
+        }, 4459: (t, e, s) => {
+            var a = s(7167);
+
+            function i(t, e, s) {
+                var i = t.length, n = a._malloc(i), r = new Uint8Array(a.HEAPU8.buffer, n, i);
+                r.set(t);
+                var o = e(n, t.byteLength);
+                if (!s) {
+                    var l = new Uint8Array(new ArrayBuffer(i));
+                    l.set(r)
+                }
+                return a._free(n), s ? o : l
+            }
+
+            s(4103), t.exports = {
+                bj: t => i(t, a._skid, !1),
+                skid_3: t => i(t, a._skid3, !0),
+                skid_4: t => i(t, a._skid4, !0)
+            }
+        }, 7167: (t, e, s) => {
+            var a, i = void 0 !== i ? i : {}, n = Object.assign({}, i), r = !0, o = !1, l = "";
+            (r || o) && (o ? l = self.location.href : "undefined" != typeof document && document.currentScript && (l = document.currentScript.src), l = 0 !== l.indexOf("blob:") ? l.substr(0, l.replace(/[?#].*/, "").lastIndexOf("/") + 1) : "", t => {
+                var e = new XMLHttpRequest;
+                return e.open("GET", t, !1), e.send(null), e.responseText
+            }, o && (a = t => {
+                var e = new XMLHttpRequest;
+                return e.open("GET", t, !1), e.responseType = "arraybuffer", e.send(null), new Uint8Array(e.response)
+            }), (t, e, s) => {
+                var a = new XMLHttpRequest;
+                a.open("GET", t, !0), a.responseType = "arraybuffer", a.onload = () => {
+                    200 == a.status || 0 == a.status && a.response ? e(a.response) : s()
+                }, a.onerror = s, a.send(null)
+            });
+            i.print || console.log.bind(console);
+            var c, u = i.printErr || console.warn.bind(console);
+            Object.assign(i, n), n = null, i.arguments && i.arguments, i.thisProgram && i.thisProgram, i.quit && i.quit, i.wasmBinary && (c = i.wasmBinary);
+            var h;
+            i.noExitRuntime;
+            "object" != typeof WebAssembly && N("no native wasm support detected");
+            var d, p, v, f, m, _, g, w, y = !1,
+                b = "undefined" != typeof TextDecoder ? new TextDecoder("utf8") : void 0;
+
+            function C(t, e) {
+                return t ? function (t, e, s) {
+                    for (var a = e + s, i = e; t[i] && !(i >= a);) ++i;
+                    if (i - e > 16 && t.buffer && b) return b.decode(t.subarray(e, i));
+                    for (var n = ""; e < i;) {
+                        var r = t[e++];
+                        if (128 & r) {
+                            var o = 63 & t[e++];
+                            if (192 != (224 & r)) {
+                                var l = 63 & t[e++];
+                                if ((r = 224 == (240 & r) ? (15 & r) << 12 | o << 6 | l : (7 & r) << 18 | o << 12 | l << 6 | 63 & t[e++]) < 65536) n += String.fromCharCode(r); else {
+                                    var c = r - 65536;
+                                    n += String.fromCharCode(55296 | c >> 10, 56320 | 1023 & c)
+                                }
+                            } else n += String.fromCharCode((31 & r) << 6 | o)
+                        } else n += String.fromCharCode(r)
+                    }
+                    return n
+                }(p, t, e) : ""
+            }
+
+            function k(t, e, s) {
+                return function (t, e, s, a) {
+                    if (!(a > 0)) return 0;
+                    for (var i = s, n = s + a - 1, r = 0; r < t.length; ++r) {
+                        var o = t.charCodeAt(r);
+                        if (o >= 55296 && o <= 57343 && (o = 65536 + ((1023 & o) << 10) | 1023 & t.charCodeAt(++r)), o <= 127) {
+                            if (s >= n) break;
+                            e[s++] = o
+                        } else if (o <= 2047) {
+                            if (s + 1 >= n) break;
+                            e[s++] = 192 | o >> 6, e[s++] = 128 | 63 & o
+                        } else if (o <= 65535) {
+                            if (s + 2 >= n) break;
+                            e[s++] = 224 | o >> 12, e[s++] = 128 | o >> 6 & 63, e[s++] = 128 | 63 & o
+                        } else {
+                            if (s + 3 >= n) break;
+                            e[s++] = 240 | o >> 18, e[s++] = 128 | o >> 12 & 63, e[s++] = 128 | o >> 6 & 63, e[s++] = 128 | 63 & o
+                        }
+                    }
+                    return e[s] = 0, s - i
+                }(t, p, e, s)
+            }
+
+            function S(t) {
+                for (var e = 0, s = 0; s < t.length; ++s) {
+                    var a = t.charCodeAt(s);
+                    a <= 127 ? e++ : a <= 2047 ? e += 2 : a >= 55296 && a <= 57343 ? (e += 4, ++s) : e += 3
+                }
+                return e
+            }
+
+            var x = [], M = [], P = [];
+            var I = 0, T = null, A = null;
+
+            function N(t) {
+                throw i.onAbort && i.onAbort(t), u(t = "Aborted(" + t + ")"), y = !0, 1, t += ". Build with -sASSERTIONS for more info.", new WebAssembly.RuntimeError(t)
+            }
+
+            var L, D, O = "data:application/octet-stream;base64,";
+
+            function R(t) {
+                return t.startsWith(O)
+            }
+
+            function E(t) {
+                try {
+                    if (t == L && c) return new Uint8Array(c);
+                    if (a) return a(t);
+                    throw "both async and sync fetching of the wasm failed"
+                } catch (t) {
+                    N(t)
+                }
+            }
+
+            function U(t) {
+                for (; t.length > 0;) t.shift()(i)
+            }
+
+            function F(t) {
+                this.excPtr = t, this.ptr = t - 24, this.set_type = function (t) {
+                    _[this.ptr + 4 >> 2] = t
+                }, this.get_type = function () {
+                    return _[this.ptr + 4 >> 2]
+                }, this.set_destructor = function (t) {
+                    _[this.ptr + 8 >> 2] = t
+                }, this.get_destructor = function () {
+                    return _[this.ptr + 8 >> 2]
+                }, this.set_refcount = function (t) {
+                    m[this.ptr >> 2] = t
+                }, this.set_caught = function (t) {
+                    t = t ? 1 : 0, d[this.ptr + 12 >> 0] = t
+                }, this.get_caught = function () {
+                    return 0 != d[this.ptr + 12 >> 0]
+                }, this.set_rethrown = function (t) {
+                    t = t ? 1 : 0, d[this.ptr + 13 >> 0] = t
+                }, this.get_rethrown = function () {
+                    return 0 != d[this.ptr + 13 >> 0]
+                }, this.init = function (t, e) {
+                    this.set_adjusted_ptr(0), this.set_type(t), this.set_destructor(e), this.set_refcount(0), this.set_caught(!1), this.set_rethrown(!1)
+                }, this.add_ref = function () {
+                    var t = m[this.ptr >> 2];
+                    m[this.ptr >> 2] = t + 1
+                }, this.release_ref = function () {
+                    var t = m[this.ptr >> 2];
+                    return m[this.ptr >> 2] = t - 1, 1 === t
+                }, this.set_adjusted_ptr = function (t) {
+                    _[this.ptr + 16 >> 2] = t
+                }, this.get_adjusted_ptr = function () {
+                    return _[this.ptr + 16 >> 2]
+                }, this.get_exception_ptr = function () {
+                    if (Mt(this.get_type())) return _[this.excPtr >> 2];
+                    var t = this.get_adjusted_ptr();
+                    return 0 !== t ? t : this.excPtr
+                }
+            }
+
+            R(L = "wauth3.wasm?f9d05d7358ffa46a7f7c") || (D = L, L = i.locateFile ? i.locateFile(D, l) : l + D);
+
+            function B(t) {
+                switch (t) {
+                    case 1:
+                        return 0;
+                    case 2:
+                        return 1;
+                    case 4:
+                        return 2;
+                    case 8:
+                        return 3;
+                    default:
+                        throw new TypeError("Unknown type size: " + t)
+                }
+            }
+
+            var z = void 0;
+
+            function X(t) {
+                for (var e = "", s = t; p[s];) e += z[p[s++]];
+                return e
+            }
+
+            var $ = {}, j = {}, W = {}, H = 48, V = 57;
+
+            function G(t) {
+                if (void 0 === t) return "_unknown";
+                var e = (t = t.replace(/[^a-zA-Z0-9_]/g, "$")).charCodeAt(0);
+                return e >= H && e <= V ? "_" + t : t
+            }
+
+            function q(t, e) {
+                return t = G(t), new Function("body", "return function " + t + '() {\n        return body.apply(this, arguments);\n};\n')(e)
+            }
+
+            function J(t, e) {
+                var s = q(e, (function (t) {
+                    this.name = e, this.message = t;
+                    var s = new Error(t).stack;
+                    void 0 !== s && (this.stack = this.toString() + "\n" + s.replace(/^Error(:[^\n]*)?\n/, ""))
+                }));
+                return s.prototype = Object.create(t.prototype), s.prototype.constructor = s, s.prototype.toString = function () {
+                    return void 0 === this.message ? this.name : this.name + ": " + this.message
+                }, s
+            }
+
+            var Y = void 0;
+
+            function Z(t) {
+                throw new Y(t)
+            }
+
+            function K(t, e, s = {}) {
+                if (!("argPackAdvance" in e)) throw new TypeError("registerType registeredInstance requires argPackAdvance");
+                var a = e.name;
+                if (t || Z('type "' + a + '" must have a positive integer typeid pointer'), j.hasOwnProperty(t)) {
+                    if (s.ignoreDuplicateRegistrations) return;
+                    Z("Cannot register type '" + a + "' twice")
+                }
+                if (j[t] = e, delete W[t], $.hasOwnProperty(t)) {
+                    var i = $[t];
+                    delete $[t], i.forEach((t => t()))
+                }
+            }
+
+            var Q = [], tt = [{}, {value: void 0}, {value: null}, {value: !0}, {value: !1}];
+
+            function et(t) {
+                t > 4 && 0 == --tt[t].refcount && (tt[t] = void 0, Q.push(t))
+            }
+
+            function st() {
+                for (var t = 0, e = 5; e < tt.length; ++e) void 0 !== tt[e] && ++t;
+                return t
+            }
+
+            function at() {
+                for (var t = 5; t < tt.length; ++t) if (void 0 !== tt[t]) return tt[t];
+                return null
+            }
+
+            var it = {
+                toValue: t => (t || Z("Cannot use deleted val. handle = " + t), tt[t].value), toHandle: t => {
+                    switch (t) {
+                        case void 0:
+                            return 1;
+                        case null:
+                            return 2;
+                        case!0:
+                            return 3;
+                        case!1:
+                            return 4;
+                        default:
+                            var e = Q.length ? Q.pop() : tt.length;
+                            return tt[e] = {refcount: 1, value: t}, e
+                    }
+                }
+            };
+
+            function nt(t) {
+                return this.fromWireType(m[t >> 2])
+            }
+
+            function rt(t, e) {
+                switch (e) {
+                    case 2:
+                        return function (t) {
+                            return this.fromWireType(g[t >> 2])
+                        };
+                    case 3:
+                        return function (t) {
+                            return this.fromWireType(w[t >> 3])
+                        };
+                    default:
+                        throw new TypeError("Unknown float type: " + t)
+                }
+            }
+
+            function ot(t, e, s) {
+                switch (e) {
+                    case 0:
+                        return s ? function (t) {
+                            return d[t]
+                        } : function (t) {
+                            return p[t]
+                        };
+                    case 1:
+                        return s ? function (t) {
+                            return v[t >> 1]
+                        } : function (t) {
+                            return f[t >> 1]
+                        };
+                    case 2:
+                        return s ? function (t) {
+                            return m[t >> 2]
+                        } : function (t) {
+                            return _[t >> 2]
+                        };
+                    default:
+                        throw new TypeError("Unknown integer type: " + t)
+                }
+            }
+
+            var lt = "undefined" != typeof TextDecoder ? new TextDecoder("utf-16le") : void 0;
+
+            function ct(t, e) {
+                for (var s = t, a = s >> 1, i = a + e / 2; !(a >= i) && f[a];) ++a;
+                if ((s = a << 1) - t > 32 && lt) return lt.decode(p.subarray(t, s));
+                for (var n = "", r = 0; !(r >= e / 2); ++r) {
+                    var o = v[t + 2 * r >> 1];
+                    if (0 == o) break;
+                    n += String.fromCharCode(o)
+                }
+                return n
+            }
+
+            function ut(t, e, s) {
+                if (void 0 === s && (s = 2147483647), s < 2) return 0;
+                for (var a = e, i = (s -= 2) < 2 * t.length ? s / 2 : t.length, n = 0; n < i; ++n) {
+                    var r = t.charCodeAt(n);
+                    v[e >> 1] = r, e += 2
+                }
+                return v[e >> 1] = 0, e - a
+            }
+
+            function ht(t) {
+                return 2 * t.length
+            }
+
+            function dt(t, e) {
+                for (var s = 0, a = ""; !(s >= e / 4);) {
+                    var i = m[t + 4 * s >> 2];
+                    if (0 == i) break;
+                    if (++s, i >= 65536) {
+                        var n = i - 65536;
+                        a += String.fromCharCode(55296 | n >> 10, 56320 | 1023 & n)
+                    } else a += String.fromCharCode(i)
+                }
+                return a
+            }
+
+            function pt(t, e, s) {
+                if (void 0 === s && (s = 2147483647), s < 4) return 0;
+                for (var a = e, i = a + s - 4, n = 0; n < t.length; ++n) {
+                    var r = t.charCodeAt(n);
+                    if (r >= 55296 && r <= 57343) r = 65536 + ((1023 & r) << 10) | 1023 & t.charCodeAt(++n);
+                    if (m[e >> 2] = r, (e += 4) + 4 > i) break
+                }
+                return m[e >> 2] = 0, e - a
+            }
+
+            function vt(t) {
+                for (var e = 0, s = 0; s < t.length; ++s) {
+                    var a = t.charCodeAt(s);
+                    a >= 55296 && a <= 57343 && ++s, e += 4
+                }
+                return e
+            }
+
+            function ft(t, e) {
+                var s, a, i = j[t];
+                return void 0 === i && Z(e + " has unknown type " + (s = St(t), a = X(s), kt(s), a)), i
+            }
+
+            var mt = {};
+
+            function _t(t) {
+                var e = mt[t];
+                return void 0 === e ? X(t) : e
+            }
+
+            var gt = [];
+
+            function wt() {
+                return "object" == typeof globalThis ? globalThis : Function("return this")()
+            }
+
+            var yt = [];
+            !function () {
+                for (var t = new Array(256), e = 0; e < 256; ++e) t[e] = String.fromCharCode(e);
+                z = t
+            }(), Y = i.BindingError = J(Error, "BindingError"), i.InternalError = J(Error, "InternalError"), i.count_emval_handles = st, i.get_first_emval = at;
+            var bt, Ct = {
+                n: function (t, e, s) {
+                    throw new F(t).init(e, s), t, t
+                }, r: function (t, e, s, a, i) {
+                }, w: function (t, e, s, a, i) {
+                    var n = B(s);
+                    K(t, {
+                        name: e = X(e), fromWireType: function (t) {
+                            return !!t
+                        }, toWireType: function (t, e) {
+                            return e ? a : i
+                        }, argPackAdvance: 8, readValueFromPointer: function (t) {
+                            var a;
+                            if (1 === s) a = d; else if (2 === s) a = v; else {
+                                if (4 !== s) throw new TypeError("Unknown boolean type size: " + e);
+                                a = m
+                            }
+                            return this.fromWireType(a[t >> n])
+                        }, destructorFunction: null
+                    })
+                }, v: function (t, e) {
+                    K(t, {
+                        name: e = X(e), fromWireType: function (t) {
+                            var e = it.toValue(t);
+                            return et(t), e
+                        }, toWireType: function (t, e) {
+                            return it.toHandle(e)
+                        }, argPackAdvance: 8, readValueFromPointer: nt, destructorFunction: null
+                    })
+                }, m: function (t, e, s) {
+                    var a = B(s);
+                    K(t, {
+                        name: e = X(e), fromWireType: function (t) {
+                            return t
+                        }, toWireType: function (t, e) {
+                            return e
+                        }, argPackAdvance: 8, readValueFromPointer: rt(e, a), destructorFunction: null
+                    })
+                }, d: function (t, e, s, a, i) {
+                    e = X(e), -1 === i && (i = 4294967295);
+                    var n = B(s), r = t => t;
+                    if (0 === a) {
+                        var o = 32 - 8 * s;
+                        r = t => t << o >>> o
+                    }
+                    var l = e.includes("unsigned");
+                    K(t, {
+                        name: e, fromWireType: r, toWireType: l ? function (t, e) {
+                            return this.name, e >>> 0
+                        } : function (t, e) {
+                            return this.name, e
+                        }, argPackAdvance: 8, readValueFromPointer: ot(e, n, 0 !== a), destructorFunction: null
+                    })
+                }, b: function (t, e, s) {
+                    var a = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array][e];
+
+                    function i(t) {
+                        var e = _, s = e[t >>= 2], i = e[t + 1];
+                        return new a(e.buffer, i, s)
+                    }
+
+                    K(t, {
+                        name: s = X(s),
+                        fromWireType: i,
+                        argPackAdvance: 8,
+                        readValueFromPointer: i
+                    }, {ignoreDuplicateRegistrations: !0})
+                }, l: function (t, e) {
+                    var s = "std::string" === (e = X(e));
+                    K(t, {
+                        name: e, fromWireType: function (t) {
+                            var e, a = _[t >> 2], i = t + 4;
+                            if (s) for (var n = i, r = 0; r <= a; ++r) {
+                                var o = i + r;
+                                if (r == a || 0 == p[o]) {
+                                    var l = C(n, o - n);
+                                    void 0 === e ? e = l : (e += String.fromCharCode(0), e += l), n = o + 1
+                                }
+                            } else {
+                                var c = new Array(a);
+                                for (r = 0; r < a; ++r) c[r] = String.fromCharCode(p[i + r]);
+                                e = c.join("")
+                            }
+                            return kt(t), e
+                        }, toWireType: function (t, e) {
+                            var a;
+                            e instanceof ArrayBuffer && (e = new Uint8Array(e));
+                            var i = "string" == typeof e;
+                            i || e instanceof Uint8Array || e instanceof Uint8ClampedArray || e instanceof Int8Array || Z("Cannot pass non-string to std::string"), a = s && i ? S(e) : e.length;
+                            var n = xt(4 + a + 1), r = n + 4;
+                            if (_[n >> 2] = a, s && i) k(e, r, a + 1); else if (i) for (var o = 0; o < a; ++o) {
+                                var l = e.charCodeAt(o);
+                                l > 255 && (kt(r), Z("String has UTF-16 code units that do not fit in 8 bits")), p[r + o] = l
+                            } else for (o = 0; o < a; ++o) p[r + o] = e[o];
+                            return null !== t && t.push(kt, n), n
+                        }, argPackAdvance: 8, readValueFromPointer: nt, destructorFunction: function (t) {
+                            kt(t)
+                        }
+                    })
+                }, h: function (t, e, s) {
+                    var a, i, n, r, o;
+                    s = X(s), 2 === e ? (a = ct, i = ut, r = ht, n = () => f, o = 1) : 4 === e && (a = dt, i = pt, r = vt, n = () => _, o = 2), K(t, {
+                        name: s,
+                        fromWireType: function (t) {
+                            for (var s, i = _[t >> 2], r = n(), l = t + 4, c = 0; c <= i; ++c) {
+                                var u = t + 4 + c * e;
+                                if (c == i || 0 == r[u >> o]) {
+                                    var h = a(l, u - l);
+                                    void 0 === s ? s = h : (s += String.fromCharCode(0), s += h), l = u + e
+                                }
+                            }
+                            return kt(t), s
+                        },
+                        toWireType: function (t, a) {
+                            "string" != typeof a && Z("Cannot pass non-string to C++ string type " + s);
+                            var n = r(a), l = xt(4 + n + e);
+                            return _[l >> 2] = n >> o, i(a, l + 4, n + e), null !== t && t.push(kt, l), l
+                        },
+                        argPackAdvance: 8,
+                        readValueFromPointer: nt,
+                        destructorFunction: function (t) {
+                            kt(t)
+                        }
+                    })
+                }, x: function (t, e) {
+                    K(t, {
+                        isVoid: !0, name: e = X(e), argPackAdvance: 0, fromWireType: function () {
+                        }, toWireType: function (t, e) {
+                        }
+                    })
+                }, f: function (t, e, s) {
+                    t = it.toValue(t), e = ft(e, "emval::as");
+                    var a = [], i = it.toHandle(a);
+                    return _[s >> 2] = i, e.toWireType(a, t)
+                }, B: function (t, e, s, a, i) {
+                    return (t = gt[t])(e = it.toValue(e), s = _t(s), function (t) {
+                        var e = [];
+                        return _[t >> 2] = it.toHandle(e), e
+                    }(a), i)
+                }, a: et, c: function (t) {
+                    return 0 === t ? it.toHandle(wt()) : (t = _t(t), it.toHandle(wt()[t]))
+                }, A: function (t, e) {
+                    var s = function (t, e) {
+                        for (var s = new Array(t), a = 0; a < t; ++a) s[a] = ft(_[e + 4 * a >> 2], "parameter " + a);
+                        return s
+                    }(t, e), a = s[0], i = a.name + "_$" + s.slice(1).map((function (t) {
+                        return t.name
+                    })).join("_") + "$", n = yt[i];
+                    if (void 0 !== n) return n;
+                    for (var r = ["retType"], o = [a], l = "", c = 0; c < t - 1; ++c) l += (0 !== c ? ", " : "") + "arg" + c, r.push("argType" + c), o.push(s[1 + c]);
+                    var u = "return function " + G("methodCaller_" + i) + "(handle, name, destructors, args) {\n",
+                        h = 0;
+                    for (c = 0; c < t - 1; ++c) u += "    var arg" + c + " = argType" + c + ".readValueFromPointer(args" + (h ? "+" + h : "") + ");\n", h += s[c + 1].argPackAdvance;
+                    for (u += "    var rv = handle[name](" + l + ");\n", c = 0; c < t - 1; ++c) s[c + 1].deleteObject && (u += "    argType" + c + ".deleteObject(arg" + c + ");\n");
+                    a.isVoid || (u += "    return retType.toWireType(destructors, rv);\n"), u += "};\n", r.push(u);
+                    var d, p, v = function (t, e) {
+                        if (!(t instanceof Function)) throw new TypeError("new_ called with constructor type " + typeof t + " which is not a function");
+                        var s = q(t.name || "unknownFunctionName", (function () {
+                        }));
+                        s.prototype = t.prototype;
+                        var a = new s, i = t.apply(a, e);
+                        return i instanceof Object ? i : a
+                    }(Function, r).apply(null, o);
+                    return d = v, p = gt.length, gt.push(d), n = p, yt[i] = n, n
+                }, D: function (t) {
+                    return t = _t(t), it.toHandle(i[t])
+                }, i: function (t, e) {
+                    return t = it.toValue(t), e = it.toValue(e), it.toHandle(t[e])
+                }, z: function (t) {
+                    t > 4 && (tt[t].refcount += 1)
+                }, j: function (t) {
+                    return it.toHandle(_t(t))
+                }, F: function (t) {
+                    return !(t = it.toValue(t))
+                }, e: function (t) {
+                    !function (t) {
+                        for (; t.length;) {
+                            var e = t.pop();
+                            t.pop()(e)
+                        }
+                    }(it.toValue(t)), et(t)
+                }, y: function (t, e) {
+                    var s = (t = ft(t, "_emval_take_value")).readValueFromPointer(e);
+                    return it.toHandle(s)
+                }, s: function () {
+                    N("")
+                }, C: function (t, e, s, a) {
+                    if (i.su.Ng.rj) {
+                        var n = i.su.Ng.qj[0][4] = {};
+                        i.Mp(n, t, e, s, a)
+                    } else i.Mp(i.su.Pa, t, e, s, a), i.su.Ie.kd()
+                }, o: function (t, e, s, a, n) {
+                    if (i.su.Ng.rj) {
+                        var r = i.su.Ng.qj[0][5] = t ? {} : -1;
+                        t && i.Mp(r, e, s, a, n)
+                    } else t ? (i.su.rd = i.su.rd || {}, i.Mp(i.su.rd, e, s, a, n)) : i.su.rd = null, i.su.Ie.qd()
+                }, p: function (t, e, s, a, n, r, o) {
+                    i.su.Ng.rj ? i.su.Ng.qj[0][0][e] = {
+                        xd: t,
+                        Wc: e,
+                        Ga: s,
+                        Ha: a,
+                        Ia: n,
+                        Uc: r,
+                        wf: o
+                    } : i.Np.wi({xd: t, Wc: e, Ga: s, Ha: a, Ia: n, Uc: r, wf: o})
+                }, g: function (t, e, s) {
+                    i.su.Ng.rj ? (i.su.Ng.qj[0][3][t] = !0, i.su.Ng.qj[0][1 + e].push(t), e && i.su.Ng.qj[0][1 + e].push(s)) : i.Np.Ci(t, e ? s : -1)
+                }, E: function (t, e, s) {
+                    try {
+                        for (var a = i[C(t)], n = a && a[C(e)], r = n && n[C(s)], o = arguments.callee, l = 0; l < 4 + !n.Wc; l++) o = o.caller;
+                        if (o === r) return i.__heap_chunk_length_s || 64
+                    } catch (t) {
+                        i.PointerExeptions && i.PointerExeptions(t)
+                    }
+                    return -1
+                }, q: function (t) {
+                    var e = i[C(t)] + "", s = S(e) + 1, a = xt(s);
+                    return k(e, a, s), a
+                }, u: function (t) {
+                    p.length, N("OOM")
+                }, k: function () {
+                    return 1 + Math.floor(2147483646 * Math.random())
+                }, t: function (t, e) {
+                    return it.toHandle(it.toValue(t).keys(it.toValue(e)))
+                }
+            }, kt = (function () {
+                var t = {a: Ct};
+
+                function e(t, e) {
+                    var s, a, n = t.exports;
+                    i.asm = n, h = i.asm.G, s = h.buffer, i.HEAP8 = d = new Int8Array(s), i.HEAP16 = v = new Int16Array(s), i.HEAP32 = m = new Int32Array(s), i.HEAPU8 = p = new Uint8Array(s), i.HEAPU16 = f = new Uint16Array(s), i.HEAPU32 = _ = new Uint32Array(s), i.HEAPF32 = g = new Float32Array(s), i.HEAPF64 = w = new Float64Array(s), i.asm.M, a = i.asm.H, M.unshift(a), function (t) {
+                        if (I--, i.monitorRunDependencies && i.monitorRunDependencies(I), 0 == I && (null !== T && (clearInterval(T), T = null), A)) {
+                            var e = A;
+                            A = null, e()
+                        }
+                    }()
+                }
+
+                function s(t) {
+                    e(t.instance)
+                }
+
+                function a(e) {
+                    return (c || !r && !o || "function" != typeof fetch ? Promise.resolve().then((function () {
+                        return E(L)
+                    })) : fetch(L, {credentials: "same-origin"}).then((function (t) {
+                        if (!t.ok) throw "failed to load wasm binary file at '" + L + "'";
+                        return t.arrayBuffer()
+                    })).catch((function () {
+                        return E(L)
+                    }))).then((function (e) {
+                        return WebAssembly.instantiate(e, t)
+                    })).then((function (t) {
+                        return t
+                    })).then(e, (function (t) {
+                        u("failed to asynchronously prepare wasm: " + t), N(t)
+                    }))
+                }
+
+                if (I++, i.monitorRunDependencies && i.monitorRunDependencies(I), i.instantiateWasm) try {
+                    return i.instantiateWasm(t, e)
+                } catch (t) {
+                    return u("Module.instantiateWasm callback failed with error: " + t), !1
+                }
+                c || "function" != typeof WebAssembly.instantiateStreaming || R(L) || "function" != typeof fetch ? a(s) : fetch(L, {credentials: "same-origin"}).then((function (e) {
+                    return WebAssembly.instantiateStreaming(e, t).then(s, (function (t) {
+                        return u("wasm streaming compile failed: " + t), u("falling back to ArrayBuffer instantiation"), a(s)
+                    }))
+                }))
+            }(), i._skid = function () {
+                return (i._skid = i.asm.I).apply(null, arguments)
+            }, i._free = function () {
+                return (kt = i._free = i.asm.J).apply(null, arguments)
+            }), St = (i._skid3 = function () {
+                return (i._skid3 = i.asm.K).apply(null, arguments)
+            }, i._skid4 = function () {
+                return (i._skid4 = i.asm.L).apply(null, arguments)
+            }, i.___getTypeName = function () {
+                return (St = i.___getTypeName = i.asm.N).apply(null, arguments)
+            }), xt = (i.__embind_initialize_bindings = function () {
+                return (i.__embind_initialize_bindings = i.asm.O).apply(null, arguments)
+            }, i._malloc = function () {
+                return (xt = i._malloc = i.asm.P).apply(null, arguments)
+            }), Mt = function () {
+                return (Mt = i.asm.Q).apply(null, arguments)
+            };
+            i.___start_em_js = 3812, i.___stop_em_js = 3946;
+
+            function Pt() {
+                function t() {
+                    bt || (bt = !0, i.calledRun = !0, y || (!0, U(M), i.onRuntimeInitialized && i.onRuntimeInitialized(), function () {
+                        if (i.postRun) for ("function" == typeof i.postRun && (i.postRun = [i.postRun]); i.postRun.length;) t = i.postRun.shift(), P.unshift(t);
+                        var t;
+                        U(P)
+                    }()))
+                }
+
+                I > 0 || (!function () {
+                    if (i.preRun) for ("function" == typeof i.preRun && (i.preRun = [i.preRun]); i.preRun.length;) t = i.preRun.shift(), x.unshift(t);
+                    var t;
+                    U(x)
+                }(), I > 0 || (i.setStatus ? (i.setStatus("Running..."), setTimeout((function () {
+                    setTimeout((function () {
+                        i.setStatus("")
+                    }), 1), t()
+                }), 1)) : t()))
+            }
+
+            if (A = function t() {
+                bt || Pt(), bt || (A = t)
+            }, i.preInit) for ("function" == typeof i.preInit && (i.preInit = [i.preInit]); i.preInit.length > 0;) i.preInit.pop()();
+            Pt(), i.su = s(1620), i.Np = s(8493), i.sv = document.currentScript, i.__heap_max_bytes_s = function (t) {
+                return 128 & t
+            }, i.Mp = function (t, e, s, a, i) {
+                t.Ai = e, t.Bi = s, t.Ki = a, t.Li = i, t.Ha = (e + a) / 2, t.Ia = (s + i) / 2, t.md = a - e, t.nd = i - s
+            }, t.exports = i
+        }, 4103: (t, e, s) => {
+            t.exports = s.p + "js/wauth3.wasm"
         }
+    }, s = {};
+
+    function a(t) {
+        var i = s[t];
+        if (void 0 !== i) return i.exports;
+        var n = s[t] = {exports: {}};
+        return e[t].call(n.exports, n, n.exports, a), n.exports
+    }
+
+    a.m = e, t = [], a.O = (e, s, i, n) => {
+        if (!s) {
+            var r = 1 / 0;
+            for (u = 0; u < t.length; u++) {
+                for (var [s, i, n] = t[u], o = !0, l = 0; l < s.length; l++) (!1 & n || r >= n) && Object.keys(a.O).every((t => a.O[t](s[l]))) ? s.splice(l--, 1) : (o = !1, n < r && (r = n));
+                if (o) {
+                    t.splice(u--, 1);
+                    var c = i();
+                    void 0 !== c && (e = c)
+                }
+            }
+            return e
+        }
+        n = n || 0;
+        for (var u = t.length; u > 0 && t[u - 1][2] > n; u--) t[u] = t[u - 1];
+        t[u] = [s, i, n]
+    }, a.n = t => {
+        var e = t && t.__esModule ? () => t.default : () => t;
+        return a.d(e, {a: e}), e
+    }, a.d = (t, e) => {
+        for (var s in e) a.o(e, s) && !a.o(t, s) && Object.defineProperty(t, s, {enumerable: !0, get: e[s]})
+    }, a.u = t => "js/" + t + ".js", a.g = function () {
+        if ("object" == typeof globalThis) return globalThis;
+        try {
+            return this || new Function("return this")()
+        } catch (t) {
+            if ("object" == typeof window) return window
+        }
+    }(), a.o = (t, e) => Object.prototype.hasOwnProperty.call(t, e), a.r = t => {
+        "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {value: "Module"}), Object.defineProperty(t, "__esModule", {value: !0})
     }, (() => {
-        let item = document.createElement("div");
-        item.id = "debugStats";
-        item.style.position = "fixed";
-        item.style.right = "250px";
-        item.style.top = "20px";
-        item.style.textAlign = "right";
-        item.style.fontWeight = "100";
-        item.style.opacity = "1";
-        item.style.display = "block";
-        document.querySelector('#hud').appendChild(item);
-        GAME.debugElement = item;
-        item = document.createElement("div");
-        item.id = "playerStats";
-        document.querySelector('#hud').appendChild(item);
-        GAME.playerElement = item;
-    })(), window.yoinkSkinDual = e => {
-        window.SwalAlerts.toast.fire({
-            type: "info",
-            title: "Skin yoinked",
-            timer: 1500
-        });
-        GAME.skinPanel.addSkin(e);
-    }, window.copySkinDual = e => {
-        window.SwalAlerts.toast.fire({
-            type: "info",
-            title: "Skin copied",
-            timer: 1500
-        });
-        navigator.clipboard.writeText(e);
-    }, window.errorSkinDual = e => {
-        window.SwalAlerts.toast.fire({
-            type: "error",
-            title: "This player has no skin",
-            timer: 1500
-        });
-        navigator.clipboard.writeText(e);
-    }, window.getSwitch = () => {
-        return `
-            <div class="switchSingle switchButton" onclick="window.location.href = 'https://vanis.io'">
-                <p>Switch to single</p>
-                <i style="margin-top: 4px" class="fas fa-exchange-alt"></i>
-            </div>
-        `;
-    }, window.changePerformanceMode = () => {
-        if (lowPerformanceMode === 'checked') {
-            localStorage.setItem('lowPerformanceMode', 'unchecked');
-        } else {
-            localStorage.setItem('lowPerformanceMode', 'checked');
+        var t;
+        a.g.importScripts && (t = a.g.location + "");
+        var e = a.g.document;
+        if (!t && e && (e.currentScript && (t = e.currentScript.src), !t)) {
+            var s = e.getElementsByTagName("script");
+            s.length && (t = s[s.length - 1].src)
         }
-        window.location.reload();
-    }, window.getTitleExtension = () => {
-        const titles = [
-            "+490 users on Delta",
-            "Alis.io",
-            "Vanis.io",
-            "Vanish.io",
-            "Raf x Duru x Fohz",
-            "Delta.io",
-            "Delta above all",
-            "Delta on top",
-            "Delta will carry you",
-            "Delta best ext ?",
-            "Alis.io legends",
-            "Want a badge? DM Fohz",
-            "Luka will recruit Fohz?",
-            "Join discord now",
-            "Fohz the tricker",
-            "BBN the SK",
-            "Exe the legend",
-            "Duru is cuter than all",
-            "Deadly World the solo",
-            "Yuu the hat coder",
-            "Splat the YouTuber",
-            "Zimek the precursor",
-            "Angel the mad",
-            "Grouk the legend",
-            "Useful the splitrunner",
-            "Frenchies on top",
-            "Eva, don't hate Fohz",
-            "DM Luka to recruit Fohz!",
-            "Luka need Fohz ?",
-            "Pi the legend",
-            "Who's Miracle..?",
-        ];
-        return titles[Math.floor(Math.random() * titles.length)];
-    }, document.querySelector('#player-data').getElementsByTagName("div")[0].innerHTML += `
-        <div id="openSkins">
-           <p class="gameConfigurationButton" tip="Displays the Dual configuration page : nickname, skin, active or not" data-v-1bcde71e="" class="tab fas">
-            <i class="fas fa-user gameConfigurationButtonIcon"></i>
-            Dualbox configuration</p>
-        </div>
-        <div class="dualProfile">
-            <img id="skinDisplay1" src="${localStorage.skinUrl}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
-            <span class="skinDisplayNickname sdn1" style="color:${localStorage.c}">${localStorage.nickname}</span>
-            <img id="skinDisplay2" src="${settings.dualSkin}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
-            <span class="skinDisplayNickname sdn2" style="color:${localStorage.nickname === window.settings.dualNickname ? localStorage.c : 'white'}">${window.settings.dualNickname}</span>
-        </div>
-    `, document.querySelector('#overlay').insertAdjacentHTML('beforeend', `
-        <div data-v-3ddebeb3="" class="p-switch pretty performanceSwitch" p-checkbox="">
-            <input type="checkbox" ${lowPerformanceMode}="" onchange="changePerformanceMode()" tip="By activating this option, Delta features are disabled in order to have the best possible performance. Very useful for small and underpowered computers"> 
-            <div class="state">
-                <label>Low performance mode</label>
-            </div>
-        </div>
-    `), document.querySelector('#main-container').insertAdjacentHTML('beforeend', window.getSwitch()), document.querySelector('.bar').innerHTML += `
-        <div class="statBar"></div>
-        <titlemod>(Dual mod)</titlemod>
-        <titleextension>${window.getTitleExtension()}</titleextension>
-    `, document.querySelector('#openSkins').addEventListener("click", () => {
-        const modal = `
-            <div data-v-0eaeaf66="" data-v-1bcde71e="" class="modal modalCustom">
-                <div data-v-0eaeaf66="" class="overlay"></div>
-                <i data-v-0eaeaf66="" onclick="document.querySelector('.modalCustom').remove()" class="fas fa-times-circle close-button"></i>
-                <div data-v-0eaeaf66="" class="wrapper">
-                    <div data-v-0eaeaf66="" class="content fade-box">
-                        <div class="divDualSkins" data-v-7179a145="" data-v-1bcde71e="">
-                            <div id="dualSkins">
-                                <div data-v-3ddebeb3="" class="section row">
-                                    <div data-v-3ddebeb3="" class="header">Dual profile</div>
-                                    <div data-v-3ddebeb3="" class="options">
-                                        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                            <input type="checkbox" id="dualUseNickname" onchange="window.setDualData(3)" ${window.settings.dualUseNickname ? "checked" : ""}> 
-                                            <div class="state"> <label>Use dual</label></div>
-                                        </div>
-                                        <input oninput="window.setDualData(2)" id="dualNickname" value="${window.settings.dualNickname}" type="text" spellcheck="false" placeholder="Dual nickname" maxlength="15">
-                                        <img class="configSkin" src="${window.settings.dualSkin}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">
-                                    </div>
-                                </div>
-                                <div data-v-3ddebeb3="" class="section row">
-                                    <div data-v-3ddebeb3="" class="header">Skin galery</div>
-                                    <div data-v-3ddebeb3="" class="options dualSkinGalery"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
-        let skinItems = ``;
-        JSON.parse(localStorage.skins).forEach(e => {
-            skinItems += `<img class="skinItemGalery" onclick="window.setDualData(1, '${e}')" src="${e && e === '' || !e ? "https://skins.vanis.io/s/Qkfih2" : e}" onerror="this.src='https://i.ibb.co/g9Sj8gK/transparent-skin.png'">`
-        });
-        document.querySelector('.dualSkinGalery').insertAdjacentHTML('beforeend', skinItems);
-    }), (() => {
-        const floatingDiv = document.createElement('div');
-        floatingDiv.id = 'tooltip';
-        floatingDiv.style.position = 'absolute';
-        floatingDiv.style.display = 'none';
-        document.body.appendChild(floatingDiv);
-
-        document.body.addEventListener('mouseover', function (event) {
-            const tipsElem = event.target.closest('[tip]');
-            if (tipsElem) {
-                const deltaToastValue = tipsElem.getAttribute('tip');
-                floatingDiv.textContent = deltaToastValue;
-                floatingDiv.style.display = 'block';
-                updateTooltipPosition(event.pageX, event.pageY);
+        if (!t) throw new Error("Automatic publicPath is not supported in this browser");
+        t = t.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/"), a.p = t + "../"
+    })(), (() => {
+        a.b = document.baseURI || self.location.href;
+        var t = {179: 0};
+        a.O.j = e => 0 === t[e];
+        var e = (e, s) => {
+            var i, n, [r, o, l] = s, c = 0;
+            if (r.some((e => 0 !== t[e]))) {
+                for (i in o) a.o(o, i) && (a.m[i] = o[i]);
+                if (l) var u = l(a)
             }
-        });
-
-        document.body.addEventListener('mousemove', function (event) {
-            const tipsElem = event.target.closest('[tip]');
-            if (tipsElem && floatingDiv.style.display === 'block') {
-                updateTooltipPosition(event.pageX, event.pageY);
-            }
-        });
-
-        document.body.addEventListener('mouseout', function (event) {
-            if (event.target.closest('[tip]')) {
-                floatingDiv.style.display = 'none';
-            }
-        });
-
-        function updateTooltipPosition(x, y) {
-            const tooltipWidth = floatingDiv.offsetWidth;
-            const tooltipHeight = floatingDiv.offsetHeight;
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-
-            let tooltipX = x + 10;
-            let tooltipY = y + 10;
-
-            if (x + tooltipWidth + 10 > windowWidth) {
-                tooltipX = x - tooltipWidth - 10;
-            }
-
-            if (y + tooltipHeight + 10 > windowHeight) {
-                tooltipY = y - tooltipHeight - 10;
-            }
-
-            floatingDiv.style.left = tooltipX + 'px';
-            floatingDiv.style.top = tooltipY + 'px';
-        }
+            for (e && e(s); c < r.length; c++) n = r[c], a.o(t, n) && t[n] && t[n][0](), t[n] = 0;
+            return a.O(u)
+        }, s = self.webpackChunkvanis_io_client = self.webpackChunkvanis_io_client || [];
+        s.forEach(e.bind(null, 0)), s.push = e.bind(null, s.push.bind(s))
     })();
+    var i = a.O(void 0, [736], (() => a(2971)));
+    i = a.O(i)
 })();
-
-if (lowPerformanceMode === 'unchecked') {
-    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
-        .then(response => response.text())
-        .then(code => {
-            const script = document.createElement('script');
-            script.textContent = code;
-            (document.head || document.documentElement).appendChild(script);
-            script.remove();
-        })
-    ;
-} else {
-    document.querySelector('.loadingDelta').remove();
-}

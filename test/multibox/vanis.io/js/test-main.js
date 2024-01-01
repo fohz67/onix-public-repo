@@ -4514,7 +4514,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
 
                     a.playerElement.innerHTML = `
-                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && lowPerformanceMode === 'unckecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
+                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && lowPerformanceMode === 'unchecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
                             <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
                             <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
                         </div>
