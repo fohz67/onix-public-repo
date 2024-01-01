@@ -458,10 +458,6 @@ span.right.silent {
     color:#ffffff8c
 }
 
-input.perk-name {
-    margin:0
-}
-
 .open-lobbies {
     background:transparent!important
 }
@@ -1367,6 +1363,10 @@ button.confirm-button.right {
 
 .badgeNotSelected {
     filter:brightness(55%)
+}
+
+input.perk-name {
+    margin:0
 }
 
 #leaderboard[data-v-7e7860a8] {
