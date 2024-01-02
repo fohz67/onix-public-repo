@@ -118,7 +118,6 @@ h4 {
     background:linear-gradient(45deg,#2c1170,#0a021d);
     border:solid 1px #956dff6e;
     border-radius:20px;
-    box-shadow:1px 0 30px 0 #5228c252!important;
     font-size:15px;
     max-width:700px;
     padding:28px 28px 15px
@@ -211,8 +210,8 @@ input[type=number],input[type=text],select {
 }
 
 .swal2-styled.swal2-cancel,.swal2-styled.swal2-cancel:active {
-    background:#392667!important;
-    color:#9c83d8!important
+    background:#442986!important;
+    color:#977cd7!important;
 }
 
 .swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel {
