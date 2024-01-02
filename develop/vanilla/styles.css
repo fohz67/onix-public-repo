@@ -457,8 +457,8 @@ i.tab.fas {
     justify-content:center!important
 }
 
-span.right.silent {
-    color:#ffffff8c
+.silent {
+    color:#ffffff75!important;
 }
 
 .open-lobbies {
