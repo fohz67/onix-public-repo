@@ -1,4 +1,4 @@
-const VERSION = '5.2.2';
+const VERSION = '5.2.3';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -3290,6 +3290,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         this.botCount--;
                     }
                     player.clearCachedData();
+                    delete currentServerPlayersList[playerId];
                     this.players.delete(playerId);
                 }
 
