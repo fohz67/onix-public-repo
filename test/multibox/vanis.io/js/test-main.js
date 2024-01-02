@@ -3844,7 +3844,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         {
                             ownedCells: a
                         } = i;
-                    s && !a.has(this) && a.add(this), t.hasCrown && this.addCrown(), !i.replaying && s && (this.addArrow(), this.addLine())
+                    s && !a.has(this) && a.add(this), t.hasCrown && this.addCrown(), this.addHat(), !i.replaying && s && (this.addArrow(), this.addLine())
                 }
 
                 updateLineVisibility() {
@@ -3900,6 +3900,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     this.crownSprite = null;
                 }
 
+                addHat() {
+                    const hat = getUserField(this.nameFromServer, this.pid, 'hat', null);
+                    if (!hat || this.hatSprite || this.crownSprite) return;
+                    let t = PIXI.Sprite.from(hat);
+                    t.scale.set(.65), t.pivot.set(0, 640), t.anchor.x = .5, t.alpha = 1, t.zIndex = 2, this.sprite.addChild(t), this.hatSprite = t
+                }
+
+                removeHat() {
+                    let t = this.hatSprite;
+                    t && (this.sprite.removeChild(t), this.hatSprite = null)
+                }
+
                 onUpdate() {
                     if (a.showDir && !this.directionSprite) {
                         let e = this.directionSprite = new PIXI.Sprite.from("https://i.postimg.cc/vmZmWCRR/i.png");
@@ -3924,7 +3936,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         } = i.mouse;
                         c.updatePoints(this.x, this.y, h, d)
                     }
-                    this.crownSprite && (this.crownSprite.visible = t > 16 && a.showCrown), this.nameSprite && (this.nameSprite.visible = o.nameShown && s), this.tagSprite && (this.tagSprite.visible = a.showTag);
+                    this.crownSprite && (this.crownSprite.visible = t > 16 && a.showCrown), this.hatSprite, this.nameSprite && (this.nameSprite.visible = o.nameShown && s), this.tagSprite && (this.tagSprite.visible = a.showTag);
                     let {
                         directionSprite: p
                     } = this;
@@ -3951,7 +3963,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 onDestroy() {
-                    this.arrowSprite && (this.sprite.removeChild(this.arrowSprite), this.arrowSprite.destroy(), delete this.arrowSprite), this.tagSprite && (this.sprite.removeChild(this.tagSprite), this.tagSprite.destroy(), delete this.tagSprite), this.directionSprite && (this.sprite.removeChild(this.directionSprite), this.directionSprite.destroy(), delete this.directionSprite), this.line && (i.scene.container.removeChild(this.line), this.line.destroy(), delete this.line), this.massText && (this.sprite.removeChild(this.massText), i.massTextPool.push(this.massText)), this.crownSprite && this.removeCrown()
+                    this.arrowSprite && (this.sprite.removeChild(this.arrowSprite), this.arrowSprite.destroy(), delete this.arrowSprite), this.tagSprite && (this.sprite.removeChild(this.tagSprite), this.tagSprite.destroy(), delete this.tagSprite), this.directionSprite && (this.sprite.removeChild(this.directionSprite), this.directionSprite.destroy(), delete this.directionSprite), this.line && (i.scene.container.removeChild(this.line), this.line.destroy(), delete this.line), this.massText && (this.sprite.removeChild(this.massText), i.massTextPool.push(this.massText)), this.crownSprite && this.removeCrown(), this.hatSprite && this.removeHat()
                 }
             }
 

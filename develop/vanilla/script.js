@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.1.2',
+    version: '5.1.3',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -479,6 +479,7 @@ function fetchColorsOnce(callback) {
                         c: user.c,
                         ba: user.ba && user.ba.u ? user.ba.u : null,
                         u: user.u,
+                        h: user.h ? user.h : null,
                     }
                 }
             });
@@ -500,7 +501,8 @@ function fetchColorChanged() {
                 LISTS.colors[user.n.trim()] = {
                     c: user.c,
                     ba: user.ba && user.ba.u ? user.ba.u : null,
-                    u: user.uid,
+                    u: user.u,
+                    h: user.h ? user.h : null,
                 }
             }
 
