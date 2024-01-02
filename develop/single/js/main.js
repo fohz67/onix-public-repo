@@ -2333,7 +2333,7 @@
                         }
                     }
                 }), t._v(" "), e("i", {
-                    staticClass: "tab far fa-keyboard",
+                    staticClass: "tab fas fa-keyboard",
                     attrs: {tip: "Hotkeys"},
                     on: {
                         click: function (e) {

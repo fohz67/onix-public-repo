@@ -5207,7 +5207,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             }
                         }
                     }), e._v(" "), s("i", {
-                        staticClass: "tab far fa-keyboard",
+                        staticClass: "tab fas fa-keyboard",
                         attrs: {
                             tip: "Hotkeys"
                         },
