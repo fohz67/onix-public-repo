@@ -2452,7 +2452,7 @@ input::placeholder {
 
 .color-input > .right[data-v-15c13b66] {
     border:1px solid #6945c5;
-    border-radius:12px;
+    border-radius:11px;
     box-shadow:0 0 16px 1px #00000054;
     height:35px;
     margin-left:auto;
@@ -2757,7 +2757,7 @@ a[data-v-7cb607ba] {
 #player-container #game-buttons #play-button[data-v-1bcde71e],#player-container #game-buttons #spec-button[data-v-1bcde71e],.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel {
     background:#b69cff;
     border:none;
-    border-radius:12px;
+    border-radius:11px;
     box-shadow:none;
     color:#241931;
     flex:9;
@@ -2780,7 +2780,7 @@ a[data-v-7cb607ba] {
 }
 
 #player-container #game-buttons #spec-button[data-v-1bcde71e] {
-    flex:2;
+    flex:3;
     margin-right:0
 }
 

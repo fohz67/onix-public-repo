@@ -76,7 +76,7 @@ h4 {
 }
 
 .chatbox.toasts.visible {
-    border-radius:12px;
+    border-radius:11px;
     display:flex;
     padding:6px 15px
 }
@@ -132,7 +132,7 @@ h4 {
 input[type=number],input[type=text],select {
     background:#54379f4d;
     border:solid 1px #956dff6e;
-    border-radius:12px;
+    border-radius:11px;
     color:#dadada;
     padding:8px
 }
@@ -687,7 +687,7 @@ titlemod {
 .colorPickerGui {
     background:#54379f4d;
     border:solid 1px #956dff6e;
-    border-radius:12px;
+    border-radius:11px;
     height:40px;
     margin-left:10px;
     margin-top:7px;
@@ -749,7 +749,7 @@ titlemod {
 .tools-list li {
     align-items:center;
     border:solid 1px #956dff6e;
-    border-radius:12px;
+    border-radius:11px;
     box-shadow:6px 2px 20px 3px #0000001a;
     color:#bddcdc;
     display:flex;
@@ -1017,7 +1017,7 @@ input.swal2-input {
 .me {
     background:#b69cff;
     border-bottom:none!important;
-    border-radius:12px;
+    border-radius:11px;
     color:#241931!important;
     margin:10px 0;
     padding:10px
@@ -1188,7 +1188,7 @@ input.swal2-input {
     align-items:center;
     background:linear-gradient(45deg,#2c1170,#0a021d);
     border:solid 1px #956dff6e;
-    border-radius:12px;
+    border-radius:11px;
     box-shadow:1px 0 20px 0 #0006!important;
     display:flex;
     height:50px;
@@ -1254,7 +1254,7 @@ input.swal2-input {
 input[type="color"] {
     -webkit-appearance:none;
     border:none;
-    border-radius:12px;
+    border-radius:11px;
     height:40px;
     padding:0;
     width:70px
@@ -1266,7 +1266,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 
 input[type="color"]::-webkit-color-swatch {
     border:none;
-    border-radius:12px;
+    border-radius:11px;
     padding:0
 }
 
@@ -1280,7 +1280,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .buttonTab {
-    border-radius:12px;
+    border-radius:11px;
     flex:1;
     height:43px;
     padding:0 10px
