@@ -1,9 +1,7 @@
-const VERSION = '5.2.3';
+const VERSION = '5.3';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
-    let rainbowColorTimeMessageSettings;
-    let showTimeMessageSettings;
     let showDeltaSettings;
     let currentColorsPlayersList = {};
     let currentServerPlayersList = {};
@@ -44,13 +42,18 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         return nickname && pid && currentServerPlayersList && currentServerPlayersList[pid] && currentServerPlayersList[pid][field] || def;
     }
 
-    function getUserColor(bot, nickname, pid, hash, forceColor) {
-        if (bot) return hash + '838383';
-        let deltaColor = getUserField(nickname, pid, 'c', null);
-        if (deltaColor) return hash + deltaColor.replaceAll('#', '');
-        if (forceColor) return forceColor;
-        let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
-        if (vanillaColor) return hash + vanillaColor.replaceAll('#', '');
+    function getUserColor(bot, nickname, pid, hash, forceColor, vanisStorage) {
+        if (!vanisStorage) return hash + 'ffffff';
+        if (vanisStorage === 'bp' || vanisStorage.showBotColor) if (bot) return hash + '838383';
+        if (vanisStorage === 'bp' || vanisStorage.showDeltaColors) {
+            let deltaColor = getUserField(nickname, pid, 'c', null);
+            if (deltaColor) return hash + deltaColor.replaceAll('#', '');
+        }
+        if (vanisStorage === 'bp' || vanisStorage.showVanisColors) {
+            if (forceColor) return forceColor;
+            let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
+            if (vanillaColor) return hash + vanillaColor.replaceAll('#', '');
+        }
         return hash + 'ffffff';
     }
 
@@ -879,7 +882,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }
 
                     function updateStatBar(that) {
-                        const statBarItem = `
+                        document.querySelector('.statBar').innerHTML = `
                             <i class="fas fa-skull barIcon"></i>
                             <p class="statBarKills">${that.killCount}</p>
                             <i class="fas fa-clock barIcon"></i>
@@ -887,8 +890,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             <i class="fas fa-trophy barIcon"></i>
                             <p class="statBarScore">${that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                         `;
-
-                        document.querySelector('.statBar').innerHTML = statBarItem;
                     }
 
                     function updateStatData(that) {
@@ -934,9 +935,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             pid: s,
                             position: t.length + 1,
                             text: i.name,
-                            color: getUserColor(i.bot, i.name, s, '#'),
-                            badge: getUserField(i.name, s, 'ba', null),
-                            badgeVanilla: getUserFieldVanilla(i.name, s, "perk_badges", null),
+                            color: getUserColor(i.bot, i.name, s, '#', null, r),
+                            badge: r.showDeltaBadges ? getUserField(i.name, s, 'ba', null) : null,
+                            badgeVanilla: r.showVanisBadges ? getUserFieldVanilla(i.name, s, "perk_badges", null) : null,
                             bold: !!i.nameColor
                         };
                         t.push(a)
@@ -1136,14 +1137,14 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             let chatPlayer = this.playerManager.getPlayer(chat.pid);
                             if (!chatPlayer) return;
 
-                            const imageUrlData = getImageUrlFromMessage(chat.text);
+                            const imageUrlData = r.showImageChat ? getImageUrlFromMessage(chat.text) : null;
 
                             chat.from = chatPlayer.name;
-                            chat.date = showTimeMessageSettings ? getCurrentDate() : '';
-                            chat.dateColor = rainbowColorTimeMessageSettings ? generateRandomHexColor() : 'white';
-                            chat.badge = getUserField(chat.from, chat.pid, 'ba', null);
-                            chat.badgeVanilla = getUserFieldVanilla(chat.from, chat.pid, 'perk_badges', null);
-                            chat.nicknameColor = getUserColor(chat.bot, chat.from, chat.pid, '#');
+                            chat.date = r.showTimeMessage ? getCurrentDate() : '';
+                            chat.dateColor = r.rainbowColorTimeMessage ? generateRandomHexColor() : 'white';
+                            chat.badge = r.showDeltaBadges ? getUserField(chat.from, chat.pid, 'ba', null) : null;
+                            chat.badgeVanilla = r.showVanisBadges ? getUserFieldVanilla(chat.from, chat.pid, 'perk_badges', null) : null;
+                            chat.nicknameColor = getUserColor(chat.bot, chat.from, chat.pid, '#', null, r);
                             chat.imageUrl = imageUrlData ? imageUrlData.newURL : null;
                             chat.text = imageUrlData ? chat.text.replace(imageUrlData.baseURL, '[Delta image]') : chat.text;
 
@@ -1289,6 +1290,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 showOwnMass: !0,
                 showOwnSkin: !0,
                 showCrown: !0,
+                showHat: !0,
+                showMyHat: !0,
                 foodVisible: !0,
                 eatAnimation: !0,
                 showHud: !0,
@@ -1364,6 +1367,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 showTag: !1,
                 showTimeMessage: !1,
                 rainbowColorTimeMessage: !1,
+                showImageChat: !0,
+                showDeltaBadges: !0,
+                showDeltaColors: !0,
+                showVanisBadges: !0,
+                showVanisColors: !0,
+                showBotColor: !0,
                 showDir: !1,
                 chatColorOnlyPeople: !1
             };
@@ -1397,7 +1406,6 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             e.exports = window.settings = new class {
                 constructor() {
                     this.getInternalSettings(), this.userDefinedSettings = this.loadUserDefinedSettings(), Object.assign(this, t, this.userDefinedSettings), this.set("skinsEnabled", !0), this.set("namesEnabled", !0), this.set("massEnabled", !0), this.compileNameFontStyle(), this.compileMassFontStyle();
-                    showTimeMessageSettings = this.userDefinedSettings.showTimeMessage || false, rainbowColorTimeMessageSettings = this.userDefinedSettings.rainbowColorTimeMessage || false;
                 }
 
                 getInternalSettings() {
@@ -3364,7 +3372,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 setNameColor(bot, pid, name) {
-                    this.perk_color = parseInt(getUserColor(bot, name, pid, '', this.perk_color), 16);
+                    this.perk_color = parseInt(getUserColor(bot, name, pid, '', this.perk_color, i), 16);
                     return this.perk_color;
                 }
 
@@ -3886,7 +3894,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 addCrown() {
-                    if (!this.sprite || this.crownSprite) return;
+                    if (!this.sprite || this.crownSprite || this.hatSprite) return;
                     let e = i.crownPool,
                         t;
                     e.length ? t = e.pop() : ((t = PIXI.Sprite.from("/img/crown.png")).scale.set(.7), t.pivot.set(0, 643), t.anchor.x = .5, t.rotation = -.5, t.alpha = .7, t.zIndex = 2), this.crownSprite = t, this.sprite.addChild(t);
@@ -3901,10 +3909,16 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 }
 
                 addHat() {
-                    const hat = getUserField(this.nameFromServer, this.pid, 'hat', null);
-                    if (!hat || this.hatSprite || this.crownSprite) return;
-                    let t = PIXI.Sprite.from(hat);
-                    t.scale.set(.65), t.pivot.set(0, 640), t.anchor.x = .5, t.alpha = 1, t.zIndex = 2, this.sprite.addChild(t), this.hatSprite = t
+                    let hat = null;
+                    if (!(a.showHat || a.showMyHat && this.isMe) || !this.sprite || this.hatSprite || !(hat = getUserField(this.player.nameFromServer, this.pid, 'h', null))) return;
+                    let t = PIXI.Sprite.from(hat.u);
+                    t.scale.set(hat.s);
+                    t.pivot.set(hat.p.x, hat.p.y);
+                    t.anchor.set(hat.a.x, hat.a.y);
+                    t.alpha = hat.al;
+                    t.zIndex = hat.z;
+                    t.rotation = hat.r;
+                    this.sprite.addChild(t), this.hatSprite = t
                 }
 
                 removeHat() {
@@ -3936,7 +3950,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                         } = i.mouse;
                         c.updatePoints(this.x, this.y, h, d)
                     }
-                    this.crownSprite && (this.crownSprite.visible = t > 16 && a.showCrown), this.hatSprite, this.nameSprite && (this.nameSprite.visible = o.nameShown && s), this.tagSprite && (this.tagSprite.visible = a.showTag);
+                    this.crownSprite && (this.crownSprite.visible = t > 16 && a.showCrown), this.hatSprite && (this.hatSprite.visible = t > 16 && (a.showHat || a.showMyHat && this.isMe)), this.nameSprite && (this.nameSprite.visible = o.nameShown && s), this.tagSprite && (this.tagSprite.visible = a.showTag);
                     let {
                         directionSprite: p
                     } = this;
@@ -4951,7 +4965,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                 const deltaBadge = getUserField(user.nickname, user.pid, 'ba', null);
                 const vanillaBadge = getUserFieldVanilla(user.nickname, user.pid, 'perk_badges', null);
                 const deltaColor = getUserField(user.nickname, user.pid, 'c', null);
-                const colorNickname = getUserColor(user.bot, user.nickname, user.pid, '#');
+                const colorNickname = getUserColor(user.bot, user.nickname, user.pid, '#', null, 'bp');
 
                 return `
                     <div class="listItem playerItem">
@@ -5533,6 +5547,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            tip: "Draws a line from cell centers to mouse position",
                             checked: e.showCellLines
                         },
                         on: {
@@ -5540,9 +5555,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("showCellLines", t)
                             }
                         }
-                    }, [e._v("Show cell aim")]), e._v(" "), s("p-check", {
+                    }, [e._v("Show aim lines")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            tip: "Shows Team0 for no tag, Team1 for 1st tag, recursively",
                             checked: e.showDir
                         },
                         on: {
@@ -5550,9 +5566,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("showDir", t)
                             }
                         }
-                    }, [e._v("Show cell direction")]), e._v(" "), s("p-check", {
+                    }, [e._v("Show direction indicator")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            tip: "Shows Team0 for no tag, Team1 for 1st tag, recursively",
                             checked: e.showTag
                         },
                         on: {
@@ -5560,7 +5577,27 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("showTag", t)
                             }
                         }
-                    }, [e._v("Show teams")])], 1)]), e._v(" "), s("div", {
+                    }, [e._v("Show teams")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showHat
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showHat", t)
+                            }
+                        }
+                    }, [e._v("Show hats")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showMyHat
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showMyHat", t)
+                            }
+                        }
+                    }, [e._v("Show my hat")])], 1)]), e._v(" "), s("div", {
                         staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
                     }, [s("div", {
                         staticClass: "header"
@@ -5569,30 +5606,91 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            tip: "Show hours, minutes and seconds beside all messages",
                             checked: e.showTimeMessage
                         },
                         on: {
                             change: function (t) {
-                                return e.change("showTimeMessage", t), showTimeMessageSettings = t
+                                return e.change("showTimeMessage", t)
                             }
                         }
-                    }, [e._v("Show message time")]), e._v(" "), s("p-check", {
+                    }, [e._v("Show time")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.rainbowColorTimeMessage
                         },
                         on: {
                             change: function (t) {
-                                return e.change("rainbowColorTimeMessage", t), rainbowColorTimeMessageSettings = t
+                                return e.change("rainbowColorTimeMessage", t)
                             }
                         }
-                    }, [e._v("Rainbow color message time")])], 1)]), e._v(" "), s("div", {
+                    }, [e._v("Rainbow color for time")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showImageChat
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showImageChat", t)
+                            }
+                        }
+                    }, [e._v("Show images")])], 1)]), e._v(" "), s("div", {
                         staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
                     }, [s("div", {
                         staticClass: "header"
                     }, [e._v("\n        HUD\n    ")]), e._v(" "), s("div", {
                         staticClass: "options"
                     }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showDeltaColors
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showDeltaColors", t)
+                            }
+                        }
+                    }, [e._v("Show Delta colors")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showDeltaBadges
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showDeltaBadges", t)
+                            }
+                        }
+                    }, [e._v("Show Delta badges")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showVanisColors
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showVanisColors", t)
+                            }
+                        }
+                    }, [e._v("Show Vanis colors")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showVanisBadges
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showVanisBadges", t)
+                            }
+                        }
+                    }, [e._v("Show Vanis badges")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showBotColor
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showBotColor", t)
+                            }
+                        }
+                    }, [e._v("Show bots grey color")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.debugStats
@@ -5612,13 +5710,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                                 return e.change("clientStats", t)
                             }
                         }
-                    }, [e._v("Client info")])], 1)]), e._v(" "), s("div", {
-                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
-                    }, [s("div", {
-                        staticClass: "header"
-                    }, [e._v("\n        Special\n    ")]), e._v(" "), s("div", {
-                        staticClass: "options"
-                    }, [s("p-check", {
+                    }, [e._v("Client info")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.playerStats
@@ -6233,6 +6325,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     showOwnMass: b.showOwnMass,
                     showOwnSkin: b.showOwnSkin,
                     showCrown: b.showCrown,
+                    showHat: b.showHat,
+                    showMyHat: b.showMyHat,
                     foodVisible: b.foodVisible,
                     eatAnimation: b.eatAnimation,
                     showHud: b.showHud,
@@ -6266,6 +6360,12 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     showCellLines: b.showCellLines,
                     showTimeMessage: b.showTimeMessage,
                     rainbowColorTimeMessage: b.rainbowColorTimeMessage,
+                    showImageChat: b.showImageChat,
+                    showDeltaBadges: b.showDeltaBadges,
+                    showDeltaColors: b.showDeltaColors,
+                    showVanisBadges: b.showVanisBadges,
+                    showVanisColors: b.showVanisColors,
+                    showBotColor: b.showBotColor,
                     dualActiveCellBorderSize: b.dualActiveCellBorderSize,
                     dualActive: b.dualActive
                 }),
@@ -6385,7 +6485,15 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                             "chatColorOnlyPeople",
                             "showCellLines",
                             "showTimeMessage",
+                            "showDeltaColors",
+                            "showDeltaBadges",
+                            "showVanisColors",
+                            "showVanisBadges",
+                            "showBotColor",
                             "rainbowColorTimeMessage",
+                            "showHat",
+                            "showMyHat",
+                            "showImageChat",
                             "dualActiveCellBorderSize",
                             "dualActive"
                         ];
