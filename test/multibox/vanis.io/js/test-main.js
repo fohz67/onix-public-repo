@@ -1,4 +1,4 @@
-const VERSION = '5.3';
+const VERSION = '5.3.1';
 let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
 
 (() => {
@@ -1524,8 +1524,8 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     })
                 },
                 writeUserData(e, t) {
-                    let s = t && i.dualUseNickname ? i.dualNickname || "Delta Dual" : document.getElementById("nickname").value,
-                        a = t ? i.dualSkin || "https://skins.vanis.io/s/Qkfih2" : document.getElementById("skinurl").value,
+                    let s = t && i.dualUseNickname ? i.dualNickname || "" : document.getElementById("nickname").value,
+                        a = t ? i.dualSkin || "" : document.getElementById("skinurl").value,
                         n = document.getElementById("teamtag").value;
                     e.writeEscapedStringNT(s), e.writeEscapedStringNT(a), e.writeEscapedStringNT(n)
                 }
