@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.1.3',
+    version: '5.2',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -2467,10 +2467,10 @@ async function drawStyle() {
 function checkAnnouncement() {
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
-    if (announcement < 44) {
+    if (announcement < 53) {
         setTimeout(() => {
-            sendTimedSwal('New feature in Dual mode !!', 'You can see all the players on the server you are playing on, a button will appear after joining a server, click on it and enjoy !!!', 10000, 'OK')
-            localStorage.setItem('announcement', '44');
+            sendTimedSwal('Massive update 5.3', 'Join discord now to see the update : https://discord.gg/wthDcUb6nY', 10000, 'OK')
+            localStorage.setItem('announcement', '53');
         }, 1500);
     }
 }
