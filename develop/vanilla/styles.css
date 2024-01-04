@@ -211,7 +211,7 @@ input[type=number],input[type=text],select {
 
 .swal2-styled.swal2-cancel,.swal2-styled.swal2-cancel:active {
     background:#442986!important;
-    color:#977cd7!important;
+    color:#977cd7!important
 }
 
 .swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel {
@@ -457,7 +457,7 @@ i.tab.fas {
 }
 
 .silent {
-    color:#ffffff75!important;
+    color:#ffffff75!important
 }
 
 .open-lobbies {
@@ -689,12 +689,12 @@ titlemod {
     border-radius:11px;
     height:40px;
     margin-left:10px;
-    margin-top:7px;
+    margin-top:15px;
     width:70px
 }
 
 #colorPickerInput {
-    margin-top:7px
+    margin-top:15px
 }
 
 #userIcon {
@@ -1314,15 +1314,12 @@ input[type="color"]::-webkit-color-swatch {
     scale:92%!important
 }
 
-.badgeListPerks,.hatListPerks {
+.badgeListPerks {
     display:flex;
     gap:5px;
     margin-top:10px;
     overflow-x:auto;
-    white-space:nowrap
-}
-
-.badgeListPerks {
+    white-space:nowrap;
     padding:0 0 10px
 }
 
@@ -1344,6 +1341,7 @@ button.confirm-button.right {
 }
 
 .badgeText {
+    margin-top:10px;
     font-size:16px
 }
 
@@ -1368,6 +1366,16 @@ button.confirm-button.right {
 
 input.perk-name {
     margin:0
+}
+
+.hatSkinImg {
+    height:100px;
+    width:100px;
+    border-radius:50%
+}
+
+.hatContainer {
+    text-align:center
 }
 
 #leaderboard[data-v-7e7860a8] {
