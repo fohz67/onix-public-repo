@@ -327,11 +327,16 @@ function pushUserOnline() {
 function pushUserColors() {
     if (APP.reserved.value) return;
 
+    let colorVisible = USER.configurations.cv === 'checked' ? 100 : 0;
+    let badgeVisible = USER.configurations.bv === 'checked' ? 10 : 0;
+    let hatVisible = USER.configurations.hv === 'checked' ? 1 : 0;
+
     pushDatabase(DB.references.meColor, {
         u: USER.credentials.uid,
         t: new Date().getTime(),
         n: USER.configurations.n,
         c: USER.configurations.c,
+        ev: colorVisible + badgeVisible + hatVisible,
     });
 }
 
@@ -342,14 +347,14 @@ function pushUserConfigurations() {
             hotkeys: USER.configurations.hotkeys,
             b: USER.configurations.b,
             r: USER.configurations.r,
-            cnc: USER.configurations.cnc,
-            cnch: USER.configurations.cnch,
-            cnl: USER.configurations.cnl,
             c: USER.configurations.c,
             n: USER.configurations.n,
             t: $(ATTRS.selectors.teamTag).val(),
             m: USER.configurations.m,
             d: USER.configurations.d,
+            hv: USER.configurations.hv,
+            cv: USER.configurations.cv,
+            bv: USER.configurations.bv,
         });
     }
 }
@@ -464,6 +469,19 @@ function fetchUserChanged() {
     });
 }
 
+function fetchColorsToUsers(user) {
+    if (user.n && user.c) {
+        const ev = user.ev ? user.ev.toString().split('').map(Number) : [1,1,1];
+
+        LISTS.colors[user.n.trim()] = {
+            c: ev[0] === 1 ? user.c : '#ffffff',
+            ba: user.ba && user.ba.u && ev[1] === 1 ? user.ba.u : null,
+            u: user.u,
+            h: user.h && ev[2] === 1 ? user.h : null,
+        }
+    }
+}
+
 function fetchColorsOnce(callback) {
     const h12 = new Date().getTime() - (12 * 60 * 60 * 1000);
 
@@ -472,21 +490,14 @@ function fetchColorsOnce(callback) {
             const users = snapshot.val();
 
             Object.keys(users).forEach(uid => {
-                const user = users[uid];
-
-                if (user.n && user.c) {
-                    LISTS.colors[user.n.trim()] = {
-                        c: user.c,
-                        ba: user.ba && user.ba.u ? user.ba.u : null,
-                        u: user.u,
-                        h: user.h ? user.h : null,
-                    }
-                }
+                fetchColorsToUsers(users[uid]);
             });
 
+            changeCellColor();
+            fetchColorChanged();
+
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-            if (APP.mode === 1 && USER.configurations.cnc === 'checked') changeCellColor();
-            if (USER.configurations.cnl === 'checked' || USER.configurations.cnch === 'checked' || USER.configurations.cnc === 'checked') fetchColorChanged();
+
             callback();
         }
     });
@@ -497,17 +508,10 @@ function fetchColorChanged() {
         if (snapshot.exists()) {
             const user = snapshot.val();
 
-            if (user.n && user.c) {
-                LISTS.colors[user.n.trim()] = {
-                    c: user.c,
-                    ba: user.ba && user.ba.u ? user.ba.u : null,
-                    u: user.u,
-                    h: user.h ? user.h : null,
-                }
-            }
+            fetchColorsToUsers(user);
+            changeCellColor(user.n);
 
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-            if (APP.mode === 1 && USER.configurations.cnc === 'checked') changeCellColor(user.n);
         }
     });
 }
@@ -675,9 +679,6 @@ function createComponents() {
 
     createBoxes();
     createSortable();
-
-    if (APP.mode === 1 && USER.configurations.cnch === 'checked') createColorObserver(ATTRS.selectors.messageList, ATTRS.selectors.messageName);
-    if (APP.mode === 1 && USER.configurations.cnl === 'checked') createColorObserver(ATTRS.selectors.leaderboard, ATTRS.selectors.leaderboardText);
 }
 
 /********
@@ -743,8 +744,7 @@ function displaySwitch() {
  *****************/
 function createSkinProfile() {
     const skin = $(ATTRS.selectors.skinUrl);
-    const skinURL = skin ? skin.val() : null;
-    if (!skinURL) return;
+    const skinURL = skin ? skin.val() : ATTRS.images.transparentSkin;
 
     $(ATTRS.selectors.playerData).before(`
         <div class="profile-image">
@@ -890,62 +890,6 @@ function createNewBox(content, title, element, tip, isBig) {
             </div>
         </div>
     `);
-}
-
-/***************************
- *
- *  Color observer creator
- *
- ***************************/
-function createColorObserver(selectorGlobal, selectorText) {
-    const selector = document.querySelector(selectorGlobal);
-
-    function applyColorToElement(element) {
-        const nickname = element.textContent.trim();
-
-        if (!APP.blacklist.includes(nickname)) {
-            const data = LISTS.colors[nickname];
-
-            if (!data) {
-                if (element.classList.contains('custom')) {
-                    element.classList.remove('custom');
-                    element.style.color = '';
-                }
-                return;
-            }
-
-            element.classList.add('custom');
-            element.style.color = data.c ? data.c : 'white';
-        } else {
-            element.style.color = 'white';
-        }
-    }
-
-    const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                        if (node.matches(selectorText)) {
-                            applyColorToElement(node);
-                        }
-                        node.querySelectorAll(selectorText).forEach(applyColorToElement);
-                    }
-                });
-            } else if (mutation.type === 'characterData') {
-                const parent = mutation.target.parentElement;
-                if (parent && parent.matches(selectorText)) {
-                    applyColorToElement(parent);
-                }
-            }
-        }
-    });
-
-    observer.observe(selector, {
-        childList: true,
-        subtree: true,
-        characterData: true,
-    });
 }
 
 /***************
@@ -1492,26 +1436,55 @@ function addToolsModal() {
 }
 
 function toolsModal(tools, total, badges) {
-    const colorParam = `
-        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
-            <input type="checkbox" id="colorSwitchNickChatbox" ${USER.configurations.cnch}="" onchange="USER.configurations.cnch = switchManager(USER.configurations.cnch, 'cnch')"> 
-            <div class="state">
-                <label>Show colors in the chat</label>
+    const settingsTab = `
+        <div class="buttonTab buttonTabActive toolsNavSettingsTab" onclick="showPage(1, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
+            <p class="buttonTabText">Settings</p>
+        </div>
+    `;
+
+    const settings = `
+        <div class="toolsPageSettings hidden">
+            <div data-v-2c5139e0="" class="section row">
+                <div data-v-2c5139e0="" class="header">Configuration</i>
+                </div>
+                <div data-v-2c5139e0="" class="options">
+                    <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                        <input type="checkbox" id="blurredHUD" ${USER.configurations.b}="" onchange="USER.configurations.b = switchManager(USER.configurations.b, 'b')" tip=""> 
+                        <div class="state">
+                            <label>Blurred in-game HUD</label>
+                        </div>
+                    </div>
+                    <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                        <input type="checkbox" id="resizableChatbox" ${USER.configurations.r}="" onchange="USER.configurations.r = switchManager(USER.configurations.r, 'r')" tip=""> 
+                        <div class="state">
+                            <label>Resizable chatbox</label>
+                        </div>
+                    </div>
+                    <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                        <input type="checkbox" id="autoSynchronization" ${USER.configurations.as}="" onchange="USER.configurations.as = switchManager(USER.configurations.as, 'as')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
+                        <div class="state">
+                            <label>Auto save my configurations</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="" tip="Don't activate this option if you do not have a powerful enough computer">
-            <input type="checkbox" id="colorSwitchNickLeaderboard" ${USER.configurations.cnl}="" onchange="USER.configurations.cnl = switchManager(USER.configurations.cnl, 'cnl')"> 
-            <div class="state">
-                <label>Show colors in the leaderboard</label>
+    `;
+
+    const hatParam = `
+        <div class="hatContainer">
+            <div class="hatPreviewContainer">
+                <img class="hatSkinImg beautifulSkin" src="${USER.configurations.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
+            </div>
+            <div class="hatSettingsContainer">
+                <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                    <input type="checkbox" id="hatActive" ${USER.configurations.hv}="" onchange="USER.configurations.hv = switchManager(USER.configurations.hv, 'hv')" tip=""> 
+                    <div class="state">
+                        <label>Hat active</label>
+                    </div>
+                </div>
             </div>
         </div>
-        <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-            <input type="checkbox" id="colorSwitchNickCell" ${USER.configurations.cnc}="" onchange="USER.configurations.cnc = switchManager(USER.configurations.cnc, 'cnc')"> 
-            <div class="state">
-                <label>Show colors in the cells</label>
-            </div>
-        </div>
-        <div data-v-22117250="" class="silent silentCustomTop silentCustomBottom">After change color settings, refresh the page.</div>
     `;
 
     return `
@@ -1521,9 +1494,7 @@ function toolsModal(tools, total, badges) {
                     <div class="buttonTab buttonTabDisabled toolsNavPerksTab" onclick="showPage(0, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
                         <p class="buttonTabText">Perks</p>
                     </div>
-                    <div class="buttonTab buttonTabActive toolsNavSettingsTab" onclick="showPage(1, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
-                        <p class="buttonTabText">Settings</p>
-                    </div>
+                    ${APP.mode === 1 ? settingsTab : ``}
                     <div class="buttonTab buttonTabActive toolsNavConfigurationsTab" onclick="showPage(2, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
                         <p class="buttonTabText">Backups</p>
                     </div>
@@ -1532,6 +1503,12 @@ function toolsModal(tools, total, badges) {
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">Colored name</div>
                         <div data-v-2c5139e0="" class="options">
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="hatActive" ${USER.configurations.cv}="" onchange="USER.configurations.cv = switchManager(USER.configurations.cv, 'cv')" tip=""> 
+                                <div class="state">
+                                    <label>Color active</label>
+                                </div>
+                            </div>
                             <div class="colorPickerContainer">
                                 <input type="text" id="colorPickerInput" value="${USER.configurations.c}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
                                 <div class="colorPickerGui">
@@ -1544,6 +1521,12 @@ function toolsModal(tools, total, badges) {
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">Badges</div>
                         <div data-v-2c5139e0="" class="options">
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="hatActive" ${USER.configurations.bv}="" onchange="USER.configurations.bv = switchManager(USER.configurations.bv, 'bv')" tip=""> 
+                                <div class="state">
+                                    <label>Badge active</label>
+                                </div>
+                            </div>
                             <p class="badgeText">Click to toggle. <b>Combined</b> with the Vanis badge</p>
                             <div class="badgeListPerks">
                                 ${badges}
@@ -1554,38 +1537,12 @@ function toolsModal(tools, total, badges) {
                         <div data-v-2c5139e0="" class="header">Hats</i></div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="hatListPerks">
-                                Soon
+                                ${hatParam}
                             </div>
                         </div> 
                     </div>
                 </div>
-                <div class="toolsPageSettings hidden">
-                    <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Configuration</i>
-                        </div>
-                        <div data-v-2c5139e0="" class="options">
-                            ${APP.mode === 1 ? colorParam : ``}
-                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                <input type="checkbox" id="blurredHUD" ${USER.configurations.b}="" onchange="USER.configurations.b = switchManager(USER.configurations.b, 'b')" tip=""> 
-                                <div class="state">
-                                    <label>Blurred in-game HUD</label>
-                                </div>
-                            </div>
-                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                <input type="checkbox" id="resizableChatbox" ${USER.configurations.r}="" onchange="USER.configurations.r = switchManager(USER.configurations.r, 'r')" tip=""> 
-                                <div class="state">
-                                    <label>Resizable chatbox</label>
-                                </div>
-                            </div>
-                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                                <input type="checkbox" id="autoSynchronization" ${USER.configurations.as}="" onchange="USER.configurations.as = switchManager(USER.configurations.as, 'as')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
-                                <div class="state">
-                                    <label>Auto save my configurations</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                ${APP.mode === 1 ? settings : ``}
                 <div class="toolsPageConfigurations hidden">
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">${total} backups saved<i class="fas fa-save headerIcon"></i>
@@ -1896,7 +1853,7 @@ function deleteConfiguration(configId) {
 function updateSuccess(configId) {
     const config = LISTS.configurations[configId];
 
-    ['skins', 'hotkeys', 'b', 'c', 'cnc', 'cnch', 'cnl', 'c', 'n', 't'].forEach(key => {
+    ['skins', 'hotkeys', 'b', 'c', 'c', 'n', 't', 'hv', 'cv', 'bv'].forEach(key => {
         if (config[key] && config[key] !== '' && config[key] !== '{}') {
             localStorage.setItem(key, config[key]);
         }
@@ -2201,12 +2158,12 @@ function getAllConfigurations() {
         c: getLocalStorageItem('c', ATTRS.colors.defaultColor),
         n: getLocalStorageItem('nickname', ''),
         a: getLocalStorageItem('a', 'unchecked'),
-        cnl: getLocalStorageItem('cnl', 'unchecked'),
-        cnch: getLocalStorageItem('cnch', 'unchecked'),
-        cnc: getLocalStorageItem('cnc', 'checked'),
         as: getLocalStorageItem('as', 'checked'),
         b: getLocalStorageItem('b', 'checked'),
         r: getLocalStorageItem('r', 'unchecked'),
+        hv: getLocalStorageItem('hv', 'checked'),
+        cv: getLocalStorageItem('cv', 'checked'),
+        bv: getLocalStorageItem('bv', 'checked'),
     }
 }
 

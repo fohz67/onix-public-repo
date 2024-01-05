@@ -1,5 +1,5 @@
 const VERSION = '5.3.1';
-let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecked';
+let disableScript = localStorage.getItem('disableScript') || 'unchecked';
 
 (() => {
     let showDeltaSettings;
@@ -4541,7 +4541,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
                     const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
 
                     a.playerElement.innerHTML = `
-                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && lowPerformanceMode === 'unchecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
+                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && disableScript === 'unchecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
                             <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
                             <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
                         </div>
@@ -9587,10 +9587,10 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
             </div>
         `;
     }, window.changePerformanceMode = () => {
-        if (lowPerformanceMode === 'checked') {
-            localStorage.setItem('lowPerformanceMode', 'unchecked');
+        if (disableScript === 'checked') {
+            localStorage.setItem('disableScript', 'unchecked');
         } else {
-            localStorage.setItem('lowPerformanceMode', 'checked');
+            localStorage.setItem('disableScript', 'checked');
         }
         window.location.reload();
     }, window.getTitleExtension = () => {
@@ -9642,9 +9642,9 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
         </div>
     `, document.querySelector('#overlay').insertAdjacentHTML('beforeend', `
         <div data-v-3ddebeb3="" class="p-switch pretty performanceSwitch" p-checkbox="">
-            <input type="checkbox" ${lowPerformanceMode}="" onchange="changePerformanceMode()" tip="By activating this option, Delta features are disabled in order to have the best possible performance. Very useful for small and underpowered computers"> 
+            <input type="checkbox" ${disableScript}="" onchange="changePerformanceMode()" tip="By deactivate this option, Delta services such as colored names, badges, and statistics will no longer work. Consequently, you won't see navigation buttons anymore. However, the Dual mode will remain available."> 
             <div class="state">
-                <label>Low performance mode</label>
+                <label>Delta services</label>
             </div>
         </div>
     `), document.querySelector('#main-container').insertAdjacentHTML('beforeend', window.getSwitch()), document.querySelector('.bar').innerHTML += `
@@ -9740,7 +9740,7 @@ let lowPerformanceMode = localStorage.getItem('lowPerformanceMode') || 'unchecke
     })();
 })();
 
-if (lowPerformanceMode === 'unchecked') {
+if (disableScript === 'unchecked') {
     fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
         .then(response => response.text())
         .then(code => {
