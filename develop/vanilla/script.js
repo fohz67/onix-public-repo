@@ -1428,41 +1428,6 @@ function addToolsModal() {
 }
 
 function toolsModal(tools, total, badges) {
-    const settingsTab = `
-        <div class="buttonTab buttonTabActive toolsNavSettingsTab" onclick="showPage(1, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
-            <p class="buttonTabText">Settings</p>
-        </div>
-    `;
-
-    const settings = `
-        <div class="toolsPageSettings hidden">
-            <div data-v-2c5139e0="" class="section row">
-                <div data-v-2c5139e0="" class="header">Configuration</i>
-                </div>
-                <div data-v-2c5139e0="" class="options">
-                    <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                        <input type="checkbox" id="blurredHUD" ${USER.configurations.b}="" onchange="USER.configurations.b = switchManager(USER.configurations.b, 'b')" tip=""> 
-                        <div class="state">
-                            <label>Blurred in-game HUD</label>
-                        </div>
-                    </div>
-                    <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                        <input type="checkbox" id="resizableChatbox" ${USER.configurations.r}="" onchange="USER.configurations.r = switchManager(USER.configurations.r, 'r')" tip=""> 
-                        <div class="state">
-                            <label>Resizable chatbox</label>
-                        </div>
-                    </div>
-                    <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                        <input type="checkbox" id="autoSynchronization" ${USER.configurations.as}="" onchange="USER.configurations.as = switchManager(USER.configurations.as, 'as')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
-                        <div class="state">
-                            <label>Auto save my configurations</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
     const hatParam = `
         <div class="hatContainer">
             <div class="hatPreviewContainer">
@@ -1480,7 +1445,9 @@ function toolsModal(tools, total, badges) {
                     <div class="buttonTab buttonTabDisabled toolsNavPerksTab" onclick="showPage(0, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
                         <p class="buttonTabText">Perks</p>
                     </div>
-                    ${APP.mode === 1 ? settingsTab : ``}
+                    <div class="buttonTab buttonTabActive toolsNavSettingsTab" onclick="showPage(1, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
+                        <p class="buttonTabText">Settings</p>
+                    </div>
                     <div class="buttonTab buttonTabActive toolsNavConfigurationsTab" onclick="showPage(2, [ATTRS.selectors.toolsPageButtonPerks, ATTRS.selectors.toolsPageButtonSettings, ATTRS.selectors.toolsPageButtonConfigurations], [ATTRS.selectors.toolsPagePerks, ATTRS.selectors.toolsPageSettings, ATTRS.selectors.toolsPageConfigurations])">
                         <p class="buttonTabText">Backups</p>
                     </div>
@@ -1523,7 +1490,32 @@ function toolsModal(tools, total, badges) {
                         </div> 
                     </div>
                 </div>
-                ${APP.mode === 1 ? settings : ``}
+                <div class="toolsPageSettings hidden">
+                    <div data-v-2c5139e0="" class="section row">
+                        <div data-v-2c5139e0="" class="header">Configuration</i>
+                        </div>
+                        <div data-v-2c5139e0="" class="options">
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="blurredHUD" ${USER.configurations.b}="" onchange="USER.configurations.b = switchManager(USER.configurations.b, 'b')" tip=""> 
+                                <div class="state">
+                                    <label>Blurred in-game HUD</label>
+                                </div>
+                            </div>
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="resizableChatbox" ${USER.configurations.r}="" onchange="USER.configurations.r = switchManager(USER.configurations.r, 'r')" tip=""> 
+                                <div class="state">
+                                    <label>Resizable chatbox</label>
+                                </div>
+                            </div>
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="autoSynchronization" ${USER.configurations.as}="" onchange="USER.configurations.as = switchManager(USER.configurations.as, 'as')" tip="By saving your locales configurations to the database, you will be able to access them anywhere"> 
+                                <div class="state">
+                                    <label>Auto save my configurations</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="toolsPageConfigurations hidden">
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">${total} backups saved<i class="fas fa-save headerIcon"></i>
