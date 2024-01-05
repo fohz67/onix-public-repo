@@ -327,8 +327,8 @@ function pushUserOnline() {
 function pushUserColors() {
     if (APP.reserved.value) return;
 
-    let colorVisible = USER.configurations.cv === 'checked' ? 1 : 2;
-    let badgeVisible = USER.configurations.bv === 'checked' ? 1 : 2;
+    let colorVisible = USER.configurations.cv === 'checked' ? 100 : 200;
+    let badgeVisible = USER.configurations.bv === 'checked' ? 10 : 20;
     let hatVisible = USER.configurations.hv === 'checked' ? 1 : 2;
 
     pushDatabase(DB.references.meColor, {
