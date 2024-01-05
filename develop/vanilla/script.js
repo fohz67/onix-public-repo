@@ -327,8 +327,7 @@ function pushUserOnline() {
 function pushUserColors() {
     if (APP.reserved.value) return;
 
-    let colorVisible = USER.configurations.cv === 'checked' ? 100 : 200;
-    let badgeVisible = USER.configurations.bv === 'checked' ? 10 : 20;
+    let colorVisible = USER.configurations.cv === 'checked' ? 10 : 20;
     let hatVisible = USER.configurations.hv === 'checked' ? 1 : 2;
 
     pushDatabase(DB.references.meColor, {
@@ -336,7 +335,7 @@ function pushUserColors() {
         t: new Date().getTime(),
         n: USER.configurations.n,
         c: USER.configurations.c,
-        ev: colorVisible + badgeVisible + hatVisible,
+        ev: colorVisible + hatVisible,
     });
 }
 
@@ -354,7 +353,6 @@ function pushUserConfigurations() {
             d: USER.configurations.d,
             hv: USER.configurations.hv,
             cv: USER.configurations.cv,
-            bv: USER.configurations.bv,
         });
     }
 }
@@ -475,9 +473,9 @@ function fetchColorsToUsers(user) {
 
         LISTS.colors[user.n.trim()] = {
             c: ev[0] === 1 ? user.c : '#ffffff',
-            ba: user.ba && user.ba.u && ev[1] === 1 ? user.ba.u : null,
+            ba: user.ba && user.ba.u ? user.ba.u : null,
             u: user.u,
-            h: user.h && ev[2] === 1 ? user.h : null,
+            h: user.h && ev[1] === 1 ? user.h : null,
         }
     }
 }
@@ -1514,14 +1512,6 @@ function toolsModal(tools, total, badges) {
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Badges
-                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
-                                <input type="checkbox" id="hatActive" ${USER.configurations.bv}="" onchange="USER.configurations.bv = switchManager(USER.configurations.bv, 'bv')" tip=""> 
-                                <div class="state">
-                                    <label>Badge active</label>
-                                </div>
-                            </div>
-                        </div>
                         <div data-v-2c5139e0="" class="options">
                             <p class="badgeText">Click to toggle. <b>Combined</b> with the Vanis badge</p>
                             <div class="badgeListPerks">
@@ -1856,7 +1846,7 @@ function deleteConfiguration(configId) {
 function updateSuccess(configId) {
     const config = LISTS.configurations[configId];
 
-    ['skins', 'hotkeys', 'b', 'c', 'c', 'n', 't', 'hv', 'cv', 'bv'].forEach(key => {
+    ['skins', 'hotkeys', 'b', 'c', 'c', 'n', 't', 'hv', 'cv'].forEach(key => {
         if (config[key] && config[key] !== '' && config[key] !== '{}') {
             localStorage.setItem(key, config[key]);
         }
@@ -2166,7 +2156,6 @@ function getAllConfigurations() {
         r: getLocalStorageItem('r', 'unchecked'),
         hv: getLocalStorageItem('hv', 'checked'),
         cv: getLocalStorageItem('cv', 'checked'),
-        bv: getLocalStorageItem('bv', 'checked'),
     }
 }
 
