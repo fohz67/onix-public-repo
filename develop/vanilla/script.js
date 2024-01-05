@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.2.1',
+    version: '5.2.2',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -327,9 +327,9 @@ function pushUserOnline() {
 function pushUserColors() {
     if (APP.reserved.value) return;
 
-    let colorVisible = USER.configurations.cv === 'checked' ? 100 : 0;
-    let badgeVisible = USER.configurations.bv === 'checked' ? 10 : 0;
-    let hatVisible = USER.configurations.hv === 'checked' ? 1 : 0;
+    let colorVisible = USER.configurations.cv === 'checked' ? 1 : 2;
+    let badgeVisible = USER.configurations.bv === 'checked' ? 1 : 2;
+    let hatVisible = USER.configurations.hv === 'checked' ? 1 : 2;
 
     pushDatabase(DB.references.meColor, {
         u: USER.credentials.uid,
@@ -1474,7 +1474,7 @@ function toolsModal(tools, total, badges) {
     const hatParam = `
         <div class="hatContainer">
             <div class="hatPreviewContainer">
-                <img class="hatSkinImg beautifulSkin" src="${USER.configurations.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
+                <img class="hatSkinImg beautifulSkin" alt="" src="${USER.configurations.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
             </div>
             <div class="hatSettingsContainer">
             </div>

@@ -1,5 +1,5 @@
-const VERSION = '5.3.1';
-let disableScript = localStorage.getItem('disableScript') || 'unchecked';
+const VERSION = '5.3.2';
+let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
     let showDeltaSettings;
@@ -4541,7 +4541,7 @@ let disableScript = localStorage.getItem('disableScript') || 'unchecked';
                     const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
 
                     a.playerElement.innerHTML = `
-                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && disableScript === 'unchecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
+                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && deltaServices === 'unchecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
                             <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
                             <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
                         </div>
@@ -9587,10 +9587,10 @@ let disableScript = localStorage.getItem('disableScript') || 'unchecked';
             </div>
         `;
     }, window.changePerformanceMode = () => {
-        if (disableScript === 'checked') {
-            localStorage.setItem('disableScript', 'unchecked');
+        if (deltaServices === 'checked') {
+            localStorage.setItem('deltaServices', 'unchecked');
         } else {
-            localStorage.setItem('disableScript', 'checked');
+            localStorage.setItem('deltaServices', 'checked');
         }
         window.location.reload();
     }, window.getTitleExtension = () => {
@@ -9642,7 +9642,7 @@ let disableScript = localStorage.getItem('disableScript') || 'unchecked';
         </div>
     `, document.querySelector('#overlay').insertAdjacentHTML('beforeend', `
         <div data-v-3ddebeb3="" class="p-switch pretty performanceSwitch" p-checkbox="">
-            <input type="checkbox" ${disableScript}="" onchange="changePerformanceMode()" tip="By deactivate this option, Delta services such as colored names, badges, and statistics will no longer work. Consequently, you won't see navigation buttons anymore. However, the Dual mode will remain available."> 
+            <input type="checkbox" ${deltaServices}="" onchange="changePerformanceMode()" tip="By deactivate this option, Delta services such as colored names, badges, and statistics will no longer work. Consequently, you won't see navigation buttons anymore. However, the Dual mode will remain available."> 
             <div class="state">
                 <label>Delta services</label>
             </div>
@@ -9740,7 +9740,7 @@ let disableScript = localStorage.getItem('disableScript') || 'unchecked';
     })();
 })();
 
-if (disableScript === 'unchecked') {
+if (deltaServices === 'checked') {
     fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
         .then(response => response.text())
         .then(code => {
