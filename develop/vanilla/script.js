@@ -463,13 +463,11 @@ function fetchUserChanged() {
 
 function fetchColorsToUsers(user) {
     if (user.n && user.c) {
-        const ev = user.ev ? user.ev.toString().split('').map(Number) : [1,1,1];
-
         LISTS.colors[user.n.trim()] = {
-            c: ev[0] === 1 ? user.c : '#ffffff',
+            c: user.c ,
             ba: user.ba && user.ba.u ? user.ba.u : null,
             u: user.u,
-            h: user.h && ev[1] === 1 ? user.h : null,
+            h: user.h ? user.h : null,
         }
     }
 }
