@@ -680,6 +680,7 @@ titlemod {
 }
 
 .colorPickerContainer {
+    margin-top:5px;
     display:flex
 }
 
@@ -689,12 +690,7 @@ titlemod {
     border-radius:11px;
     height:40px;
     margin-left:10px;
-    margin-top:15px;
     width:70px
-}
-
-#colorPickerInput {
-    margin-top:15px
 }
 
 #userIcon {
@@ -733,8 +729,7 @@ titlemod {
 }
 
 .silentUid {
-    font-size:12px;
-    margin-top:2px
+    font-size:12px
 }
 
 .tools-list {
@@ -1341,7 +1336,6 @@ button.confirm-button.right {
 }
 
 .badgeText {
-    margin-top:10px;
     font-size:16px
 }
 
@@ -1376,6 +1370,11 @@ input.perk-name {
 
 .hatContainer {
     text-align:center
+}
+
+.forceRight {
+    float:right;
+    margin:3px 5px
 }
 
 #leaderboard[data-v-7e7860a8] {

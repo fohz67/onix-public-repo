@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.2',
+    version: '5.2.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1122,7 +1122,7 @@ function generateProfileSection() {
     return `
         <div data-v-2c5139e0="" class="section row">
             <div data-v-2c5139e0="" class="header">Profil
-                <span data-v-22117250="" class="right silent silentUid confidential">${USER.credentials.uid}</span>
+                <span data-v-22117250="" class="forceRight confidential silentUid">${USER.credentials.uid}</span>
             </div>
             <div data-v-2c5139e0="" class="options">
                 <p class="stat-p">
@@ -1477,12 +1477,6 @@ function toolsModal(tools, total, badges) {
                 <img class="hatSkinImg beautifulSkin" src="${USER.configurations.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
             </div>
             <div class="hatSettingsContainer">
-                <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
-                    <input type="checkbox" id="hatActive" ${USER.configurations.hv}="" onchange="USER.configurations.hv = switchManager(USER.configurations.hv, 'hv')" tip=""> 
-                    <div class="state">
-                        <label>Hat active</label>
-                    </div>
-                </div>
             </div>
         </div>
     `;
@@ -1501,14 +1495,15 @@ function toolsModal(tools, total, badges) {
                 </div>
                 <div class="toolsPagePerks">
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Colored name</div>
-                        <div data-v-2c5139e0="" class="options">
-                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                        <div data-v-2c5139e0="" class="header">Colored name
+                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
                                 <input type="checkbox" id="hatActive" ${USER.configurations.cv}="" onchange="USER.configurations.cv = switchManager(USER.configurations.cv, 'cv')" tip=""> 
                                 <div class="state">
                                     <label>Color active</label>
                                 </div>
                             </div>
+                        </div>
+                        <div data-v-2c5139e0="" class="options">
                             <div class="colorPickerContainer">
                                 <input type="text" id="colorPickerInput" value="${USER.configurations.c}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
                                 <div class="colorPickerGui">
@@ -1519,14 +1514,15 @@ function toolsModal(tools, total, badges) {
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Badges</div>
-                        <div data-v-2c5139e0="" class="options">
-                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                        <div data-v-2c5139e0="" class="header">Badges
+                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
                                 <input type="checkbox" id="hatActive" ${USER.configurations.bv}="" onchange="USER.configurations.bv = switchManager(USER.configurations.bv, 'bv')" tip=""> 
                                 <div class="state">
                                     <label>Badge active</label>
                                 </div>
                             </div>
+                        </div>
+                        <div data-v-2c5139e0="" class="options">
                             <p class="badgeText">Click to toggle. <b>Combined</b> with the Vanis badge</p>
                             <div class="badgeListPerks">
                                 ${badges}
@@ -1534,7 +1530,14 @@ function toolsModal(tools, total, badges) {
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Hats</i></div>
+                        <div data-v-2c5139e0="" class="header">Hats
+                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
+                                <input type="checkbox" id="hatActive" ${USER.configurations.hv}="" onchange="USER.configurations.hv = switchManager(USER.configurations.hv, 'hv')" tip=""> 
+                                <div class="state">
+                                    <label>Hat active</label>
+                                </div>
+                            </div>
+                        </div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="hatListPerks">
                                 ${hatParam}
