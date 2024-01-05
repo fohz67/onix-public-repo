@@ -327,15 +327,11 @@ function pushUserOnline() {
 function pushUserColors() {
     if (APP.reserved.value) return;
 
-    let colorVisible = USER.configurations.cv === 'checked' ? 10 : 20;
-    let hatVisible = USER.configurations.hv === 'checked' ? 1 : 2;
-
     pushDatabase(DB.references.meColor, {
         u: USER.credentials.uid,
         t: new Date().getTime(),
         n: USER.configurations.n,
         c: USER.configurations.c,
-        ev: colorVisible + hatVisible,
     });
 }
 
@@ -351,8 +347,6 @@ function pushUserConfigurations() {
             t: $(ATTRS.selectors.teamTag).val(),
             m: USER.configurations.m,
             d: USER.configurations.d,
-            hv: USER.configurations.hv,
-            cv: USER.configurations.cv,
         });
     }
 }
@@ -1493,14 +1487,7 @@ function toolsModal(tools, total, badges) {
                 </div>
                 <div class="toolsPagePerks">
                     <div data-v-2c5139e0="" class="section row">
-                        <div data-v-2c5139e0="" class="header">Colored name
-                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
-                                <input type="checkbox" id="hatActive" ${USER.configurations.cv}="" onchange="USER.configurations.cv = switchManager(USER.configurations.cv, 'cv')" tip=""> 
-                                <div class="state">
-                                    <label>Color active</label>
-                                </div>
-                            </div>
-                        </div>
+                        <div data-v-2c5139e0="" class="header">Colored name</div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="colorPickerContainer">
                                 <input type="text" id="colorPickerInput" value="${USER.configurations.c}" placeholder="${ATTRS.colors.defaultColor}" onchange="onColorChanged(this)">
@@ -1512,6 +1499,7 @@ function toolsModal(tools, total, badges) {
                         </div> 
                     </div>
                     <div data-v-2c5139e0="" class="section row">
+                    <div data-v-2c5139e0="" class="header">Badge</div>
                         <div data-v-2c5139e0="" class="options">
                             <p class="badgeText">Click to toggle. <b>Combined</b> with the Vanis badge</p>
                             <div class="badgeListPerks">
@@ -1522,7 +1510,7 @@ function toolsModal(tools, total, badges) {
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">Hats
                             <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
-                                <input type="checkbox" id="hatActive" ${USER.configurations.hv}="" onchange="USER.configurations.hv = switchManager(USER.configurations.hv, 'hv')" tip=""> 
+                                <input type="checkbox" id="hatActive" tip=""> 
                                 <div class="state">
                                     <label>Hat active</label>
                                 </div>
@@ -1846,7 +1834,7 @@ function deleteConfiguration(configId) {
 function updateSuccess(configId) {
     const config = LISTS.configurations[configId];
 
-    ['skins', 'hotkeys', 'b', 'c', 'c', 'n', 't', 'hv', 'cv'].forEach(key => {
+    ['skins', 'hotkeys', 'b', 'c', 'c', 'n', 't'].forEach(key => {
         if (config[key] && config[key] !== '' && config[key] !== '{}') {
             localStorage.setItem(key, config[key]);
         }
@@ -2154,8 +2142,6 @@ function getAllConfigurations() {
         as: getLocalStorageItem('as', 'checked'),
         b: getLocalStorageItem('b', 'checked'),
         r: getLocalStorageItem('r', 'unchecked'),
-        hv: getLocalStorageItem('hv', 'checked'),
-        cv: getLocalStorageItem('cv', 'checked'),
     }
 }
 
