@@ -410,7 +410,7 @@ function pushUserPerk(item, type, refColor, refUser, list) {
         $(`.${type}${perk.i}`).removeClass(`${type}${not}Selected`).addClass(`${type}${inverseNot}Selected`);
 
         pushDatabase(refColor, perk);
-        if (type !== "hat") pushDatabase(refUser, perk);
+        pushDatabase(refUser, perk);
 
         if (APP.selected[type] === perk.i) APP.selected[type] = false;
         else APP.selected[type] = perk.i;
