@@ -1488,14 +1488,15 @@ function toolsModal(tools, total, badges, hats) {
                     </div>
                     <div data-v-2c5139e0="" class="section row">
                         <div data-v-2c5139e0="" class="header">Hats
-                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="">
-                                <input type="checkbox" id="hatActive" tip=""> 
+                            <div data-v-3ddebeb3="" class="p-switch pretty forceRight" p-checkbox="" tip="To activate custom hats, not perks hats">
+                                <input type="checkbox" id="hatActive"> 
                                 <div class="state">
                                     <label>Hat active</label>
                                 </div>
                             </div>
                         </div>
                         <div data-v-2c5139e0="" class="options">
+                            <p class="badgeText">Click to toggle. You can't adjust the opacity now, soon yes</p>
                             <div class="hatListPerks">
                                 ${hats}
                             </div>
