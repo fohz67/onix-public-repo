@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.2.3',
+    version: '5.2.4',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -329,6 +329,7 @@ function pushUserSpecificData(ref, type, reserved) {
     if (type === 'skin') data.s = getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '';
     if (type === 'color') data.c = APP.reserved.value ? APP.reserved.color : USER.configurations.c;
     if (type === 'server') data.se = USER.server;
+    if (type === 'spec') data.se = 'Spectator on ' + USER.server ;
 
     pushDatabase(ref, data);
 }
@@ -926,7 +927,7 @@ function usersModal(users) {
         meHeader: `<h3 class="titleSubBox">My profile</h3>`,
         onlineHeader: `<h3 class="titleSubBox">${userCount.online} Online players</h3>`,
         offlineHeader: `<h3 class="titleSubBox">${userCount.offline} Offline players</h3>`,
-        profileHeader: injectUser(me, getUsersTime(me.st)),
+        profileHeader: injectUser(me, getUserTime(me.st)),
         onlineList: listOnline,
         offlineList: listOffline,
         counts: userCount,
@@ -944,7 +945,7 @@ function updateUserLists(users, me) {
 
     Object.values(users).forEach(user => {
         if (user === me) return;
-        const status = getUsersTime(user.st);
+        const status = getUserTime(user.st);
         const userHTML = injectUser(user, status);
 
         if (status === 'Online') {
@@ -975,7 +976,7 @@ function injectUser(user, status) {
     }
 
     return `
-        <div class="listItem userItem ${status}" tip="${getUsersTip(user, user.se, status)}">
+        <div class="listItem userItem ${status}" tip="${getUserTip(user, user.se, status)}">
             <img class="userPhoto beautifulSkin" alt="" src="${skin === '' ? ATTRS.images.transparentSkin : skin}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>
             <div class="userOnline" style="background-color: ${status === 'Online' ? ATTRS.colors.onlineColor : ATTRS.colors.offlineColor}"></div>
             <div class="listTextItem userTextElem">
@@ -985,8 +986,8 @@ function injectUser(user, status) {
                         <span class="userLevel">${user.l === 0 ? '' : ' - Lvl ' + user.l}</span>
                     </p>
                 </div>
-                <p class="userOnlineText">${status} on ${user.se}
-                    <img class="userModeImg" alt="" src="${getUsersMode(user.m)}" tip="${user.m + ' mode'}">
+                <p class="userOnlineText">${getUserServer(status, user.se)}
+                    <img class="userModeImg" alt="" src="${getUserMode(user.m)}" tip="${user.m + ' mode'}">
                 </p>
             </div>
         </div>
@@ -1042,7 +1043,7 @@ function injectConnectionsStats() {
  *  Users box utilitaries
  *
  **************************/
-function getUsersTime(time) {
+function getUserTime(time) {
     function getTimeAgo(days, hours, minutes) {
         if (days >= 2) return undefined;
         else if (days > 0) return `${days}d ago`;
@@ -1079,14 +1080,19 @@ function getUserAnonymous(user) {
     return false;
 }
 
-function getUsersTip(user, userServer, status) {
+function getUserTip(user, userServer, status) {
     return `Nickname : ${user.n}\n${user.l === 0 ? '' : 'Level : ' + user.l + '\n'}Last connection : ${status === 'Online' ? 'Now' : status}\nServer : ${userServer}\nColor used : ${user.c}\nMode: ${user.m ? user.m : 'Unknown'}`;
 }
 
-function getUsersMode(userMode) {
+function getUserMode(userMode) {
     if (userMode === 'Single') return ATTRS.images.singleMode
     else if (userMode === 'Dual') return ATTRS.images.dualMode
     else return ATTRS.images.undefMode;
+}
+
+function getUserServer(status, server) {
+    if (server.includes('Spectator') && status === 'Online') return server
+    return status + server.replace('Spectator', '');
 }
 
 /********************
