@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.2.5',
+    version: '5.3.0',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -383,35 +383,37 @@ function pushUserStatisticsLocally() {
 }
 
 function pushUserBadge(item) {
-    pushUserPerk(item, 'badge', DB.references.meColorBadge, DB.references.meUserBadge, LISTS.badges, 'badge');
+    pushUserPerk(item, 'badge', DB.references.meColorBadge, DB.references.meUserBadge, LISTS.badges);
 }
 
 function pushUserHat(item) {
-    pushUserPerk(item, 'hat', DB.references.meColorHat, DB.references.meUserHat, LISTS.hat, 'hat');
+    pushUserPerk(item, 'hat', DB.references.meColorHat, DB.references.meUserHat, LISTS.hats);
 }
 
-function pushUserPerk(item, type, refColor, refUser, list, key) {
+function pushUserPerk(item, type, refColor, refUser, list) {
     const perk = JSONSafeParser(decodeURIComponent(item));
+
+    console.log(perk);
 
     if (Object.keys(perk).length > 0) {
         if (perk.o) delete perk.o;
         if (perk.e) delete perk.e;
-        if (APP.selected[key] === perk.i) perk.u = null;
+        if (APP.selected[type] === perk.i) perk.u = null;
 
         Object.values(list).forEach(perk => {
             $(`.${type}${perk.i}`).removeClass(`${type}Selected`).addClass(`${type}NotSelected`);
         });
 
-        const not = APP.selected[key] === perk.i ? '' : 'Not';
-        const inverseNot = APP.selected[key] === perk.i ? 'Not' : '';
+        const not = APP.selected[type] === perk.i ? '' : 'Not';
+        const inverseNot = APP.selected[type] === perk.i ? 'Not' : '';
         
         $(`.${type}${perk.i}`).removeClass(`${type}${not}Selected`).addClass(`${type}${inverseNot}Selected`);
 
         pushDatabase(refColor, perk);
-        pushDatabase(refUser, perk);
+        if (type !== "hat") pushDatabase(refUser, perk);
 
-        if (APP.selected[key] === perk.i) APP.selected[key] = false;
-        else APP.selected[key] = perk.i;
+        if (APP.selected[type] === perk.i) APP.selected[type] = false;
+        else APP.selected[type] = perk.i;
     }
 }
 
@@ -1787,17 +1789,17 @@ function injectSkin(skins) {
 }
 
 function injectBadge(item) {
-    return injectPerk(item, 'ba', 'badge', 'badge', 'pushUserBadge');
+    return injectPerk(item, 'ba', 'badge', 'pushUserBadge');
 }
 
 function injectHat(item) {
-    return injectPerk(item, 'h', 'hat', 'hat', 'pushUserHat');
+    return injectPerk(item, 'h',  'hat', 'pushUserHat');
 }
 
-function injectPerk(item, db, type, key, onclickFunction) {
+function injectPerk(item, db, type, onclickFunction) {
     const userOwnedItem = LISTS.users[USER.credentials.uid][db];
     let isOwner = false;
-    APP.selected[key] = (userOwnedItem && userOwnedItem.i === item.i) ? userOwnedItem.i : false;
+    APP.selected[type] = (userOwnedItem && userOwnedItem.i === item.i) ? userOwnedItem.i : false;
 
     if (item.o && item.o[USER.credentials.uid]) {
         isOwner = true;
@@ -1809,7 +1811,7 @@ function injectPerk(item, db, type, key, onclickFunction) {
     }
 
     return `
-        <img class="${type}Item ${type}${item.i} ${isOwner ? `${type}Owner` : `${type}NotOwner`} ${APP.selected[key] ? `${type}Selected` : `${type}NotSelected`}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="${onclickFunction}('${encodeURIComponent(JSON.stringify(item))}')"` : ''} alt=""/>
+        <img class="${type}Item ${type}${item.i} ${isOwner ? `${type}Owner` : `${type}NotOwner`} ${APP.selected[type] ? `${type}Selected` : `${type}NotSelected`}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="${onclickFunction}('${encodeURIComponent(JSON.stringify(item))}')"` : ''} alt=""/>
     `;
 }
 
