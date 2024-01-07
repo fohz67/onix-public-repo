@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.2.4',
+    version: '5.2.5',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1092,7 +1092,7 @@ function getUserMode(userMode) {
 
 function getUserServer(status, server) {
     if (server.includes('Spectator') && status === 'Online') return server
-    return status + server.replace('Spectator', '');
+    return status + ' on ' + server.replace('Spectator on ', '');
 }
 
 /********************
