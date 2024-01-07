@@ -1,14 +1,19 @@
 const APP = {
-    version: '5.2.2',
+    version: '5.2.3',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
+    statsHaveChanged: false,
     reserved: {
         value: false,
         color: '#ffffff'
     },
-    selected: false,
+    selected: {
+        badge: false,
+        hat: false,
+        aura: false
+    },
     blacklist: ['.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'k', 'K', 'm', 'M', 'A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 'E1', 'E2', 'E3', 'E4', 'E5', 'Unnamed', 'Long Name', 'Bad Words', '', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         ', '          ', '           ', '            ', '             ', '              ', '               ', '                '],
 }
 
@@ -36,6 +41,7 @@ const LISTS = {
     users: {},
     colors: {},
     badges: undefined,
+    hats: undefined,
     configurations: undefined,
     leaderboard: undefined,
 }
@@ -96,6 +102,7 @@ async function onScriptsReady() {
                 removeAds();
                 createComponents();
                 listenerComponents();
+                mutationComponents();
                 drawStyle();
             });
         });
@@ -292,47 +299,38 @@ function initAnimationsPage() {
  *
  *********************/
 function pushUserInfos() {
-    let data = {
-        u: USER.credentials.uid,
-        n: USER.configurations.n,
-        s: getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '',
-        c: APP.reserved.value ? APP.reserved.color : USER.configurations.c,
-        se: USER.server,
-        st: new Date().getTime(),
-        m: USER.mode,
-        l: 0,
-        a: USER.configurations.a,
-    }
-
-    if ($(ATTRS.selectors.discordBtn)) {
-        const levelText = $(ATTRS.selectors.level).text().trim();
-        const match = levelText.match(/\d+/);
-        data.l = match ? match[0] : 0;
-    }
-
-    pushDatabase(DB.references.meUser, data);
-}
-
-function pushUserOnline() {
     pushDatabase(DB.references.meUser, {
         u: USER.credentials.uid,
-        n: USER.configurations.n,
-        s: getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '',
-        c: APP.reserved.value ? APP.reserved.color : USER.configurations.c,
-        se: USER.server,
         st: new Date().getTime(),
+        n: USER.configurations.n,
+        c: APP.reserved.value ? APP.reserved.color : USER.configurations.c,
+        s: getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '',
+        se: USER.server,
+        l: $(ATTRS.selectors.level).length > 0 ? parseInt($(ATTRS.selectors.level).text().trim().match(/\d+/)[0]) || 0 : 0,
+        a: USER.configurations.a,
+        m: USER.mode,
     });
-}
-
-function pushUserColors() {
-    if (APP.reserved.value) return;
 
     pushDatabase(DB.references.meColor, {
         u: USER.credentials.uid,
         t: new Date().getTime(),
         n: USER.configurations.n,
         c: USER.configurations.c,
-    });
+    })
+}
+
+function pushUserSpecificData(ref, type, reserved) {
+    if (reserved && APP.reserved.value) return;
+
+    let data = {};
+    if (type === 'status') data.st = new Date().getTime();
+    if (type === 'time') data.t = new Date().getTime();
+    if (type === 'name') data.n = USER.configurations.n;
+    if (type === 'skin') data.s = getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '';
+    if (type === 'color') data.c = APP.reserved.value ? APP.reserved.color : USER.configurations.c;
+    if (type === 'server') data.se = USER.server;
+
+    pushDatabase(ref, data);
 }
 
 function pushUserConfigurations() {
@@ -344,7 +342,6 @@ function pushUserConfigurations() {
             r: USER.configurations.r,
             c: USER.configurations.c,
             n: USER.configurations.n,
-            t: $(ATTRS.selectors.teamTag).val(),
             m: USER.configurations.m,
             d: USER.configurations.d,
         });
@@ -358,6 +355,8 @@ function pushUserStatisticsDb() {
     localStorage.setItem('sM', '0');
     localStorage.setItem('sK', '0');
     localStorage.setItem('sG', '0');
+
+    APP.statsHaveChanged = true;
 }
 
 function pushUserStatisticsLocally() {
@@ -378,28 +377,40 @@ function pushUserStatisticsLocally() {
     localStorage.setItem('sM', mass.toString());
     localStorage.setItem('sK', kill.toString());
     localStorage.setItem('sG', game.toString());
+
+    APP.statsHaveChanged = false;
 }
 
 function pushUserBadge(item) {
-    const badge = JSONSafeParser(decodeURIComponent(item));
+    pushUserPerk(item, 'badge', DB.references.meColorBadge, DB.references.meUserBadge, LISTS.badges, 'badge');
+}
 
-    if (Object.keys(badge).length > 0) {
-        if (badge.o) delete badge.o;
-        if (badge.e) delete badge.e;
-        if (APP.selected === badge.i) badge.u = null;
+function pushUserHat(item) {
+    pushUserPerk(item, 'hat', DB.references.meColorHat, DB.references.meUserHat, LISTS.hat, 'hat');
+}
 
-        Object.values(LISTS.badges).forEach(badgeEach => {
-            $(`.badge${badgeEach.i}`).removeClass('badgeSelected').addClass('badgeNotSelected');
+function pushUserPerk(item, type, refColor, refUser, list, key) {
+    const perk = JSONSafeParser(decodeURIComponent(item));
+
+    if (Object.keys(perk).length > 0) {
+        if (perk.o) delete perk.o;
+        if (perk.e) delete perk.e;
+        if (APP.selected[key] === perk.i) perk.u = null;
+
+        Object.values(list).forEach(perk => {
+            $(`.${type}${perk.i}`).removeClass(`${type}Selected`).addClass(`${type}NotSelected`);
         });
-        const not = APP.selected === badge.i ? '' : 'Not';
-        const inverseNot = APP.selected === badge.i ? 'Not' : '';
-        $(`.badge${badge.i}`).removeClass(`badge${not}Selected`).addClass(`badge${inverseNot}Selected`);
 
-        pushDatabase(DB.references.meColorBadge, badge);
-        pushDatabase(DB.references.meUserBadge, badge);
+        const not = APP.selected[key] === perk.i ? '' : 'Not';
+        const inverseNot = APP.selected[key] === perk.i ? 'Not' : '';
+        
+        $(`.${type}${perk.i}`).removeClass(`${type}${not}Selected`).addClass(`${type}${inverseNot}Selected`);
 
-        if (APP.selected === badge.i) APP.selected = false;
-        else APP.selected = badge.i;
+        pushDatabase(refColor, perk);
+        pushDatabase(refUser, perk);
+
+        if (APP.selected[key] === perk.i) APP.selected[key] = false;
+        else APP.selected[key] = perk.i;
     }
 }
 
@@ -582,9 +593,7 @@ function removeCookie() {
  *  Components listener
  *
  ***********************/
-function onActionPressed() {
-    pushUserOnline();
-
+function onChatboxNeedResize() {
     if (USER.configurations.r === 'checked' && APP.resize === 0) {
         APP.resize = 1;
         createChatboxResizable();
@@ -601,6 +610,31 @@ function onColorChanged(that) {
     }
 }
 
+function mutationComponents() {
+    const target = document.querySelector(ATTRS.selectors.bar);
+    const config = {
+        characterData: true,
+        childList: true,
+        subtree: true
+    };
+
+    let callback = function (mutationsList) {
+        for (let mutation of mutationsList) {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                if (APP.mode === 2) {
+                    pushUserSpecificData(DB.references.meUser, 'status', false);
+                    pushUserSpecificData(DB.references.meColor, 'time', true);
+                }
+                APP.statsHaveChanged = true;
+                break;
+            }
+        }
+    };
+
+    const observer = new MutationObserver(callback);
+    observer.observe(target, config);
+}
+
 function listenerComponents() {
     if (APP.mode === 1) {
         $(ATTRS.selectors.skinUrl).on('change', function () {
@@ -612,48 +646,34 @@ function listenerComponents() {
         });
     }
 
-    if (APP.mode === 2) {
-        const target = document.querySelector(ATTRS.selectors.bar);
-        const config = {
-            characterData: true,
-            childList: true,
-            subtree: true
-        };
-
-        let callback = function (mutationsList) {
-            for (let mutation of mutationsList) {
-                if (mutation.type === 'childList' || mutation.type === 'characterData') {
-                    onActionPressed();
-                    break;
-                }
-            }
-        };
-
-        const observer = new MutationObserver(callback);
-        observer.observe(target, config);
-    }
-
     $(ATTRS.selectors.nickname).on('input', function () {
         if (APP.mode === 1) $(ATTRS.selectors.nicknameProfile).text($(this).val());
         USER.configurations.n = $(this).val();
     }).on('change', function () {
         getReservedName();
-        pushUserColors();
-        pushUserOnline();
+        pushUserSpecificData(DB.references.meUser, 'name', false);
+        pushUserSpecificData(DB.references.meColor, 'name', true);
     });
 
     $(ATTRS.selectors.serverListItem).on('click', function () {
         USER.server = $(this).find(ATTRS.selectors.serverName).text();
         APP.resize = 0;
-        pushUserOnline();
+        pushUserSpecificData(DB.references.meUser, 'server', false);
     });
 
     $(ATTRS.selectors.playButton).on('click', () => {
-        if (USER.server !== ' Lobbies') pushUserStatisticsLocally();
-        onActionPressed();
+        if (USER.server !== ' Lobbies' && APP.statsHaveChanged) pushUserStatisticsLocally();
+        if (APP.mode === 1) {
+            pushUserSpecificData(DB.references.meUser, 'status', false);
+            pushUserSpecificData(DB.references.meColor, 'time', true);
+        }
+        onChatboxNeedResize();
     });
 
-    $(ATTRS.selectors.spectateButton).on('click', onActionPressed);
+    $(ATTRS.selectors.spectateButton).on('click', () => {
+        pushUserSpecificData(DB.references.meUser, 'spec', false);
+        onChatboxNeedResize();
+    });
 }
 
 /***********************
@@ -760,12 +780,11 @@ function skinChecker(url) {
 
     image.onload = function () {
         $(ATTRS.selectors.skinProfile).attr('src', url);
-        pushUserOnline();
+        pushUserSpecificData(DB.references.meUser, 'skin', false);
     }
 
     image.onerror = function () {
         $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.transparentSkin);
-        pushUserOnline();
     }
 
     image.src = url;
@@ -1395,47 +1414,34 @@ function injectLeaderboard(item, itemId, position, filter) {
  *  Tools page
  *
  ***************/
-function drawToolsModal() {
+async function drawToolsModal() {
     if ($(ATTRS.selectors.toolBox).length > 0) return;
 
-    if (LISTS.badges === undefined || LISTS.configurations === undefined) {
-        DB.references.badges.once('value', snapshot => {
-            if (snapshot.exists()) {
-                LISTS.badges = snapshot.val();
-                DB.references.meConfig.once('value', snapshot => {
-                    if (snapshot.exists()) {
-                        LISTS.configurations = snapshot.val();
-                    }
-                    addToolsModal();
-                });
-            }
-            addToolsModal();
-        });
-    } else {
-        addToolsModal();
+    if (LISTS.badges === undefined || LISTS.hats === undefined || LISTS.configurations === undefined) {
+        try {
+            const badgesSnapshot = await DB.references.badges.once('value');
+            if (badgesSnapshot.exists()) LISTS.badges = badgesSnapshot.val();
+            const hatsSnapshot = await DB.references.hats.once('value');
+            if (hatsSnapshot.exists()) LISTS.hats = hatsSnapshot.val();
+            const configurationsSnapshot = await DB.references.meConfig.once('value');
+            if (configurationsSnapshot.exists()) LISTS.configurations = configurationsSnapshot.val();
+        } catch (e) {}
     }
+
+    addToolsModal();
 }
 
 function addToolsModal() {
     const configurations = fetchItem(LISTS.configurations, injectConfiguration);
-    const nbCofigurations = LISTS.configurations ? Object.keys(LISTS.configurations).length : 0;
+    const configurationsLength = LISTS.configurations ? Object.keys(LISTS.configurations).length : 0;
     const badges = fetchItem(LISTS.badges, injectBadge);
-    const modal = toolsModal(configurations, nbCofigurations, badges);
+    const hats = fetchItem(LISTS.hats, injectHat);
+    const modal = toolsModal(configurations, configurationsLength, badges, hats);
 
     createNewBox(modal, 'Delta settings', '');
 }
 
-function toolsModal(tools, total, badges) {
-    const hatParam = `
-        <div class="hatContainer">
-            <div class="hatPreviewContainer">
-                <img class="hatSkinImg beautifulSkin" alt="" src="${USER.configurations.s}" onerror="this.src = '${ATTRS.images.defaultSkin}'">
-            </div>
-            <div class="hatSettingsContainer">
-            </div>
-        </div>
-    `;
-
+function toolsModal(tools, total, badges, hats) {
     return `
         <div class="tool-container">
             <div class="tool-section">
@@ -1483,7 +1489,7 @@ function toolsModal(tools, total, badges) {
                         </div>
                         <div data-v-2c5139e0="" class="options">
                             <div class="hatListPerks">
-                                ${hatParam}
+                                ${hats}
                             </div>
                         </div> 
                     </div>
@@ -1643,6 +1649,7 @@ async function loadAllSkins() {
 
     for (let pageNumber = 0; pageNumber <= 50; pageNumber++) {
         const data = await fetchSkins(`https://cors-proxy.fringe.zone/https://skins.vanis.io/api/public-skins?page=${pageNumber}`, `Page ${pageNumber} error`);
+
         if (data) {
             SKINS.all.push(...data);
             data.forEach(skin => itemSkinModal(skin, ATTRS.selectors.skinsNavAllPage));
@@ -1686,6 +1693,7 @@ function openSkin(skinUrl, skinId) {
 function getSkinIdByUrl(url) {
     if (!url) return null;
     const separator = url.split('/');
+
     return separator[separator.length - 1];
 }
 
@@ -1700,6 +1708,7 @@ function copySkin(skinUrl) {
 function yoinkSkin(skinUrl) {
     const allSkins = getLocalStorageItem('skins', '["https://skins.vanis.io/s/Qkfih2","https://skins.vanis.io/s/Qkfih2"]');
     let arraySkins = JSONSafeParser(allSkins);
+
     if (Object.keys(arraySkins).length > 0) {
         arraySkins.push(skinUrl);
         localStorage.setItem('skins', JSON.stringify(arraySkins));
@@ -1721,6 +1730,7 @@ function injectConfiguration(item, itemId) {
         if (!hotkeys) return 0;
         const hotkeysJSON = JSONSafeParser(hotkeys);
         if (Object.keys(hotkeysJSON).length === 0) return 0;
+
         return Object.keys(hotkeysJSON).filter(key => hotkeysJSON[key] !== '').length;
     }
 
@@ -1755,30 +1765,45 @@ function injectConfiguration(item, itemId) {
 function injectSkin(skins) {
     if (!skins) return {list: '', count: 0};
     const skinUrls = JSONSafeParser(skins);
+
     if (Object.keys(skinUrls).length > 0) {
         const skinElements = skinUrls.map(url => {
             const id = getSkinIdByUrl(url);
             const clicker = id && url ? `onclick="openSkin('${url}', '${id}')"` : ``;
+
             return `<img src="${url}" alt="" class="configSkinItem beautifulSkin" tip="${url}" onerror="this.src = '${ATTRS.images.defaultSkin}'" ${clicker}>`;
         });
+
         return {list: `<div class="listSkins">${skinElements.join('')}</div>`, count: Object.keys(skinUrls).length};
     }
+
     return {list: '', count: 0};
 }
 
 function injectBadge(item) {
-    const badge = LISTS.users[USER.credentials.uid].ba;
-    let isOwner = false;
-    APP.selected = (badge && badge.i === item.i && badge.u) ? badge.i : false;
+    return injectPerk(item, 'ba', 'badge', 'badge', 'pushUserBadge');
+}
 
-    if (item.o && item.o[USER.credentials.uid]) isOwner = true;
-    else if (item.e) {
-        if (item.e.t === 'kill' && item.e.v <= USER.statistics.sK) isOwner = true;
-        else if (item.e.t === 'time' && item.e.v <= USER.statistics.sT) isOwner = true;
+function injectHat(item) {
+    return injectPerk(item, 'h', 'hat', 'hat', 'pushUserHat');
+}
+
+function injectPerk(item, db, type, key, onclickFunction) {
+    const userOwnedItem = LISTS.users[USER.credentials.uid][db];
+    let isOwner = false;
+    APP.selected[key] = (userOwnedItem && userOwnedItem.i === item.i) ? userOwnedItem.i : false;
+
+    if (item.o && item.o[USER.credentials.uid]) {
+        isOwner = true;
+    } else if (item.e) {
+        if ((item.e.t === 'kill' && item.e.v <= USER.statistics.sK) ||
+            (item.e.t === 'time' && item.e.v <= USER.statistics.sT)) {
+            isOwner = true;
+        }
     }
 
     return `
-        <img class="badgeItem badge${item.i} ${isOwner ? 'badgeOwner' : 'badgeNotOwner'} ${APP.selected ? 'badgeSelected' : 'badgeNotSelected'}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="pushUserBadge('${encodeURIComponent(JSON.stringify(item))}')"` : ''} alt=""/>
+        <img class="${type}Item ${type}${item.i} ${isOwner ? `${type}Owner` : `${type}NotOwner`} ${APP.selected[key] ? `${type}Selected` : `${type}NotSelected`}" src="${item.u}" tip="${item.t}" ${isOwner ? `onclick="${onclickFunction}('${encodeURIComponent(JSON.stringify(item))}')"` : ''} alt=""/>
     `;
 }
 
@@ -1786,7 +1811,7 @@ function injectBadge(item) {
  *
  *  Delete configurations
  *
- **************************/
+ ****************ƒ**********/
 function deleteSuccess(configId) {
     const node = $('#' + configId);
 
@@ -1937,8 +1962,8 @@ function changeUserColor(color) {
         $(ATTRS.selectors.nicknameProfile2).css('color', isSameNickname ? commonColor : 'white');
     }
 
-    pushUserColors();
-    pushUserOnline();
+    pushUserSpecificData(DB.references.meUser, 'color', false);
+    pushUserSpecificData(DB.references.meColor, 'color', true);
 }
 
 /***********************
@@ -1967,7 +1992,6 @@ function changeCellColor(nicknameToUpdate) {
  **********************/
 function pushUserData() {
     pushUserInfos();
-    pushUserColors();
     pushUserConfigurations();
 }
 
@@ -2144,9 +2168,12 @@ function getAllReferences() {
         user: db.ref(`U`),
         statistics: db.ref(`S`),
         badges: db.ref(`B`),
+        hats: db.ref(`H`),
         meUser: db.ref(`U/${uid}`),
         meUserBadge: db.ref(`U/${uid}/ba`),
         meColorBadge: db.ref(`C/${uid}/ba`),
+        meUserHat: db.ref(`U/${uid}/h`),
+        meColorHat: db.ref(`C/${uid}/h`),
         meColor: db.ref(`C/${uid}`),
         meStat: db.ref(`S/${uid}`),
         meConfig: db.ref(`Ba/${uid}`),
@@ -2201,7 +2228,7 @@ function getAllSelectors() {
 
         // HUD and Ads
         ad: 'div[data-v-5190ae12][style*="height: 286px;"]',
-        bar: '.bar>.statBar',
+        bar: APP.mode === 1 ? '#overlay>.container:nth-child(3)' : '.bar>.statBar',
         barHud: '.bar',
         bodyHud: 'body',
         cmp: '#cmpbox',
