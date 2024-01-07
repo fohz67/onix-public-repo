@@ -393,8 +393,6 @@ function pushUserHat(item) {
 function pushUserPerk(item, type, refColor, refUser, list) {
     const perk = JSONSafeParser(decodeURIComponent(item));
 
-    console.log(perk);
-
     if (Object.keys(perk).length > 0) {
         if (perk.o) delete perk.o;
         if (perk.e) delete perk.e;
