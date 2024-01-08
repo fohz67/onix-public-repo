@@ -1,6 +1,3 @@
-const VERSION = '5.3.2';
-let deltaServices = localStorage.getItem('deltaServices') || 'checked';
-
 (() => {
     var t, e = {
         2: (t, e, s) => {
@@ -2336,7 +2333,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }
                     }
                 }), t._v(" "), e("i", {
-                    staticClass: "tab fas fa-keyboard",
+                    staticClass: "tab far fa-keyboard",
                     attrs: {tip: "Hotkeys"},
                     on: {
                         click: function (e) {
@@ -7303,17 +7300,3 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
     var i = a.O(void 0, [736], (() => a(2971)));
     i = a.O(i)
 })();
-
-if (deltaServices === 'checked') {
-    fetch('https://raw.githubusercontent.com/Fohz67/Delta-Client-Content/main/script.js')
-        .then(response => response.text())
-        .then(code => {
-            const script = document.createElement('script');
-            script.textContent = code;
-            (document.head || document.documentElement).appendChild(script);
-            script.remove();
-        })
-    ;
-} else {
-    document.querySelector('.loadingDelta').remove();
-}
