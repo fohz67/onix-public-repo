@@ -3911,6 +3911,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 addHat() {
                     let hat = null;
                     if (!(a.showHat || a.showMyHat && this.isMe) || !this.sprite || this.hatSprite || !(hat = getUserField(this.player.nameFromServer, this.pid, 'h', null))) return;
+                    if (!hat.u) return;
                     let t = PIXI.Sprite.from(hat.u);
                     t.scale.set(hat.s);
                     t.pivot.set(hat.p.x, hat.p.y);
