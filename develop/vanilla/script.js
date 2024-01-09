@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.3.0',
+    version: '5.3.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -345,6 +345,7 @@ function pushUserConfigurations() {
             n: USER.configurations.n,
             m: USER.configurations.m,
             d: USER.configurations.d,
+            cc: USER.configurations.cc,
         });
     }
 }
@@ -1524,6 +1525,12 @@ function toolsModal(tools, total, badges, hats) {
                                     <label>Auto save my configurations</label>
                                 </div>
                             </div>
+                            <div data-v-3ddebeb3="" class="p-switch pretty" p-checkbox="">
+                                <input type="checkbox" id="autoSynchronization" ${USER.configurations.cc}="" onchange="USER.configurations.cc = switchManager(USER.configurations.cc, 'cc')" tip="Shows color in player nickname"> 
+                                <div class="state">
+                                    <label>Show nickname color</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2163,6 +2170,7 @@ function getAllConfigurations() {
         as: getLocalStorageItem('as', 'checked'),
         b: getLocalStorageItem('b', 'checked'),
         r: getLocalStorageItem('r', 'unchecked'),
+        cc: getLocalStorageItem('cc', 'checked'),
     }
 }
 
