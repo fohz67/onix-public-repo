@@ -496,7 +496,7 @@ function fetchColorsOnce(callback) {
                 fetchColorsToUsers(users[uid]);
             });
 
-            changeCellColor();
+            if (USER.configurations.cc === 'checked') changeCellColor();
             fetchColorChanged();
 
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
@@ -512,7 +512,7 @@ function fetchColorChanged() {
             const user = snapshot.val();
 
             fetchColorsToUsers(user);
-            changeCellColor(user.n);
+            if (USER.configurations.cc === 'checked') changeCellColor(user.n);
 
             window.dispatchEvent(new CustomEvent('colorsDualChanged'));
         }
