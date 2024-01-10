@@ -1,4 +1,4 @@
-const VERSION = '5.3.3';
+const VERSION = '5.3.4';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -4594,7 +4594,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     const onContextMenuAction = hasSkin ? `window.copySkinDual('${skinUrl}')` : 'window.errorSkinDual()';
 
                     a.playerElement.innerHTML = `
-                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" ${localStorage.b === 'checked' && deltaServices === 'unchecked' ? `style="backdrop-filter: blur(7px);"` : ``}>
+                        <div class="playerStalkContainer" onclick="${onClickAction}" oncontextmenu="${onContextMenuAction}" style="${n.showChat ? ``: `bottom:10px!important;`}${localStorage.b === 'checked' ? `backdrop-filter: blur(7px);` : ``}">
                             <img class="playerStalkImage beautifulSkin" src="${skinUrl}" alt="">
                             <p class="playerStalkText">${selectedPlayer.name} | PID: ${selectedPlayer.pid}</p>
                         </div>
@@ -5139,6 +5139,16 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 if (e.region) return e.region.toUpperCase();
                 var t = e.url.toLowerCase().match(/game-([a-z]{2})/);
                 return t ? t[1].toUpperCase() : ""
+            }
+
+            function movePlayerStalkContainer(t) {
+                const playerStalkContainer = document.querySelector(".playerStalkContainer");
+                const chatbox = document.getElementById("chatbox");
+                if (playerStalkContainer && chatbox) {
+                    let chatboxHeight = parseInt(chatbox.style.height, 10);
+                    chatboxHeight = isNaN(chatboxHeight) || chatboxHeight == 0 ? 220 : chatboxHeight + 40;
+                    playerStalkContainer.style.bottom = t ? chatboxHeight + "px" : "10px";
+                }
             }
 
             var m, v = (s(166), s(0)),
@@ -6128,6 +6138,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         },
                         on: {
                             change: function(t) {
+                                movePlayerStalkContainer(t);
                                 return e.change("showChat", t)
                             }
                         }

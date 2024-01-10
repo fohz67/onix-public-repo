@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.3.1',
+    version: '5.3.2',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -1343,7 +1343,7 @@ function addLeaderboardModal() {
         <div class="leaderboardList"></div>
     `;
 
-    createNewBox(modal, 'Deltaboard top 50', '');
+    createNewBox(modal, 'Deltaboard top 100', '');
     injectCustomLeaderboard('kda');
 }
 
@@ -1364,7 +1364,7 @@ function injectCustomLeaderboard(filter) {
 
     const sortedLeaderboard = Object.values(LISTS.leaderboard)
         .sort(sortingFunctions[filter] || sortingFunctions['kda'])
-        .slice(0, 50);
+        .slice(0, 100);
 
     const leaderboardHTML = sortedLeaderboard.map((element, index) =>
         injectLeaderboard(element, element.uid, index + 1, filter)
