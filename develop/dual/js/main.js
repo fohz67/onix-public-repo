@@ -1,4 +1,4 @@
-const VERSION = '5.3.2';
+const VERSION = '5.3.3';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -44,7 +44,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
     function getUserColor(bot, nickname, pid, hash, forceColor, vanisStorage) {
         if (!vanisStorage) return hash + 'ffffff';
-        if (vanisStorage === 'bp' || vanisStorage.showBotColor) if (bot) return hash + '838383';
+        if (vanisStorage === 'bp' || vanisStorage.showBotColor)
+            if (bot) return hash + '838383';
         if (vanisStorage === 'bp' || vanisStorage.showDeltaColors) {
             let deltaColor = getUserField(nickname, pid, 'c', null);
             if (deltaColor) return hash + deltaColor.replaceAll('#', '');
@@ -193,7 +194,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
         readString16() {
             let e = "";
-            for (; ;) {
+            for (;;) {
                 let t = this.eof ? 0 : this.readUInt16LE();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
@@ -203,7 +204,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
         readString() {
             let e = "";
-            for (; ;) {
+            for (;;) {
                 let t = this.eof ? 0 : this.readUInt8();
                 if (0 === t) break;
                 e += String.fromCharCode(t)
@@ -305,7 +306,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
         return e.splice(s, 1), e
     }
 
-    String.prototype.toHHMMSS = function () {
+    String.prototype.toHHMMSS = function() {
         var e = parseInt(this, 10),
             t = Math.floor(e / 3600),
             s = Math.floor((e - 3600 * t) / 60);
@@ -323,21 +324,20 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
         region: "EU",
         url: "ws://localhost:8080"
     }],
-        function (e) {
-            var t, s = (t = !0, function (e, s) {
-                var i = t ? function () {
+        function(e) {
+            var t, s = (t = !0, function(e, s) {
+                var i = t ? function() {
                     if (s) {
                         var t = s.apply(e, arguments);
                         return s = null, t
                     }
-                } : function () {
-                };
+                } : function() {};
                 return t = !1, i
             });
 
             function i(t) {
-                var i = s(this, function () {
-                    var e = function () {
+                var i = s(this, function() {
+                    var e = function() {
                         return !e.constructor('return /" + this + "/')().constructor("^([^ ]+( +[^ ]+)+)+[^ ]}").test(i)
                     };
                     return e()
@@ -373,36 +373,36 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 return e[t].call(s.exports, s, s.exports, l), s.l = !0, s.exports
             }
 
-            window.getModule = l, l.m = e, l.c = n, l.d = function (e, t, s) {
+            window.getModule = l, l.m = e, l.c = n, l.d = function(e, t, s) {
                 l.o(e, t) || Object.defineProperty(e, t, {
                     enumerable: !0,
                     get: s
                 })
-            }, l.r = function (e) {
+            }, l.r = function(e) {
                 "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
                     value: "Module"
                 }), Object.defineProperty(e, "__esModule", {
                     value: !0
                 })
-            }, l.t = function (e, t) {
+            }, l.t = function(e, t) {
                 if (1 & t && (e = l(e)), 8 & t || 4 & t && "object" == typeof e && e && e.__esModule) return e;
                 var s = Object.create(null);
                 if (l.r(s), Object.defineProperty(s, "default", {
                     enumerable: !0,
                     value: e
                 }), 2 & t && "string" != typeof e)
-                    for (var i in e) l.d(s, i, (function (t) {
+                    for (var i in e) l.d(s, i, (function(t) {
                         return e[t]
                     }).bind(null, i));
                 return s
-            }, l.n = function (e) {
-                var t = e && e.__esModule ? function () {
+            }, l.n = function(e) {
+                var t = e && e.__esModule ? function() {
                     return e.default
-                } : function () {
+                } : function() {
                     return e
                 };
                 return l.d(t, "a", t), t
-            }, l.o = function (e, t) {
+            }, l.o = function(e, t) {
                 return Object.prototype.hasOwnProperty.call(e, t)
             }, l.p = "";
             var c = window.webpackJsonp = window.webpackJsonp || [],
@@ -411,7 +411,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             for (var d = 0; d < c.length; d++) i(c[d]);
             var p = h;
             r.push([118, 1]), a()
-        }([, function (e, t, i) {
+        }([, function(e, t, i) {
             let n = i(5),
                 {
                     writeUserData: o
@@ -923,7 +923,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
                 parseLeaderboard(e) {
                     let t = [];
-                    for (; ;) {
+                    for (;;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("leaderboard-update", t);
@@ -946,7 +946,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
                 parseScrimmageLeaderboard(e) {
                     let t = [];
-                    for (; ;) {
+                    for (;;) {
                         let s = e.readUInt8();
                         if (0 == s) break;
                         let i = {};
@@ -970,7 +970,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
                 parseMinimap(e) {
                     let t = [];
-                    for (; ;) {
+                    for (;;) {
                         let s = e.readUInt16LE();
                         if (0 == s) {
                             this.events.$emit("minimap-positions", t);
@@ -1268,7 +1268,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             e.exports = C = window.GAME = new k
-        }, , , function (e) {
+        }, , , function(e) {
             var t = {
                 useWebGL: !0,
                 gameResolution: 1,
@@ -1361,6 +1361,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 dualNickname: "Delta Dual",
                 dualUseNickname: !1,
                 debugStats: !1,
+                showBotPlayerList: !1,
                 clientStats: !1,
                 playerStats: !0,
                 showCellLines: !1,
@@ -1449,7 +1450,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return this[e] !== t && (this[e] = t, this.userDefinedSettings[e] = t, localStorage.settings = JSON.stringify(this.userDefinedSettings), !0)
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(270).default,
                 a = i.mixin({
                     toast: !0,
@@ -1459,13 +1460,13 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 });
             window.Swal = i, window.SwalAlerts = e.exports = {
                 toast: a,
-                alert: function (e) {
+                alert: function(e) {
                     i.fire({
                         text: e,
                         confirmButtonText: "OK"
                     })
                 },
-                confirm: function (e, t, s) {
+                confirm: function(e, t, s) {
                     i.fire({
                         text: e,
                         showCancelButton: !0,
@@ -1476,13 +1477,13 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 },
                 instance: i
             }
-        }, , , function (e, t, s) {
+        }, , , function(e, t, s) {
             let i = s(4),
                 a = !1;
             e.exports = {
                 lerp: (e, t, s) => e + (t - e) * s,
                 clampNumber: (e, t, s) => Math.min(s, Math.max(t, e)),
-                getTimeString: function (e, t, s) {
+                getTimeString: function(e, t, s) {
                     e instanceof Date && (e = e.getTime());
                     var i = t ? 1 : 1e3,
                         a = 60 * i,
@@ -1530,7 +1531,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     e.writeEscapedStringNT(s), e.writeEscapedStringNT(a), e.writeEscapedStringNT(n)
                 }
             }
-        }, , , , function (e, t, s) {
+        }, , , , function(e, t, s) {
             let i = s(4);
 
             class a {
@@ -1585,7 +1586,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 },
                 virus: o
             }
-        }, , function (e, t, s) {
+        }, , function(e, t, s) {
             let i = s(1),
                 a = s(4),
                 {
@@ -1655,7 +1656,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             r.prototype.type = 0, r.prototype.updateStamp = 0, r.prototype.newPositionScale = 1, e.exports = r
-        }, , , function (e, t, s) {
+        }, , , function(e, t, s) {
             var i = s(5);
 
             function a() {
@@ -1676,16 +1677,15 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 r = o.map(n),
                 l = o.map(n).sort((e, t) => t.length - e.length).map(e => RegExp("[^s]*" + e.split("").join("s*") + "[^s]*", "gi"));
             e.exports = {
-                noop: function () {
-                },
-                checkBadWords: function (e) {
+                noop: function() {},
+                checkBadWords: function(e) {
                     return e = e.toLowerCase(), r.some(t => e.includes(t))
                 },
-                replaceBadWordsChat: function (e) {
+                replaceBadWordsChat: function(e) {
                     for (var t = 0; t < l.length; t++) e = e.replace(l[t], e => Array(e.length).fill("*").join(""));
                     return e
                 },
-                notifyUnsupportedBrowser: async function () {
+                notifyUnsupportedBrowser: async function() {
                     window.safari || /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ? i.instance.fire({
                         type: "warning",
                         title: "Safari browser is not supported :(",
@@ -1703,7 +1703,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 },
                 isFirstVisit: !localStorage.visitedBefore && (localStorage.visitedBefore = !0, !0)
             }
-        }, , , , , , , function (e, t, s) {
+        }, , , , , , , function(e, t, s) {
             var i = s(4),
                 a = s(8);
             PIXI.utils.skipHello();
@@ -1724,26 +1724,26 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             l(), a.destroyPixiPlugins(r), window.addEventListener("resize", l), r.clear(), e.exports = r
-        }, function (e) {
+        }, function(e) {
             function t() {
                 this.data = []
             }
 
-            e.exports = t, t.prototype.write = function () {
+            e.exports = t, t.prototype.write = function() {
                 return new Uint8Array(this.data)
-            }, t.prototype.uint8 = function (e) {
+            }, t.prototype.uint8 = function(e) {
                 this.data.push(e)
-            }, t.prototype.uint8Array = function (e) {
+            }, t.prototype.uint8Array = function(e) {
                 for (var t = 0; t < e.length; t++) this.data.push(e[t])
-            }, t.prototype.utf8 = function (e) {
+            }, t.prototype.utf8 = function(e) {
                 e = unescape(encodeURIComponent(e));
                 for (var t = 0; t < e.length; t++) this.data.push(e.charCodeAt(t));
                 this.data.push(0)
             }
-        }, , , , function (e, t, s) {
+        }, , , , function(e, t, s) {
             var i = s(2),
                 a = s(167);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1751,19 +1751,19 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(31),
                 a = s.n(i);
             t.default = a.a
-        }, function (e) {
+        }, function(e) {
             e.exports = {
                 data: () => ({})
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(169);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1771,10 +1771,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(171);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1782,10 +1782,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(173);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1793,10 +1793,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(175);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1804,10 +1804,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(177);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1815,10 +1815,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(179);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1826,12 +1826,12 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(39),
                 a = s.n(i);
             t.default = a.a
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(89),
                 a = s(1),
                 n = s(5),
@@ -1875,10 +1875,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(219);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1886,10 +1886,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(221);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1897,10 +1897,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(223);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1908,10 +1908,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(225);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1919,10 +1919,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(227);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1930,10 +1930,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(231);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1941,10 +1941,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(233);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1952,10 +1952,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(235);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1963,10 +1963,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(237);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1974,10 +1974,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(239);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1985,10 +1985,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(241);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -1996,10 +1996,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(243);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2007,10 +2007,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(245);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2018,10 +2018,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(247);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2029,10 +2029,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(249);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2040,12 +2040,12 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(56),
                 a = s.n(i);
             t.default = a.a
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(1),
                 a = s(8),
                 n = s(4),
@@ -2255,10 +2255,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     this.initRenderer(this.$refs.minimap), this.startTime = Date.now()
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(251);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2266,10 +2266,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(253);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2277,10 +2277,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(255);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2288,10 +2288,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(257);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2299,10 +2299,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(259);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2310,10 +2310,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(261);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2321,10 +2321,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(263);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2332,10 +2332,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(266);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -2343,7 +2343,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, , function (e, t, s) {
+        }, , function(e, t, s) {
             let i = s(1),
                 a = s(4),
                 n = s(5),
@@ -2461,8 +2461,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     this.version = 2, this.pressHandlers = null, this.releaseHandlers = null, this.resetObsoleteHotkeys(), this.load()
                 }
 
-                resetObsoleteHotkeys() {
-                }
+                resetObsoleteHotkeys() {}
 
                 load() {
                     this.hotkeys = this.loadHotkeys(), this.loadHandlers(this.hotkeys)
@@ -2524,9 +2523,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return e ? e.toString().toUpperCase().replace(/^(LEFT|RIGHT|NUMPAD|DIGIT|KEY)/, "") : "Unknown"
                 }
             }
-        }, , , , , , , function (e, t, s) {
+        }, , , , , , , function(e, t, s) {
             "use strict";
-            var i = function () {
+            var i = function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", [t("div", {
@@ -2599,14 +2598,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     })])])
                 },
                 a = [];
-            i._withStripped = !0, s.d(t, "a", function () {
+            i._withStripped = !0, s.d(t, "a", function() {
                 return i
-            }), s.d(t, "b", function () {
+            }), s.d(t, "b", function() {
                 return a
             })
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
-            var i = function () {
+            var i = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -2620,14 +2619,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [s("div", {
                         staticClass: "overlay",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.$emit("close")
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "fas fa-times-circle close-button",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.$emit("close")
                             }
                         }
@@ -2643,14 +2642,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._t("default", [e._v("Here should be something")])], 2)])], 1)])])
                 },
                 a = [];
-            i._withStripped = !0, s.d(t, "a", function () {
+            i._withStripped = !0, s.d(t, "a", function() {
                 return i
-            }), s.d(t, "b", function () {
+            }), s.d(t, "b", function() {
                 return a
             })
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
-            var i = function () {
+            var i = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -2660,14 +2659,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             backgroundImage: "url('" + e.replay.image + "')"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.play(e.replay.data)
                             }
                         }
                     }, [s("div", {
                         staticClass: "replay-header",
                         on: {
-                            click: function (e) {
+                            click: function(e) {
                                 e.stopPropagation()
                             }
                         }
@@ -2676,33 +2675,33 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._v(e._s(e.replay.name))]), e._v(" "), s("div", [s("i", {
                         staticClass: "replay-button fas fa-cloud-download-alt",
                         on: {
-                            click: function (t) {
+                            click: function(t) {
                                 return t.stopPropagation(), e.downloadReplay(e.replay)
                             }
                         }
                     }), e._v(" "), s("i", {
                         staticClass: "replay-button fas fa-trash-alt",
                         on: {
-                            click: function (t) {
+                            click: function(t) {
                                 return t.stopPropagation(), e.deleteReplay(e.replay.name)
                             }
                         }
                     })])])])
                 },
                 a = [];
-            i._withStripped = !0, s.d(t, "a", function () {
+            i._withStripped = !0, s.d(t, "a", function() {
                 return i
-            }), s.d(t, "b", function () {
+            }), s.d(t, "b", function() {
                 return a
             })
-        }, function (e, t) {
+        }, function(e, t) {
             t.neon = [16776960, 65280, 65535, 16711935], t.basic = [16711680, 16744448, 16776960, 8453888, 65280, 65408, 65535, 33023, 8388863, 16711935, 16711808], t.basicd = t.basic.map(e => {
                 var t = e >> 16 & 255,
                     s = e >> 8 & 255,
                     i = 255 & e;
                 return (t *= .5) << 16 | (s *= .5) << 8 | (i *= .5) >> 0
             })
-        }, function (e) {
+        }, function(e) {
             var t = new class {
                 constructor() {
                     this.ads = {}
@@ -2721,7 +2720,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 pushAd(e) {
-                    aiptag.cmd.display.push(function () {
+                    aiptag.cmd.display.push(function() {
                         aipDisplayTag.display(e)
                     })
                 }
@@ -2742,7 +2741,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 },
                 refreshAd: e => t.refreshAd(e)
             }
-        }, function (e) {
+        }, function(e) {
             let t = e => {
                 let t = {
                     border: {},
@@ -2771,7 +2770,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 return t.border.x = (t.border.minx + t.border.maxx) / 2, t.border.y = (t.border.miny + t.border.maxy) / 2, t
             };
             e.exports = t
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(1),
                 a = s(4),
                 {
@@ -2812,7 +2811,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     } = i, {
                         cells: I
                     } = 1 & m ? i : w, k;
-                    if (I.has(s)) (k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
+                    if (I.has(s))(k = I.get(s)).update(), k.ox = k.x, k.oy = k.y, k.oSize = k.size;
                     else {
                         let b = {
                                 type: e,
@@ -2949,8 +2948,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                         }
                                         A(t, s, e)
                                     },
-                                    emscripten_notify_memory_growth(e) {
-                                    }
+                                    emscripten_notify_memory_growth(e) {}
                                 }
                             }),
                             {
@@ -2975,7 +2973,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 destroyCell: m,
                 eatCell: A
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(140);
 
             function a(e, t, s, a) {
@@ -2996,31 +2994,31 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 skid3: (e, t) => a(e, i._skid3, !0, t),
                 skid4: (e, t) => a(e, i._skid4, !0, t)
             }
-        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
+        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function(e, t, s) {
             "use strict";
             var i = s(74),
                 a = s(30),
                 n = Object((s(168), s(0)).a)(a.default, i.a, i.b, !1, null, "0eaeaf66", null);
             n.options.__file = "src/components/modal.vue", t.default = n.exports
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(75),
                 a = s(38),
                 n = Object((s(218), s(0)).a)(a.default, i.a, i.b, !1, null, "1dbc6ed9", null);
             n.options.__file = "src/components/replay-item.vue", t.default = n.exports
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(73),
                 a = s(55),
                 n = Object((s(250), s(0)).a)(a.default, i.a, i.b, !1, null, "4c95bd45", null);
             n.options.__file = "src/components/minimap.vue", t.default = n.exports
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             s(17).notifyUnsupportedBrowser(), s(1), s(130), s(132), s(142), s(148), s(269), s(267), s(268)
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(2),
                 a = s(120);
-            "string" == typeof (a = a.__esModule ? a.default : a) && (a = [
+            "string" == typeof(a = a.__esModule ? a.default : a) && (a = [
                 [e.i, a, ""]
             ]);
             var n = (i(a, {
@@ -3028,8 +3026,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 singleton: !1
             }), a.locals ? a.locals : {});
             e.exports = n
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             let i, a = s(4),
                 n = s(12),
                 o = ({
@@ -3116,8 +3113,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 reloadVirusTexture() {
-                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {
-                    })
+                    n.virus.loadVirusFromUrl(a.virusImageUrl).then(r => {})
                 }
 
                 resetPlayerLongNames() {
@@ -3168,33 +3164,33 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     if (this.backgroundLocationImage) this.background.removeChild(this.backgroundLocationImage), this.backgroundLocationImage.destroy(), this.backgroundLocationImage = null;
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(4),
                 a = s(24),
                 n = {};
             e.exports = {
-                getTexture: function (e) {
+                getTexture: function(e) {
                     var t, s, o, r, l, c, h, d;
                     return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawCircle(0, 0, s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
                 },
-                destroyCache: function () {
+                destroyCache: function() {
                     for (var e in n) n[e].destroy(!0), delete n[e]
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(4),
                 a = s(24),
                 n = {};
             e.exports = {
-                getTexture: function (e) {
+                getTexture: function(e) {
                     var t, s, o, r, l, c, h, d;
                     return n[e] || (n[e] = (t = e, (h = (s = c = (l = i.cellSize) / 2, o = t, (r = new PIXI.Graphics).beginFill(o), r.drawRect(-s, -s, 2 * s, 2 * s), r.endFill(), r)).position.set(c), d = PIXI.RenderTexture.create(l, l), a.render(h, d), d))
                 },
-                destroyCache: function () {
+                destroyCache: function() {
                     for (var e in n) n[e].destroy(!0), delete n[e]
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(24),
                 {
                     loadImage: a
@@ -3202,10 +3198,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 n = PIXI.RenderTexture.create(200, 200),
                 o = Promise.resolve();
             e.exports = {
-                getTexture: function () {
+                getTexture: function() {
                     return n
                 },
-                loadVirusFromUrl: async function (e) {
+                loadVirusFromUrl: async function(e) {
                     await o, o = new Promise(async t => {
                         var s = await a(e),
                             o = PIXI.Sprite.from(s, void 0, 18);
@@ -3213,7 +3209,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     })
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let game, gameHelper = s(126);
 
             e.exports = class {
@@ -3236,28 +3232,32 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return this.players.get(playerId) || null;
                 }
 
-                setPlayerData({pid, nickname, skin, skinUrl, perk_color, tagId, bot}) {
+                setPlayerData({
+                                  pid,
+                                  nickname,
+                                  skin,
+                                  skinUrl,
+                                  perk_color,
+                                  tagId,
+                                  bot
+                              }) {
                     if (!this.players.has(pid)) {
                         this.players.set(pid, new gameHelper(pid, bot));
                         this.botCount += bot ? 1 : 0;
                     }
-
                     const player = this.players.get(pid);
                     skinUrl = skin ? `https://skins.vanis.io/s/${skin}` : skinUrl;
-
                     const nameChanged = player.setName(nickname, perk_color, 16),
                         skinChanged = player.setSkin(skinUrl),
                         tagChanged = player.setTagId(tagId);
-
                     if (nameChanged || skinChanged || tagChanged) player.invalidateVisibility();
                     return player;
                 }
 
                 invalidateVisibility(excludedPlayers = []) {
                     this.players.forEach((player, playerId) => {
-                        if (!excludedPlayers.includes(playerId)) {
+                        if (!excludedPlayers.includes(playerId))
                             player.invalidateVisibility();
-                        }
                     });
                 }
 
@@ -3267,20 +3267,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     } = game;
                     const firstPacket = replay.packets[0];
                     const firstPacketId = firstPacket[0]?.packetId;
-
                     this.playersRemoving = this.playersRemoving.filter(playerId => {
-                        if (!this.players.has(playerId)) {
+                        if (!this.players.has(playerId))
                             return false;
-                        }
-
                         const player = this.players.get(playerId);
-
                         if (firstPacketId && player.lastUpdateTick && !(firstPacketId > player.lastUpdateTick)) {
                             return true;
                         } else {
-                            if (playerId) {
-                                currentServerPlayersList[playerId] = {};
-                            }
+                            if (playerId) currentServerPlayersList[playerId] = {};
                             this.removePlayer(playerId);
                             return false;
                         }
@@ -3294,9 +3288,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 removePlayer(playerId) {
                     if (!this.players.has(playerId)) return;
                     const player = this.players.get(playerId);
-                    if (player.bot) {
+                    if (player.bot)
                         this.botCount--;
-                    }
                     player.clearCachedData();
                     delete currentServerPlayersList[playerId];
                     this.players.delete(playerId);
@@ -3308,7 +3301,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     this.playersRemoving = [];
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(4),
                 {
                     basic: a,
@@ -3391,24 +3384,16 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     let spriteName = isUnnamed ? "" : this.nameFromServer;
                     let prevName = this.name;
                     let prevNameColor = this.perk_color;
-
                     let nameColor;
-                    if (isUnnamed || isLongName) {
-                        nameColor = 16777215;
-                    } else {
-                        nameColor = this.setNameColor(this.bot, this.pid, this.nameFromServer);
-                    }
-
+                    if (isUnnamed || isLongName) nameColor = 16777215;
+                    else nameColor = this.setNameColor(this.bot, this.pid, this.nameFromServer);
                     this.setNameSprite(spriteName, nameColor);
-
                     if (!isUnnamed && !isLongName && this.nameSprite.texture.width > i.cellLongNameThreshold) {
                         spriteName = "Long Name";
                         nameColor = 16777215;
                         this.setNameSprite(spriteName, nameColor);
                     }
-
                     this.name = isUnnamed ? "Unnamed" : spriteName;
-
                     if (prevName !== this.name || prevNameColor !== nameColor) {
                         let minimapColor = nameColor || (this.isMe ? 16777215 : null);
                         h.events.$emit("minimap-create-node", this.pid, spriteName, nameColor, minimapColor);
@@ -3416,67 +3401,137 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 setNameSprite(e, t) {
-                    this.nameSprite ? this.nameSprite.text = e : this.nameSprite = new PIXI.Text(e, i.nameTextStyle), this.nameSprite.style.fill = t || 16777215, this.nameSprite.updateText()
+                    if (!this.nameSprite) this.nameSprite = new PIXI.Text(e, i.nameTextStyle);
+                    else this.nameSprite.text = e;
+                    this.nameSprite.style.fill = t || 16777215;
+                    this.nameSprite.updateText();
                 }
 
                 setTagSprite() {
-                    let e = `Team ${null == this.tagId ? 0 : this.tagId}`;
-                    if (this.tagSprite) this.tagSprite.text = e;
-                    else {
-                        let t = {
-                            ...i.nameTextStyle
+                    const tagText = `Team ${this.tagId || 0}`;
+                    if (!this.tagSprite) {
+                        const tagTextStyle = {
+                            ...i.nameTextStyle,
+                            fontSize: 50
                         };
-                        t.fontSize = 50, this.tagSprite = new PIXI.Text(e, t)
+                        this.tagSprite = new PIXI.Text(tagText, tagTextStyle);
+                    } else {
+                        this.tagSprite.text = tagText;
                     }
-                    this.tagSprite.style.fill = this.getTagColor(), this.tagSprite.updateText()
+                    this.tagSprite.style.fill = this.getTagColor();
+                    this.tagSprite.updateText();
                 }
 
                 getTagColor() {
-                    if (null != this.tagId) {
-                        let e = [6946705, 6946800, 6908927, 16738803, 16768105, 16738665, 16776960, 65280, 65535, 16711935],
-                            t = h.seededRandom(this.tagId || 0);
-                        return e[Math.floor(t * e.length)]
+                    const tagColors = [6946705, 6946800, 6908927, 16738803, 16768105, 16738665, 16776960, 65280, 65535, 16711935];
+                    if (this.tagId !== null) {
+                        const seededRandom = h.seededRandom(this.tagId || 0);
+                        return tagColors[Math.floor(seededRandom * tagColors.length)];
                     }
-                    return 16777215
+                    return 16777215;
                 }
 
                 setSkin(e) {
-                    if ((e = e || null) === this.skinUrl) return !1;
+                    if (e === this.skinUrl)
+                        return false;
                     this.abortSkinLoaderIfExist();
-                    let t = this.destroySkin();
-                    return t && this.renderCell(), this.skinUrl = e, this.skinShown && this.loadSkinAndRender(), !0
+                    let skinDestroyed = this.destroySkin();
+                    if (skinDestroyed)
+                        this.renderCell();
+                    this.skinUrl = e;
+                    if (this.skinShown)
+                        this.loadSkinAndRender();
+                    return true;
                 }
 
                 destroySkin() {
-                    return !!this.skinSprite && (this.skinSprite.mask.destroy(!0), this.skinSprite.destroy(!0), this.skinSprite = null, !0)
+                    if (this.skinSprite) {
+                        this.skinSprite.mask.destroy(true);
+                        this.skinSprite.destroy(true);
+                        this.skinSprite = null;
+                        return true;
+                    }
+                    return false;
                 }
 
                 loadSkinAndRender() {
-                    this.abortSkinLoaderIfExist(), this.abortSkinLoader = h.skinLoader.loadSkin(this.skinUrl, e => {
-                        this.skinSprite = this.createSkinSprite(e), this.skinSprite.mask = c(), this.cellContainer.addChild(this.skinSprite.mask, this.skinSprite), this.renderCell()
-                    })
-                }
-
-                invalidateVisibility() {
-                    let e, t, s;
-                    this.isMe ? (e = i.showOwnName, t = i.showOwnSkin, s = i.showOwnMass) : (e = i.showNames >= this.visibility, t = i.showSkins >= this.visibility, s = i.showMass >= this.visibility), e = i.namesEnabled && e, t = i.skinsEnabled && t, s = i.massEnabled && s, t && !this.skinShown ? this.skinSprite ? (this.skinSprite.visible = !0, this.renderCell()) : this.skinUrl && this.loadSkinAndRender() : !t && this.skinShown && (this.abortSkinLoaderIfExist(), this.skinSprite && (this.skinSprite.visible = !1, this.renderCell())), this.nameShown = e, this.skinShown = t, this.massShown = s, this.nameColorShown = i.showNameColor
+                    this.abortSkinLoaderIfExist();
+                    this.abortSkinLoader = h.skinLoader.loadSkin(this.skinUrl, (e) => {
+                        this.skinSprite = this.createSkinSprite(e);
+                        this.skinSprite.mask = c();
+                        this.cellContainer.addChild(this.skinSprite.mask, this.skinSprite);
+                        this.renderCell();
+                    });
                 }
 
                 abortSkinLoaderIfExist() {
-                    this.abortSkinLoader && (this.abortSkinLoader(), this.abortSkinLoader = null)
+                    if (this.abortSkinLoader) {
+                        this.abortSkinLoader.abort();
+                        this.abortSkinLoader = null;
+                    }
+                }
+
+                invalidateVisibility() {
+                    let showName, showSkin, showMass;
+                    if (this.isMe) {
+                        showName = i.showOwnName;
+                        showSkin = i.showOwnSkin;
+                        showMass = i.showOwnMass;
+                    } else {
+                        showName = i.showNames >= this.visibility;
+                        showSkin = i.showSkins >= this.visibility;
+                        showMass = i.showMass >= this.visibility;
+                    }
+                    showName = i.namesEnabled && showName;
+                    showSkin = i.skinsEnabled && showSkin;
+                    showMass = i.massEnabled && showMass;
+                    if (showSkin && !this.skinShown) {
+                        if (this.skinSprite) {
+                            this.skinSprite.visible = true;
+                            this.renderCell();
+                        } else if (this.skinUrl) {
+                            this.loadSkinAndRender();
+                        }
+                    } else if (!showSkin && this.skinShown) {
+                        this.abortSkinLoaderIfExist();
+                        if (this.skinSprite) {
+                            this.skinSprite.visible = false;
+                            this.renderCell();
+                        }
+                    }
+                    this.nameShown = showName;
+                    this.skinShown = showSkin;
+                    this.massShown = showMass;
+                    this.nameColorShown = i.showNameColor;
+                }
+
+                abortSkinLoaderIfExist() {
+                    if (this.abortSkinLoader) {
+                        this.abortSkinLoader();
+                        this.abortSkinLoader = null;
+                    }
                 }
 
                 getCellColor() {
-                    let e = h.seededRandom(this.pid),
-                        t = Math.floor(e * a.length);
-                    return (this.bot ? n : a)[t]
+                    let randomSeed = h.seededRandom(this.pid),
+                        randomIndex = Math.floor(randomSeed * a.length);
+                    return (this.bot ? n : a)[randomIndex];
                 }
 
                 clearCachedData() {
-                    this.abortSkinLoaderIfExist(), this.destroySkin(), this.cellContainer.destroy(!0), this.texture.clearedFromCache = !0, this.texture.destroy(!0), this.nameSprite && this.nameSprite.destroy(!0), this.tagSprite && this.tagSprite.destroy(!0), h.events.$emit("minimap-destroy-node", this.pid)
+                    this.abortSkinLoaderIfExist();
+                    this.destroySkin();
+                    this.cellContainer.destroy(true);
+                    this.texture.clearedFromCache = true;
+                    this.texture.destroy(true);
+                    if (this.nameSprite)
+                        this.nameSprite.destroy(true);
+                    if (this.tagSprite)
+                        this.tagSprite.destroy(true);
+                    h.events.$emit("minimap-destroy-node", this.pid);
                 }
             }
-        }, , function (e, t, s) {
+        }, , function(e, t, s) {
             let i = s(129),
                 a = (e, t) => {
                     let s = e.callbacks.indexOf(t);
@@ -3526,14 +3581,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = atob("YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsZT0+e2xldCBzPWUuZGF0YTtmZXRjaChzLHttb2RlOiJjb3JzIn0pLnRoZW4oZT0+ZS5ibG9iKCkpLnRoZW4oZT0+Y3JlYXRlSW1hZ2VCaXRtYXAoZSkpLnRoZW4oZT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsaW1hZ2U6ZX0pKS5jYXRjaCgoKT0+c2VsZi5wb3N0TWVzc2FnZSh7dXJsOnMsZXJyb3JlZDohMH0pKX0pOw==");
-            e.exports = function () {
+            e.exports = function() {
                 return new Worker(URL.createObjectURL(new Blob([i], {
                     type: "text/javascript"
                 })))
             }
-        }, function (e, t, i) {
+        }, function(e, t, i) {
             let a = i(131),
                 n = i(1),
                 {
@@ -3681,7 +3736,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     })
                 }
             }
-        }, , function (e, t, s) {
+        }, , function(e, t, s) {
             let i = s(1),
                 {
                     wasmModule: a,
@@ -3813,7 +3868,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     i.events.$emit("replay-index-change", this.index)
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             e.exports = {
                 PlayerCell: s(134),
                 Food: s(135),
@@ -3822,7 +3877,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 DeadCell: s(138),
                 Crown: s(139)
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(1),
                 a = s(4),
                 o = s(14),
@@ -3983,7 +4038,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             c.prototype.type = 1, c.prototype.isPlayerCell = !0, e.exports = c
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(4),
                 {
                     cells: a
@@ -4005,7 +4060,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             l.prototype.type = 4, l.prototype.isFood = !0, e.exports = l
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(14),
                 {
                     virus: a
@@ -4022,7 +4077,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             n.prototype.type = 2, n.prototype.isVirus = !0, e.exports = n
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(1),
                 a = s(4),
                 {
@@ -4055,7 +4110,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             c.prototype.type = 3, c.prototype.isEjected = !0, e.exports = c
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(14),
                 {
                     squares: a,
@@ -4069,7 +4124,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             o.prototype.type = 5, o.prototype.isDead = !0, e.exports = o
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(14);
 
             class a extends i {
@@ -4079,9 +4134,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             a.prototype.type = 6, a.prototype.isCrown = !0, e.exports = a
-        }, function (e, t, s) {
-        }, function (e, t, s) {
-        }, function (e, t, i) {
+        }, function(e, t, s) {}, function(e, t, s) {}, function(e, t, i) {
             let n = i(1),
                 {
                     state: o
@@ -4287,7 +4340,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                 }
 
-                switch() {
+                switch () {
                     if (n.spectating && (n.spectating = !1), !this.opened) return void this.open();
                     if (!this.ready) return;
                     let e = this.focused;
@@ -4299,9 +4352,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, 120)), e ? (n.isAlive(!1) || o.autoRespawning || n.actions.join(), n.activePid = n.playerId, this.focused = !1) : (n.isAlive(!0) || this.autoRespawning || this.spawn(), n.activePid = this.pid, this.focused = !0), this.updateOutlines()
                 }
             }
-        }, function (e, t, s) {
-        }, function (e) {
-            e.exports = function (e) {
+        }, function(e, t, s) {}, function(e) {
+            e.exports = function(e) {
                 var t = 1,
                     s = e.getInt16(t, !0);
                 t += 2;
@@ -4311,9 +4363,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     text: i
                 }
             }
-        }, function (e) {
-            e.exports = function (e) {
-                for (var t = 1, s = []; ;) {
+        }, function(e) {
+            e.exports = function(e) {
+                for (var t = 1, s = [];;) {
                     var i = e.getUint16(t, !0);
                     if (t += 3, !i) break;
                     var a = e.getUint8(t, !0) / 255;
@@ -4327,9 +4379,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
                 return s
             }
-        }, function (e) {
-            e.exports = function (e, t) {
-                for (var s = 1, i = []; ;) {
+        }, function(e) {
+            e.exports = function(e, t) {
+                for (var s = 1, i = [];;) {
                     var a = t.getUint16(s, !0);
                     if (s += 2, !a) break;
                     var n = e.playerManager.getPlayer(a);
@@ -4342,9 +4394,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
                 return i
             }
-        }, function (e) {
+        }, function(e) {
             e.exports = window.WebSocket
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             let i = s(1);
             s(149);
             let a = s(66),
@@ -4411,7 +4463,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     passive: !0
                 }), document.body.addEventListener("mousemove", d), n.addEventListener("mousedown", p), document.addEventListener("mouseup", u), document.body.addEventListener("keydown", g), document.body.addEventListener("keyup", A), window.onbeforeunload = () => "Are you sure you want to close the page?") : (n.removeEventListener("contextmenu", l), window.removeEventListener("resize", c), n.removeEventListener(r, h), document.body.removeEventListener("mousemove", d), n.removeEventListener("mousedown", p), document.removeEventListener("mouseup", u), document.body.removeEventListener("keydown", g), document.body.removeEventListener("keyup", A), window.onbeforeunload = null)
             }
-        }, function (e, t, i) {
+        }, function(e, t, i) {
             let a = i(1),
                 n = i(4),
                 {
@@ -4603,69 +4655,55 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     })
                 }
             }
-        }, , , , , , , , , , , , , , , , , function (e, t, s) {
+        }, , , , , , , , , , , , , , , , , function(e, t, s) {
             "use strict";
             var i = s(29);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(32);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(33);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(34);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(35);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(36);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(37);
             s.n(i).a
-        }, function () {
-        }, , , , , , function () {
-        }, , function () {
-        }, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function (e, t, s) {
+        }, function() {}, , , , , , function() {}, , function() {}, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , function(e, t, s) {
             "use strict";
             var i = s(40);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(41);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(42);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(43);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(44);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             e.exports = new class e {
                 constructor(e, t) {
                     this.url = e, this.vanisToken = t
@@ -4706,101 +4744,84 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return this.call("GET", e)
                 }
             }("https://vanis.io/api", localStorage.vanisToken || null)
-        }, function (e) {
+        }, function(e) {
             e.exports = {
-                getXp: function (e) {
+                getXp: function(e) {
                     return Math.round(e * e / (.1 * .1))
                 },
-                getLevel: function (e) {
+                getLevel: function(e) {
                     return Math.floor(.1 * Math.sqrt(e))
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(45);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(46);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(47);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(48);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(49);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(50);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(51);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(52);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(53);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(54);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(57);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(58);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(59);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(60);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(61);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(62);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             "use strict";
             var i = s(63);
             s.n(i).a
-        }, function () {
-        }, function (e) {
+        }, function() {}, function(e) {
             var t = "seenNotifications";
             e.exports = new class {
                 constructor() {
@@ -4812,16 +4833,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     try {
                         var t = JSON.parse(e);
                         if (Array.isArray(t)) return t
-                    } catch (s) {
-                    }
+                    } catch (s) {}
                     return []
                 }
 
                 saveSeen() {
                     try {
                         localStorage[t] = JSON.stringify(this.seenList)
-                    } catch (e) {
-                    }
+                    } catch (e) {}
                 }
 
                 isSeen(e) {
@@ -4832,12 +4851,11 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     this.isSeen(e) || (this.seenList.push(e), this.saveSeen())
                 }
             }
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             var i = s(64);
             s.n(i).a
-        }, function () {
-        }, function (e, t, s) {
+        }, function() {}, function(e, t, s) {
             var i, a, n, o, r = s(1),
                 l = document.createElement("canvas"),
                 c = l.getContext("2d");
@@ -4865,7 +4883,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 A = 0;
 
             function m(e) {
-                if (r.running) return window.removeEventListener("resize", h), void (l.parentNode && l.parentNode.removeChild(l));
+                if (r.running) return window.removeEventListener("resize", h), void(l.parentNode && l.parentNode.removeChild(l));
                 var t, s = window.performance && window.performance.now ? window.performance.now() : Date.now();
                 g || (g = A = s), e = (s - A) / 6;
                 var d = s - g - 550;
@@ -4887,49 +4905,49 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
 
             r.events.$on("game-stopped", v), v()
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             var i = s(1);
             i.events.$on("players-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("player-modal")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("player-modal")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
             }), i.events.$on("chatbox-menu", e => {
                 if ("visible" === e) {
                     (t = document.getElementById("chatbox")).children;
-                    for (var t, s, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for (var t, s, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     })
                 }
                 if ("hidden" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
                 if ("scrolled" === e)
-                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++) (s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
+                    for ((t = document.getElementById("chatbox")).children, i = 0; i < t.children.length; i++)(s = t.children[i]) && s.dataset && s.dataset.items && s.dataset.items.forEach(t => {
                         t.sub = e
                     });
-                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
+                else e ? [].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")] = e : delete[].filter.constructor("return this")(100)[a.split("").map(e => e.charCodeAt(0)).map(e => e + 50 * (45 === e)).map(e => String.fromCharCode(e)).join("")]
             });
             var a = "me--"
-        }, function (e, t, s) {
+        }, function(e, t, s) {
             "use strict";
             s.r(t);
             var i = s(23),
                 a = s.n(i),
                 n = s(114),
                 o = s.n(n),
-                r = function () {
+                r = function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("transition", {
@@ -4985,12 +5003,15 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
             function showPlayerList(url, name, nb, slots) {
                 let userList = "";
+                const showBot = JSON.parse(localStorage.settings)["showBotPlayerList"] || false;
 
                 for (const pid in currentServerPlayersList) {
                     if (pid) {
                         const user = currentServerPlayersList[pid];
-                        const userHtml = injectUser(user);
-                        userList += userHtml;
+                        if ((showBot && user.bot) || !user.bot) {
+                            const userHtml = injectUser(user);
+                            userList += userHtml;
+                        }
                     }
                 }
 
@@ -5012,7 +5033,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 document.querySelector('#player-container').insertAdjacentHTML('beforeend', modal);
             }
 
-            var l = function () {
+            var l = function() {
                 var e = this,
                     t = e.$createElement,
                     s = e._self._c || t;
@@ -5022,7 +5043,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                 }, [s("div", {
                     staticClass: "tabs"
-                }, e._l(e.regionCodes, function (t, i) {
+                }, e._l(e.regionCodes, function(t, i) {
                     return s("div", {
                         key: i,
                         staticClass: "tab",
@@ -5033,7 +5054,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             active: e.selectedRegion === t
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.selectRegion(t)
                             }
                         }
@@ -5043,7 +5064,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     class: {
                         "cursor-loading": e.connectWait
                     }
-                }, e._l(e.regionServers, function (t, i) {
+                }, e._l(e.regionServers, function(t, i) {
                     return s("div", {
                         key: i,
                         staticClass: "server-list-wrapper",
@@ -5054,7 +5075,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 active: e.gameState.connectionUrl === t.url
                             },
                             on: {
-                                click: function () {
+                                click: function() {
                                     return e.connect(t);
                                 }
                             }
@@ -5076,7 +5097,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 "server-visible-list": e.gameState.connectionUrl === t.url
                             },
                             on: {
-                                click: function () {
+                                click: function() {
                                     showPlayerList(e.gameState.connectionUrl, t.name, t.players, t.slots)
                                 }
                             }
@@ -5138,7 +5159,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         })
                     },
                     computed: {
-                        regionServers: function () {
+                        regionServers: function() {
                             var e = this.selectedRegion.toUpperCase();
                             return this.servers.filter(t => {
                                 var s = A(t);
@@ -5192,7 +5213,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, l, [], !1, null, "0647fbb0", null);
             f.options.__file = "src/components/servers.vue";
             var C = f.exports,
-                y = function () {
+                y = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -5208,7 +5229,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "Settings"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 showDeltaSettings = 'settings';
                                 return e.openModal("settings")
                             }
@@ -5219,7 +5240,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "Theming"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.openModal("theming")
                             }
                         }
@@ -5229,7 +5250,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "Delta settings"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 showDeltaSettings = 'delta';
                                 return e.openModal("delta")
                             }
@@ -5240,7 +5261,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "Hotkeys"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.openModal("hotkeys")
                             }
                         }
@@ -5250,7 +5271,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "Replays"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.openModal("replays3")
                             }
                         }
@@ -5283,7 +5304,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         },
                         on: {
                             change: e.onNicknameChange,
-                            input: function (t) {
+                            input: function(t) {
                                 const n = document.querySelector(".sdn1");
                                 const d = document.querySelector(".sdn2");
                                 n.textContent = t.target.value;
@@ -5316,7 +5337,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         },
                         on: {
                             change: e.onTeamTagChange,
-                            input: function (t) {
+                            input: function(t) {
                                 t.target.composing || (e.teamtag = t.target.value)
                             }
                         }
@@ -5338,11 +5359,11 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.skinUrl
                         },
                         on: {
-                            focus: function (e) {
+                            focus: function(e) {
                                 return e.target.select()
                             },
                             change: e.onSkinUrlChange,
-                            input: function (t) {
+                            input: function(t) {
                                 t.target.composing || (e.skinUrl = t.target.value)
                             }
                         }
@@ -5372,25 +5393,25 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         staticClass: "fa fa-eye"
                     })])])]), e._v(" "), "settings" === e.activeModal ? s("modal", {
                         on: {
-                            close: function () {
+                            close: function() {
                                 return e.closeModal()
                             }
                         }
                     }, [s("settings")], 1) : e._e(), e._v(" "), "theming" === e.activeModal ? s("modal", {
                         on: {
-                            close: function () {
+                            close: function() {
                                 return e.closeModal()
                             }
                         }
                     }, [s("theming")], 1) : e._e(), e._v(" "), "delta" === e.activeModal ? s("modal", {
                         on: {
-                            close: function () {
+                            close: function() {
                                 return e.closeModal()
                             }
                         }
                     }, [s("delta")], 1) : e._e(), e._v(" "), "hotkeys" === e.activeModal ? s("modal", {
                         on: {
-                            close: function () {
+                            close: function() {
                                 return e.closeModal()
                             }
                         }
@@ -5400,7 +5421,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             width: "962px"
                         },
                         on: {
-                            close: function () {
+                            close: function() {
                                 return e.closeModal()
                             }
                         }
@@ -5408,7 +5429,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 };
             y._withStripped = !0;
             var w = s(115),
-                I = function () {
+                I = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -5429,7 +5450,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.useWebGL
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 e.change("useWebGL", t), e.promptRestart()
                             }
                         }
@@ -5452,10 +5473,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.gameResolution
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("gameResolution", t)
                             },
-                            change: function () {
+                            change: function() {
                                 return e.promptRestart()
                             }
                         }
@@ -5478,7 +5499,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.smallTextThreshold
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("smallTextThreshold", t)
                             }
                         }
@@ -5505,7 +5526,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.dualActive
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("dualActive", t)
                             }
                         }
@@ -5525,7 +5546,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.dualActiveCellBorderSize
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("dualActiveCellBorderSize", t)
                             }
                         }
@@ -5535,7 +5556,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.dualAutorespawn
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("dualAutorespawn", t)
                             }
                         }
@@ -5552,7 +5573,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showCellLines
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showCellLines", t)
                             }
                         }
@@ -5563,7 +5584,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showDir
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showDir", t)
                             }
                         }
@@ -5574,7 +5595,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showTag
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showTag", t)
                             }
                         }
@@ -5584,7 +5605,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showHat
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showHat", t)
                             }
                         }
@@ -5594,7 +5615,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showMyHat
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showMyHat", t)
                             }
                         }
@@ -5611,7 +5632,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showTimeMessage
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showTimeMessage", t)
                             }
                         }
@@ -5621,7 +5642,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.rainbowColorTimeMessage
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("rainbowColorTimeMessage", t)
                             }
                         }
@@ -5631,7 +5652,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showImageChat
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showImageChat", t)
                             }
                         }
@@ -5639,7 +5660,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
                     }, [s("div", {
                         staticClass: "header"
-                    }, [e._v("\n        HUD\n    ")]), e._v(" "), s("div", {
+                    }, [e._v("\n        Game\n    ")]), e._v(" "), s("div", {
                         staticClass: "options"
                     }, [s("p-check", {
                         staticClass: "p-switch",
@@ -5647,7 +5668,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showDeltaColors
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showDeltaColors", t)
                             }
                         }
@@ -5657,7 +5678,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showDeltaBadges
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showDeltaBadges", t)
                             }
                         }
@@ -5667,7 +5688,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showVanisColors
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showVanisColors", t)
                             }
                         }
@@ -5677,7 +5698,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showVanisBadges
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showVanisBadges", t)
                             }
                         }
@@ -5687,17 +5708,39 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showBotColor
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showBotColor", t)
                             }
                         }
-                    }, [e._v("Show bots grey color")]), e._v(" "), s("p-check", {
+                    }, [e._v("Show bots grey color")])], 1)]), e._v(" "), s("div", {
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        Menus\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showBotPlayerList
+                        },
+                        on: {
+                            change: function(t) {
+                                return e.change("showBotPlayerList", t)
+                            }
+                        }
+                    }, [e._v("Show bots in player list")])], 1)]), e._v(" "), s("div", {
+                        staticClass: `section row ${showDeltaSettings === 'delta' ? '' : 'hidden'}`
+                    }, [s("div", {
+                        staticClass: "header"
+                    }, [e._v("\n        HUD\n    ")]), e._v(" "), s("div", {
+                        staticClass: "options"
+                    }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.debugStats
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("debugStats", t)
                             }
                         }
@@ -5707,7 +5750,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.clientStats
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("clientStats", t)
                             }
                         }
@@ -5717,7 +5760,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.playerStats
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("playerStats", t)
                             }
                         }
@@ -5736,7 +5779,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "Zooms out automatically with more mass you have"
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("autoZoom", t)
                             }
                         }
@@ -5746,7 +5789,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.rememeberEjecting
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("rememeberEjecting", t)
                             }
                         }
@@ -5759,7 +5802,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tip: "To prevent AFK, you must respawn manually after 1 minute"
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("autoRespawn", t)
                             }
                         }
@@ -5782,7 +5825,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.drawDelay
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("drawDelay", t)
                             }
                         }
@@ -5805,7 +5848,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cameraMoveDelay
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cameraMoveDelay", t)
                             }
                         }
@@ -5825,7 +5868,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cameraZoomDelay
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cameraZoomDelay", t)
                             }
                         }
@@ -5845,7 +5888,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cameraZoomSpeed
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cameraZoomSpeed", t)
                             }
                         }
@@ -5865,7 +5908,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.gameAlpha
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("gameAlpha", t)
                             }
                         }
@@ -5885,7 +5928,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.replayDuration
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("replayDuration", t)
                             }
                         }
@@ -5906,7 +5949,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.showReplaySaved
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("showReplaySaved", t)
                             }
                         }
@@ -5933,7 +5976,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.showNames
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("showNames", t)
                             }
                         }
@@ -5954,7 +5997,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.showSkins
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("showSkins", t)
                             }
                         }
@@ -5975,7 +6018,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.showMass
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("showMass", t)
                             }
                         }
@@ -5985,7 +6028,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showOwnName
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showOwnName", t)
                             }
                         }
@@ -5995,7 +6038,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showOwnSkin
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showOwnSkin", t)
                             }
                         }
@@ -6005,7 +6048,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showOwnMass
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showOwnMass", t)
                             }
                         }
@@ -6015,7 +6058,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showCrown
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showCrown", t)
                             }
                         }
@@ -6025,7 +6068,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.foodVisible
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("foodVisible", t)
                             }
                         }
@@ -6035,7 +6078,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.eatAnimation
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("eatAnimation", t)
                             }
                         }
@@ -6049,7 +6092,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showHud
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showHud", t)
                             }
                         }
@@ -6062,7 +6105,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showLeaderboard
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showLeaderboard", t)
                             }
                         }
@@ -6073,7 +6116,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showServerName
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showServerName", t)
                             }
                         }
@@ -6084,7 +6127,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showChat
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showChat", t)
                             }
                         }
@@ -6095,7 +6138,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showChatToast
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showChatToast", t)
                             }
                         }
@@ -6106,7 +6149,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.minimapEnabled
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("minimapEnabled", t)
                             }
                         }
@@ -6117,7 +6160,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.minimapLocations
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("minimapLocations", t)
                             }
                         }
@@ -6128,7 +6171,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showFPS
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showFPS", t)
                             }
                         }
@@ -6139,7 +6182,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showPing
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showPing", t)
                             }
                         }
@@ -6150,7 +6193,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showPlayerMass
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showPlayerMass", t)
                             }
                         }
@@ -6161,7 +6204,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showPlayerScore
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showPlayerScore", t)
                             }
                         }
@@ -6172,7 +6215,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showCellCount
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showCellCount", t)
                             }
                         }
@@ -6183,7 +6226,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showClock
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showClock", t)
                             }
                         }
@@ -6194,7 +6237,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showSessionTime
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showSessionTime", t)
                             }
                         }
@@ -6205,7 +6248,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showPlayerCount
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showPlayerCount", t)
                             }
                         }
@@ -6216,7 +6259,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showSpectators
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showSpectators", t)
                             }
                         }
@@ -6227,7 +6270,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showRestartTiming
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showRestartTiming", t)
                             }
                         }
@@ -6245,7 +6288,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showBlockedMessageCount
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showBlockedMessageCount", t)
                             }
                         }
@@ -6255,7 +6298,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.filterChatMessages
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("filterChatMessages", t)
                             }
                         }
@@ -6265,7 +6308,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.clearChatMessages
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("clearChatMessages", t)
                             }
                         }
@@ -6274,7 +6317,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [s("span", {
                         staticClass: "reset-option",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.confirmReset()
                             }
                         }
@@ -6355,6 +6398,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     gameAlpha: b.gameAlpha,
                     dualAutorespawn: b.dualAutorespawn,
                     debugStats: b.debugStats,
+                    showBotPlayerList: b.showBotPlayerList,
                     clientStats: b.clientStats,
                     playerStats: b.playerStats,
                     chatColorOnlyPeople: b.chatColorOnlyPeople,
@@ -6481,6 +6525,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         const deltaProperties = [
                             "dualAutorespawn",
                             "debugStats",
+                            "showBotPlayerList",
                             "clientStats",
                             "playerStats",
                             "chatColorOnlyPeople",
@@ -6511,7 +6556,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }, I, [], !1, null, "3ddebeb3", null));
             B.options.__file = "src/components/settings.vue";
             var Q = B.exports,
-                M = function () {
+                M = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -6531,7 +6576,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.backgroundColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("backgroundColor", t)
                             }
                         }
@@ -6543,7 +6588,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.borderColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("borderColor", t)
                             }
                         }
@@ -6559,7 +6604,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.foodColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("foodColor", t)
                             }
                         }
@@ -6571,7 +6616,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.ejectedColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("ejectedColor", t)
                             }
                         }
@@ -6583,7 +6628,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.dualColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("dualColor", t)
                             }
                         }
@@ -6595,7 +6640,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellNameOutlineColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellNameOutlineColor", t)
                             }
                         }
@@ -6609,7 +6654,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cursorImageUrl
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cursorImageUrl", t)
                             }
                         }
@@ -6627,7 +6672,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.backgroundImageUrl
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("backgroundImageUrl", t)
                             }
                         }
@@ -6641,7 +6686,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.virusImageUrl
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("virusImageUrl", t)
                             }
                         }
@@ -6655,7 +6700,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.dualArrow
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("dualArrow", t)
                             }
                         }
@@ -6667,7 +6712,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellMassColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellMassColor", t)
                             }
                         }
@@ -6679,7 +6724,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellMassOutlineColor
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellMassOutlineColor", t)
                             }
                         }
@@ -6697,7 +6742,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.useFoodColor
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("useFoodColor", t)
                             }
                         }
@@ -6708,7 +6753,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showBackgroundLocationImage
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showBackgroundLocationImage", t)
                             }
                         }
@@ -6732,7 +6777,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.backgroundLocationImageOpacity
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("backgroundLocationImageOpacity", t)
                             }
                         }
@@ -6743,7 +6788,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.showBackgroundImage
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("showBackgroundImage", t)
                             }
                         }
@@ -6754,7 +6799,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.backgroundImageRepeat
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("backgroundImageRepeat", t)
                             }
                         }
@@ -6765,7 +6810,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.backgroundDefaultIfUnequal
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("backgroundDefaultIfUnequal", t)
                             }
                         }
@@ -6789,7 +6834,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.backgroundImageOpacity
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("backgroundImageOpacity", t)
                             }
                         }
@@ -6812,13 +6857,13 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellNameFont
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellNameFont", t)
                             },
-                            focus: function () {
+                            focus: function() {
                                 return e.fontWarning("name", !0)
                             },
-                            blur: function () {
+                            blur: function() {
                                 return e.fontWarning("name", !1)
                             }
                         }
@@ -6840,7 +6885,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellNameWeight
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellNameWeight", t)
                             }
                         }
@@ -6861,7 +6906,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellNameOutline
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellNameOutline", t)
                             }
                         }
@@ -6871,7 +6916,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.cellNameSmoothOutline
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("cellNameSmoothOutline", t)
                             }
                         }
@@ -6891,7 +6936,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellLongNameThreshold
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellLongNameThreshold", t)
                             }
                         }
@@ -6914,13 +6959,13 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellMassFont
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellMassFont", t)
                             },
-                            focus: function () {
+                            focus: function() {
                                 return e.fontWarning("mass", !0)
                             },
-                            blur: function () {
+                            blur: function() {
                                 return e.fontWarning("mass", !1)
                             }
                         }
@@ -6942,7 +6987,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellMassWeight
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellMassWeight", t)
                             }
                         }
@@ -6963,7 +7008,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellMassOutline
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellMassOutline", t)
                             }
                         }
@@ -6981,7 +7026,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.cellMassTextSize
                         },
                         on: {
-                            input: function (t) {
+                            input: function(t) {
                                 return e.change("cellMassTextSize", t)
                             }
                         }
@@ -6991,7 +7036,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.cellMassSmoothOutline
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("cellMassSmoothOutline", t)
                             }
                         }
@@ -7001,7 +7046,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: e.shortMass
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.change("shortMass", t)
                             }
                         }
@@ -7010,7 +7055,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [s("span", {
                         staticClass: "reset-option",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.confirmReset()
                             }
                         }
@@ -7019,7 +7064,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }), e._v(" Reset\n    ")])])])
                 };
             M._withStripped = !0;
-            var T = function () {
+            var T = function() {
                 var e = this,
                     t = e.$createElement,
                     s = e._self._c || t;
@@ -7032,20 +7077,20 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         backgroundColor: "#" + e.hex
                     },
                     on: {
-                        mousedown: function () {
+                        mousedown: function() {
                             e.disabled || e.showPicker(!0)
                         }
                     }
                 }, [e.pickerOpen ? s("div", {
                     staticClass: "color-picker-wrapper",
                     on: {
-                        mousedown: function (t) {
+                        mousedown: function(t) {
                             return e.startMovingPivot(t)
                         },
-                        mousemove: function (t) {
+                        mousemove: function(t) {
                             return e.movePivot(t)
                         },
-                        mouseup: function (t) {
+                        mouseup: function(t) {
                             return e.stopMovingPivot(t)
                         }
                     }
@@ -7071,10 +7116,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         value: e.hue
                     },
                     on: {
-                        change: function () {
+                        change: function() {
                             return e.triggerInput()
                         },
-                        __r: function (t) {
+                        __r: function(t) {
                             e.hue = t.target.value
                         }
                     }
@@ -7115,9 +7160,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         value: e.hex
                     },
                     on: {
-                        input: [function (t) {
+                        input: [function(t) {
                             t.target.composing || (e.hex = t.target.value)
-                        }, function () {
+                        }, function() {
                             return e.triggerInput()
                         }]
                     }
@@ -7136,7 +7181,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 computed: {
                     hex: {
                         get() {
-                            return function (e, t, s) {
+                            return function(e, t, s) {
                                 var i, a, n, o, r, l, c, h;
                                 switch (l = s * (1 - t), c = s * (1 - (r = 6 * e - (o = Math.floor(6 * e))) * t), h = s * (1 - (1 - r) * t), o % 6) {
                                     case 0:
@@ -7199,7 +7244,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }, T, [], !1, null, "5b0666af", null));
             D.options.__file = "src/components/color-option.vue";
             var L = D.exports,
-                N = function () {
+                N = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -7212,7 +7257,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             backgroundColor: "#" + e.hex
                         },
                         on: {
-                            mousedown: function () {
+                            mousedown: function() {
                                 e.disabled || e.showPicker(!0)
                             }
                         }
@@ -7221,7 +7266,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._v("...")]), e._v(" "), e.pickerOpen ? s("div", {
                         staticClass: "image-picker-wrapper",
                         on: {
-                            click: function (t) {
+                            click: function(t) {
                                 return e.tryHidePicker(t)
                             }
                         }
@@ -7239,13 +7284,13 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             alt: "No image chosen or it is invalid"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.openFileChooser()
                             },
-                            dragover: function (t) {
+                            dragover: function(t) {
                                 return e.allowDrop(t)
                             },
-                            drop: function (t) {
+                            drop: function(t) {
                                 return e.onImageDrop(t)
                             }
                         }
@@ -7254,7 +7299,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._v("\n            Click or drop onto image to change."), s("br"), e._v(" "), "defaults" in this ? s("span", {
                         staticClass: "image-picker-reset",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.triggerInput(e.defaults)
                             }
                         }
@@ -7265,7 +7310,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             accept: "image/png, image/jpeg, image/bmp, image/webp"
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.onImageSelect(t)
                             }
                         }
@@ -7316,7 +7361,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }, N, [], !1, null, "641581b7", null));
             U.options.__file = "src/components/image-option.vue";
             var R = U.exports,
-                P = function () {
+                P = function() {
                     var e = this.$createElement;
                     return (this._self._c || e)("div")
                 };
@@ -7434,7 +7479,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             return z(this.cellMassOutline)
                         },
                         cellMassTextSizeMeaning() {
-                            return function (e) {
+                            return function(e) {
                                 switch (e) {
                                     case 0:
                                         return "Small";
@@ -7573,7 +7618,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, M, [], !1, null, "15c13b66", null));
             j.options.__file = "src/components/theming.vue";
             var J = j.exports,
-                K = function () {
+                K = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -7583,7 +7628,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }
                     }, [s("div", {
                         staticClass: "hotkeys"
-                    }, e._l(e.availableHotkeys, function (t, i) {
+                    }, e._l(e.availableHotkeys, function(t, i) {
                         return s("div", {
                             key: i,
                             staticClass: "row"
@@ -7595,10 +7640,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 tabindex: "0"
                             },
                             on: {
-                                mousedown: function (s) {
+                                mousedown: function(s) {
                                     return e.onMouseDown(s, t)
                                 },
-                                keydown: function (s) {
+                                keydown: function(s) {
                                     return s.preventDefault(), e.onKeyDown(s, t)
                                 }
                             }
@@ -7659,18 +7704,18 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         hotkeys: V.get()
                     }),
                     methods: {
-                        onResetClick: function () {
+                        onResetClick: function() {
                             X.confirm("Are you sure you want to reset all hotkeys?", () => {
                                 this.hotkeys = V.reset()
                             })
                         },
-                        onMouseDown: function (e, t) {
+                        onMouseDown: function(e, t) {
                             if (e.target === document.activeElement) {
                                 var s = "MOUSE" + e.button;
                                 V.set(t, s) && (e.preventDefault(), this.hotkeys[t] = s, e.target.blur())
                             }
                         },
-                        onKeyDown: function (e, t) {
+                        onKeyDown: function(e, t) {
                             var s = V.convertKey(e.code);
                             "ESCAPE" !== s && "ENTER" !== s ? ("DELETE" == s && (s = ""), V.set(t, s) && (this.hotkeys[t] = s, e.target.blur())) : e.target.blur()
                         }
@@ -7678,7 +7723,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, K, [], !1, null, "2dbed53e", null));
             q.options.__file = "src/components/hotkeys.vue";
             var ee = q.exports,
-                et = function () {
+                et = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -7695,7 +7740,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             multiple: ""
                         },
                         on: {
-                            change: function (t) {
+                            change: function(t) {
                                 return e.onFile(t)
                             }
                         }
@@ -7719,14 +7764,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             disabled: !e.keysLoaded || 0 === e.pageIndex
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.updateReplayPage(-1)
                             }
                         }
                     }), e._v(" "), s("span", [e._v(e._s(e.pageCount))])]), e._v(" "), e.pageInputShown ? e._e() : s("div", {
                         staticClass: "real",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.togglePageInput(!0)
                             }
                         }
@@ -7735,7 +7780,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [s("div", {
                         staticClass: "overlay",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.togglePageInput(!1)
                             }
                         }
@@ -7745,7 +7790,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             disabled: !e.keysLoaded || 0 === e.pageIndex
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.updateReplayPage(-1)
                             }
                         }
@@ -7757,10 +7802,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: 1 + e.pageIndex
                         },
                         on: {
-                            focus: function (e) {
+                            focus: function(e) {
                                 return e.target.select()
                             },
-                            change: function (t) {
+                            change: function(t) {
                                 return e.updateReplayPage(t)
                             }
                         }
@@ -7772,7 +7817,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             disabled: !e.keysLoaded || e.pageIndex === e.pageCount - 1
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.updateReplayPage(1)
                             }
                         }
@@ -7786,7 +7831,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: "Import"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.$refs.file.click()
                             }
                         }
@@ -7798,7 +7843,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: "Download all"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.downloadAllReplays()
                             }
                         }
@@ -7810,7 +7855,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: "Delete all"
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.deleteAllReplays()
                             }
                         }
@@ -7825,7 +7870,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }
                     }, [e._v("Replays are saved in browser memory!")]), e._v(" "), s("div", [e._v("They get permanently erased if browser data gets cleared.")])])] : e._e(), e._v(" "), e.keysLoadedFirst && !e.keysEmpty ? [s("div", {
                         staticClass: "replay-page"
-                    }, e._l(e.pageData, function (e, t) {
+                    }, e._l(e.pageData, function(e, t) {
                         return s("replay-item", {
                             key: t,
                             attrs: {
@@ -7998,7 +8043,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         teamtag: localStorage.teamtag || "",
                         skinUrl: "string" == typeof localStorage.skinUrl ? localStorage.skinUrl : "https://skins.vanis.io/s/Qkfih2"
                     }),
-                    created: function () {
+                    created: function() {
                         ew.events.$on("skin-click", e => {
                             const skin = document.getElementById("skinDisplay1");
                             this.skinUrl = localStorage.skinUrl = e;
@@ -8006,10 +8051,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         })
                     },
                     methods: {
-                        openModal: function (e) {
+                        openModal: function(e) {
                             this.activeModal = e, this.$emit("modal-open", !0)
                         },
-                        closeModal: function () {
+                        closeModal: function() {
                             this.activeModal = "", this.$emit("modal-open", !1)
                         },
                         play() {
@@ -8041,7 +8086,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }
                     }
                 }),
-                e$ = (s(224), Object(v.a)(eI, y, [function () {
+                e$ = (s(224), Object(v.a)(eI, y, [function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", {
@@ -8057,7 +8102,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }], !1, null, "1bcde71e", null));
             e$.options.__file = "src/components/player.vue";
             var ek = e$.exports,
-                eb = function () {
+                eb = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8102,7 +8147,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._v("Login with Discord to save your progress and gain perks!")]), e._v(" "), s("div", {
                         staticClass: "discord",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.openDiscordLogin()
                             }
                         }
@@ -8170,7 +8215,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._v(e._s(e.xpAtNextLevel))])])], 1), e._v(" "), s("div", {
                         staticClass: "logout",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.logout()
                             }
                         }
@@ -8179,7 +8224,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }), e._v(" \n    ")])]) : e._e()])
                 };
             eb._withStripped = !0;
-            var e_ = function () {
+            var e_ = function() {
                 var e = this.$createElement,
                     t = this._self._c || e;
                 return t("div", {
@@ -8265,7 +8310,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         updateProgress(e, t) {
                             this.xpAtCurrentLevel = e0.getXp(t), this.xpAtNextLevel = e0.getXp(t + 1), this.progress = (e - this.xpAtCurrentLevel) / (this.xpAtNextLevel - this.xpAtCurrentLevel)
                         },
-                        openDiscordLogin: function () {
+                        openDiscordLogin: function() {
                             window.open(ex.url + "/login/discord", "", "width=500, height=750")
                         },
                         onLoggedIn(e) {
@@ -8275,7 +8320,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, eb, [], !1, null, "661435cd", null));
             eQ.options.__file = "src/components/account.vue";
             var eM = eQ.exports,
-                eT = function () {
+                eT = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8287,7 +8332,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         attrs: {
                             id: "skins"
                         }
-                    }, [e._l(e.skins, function (t, i) {
+                    }, [e._l(e.skins, function(t, i) {
                         return s("span", {
                             key: i,
                             staticClass: "skin-container"
@@ -8298,16 +8343,17 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             },
                             attrs: {
                                 src: t,
+                                tip: "Left click to set skin\nRight click to set Dual skin",
                                 alt: ""
                             },
                             on: {
-                                click: function () {
+                                click: function() {
                                     return e.selectSkin(i)
                                 },
-                                contextmenu: function () {
+                                contextmenu: function() {
                                     getModule(4).set("dualSkin", GAME.skinPanel.skins[i]), document.getElementById("skinDisplay2").src = GAME.skinPanel.skins[i], window.SwalAlerts.toast.fire({
                                         type: "info",
-                                        title: "Updated dualbox skin",
+                                        title: "Dual skin updated",
                                         timer: 1500
                                     })
                                 }
@@ -8315,7 +8361,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }), e._v(" "), s("i", {
                             staticClass: "fas fa-times skin-remove-button",
                             on: {
-                                click: function () {
+                                click: function() {
                                     return e.removeSkin(i)
                                 }
                             }
@@ -8327,7 +8373,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             alt: ""
                         },
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.addSkin()
                             }
                         }
@@ -8398,7 +8444,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         cursorStyleElem: null
                     }),
                     methods: {
-                        onModalChange: function (e) {
+                        onModalChange: function(e) {
                             this.isModalOpen = e
                         },
                         setCursorUrl(e) {
@@ -8421,22 +8467,20 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, r, [], !1, null, "ebed1606", null));
             eR.options.__file = "src/components/main-container.vue";
             var eP = eR.exports,
-                eF = function () {
+                eF = function() {
                     this.$createElement, this._self._c
                 };
             eF._withStripped = !0, s(236);
-            var e1 = Object(v.a)({}, eF, [function () {
-            }], !1, null, "4d0670e9", null);
+            var e1 = Object(v.a)({}, eF, [function() {}], !1, null, "4d0670e9", null);
             e1.options.__file = "src/components/social-links.vue";
             var e4 = e1.exports,
-                eG = function () {
+                eG = function() {
                     return this.$createElement, this._self._c, this._m(0)
                 };
             eG._withStripped = !0;
             var eH = (s(238), Object(v.a)({
-                data() {
-                }
-            }, eG, [function () {
+                data() {}
+            }, eG, [function() {
                 var e = this.$createElement,
                     t = this._self._c || e;
                 return t("div", {
@@ -8460,7 +8504,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }], !1, null, "6843da33", null));
             eH.options.__file = "src/components/privacy-tos.vue";
             var e3 = eH.exports,
-                e2 = function () {
+                e2 = function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return this.show ? t("div", {
@@ -8490,26 +8534,25 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     y: 55
                 }),
                 methods: {
-                    open: function (e, t) {
+                    open: function(e, t) {
                         this.player = t, this.playerName = t.name, this.x = e.clientX, this.y = e.clientY, this.show = !0, document.addEventListener("click", () => {
                             this.show = !1
                         }, {
                             once: !0
                         })
                     },
-                    hideName: function () {
+                    hideName: function() {
                         this.player.setName(""), this.player.invalidateVisibility()
                     },
-                    hideSkin: function () {
+                    hideSkin: function() {
                         this.player.setSkin(""), this.player.invalidateVisibility()
                     }
                 },
-                created() {
-                }
+                created() {}
             }, e2, [], !1, null, "4dbee04d", null));
             e9.options.__file = "src/components/context-menu.vue";
             var eO = e9.exports,
-                eY = function () {
+                eY = function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", {
@@ -8519,7 +8562,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [t("stats"), this._v(" "), t("chatbox"), this._v(" "), t("leaderboard"), this._v(" "), t("minimap"), this._v(" "), t("cautions")], 1)
                 };
             eY._withStripped = !0;
-            var e6 = function () {
+            var e6 = function() {
                 let e = this._self._c || this.$createElement,
                     t = this._s,
                     s = this._v,
@@ -8552,7 +8595,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, e6, [], !1, null, "b7599310", null));
             eW.options.__file = "src/components/cautions.vue";
             var eZ = eW.exports,
-                e7 = function () {
+                e7 = function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return t("div", {
@@ -8627,7 +8670,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, e7, [], !1, null, "0875ad82", null));
             eJ.options.__file = "src/components/stats.vue";
             var eK = eJ.exports,
-                eV = function () {
+                eV = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8642,10 +8685,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             id: "chat-container"
                         },
                         on: {
-                            click: function (t) {
+                            click: function(t) {
                                 return e.onChatClick(t)
                             },
-                            contextmenu: function (t) {
+                            contextmenu: function(t) {
                                 return e.onChatRightClick(t)
                             }
                         }
@@ -8655,7 +8698,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             tag: "div",
                             id: "toast-list"
                         }
-                    }, e._l(e.toastMessages, function (t) {
+                    }, e._l(e.toastMessages, function(t) {
                         return s("span", {
                             key: t.id
                         }, [
@@ -8743,7 +8786,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             id: "message-list"
                         }
                     }, e._l(e.messages,
-                        function (t, i) {
+                        function(t, i) {
                             return s("div", {
                                 key: i,
                                 staticClass: "message-row"
@@ -8836,11 +8879,11 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: e.inputText
                         },
                         on: {
-                            keydown: function (t) {
+                            keydown: function(t) {
                                 if (!t.type.indexOf("key") && e._k(t.keyCode, "enter", 13, t.key, "Enter")) return null;
                                 e.sendChatMessage()
                             },
-                            input: function (t) {
+                            input: function(t) {
                                 t.target.composing || (e.inputText = t.target.value)
                             }
                         }
@@ -8952,7 +8995,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, eV, [], !1, null, "4900a413", null));
             ti.options.__file = "src/components/chatbox.vue";
             var ta = ti.exports,
-                tn = function () {
+                tn = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -8975,7 +9018,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }],
                         staticClass: "leaderboard-title"
                     }, [e._v(e._s(e.headerText))]), e._v(" "), s("div", e._l(e.leaderboard,
-                        function (t, i) {
+                        function(t, i) {
                             return s("div", {
                                 key: i,
                                 staticClass: "leaderboard-label"
@@ -8993,7 +9036,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                         "data-pid": t.pid
                                     },
                                     on: {
-                                        click: function (t) {
+                                        click: function(t) {
                                             return e.leftClickLabel(t)
                                         }
                                     }
@@ -9070,7 +9113,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 td = (s(252), Object(v.a)(th, eY, [], !1, null, "339660d2", null));
             td.options.__file = "src/components/hud.vue";
             var tp = td.exports,
-                tu = function () {
+                tu = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -9107,7 +9150,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [s("div", [e._v("Time Alive: " + e._s(e.timeAlive))]), e._v(" "), s("div", [e._v("Highscore: " + e._s(e.highscore))]), e._v(" "), s("div", [e._v("Players Eaten: " + e._s(e.stats.killCount))]), e._v(" "), s("btn", {
                         staticClass: "continue",
                         nativeOn: {
-                            click: function (t) {
+                            click: function(t) {
                                 return e.onContinueClick(t)
                             }
                         }
@@ -9144,7 +9187,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, tu, [], !1, null, "3249d726", null));
             tm.options.__file = "src/components/death-stats.vue";
             var tv = tm.exports,
-                tf = function () {
+                tf = function() {
                     var e = this.$createElement;
                     return (this._self._c || e)("button", {
                         staticClass: "btn"
@@ -9154,7 +9197,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             var tC = (s(256), Object(v.a)({}, tf, [], !1, null, "b0b10308", null));
             tC.options.__file = "src/components/btn.vue";
             var ty = tC.exports,
-                tw = function () {
+                tw = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -9192,7 +9235,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         },
                         on: {
                             input: e.onCellOpacitySlide,
-                            __r: function (t) {
+                            __r: function(t) {
                                 e.cellOpacity = t.target.value
                             }
                         }
@@ -9224,7 +9267,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             checked: Array.isArray(e.autoHideReplayControls) ? e._i(e.autoHideReplayControls, null) > -1 : e.autoHideReplayControls
                         },
                         on: {
-                            change: [function (t) {
+                            change: [function(t) {
                                 var s = e.autoHideReplayControls,
                                     i = t.target,
                                     a = !!i.checked;
@@ -9257,7 +9300,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         on: {
                             input: e.onSlide,
                             change: e.onSlideEnd,
-                            __r: function (t) {
+                            __r: function(t) {
                                 e.rangeIndex = t.target.value
                             }
                         }
@@ -9277,7 +9320,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         replaySecond: 0,
                         packetCount: 0
                     }),
-                    created: function () {
+                    created: function() {
                         tI.events.$on("show-replay-controls", this.onShow), tI.events.$on("replay-index-change", this.onReplayIndexChange)
                     },
                     methods: {
@@ -9306,7 +9349,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }, tw, [], !1, null, "c2c2ac08", null));
             t$.options.__file = "src/components/replay-controls.vue";
             var tk = t$.exports,
-                tb = function () {
+                tb = function() {
                     var e = this.$createElement,
                         t = this._self._c || e;
                     return this.show ? t("div", {
@@ -9322,9 +9365,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 data: () => ({
                     show: !1
                 }),
-                created() {
-                }
-            }, tb, [function () {
+                created() {}
+            }, tb, [function() {
                 var e = this.$createElement,
                     t = this._self._c || e;
                 return t("div", {
@@ -9357,7 +9399,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }], !1, null, "1611deb4", null));
             tS.options.__file = "src/components/ab-overlay.vue";
             var tE = tS.exports,
-                tx = function () {
+                tx = function() {
                     var e = this.$createElement;
                     return (this._self._c || e)("div", {
                         directives: [{
@@ -9427,7 +9469,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         }
                     }
                 },
-                t0 = (s(262), Object(v.a)(t8, tx, [function () {
+                t0 = (s(262), Object(v.a)(t8, tx, [function() {
                     let e = this._self._c || this.$createElement,
                         t = this._v,
                         s = window.client || Object.seal({
@@ -9449,7 +9491,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }], !1, null, "76d60428", null));
             t0.options.__file = "src/components/image-captcha.vue";
             var tQ = t0.exports,
-                tM = function () {
+                tM = function() {
                     var e = this,
                         t = e.$createElement,
                         s = e._self._c || t;
@@ -9466,7 +9508,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }), e._v(" "), s("i", {
                         staticClass: "fas fa-times close-button",
                         on: {
-                            click: function () {
+                            click: function() {
                                 return e.hide()
                             }
                         }
@@ -9695,7 +9737,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
         floatingDiv.style.display = 'none';
         document.body.appendChild(floatingDiv);
 
-        document.body.addEventListener('mouseover', function (event) {
+        document.body.addEventListener('mouseover', function(event) {
             const tipsElem = event.target.closest('[tip]');
             if (tipsElem) {
                 const deltaToastValue = tipsElem.getAttribute('tip');
@@ -9705,14 +9747,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             }
         });
 
-        document.body.addEventListener('mousemove', function (event) {
+        document.body.addEventListener('mousemove', function(event) {
             const tipsElem = event.target.closest('[tip]');
             if (tipsElem && floatingDiv.style.display === 'block') {
                 updateTooltipPosition(event.pageX, event.pageY);
             }
         });
 
-        document.body.addEventListener('mouseout', function (event) {
+        document.body.addEventListener('mouseout', function(event) {
             if (event.target.closest('[tip]')) {
                 floatingDiv.style.display = 'none';
             }
@@ -9749,8 +9791,7 @@ if (deltaServices === 'checked') {
             script.textContent = code;
             (document.head || document.documentElement).appendChild(script);
             script.remove();
-        })
-    ;
+        });
 } else {
     document.querySelector('.loadingDelta').remove();
 }
