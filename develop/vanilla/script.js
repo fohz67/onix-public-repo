@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.3.2',
+    version: '5.3.3',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -371,9 +371,6 @@ function pushUserStatisticsLocally() {
     USER.statistics.sM += mass;
     USER.statistics.sK += kill;
     USER.statistics.sG += 1;
-    USER.statistics.aT = USER.statistics.sT / USER.statistics.sG;
-    USER.statistics.aM = USER.statistics.sM / USER.statistics.sG;
-    USER.statistics.k = USER.statistics.sK / USER.statistics.sG;
 
     localStorage.setItem('sT', time.toString());
     localStorage.setItem('sM', mass.toString());
@@ -442,10 +439,6 @@ function fetchUserStatisticsDb() {
                 u: USER.credentials.uid
             };
         }
-
-        USER.statistics.k = USER.statistics.sK / USER.statistics.sG;
-        USER.statistics.aM = USER.statistics.sM / USER.statistics.sG;
-        USER.statistics.aT = USER.statistics.sT / USER.statistics.sG;
 
         pushUserStatisticsDb();
     });
@@ -1165,11 +1158,11 @@ function generateStatisticsSection(statistics) {
             <div data-v-2c5139e0="" class="options">
                 ${generateStatisticItem('Kills', statistics.sK)}
                 ${generateStatisticItem('Deaths', statistics.sG)}
-                ${generateStatisticItem('K/D', statistics.k.toFixed(2), 'The KDA represents the number of kills in relation to the number of deaths.')}
+                ${generateStatisticItem('K/D', (statistics.sK / statistics.sG).toFixed(2), 'The KDA represents the number of kills in relation to the number of deaths.')}
                 ${generateStatisticItem('Mass eaten', getFormatedMass(statistics.sM))}
-                ${generateStatisticItem('Mass eaten / game', getFormatedMass(statistics.aM))}
+                ${generateStatisticItem('Mass eaten / game', getFormatedMass(statistics.sM / statistics.sG))}
                 ${generateStatisticItem('Time played', getElapsedTime(statistics.sT))}
-                ${generateStatisticItem('Time played / game', getElapsedTime(statistics.aT))}
+                ${generateStatisticItem('Time played / game', getElapsedTime(statistics.sT / statistics.sG))}
             </div>
         </div>
     `;
@@ -1354,12 +1347,12 @@ function handleButtonClick(id, filter) {
 
 function injectCustomLeaderboard(filter) {
     const sortingFunctions = {
-        'kda': (a, b) => b.k - a.k,
+        'kda': (a, b) => (b.sK / b.sG) - (a.sK / a.sG),
         'killTotal': (a, b) => b.sK - a.sK,
         'gameTotal': (a, b) => b.sG - a.sG,
         'massTotal': (a, b) => b.sM - a.sM,
         'timeTotal': (a, b) => b.sT - a.sT,
-        'massAvg': (a, b) => b.aM - a.aM
+        'massAvg': (a, b) => (b.sM / b.sG) - (a.sM / a.sG)
     };
 
     const sortedLeaderboard = Object.values(LISTS.leaderboard)
@@ -1386,19 +1379,19 @@ function injectLeaderboard(item, itemId, position, filter) {
             statisticValue = item.sG;
             break;
         case 'kda':
-            statisticValue = item.k.toFixed(2) + ' K/D';
+            statisticValue = (item.sK / item.sG).toFixed(2) + ' K/D';
             break;
         case 'massTotal':
             statisticValue = getFormatedMass(item.sM);
             break;
         case 'massAvg':
-            statisticValue = getFormatedMass(item.aM);
+            statisticValue = getFormatedMass(item.sM / item.sG);
             break;
         case 'timeTotal':
             statisticValue = getElapsedTime(item.sT, false, false, false, true, true, false);
             break;
         default:
-            statisticValue = item.k.toFixed(2) + ' K/D';
+            statisticValue = (item.sK / item.sG).toFixed(2) + ' K/D';
     }
 
     if (itemUser.n.trim() === '') {
