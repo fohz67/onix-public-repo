@@ -307,7 +307,7 @@ function pushUserInfos() {
         s: getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '',
         se: USER.server,
         l: $(ATTRS.selectors.level).length > 0 ? parseInt($(ATTRS.selectors.level).text().trim().match(/\d+/)[0]) || 0 : 0,
-        a: USER.configurations.a,
+        a: USER.configurations.a === 'checked' ? 1 : 0,
         m: USER.mode,
     });
 }
@@ -322,7 +322,7 @@ function pushUserSpecificData(ref, type, reserved) {
     if (type === 'skin') data.s = getSkinIdByUrl($(ATTRS.selectors.skinUrl) ? $(ATTRS.selectors.skinUrl).val() : '') || '';
     if (type === 'color') data.c = APP.reserved.value ? APP.reserved.color : USER.configurations.c;
     if (type === 'server') data.se = USER.server;
-    if (type === 'spec') data.se = 'Spectator on ' + USER.server ;
+    if (type === 'spec') data.se = 'Spectator on ' + USER.server;
 
     pushDatabase(ref, data);
 }
@@ -395,7 +395,7 @@ function pushUserPerk(item, type, ref, list) {
 
         const not = APP.selected[type] === perk.i ? '' : 'Not';
         const inverseNot = APP.selected[type] === perk.i ? 'Not' : '';
-        
+
         $(`.${type}${perk.i}`).removeClass(`${type}${not}Selected`).addClass(`${type}${inverseNot}Selected`);
 
         pushDatabase(ref, perk);
@@ -1021,17 +1021,15 @@ function getUserTime(time) {
 }
 
 function getUserAnonymous(user) {
-    if (user.a === 'checked') {
+    if (user.a === 1) {
         user.s = ATTRS.images.anonymousSkin;
         user.n = 'Anonymous #' + Math.floor(Math.random() * 1000);
         user.l = 0;
         user.c = ATTRS.colors.white;
         user.m = 'Anonymous';
         user.ba = null;
-
         return true;
     }
-
     return false;
 }
 
@@ -1386,7 +1384,8 @@ async function drawToolsModal() {
             if (hatsSnapshot.exists()) LISTS.hats = hatsSnapshot.val();
             const configurationsSnapshot = await DB.references.meConfig.once('value');
             if (configurationsSnapshot.exists()) LISTS.configurations = configurationsSnapshot.val();
-        } catch (e) {}
+        } catch (e) {
+        }
     }
 
     addToolsModal();
@@ -1753,7 +1752,7 @@ function injectBadge(item) {
 }
 
 function injectHat(item) {
-    return injectPerk(item, 'h',  'hat', 'pushUserHat');
+    return injectPerk(item, 'h', 'hat', 'pushUserHat');
 }
 
 function injectPerk(item, db, type, onclickFunction) {
@@ -2039,7 +2038,7 @@ function switchManager(userSettings, userSettingsLabel) {
 function switchManagerSpecificChange(userSettings, userSettingsLabel) {
     if (userSettingsLabel === 'a') {
         pushDatabase(DB.references.meUser, {
-            a: userSettings,
+            a: userSettings === 'checked' ? 1 : 0,
         });
     } else if (userSettingsLabel === 'b') {
         let style = (userSettings === 'checked') ? 'blur(7px)' : '';
