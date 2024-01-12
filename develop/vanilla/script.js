@@ -1044,6 +1044,7 @@ function getUserMode(userMode) {
 }
 
 function getUserServer(status, server) {
+    if (server === 'Anonymous' && status === 'Online') return 'Online';
     if (server.includes('Spectator') && status === 'Online') return server
     return status + ' on ' + server.replace('Spectator on ', '');
 }
@@ -2023,26 +2024,18 @@ function removeDatabase(ref) {
  *
  ******************/
 function switchManager(userSettings, userSettingsLabel) {
-    if (userSettings === 'checked') {
-        userSettings = 'unchecked';
-    } else {
-        userSettings = 'checked';
-    }
-
+    if (userSettings === 'checked') userSettings = 'unchecked';
+    else userSettings = 'checked';
     switchManagerSpecificChange(userSettings, userSettingsLabel);
     localStorage.setItem(userSettingsLabel, userSettings);
-
     return userSettings;
 }
 
 function switchManagerSpecificChange(userSettings, userSettingsLabel) {
     if (userSettingsLabel === 'a') {
-        pushDatabase(DB.references.meUser, {
-            a: userSettings === 'checked' ? 1 : 0,
-        });
+        pushDatabase(DB.references.meUser, { a: userSettings === 'checked' ? 1 : 0 });
     } else if (userSettingsLabel === 'b') {
         let style = (userSettings === 'checked') ? 'blur(7px)' : '';
-
         $(ATTRS.selectors.leaderboard).css('backdrop-filter', style);
         $(ATTRS.selectors.chatboxContainer).css('backdrop-filter', style);
         $(ATTRS.selectors.minimapContainer).css('backdrop-filter', style);
