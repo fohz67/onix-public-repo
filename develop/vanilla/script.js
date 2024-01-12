@@ -448,7 +448,7 @@ function fetchUserStatisticsDb()
 
 function fetchUsersOnce(callback)
 {
-    DB.references.user.once('value', snapshot => {
+    DB.references.user.orderByChild('st').startAt((new Date().getTime() - (8 * 24 * 60 * 60 * 1000))).once('value', snapshot => {
         if (snapshot.exists()) {
             const users = snapshot.val();
             LISTS.users = users;
@@ -457,6 +457,7 @@ function fetchUsersOnce(callback)
                 fetchColorsToUsers(users[uid], null);
             });
             fetchNewValues();
+            getReservedName();
             callback();
         }
     });
@@ -502,7 +503,6 @@ function fetchNewValues()
     if (me.b) displayError(`You've been banned from Delta by Fohz. Reason: ${me.b}`);
     if (APP.mode === 1 && USER.configurations.cc === 'checked') changeCellColor();
     if (APP.mode === 2) window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-    getReservedName();
 }
 
 function fetchItem(elements, functionExec)
@@ -908,7 +908,7 @@ function drawUsersModal()
     const modal = usersModal(LISTS.users);
     const list = modal.meHeader + modal.profileHeader + modal.onlineHeader + modal.onlineList + modal.offlineHeader + modal.offlineList;
 
-    createNewBox(list, modal.counts.total + ' Players', injectAnonymousSwitch(), injectConnectionsStats());
+    createNewBox(list, 'Players list', injectAnonymousSwitch(), injectConnectionsStats());
 }
 
 function usersModal(users)
@@ -2244,6 +2244,7 @@ function getAllReferences()
         user: db.ref(`U`),
         statistics: db.ref(`S`),
         badges: db.ref(`B`),
+        dashboardTotal: db.ref(`St/t`),
         hats: db.ref(`H`),
         meUser: db.ref(`U/${uid}`),
         meUserBadge: db.ref(`U/${uid}/ba`),
