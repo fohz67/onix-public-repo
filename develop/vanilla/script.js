@@ -1377,13 +1377,14 @@ function handleButtonClick(id, filter)
 function injectCustomLeaderboard(filter)
 {
     const sortingFunctions = {
-        'kda': (a, b) => (b.sK / b.sG) - (a.sK / a.sG),
+        'kda': (a, b) => ((b.sG ? b.sK / b.sG : 0) - (a.sG ? a.sK / a.sG : 0)),
         'killTotal': (a, b) => b.sK - a.sK,
         'gameTotal': (a, b) => b.sG - a.sG,
         'massTotal': (a, b) => b.sM - a.sM,
         'timeTotal': (a, b) => b.sT - a.sT,
-        'massAvg': (a, b) => (b.sM / b.sG) - (a.sM / a.sG)
+        'massAvg': (a, b) => ((b.sG ? b.sM / b.sG : 0) - (a.sG ? a.sM / a.sG : 0))
     };
+
 
     const sortedLeaderboard = Object.values(LISTS.leaderboard)
         .sort(sortingFunctions[filter] || sortingFunctions['kda'])
