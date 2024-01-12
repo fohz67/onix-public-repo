@@ -312,9 +312,7 @@ function pushUserInfos() {
     });
 }
 
-function pushUserSpecificData(ref, type, reserved) {
-    if (reserved && APP.reserved.value) return;
-
+function pushUserSpecificData(ref, type) {
     let data = {};
     if (type === 'status') data.st = new Date().getTime();
     if (type === 'time') data.t = new Date().getTime();
@@ -589,7 +587,7 @@ function mutationComponents() {
         for (let mutation of mutationsList) {
             if (mutation.type === 'childList' || mutation.type === 'characterData') {
                 if (APP.mode === 2) {
-                    pushUserSpecificData(DB.references.meUser, 'status', false);
+                    pushUserSpecificData(DB.references.meUser, 'status');
                 }
                 APP.statsHaveChanged = true;
                 break;
@@ -617,23 +615,23 @@ function listenerComponents() {
         USER.configurations.n = $(this).val();
     }).on('change', function () {
         getReservedName();
-        pushUserSpecificData(DB.references.meUser, 'name', false);
+        pushUserSpecificData(DB.references.meUser, 'name');
     });
 
     $(ATTRS.selectors.serverListItem).on('click', function () {
         USER.server = $(this).find(ATTRS.selectors.serverName).text();
         APP.resize = 0;
-        pushUserSpecificData(DB.references.meUser, 'server', false);
+        pushUserSpecificData(DB.references.meUser, 'server');
     });
 
     $(ATTRS.selectors.playButton).on('click', () => {
         if (USER.server !== ' Lobbies' && APP.statsHaveChanged) pushUserStatisticsLocally();
-        if (APP.mode === 1) pushUserSpecificData(DB.references.meUser, 'status', false);
+        if (APP.mode === 1) pushUserSpecificData(DB.references.meUser, 'status');
         onChatboxNeedResize();
     });
 
     $(ATTRS.selectors.spectateButton).on('click', () => {
-        pushUserSpecificData(DB.references.meUser, 'spec', false);
+        pushUserSpecificData(DB.references.meUser, 'spec');
         onChatboxNeedResize();
     });
 }
@@ -742,7 +740,7 @@ function skinChecker(url) {
 
     image.onload = function () {
         $(ATTRS.selectors.skinProfile).attr('src', url);
-        pushUserSpecificData(DB.references.meUser, 'skin', false);
+        pushUserSpecificData(DB.references.meUser, 'skin');
     }
 
     image.onerror = function () {
@@ -1936,7 +1934,7 @@ function changeUserColor(color) {
         $(ATTRS.selectors.nicknameProfile2).css('color', isSameNickname ? commonColor : 'white');
     }
 
-    pushUserSpecificData(DB.references.meUser, 'color', false);
+    pushUserSpecificData(DB.references.meUser, 'color');
 }
 
 /***********************
