@@ -1036,7 +1036,7 @@ function injectConnectionsStats()
         }
     }
 
-    return `Total install: ${values.total - 1}\nOnline users: ${values.online - 1}\nDaily active users: ${values.daily - 1}\nActive last 2 days: ${values.last2days - 1}\nActive this week: ${values.last7days - 1}`;
+    return `Online users: ${values.online - 1}\nDaily active users: ${values.daily - 1}\nActive last 2 days: ${values.last2days - 1}\nActive this week: ${values.last7days - 1}`;
 }
 
 /**************************
