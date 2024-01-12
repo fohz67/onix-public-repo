@@ -466,18 +466,18 @@ function fetchUserChanged() {
 function fetchColorsToUsers(user, one) {
     function addColorsAndPerks() {
         LISTS.colors[user.n.trim()] = {
+            u: user.u,
             c: user.c,
             ba: user.ba && user.ba.u ? user.ba.u : null,
-            u: user.u,
             h: user.h ? user.h : null
         };
     }
     if (!user.n || !user.c || !user.u) return;
     if (!one) return addColorsAndPerks();
     const colorChanged = user.c !== one.c;
-    const badgeChanged = user.ba && user.ba.u ? user.ba.u !== one.ba.u : false;
-    const hatChanged = user.h && user.h.u ? user.h.u !== one.h.u : false;
-    if ((colorChanged || badgeChanged || hatChanged) && user.n && user.st > new Date().getTime() - 60 * 60 * 1000) addColorsAndPerks();
+    const badgeChanged = user.ba && user.ba.u && one.ba && one.ba.u ? user.ba.u !== one.ba.u : false;
+    const hatChanged = user.h && user.h.u && one.h && one.h.u ? user.h.u !== one.h.u : false;
+    if ((colorChanged || badgeChanged || hatChanged) && user.n && user.st > new Date().getTime() - 5 * 60 * 60 * 1000) addColorsAndPerks();
 }
 
 function fetchNewValues() {
