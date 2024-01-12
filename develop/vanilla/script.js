@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.3.4',
+    version: '5.4',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -457,22 +457,28 @@ function fetchUserChanged() {
             const user = snapshot.val();
 
             if (user && user.u) {
-                LISTS.users[user.u] = user;
                 fetchColorsToUsers(user);
                 fetchNewValues();
+                LISTS.users[user.u] = user;
             }
         }
     });
 }
 
 function fetchColorsToUsers(user) {
-    if (user.c && user.n) {
-        LISTS.colors[user.n.trim()] = {
-            c: user.c,
-            ba: user.ba && user.ba.u ? user.ba.u : null,
-            u: user.u,
-            h: user.h ? user.h : null,
-        }
+    const {c: color, ba: badge, h: hat, n: name, st: timestamp, u: uid} = user;
+    const userInList = LISTS.users[uid];
+    const colorChanged = color !== userInList.c;
+    const badgeChanged = badge && badge.u ? badge.u !== userInList.ba.u : false;
+    const hatChanged = hat && hat.u ? hat.u !== userInList.h.u : false;
+
+    if (colorChanged && (badgeChanged || !badge) && (hatChanged || !hat) && name && timestamp > new Date().getTime() - 60 * 60 * 1000) {
+        LISTS.colors[name.trim()] = {
+            c: color,
+            ba: badge && badge.u ? badge.u : null,
+            u: uid,
+            h: hat ? hat : null,
+        };
     }
 }
 
@@ -2033,7 +2039,7 @@ function switchManager(userSettings, userSettingsLabel) {
 
 function switchManagerSpecificChange(userSettings, userSettingsLabel) {
     if (userSettingsLabel === 'a') {
-        pushDatabase(DB.references.meUser, { a: userSettings === 'checked' ? 1 : 0 });
+        pushDatabase(DB.references.meUser, {a: userSettings === 'checked' ? 1 : 0});
     } else if (userSettingsLabel === 'b') {
         let style = (userSettings === 'checked') ? 'blur(7px)' : '';
         $(ATTRS.selectors.leaderboard).css('backdrop-filter', style);
