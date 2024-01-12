@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.3.3',
+    version: '5.3.4',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -310,13 +310,6 @@ function pushUserInfos() {
         a: USER.configurations.a,
         m: USER.mode,
     });
-
-    pushDatabase(DB.references.meColor, {
-        u: USER.credentials.uid,
-        t: new Date().getTime(),
-        n: USER.configurations.n,
-        c: USER.configurations.c,
-    })
 }
 
 function pushUserSpecificData(ref, type, reserved) {
@@ -381,14 +374,14 @@ function pushUserStatisticsLocally() {
 }
 
 function pushUserBadge(item) {
-    pushUserPerk(item, 'badge', DB.references.meColorBadge, DB.references.meUserBadge, LISTS.badges);
+    pushUserPerk(item, 'badge', DB.references.meUserBadge, LISTS.badges);
 }
 
 function pushUserHat(item) {
-    pushUserPerk(item, 'hat', DB.references.meColorHat, DB.references.meUserHat, LISTS.hats);
+    pushUserPerk(item, 'hat', DB.references.meUserHat, LISTS.hats);
 }
 
-function pushUserPerk(item, type, refColor, refUser, list) {
+function pushUserPerk(item, type, ref, list) {
     const perk = JSONSafeParser(decodeURIComponent(item));
 
     if (Object.keys(perk).length > 0) {
@@ -405,8 +398,7 @@ function pushUserPerk(item, type, refColor, refUser, list) {
         
         $(`.${type}${perk.i}`).removeClass(`${type}${not}Selected`).addClass(`${type}${inverseNot}Selected`);
 
-        pushDatabase(refColor, perk);
-        pushDatabase(refUser, perk);
+        pushDatabase(ref, perk);
 
         if (APP.selected[type] === perk.i) APP.selected[type] = false;
         else APP.selected[type] = perk.i;
@@ -444,13 +436,17 @@ function fetchUserStatisticsDb() {
     });
 }
 
-function fetchUsersOnce() {
+function fetchUsersOnce(callback) {
     DB.references.user.once('value', snapshot => {
         if (snapshot.exists()) {
-            LISTS.users = snapshot.val();
+            const users = snapshot.val();
+            LISTS.users = users;
 
-            fetchBanned();
-            fetchUserChanged();
+            Object.keys(users).forEach(uid => {
+                fetchColorsToUsers(users[uid]);
+            });
+            fetchNewValues();
+            callback();
         }
     });
 }
@@ -460,17 +456,19 @@ function fetchUserChanged() {
         if (snapshot.exists()) {
             const user = snapshot.val();
 
-            if (user.u) {
+            if (user && user.u) {
                 LISTS.users[user.u] = user;
+                fetchColorsToUsers(user);
+                fetchNewValues();
             }
         }
     });
 }
 
 function fetchColorsToUsers(user) {
-    if (user.n && user.c) {
+    if (user.c && user.n) {
         LISTS.colors[user.n.trim()] = {
-            c: user.c ,
+            c: user.c,
             ba: user.ba && user.ba.u ? user.ba.u : null,
             u: user.u,
             h: user.h ? user.h : null,
@@ -478,44 +476,12 @@ function fetchColorsToUsers(user) {
     }
 }
 
-function fetchColorsOnce(callback) {
-    const h12 = new Date().getTime() - (12 * 60 * 60 * 1000);
-
-    DB.references.color.orderByChild('t').startAt(h12).once('value', snapshot => {
-        if (snapshot.exists()) {
-            const users = snapshot.val();
-
-            Object.keys(users).forEach(uid => {
-                fetchColorsToUsers(users[uid]);
-            });
-
-            if (USER.configurations.cc === 'checked') changeCellColor();
-            fetchColorChanged();
-
-            window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-
-            callback();
-        }
-    });
-}
-
-function fetchColorChanged() {
-    DB.references.color.on('child_changed', snapshot => {
-        if (snapshot.exists()) {
-            const user = snapshot.val();
-
-            fetchColorsToUsers(user);
-            if (USER.configurations.cc === 'checked') changeCellColor(user.n);
-
-            window.dispatchEvent(new CustomEvent('colorsDualChanged'));
-        }
-    });
-}
-
-function fetchBanned() {
+function fetchNewValues() {
     const me = LISTS.users[USER.credentials.uid];
-    const message = me ? me.b : null;
-    if (message) displayError(`You've been banned from Delta by Fohz. Reason: ${message}`);
+    if (me.b) displayError(`You've been banned from Delta by Fohz. Reason: ${me.b}`);
+    if (APP.mode === 1 && USER.configurations.cc === 'checked') changeCellColor();
+    if (APP.mode === 2) window.dispatchEvent(new CustomEvent('colorsDualChanged'));
+    getReservedName();
 }
 
 function fetchItem(elements, functionExec) {
@@ -618,7 +584,6 @@ function mutationComponents() {
             if (mutation.type === 'childList' || mutation.type === 'characterData') {
                 if (APP.mode === 2) {
                     pushUserSpecificData(DB.references.meUser, 'status', false);
-                    pushUserSpecificData(DB.references.meColor, 'time', true);
                 }
                 APP.statsHaveChanged = true;
                 break;
@@ -647,7 +612,6 @@ function listenerComponents() {
     }).on('change', function () {
         getReservedName();
         pushUserSpecificData(DB.references.meUser, 'name', false);
-        pushUserSpecificData(DB.references.meColor, 'name', true);
     });
 
     $(ATTRS.selectors.serverListItem).on('click', function () {
@@ -658,10 +622,7 @@ function listenerComponents() {
 
     $(ATTRS.selectors.playButton).on('click', () => {
         if (USER.server !== ' Lobbies' && APP.statsHaveChanged) pushUserStatisticsLocally();
-        if (APP.mode === 1) {
-            pushUserSpecificData(DB.references.meUser, 'status', false);
-            pushUserSpecificData(DB.references.meColor, 'time', true);
-        }
+        if (APP.mode === 1) pushUserSpecificData(DB.references.meUser, 'status', false);
         onChatboxNeedResize();
     });
 
@@ -1970,7 +1931,6 @@ function changeUserColor(color) {
     }
 
     pushUserSpecificData(DB.references.meUser, 'color', false);
-    pushUserSpecificData(DB.references.meColor, 'color', true);
 }
 
 /***********************
@@ -2003,10 +1963,9 @@ function pushUserData() {
 }
 
 function fetchUserData() {
-    fetchUsersOnce();
-    fetchUserStatisticsDb();
-    fetchColorsOnce(() => {
-        getReservedName();
+    fetchUsersOnce(() => {
+        fetchUserChanged();
+        fetchUserStatisticsDb();
         pushUserData();
     });
 }
@@ -2172,17 +2131,13 @@ function getAllReferences() {
     const db = DB.database;
 
     return {
-        color: db.ref(`C`),
         user: db.ref(`U`),
         statistics: db.ref(`S`),
         badges: db.ref(`B`),
         hats: db.ref(`H`),
         meUser: db.ref(`U/${uid}`),
         meUserBadge: db.ref(`U/${uid}/ba`),
-        meColorBadge: db.ref(`C/${uid}/ba`),
         meUserHat: db.ref(`U/${uid}/h`),
-        meColorHat: db.ref(`C/${uid}/h`),
-        meColor: db.ref(`C/${uid}`),
         meStat: db.ref(`S/${uid}`),
         meConfig: db.ref(`Ba/${uid}`),
         meConfigItem: db.ref(`Ba/${uid}/${APP.machineId}`),
