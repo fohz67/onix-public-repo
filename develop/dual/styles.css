@@ -3844,8 +3844,8 @@ span.right.silent {
 }
 
 .forceRight {
-    float:right;
-    margin:-2px 5px!important;
+    float:right!important;
+    margin:3px 0 0 0!important
 }
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
