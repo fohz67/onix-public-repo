@@ -57,23 +57,22 @@ const SKINS = {
  *  On start
  *
  *************/
-if (document.readyState === 'submitLoading') {
-    document.addEventListener('DOMContentLoaded', onDocumentReady);
-} else {
-    onDocumentReady();
-}
+if (document.readyState === 'submitLoading') document.addEventListener('DOMContentLoaded', onDocumentReady);
+else onDocumentReady();
 
 /**********************
  *
  *  Component creator
  *
  **********************/
-function onDocumentReady() {
+function onDocumentReady()
+{
     pageConfiguration();
     onAttributesReady().then();
 }
 
-async function onAttributesReady() {
+async function onAttributesReady()
+{
     try {
         await loadScript(ATTRS.libraries.firebaseApp);
         await Promise.all([
@@ -95,7 +94,8 @@ async function onAttributesReady() {
     }
 }
 
-async function onScriptsReady() {
+async function onScriptsReady()
+{
     firebaseConfiguration(() => {
         firebaseAccount(() => {
             firebaseComponents(() => {
@@ -114,7 +114,8 @@ async function onScriptsReady() {
  *  Firebase configuration
  *
  ***************************/
-function firebaseConfiguration(callback) {
+function firebaseConfiguration(callback)
+{
     const firebaseConfig = {
         apiKey: 'AIzaSyCc_St6TMlGM6fmeYre_gHjCXYriPc3wtM',
         authDomain: 'delta-client.firebaseapp.com',
@@ -139,7 +140,8 @@ function firebaseConfiguration(callback) {
  *  Firebase account
  *
  *********************/
-function firebaseSignOut() {
+function firebaseSignOut()
+{
     if (firebase.auth().currentUser) {
         firebase.auth().signOut()
             .then(() => {
@@ -150,7 +152,8 @@ function firebaseSignOut() {
     }
 }
 
-function firebaseAccount(callback) {
+function firebaseAccount(callback)
+{
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             getLocalValues(user);
@@ -168,7 +171,8 @@ function firebaseAccount(callback) {
  *  Firebase components
  *
  ************************/
-function firebaseComponents(callback) {
+function firebaseComponents(callback)
+{
     if (firebase.apps.length > 0) {
         fetchUserData();
         callback();
@@ -180,7 +184,8 @@ function firebaseComponents(callback) {
  *  Firebase account form
  *
  **************************/
-function initRegisterForm() {
+function initRegisterForm()
+{
     initRegisterPage();
     initAnimationsPage();
     initAnimationsForm();
@@ -190,7 +195,8 @@ function initRegisterForm() {
     }, 1000);
 }
 
-function initRegisterPage() {
+function initRegisterPage()
+{
     document.head.innerHTML += `
         <style>
             #login-form>input::placeholder {
@@ -214,7 +220,8 @@ function initRegisterPage() {
     `;
 }
 
-function initAnimationsForm() {
+function initAnimationsForm()
+{
     const submitButton = $(ATTRS.selectors.submitButton);
     const submitButtonHoverStyle = {
         transform: 'scale(0.9)',
@@ -239,7 +246,8 @@ function initAnimationsForm() {
     $(ATTRS.selectors.passwordInput).on('input', handleInput);
 }
 
-function initForm() {
+function initForm()
+{
     const submitButton = $(ATTRS.selectors.submitButton);
     const submitText = $(ATTRS.selectors.submitText);
     const emailInput = $(ATTRS.selectors.emailInput);
@@ -283,7 +291,8 @@ function initForm() {
     });
 }
 
-function initAnimationsPage() {
+function initAnimationsPage()
+{
     const animationStyle = document.createElement('style');
 
     animationStyle.textContent = `
@@ -298,7 +307,8 @@ function initAnimationsPage() {
  *  Push to database
  *
  *********************/
-function pushUserInfos() {
+function pushUserInfos()
+{
     pushDatabase(DB.references.meUser, {
         u: USER.credentials.uid,
         st: new Date().getTime(),
@@ -312,7 +322,8 @@ function pushUserInfos() {
     });
 }
 
-function pushUserSpecificData(ref, type) {
+function pushUserSpecificData(ref, type)
+{
     let data = {};
     if (type === 'status') data.st = new Date().getTime();
     if (type === 'time') data.t = new Date().getTime();
@@ -325,7 +336,8 @@ function pushUserSpecificData(ref, type) {
     pushDatabase(ref, data);
 }
 
-function pushUserConfigurations() {
+function pushUserConfigurations()
+{
     if (USER.configurations.as === 'checked') {
         pushDatabase(DB.references.meConfigItem, {
             skins: USER.configurations.skins,
@@ -341,7 +353,8 @@ function pushUserConfigurations() {
     }
 }
 
-function pushUserStatisticsDb() {
+function pushUserStatisticsDb()
+{
     pushDatabase(DB.references.meStat, USER.statistics);
 
     localStorage.setItem('sT', '0');
@@ -352,7 +365,8 @@ function pushUserStatisticsDb() {
     APP.statsHaveChanged = true;
 }
 
-function pushUserStatisticsLocally() {
+function pushUserStatisticsLocally()
+{
     const time = parseInt(getLocalStorageItem('sT', '0')) + ($(ATTRS.selectors.statTime).length ? getConvertedTimeToSeconds($(ATTRS.selectors.statTime).text().split(": ")[1]) : 0);
     const mass = parseInt(getLocalStorageItem('sM', '0')) + ($(ATTRS.selectors.statScore).length ? getConvertedStringToNumber($(ATTRS.selectors.statScore).text().split(": ")[1]) : 0);
     const kill = parseInt(getLocalStorageItem('sK', '0')) + ($(ATTRS.selectors.statKills).length ? parseInt($(ATTRS.selectors.statKills).text().split(": ")[1], 10) : 0);
@@ -371,33 +385,30 @@ function pushUserStatisticsLocally() {
     APP.statsHaveChanged = false;
 }
 
-function pushUserBadge(item) {
+function pushUserBadge(item)
+{
     pushUserPerk(item, 'badge', DB.references.meUserBadge, LISTS.badges);
 }
 
-function pushUserHat(item) {
+function pushUserHat(item)
+{
     pushUserPerk(item, 'hat', DB.references.meUserHat, LISTS.hats);
 }
 
-function pushUserPerk(item, type, ref, list) {
+function pushUserPerk(item, type, ref, list)
+{
     const perk = JSONSafeParser(decodeURIComponent(item));
-
     if (Object.keys(perk).length > 0) {
         if (perk.o) delete perk.o;
         if (perk.e) delete perk.e;
         if (APP.selected[type] === perk.i) perk.u = null;
-
         Object.values(list).forEach(perk => {
             $(`.${type}${perk.i}`).removeClass(`${type}Selected`).addClass(`${type}NotSelected`);
         });
-
         const not = APP.selected[type] === perk.i ? '' : 'Not';
         const inverseNot = APP.selected[type] === perk.i ? 'Not' : '';
-
         $(`.${type}${perk.i}`).removeClass(`${type}${not}Selected`).addClass(`${type}${inverseNot}Selected`);
-
         pushDatabase(ref, perk);
-
         if (APP.selected[type] === perk.i) APP.selected[type] = false;
         else APP.selected[type] = perk.i;
     }
@@ -408,7 +419,8 @@ function pushUserPerk(item, type, ref, list) {
  *  Fetch from database
  *
  ************************/
-function fetchUserStatisticsDb() {
+function fetchUserStatisticsDb()
+{
     DB.references.meStat.once('value', snapshot => {
         if (snapshot.exists()) {
             const data = snapshot.val();
@@ -434,7 +446,8 @@ function fetchUserStatisticsDb() {
     });
 }
 
-function fetchUsersOnce(callback) {
+function fetchUsersOnce(callback)
+{
     DB.references.user.once('value', snapshot => {
         if (snapshot.exists()) {
             const users = snapshot.val();
@@ -449,7 +462,8 @@ function fetchUsersOnce(callback) {
     });
 }
 
-function fetchUserChanged() {
+function fetchUserChanged()
+{
     DB.references.user.on('child_changed', snapshot => {
         if (snapshot.exists()) {
             const user = snapshot.val();
@@ -463,8 +477,10 @@ function fetchUserChanged() {
     });
 }
 
-function fetchColorsToUsers(user, one) {
-    function addColorsAndPerks() {
+function fetchColorsToUsers(user, one)
+{
+    function addColorsAndPerks()
+    {
         LISTS.colors[user.n.trim()] = {
             u: user.u,
             c: user.c,
@@ -480,7 +496,8 @@ function fetchColorsToUsers(user, one) {
     if ((colorChanged || badgeChanged || hatChanged) && user.n && user.st > new Date().getTime() - 5 * 60 * 60 * 1000) addColorsAndPerks();
 }
 
-function fetchNewValues() {
+function fetchNewValues()
+{
     const me = LISTS.users[USER.credentials.uid];
     if (me.b) displayError(`You've been banned from Delta by Fohz. Reason: ${me.b}`);
     if (APP.mode === 1 && USER.configurations.cc === 'checked') changeCellColor();
@@ -488,7 +505,8 @@ function fetchNewValues() {
     getReservedName();
 }
 
-function fetchItem(elements, functionExec) {
+function fetchItem(elements, functionExec)
+{
     if (!elements) return ``;
     return Object.entries(elements).map(([elementId, element]) => {
         return functionExec(element, elementId);
@@ -500,7 +518,8 @@ function fetchItem(elements, functionExec) {
  *  Page configuration
  *
  ***********************/
-function pageConfiguration() {
+function pageConfiguration()
+{
     let link = document.querySelector(ATTRS.selectors.link) || document.createElement('link');
 
     let iconElement = document.querySelector('.far.fa-keyboard');
@@ -523,7 +542,8 @@ function pageConfiguration() {
  *  Script loader
  *
  ******************/
-function loadScript(url) {
+function loadScript(url)
+{
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
 
@@ -540,11 +560,13 @@ function loadScript(url) {
  *  Cookie remover
  *
  *******************/
-function removeAds() {
+function removeAds()
+{
     $(ATTRS.selectors.ad).css('display', 'none');
 }
 
-function removeCookie() {
+function removeCookie()
+{
     setTimeout(function () {
         if ($(ATTRS.selectors.cmp)) {
             $(ATTRS.selectors.cmpButton).click();
@@ -558,14 +580,16 @@ function removeCookie() {
  *  Components listener
  *
  ***********************/
-function onChatboxNeedResize() {
+function onChatboxNeedResize()
+{
     if (USER.configurations.r === 'checked' && APP.resize === 0) {
         APP.resize = 1;
         createChatboxResizable();
     }
 }
 
-function onColorChanged(that) {
+function onColorChanged(that)
+{
     const color = $(that).val();
 
     if (color && /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)) {
@@ -575,7 +599,8 @@ function onColorChanged(that) {
     }
 }
 
-function mutationComponents() {
+function mutationComponents()
+{
     const target = document.querySelector(ATTRS.selectors.bar);
     const config = {
         characterData: true,
@@ -599,16 +624,15 @@ function mutationComponents() {
     observer.observe(target, config);
 }
 
-function listenerComponents() {
-    if (APP.mode === 1) {
-        $(ATTRS.selectors.skinUrl).on('change', function () {
-            skinValidation($(this).val());
-        });
+function listenerComponents()
+{
+    $(ATTRS.selectors.skinUrl).on('change', function () {
+        skinValidation($(this).val());
+    });
 
-        $(ATTRS.selectors.skinElem).on('click', function () {
-            skinValidation($(this).attr('src'));
-        });
-    }
+    $(ATTRS.selectors.skinElem).on('click', function () {
+        skinValidation($(this).attr('src'));
+    });
 
     $(ATTRS.selectors.nickname).on('input', function () {
         if (APP.mode === 1) $(ATTRS.selectors.nicknameProfile).text($(this).val());
@@ -641,7 +665,8 @@ function listenerComponents() {
  *  Components creator
  *
  ***********************/
-function createComponents() {
+function createComponents()
+{
     if (APP.mode === 1) {
         createSkinProfile();
         createHUD();
@@ -656,7 +681,8 @@ function createComponents() {
  *  HUD
  *
  ********/
-function createHUD() {
+function createHUD()
+{
     displayTitle();
     displaySocial();
 
@@ -664,7 +690,8 @@ function createHUD() {
     if (level && $(ATTRS.selectors.discordBtn).length === 0 && level.match(/\d+/)[0] >= 5) displaySwitch();
 }
 
-function displayTitle() {
+function displayTitle()
+{
     const randomTitle = ATTRS.titles[Math.floor(Math.random() * ATTRS.titles.length)];
 
     $(ATTRS.selectors.barHud).append(`
@@ -673,7 +700,8 @@ function displayTitle() {
     `);
 }
 
-function displaySocial() {
+function displaySocial()
+{
     const socialContainer = $(ATTRS.selectors.socialContainer);
     if (!socialContainer) return;
 
@@ -698,7 +726,8 @@ function displaySocial() {
     });
 }
 
-function displaySwitch() {
+function displaySwitch()
+{
     $(ATTRS.selectors.mainContainer).append(`
         <div class="switchDual switchButton" tip='Delta Dual uses Rise, the original system created by Zimek.' onclick="window.location.href = '${ATTRS.libraries.deltaDual}'">
             <p>Switch to dual</p>
@@ -712,7 +741,8 @@ function displaySwitch() {
  *  Skin profile
  *
  *****************/
-function createSkinProfile() {
+function createSkinProfile()
+{
     const skin = $(ATTRS.selectors.skinUrl);
     const skinURL = skin ? skin.val() : ATTRS.images.transparentSkin;
 
@@ -726,36 +756,38 @@ function createSkinProfile() {
     skinValidation(skinURL);
 }
 
-function skinValidation(url) {
-    if (url === ATTRS.images.imageAddVanis) {
-        $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.vanisSkin);
-        return;
-    }
-
-    skinChecker(url);
+function skinValidation(url)
+{
+    if (url === ATTRS.images.imageAddVanis && APP.mode === 1) skinPutter(ATTRS.images.vanisSkin, true);
+    else skinChecker(url);
 }
 
-function skinChecker(url) {
+function skinChecker(url)
+{
     const image = new Image();
-
-    image.onload = function () {
-        $(ATTRS.selectors.skinProfile).attr('src', url);
-        pushUserSpecificData(DB.references.meUser, 'skin');
-    }
-
-    image.onerror = function () {
-        $(ATTRS.selectors.skinProfile).attr('src', ATTRS.images.transparentSkin);
-    }
-
+    image.onload = (() => {
+        skinPutter(url, true);
+    });
+    image.onerror = (() => {
+        skinPutter(ATTRS.images.transparentSkin, true);
+    });
     image.src = url;
 }
+
+function skinPutter(url, push)
+{
+    if (push) pushUserSpecificData(DB.references.meUser, 'skin');
+    if (APP.mode === 1) $(ATTRS.selectors.skinProfile).attr('src', url);
+}
+
 
 /******************
  *
  *  Reserved name
  *
  ******************/
-function getReservedName() {
+function getReservedName()
+{
     const nickname = USER.configurations.n.trim();
     const colorUser = LISTS.colors[nickname];
 
@@ -794,7 +826,8 @@ function getReservedName() {
  *  Page creator
  *
  *****************/
-function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec) {
+function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec)
+{
     if (typeof functionExec === 'function') functionExec();
 
     if (buttonSelectors) {
@@ -825,7 +858,8 @@ function showPage(pageIndex, buttonSelectors, tabSelectors, functionExec) {
  *  Boxes creator
  *
  *******************/
-function createBoxes() {
+function createBoxes()
+{
     createNewIcon(true, 'fas fa-users', 'Delta users', 'userIcon', drawUsersModal);
     createNewIcon(true, 'fas fa-user', 'Account', 'statIcon', drawStatisticsModal);
     createNewIcon(true, 'fas fa-trophy', 'Deltaboard', 'leaderboardIcon', drawLeaderboardModal);
@@ -833,7 +867,8 @@ function createBoxes() {
     createNewIcon(true, 'fas fa-images', 'Skins galery', 'skinsIcon', drawSkinsModal);
 }
 
-function createNewIcon(isChild, iconImg, tip, iconId, functionClick) {
+function createNewIcon(isChild, iconImg, tip, iconId, functionClick)
+{
     let icon = $('<i>').addClass(iconImg).attr({
         'id': iconId,
         'tip': tip
@@ -841,7 +876,8 @@ function createNewIcon(isChild, iconImg, tip, iconId, functionClick) {
     (isChild ? $(ATTRS.selectors.mainContainer) : $(ATTRS.selectors.menuContainer)).append(icon);
 }
 
-function createNewBox(content, title, element, tip, isBig) {
+function createNewBox(content, title, element, tip, isBig)
+{
     let bigStyle = isBig ? `style="margin-left: -316px; width: 962px;"` : ``;
 
     $(ATTRS.selectors.playerContainer).append(`
@@ -866,7 +902,8 @@ function createNewBox(content, title, element, tip, isBig) {
  *  Users page
  *
  ***************/
-function drawUsersModal() {
+function drawUsersModal()
+{
     if ($(ATTRS.selectors.userBox).length > 0) return;
     const modal = usersModal(LISTS.users);
     const list = modal.meHeader + modal.profileHeader + modal.onlineHeader + modal.onlineList + modal.offlineHeader + modal.offlineList;
@@ -874,7 +911,8 @@ function drawUsersModal() {
     createNewBox(list, modal.counts.total + ' Players', injectAnonymousSwitch(), injectConnectionsStats());
 }
 
-function usersModal(users) {
+function usersModal(users)
+{
     const me = users[USER.credentials.uid];
     let {
         listOnline,
@@ -893,7 +931,8 @@ function usersModal(users) {
     };
 }
 
-function updateUserLists(users, me) {
+function updateUserLists(users, me)
+{
     let listOnline = '';
     let listOffline = '';
     let userCount = {
@@ -924,7 +963,8 @@ function updateUserLists(users, me) {
     };
 }
 
-function injectUser(user, status) {
+function injectUser(user, status)
+{
     const isAnonymous = getUserAnonymous(user);
     const skin = isAnonymous ? user.s : 'https://skins.vanis.io/s/' + user.s;
     const clicker = skin ? `onclick="openSkin('${skin}', '${user.s}')"` : ``;
@@ -953,7 +993,8 @@ function injectUser(user, status) {
     `;
 }
 
-function injectAnonymousSwitch() {
+function injectAnonymousSwitch()
+{
     return `
         <div data-v-3ddebeb3="" class="p-switch pretty switchAnonymous" p-checkbox="">
             <input type="checkbox" id="anonymousSwitch" ${USER.configurations.a}="" onchange="USER.configurations.a = switchManager(USER.configurations.a, 'a')" tip="Hides all your profile informations"> 
@@ -964,7 +1005,8 @@ function injectAnonymousSwitch() {
     `;
 }
 
-function injectConnectionsStats() {
+function injectConnectionsStats()
+{
     let values = {
         total: Object.keys(LISTS.users).length,
         online: 0,
@@ -1002,8 +1044,10 @@ function injectConnectionsStats() {
  *  Users box utilitaries
  *
  **************************/
-function getUserTime(time) {
-    function getTimeAgo(days, hours, minutes) {
+function getUserTime(time)
+{
+    function getTimeAgo(days, hours, minutes)
+    {
         if (days >= 2) return undefined;
         else if (days > 0) return `${days}d ago`;
         else if (hours > 0) return `${hours}h ago`;
@@ -1024,7 +1068,8 @@ function getUserTime(time) {
     return getTimeAgo(days, hours % 24, minutes);
 }
 
-function getUserAnonymous(user) {
+function getUserAnonymous(user)
+{
     if (user.a === 1) {
         user.s = ATTRS.images.anonymousSkin;
         user.n = 'Anonymous #' + Math.floor(Math.random() * 1000);
@@ -1037,17 +1082,20 @@ function getUserAnonymous(user) {
     return false;
 }
 
-function getUserTip(user, userServer, status) {
+function getUserTip(user, userServer, status)
+{
     return `Nickname : ${user.n}\n${user.l === 0 ? '' : 'Level : ' + user.l + '\n'}Last connection : ${status === 'Online' ? 'Now' : status}\nServer : ${userServer}\nColor used : ${user.c}\nMode: ${user.m ? user.m : 'Unknown'}`;
 }
 
-function getUserMode(userMode) {
+function getUserMode(userMode)
+{
     if (userMode === 'Single') return ATTRS.images.singleMode
     else if (userMode === 'Dual') return ATTRS.images.dualMode
     else return ATTRS.images.undefMode;
 }
 
-function getUserServer(status, server) {
+function getUserServer(status, server)
+{
     if (server === 'Anonymous' && status === 'Online') return 'Online';
     if (server.includes('Spectator') && status === 'Online') return server
     return status + ' on ' + server.replace('Spectator on ', '');
@@ -1058,21 +1106,24 @@ function getUserServer(status, server) {
  *  Statistics page
  *
  ********************/
-function drawStatisticsModal() {
+function drawStatisticsModal()
+{
     if ($(ATTRS.selectors.toolBox).length > 0) return;
     const modal = statisticsModal(USER.statistics);
 
     createNewBox(modal.list, 'Profile & stats', modal.logout);
 }
 
-function statisticsModal(statistics) {
+function statisticsModal(statistics)
+{
     return {
         list: generateStatisticsList(statistics),
         logout: generateLogoutButton()
     }
 }
 
-function generateLogoutButton() {
+function generateLogoutButton()
+{
     return `
         <div class="divLogout" onclick="firebaseSignOut()">
             <p>Logout</p>
@@ -1081,7 +1132,8 @@ function generateLogoutButton() {
     `;
 }
 
-function generateStatisticsList(statistics) {
+function generateStatisticsList(statistics)
+{
     return `
         <div class="stat-container">
             ${generateProfileSection()}
@@ -1091,7 +1143,8 @@ function generateStatisticsList(statistics) {
     `;
 }
 
-function generateProfileSection() {
+function generateProfileSection()
+{
     return `
         <div data-v-2c5139e0="" class="section row">
             <div data-v-2c5139e0="" class="header">Profil
@@ -1113,7 +1166,8 @@ function generateProfileSection() {
     `;
 }
 
-function generateStatisticsSection(statistics) {
+function generateStatisticsSection(statistics)
+{
     return `
         <div data-v-2c5139e0="" class="section row">
             <div data-v-2c5139e0="" class="header">Statistics   
@@ -1132,7 +1186,8 @@ function generateStatisticsSection(statistics) {
     `;
 }
 
-function generateStatisticItem(label, value, tooltip = '') {
+function generateStatisticItem(label, value, tooltip = '')
+{
     return `
         <p class="stat-p" ${tooltip ? `tip="${tooltip}"` : ''}>
             <span class="stat-span">${label}: </span>
@@ -1146,7 +1201,8 @@ function generateStatisticItem(label, value, tooltip = '') {
  *  Statistics box
  *
  *******************/
-function getConvertedTimeToSeconds(str) {
+function getConvertedTimeToSeconds(str)
+{
     if (typeof str !== 'string') return 0;
     return str.split(' ').reduce((total, part) => {
         const value = parseFloat(part);
@@ -1157,7 +1213,8 @@ function getConvertedTimeToSeconds(str) {
     }, 0);
 }
 
-function getConvertedStringToNumber(str) {
+function getConvertedStringToNumber(str)
+{
     if (typeof str !== 'string') return 0;
     const value = parseFloat(str);
     if (Number.isNaN(value)) return 0;
@@ -1166,7 +1223,8 @@ function getConvertedStringToNumber(str) {
     return value;
 }
 
-function getElapsedTime(seconds, showYears = true, showMonths = true, showDays = true, showHours = true, showMinutes = true, showSeconds = true) {
+function getElapsedTime(seconds, showYears = true, showMonths = true, showDays = true, showHours = true, showMinutes = true, showSeconds = true)
+{
     let years = 0,
         months = 0,
         days = 0,
@@ -1188,7 +1246,8 @@ function getElapsedTime(seconds, showYears = true, showMonths = true, showDays =
     return result.trim();
 }
 
-function getFormatedMass(value) {
+function getFormatedMass(value)
+{
     if (value >= 1e15) return formatNumber(value, 1e15, "Qd");
     else if (value >= 1e12) return formatNumber(value, 1e12, "Td");
     else if (value >= 1e9) return formatNumber(value, 1e9, "Md");
@@ -1197,7 +1256,8 @@ function getFormatedMass(value) {
     else return Math.round(value).toString();
 }
 
-function formatNumber(value, divisor, unit) {
+function formatNumber(value, divisor, unit)
+{
     let primary = value / divisor;
     let rest = value % divisor;
     let secondary = Math.round(rest / (divisor / 10));
@@ -1205,7 +1265,8 @@ function formatNumber(value, divisor, unit) {
     return `${Math.round(primary)}${unit}`;
 }
 
-function swalResetStatistics() {
+function swalResetStatistics()
+{
     Swal.fire({
         title: 'Confirm reset ?',
         text: 'Do you want to permanently delete your statistics ?',
@@ -1219,7 +1280,8 @@ function swalResetStatistics() {
     });
 }
 
-function confirmResetStatistics() {
+function confirmResetStatistics()
+{
     DB.references.meStat.remove()
         .then(() => {
             sendTimedSwal('Deleted', 'Your statistics have been successfully deleted, the page will reload...', 1500, false);
@@ -1235,7 +1297,8 @@ function confirmResetStatistics() {
  *  Leaderboard page
  *
  **********************/
-function drawLeaderboardModal() {
+function drawLeaderboardModal()
+{
     if ($(ATTRS.selectors.toolBox).length > 0) return;
 
     if (LISTS.leaderboard === undefined) {
@@ -1250,7 +1313,8 @@ function drawLeaderboardModal() {
     }
 }
 
-function addLeaderboardModal() {
+function addLeaderboardModal()
+{
     const buttons = [{
         id: 0,
         text: 'K/D',
@@ -1304,12 +1368,14 @@ function addLeaderboardModal() {
     injectCustomLeaderboard('kda');
 }
 
-function handleButtonClick(id, filter) {
+function handleButtonClick(id, filter)
+{
     showPage(id, [ATTRS.selectors.leaderbordKdaButton, ATTRS.selectors.leaderbordKillsButton, ATTRS.selectors.leaderbordGamesButton, ATTRS.selectors.leaderbordMassTotalButton, ATTRS.selectors.leaderbordMassAvgButton, ATTRS.selectors.leaderbordTimeButton], null);
     injectCustomLeaderboard(filter);
 }
 
-function injectCustomLeaderboard(filter) {
+function injectCustomLeaderboard(filter)
+{
     const sortingFunctions = {
         'kda': (a, b) => (b.sK / b.sG) - (a.sK / a.sG),
         'killTotal': (a, b) => b.sK - a.sK,
@@ -1330,7 +1396,8 @@ function injectCustomLeaderboard(filter) {
     $(ATTRS.selectors.leaderboardList).html(leaderboardHTML);
 }
 
-function injectLeaderboard(item, itemId, position, filter) {
+function injectLeaderboard(item, itemId, position, filter)
+{
     const itemUser = LISTS.users[item.u];
     if (!itemUser) return ``;
     let statisticValue;
@@ -1378,7 +1445,8 @@ function injectLeaderboard(item, itemId, position, filter) {
  *  Tools page
  *
  ***************/
-async function drawToolsModal() {
+async function drawToolsModal()
+{
     if ($(ATTRS.selectors.toolBox).length > 0) return;
 
     if (LISTS.badges === undefined || LISTS.hats === undefined || LISTS.configurations === undefined) {
@@ -1396,7 +1464,8 @@ async function drawToolsModal() {
     addToolsModal();
 }
 
-function addToolsModal() {
+function addToolsModal()
+{
     const configurations = fetchItem(LISTS.configurations, injectConfiguration);
     const configurationsLength = LISTS.configurations ? Object.keys(LISTS.configurations).length : 0;
     const badges = fetchItem(LISTS.badges, injectBadge);
@@ -1406,7 +1475,8 @@ function addToolsModal() {
     createNewBox(modal, 'Delta settings', '');
 }
 
-function toolsModal(tools, total, badges, hats) {
+function toolsModal(tools, total, badges, hats)
+{
     return `
         <div class="tool-container">
             <div class="tool-section">
@@ -1511,14 +1581,16 @@ function toolsModal(tools, total, badges, hats) {
  *  Skins page
  *
  ***************/
-async function drawSkinsModal() {
+async function drawSkinsModal()
+{
     if ($(ATTRS.selectors.skinBox).length > 0) return;
 
     createNewBox(injectSkinPages(), 'Public skins', '', '', true);
     await loadAllSkins();
 }
 
-function injectSkinPages() {
+function injectSkinPages()
+{
     return `
         <div class="buttonTabContainer">
             <div class="buttonTab buttonTabDisabled skinsNavAllButton" onclick="showPage(0, [ATTRS.selectors.skinsNavAllButton, ATTRS.selectors.skinsNavMeButton, ATTRS.selectors.skinsNavFavButton], [ATTRS.selectors.skinsNavAllPage, ATTRS.selectors.skinsNavMePage, ATTRS.selectors.skinsNavFavPage], loadAllSkins)">
@@ -1542,7 +1614,8 @@ function injectSkinPages() {
  *  Skins page renderer system
  *
  *******************************/
-function renderSkinsFromList(content, list) {
+function renderSkinsFromList(content, list)
+{
     if (!Array.isArray(content) || content.length === 0) return;
     if ($(list).find('img').length !== content.length) {
         content.forEach(skin => {
@@ -1551,7 +1624,8 @@ function renderSkinsFromList(content, list) {
     }
 }
 
-function itemSkinModal(skin, list) {
+function itemSkinModal(skin, list)
+{
     if (!skin.id) return;
     const skinUrl = `https://skins.vanis.io/s/${skin.id}`;
 
@@ -1565,7 +1639,8 @@ function itemSkinModal(skin, list) {
  *  Skins page loader
  *
  ***********************/
-async function fetchSkins(url, errorMessage) {
+async function fetchSkins(url, errorMessage)
+{
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -1587,7 +1662,8 @@ async function fetchSkins(url, errorMessage) {
     }
 }
 
-async function loadSkins(title, storage, apiUrl, errorMessage, pageSelector) {
+async function loadSkins(title, storage, apiUrl, errorMessage, pageSelector)
+{
     $(ATTRS.selectors.boxTitle).text(title);
 
     if (storage.length > 0) {
@@ -1603,15 +1679,18 @@ async function loadSkins(title, storage, apiUrl, errorMessage, pageSelector) {
     }
 }
 
-async function loadMySkins() {
+async function loadMySkins()
+{
     await loadSkins('My skins', SKINS.me, 'https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/skins', 'Fetching my skins error', ATTRS.selectors.skinsNavMePage);
 }
 
-async function loadFavSkins() {
+async function loadFavSkins()
+{
     await loadSkins('Favorite skins', SKINS.fav, 'https://cors-proxy.fringe.zone/https://skins.vanis.io/api/me/favorites', 'Fetching my favorites skins error', ATTRS.selectors.skinsNavFavPage);
 }
 
-async function loadAllSkins() {
+async function loadAllSkins()
+{
     $(ATTRS.selectors.boxTitle).text('Public skins');
 
     if (SKINS.all.length > 0) {
@@ -1634,7 +1713,8 @@ async function loadAllSkins() {
  *  Skins page functions
  *
  *************************/
-function openSkin(skinUrl, skinId) {
+function openSkin(skinUrl, skinId)
+{
     $(ATTRS.selectors.overlay).append(`
         <div class="overlaySkin">
             <i class="fas fa-times closeSkinItemModal" onclick="$(ATTRS.selectors.overlaySkin).remove()"></i>
@@ -1662,14 +1742,16 @@ function openSkin(skinUrl, skinId) {
     `);
 }
 
-function getSkinIdByUrl(url) {
+function getSkinIdByUrl(url)
+{
     if (!url) return null;
     const separator = url.split('/');
 
     return separator[separator.length - 1];
 }
 
-function copySkin(skinUrl) {
+function copySkin(skinUrl)
+{
     navigator.clipboard.writeText(skinUrl).then(() => {
         sendTimedSwal('Skin copied', 'The skin has been copied to the clipboard', 1500, false)
     }).catch((e) => {
@@ -1677,7 +1759,8 @@ function copySkin(skinUrl) {
     })
 }
 
-function yoinkSkin(skinUrl) {
+function yoinkSkin(skinUrl)
+{
     const allSkins = getLocalStorageItem('skins', '["https://skins.vanis.io/s/Qkfih2","https://skins.vanis.io/s/Qkfih2"]');
     let arraySkins = JSONSafeParser(allSkins);
 
@@ -1695,7 +1778,8 @@ function yoinkSkin(skinUrl) {
  *  Injector system
  *
  ********************/
-function injectConfiguration(item, itemId) {
+function injectConfiguration(item, itemId)
+{
     const skins = injectSkin(item.skins);
 
     function getHotkeysCount(hotkeys) {
@@ -1734,7 +1818,8 @@ function injectConfiguration(item, itemId) {
     `;
 }
 
-function injectSkin(skins) {
+function injectSkin(skins)
+{
     if (!skins) return {list: '', count: 0};
     const skinUrls = JSONSafeParser(skins);
 
@@ -1752,15 +1837,18 @@ function injectSkin(skins) {
     return {list: '', count: 0};
 }
 
-function injectBadge(item) {
+function injectBadge(item)
+{
     return injectPerk(item, 'ba', 'badge', 'pushUserBadge');
 }
 
-function injectHat(item) {
+function injectHat(item)
+{
     return injectPerk(item, 'h', 'hat', 'pushUserHat');
 }
 
-function injectPerk(item, db, type, onclickFunction) {
+function injectPerk(item, db, type, onclickFunction)
+{
     const userOwnedItem = LISTS.users[USER.credentials.uid][db];
     let isOwner = false;
     APP.selected[type] = (userOwnedItem && userOwnedItem.i === item.i) ? userOwnedItem.i : false;
@@ -1784,7 +1872,8 @@ function injectPerk(item, db, type, onclickFunction) {
  *  Delete configurations
  *
  ****************ƒ**********/
-function deleteSuccess(configId) {
+function deleteSuccess(configId)
+{
     const node = $('#' + configId);
 
     DB.references.meConfig.child(configId).remove()
@@ -1799,7 +1888,8 @@ function deleteSuccess(configId) {
         });
 }
 
-function deleteConfiguration(configId) {
+function deleteConfiguration(configId)
+{
     Swal.fire({
         title: 'Confirm deletion ?',
         text: 'Do you want to remove this configuration definitely ?',
@@ -1818,7 +1908,8 @@ function deleteConfiguration(configId) {
  *  Update configurations
  *
  **************************/
-function updateSuccess(configId) {
+function updateSuccess(configId)
+{
     const config = LISTS.configurations[configId];
 
     ['skins', 'hotkeys', 'b', 'c', 'c', 'n', 't'].forEach(key => {
@@ -1834,7 +1925,8 @@ function updateSuccess(configId) {
     setTimeout(() => window.location.reload(), 1500);
 }
 
-function callSwal(configId) {
+function callSwal(configId)
+{
     Swal.fire({
         title: 'Confirm update ?',
         text: 'Do you want to load this configuration into the game ?',
@@ -1848,7 +1940,8 @@ function callSwal(configId) {
     });
 }
 
-function updateConfiguration(configId) {
+function updateConfiguration(configId)
+{
     callSwal(configId);
 }
 
@@ -1857,7 +1950,8 @@ function updateConfiguration(configId) {
  *  Sortable lib
  *
  *****************/
-function updateSkinsLocally() {
+function updateSkinsLocally()
+{
     let urlList = '[';
 
     $(ATTRS.selectors.skinElem).each(function () {
@@ -1873,7 +1967,8 @@ function updateSkinsLocally() {
     localStorage.setItem('skins', urlList);
 }
 
-function createSortable() {
+function createSortable()
+{
     const container = document.getElementById('skins');
 
     new Sortable(container, {
@@ -1884,7 +1979,8 @@ function createSortable() {
     });
 }
 
-function createChatboxResizable() {
+function createChatboxResizable()
+{
     const chatContainer = $(ATTRS.selectors.chatboxContainer);
 
     chatContainer.on('mousedown', function (e) {
@@ -1919,7 +2015,8 @@ function createChatboxResizable() {
  *  User color manager
  *
  ***********************/
-function changeUserColor(color) {
+function changeUserColor(color)
+{
     USER.configurations.c = color;
     localStorage.setItem('c', color);
 
@@ -1942,7 +2039,8 @@ function changeUserColor(color) {
  *  Cell color manager
  *
  ***********************/
-function changeCellColor(nicknameToUpdate) {
+function changeCellColor(nicknameToUpdate)
+{
     const originalFillText = CanvasRenderingContext2D.prototype.fillText;
 
     CanvasRenderingContext2D.prototype.fillText = function (text, x, y) {
@@ -1961,12 +2059,14 @@ function changeCellColor(nicknameToUpdate) {
  *  User data manager
  *
  **********************/
-function pushUserData() {
+function pushUserData()
+{
     pushUserInfos();
     pushUserConfigurations();
 }
 
-function fetchUserData() {
+function fetchUserData()
+{
     pushUserData();
     fetchUsersOnce(() => {
         fetchUserChanged();
@@ -1979,7 +2079,8 @@ function fetchUserData() {
  *  Data manager
  *
  *****************/
-function JSONSafeParser(elem) {
+function JSONSafeParser(elem)
+{
     try {
         return JSON.parse(elem);
     } catch (e) {
@@ -1988,11 +2089,13 @@ function JSONSafeParser(elem) {
     }
 }
 
-function getLocalStorageItem(key, defaultValue) {
+function getLocalStorageItem(key, defaultValue)
+{
     return localStorage.getItem(key) || defaultValue;
 }
 
-function getLocalValues(user) {
+function getLocalValues(user)
+{
     USER.credentials = user;
     USER.server = 'Lobby';
     USER.mode = APP.mode === 1 ? 'Single' : 'Dual';
@@ -2005,18 +2108,21 @@ function getLocalValues(user) {
  *  Database manager
  *
  *********************/
-function getDatabase() {
+function getDatabase()
+{
     DB.database = firebase.database();
     DB.references = getAllReferences();
 }
 
-function pushDatabase(ref, data) {
+function pushDatabase(ref, data)
+{
     if (window.firebase) {
         ref.update(data);
     }
 }
 
-function removeDatabase(ref) {
+function removeDatabase(ref)
+{
     if (window.firebase) {
         ref.remove(data);
     }
@@ -2027,7 +2133,8 @@ function removeDatabase(ref) {
  *  Switch manager
  *
  ******************/
-function switchManager(userSettings, userSettingsLabel) {
+function switchManager(userSettings, userSettingsLabel)
+{
     if (userSettings === 'checked') userSettings = 'unchecked';
     else userSettings = 'checked';
     switchManagerSpecificChange(userSettings, userSettingsLabel);
@@ -2035,7 +2142,8 @@ function switchManager(userSettings, userSettingsLabel) {
     return userSettings;
 }
 
-function switchManagerSpecificChange(userSettings, userSettingsLabel) {
+function switchManagerSpecificChange(userSettings, userSettingsLabel)
+{
     if (userSettingsLabel === 'a') {
         pushDatabase(DB.references.meUser, {a: userSettings === 'checked' ? 1 : 0});
     } else if (userSettingsLabel === 'b') {
@@ -2053,7 +2161,8 @@ function switchManagerSpecificChange(userSettings, userSettingsLabel) {
  *  Swal2 manager
  *
  ******************/
-function sendTimedSwal(title, text, timer, confirm) {
+function sendTimedSwal(title, text, timer, confirm)
+{
     Swal.fire({
         title: title,
         text: text,
@@ -2067,7 +2176,8 @@ function sendTimedSwal(title, text, timer, confirm) {
  *  Error manager
  *
  ******************/
-function displayError(message) {
+function displayError(message)
+{
     const bodyElement = $(ATTRS.selectors.bodyHud);
 
     bodyElement.empty();
@@ -2090,7 +2200,8 @@ function displayError(message) {
  *  Navigator data manager
  *
  ***************************/
-function getMachineId() {
+function getMachineId()
+{
     let machineId = localStorage.getItem('MachineId');
 
     if (!machineId) {
@@ -2106,7 +2217,8 @@ function getMachineId() {
  *  Local data manager
  *
  ***********************/
-function getAllConfigurations() {
+function getAllConfigurations()
+{
     return {
         m: APP.machineId,
         d: new Date().toLocaleDateString('fr-FR'),
@@ -2122,7 +2234,8 @@ function getAllConfigurations() {
     }
 }
 
-function getAllReferences() {
+function getAllReferences()
+{
     const uid = USER.credentials.uid;
     const db = DB.database;
 
@@ -2140,7 +2253,8 @@ function getAllReferences() {
     }
 }
 
-function getAllLibrary() {
+function getAllLibrary()
+{
     return {
         firebaseApp: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js',
         firebaseDatabase: 'https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js',
@@ -2152,7 +2266,8 @@ function getAllLibrary() {
     }
 }
 
-function getAllSelectors() {
+function getAllSelectors()
+{
     return {
         // Global Elements
         head: 'head',
@@ -2277,7 +2392,8 @@ function getAllSelectors() {
     };
 }
 
-function getAllImages() {
+function getAllImages()
+{
     return {
         // Skins
         anonymousSkin: 'https://i.ibb.co/NtMpMBJ/anonymous.png',
@@ -2296,7 +2412,8 @@ function getAllImages() {
     };
 }
 
-function getAllColors() {
+function getAllColors()
+{
     return {
         whiteRGB: 'rgb(255, 255, 255)',
         defaultColor: '#c084ff',
@@ -2305,14 +2422,16 @@ function getAllColors() {
     }
 }
 
-function getAllErrors() {
+function getAllErrors()
+{
     return {
         title: 'Delta error:',
         content: '. Please send a message in #support on the official Delta Discord server : https://discord.gg/wthDcUb6nY/',
     };
 }
 
-function getAllTitle() {
+function getAllTitle()
+{
     return [
         '+490 users on Delta',
         'Alis.io',
@@ -2353,7 +2472,8 @@ function getAllTitle() {
  *  Draw style
  *
  ***************/
-async function drawStyle() {
+async function drawStyle()
+{
     try {
         const cache = `${ATTRS.libraries.css}?=${new Date().getTime()}`;
         const response = await fetch(cache);
@@ -2375,7 +2495,8 @@ async function drawStyle() {
  *  Broadcast
  *
  ***************/
-function checkAnnouncement() {
+function checkAnnouncement()
+{
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
     if (announcement < 53) {
