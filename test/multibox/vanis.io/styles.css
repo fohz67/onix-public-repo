@@ -1928,7 +1928,7 @@ input::placeholder {
 .vanis-button {
     background:#54379f4d;
     border:solid 1px #956dff6e;
-    border-radius:6px!important;
+    border-radius: 8px!important;
     color:#dadada;
     cursor:pointer;
     outline:0;
