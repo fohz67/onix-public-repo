@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.4',
+    version: '5.4.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -441,7 +441,7 @@ function fetchUsersOnce(callback) {
             LISTS.users = users;
 
             Object.keys(users).forEach(uid => {
-                fetchColorsToUsers(users[uid]);
+                fetchColorsToUsers(users[uid], null);
             });
             fetchNewValues();
             callback();
@@ -455,29 +455,29 @@ function fetchUserChanged() {
             const user = snapshot.val();
 
             if (user && user.u) {
-                fetchColorsToUsers(user);
-                fetchNewValues();
+                fetchColorsToUsers(user, LISTS.users[user.u]);
                 LISTS.users[user.u] = user;
+                fetchNewValues();
             }
         }
     });
 }
 
-function fetchColorsToUsers(user) {
-    const {c: color, ba: badge, h: hat, n: name, st: timestamp, u: uid} = user;
-    const userInList = LISTS.users[uid];
-    const colorChanged = color !== userInList.c;
-    const badgeChanged = badge && badge.u ? badge.u !== userInList.ba.u : false;
-    const hatChanged = hat && hat.u ? hat.u !== userInList.h.u : false;
-
-    if (colorChanged && (badgeChanged || !badge) && (hatChanged || !hat) && name && timestamp > new Date().getTime() - 60 * 60 * 1000) {
-        LISTS.colors[name.trim()] = {
-            c: color,
-            ba: badge && badge.u ? badge.u : null,
-            u: uid,
-            h: hat ? hat : null,
+function fetchColorsToUsers(user, one) {
+    function addColorsAndPerks() {
+        LISTS.colors[user.n.trim()] = {
+            c: user.c,
+            ba: user.ba && user.ba.u ? user.ba.u : null,
+            u: user.u,
+            h: user.h ? user.h : null
         };
     }
+    if (!user.n || !user.c || !user.u) return;
+    if (!one) return addColorsAndPerks();
+    const colorChanged = user.c !== one.c;
+    const badgeChanged = user.ba && user.ba.u ? user.ba.u !== one.ba.u : false;
+    const hatChanged = user.h && user.h.u ? user.h.u !== one.h.u : false;
+    if ((colorChanged || badgeChanged || hatChanged) && user.n && user.st > new Date().getTime() - 60 * 60 * 1000) addColorsAndPerks();
 }
 
 function fetchNewValues() {
@@ -929,7 +929,7 @@ function injectUser(user, status) {
     const skin = isAnonymous ? user.s : 'https://skins.vanis.io/s/' + user.s;
     const clicker = skin ? `onclick="openSkin('${skin}', '${user.s}')"` : ``;
 
-    if (user.n.trim() === '') {
+    if (!user.n || user.n && user.n.trim() === '') {
         user.c = 'white';
         user.n = 'Unnamed';
     }
@@ -1967,10 +1967,10 @@ function pushUserData() {
 }
 
 function fetchUserData() {
+    pushUserData();
     fetchUsersOnce(() => {
         fetchUserChanged();
         fetchUserStatisticsDb();
-        pushUserData();
     });
 }
 
