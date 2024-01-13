@@ -1194,7 +1194,6 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                     nickname: playerName,
                                     skinUrl: playerSkinUrl
                                 };
-
                                 playerManager.setPlayerData(playerData);
                             }
                         }
@@ -3246,7 +3245,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         this.botCount += bot ? 1 : 0;
                     }
                     const player = this.players.get(pid);
-                    skinUrl = skin ? `https://skins.vanis.io/s/${skin}` : skinUrl;
+                    const customSkin = getUserField(nickname, pid, 's', null);
+                    skinUrl = customSkin ? customSkin : skin ? `https://skins.vanis.io/s/${skin}` : skinUrl;
                     const nameChanged = player.setName(nickname, perk_color, 16),
                         skinChanged = player.setSkin(skinUrl),
                         tagChanged = player.setTagId(tagId);
@@ -3350,10 +3350,21 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 createSkinSprite(e) {
-                    let t = new PIXI.BaseTexture(e),
-                        s = new PIXI.Texture(t),
-                        i = new PIXI.Sprite(s);
-                    return i.width = i.height = o, i.anchor.set(.5), i
+                    let baseTexture = new PIXI.BaseTexture(e),
+                        texture = new PIXI.Texture(baseTexture),
+                        sprite = new PIXI.Sprite(texture);
+                    sprite.width = o;
+                    sprite.height = o;
+                    sprite.anchor.set(0.5);
+                    let ratio = Math.max(sprite.width / texture.width, sprite.height / texture.height);
+                    sprite.scale.x = sprite.scale.y = ratio;
+                    sprite.texture.frame = new PIXI.Rectangle(
+                        (texture.width - sprite.width / ratio) / 2,
+                        (texture.height - sprite.height / ratio) / 2,
+                        sprite.width / ratio,
+                        sprite.height / ratio
+                    );
+                    return sprite;
                 }
 
                 renderCell() {
