@@ -477,7 +477,7 @@ function fetchNewValues() {
     const me = LISTS.users[USER.credentials.uid];
     if (me.b) displayError(`You've been banned from Delta by Fohz. Reason: ${me.b}`);
     if (APP.mode === 1 && USER.configurations.cc === 'checked') changeCellColor();
-    if (APP.mode === 2) window.dispatchEvent(new CustomEvent('colorsDualChanged'));
+    if (APP.mode === 2) window.dispatchEvent(new CustomEvent('colorChanged'));
 }
 
 function fetchItem(elements, functionExec) {

@@ -10,7 +10,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
         return localStorage.getItem(key) || defaultValue;
     }
 
-    window.addEventListener('colorsDualChanged', () => {
+    window.addEventListener('colorChanged', () => {
         currentColorsPlayersList = window.getColorsDual();
     });
 
@@ -992,9 +992,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     let playersData = JSON.parse(data.readEscapedString());
                     let currentPlayer = playersData.find(player => player.pid === this.playerId);
                     let tagUpdated = currentPlayer && this.setTagId(currentPlayer.tagId);
-                    let {
-                        playerManager
-                    } = this;
+                    let {playerManager} = this;
                     let updatedPlayers = [];
                     if (currentPlayer && currentPlayer.pid) {
                         window.updatePid = () => currentPlayer.pid;
@@ -1002,10 +1000,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
+                        currentServerPlayersList[player.pid] = player;
                         updatedPlayers.push(updatedPlayer);
-                        if (player.pid) {
-                            currentServerPlayersList[player.pid] = player;
-                        }
                     }
                     if (tagUpdated) {
                         this.events.$emit("minimap-positions", []);
@@ -3239,23 +3235,15 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return this.players.get(playerId) || null;
                 }
 
-                setPlayerData({
-                                  pid,
-                                  nickname,
-                                  skin,
-                                  skinUrl,
-                                  perk_color,
-                                  tagId,
-                                  bot
-                              }) {
+                setPlayerData({pid, nickname, skin, skinUrl, perk_color, tagId, bot}) {
                     if (!this.players.has(pid)) {
                         this.players.set(pid, new gameHelper(pid, bot));
                         this.botCount += bot ? 1 : 0;
                     }
                     const player = this.players.get(pid);
                     const customSkin = getUserField(nickname, pid, 's', null);
-                    skinUrl = customSkin ? customSkin : skin ? `https://skins.vanis.io/s/${skin}` : skinUrl;
-                    const nameChanged = player.setName(nickname, perk_color, 16),
+                    skinUrl = !skin || (skin && skin === "") ? customSkin ? customSkin : "" : `https://skins.vanis.io/s/${skin}`;
+                    const nameChanged = player.setName(nickname, perk_color),
                         skinChanged = player.setSkin(skinUrl),
                         tagChanged = player.setTagId(tagId);
                     if (nameChanged || skinChanged || tagChanged) player.invalidateVisibility();
