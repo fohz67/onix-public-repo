@@ -995,7 +995,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         playerManager
                     } = this;
                     let updatedPlayers = [];
-
+                    if (currentPlayer && currentPlayer.pid) {
+                        window.updatePid = () => currentPlayer.pid;
+                        window.dispatchEvent(new CustomEvent('userPidChanged'));
+                    }
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
                         updatedPlayers.push(updatedPlayer);
@@ -1003,7 +1006,6 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             currentServerPlayersList[player.pid] = player;
                         }
                     }
-
                     if (tagUpdated) {
                         this.events.$emit("minimap-positions", []);
                         playerManager.invalidateVisibility(updatedPlayers);
@@ -8734,13 +8736,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                     }
                                 }, [e._v(e._s(t.date))]) : e._e(),
 
-                                t.badge ? s("span", {
+                                t.badge && t.badge.u ? s("span", {
                                     staticClass: "message-badge",
                                 }, [
                                     s("img", {
                                         attrs: {
+                                            ...(t.badge.t ? { tip: t.badge.t } : {}),
                                             class: 'badgeMessage',
-                                            src: t.badge,
+                                            src: t.badge.u,
                                             alt: "chat-badge"
                                         }
                                     })
@@ -8820,14 +8823,15 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                     }
                                 }, [e._v(e._s(t.date ? t.date : ''))]),
 
-                                t.badge ? [
+                                t.badge && t.badge.u ? [
                                     s("span", {
                                         staticClass: "message-badge",
                                     }, [
                                         s("img", {
                                             attrs: {
+                                                ...(t.badge.t ? { tip: t.badge.t } : {}),
                                                 class: 'badgeMessage',
-                                                src: t.badge,
+                                                src: t.badge.u,
                                                 alt: "chat-badge"
                                             }
                                         })
@@ -9063,9 +9067,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                         }
                                     }
                                 }, [
-                                    t.badge ? s("img", {
+                                    t.badge && t.badge.u ? s("img", {
                                         attrs: {
-                                            src: t.badge,
+                                            ...(t.badge.t ? { tip: t.badge.t } : {}),
+                                            src: t.badge.u,
                                             alt: "badge",
                                             class: "badgeLeaderboard"
                                         }

@@ -1,14 +1,10 @@
 const APP = {
-    version: '5.5',
+    version: '5.5.1',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
     skinAuth: 'Vanis s5fKDiOD5hSR-DVZGs5u',
     statsHaveChanged: false,
-    reserved: {
-        value: false,
-        color: '#ffffff'
-    },
     selected: {
         badge: false,
         hat: false,
@@ -300,7 +296,7 @@ function pushUserInfos() {
         u: USER.credentials.uid,
         st: new Date().getTime(),
         n: USER.configurations.n,
-        c: APP.reserved.value ? APP.reserved.color : USER.configurations.c,
+        c: USER.configurations.c,
         s: skinData.type === 'vanis' ? skinData.id : skinData.url,
         se: USER.server,
         l: $(ATTRS.selectors.level).length > 0 ? parseInt($(ATTRS.selectors.level).text().trim().match(/\d+/)[0]) || 0 : 0,
@@ -316,9 +312,10 @@ function pushUserSpecificData(ref, type) {
     if (type === 'time') data.t = new Date().getTime();
     if (type === 'name') data.n = USER.configurations.n;
     if (type === 'skin') data.s = skinData.type === 'vanis' ? skinData.id : skinData.url;
-    if (type === 'color') data.c = APP.reserved.value ? APP.reserved.color : USER.configurations.c;
+    if (type === 'color') data.c = USER.configurations.c;
     if (type === 'server') data.se = USER.server;
     if (type === 'spec') data.se = 'Spectator on ' + USER.server;
+    if (type === 'pid') data.p = USER.pid;
 
     pushDatabase(ref, data);
 }
@@ -433,10 +430,9 @@ function fetchUsersOnce(callback) {
             LISTS.users = users;
 
             Object.keys(users).forEach(uid => {
-                fetchColorsToUsers(users[uid], null);
+                fetchColorsToUsers(users[uid], -1);
             });
             fetchNewValues();
-            getReservedName();
             callback();
         }
     });
@@ -457,23 +453,24 @@ function fetchUserChanged() {
 }
 
 function fetchColorsToUsers(user, one) {
+    if (!user.n || !user.u) return;
+    const skinData = processSkinInput(user.s);
     function addColorsAndPerks() {
         LISTS.colors[user.n.trim()] = {
             u: user.u,
-            c: user.c,
+            p: user.p,
+            c: user.c ? user.c : null,
+            h: user.h ? user.h : null,
+            ba: user.ba ? user.ba : null,
             s: skinData.type === 'imgbb' ? skinData.url : null,
-            ba: user.ba && user.ba.u ? user.ba.u : null,
-            h: user.h ? user.h : null
         };
     }
-    if (!user.n || !user.c || !user.u) return;
-    const skinData = processSkinInput(user.s);
-    if (!one) return addColorsAndPerks();
-    const colorChanged = user.c !== one.c;
-    const badgeChanged = user.ba && user.ba.u && one.ba && one.ba.u ? user.ba.u !== one.ba.u : false;
-    const hatChanged = user.h && user.h.u && one.h && one.h.u ? user.h.u !== one.h.u : false;
-    const skinChanged = skinData.type === 'imgbb' && one.s ? user.s !== one.s : false;
-    if ((colorChanged || badgeChanged || hatChanged || skinChanged) && user.n) addColorsAndPerks();
+    function hasChanged(newProp, existingProp) {
+        return newProp && existingProp ? newProp !== existingProp : false;
+    }
+    if (one === -1 || hasChanged(user.c, one.c) || (user.ba && one.ba && hasChanged(user.ba.u, one.ba.u)) || (user.h && one.h && hasChanged(user.h.u, one.h.u)) || (skinData.type === 'imgbb' && hasChanged(user.skin, one.skin)) || hasChanged(user.p, one.p)) {
+        addColorsAndPerks(user, skinData);
+    }
 }
 
 function fetchNewValues() {
@@ -607,7 +604,6 @@ function listenerComponents() {
         if (APP.mode === 1) $(ATTRS.selectors.nicknameProfile).text($(this).val());
         USER.configurations.n = $(this).val();
     }).on('change', function () {
-        getReservedName();
         pushUserSpecificData(DB.references.meUser, 'name');
     });
 
@@ -739,61 +735,6 @@ function skinPutter(url, push) {
     if (push) pushUserSpecificData(DB.references.meUser, 'skin');
     if (APP.mode === 1) $(ATTRS.selectors.skinProfile).attr('src', url);
 }
-
-
-/******************
- *
- *  Reserved name
- *
- ******************/
-function getReservedName() {
-    const nickname = USER.configurations.n.trim();
-    const colorUser = LISTS.colors[nickname];
-
-    const setStyle = (color, fontStyle) => {
-        const nicknameProfile = $(ATTRS.selectors.nicknameProfile);
-
-        nicknameProfile.css({
-            'color': color,
-            'font-style': fontStyle
-        });
-        $(ATTRS.selectors.nickname).css('font-style', fontStyle);
-
-        if (APP.mode === 2) {
-            const nicknameProfile2 = $(ATTRS.selectors.nicknameProfile2);
-
-            if (nicknameProfile.text() === nicknameProfile2.text()) {
-                nicknameProfile2.css({
-                    'color': color,
-                    'font-style': fontStyle
-                });
-            }
-        }
-    };
-
-    if (nickname !== '' && APP.blacklist.includes(nickname)) {
-        sendTimedSwal('Blacklisted nickname', 'Your actual nickname is blacklisted, your color is now white', 10000, 'OK');
-        setStyle('#ffffff', 'italic');
-        APP.reserved = {
-            value: true,
-            color: '#ffffff'
-        };
-    } else if (nickname !== '' && colorUser && colorUser.u !== USER.credentials.uid) {
-        sendTimedSwal('Reserved nickname', 'Your actual nickname is reserved by another Delta player, if you want to play with your color, change your nickname', 10000, 'OK');
-        setStyle(colorUser.c, 'italic');
-        APP.reserved = {
-            value: true,
-            color: colorUser.c
-        };
-    } else {
-        setStyle(USER.configurations.c, 'normal');
-        APP.reserved = {
-            value: false,
-            color: USER.configurations.c
-        };
-    }
-}
-
 
 /*****************
  *
@@ -1973,15 +1914,13 @@ function changeUserColor(color) {
     USER.configurations.c = color;
     localStorage.setItem('c', color);
 
-    const commonColor = APP.reserved.value ? APP.reserved.color : color;
-
-    $(ATTRS.selectors.nicknameProfile).css('color', commonColor);
+    $(ATTRS.selectors.nicknameProfile).css('color', color);
     $(ATTRS.selectors.colorPickerInput).val(color);
     $(ATTRS.selectors.colorPickerSelector).val(color);
 
     if (APP.mode === 2) {
         const isSameNickname = $(ATTRS.selectors.nicknameProfile).text() === $(ATTRS.selectors.nicknameProfile2).text();
-        $(ATTRS.selectors.nicknameProfile2).css('color', isSameNickname ? commonColor : 'white');
+        $(ATTRS.selectors.nicknameProfile2).css('color', isSameNickname ? color : 'white');
     }
 
     pushUserSpecificData(DB.references.meUser, 'color');
@@ -2351,7 +2290,7 @@ function getAllImages() {
 function getAllColors() {
     return {
         whiteRGB: 'rgb(255, 255, 255)',
-        defaultColor: '#c084ff',
+        defaultColor: '#ffffff',
         onlineColor: '#32e34a',
         offlineColor: '#e33247',
     }
@@ -2444,3 +2383,7 @@ function checkAnnouncement() {
  *
  ***************/
 window.getColorsDual = () => LISTS.colors;
+window.addEventListener('userPidChanged', () => {
+    USER.pid = window.updatePid();
+    pushUserSpecificData(DB.references.meUser, 'pid');
+});
