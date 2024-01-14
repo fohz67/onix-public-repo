@@ -468,7 +468,7 @@ function fetchColorsToUsers(user, one) {
     function hasChanged(newProp, existingProp) {
         return newProp && existingProp ? newProp !== existingProp : false;
     }
-    if (one === -1 || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || (user.ba && one.ba && hasChanged(user.ba.u, one.ba.u)) || (user.h && one.h && hasChanged(user.h.u, one.h.u)) || (skinData.type === 'imgbb' && hasChanged(user.skin, one.skin)) || hasChanged(user.p, one.p)) {
+    if (one === -1 || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || (user.ba && one.ba && hasChanged(user.ba.u, one.ba.u)) || (user.h && one.h && hasChanged(user.h.u, one.h.u)) || (skinData.type === 'imgbb' && hasChanged(user.s, one.s)) || hasChanged(user.p, one.p)) {
         addColorsAndPerks(user, skinData);
     }
 }
