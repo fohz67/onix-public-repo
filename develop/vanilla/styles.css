@@ -661,17 +661,19 @@ titlemod {
     border-radius:50%;
     box-shadow:0 0 15px 1px #00000026!important;
     display:block;
-    margin-left:22.5%;
+    margin-left:40%;
     margin-top:20px;
-    margin-bottom:15px;
-    width:55%
+    width:190px;
+    object-fit:cover;
+    height:190px;
+    margin-bottom:15px
 }
 
 .nicknameProfile {
     display:block;
     font-family:'Montserrat',sans-serif;
     font-size:31px;
-    left:50%;
+    left:90%;
     position:absolute;
     text-align:center;
     text-shadow:0 0 15px #000;
@@ -1334,7 +1336,10 @@ input[type="color"]::-webkit-color-swatch {
 img.skin {
     animation:svelte-1k2e827-background-gradient 7s linear infinite;
     background:linear-gradient(-45deg,red 0%,yellow 17%,lime 33%,cyan 50%,blue 67%,magenta 83%,red 100%);
-    background-size:200% 200%
+    background-size:200% 200%;
+    width:71px;
+    height:71px;
+    object-fit:cover
 }
 
 button.confirm-button.right {
