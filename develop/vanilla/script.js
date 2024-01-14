@@ -430,7 +430,7 @@ function fetchUsersOnce(callback) {
             LISTS.users = users;
 
             Object.keys(users).forEach(uid => {
-                fetchColorsToUsers(users[uid], -1);
+                fetchColorsToUsers(users[uid], "x");
             });
             fetchNewValues();
             callback();
@@ -473,12 +473,12 @@ function fetchColorsToUsers(user, one) {
         if (newProp && !existingProp) return true;
         if (newProp && existingProp) {
             if (newProp.u && !existingProp.u) return true;
-            if (newProp.u && existingProp.u) return newProp.u === existingProp.u;
+            if (newProp.u && existingProp.u) return !(newProp.u === existingProp.u);
             return false;
         }
         return false;
     }
-    if (one === -1 || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || hasSpecialChanged(user.ba, one.ba) || hasSpecialChanged(user.h, one.h) || (skinData.type === 'imgbb' && hasChanged(user.s, one.s)) || hasChanged(user.p, one.p)) {
+    if (one === "x" || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || hasSpecialChanged(user.ba, one.ba) || hasSpecialChanged(user.h, one.h) || (skinData.type === 'imgbb' && hasChanged(user.s, one.s)) || hasChanged(user.p, one.p)) {
         addColorsAndPerks(user, skinData);
     }
 }
