@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.5.2',
+    version: '5.5.3',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -466,9 +466,19 @@ function fetchColorsToUsers(user, one) {
         };
     }
     function hasChanged(newProp, existingProp) {
-        return newProp && existingProp ? newProp !== existingProp : false;
+        return newProp ? newProp !== existingProp : false;
     }
-    if (one === -1 || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || (user.ba && one.ba && hasChanged(user.ba.u, one.ba.u)) || (user.h && one.h && hasChanged(user.h.u, one.h.u)) || (skinData.type === 'imgbb' && hasChanged(user.s, one.s)) || hasChanged(user.p, one.p)) {
+    function hasSpecialChanged(newProp, existingProp) {
+        if (!newProp) return false;
+        if (newProp && !existingProp) return true;
+        if (newProp && existingProp) {
+            if (newProp.u && !existingProp.u) return true;
+            if (newProp.u && existingProp.u) return newProp.u === existingProp.u;
+            return false;
+        }
+        return false;
+    }
+    if (one === -1 || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || hasSpecialChanged(user.ba, one.ba) || hasSpecialChanged(user.h, one.h) || (skinData.type === 'imgbb' && hasChanged(user.s, one.s)) || hasChanged(user.p, one.p)) {
         addColorsAndPerks(user, skinData);
     }
 }
