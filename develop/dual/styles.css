@@ -2792,7 +2792,9 @@ a[data-v-7cb607ba] {
     border-radius:50%;
     box-shadow:0 0 50px 0 #00000020;
     display:block;
-    width:46%
+    width:145px;
+    object-fit:cover;
+    height:145px
 }
 
 .tabs[data-v-1bcde71e] {
@@ -2921,7 +2923,9 @@ a[data-v-7cb607ba] {
     box-shadow:0 0 15px 1px #00000026!important;
     box-sizing:border-box;
     cursor:pointer;
-    width:100%
+    width:72px;
+    height:72px;
+    object-fit:cover
 }
 
 .skin-container[data-v-1c614894] {
@@ -3567,6 +3571,7 @@ canvas[data-v-4c95bd45] {
     cursor:pointer;
     height:80px;
     margin:5px;
+    object-fit:cover;
     width:80px
 }
 
@@ -3744,6 +3749,7 @@ titleExtension {
 .playerPhoto {
     border-radius:50%;
     height:90px;
+    object-fit:cover;
     width:90px
 }
 
@@ -3845,7 +3851,7 @@ span.right.silent {
 
 .forceRight {
     float:right!important;
-    margin:3px 0 0 0!important
+    margin:3px 0 0!important
 }
 
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
