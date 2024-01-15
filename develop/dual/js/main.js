@@ -1,38 +1,15 @@
-const VERSION = '5.4.1';
+const VERSION = '5.4.2';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
     let showDeltaSettings;
+    let crownHolder;
     let currentColorsPlayersList = {};
     let currentServerPlayersList = {};
-
-    function getLocalStorageItem(key, defaultValue) {
-        return localStorage.getItem(key) || defaultValue;
-    }
 
     window.addEventListener('colorChanged', () => {
         currentColorsPlayersList = window.getColorsDual();
     });
-
-    function getImageUrlFromMessage(message) {
-        const imageRegex = /deltaimage:(\S+)/;
-        const match = message.match(imageRegex);
-
-        if (match && match[1]) {
-            let imageUrl = "https://" + match[1].replace(/\.(delta)(com|fr|eu|pro|io|us|en|as|co|pw)/g, '.$2');
-            if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) {
-                return {
-                    newURL: imageUrl,
-                    baseURL: match[0]
-                };
-            }
-        }
-        return null;
-    }
-
-    function generateRandomHexColor() {
-        return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
-    }
 
     function getUserField(nickname, pid, field, def = null) {
         //&& currentColorsPlayersList[nickname.trim()].p === pid
@@ -66,11 +43,6 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             timer,
             showConfirmButton: confirm
         });
-    }
-
-    function getCurrentDate() {
-        const currentDate = new Date();
-        return `[${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}] `;
     }
 
     function getPerkBadgeImage(n) {
@@ -935,6 +907,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         `;
                     }
 
+                    function getLocalStorageItem(key, defaultValue) {
+                        return localStorage.getItem(key) || defaultValue;
+                    }
+
                     function updateStatData(that) {
                         localStorage.setItem('sT', (parseInt(getLocalStorageItem('sT', '0')) + getConvertedTimeToSeconds(that.timeAlive.toString().toHHMMSS())).toString());
                         localStorage.setItem('sM', (parseInt(getLocalStorageItem('sM', '0')) + getConvertedStringToNumber(that.highestScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))).toString());
@@ -985,6 +961,22 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         };
                         t.push(a)
                     }
+                }
+
+                parseImageFormUrl(message) {
+                    const imageRegex = /deltaimage:(\S+)/;
+                    const match = message.match(imageRegex);
+
+                    if (match && match[1]) {
+                        let imageUrl = "https://" + match[1].replace(/\.(delta)(com|fr|eu|pro|io|us|en|as|co|pw)/g, '.$2');
+                        if (/\.(jpeg|jpg|gif|png)$/i.test(imageUrl)) {
+                            return {
+                                newURL: imageUrl,
+                                baseURL: match[0]
+                            };
+                        }
+                    }
+                    return null;
                 }
 
                 parseScrimmageLeaderboard(e) {
@@ -1109,7 +1101,12 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             }
 
                             if (playerToUncrown) playerToUncrown.setCrown(false);
-                            if (playerToCrown) playerToCrown.setCrown(true);
+                            if (playerToCrown) {
+                                playerToCrown.setCrown(true);
+                                crownHolder = playerToCrown;
+                            } else {
+                                crownHolder = null;
+                            }
                             return;
                         }
                         case 8:
@@ -1170,6 +1167,15 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             this.parseMinimap(buffer);
                             return;
                         case 13: {
+                            function generateRandomHexColor() {
+                                return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
+                            }
+
+                            function getCurrentDate() {
+                                const currentDate = new Date();
+                                return `[${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}] `;
+                            }
+
                             let chat = {
                                 pid: buffer.readUInt16LE(),
                                 text: buffer.readEscapedString()
@@ -1189,7 +1195,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             let chatPlayer = this.playerManager.getPlayer(chat.pid);
                             if (!chatPlayer) return;
 
-                            const imageUrlData = r.showImageChat ? getImageUrlFromMessage(chat.text) : null;
+                            const imageUrlData = r.showImageChat ? this.parseImageFormUrl(chat.text) : null;
 
                             chat.from = chatPlayer.name;
                             chat.date = r.showTimeMessage ? getCurrentDate() : '';
@@ -1414,6 +1420,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 debugStats: !1,
                 showBotPlayerList: !1,
                 clientStats: !1,
+                crownHolderInfo: !0,
                 playerStats: !0,
                 showCellLines: !1,
                 showTag: !1,
@@ -2131,6 +2138,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     showSessionTime: n.showSessionTime,
                     showSpectators: n.showSpectators,
                     showPlayerCount: n.showPlayerCount,
+                    crownHolderInfo : n.crownHolderInfo,
                     showRestartTiming: n.showRestartTiming,
                     systemTime: d(),
                     sessionTime: p(0, !1),
@@ -2296,7 +2304,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }), i.events.$on("restart-timing-changed", e => this.restartTick = e), i.events.$on("game-started", () => {
                         this.showMinimapCircle = i.border.circle, this.drawLocations(this.$refs.locations)
                     }), i.events.$on("game-stopped", () => this.restartTick = 0), i.events.$on("minimap-stats-invalidate-shown", () => {
-                        this.showClock = n.showClock, this.showSessionTime = n.showSessionTime, this.showSpectators = n.showSpectators, this.showPlayerCount = n.showPlayerCount, this.showRestartTiming = n.showRestartTiming
+                        this.showClock = n.showClock, this.showSessionTime = n.showSessionTime, this.showSpectators = n.showSpectators, this.showPlayerCount = n.showPlayerCount, this.showRestartTiming = n.showRestartTiming, this.crownHolderInfo = n.crownHolderInfo
                     }), i.events.$on("every-second", () => {
                         this.systemTime = d();
                         var e = (Date.now() - this.startTime) / 1e3;
@@ -2581,6 +2589,16 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             var i = function () {
                     var e = this.$createElement,
                         t = this._self._c || e;
+
+                    const hasCrownHolder = this.crownHolderInfo && crownHolder && crownHolder.nameFromServer;
+
+                    const getCrownHolderInnerHTML = () => {
+                        const name = crownHolder.nameFromServer;
+                        const perk_color = crownHolder.perk_color;
+                        const color = getUserField(name, crownHolder.pid, 'c', null) || (perk_color ? perk_color.toString(16) : 'white');
+                        return `<span style="color: white;">Crown holder:</span> <span style="color: ${color};">${name}</span>`;
+                    }
+
                     return t("div", [t("div", {
                         directives: [{
                             name: "show",
@@ -2627,7 +2645,17 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             value: this.showRestartTiming && this.restartTime,
                             expression: "showRestartTiming && restartTime"
                         }]
-                    }, [this._v("Restart in " + this._s(this.restartTime))])]), this._v(" "), t("div", {
+                    }, [this._v("Restart in " + this._s(this.restartTime))]), this._v(" "), t("div", {
+                        directives: [{
+                            name: "show",
+                            rawName: "v-show",
+                            value: this.crownHolderInfo,
+                            expression: "crownHolderInfo"
+                        }],
+                        domProps: {
+                            innerHTML: hasCrownHolder ? getCrownHolderInnerHTML() : ``
+                        }
+                    })]), this._v(" "), t("div", {
                         directives: [{
                             name: "show",
                             rawName: "v-show",
@@ -5850,6 +5878,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            disabled: !e.showHud,
                             checked: e.debugStats
                         },
                         on: {
@@ -5860,6 +5889,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }, [e._v("Network info")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
+                            disabled: !e.showHud,
                             checked: e.clientStats
                         },
                         on: {
@@ -5868,6 +5898,17 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             }
                         }
                     }, [e._v("Client info")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            disabled: !e.showHud,
+                            checked: e.crownHolderInfo
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("crownHolderInfo", t)
+                            }
+                        }
+                    }, [e._v("Crown holder info")]), e._v(" "), s("p-check", {
                         staticClass: "p-switch",
                         attrs: {
                             checked: e.playerStats
@@ -6515,6 +6556,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     showBotPlayerList: b.showBotPlayerList,
                     clientStats: b.clientStats,
                     playerStats: b.playerStats,
+                    crownHolderInfo: b.crownHolderInfo,
                     chatColorOnlyPeople: b.chatColorOnlyPeople,
                     showCellLines: b.showCellLines,
                     showTimeMessage: b.showTimeMessage,
@@ -6618,6 +6660,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 case "showSessionTime":
                                 case "showSpectators":
                                 case "showPlayerCount":
+                                case "crownHolderInfo":
                                 case "showRestartTiming":
                                     k.events.$emit("minimap-stats-invalidate-shown");
                                     break;
@@ -6641,6 +6684,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             "debugStats",
                             "showBotPlayerList",
                             "clientStats",
+                            "crownHolderInfo",
                             "playerStats",
                             "chatColorOnlyPeople",
                             "showCellLines",
