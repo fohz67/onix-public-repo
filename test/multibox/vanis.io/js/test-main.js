@@ -732,32 +732,73 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 onTick() {
-                    let e = this.timeStamp = performance.now();
-                    e >= this.moveWaitUntil && (this.updateMouse(), this.splitCount = 0);
-                    let {
-                        destroyedCells: t
-                    } = this, s = t.length;
-                    for (; s--;) {
-                        let i = t[s];
-                        i.update() && (i.destroySprite(), t.splice(s, 1))
+                    this.checkAndUpdateTimeStamp();
+                    this.updateDestroyedCells();
+                    this.updateAndCountActiveCells();
+                    this.sortSceneAndUpdateScore();
+                    this.renderer.render(this.scene.container);
+                }
+
+                checkAndUpdateTimeStamp() {
+                    let currentTimeStamp = this.timeStamp = performance.now();
+
+                    if (currentTimeStamp >= this.moveWaitUntil) {
+                        this.updateMouse();
+                        this.splitCount = 0;
                     }
-                    let a = 0;
-                    this.allCells.forEach(e => {
-                        e.update(), e.pid == this.activePid && a++
-                    }), this.cellCount != a && (this.cellCount = a, this.events.$emit("cells-changed", a));
-                    let {
-                        scene: n
-                    } = this;
-                    n.sort();
-                    let o = this.updateCamera();
-                    if (o) {
-                        this.score = o;
-                        let {
-                            highestScore: r
-                        } = this;
-                        this.highestScore = r ? r < o ? o : r : o
-                    } else this.isAlive(!0) || this.isAlive(!1) || (this.score = 0);
-                    this.renderer.render(n.container)
+                }
+
+                updateDestroyedCells() {
+                    let {destroyedCells: destroyedCellsList} = this;
+                    let destroyListLength = destroyedCellsList.length;
+
+                    for (; destroyListLength--;) {
+                        let cellItem = destroyedCellsList[destroyListLength];
+
+                        if (cellItem.update()) {
+                            cellItem.destroySprite();
+                            destroyedCellsList.splice(destroyListLength, 1)
+                        }
+                    }
+                }
+
+                updateAndCountActiveCells() {
+                    let activeGameCellCount = 0;
+
+                    this.allCells.forEach(gameCell => {
+                        gameCell.update();
+
+                        if (gameCell.pid == this.activePid) {
+                            activeGameCellCount++;
+                        }
+                    });
+
+                    if (this.cellCount != activeGameCellCount) {
+                        this.cellCount = activeGameCellCount;
+                        this.events.$emit("cells-changed", activeGameCellCount);
+                    }
+                }
+
+                sortSceneAndUpdateScore() {
+                    let {scene: currentGameScene} = this;
+
+                    currentGameScene.sort();
+
+                    let calculatedScore = this.updateCamera();
+
+                    if (calculatedScore) {
+                        this.score = calculatedScore;
+                        this.highestScore = this.calculateHighestScore(this.highestScore, calculatedScore);
+                    } else if (!this.isAlive(true) && !this.isAlive(false)) {
+                        this.score = 0;
+                    }
+                }
+
+                calculateHighestScore(previousHighestScore, newScorePoints) {
+                    if (previousHighestScore) {
+                        return previousHighestScore < newScorePoints ? newScorePoints : previousHighestScore;
+                    }
+                    return newScorePoints;
                 }
 
                 updateCamera(e = !1) {
