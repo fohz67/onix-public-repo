@@ -1034,20 +1034,31 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     let currentPlayer = playersData.find(player => player.pid === this.playerId);
                     let tagUpdated = currentPlayer && this.setTagId(currentPlayer.tagId);
                     let {playerManager} = this;
-                    let updatedPlayers = [];
-                    if (currentPlayer && currentPlayer.pid) {
-                        window.updatePid = () => currentPlayer.pid;
-                        window.dispatchEvent(new CustomEvent('userPidChanged'));
+
+                    if (currentPlayer && currentPlayer.pid)
+                        this.updateCurrentPlayerPid(currentPlayer);
+
+                    let updatedPlayers = this.updatePlayersData(playersData, playerManager);
+
+                    if (tagUpdated) {
+                        this.events.$emit("minimap-positions", []);
+                        playerManager.invalidateVisibility(updatedPlayers);
                     }
+                }
+
+                updateCurrentPlayerPid(player) {
+                    window.updatePid = () => player.pid;
+                    window.dispatchEvent(new CustomEvent('userPidChanged'));
+                }
+
+                updatePlayersData(playersData, playerManager) {
+                    let updatedPlayers = [];
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
                         currentServerPlayersList[player.pid] = player;
                         updatedPlayers.push(updatedPlayer);
                     }
-                    if (tagUpdated) {
-                        this.events.$emit("minimap-positions", []);
-                        playerManager.invalidateVisibility(updatedPlayers);
-                    }
+                    return updatedPlayers;
                 }
 
                 parseMessage(buffer) {
