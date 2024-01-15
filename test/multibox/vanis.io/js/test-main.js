@@ -3294,10 +3294,16 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                     const player = this.players.get(pid);
                     const customSkin = getUserField(nickname, pid, 's', null);
-                    skinUrl = skinUrl ? skinUrl : (!skin || skin === ""  ? (customSkin ? customSkin : "") : `https://skins.vanis.io/s/${skin}`);
-                    const nameChanged = player.setName(nickname, perk_color),
-                        skinChanged = player.setSkin(skinUrl),
-                        tagChanged = player.setTagId(tagId);
+
+                    const isSkinUrlValid = !!skinUrl;
+                    const isSkinValid = skin && skin !== "";
+                    const finalSkin = isSkinValid ? `https://skins.vanis.io/s/${skin}` : "";
+                    skinUrl = isSkinUrlValid ? skinUrl : (customSkin || finalSkin);
+
+                    const nameChanged = player.setName(nickname, perk_color);
+                    const skinChanged = player.setSkin(skinUrl);
+                    const tagChanged = player.setTagId(tagId);
+
                     if (nameChanged || skinChanged || tagChanged) player.invalidateVisibility();
                     return player;
                 }
