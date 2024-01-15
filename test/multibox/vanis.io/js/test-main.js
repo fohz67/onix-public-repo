@@ -3242,7 +3242,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                     const player = this.players.get(pid);
                     const customSkin = getUserField(nickname, pid, 's', null);
-                    skinUrl = !skin || (skin && skin === "") ? customSkin ? customSkin : "" : `https://skins.vanis.io/s/${skin}`;
+                    skinUrl = skinUrl ? skinUrl : (!skin || skin === ""  ? (customSkin ? customSkin : "") : `https://skins.vanis.io/s/${skin}`);
                     const nameChanged = player.setName(nickname, perk_color),
                         skinChanged = player.setSkin(skinUrl),
                         tagChanged = player.setTagId(tagId);
