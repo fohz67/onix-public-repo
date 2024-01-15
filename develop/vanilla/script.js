@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.5.3',
+    version: '5.5.4',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -430,7 +430,10 @@ function fetchUsersOnce(callback) {
             LISTS.users = users;
 
             Object.keys(users).forEach(uid => {
-                fetchColorsToUsers(users[uid], "x");
+                const user = users[uid];
+                if (user && user.u && user.n) {
+                    fetchColorsToUsers(user, "x");
+                }
             });
             fetchNewValues();
             callback();
@@ -443,7 +446,7 @@ function fetchUserChanged() {
         if (snapshot.exists()) {
             const user = snapshot.val();
 
-            if (user && user.u) {
+            if (user && user.u && user.n) {
                 fetchColorsToUsers(user, LISTS.users[user.u]);
                 LISTS.users[user.u] = user;
                 fetchNewValues();
@@ -453,8 +456,8 @@ function fetchUserChanged() {
 }
 
 function fetchColorsToUsers(user, one) {
-    if (!user.n || !user.u) return;
     const skinData = processSkinInput(user.s);
+
     function addColorsAndPerks() {
         LISTS.colors[user.n.trim()] = {
             u: user.u,
@@ -466,8 +469,14 @@ function fetchColorsToUsers(user, one) {
         };
     }
     function hasChanged(newProp, existingProp) {
-        return newProp ? newProp !== existingProp : false;
+        if (!newProp) return false;
+        if (newProp && !existingProp) return true;
+        if (newProp && existingProp) {
+            return !(newProp === existingProp);
+        }
+        return false;
     }
+
     function hasSpecialChanged(newProp, existingProp) {
         if (!newProp) return false;
         if (newProp && !existingProp) return true;
@@ -478,6 +487,7 @@ function fetchColorsToUsers(user, one) {
         }
         return false;
     }
+
     if (one === "x" || hasChanged(user.n, one.n) || hasChanged(user.c, one.c) || hasSpecialChanged(user.ba, one.ba) || hasSpecialChanged(user.h, one.h) || (skinData.type === 'imgbb' && hasChanged(user.s, one.s)) || hasChanged(user.p, one.p)) {
         addColorsAndPerks(user, skinData);
     }
@@ -485,7 +495,7 @@ function fetchColorsToUsers(user, one) {
 
 function fetchNewValues() {
     const me = LISTS.users[USER.credentials.uid];
-    if (me.b) displayError(`You've been banned from Delta by Fohz. Reason: ${me.b}`);
+    if (me && me.b) displayError(`You've been banned from Delta by Fohz. Reason: ${me.b}`);
     if (APP.mode === 1 && USER.configurations.cc === 'checked') changeCellColor();
     if (APP.mode === 2) window.dispatchEvent(new CustomEvent('colorChanged'));
 }
@@ -732,6 +742,7 @@ function skinValidation(url) {
 
 function skinChecker(url) {
     const image = new Image();
+
     image.onload = (() => {
         skinPutter(url, true);
     });
