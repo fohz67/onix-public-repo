@@ -1,4 +1,4 @@
-const VERSION = '5.4';
+const VERSION = '5.4.1';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -35,7 +35,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
     }
 
     function getUserField(nickname, pid, field, def = null) {
-        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()].p === pid && currentColorsPlayersList[nickname.trim()][field] || def;
+        //&& currentColorsPlayersList[nickname.trim()].p === pid
+        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()][field] || def;
     }
 
     function getUserFieldVanilla(nickname, pid, field, def = null) {
@@ -5093,7 +5094,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         <img class="playerPhoto beautifulSkin" alt="" src="${user.skin === '' ? 'https://i.ibb.co/g9Sj8gK/transparent-skin.png' : 'https://skins.vanis.io/s/' + user.skin}" onerror="this.src = 'https://skins.vanis.io/s/Qkfih2'">
                         <div class="listTextItem playerTextElem">
                             <div class="playerNickLine">
-                                ${deltaBadge ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge}">` : ``}
+                                ${deltaBadge && deltaBadge.u ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge.u}">` : ``}
                                 ${vanillaBadge ? `<img class="playerVanilla playerBadgeDiv" alt="" src="/img/badge/${getPerkBadgeImage(vanillaBadge)}.png?2">` : ``}
                                 <p class="playerNickname" style="color: ${colorNickname}">${user.nickname}</p>
                             </div>

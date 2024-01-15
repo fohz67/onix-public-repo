@@ -1,4 +1,4 @@
-const VERSION = '5.4';
+const VERSION = '5.4.1';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -35,7 +35,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
     }
 
     function getUserField(nickname, pid, field, def = null) {
-        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()].p === pid && currentColorsPlayersList[nickname.trim()][field] || def;
+        //&& currentColorsPlayersList[nickname.trim()].p === pid
+        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()][field] || def;
     }
 
     function getUserFieldVanilla(nickname, pid, field, def = null) {
@@ -732,32 +733,73 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 onTick() {
-                    let e = this.timeStamp = performance.now();
-                    e >= this.moveWaitUntil && (this.updateMouse(), this.splitCount = 0);
-                    let {
-                        destroyedCells: t
-                    } = this, s = t.length;
-                    for (; s--;) {
-                        let i = t[s];
-                        i.update() && (i.destroySprite(), t.splice(s, 1))
+                    this.checkAndUpdateTimeStamp();
+                    this.updateDestroyedCells();
+                    this.updateAndCountActiveCells();
+                    this.sortSceneAndUpdateScore();
+                    this.renderer.render(this.scene.container);
+                }
+
+                checkAndUpdateTimeStamp() {
+                    let currentTimeStamp = this.timeStamp = performance.now();
+
+                    if (currentTimeStamp >= this.moveWaitUntil) {
+                        this.updateMouse();
+                        this.splitCount = 0;
                     }
-                    let a = 0;
-                    this.allCells.forEach(e => {
-                        e.update(), e.pid == this.activePid && a++
-                    }), this.cellCount != a && (this.cellCount = a, this.events.$emit("cells-changed", a));
-                    let {
-                        scene: n
-                    } = this;
-                    n.sort();
-                    let o = this.updateCamera();
-                    if (o) {
-                        this.score = o;
-                        let {
-                            highestScore: r
-                        } = this;
-                        this.highestScore = r ? r < o ? o : r : o
-                    } else this.isAlive(!0) || this.isAlive(!1) || (this.score = 0);
-                    this.renderer.render(n.container)
+                }
+
+                updateDestroyedCells() {
+                    let {destroyedCells: destroyedCellsList} = this;
+                    let destroyListLength = destroyedCellsList.length;
+
+                    for (; destroyListLength--;) {
+                        let cellItem = destroyedCellsList[destroyListLength];
+
+                        if (cellItem.update()) {
+                            cellItem.destroySprite();
+                            destroyedCellsList.splice(destroyListLength, 1)
+                        }
+                    }
+                }
+
+                updateAndCountActiveCells() {
+                    let activeGameCellCount = 0;
+
+                    this.allCells.forEach(gameCell => {
+                        gameCell.update();
+
+                        if (gameCell.pid == this.activePid) {
+                            activeGameCellCount++;
+                        }
+                    });
+
+                    if (this.cellCount != activeGameCellCount) {
+                        this.cellCount = activeGameCellCount;
+                        this.events.$emit("cells-changed", activeGameCellCount);
+                    }
+                }
+
+                sortSceneAndUpdateScore() {
+                    let {scene: currentGameScene} = this;
+
+                    currentGameScene.sort();
+
+                    let calculatedScore = this.updateCamera();
+
+                    if (calculatedScore) {
+                        this.score = calculatedScore;
+                        this.highestScore = this.calculateHighestScore(this.highestScore, calculatedScore);
+                    } else if (!this.isAlive(true) && !this.isAlive(false)) {
+                        this.score = 0;
+                    }
+                }
+
+                calculateHighestScore(previousHighestScore, newScorePoints) {
+                    if (previousHighestScore) {
+                        return previousHighestScore < newScorePoints ? newScorePoints : previousHighestScore;
+                    }
+                    return newScorePoints;
                 }
 
                 updateCamera(e = !1) {
@@ -993,20 +1035,31 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     let currentPlayer = playersData.find(player => player.pid === this.playerId);
                     let tagUpdated = currentPlayer && this.setTagId(currentPlayer.tagId);
                     let {playerManager} = this;
-                    let updatedPlayers = [];
-                    if (currentPlayer && currentPlayer.pid) {
-                        window.updatePid = () => currentPlayer.pid;
-                        window.dispatchEvent(new CustomEvent('userPidChanged'));
+
+                    if (currentPlayer && currentPlayer.pid)
+                        this.updateCurrentPlayerPid(currentPlayer);
+
+                    let updatedPlayers = this.updatePlayersData(playersData, playerManager);
+
+                    if (tagUpdated) {
+                        this.events.$emit("minimap-positions", []);
+                        playerManager.invalidateVisibility(updatedPlayers);
                     }
+                }
+
+                updateCurrentPlayerPid(player) {
+                    window.updatePid = () => player.pid;
+                    window.dispatchEvent(new CustomEvent('userPidChanged'));
+                }
+
+                updatePlayersData(playersData, playerManager) {
+                    let updatedPlayers = [];
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
                         currentServerPlayersList[player.pid] = player;
                         updatedPlayers.push(updatedPlayer);
                     }
-                    if (tagUpdated) {
-                        this.events.$emit("minimap-positions", []);
-                        playerManager.invalidateVisibility(updatedPlayers);
-                    }
+                    return updatedPlayers;
                 }
 
                 parseMessage(buffer) {
@@ -3242,10 +3295,16 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                     const player = this.players.get(pid);
                     const customSkin = getUserField(nickname, pid, 's', null);
-                    skinUrl = !skin || (skin && skin === "") ? customSkin ? customSkin : "" : `https://skins.vanis.io/s/${skin}`;
-                    const nameChanged = player.setName(nickname, perk_color),
-                        skinChanged = player.setSkin(skinUrl),
-                        tagChanged = player.setTagId(tagId);
+
+                    const isSkinUrlValid = !!skinUrl;
+                    const isSkinValid = skin && skin !== "";
+                    const finalSkin = isSkinValid ? `https://skins.vanis.io/s/${skin}` : "";
+                    skinUrl = isSkinUrlValid ? skinUrl : (customSkin || finalSkin);
+
+                    const nameChanged = player.setName(nickname, perk_color);
+                    const skinChanged = player.setSkin(skinUrl);
+                    const tagChanged = player.setTagId(tagId);
+
                     if (nameChanged || skinChanged || tagChanged) player.invalidateVisibility();
                     return player;
                 }
@@ -5035,7 +5094,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         <img class="playerPhoto beautifulSkin" alt="" src="${user.skin === '' ? 'https://i.ibb.co/g9Sj8gK/transparent-skin.png' : 'https://skins.vanis.io/s/' + user.skin}" onerror="this.src = 'https://skins.vanis.io/s/Qkfih2'">
                         <div class="listTextItem playerTextElem">
                             <div class="playerNickLine">
-                                ${deltaBadge ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge}">` : ``}
+                                ${deltaBadge && deltaBadge.u ? `<img class="playerDelta playerBadgeDiv" alt="" src="${deltaBadge.u}">` : ``}
                                 ${vanillaBadge ? `<img class="playerVanilla playerBadgeDiv" alt="" src="/img/badge/${getPerkBadgeImage(vanillaBadge)}.png?2">` : ``}
                                 <p class="playerNickname" style="color: ${colorNickname}">${user.nickname}</p>
                             </div>
