@@ -1,4 +1,4 @@
-const VERSION = '5.4.3';
+const VERSION = '5.4.4';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -3430,7 +3430,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             return true;
                         } else {
                             if (playerId) currentServerPlayersList[playerId] = {};
-                            this.removePlayer(playerId);
+                            this.removePlayer(playerId, true);
                             return false;
                         }
                     });
@@ -3440,18 +3440,18 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     this.playersRemoving.push(playerId);
                 }
 
-                removePlayer(playerId) {
+                removePlayer(playerId, printer) {
                     if (!this.players.has(playerId)) return;
                     const player = this.players.get(playerId);
                     if (player.bot)
                         this.botCount--;
-                    player.clearCachedData();
+                    player.clearCachedData(printer);
                     delete currentServerPlayersList[playerId];
                     this.players.delete(playerId);
                 }
 
                 destroy() {
-                    this.players.forEach((_, playerId) => this.removePlayer(playerId));
+                    this.players.forEach((_, playerId) => this.removePlayer(playerId, false));
                     this.botCount = 0;
                     this.playersRemoving = [];
                 }
@@ -3684,8 +3684,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return (this.bot ? n : a)[randomIndex];
                 }
 
-                clearCachedData() {
-                    if (i.showGameLogs) pushGameLog(this, 3, false, 5000);
+                clearCachedData(printer) {
+                    if (printer && i.showGameLogs) pushGameLog(this, 3, false, 5000);
                     this.abortSkinLoaderIfExist();
                     this.destroySkin();
                     this.cellContainer.destroy(true);
