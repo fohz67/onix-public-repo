@@ -1,4 +1,4 @@
-const VERSION = '5.4.4';
+const VERSION = '5.4.5';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -261,6 +261,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
             4: {i: "fas fa-crown", c: "rgba(255,103,0,0.5)", cb: "rgb(255,103,0)"},
             5: {i: "fas fa-crown", c: "rgba(255,0,75,0.5)", cb: "#ff004b"},
             6: {i: "fas fa-pen", c: "rgba(255,103,0,0.5)", cb: "rgb(255,103,0)"},
+            7: {i: "fas fa-crown", c: "rgba(0,104,255,0.5)", cb: "rgb(0,103,255)"},
         };
 
         if (player.bot) {
@@ -277,9 +278,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
         item.style.background = fullColor ? types[type].c : '#00000047';
         item.style.border = `1px solid ${fullColor ? types[type].cb : '#ffffff0f'}`;
         item.innerHTML = `
-                        <p style="color: ${fullColor ? '' : types[type].cb}">${player.nameFromServer}</p>
-                        <i class="${types[type].i} gameLogIcon" style="color: ${fullColor ? '' : types[type].cb}"></i>
-                    `;
+            <p style="color: ${fullColor ? '' : types[type].cb}">${player.nameFromServer}</p>
+            <i class="${types[type].i} gameLogIcon" style="color: ${fullColor ? '' : types[type].cb}"></i>
+        `;
         hudElement.append(item);
 
         function removeGameLog(element) {
@@ -1018,12 +1019,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         return;
                     }
 
-                    let userToSend = newPlayer;
                     const newPlayerName = newPlayer.nameFromServer;
                     const oldPlayerName = oldPlayer.nickname;
 
                     if (newPlayerName && oldPlayerName && newPlayerName !== oldPlayerName) {
-                        userToSend.nameFromServer = oldPlayerName + " -> " + newPlayerName;
+                        const playerToLog = {
+                            bot: false,
+                            nameFromServer: oldPlayerName + " ➟ " + newPlayerName
+                        };
                         if (r.showGameLogs) pushGameLog(userToSend, 6, false, 10000);
                     }
                 }
@@ -1121,6 +1124,35 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     return updatedPlayers;
                 }
 
+                defineCrown(playerToCrown, playerToUncrown) {
+                    if (playerToUncrown) {
+                        playerToUncrown.setCrown(false);
+                    }
+                    if (playerToCrown) {
+                        playerToCrown.setCrown(true);
+                        crownHolder = playerToCrown;
+                    } else {
+                        crownHolder = null;
+                    }
+                }
+
+                sendCrownLogs(playerToCrown, playerToUncrown) {
+                    if (playerToCrown && playerToUncrown) {
+                        if (r.showGameLogs) {
+                            if (!playerToUncrown.nameFromServer || !playerToCrown.nameFromServer) return;
+                            const playerToLog = {
+                                bot: false,
+                                nameFromServer: playerToUncrown.nameFromServer + " ➟ " + playerToCrown.nameFromServer
+                            }
+                            if (r.showGameLogs) pushGameLog(playerToLog, 4, false, 5000);
+                        }
+                    } else if (playerToCrown && !playerToUncrown) {
+                        if (r.showGameLogs) pushGameLog(playerToCrown, 7, false, 5000);
+                    } else if (!playerToCrown && playerToUncrown) {
+                        if (r.showGameLogs) pushGameLog(playerToUncrown, 5, false, 5000);
+                    }
+                }
+
                 parseMessage(buffer) {
                     let messageType = buffer.readUInt8();
 
@@ -1166,18 +1198,8 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 let player2Id = buffer.readUInt16LE();
                                 playerToUncrown = this.playerManager.getPlayer(player2Id);
                             }
-
-                            if (playerToUncrown) {
-                                playerToUncrown.setCrown(false);
-                                if (r.showGameLogs) pushGameLog(playerToUncrown, 5, false, 5000);
-                            }
-                            if (playerToCrown) {
-                                playerToCrown.setCrown(true);
-                                crownHolder = playerToCrown;
-                                if (r.showGameLogs) pushGameLog(playerToCrown, 4, false, 5000);
-                            } else {
-                                crownHolder = null;
-                            }
+                            this.defineCrown(playerToCrown, playerToUncrown);
+                            this.sendCrownLogs(playerToCrown, playerToUncrown);
                             return;
                         }
                         case 8:

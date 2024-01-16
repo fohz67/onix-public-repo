@@ -3856,6 +3856,7 @@ span.right.silent {
 
 .gameLog {
     display:flex;
+    align-self:flex-end;
     padding:7px 12px;
     width:fit-content;
     border-radius:10px;
@@ -3868,8 +3869,11 @@ span.right.silent {
 
 #gameLogFrame {
     position:fixed;
-    left:300px;
-    bottom:5px
+    right:240px;
+    bottom:5px;
+    display:flex;
+    flex-direction:column;
+    text-align:right
 }
 
 .gameLogIcon {
@@ -3900,11 +3904,43 @@ span.right.silent {
     }
 }
 
-.server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
+.buttonTabContainer {
+    display:flex;
+    gap:7px;
+    margin:0 5px 10px;
+    overflow-x:auto;
+    padding:0 0 8px;
+    white-space:nowrap
+}
+
+.buttonTab {
+    border-radius:11px;
+    flex:1;
+    height:43px;
+    padding:0 10px
+}
+
+.buttonTabDisabled {
+    background:#b69cff;
+    color:#241931
+}
+
+.buttonTabActive {
+    background:transparent;
+    color:#fff
+}
+
+.buttonTabText {
+    font-size:17px;
+    margin-top:10px;
+    text-align:center
+}
+
+.buttonTab:hover,.server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
     cursor:pointer;
     scale:92%
 }
 
-.server-visible-list,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.replay-item,.skinItemGalery,.playerStalkContainer,#tab-menu .tab[data-v-0647fbb0],#openSkins,.logout[data-v-661435cd],.image-button-text[data-v-641581b7],.vanis-button,#hotkey-container .bind[data-v-2dbed53e],.server-list-item,.skin-container[data-v-1c614894],.discord[data-v-661435cd],.tab[data-v-1bcde71e],#player-container #game-buttons #play-button[data-v-1bcde71e],#player-container #game-buttons #spec-button[data-v-1bcde71e],.reset-option[data-v-15c13b66],.reset-option[data-v-3ddebeb3],.reset-option[data-v-2c5139e0] {
+.buttonTab,.server-visible-list,.swal2-styled.swal2-confirm,.swal2-styled.swal2-cancel,.replay-item,.skinItemGalery,.playerStalkContainer,#tab-menu .tab[data-v-0647fbb0],#openSkins,.logout[data-v-661435cd],.image-button-text[data-v-641581b7],.vanis-button,#hotkey-container .bind[data-v-2dbed53e],.server-list-item,.skin-container[data-v-1c614894],.discord[data-v-661435cd],.tab[data-v-1bcde71e],#player-container #game-buttons #play-button[data-v-1bcde71e],#player-container #game-buttons #spec-button[data-v-1bcde71e],.reset-option[data-v-15c13b66],.reset-option[data-v-3ddebeb3],.reset-option[data-v-2c5139e0] {
     transition:all .3s
 }
