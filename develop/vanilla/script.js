@@ -2394,10 +2394,10 @@ async function drawStyle() {
 function checkAnnouncement() {
     const announcement = parseInt(localStorage.getItem('announcement') || 0);
 
-    if (announcement < 53) {
+    if (announcement < 55) {
         setTimeout(() => {
             sendTimedSwal('Message to Delta users ❤️', 'Hi guys, we are +650 on Delta, with 250 users / days, to celebrate, i pushed a really good feature.... Game logs ! Go to dual, and look beside the chatbox...😏 nickname changes, comes, leaves, crown owner changes... many more logs will arrived soon ! Love y\'all❤️ Fohz', 10000, 'OK')
-            localStorage.setItem('announcement', '53');
+            localStorage.setItem('announcement', '55');
         }, 1500);
     }
 }
