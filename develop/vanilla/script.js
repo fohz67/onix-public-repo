@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.5.4',
+    version: '5.5.5',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -2056,7 +2056,10 @@ function switchManagerSpecificChange(userSettings, userSettingsLabel) {
         $(ATTRS.selectors.chatboxContainer).css('backdrop-filter', style);
         $(ATTRS.selectors.minimapContainer).css('backdrop-filter', style);
         $(ATTRS.selectors.messageToast).css('backdrop-filter', style);
-        if (APP.mode === 2) $(ATTRS.selectors.playerStalkContainer).css('backdrop-filter', style);
+        if (APP.mode === 2) {
+            $(ATTRS.selectors.playerStalkContainer).css('backdrop-filter', style);
+            $(ATTRS.selectors.gameLogsItem).css('backdrop-filter', style);
+        }
     }
 }
 
@@ -2209,6 +2212,7 @@ function getAllSelectors() {
         menuContainer: '#menu-container',
         modalHud: '.modal',
         socialContainer: '.social-container',
+        gameLogsItem: '.gameLog',
 
         // Leaderboard Elements
         leaderboard: '#leaderboard',
