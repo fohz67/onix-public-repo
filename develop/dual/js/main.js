@@ -1,78 +1,7 @@
-const VERSION = '5.4.2';
+const VERSION = '5.4.3';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
-    let showDeltaSettings;
-    let crownHolder;
-    let currentColorsPlayersList = {};
-    let currentServerPlayersList = {};
-
-    window.addEventListener('colorChanged', () => {
-        currentColorsPlayersList = window.getColorsDual();
-    });
-
-    function getUserField(nickname, pid, field, def = null) {
-        //&& currentColorsPlayersList[nickname.trim()].p === pid
-        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()][field] || def;
-    }
-
-    function getUserFieldVanilla(nickname, pid, field, def = null) {
-        return nickname && pid && currentServerPlayersList && currentServerPlayersList[pid] && currentServerPlayersList[pid][field] || def;
-    }
-
-    function getUserColor(bot, nickname, pid, hash, forceColor, vanisStorage) {
-        if (!vanisStorage) return hash + 'ffffff';
-        if (vanisStorage === 'bp' || vanisStorage.showBotColor)
-            if (bot) return hash + '838383';
-        if (vanisStorage === 'bp' || vanisStorage.showDeltaColors) {
-            let deltaColor = getUserField(nickname, pid, 'c', null);
-            if (deltaColor) return hash + deltaColor.replaceAll('#', '');
-        }
-        if (vanisStorage === 'bp' || vanisStorage.showVanisColors) {
-            if (forceColor) return forceColor;
-            let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
-            if (vanillaColor) return hash + vanillaColor.replaceAll('#', '');
-        }
-        return hash + 'ffffff';
-    }
-
-    function sendTimedSwal(title, text, timer, confirm) {
-        Swal.fire({
-            title,
-            text,
-            timer,
-            showConfirmButton: confirm
-        });
-    }
-
-    function getPerkBadgeImage(n) {
-        const badge = {
-            1: "admin",
-            2: "mod",
-            4: "skin_mod",
-            8: "contributor",
-            16: "organizer",
-            32: "referee",
-            256: "youtuber",
-            1024: "editor",
-            4096: "level_100",
-            8192: "level_200",
-            16384: "level_300",
-            65536: "ffa_winner",
-            131072: "instant_winner",
-            262144: "gigasplit_winner",
-            524288: "megasplit_winner",
-            1048576: "crazy_winner",
-            2097152: "self-feed_winner",
-            33554432: "server_booster",
-            67108864: "place_contributor_2023",
-            16777216: "place_contributor_2022",
-            268435456: "slb_winner",
-            2147483648: "official"
-        };
-        return badge[n];
-    }
-
     class s {
         constructor(e, t) {
             if (this.view = null, e instanceof DataView) this.view = e;
@@ -250,6 +179,125 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
     }
 
     window.SmartBuffer = s;
+
+    let showDeltaSettings;
+    let crownHolder;
+    let currentColorsPlayersList = {};
+    let currentServerPlayersList = {};
+
+    window.addEventListener('colorChanged', () => {
+        currentColorsPlayersList = window.getColorsDual();
+    });
+
+    function getUserField(nickname, pid, field, def = null) {
+        //&& currentColorsPlayersList[nickname.trim()].p === pid
+        return nickname && pid && currentColorsPlayersList && currentColorsPlayersList[nickname.trim()] && currentColorsPlayersList[nickname.trim()][field] || def;
+    }
+
+    function getUserFieldVanilla(nickname, pid, field, def = null) {
+        return nickname && pid && currentServerPlayersList && currentServerPlayersList[pid] && currentServerPlayersList[pid][field] || def;
+    }
+
+    function getUserColor(bot, nickname, pid, hash, forceColor, vanisStorage) {
+        if (!vanisStorage) return hash + 'ffffff';
+        if (vanisStorage === 'bp' || vanisStorage.showBotColor)
+            if (bot) return hash + '838383';
+        if (vanisStorage === 'bp' || vanisStorage.showDeltaColors) {
+            let deltaColor = getUserField(nickname, pid, 'c', null);
+            if (deltaColor) return hash + deltaColor.replaceAll('#', '');
+        }
+        if (vanisStorage === 'bp' || vanisStorage.showVanisColors) {
+            if (forceColor) return forceColor;
+            let vanillaColor = getUserFieldVanilla(nickname, pid, 'perk_color', null);
+            if (vanillaColor) return hash + vanillaColor.replaceAll('#', '');
+        }
+        return hash + 'ffffff';
+    }
+
+    function sendTimedSwal(title, text, timer, confirm) {
+        Swal.fire({
+            title,
+            text,
+            timer,
+            showConfirmButton: confirm
+        });
+    }
+
+    function getPerkBadgeImage(n) {
+        const badge = {
+            1: "admin",
+            2: "mod",
+            4: "skin_mod",
+            8: "contributor",
+            16: "organizer",
+            32: "referee",
+            256: "youtuber",
+            1024: "editor",
+            4096: "level_100",
+            8192: "level_200",
+            16384: "level_300",
+            65536: "ffa_winner",
+            131072: "instant_winner",
+            262144: "gigasplit_winner",
+            524288: "megasplit_winner",
+            1048576: "crazy_winner",
+            2097152: "self-feed_winner",
+            33554432: "server_booster",
+            67108864: "place_contributor_2023",
+            16777216: "place_contributor_2022",
+            268435456: "slb_winner",
+            2147483648: "official"
+        };
+        return badge[n];
+    }
+
+    function pushGameLog(player, type, fullColor = false, time = 5000) {
+        if (!player || !player.nameFromServer) return;
+
+        const types = {
+            1: {i: "fas fa-arrow-up", c: "rgba(0,104,255,0.5)", cb: "rgb(0,103,255)"},
+            2: {i: "fas fa-arrow-up", c: "rgba(145,0,255,0.79)", cb: "#9100ff"},
+            3: {i: "fas fa-arrow-down", c: "rgba(255,0,75,0.5)", cb: "#ff004b"},
+            4: {i: "fas fa-crown", c: "rgba(255,103,0,0.5)", cb: "rgb(255,103,0)"},
+            5: {i: "fas fa-crown", c: "rgba(255,0,75,0.5)", cb: "#ff004b"},
+            6: {i: "fas fa-pen", c: "rgba(255,103,0,0.5)", cb: "rgb(255,103,0)"},
+        };
+
+        if (player.bot) {
+            types[type].c = "rgba(159,159,159,0.44)";
+            types[type].cb = "#8f8f8f";
+        }
+
+        const hudElement = document.querySelector("#hud>#gameLogFrame");
+        if (!hudElement) return;
+
+        const item = document.createElement("div");
+        item.className = "gameLog";
+        item.style.backdropFilter = (localStorage.b === 'checked' ? "blur(7px)" : "");
+        item.style.background = fullColor ? types[type].c : '#00000047';
+        item.style.border = `1px solid ${fullColor ? types[type].cb : '#ffffff0f'}`;
+        item.innerHTML = `
+                        <p style="color: ${fullColor ? '' : types[type].cb}">${player.nameFromServer}</p>
+                        <i class="${types[type].i} gameLogIcon" style="color: ${fullColor ? '' : types[type].cb}"></i>
+                    `;
+        hudElement.append(item);
+
+        function removeGameLog(element) {
+            element.style.animation = 'slideGameOut 0.5s ease forwards';
+            setTimeout(() => {
+                if (element && hudElement.contains(element)) {
+                    hudElement.removeChild(element);
+                }
+            }, 500);
+        }
+
+        setTimeout(() => {
+            if (item && hudElement.contains(item)) {
+                removeGameLog(item);
+            }
+        }, time);
+    }
+
     let i = [5, 104, 253, 62, 175, 116, 238, 41];
 
     class a {
@@ -963,6 +1011,23 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     }
                 }
 
+                checkUserChange(newPlayer, oldPlayer) {
+                    if (!newPlayer) return;
+                    if (newPlayer && !oldPlayer) {
+                        if (r.showGameLogs) pushGameLog(newPlayer, 1, false, 5000);
+                        return;
+                    }
+
+                    let userToSend = newPlayer;
+                    const newPlayerName = newPlayer.nameFromServer;
+                    const oldPlayerName = oldPlayer.nickname;
+
+                    if (newPlayerName && oldPlayerName && newPlayerName !== oldPlayerName) {
+                        userToSend.nameFromServer = oldPlayerName + " -> " + newPlayerName;
+                        if (r.showGameLogs) pushGameLog(userToSend, 6, false, 10000);
+                    }
+                }
+
                 parseImageFormUrl(message) {
                     const imageRegex = /deltaimage:(\S+)/;
                     const match = message.match(imageRegex);
@@ -1048,8 +1113,10 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     let updatedPlayers = [];
                     for (let player of playersData) {
                         let updatedPlayer = playerManager.setPlayerData(player);
+                        const actualUser = currentServerPlayersList[player.pid];
                         currentServerPlayersList[player.pid] = player;
                         updatedPlayers.push(updatedPlayer);
+                        if (playersData.length === 1) this.checkUserChange(updatedPlayer, actualUser);
                     }
                     return updatedPlayers;
                 }
@@ -1100,10 +1167,14 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 playerToUncrown = this.playerManager.getPlayer(player2Id);
                             }
 
-                            if (playerToUncrown) playerToUncrown.setCrown(false);
+                            if (playerToUncrown) {
+                                playerToUncrown.setCrown(false);
+                                if (r.showGameLogs) pushGameLog(playerToUncrown, 5, false, 5000);
+                            }
                             if (playerToCrown) {
                                 playerToCrown.setCrown(true);
                                 crownHolder = playerToCrown;
+                                if (r.showGameLogs) pushGameLog(playerToCrown, 4, false, 5000);
                             } else {
                                 crownHolder = null;
                             }
@@ -1430,6 +1501,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 showDeltaBadges: !0,
                 showDeltaColors: !0,
                 showVanisBadges: !0,
+                showGameLogs: !0,
                 showVanisColors: !0,
                 showBotColor: !0,
                 showDir: !1,
@@ -3613,6 +3685,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                 }
 
                 clearCachedData() {
+                    if (i.showGameLogs) pushGameLog(this, 3, false, 5000);
                     this.abortSkinLoaderIfExist();
                     this.destroySkin();
                     this.cellContainer.destroy(true);
@@ -3664,14 +3737,21 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                         url: t,
                         image: s,
                         errored: i
-                    } = e.data, a = this.loaders.get(t);
-                    if (i) a.errored = !0, a.callbacks = [];
-                    else {
-                        a.image = s;
-                        let {
-                            callbacks: n
-                        } = a;
-                        for (; n.length;) n.pop()(s)
+                    } = e.data;
+
+                    let loader = this.loaders.get(t);
+                    if (!loader) return;
+
+                    if (i) {
+                        loader.errored = true;
+                        loader.callbacks = [];
+                    } else {
+                        loader.image = s;
+
+                        while (loader.callbacks.length) {
+                            let callback = loader.callbacks.pop();
+                            callback(s);
+                        }
                     }
                 }
             }
@@ -5918,7 +5998,17 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                                 return e.change("playerStats", t)
                             }
                         }
-                    }, [e._v("Player tracker")])], 1)]), e._v(" "), s("div", {
+                    }, [e._v("Player tracker")]), e._v(" "), s("p-check", {
+                        staticClass: "p-switch",
+                        attrs: {
+                            checked: e.showGameLogs
+                        },
+                        on: {
+                            change: function (t) {
+                                return e.change("showGameLogs", t)
+                            }
+                        }
+                    }, [e._v("Game logs")])], 1)]), e._v(" "), s("div", {
                         staticClass: `section row ${showDeltaSettings === 'delta' ? 'hidden' : ''}`
                     }, [s("div", {
                         staticClass: "header"
@@ -6565,6 +6655,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                     showDeltaBadges: b.showDeltaBadges,
                     showDeltaColors: b.showDeltaColors,
                     showVanisBadges: b.showVanisBadges,
+                    showGameLogs: b.showGameLogs,
                     showVanisColors: b.showVanisColors,
                     showBotColor: b.showBotColor,
                     dualActiveCellBorderSize: b.dualActiveCellBorderSize,
@@ -6693,6 +6784,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             "showDeltaBadges",
                             "showVanisColors",
                             "showVanisBadges",
+                            "showGameLogs",
                             "showBotColor",
                             "rainbowColorTimeMessage",
                             "showHat",
@@ -9766,6 +9858,9 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
         item.id = "playerStats";
         document.querySelector('#hud').appendChild(item);
         GAME.playerElement = item;
+        item = document.createElement("div");
+        item.id = "gameLogFrame";
+        document.querySelector('#hud').appendChild(item);
     })(), window.yoinkSkinDual = e => {
         window.SwalAlerts.toast.fire({
             type: "info",

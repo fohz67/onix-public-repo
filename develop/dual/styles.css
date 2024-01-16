@@ -3854,6 +3854,52 @@ span.right.silent {
     margin:3px 0 0!important
 }
 
+.gameLog {
+    display:flex;
+    padding:7px 12px;
+    width:fit-content;
+    border-radius:10px;
+    font-size:17px;
+    color:#fff;
+    box-shadow:0 0 30px 0 #00000061!important;
+    margin-bottom:5px;
+    animation:slideGameIn .5s ease
+}
+
+#gameLogFrame {
+    position:fixed;
+    left:300px;
+    bottom:5px
+}
+
+.gameLogIcon {
+    margin:2px 0 0 5px
+}
+
+@keyframes slideGameIn {
+    from {
+        transform:translateY(100%);
+        opacity:0
+    }
+
+    to {
+        transform:translateY(0);
+        opacity:1
+    }
+}
+
+@keyframes slideGameOut {
+    from {
+        transform:translateY(0);
+        opacity:1
+    }
+
+    to {
+        transform:translateY(-100%);
+        opacity:0
+    }
+}
+
 .server-visible-list:hover,.swal2-styled.swal2-confirm:hover,.swal2-styled.swal2-cancel:hover,.replay-item:hover,.skinItemGalery:hover,.playerStalkContainer:hover,#tab-menu .tab[data-v-0647fbb0]:hover,#openSkins:hover,.logout[data-v-661435cd]:hover,.image-button-text[data-v-641581b7]:hover,.vanis-button:hover,#hotkey-container .bind[data-v-2dbed53e]:hover,.server-list-item:hover,.skin-container[data-v-1c614894]:hover,.discord[data-v-661435cd]:hover,.tab[data-v-1bcde71e]:hover,#player-container #game-buttons #play-button[data-v-1bcde71e]:hover,#player-container #game-buttons #spec-button[data-v-1bcde71e]:hover,.reset-option[data-v-15c13b66]:hover,.reset-option[data-v-3ddebeb3]:hover,.reset-option[data-v-2c5139e0]:hover {
     cursor:pointer;
     scale:92%
