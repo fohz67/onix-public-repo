@@ -2396,7 +2396,7 @@ function checkAnnouncement() {
 
     if (announcement < 53) {
         setTimeout(() => {
-            sendTimedSwal('Massive update 5.3', 'Join discord now to see the update : https://discord.gg/wthDcUb6nY', 10000, 'OK')
+            sendTimedSwal('Message to Delta users ❤️', 'Hi guys, we are +650 on Delta, with 250 users / days, to celebrate, i pushed a really good feature.... Game logs ! Go to dual, and look beside the chatbox...😏 nickname changes, comes, leaves, crown owner changes... many more logs will arrived soon ! Love y\'all❤️ Fohz', 10000, 'OK')
             localStorage.setItem('announcement', '53');
         }, 1500);
     }
