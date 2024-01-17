@@ -1,5 +1,5 @@
 const APP = {
-    version: '5.5.5',
+    version: '5.5.6',
     mode: (window.location.pathname === '/delta-dual' || window.location.hash === '#test') ? 2 : 1,
     resize: 0,
     machineId: getMachineId(),
@@ -447,7 +447,8 @@ function fetchUserChanged() {
             const user = snapshot.val();
 
             if (user && user.u && user.n) {
-                fetchColorsToUsers(user, LISTS.users[user.u]);
+                const oldUser = LISTS.users[user.u] ? LISTS.users[user.u] : {a:null, c:null, l:null, m:null, s:null, se:null, st:null, u:null};
+                fetchColorsToUsers(user, oldUser);
                 LISTS.users[user.u] = user;
                 fetchNewValues();
             }
