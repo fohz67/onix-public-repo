@@ -1,4 +1,4 @@
-const VERSION = '5.4.5';
+const VERSION = '5.4.6';
 let deltaServices = localStorage.getItem('deltaServices') || 'checked';
 
 (() => {
@@ -1027,7 +1027,7 @@ let deltaServices = localStorage.getItem('deltaServices') || 'checked';
                             bot: false,
                             nameFromServer: oldPlayerName + " ➟ " + newPlayerName
                         };
-                        if (r.showGameLogs) pushGameLog(userToSend, 6, false, 10000);
+                        if (r.showGameLogs) pushGameLog(playerToLog, 6, false, 10000);
                     }
                 }
 
